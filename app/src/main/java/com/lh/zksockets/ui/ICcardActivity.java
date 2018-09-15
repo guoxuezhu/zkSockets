@@ -1,8 +1,11 @@
-package com.lh.zksockets;
+package com.lh.zksockets.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.lh.zksockets.AddCardDialog;
+import com.lh.zksockets.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

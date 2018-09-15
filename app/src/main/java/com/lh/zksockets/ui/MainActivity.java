@@ -1,9 +1,11 @@
-package com.lh.zksockets;
+package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.lh.zksockets.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

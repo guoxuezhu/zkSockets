@@ -9,7 +9,7 @@
     android:layout_marginRight="40dp"
     android:layout_marginTop="22dp"
     android:orientation="vertical"
-    tools:context=".AdvancedSetingActivity">
+    tools:context=".ui.AdvancedSetingActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
