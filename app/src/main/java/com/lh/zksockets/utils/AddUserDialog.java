@@ -1,8 +1,10 @@
-package com.lh.zksockets;
+package com.lh.zksockets.utils;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.lh.zksockets.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

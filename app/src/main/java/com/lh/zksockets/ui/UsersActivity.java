@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.lh.zksockets.AddUserDialog;
 import com.lh.zksockets.R;
+import com.lh.zksockets.utils.AddUserDialog;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

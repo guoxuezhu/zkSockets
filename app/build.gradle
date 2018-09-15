@@ -1,6 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
+
+    signingConfigs {
+        release {
+            keyAlias 'zks'
+            keyPassword 'lihongzks'
+            storeFile file('../key/zks.jks')
+            storePassword 'zkslihong'
+        }
+    }
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.lh.zksockets"
@@ -15,6 +26,7 @@ android {
             minifyEnabled false
             buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'false'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         debug {
@@ -22,6 +34,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "中控-${variant.name}-${variant.versionName}.apk"
+        }
+    }
+
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.lh.zksockets.data.DbDao'
+        targetGenDir 'src/main/java'
+    }
+
+
 }
 
 dependencies {
@@ -37,4 +64,8 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:8.4.0"
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    //数据库//http://blog.csdn.net/axuanqq/article/details/51344299
+    implementation 'org.greenrobot:greendao:3.2.2'
+
 }
