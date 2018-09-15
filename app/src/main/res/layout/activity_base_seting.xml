@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="22dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginTop="22dp"
+    android:orientation="vertical"
+    tools:context=".BaseSetingActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/baseSet_btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="基本设置"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="位置:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <EditText
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="高三教室"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="上网方式:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+
+            <RadioGroup
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_10">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="静态IP"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="动态IP"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IP地址:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <EditText
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="192.168.11.112"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="端口号:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <EditText
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="8089"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="版本号:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <EditText
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="1.0.0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="设备:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <EditText
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_table_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="orangepi android_5.1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_baseset_ok"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/btn_bg"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
