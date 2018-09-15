@@ -44,7 +44,9 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@null"
             android:text="投影机一"
+            android:background="@drawable/rbtn_status_1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
@@ -52,7 +54,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_100"
+            android:button="@null"
             android:text="投影机二"
+            android:background="@drawable/rbtn_status_1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
