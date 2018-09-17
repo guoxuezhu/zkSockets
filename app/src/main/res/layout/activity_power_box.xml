@@ -34,209 +34,208 @@
 
     </RelativeLayout>
 
-
-    <LinearLayout
-        android:id="@+id/LL_check"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:text="选择电路"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/LL_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:text="选择电路"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <GridView
+                    android:id="@+id/power_gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:numColumns="4" />
+
+                <Button
+                    android:id="@+id/btn_to_open"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
+                    android:text="设置开机时间"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_open"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:text="开机时间"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/xian" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="序号"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="线路"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="开机时间(s)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
 
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="投影机一" />
+                </LinearLayout>
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="投影机二" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/xian" />
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="投影幕一" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/open_power_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="投影幕二" />
+                <Button
+                    android:id="@+id/btn_to_close"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
+                    android:text="设置关机时间"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:text="关机时间"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/xian" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="序号"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="线路"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="关机时间(s)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/xian" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/closed_power_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <Button
+                    android:id="@+id/btn_powerbox_ok"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
+                    android:text="完成"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="电脑" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="显示器" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="电视" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="功放" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="插座一" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="插座二" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="插座三" />
-
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_weight="1"
-                android:text="插座四" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_to_open"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/btn_bg"
-            android:text="设置开机时间"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_24" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LL_open"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:text="设置开机顺序"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <Button
-            android:id="@+id/btn_to_close"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/btn_bg"
-            android:text="设置关机时间"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_24" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LL_close"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:text="设置关机顺序"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-        <Button
-            android:id="@+id/btn_powerbox_ok"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp_20"
-            android:background="@drawable/btn_bg"
-            android:text="完成"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_24" />
-
-    </LinearLayout>
 
 </LinearLayout>
