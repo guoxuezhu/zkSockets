@@ -66,152 +66,27 @@
 
     </RadioGroup>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="串口配置:"
-            android:textSize="@dimen/text_size_20" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="@dimen/dp_900"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_solid_bg"
-                    android:gravity="center"
-                    android:text="波特率"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-
-                <Spinner
-                    android:id="@+id/spinnerBaudRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dropDownVerticalOffset="40dp"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:layout_weight="1"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_solid_bg"
-                    android:gravity="center"
-                    android:text="校验位"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-                <Spinner
-                    android:id="@+id/spinnerCheckoutBit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dropDownVerticalOffset="40dp"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:layout_weight="1"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_solid_bg"
-                    android:gravity="center"
-                    android:text="数据位"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-                <Spinner
-                    android:id="@+id/spinnerDataBit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dropDownVerticalOffset="40dp"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:layout_weight="1"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_solid_bg"
-                    android:gravity="center"
-                    android:text="停止位"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-                <Spinner
-                    android:id="@+id/spinnerStopBit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dropDownVerticalOffset="40dp"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="命令设置:"
-            android:textSize="@dimen/text_size_20" />
-
-        <LinearLayout
-            android:layout_width="@dimen/dp_900"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_10"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="串口配置:"
+                android:textSize="@dimen/text_size_20" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/dp_900"
                 android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -222,201 +97,331 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/dp_100"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@drawable/layout_solid_bg"
                         android:gravity="center"
-                        android:text="投影机类型"
+                        android:text="波特率"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
+
                     <Spinner
-                        android:id="@+id/spinnerTyep"
-                        android:layout_width="0dp"
+                        android:id="@+id/spinnerBaudRate"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:dropDownVerticalOffset="40dp"
                         android:gravity="center_vertical" />
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
                     android:layout_weight="1"
                     android:background="@drawable/layout_stroke_bg"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/dp_100"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@drawable/layout_solid_bg"
                         android:gravity="center"
-                        android:text="开投影机命令"
+                        android:text="校验位"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <EditText
-                        android:layout_width="0dp"
+                    <Spinner
+                        android:id="@+id/spinnerCheckoutBit"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="32543dgfdh" />
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
 
                 </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
                     android:layout_weight="1"
                     android:background="@drawable/layout_stroke_bg"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/dp_100"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@drawable/layout_solid_bg"
                         android:gravity="center"
-                        android:text="关投影机命令"
+                        android:text="数据位"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <EditText
-                        android:layout_width="0dp"
+                    <Spinner
+                        android:id="@+id/spinnerDataBit"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="32543dgfdh" />
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
 
                 </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
                     android:layout_weight="1"
                     android:background="@drawable/layout_stroke_bg"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/dp_100"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@drawable/layout_solid_bg"
                         android:gravity="center"
-                        android:text="切换到VGA"
+                        android:text="停止位"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <EditText
-                        android:layout_width="0dp"
+                    <Spinner
+                        android:id="@+id/spinnerStopBit"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="32543dgfdh" />
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
 
                 </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
 
             </LinearLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="命令设置:"
+                android:textSize="@dimen/text_size_20" />
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
+
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/layout_stroke_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/layout_solid_bg"
-                        android:gravity="center"
-                        android:text="切换到HDMI"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
+                        android:background="@drawable/layout_stroke_bg"
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_solid_bg"
+                            android:gravity="center"
+                            android:text="投影机类型"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20" />
+
+                        <Spinner
+                            android:id="@+id/spinnerTyep"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:dropDownVerticalOffset="40dp"
+                            android:gravity="center_vertical" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dp_100"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="df.327fd.3" />
+                        android:layout_marginLeft="@dimen/dp_10" />
 
                 </LinearLayout>
 
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_stroke_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_solid_bg"
+                            android:gravity="center"
+                            android:text="开投影机命令"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:text="32543dgfdh" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="测试" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_stroke_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_solid_bg"
+                            android:gravity="center"
+                            android:text="关投影机命令"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:text="32543dgfdh" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="测试" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_stroke_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_solid_bg"
+                            android:gravity="center"
+                            android:text="切换到VGA"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:text="32543dgfdh" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="测试" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_stroke_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/layout_solid_bg"
+                            android:gravity="center"
+                            android:text="切换到HDMI"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:text="df.327fd.3" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="测试" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-
-    </LinearLayout>
+    </ScrollView>
 
 
     <Button
@@ -424,7 +429,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_margin="@dimen/dp_20"
         android:background="@drawable/btn_bg"
         android:text="完成"
         android:textColor="@color/white"

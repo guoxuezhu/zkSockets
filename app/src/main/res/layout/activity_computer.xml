@@ -34,129 +34,140 @@
 
     </RelativeLayout>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:layout_marginTop="@dimen/dp_60"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-
-        <TextView
-            android:layout_width="@dimen/dp_150"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="IP地址:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:orientation="vertical">
 
-        <EditText
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="192.168.31.11"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:layout_marginTop="@dimen/dp_10"
-        android:gravity="center"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_60"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="@dimen/dp_150"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="端口号:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="IP地址:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
 
-        <EditText
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="8089"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+                <EditText
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="192.168.31.11"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:layout_marginTop="@dimen/dp_10"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="@dimen/dp_150"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="用户名:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
-
-        <EditText
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="admin"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
-        android:layout_marginTop="@dimen/dp_10"
-        android:gravity="center"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="@dimen/dp_150"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="密码:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="端口号:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
 
-        <EditText
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text="123456"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+                <EditText
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="8089"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/btn_computer_ok"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_20"
-        android:background="@drawable/btn_bg"
-        android:text="完成"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_24" />
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="用户名:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+                <EditText
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="admin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="密码:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+                <EditText
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="123456"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_computer_ok"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
