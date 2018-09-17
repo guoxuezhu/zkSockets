@@ -3,7 +3,6 @@ package com.lh.zksockets.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.BaudRateAdapter;
 import com.lh.zksockets.adapter.SelectAdapter;
 
 import java.util.ArrayList;

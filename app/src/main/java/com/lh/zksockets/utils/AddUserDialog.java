@@ -3,15 +3,23 @@ package com.lh.zksockets.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.lh.zksockets.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class AddUserDialog extends Dialog {
 
+    @BindView(R.id.et_userName)
+    EditText et_userName;
+    @BindView(R.id.et_userPaw)
+    EditText et_userPaw;
+    @BindView(R.id.et_userType)
+    EditText et_userType;
 
     private Context mContext;
     private UserDialogCallBack mUserDialogCallBack;
@@ -28,15 +36,11 @@ public class AddUserDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_user_dialog_view);
         ButterKnife.bind(this);
-        getView();
     }
 
-    private void getView() {
-
-    }
 
     public interface UserDialogCallBack {
-        void addUserInfo();
+        void addUserInfo(String userName, String userPaw, int userType);
     }
 
     @OnClick(R.id.dialog_user_btn_no)
@@ -46,7 +50,8 @@ public class AddUserDialog extends Dialog {
 
     @OnClick(R.id.dialog_user_btn_ok)
     public void dialog_user_btn_ok() {
-        mUserDialogCallBack.addUserInfo();
+        mUserDialogCallBack.addUserInfo(et_userName.getText().toString(),et_userPaw.getText().toString(),
+                1);
     }
 
 }

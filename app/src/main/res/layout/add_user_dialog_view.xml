@@ -33,13 +33,14 @@
             android:textSize="@dimen/text_size_16" />
 
         <EditText
+            android:id="@+id/et_userName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="1213124"
+            android:text="admin"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -63,13 +64,14 @@
             android:textSize="@dimen/text_size_16" />
 
         <EditText
+            android:id="@+id/et_userPaw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="2354325"
+            android:text="123456"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -93,13 +95,14 @@
             android:textSize="@dimen/text_size_16" />
 
         <EditText
+            android:id="@+id/et_userType"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="类型2"
+            android:text="管理员"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
