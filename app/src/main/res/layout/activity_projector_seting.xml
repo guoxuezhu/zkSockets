@@ -38,25 +38,29 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
 
         <RadioButton
+            android:id="@+id/radio_btn_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@null"
-            android:text="投影机一"
             android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="投影机一"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
         <RadioButton
+            android:id="@+id/radio_btn_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_100"
-            android:button="@null"
-            android:text="投影机二"
             android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="投影机二"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
@@ -71,8 +75,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
             android:text="串口配置:"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_20" />
 
         <LinearLayout
             android:layout_width="@dimen/dp_900"
@@ -97,10 +102,13 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
+
                 <Spinner
+                    android:id="@+id/spinnerBaudRate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center" />
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -122,9 +130,11 @@
                     android:textSize="@dimen/text_size_20" />
 
                 <Spinner
+                    android:id="@+id/spinnerCheckoutBit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center" />
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -146,9 +156,11 @@
                     android:textSize="@dimen/text_size_20" />
 
                 <Spinner
+                    android:id="@+id/spinnerDataBit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center" />
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -170,9 +182,11 @@
                     android:textSize="@dimen/text_size_20" />
 
                 <Spinner
+                    android:id="@+id/spinnerStopBit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center" />
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -183,8 +197,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
             android:text="命令设置:"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_20" />
 
         <LinearLayout
             android:layout_width="@dimen/dp_900"
@@ -217,10 +232,12 @@
                         android:textSize="@dimen/text_size_20" />
 
                     <Spinner
+                        android:id="@+id/spinnerTyep"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
 
                 </LinearLayout>
 
