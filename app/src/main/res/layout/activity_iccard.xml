@@ -72,49 +72,63 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="序号" />
+                android:text="序号"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="工号" />
+                android:text="工号"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="卡类型" />
+                android:text="卡类型"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="更新时间" />
+                android:text="更新时间"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="老师名称" />
+                android:text="老师名称"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="所属部门" />
+                android:text="所属部门"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="卡号" />
+                android:text="卡号"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
 
             <TextView
@@ -122,7 +136,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="操作" />
+                android:text="操作"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
         </LinearLayout>
 

@@ -54,21 +54,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="序号" />
+                android:text="序号"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="IP地址" />
+                android:text="IP地址"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="时间" />
+                android:text="时间"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
 
 
         </LinearLayout>

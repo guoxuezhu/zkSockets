@@ -16,7 +16,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="序号" />
+            android:text="序号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -24,7 +26,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="用户名" />
+            android:text="用户名"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
 
         <TextView
             android:id="@+id/tv_user_paw"
@@ -32,7 +36,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="密码" />
+            android:text="密码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
 
         <TextView
             android:id="@+id/tv_user_type"
@@ -40,8 +46,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="类型" />
-
+            android:text="类型"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
 
 
         <LinearLayout
