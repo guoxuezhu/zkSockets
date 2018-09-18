@@ -49,7 +49,7 @@ public class AdvancedSetingActivity extends Activity {
 
     @OnClick(R.id.power_box)
     public void power_box() {
-        startActivity(new Intent(this, PowerBoxActivity.class));
+        startActivity(new Intent(this, PowerDeviceActivity.class));
         finish();
     }
 
