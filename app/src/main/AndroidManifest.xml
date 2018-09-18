@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <!-- 开机自启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -35,6 +39,12 @@
         <activity android:name=".ui.UsersActivity" />
         <activity android:name=".ui.NetStatusActivity" />
         <activity android:name=".ui.PowerDeviceActivity"></activity>
+
+        <receiver android:name=".BootRestartReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
