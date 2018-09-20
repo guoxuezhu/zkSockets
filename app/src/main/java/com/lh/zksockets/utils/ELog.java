@@ -14,19 +14,19 @@ public class ELog {
 
     public static void i(Object msg) {
         if (isDebug) {
-            Log.i("wisc", "" + msg);
+            Log.i("mylog", "" + msg);
         }
     }
 
     public static void d(Object msg) {
         if (isDebug) {
-            Log.d("wisc", "" + msg);
+            Log.d("mylog", "" + msg);
         }
     }
 
     public static void e(Object msg) {
         if (isDebug) {
-            Log.e("wisc", "" + msg);
+            Log.e("mylog", "" + msg);
         }
     }
 

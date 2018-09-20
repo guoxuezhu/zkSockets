@@ -13,9 +13,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.msg)
-    TextView msg;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
