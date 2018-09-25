@@ -36,7 +36,7 @@ public class SerialPort {
     private FileOutputStream mFileOutputStream;
 
     public SerialPort(File device, int baudrate, int flags) throws SecurityException, IOException {
-        ELog.i("=======SerialPort==打开串口device.canRead()" + device.canRead() + "======" + device.canWrite());
+        ELog.i("=======SerialPort==打开串口device.canRead()====" + device.canRead() + "======" + device.canWrite());
         /* Check access permission */
         if (!device.canRead() || !device.canWrite()) {
             try {
@@ -59,7 +59,7 @@ public class SerialPort {
         }
 
         mFd = open(device.getAbsolutePath(), baudrate, flags);
-        ELog.i("=======SerialPort==设备路径" + device.getAbsolutePath() + "波特率====" + baudrate + "==flags=" + flags);
+        ELog.i("=======SerialPort==设备路径=====" + device.getAbsolutePath() + "波特率====" + baudrate + "==flags=" + flags);
         if (mFd == null) {
             ELog.i("native open returns null");
             throw new IOException();
