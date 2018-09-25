@@ -45,7 +45,7 @@ public class XiangDaoActivity extends Activity {
 
     @OnClick(R.id.send_ck)
     public void send_ck() {
-        sendSerialPort("sdddss");
+        sendSerialPort("BB 04 00 02 02 01 00 55");
 
     }
 

@@ -16,4 +16,13 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="myBgLayout">
+        <item name="android:layout_marginBottom">22dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginTop">22dp</item>
+    </style>
+
+
 </resources>
