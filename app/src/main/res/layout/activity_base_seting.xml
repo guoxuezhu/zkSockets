@@ -59,6 +59,7 @@
                     android:textSize="@dimen/text_size_24" />
 
                 <EditText
+                    android:id="@+id/et_classRoom"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
@@ -131,13 +132,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_IP"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="192.168.11.112"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
@@ -160,6 +162,7 @@
                     android:textSize="@dimen/text_size_24" />
 
                 <EditText
+                    android:id="@+id/et_PORT"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
@@ -187,13 +190,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_zkVersionName"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="1.0.0"
+                    android:text="0.0.0"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
@@ -215,13 +219,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_zkDeviceName"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="orangepi android_5.1"
+                    android:text="orangepi"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 

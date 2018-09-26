@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="中控设置"
+                android:text="矩阵设置"
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>

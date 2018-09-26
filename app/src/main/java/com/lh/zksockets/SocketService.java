@@ -4,7 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
+
+import com.lh.zksockets.utils.ELog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class SocketService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("zklh", "=====onCreate====");
+        ELog.d("======onCreate====");
         try {
             server = new ServerSocket(8089);
             beginListen();
@@ -50,11 +51,14 @@ public class SocketService extends Service {
                     String s = null;
 
                     while ((s = bufReader.readLine()) != null) {
-                        Log.d("zklh", "=====msg====" + s);
+                        ELog.d("======msg====" + s);
+                        if(s.equals("000000")){
+                            //设备
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("zklh", "=========server.accept()===========IOException====" + e);
+                    ELog.e("====server.accept()====IOException====" + e);
                 }
 
             }
@@ -66,7 +70,7 @@ public class SocketService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("zklh", "=====onDestroy====");
+        ELog.d("====onDestroy====");
         try {
             if (server != null) {
                 server.close();
