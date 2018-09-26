@@ -59,6 +59,12 @@ public class AdvancedSetingActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.zk_seting)
+    public void zk_seting() {
+        startActivity(new Intent(this, ZhongKongActivity.class));
+        finish();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/myBgLayout"
     android:orientation="vertical"
     tools:context=".ui.AdvancedSetingActivity">
 
@@ -143,6 +143,18 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/zk_seting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="中控设置"
+                android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
 

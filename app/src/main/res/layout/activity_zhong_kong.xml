@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/myBgLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ZhongKongActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/zk_back_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="中控设置"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_60"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_zk_1"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="切换到"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+                <EditText
+                    android:id="@+id/et_zk_2"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_zk_ok"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

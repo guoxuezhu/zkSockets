@@ -9,21 +9,14 @@
 
     <!-- 开机自启动 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-
-
-
-
-
 
     <application
         android:name=".MyApplication"
@@ -53,13 +46,15 @@
         <activity android:name=".ui.ICcardActivity" />
         <activity android:name=".ui.UsersActivity" />
         <activity android:name=".ui.NetStatusActivity" />
-        <activity android:name=".ui.PowerDeviceActivity"></activity>
+        <activity android:name=".ui.PowerDeviceActivity" />
+        <activity android:name=".ui.ZhongKongActivity"></activity>
 
         <receiver android:name=".BootRestartReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
