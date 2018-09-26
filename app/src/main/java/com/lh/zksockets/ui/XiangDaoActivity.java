@@ -3,7 +3,6 @@ package com.lh.zksockets.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.lh.zksockets.R;
 import com.lh.zksockets.utils.ELog;
@@ -45,17 +44,26 @@ public class XiangDaoActivity extends Activity {
 
     @OnClick(R.id.send_ck)
     public void send_ck() {
-        sendSerialPort("BB 04 00 02 02 01 00 55");
-
+        byte[] data = StringToBytes("BB04000202010055");
+        sendSerialPort(data);
     }
 
-    private void sendSerialPort(String data) {
+    private byte[] StringToBytes(String str) {
+        byte[] bytes = new byte[str.length() / 2];
+        for (int i = 0; i < str.length(); i = i + 2) {
+            bytes[i/2] = (byte) Integer.parseInt(str.substring(i, i + 2), 16);
+        }
+        return bytes;
+    }
+
+
+
+    private void sendSerialPort(byte[] sendData) {
         try {
-            byte[] sendData = data.getBytes(); //string转byte[]
-            //this.data_ = new String(sendData); //byte[]转string
+            //byte[] sendData = data.getBytes(); //string转byte[]
             if (sendData.length > 0) {
                 outputStream.write(sendData);
-                outputStream.write('\n');
+//                outputStream.write('\n');
                 //outputStream.write('\r'+'\n');
                 outputStream.flush();
                 ELog.e("====sendSerialPort: 串口数据发送成功");
