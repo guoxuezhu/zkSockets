@@ -24,6 +24,7 @@ public class DaoMaster extends AbstractDaoMaster {
         IcCardDao.createTable(db, ifNotExists);
         PowerDeviceDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
+        ProjectorDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -31,6 +32,7 @@ public class DaoMaster extends AbstractDaoMaster {
         IcCardDao.dropTable(db, ifExists);
         PowerDeviceDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
+        ProjectorDao.dropTable(db, ifExists);
     }
 
     /**
@@ -52,6 +54,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(IcCardDao.class);
         registerDaoClass(PowerDeviceDao.class);
         registerDaoClass(UsersDao.class);
+        registerDaoClass(ProjectorDao.class);
     }
 
     public DaoSession newSession() {
