@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
@@ -125,7 +126,6 @@ public class ProjectorSetingActivity extends Activity {
             et_HDMI_command.setText("");
         }
 
-
     }
 
     private void typeInitView() {
@@ -139,7 +139,6 @@ public class ProjectorSetingActivity extends Activity {
         spinnerTyep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ELog.i("=====投影机类型============" + typeList.get(position));
                 selectTyep = typeList.get(position);
                 selectTyepId = position;
             }
@@ -154,8 +153,8 @@ public class ProjectorSetingActivity extends Activity {
 
     private void stopBitInitView() {
         stopBitList = new ArrayList<>();
-        stopBitList.add("0");
         stopBitList.add("1");
+        stopBitList.add("1.5");
         stopBitList.add("2");
 
 
@@ -163,7 +162,6 @@ public class ProjectorSetingActivity extends Activity {
         spinnerStopBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("lhlog", "=====停止位============" + stopBitList.get(position));
                 selectStopBit = stopBitList.get(position);
                 selectStopBitId = position;
             }
@@ -187,7 +185,6 @@ public class ProjectorSetingActivity extends Activity {
         spinnerDataBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("lhlog", "=====数据位============" + dataBitList.get(position));
                 selectDataBit = dataBitList.get(position);
                 selectDataBitId = position;
             }
@@ -212,7 +209,6 @@ public class ProjectorSetingActivity extends Activity {
         spinnerCheckoutBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("lhlog", "=====校验位============" + checkoutBitList.get(position));
                 selectCheckoutBit = checkoutBitList.get(position);
                 selectCheckoutBitId = position;
             }
@@ -227,6 +223,8 @@ public class ProjectorSetingActivity extends Activity {
 
     private void baudRateInitView() {
         baudRateList = new ArrayList<>();
+        baudRateList.add("2400");
+        baudRateList.add("4800");
         baudRateList.add("9600");
         baudRateList.add("14400");
         baudRateList.add("19200");
@@ -239,7 +237,6 @@ public class ProjectorSetingActivity extends Activity {
         spinnerBaudRate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("lhlog", "=====波特率============" + baudRateList.get(position));
                 selectBaudRate = baudRateList.get(position);
                 selectBaudRateId = position;
             }
@@ -285,7 +282,7 @@ public class ProjectorSetingActivity extends Activity {
                 selectTyepId, et_open_command.getText().toString(), et_closed_command.getText().toString(),
                 et_VGA_command.getText().toString(), et_HDMI_command.getText().toString()));
 
-        back();
+        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.projector_btn_back)
