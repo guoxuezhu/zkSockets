@@ -44,8 +44,8 @@ public class PowerListAdapter extends RecyclerView.Adapter<PowerListAdapter.Powe
         PowerDevice powerDevice = datas.get(position);
         holder.tv_powerdevice_serialNumber.setText(position + 1 + "");
         holder.tv_Powerdevice.setText(powerDevice.deviceName);
-        holder.tv_openTime.setText(powerDevice.openTime);
-        holder.tv_closedTime.setText(powerDevice.closedTime);
+        holder.tv_openTime.setText(powerDevice.openTime + "");
+        holder.tv_closedTime.setText(powerDevice.closedTime + "");
 
     }
 

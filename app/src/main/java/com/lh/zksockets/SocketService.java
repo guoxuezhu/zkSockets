@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.WorksUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,6 +37,12 @@ public class SocketService extends Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //电源箱操作
+        WorksUtil.powerWorkOpen();
+
+
+
     }
 
     //https://blog.csdn.net/zhangqufa/article/details/69228949

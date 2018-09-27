@@ -16,7 +16,9 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.PowerCheckBoxAdapter;
 import com.lh.zksockets.adapter.PowerDeviceClosedAdapter;
 import com.lh.zksockets.adapter.PowerDeviceOpenAdapter;
+import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.PowerDeviceDao;
+import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.model.PowerDevice;
 
 import java.util.ArrayList;
@@ -65,18 +67,28 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
 
     private void gridViewInit() {
         powerDatas = new ArrayList<>();
-        powerDatas.add("投影机一");
-        powerDatas.add("投影机二");
-        powerDatas.add("投影幕一");
-        powerDatas.add("投影幕二");
-        powerDatas.add("电脑");
-        powerDatas.add("显示器");
-        powerDatas.add("电视");
-        powerDatas.add("功放");
-        powerDatas.add("插座一");
-        powerDatas.add("插座二");
-        powerDatas.add("插座三");
-        powerDatas.add("插座四");
+        ProjectorDao projectorDao = MyApplication.getDaoSession().getProjectorDao();
+        for (int i = 0; i < projectorDao.loadAll().size(); i++) {
+            powerDatas.add(projectorDao.loadAll().get(i).name);
+            powerDatas.add(projectorDao.loadAll().get(i).name + "的幕布");
+        }
+
+        ComputerDao computerDao = MyApplication.getDaoSession().getComputerDao();
+        for (int i = 0; i < computerDao.loadAll().size(); i++) {
+            powerDatas.add(computerDao.loadAll().get(i).userName + "的电脑");
+        }
+
+//        powerDatas.add("投影机一");
+//        powerDatas.add("投影机二");
+//        powerDatas.add("投影幕一");
+//        powerDatas.add("投影幕二");
+//        powerDatas.add("电脑/显示器");
+//        powerDatas.add("电视");
+//        powerDatas.add("功放");
+//        powerDatas.add("插座一");
+//        powerDatas.add("插座二");
+//        powerDatas.add("插座三");
+//        powerDatas.add("插座四");
 
         power_gridView.setAdapter(new PowerCheckBoxAdapter(this, powerDatas, this));
 
@@ -106,7 +118,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         PowerDeviceOpenAdapter powerDeviceAdapter = new PowerDeviceOpenAdapter(this, checkedPower, this);
         open_power_recyclerView.setAdapter(powerDeviceAdapter);
         for (int i = 0; i < checkedPower.size(); i++) {
-            powerDevices.add(new PowerDevice(checkedPower.get(i), null, null));
+            powerDevices.add(new PowerDevice(checkedPower.get(i), 0, 0));
         }
     }
 
@@ -118,7 +130,11 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         }
         for (int i = 0; i < powerDevices.size(); i++) {
             if (powerDevices.get(i).deviceName.equals(item)) {
-                powerDevices.get(i).setOpenTime(openTime);
+                if (openTime.equals("")) {
+                    powerDevices.get(i).setOpenTime(0);
+                } else {
+                    powerDevices.get(i).setOpenTime(Integer.parseInt(openTime));
+                }
             }
         }
     }
@@ -126,7 +142,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
     @OnClick(R.id.btn_to_close)
     public void btn_to_close() {
         for (int i = 0; i < powerDevices.size(); i++) {
-            if (powerDevices.get(i).openTime == null) {
+            if (powerDevices.get(i).openTime == 0) {
                 Toast.makeText(this, "有线路开机时间未添加，请添加", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -151,7 +167,11 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         }
         for (int i = 0; i < powerDevices.size(); i++) {
             if (powerDevices.get(i).deviceName.equals(item)) {
-                powerDevices.get(i).setClosedTime(closedTime);
+                if (closedTime.equals("")) {
+                    powerDevices.get(i).setClosedTime(0);
+                } else {
+                    powerDevices.get(i).setClosedTime(Integer.parseInt(closedTime));
+                }
             }
         }
     }
@@ -159,7 +179,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
     @OnClick(R.id.btn_powerbox_ok)
     public void btn_powerbox_ok() {
         for (int i = 0; i < powerDevices.size(); i++) {
-            if (powerDevices.get(i).closedTime == null) {
+            if (powerDevices.get(i).closedTime == 0) {
                 Toast.makeText(this, "有线路关机时间未添加，请添加", Toast.LENGTH_SHORT).show();
                 return;
             }

@@ -25,8 +25,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
      */
     public static class Properties {
         public final static Property DeviceName = new Property(0, String.class, "deviceName", false, "DEVICE_NAME");
-        public final static Property OpenTime = new Property(1, String.class, "openTime", false, "OPEN_TIME");
-        public final static Property ClosedTime = new Property(2, String.class, "closedTime", false, "CLOSED_TIME");
+        public final static Property OpenTime = new Property(1, int.class, "openTime", false, "OPEN_TIME");
+        public final static Property ClosedTime = new Property(2, int.class, "closedTime", false, "CLOSED_TIME");
     }
 
 
@@ -43,8 +43,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"POWER_DEVICE\" (" + //
                 "\"DEVICE_NAME\" TEXT," + // 0: deviceName
-                "\"OPEN_TIME\" TEXT," + // 1: openTime
-                "\"CLOSED_TIME\" TEXT);"); // 2: closedTime
+                "\"OPEN_TIME\" INTEGER NOT NULL ," + // 1: openTime
+                "\"CLOSED_TIME\" INTEGER NOT NULL );"); // 2: closedTime
     }
 
     /** Drops the underlying database table. */
@@ -61,16 +61,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
         if (deviceName != null) {
             stmt.bindString(1, deviceName);
         }
- 
-        String openTime = entity.getOpenTime();
-        if (openTime != null) {
-            stmt.bindString(2, openTime);
-        }
- 
-        String closedTime = entity.getClosedTime();
-        if (closedTime != null) {
-            stmt.bindString(3, closedTime);
-        }
+        stmt.bindLong(2, entity.getOpenTime());
+        stmt.bindLong(3, entity.getClosedTime());
     }
 
     @Override
@@ -81,16 +73,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
         if (deviceName != null) {
             stmt.bindString(1, deviceName);
         }
- 
-        String openTime = entity.getOpenTime();
-        if (openTime != null) {
-            stmt.bindString(2, openTime);
-        }
- 
-        String closedTime = entity.getClosedTime();
-        if (closedTime != null) {
-            stmt.bindString(3, closedTime);
-        }
+        stmt.bindLong(2, entity.getOpenTime());
+        stmt.bindLong(3, entity.getClosedTime());
     }
 
     @Override
@@ -102,8 +86,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
     public PowerDevice readEntity(Cursor cursor, int offset) {
         PowerDevice entity = new PowerDevice( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // deviceName
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // openTime
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // closedTime
+            cursor.getInt(offset + 1), // openTime
+            cursor.getInt(offset + 2) // closedTime
         );
         return entity;
     }
@@ -111,8 +95,8 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
     @Override
     public void readEntity(Cursor cursor, PowerDevice entity, int offset) {
         entity.setDeviceName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setOpenTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setClosedTime(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setOpenTime(cursor.getInt(offset + 1));
+        entity.setClosedTime(cursor.getInt(offset + 2));
      }
     
     @Override

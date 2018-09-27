@@ -40,7 +40,7 @@
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="admin"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -71,7 +71,7 @@
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="123456"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -102,7 +102,7 @@
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="管理员"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 

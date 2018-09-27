@@ -8,12 +8,12 @@ public class PowerDevice {
 
     public String deviceName;
 
-    public String openTime;
+    public int openTime;
 
-    public String closedTime;
+    public int closedTime;
 
-    @Generated(hash = 552878418)
-    public PowerDevice(String deviceName, String openTime, String closedTime) {
+    @Generated(hash = 1969481739)
+    public PowerDevice(String deviceName, int openTime, int closedTime) {
         this.deviceName = deviceName;
         this.openTime = openTime;
         this.closedTime = closedTime;
@@ -27,8 +27,8 @@ public class PowerDevice {
     public String toString() {
         return "PowerDevice{" +
                 "deviceName='" + deviceName + '\'' +
-                ", openTime='" + openTime + '\'' +
-                ", closedTime='" + closedTime + '\'' +
+                ", openTime=" + openTime +
+                ", closedTime=" + closedTime +
                 '}';
     }
 
@@ -40,19 +40,19 @@ public class PowerDevice {
         this.deviceName = deviceName;
     }
 
-    public String getOpenTime() {
+    public int getOpenTime() {
         return this.openTime;
     }
 
-    public void setOpenTime(String openTime) {
+    public void setOpenTime(int openTime) {
         this.openTime = openTime;
     }
 
-    public String getClosedTime() {
+    public int getClosedTime() {
         return this.closedTime;
     }
 
-    public void setClosedTime(String closedTime) {
+    public void setClosedTime(int closedTime) {
         this.closedTime = closedTime;
     }
 }
