@@ -10,23 +10,26 @@ public class Computer {
     public String PORT;
     public String userName;
     public String Password;
-    public String openCommand;
-    public String closedCommand;
+    public String chazuo;
+    public int chazuoId;
 
-    @Generated(hash = 599429489)
+
+    @Generated(hash = 1487998518)
     public Computer(String IP, String PORT, String userName, String Password,
-            String openCommand, String closedCommand) {
+            String chazuo, int chazuoId) {
         this.IP = IP;
         this.PORT = PORT;
         this.userName = userName;
         this.Password = Password;
-        this.openCommand = openCommand;
-        this.closedCommand = closedCommand;
+        this.chazuo = chazuo;
+        this.chazuoId = chazuoId;
     }
+
 
     @Generated(hash = 1238779503)
     public Computer() {
     }
+
 
     @Override
     public String toString() {
@@ -35,56 +38,68 @@ public class Computer {
                 ", PORT='" + PORT + '\'' +
                 ", userName='" + userName + '\'' +
                 ", Password='" + Password + '\'' +
-                ", openCommand='" + openCommand + '\'' +
-                ", closedCommand='" + closedCommand + '\'' +
+                ", chazuo='" + chazuo + '\'' +
+                ", chazuoId=" + chazuoId +
                 '}';
     }
+
 
     public String getIP() {
         return this.IP;
     }
 
+
     public void setIP(String IP) {
         this.IP = IP;
     }
+
 
     public String getPORT() {
         return this.PORT;
     }
 
+
     public void setPORT(String PORT) {
         this.PORT = PORT;
     }
+
 
     public String getUserName() {
         return this.userName;
     }
 
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
     public String getPassword() {
         return this.Password;
     }
 
+
     public void setPassword(String Password) {
         this.Password = Password;
     }
 
-    public String getOpenCommand() {
-        return this.openCommand;
+
+    public String getChazuo() {
+        return this.chazuo;
     }
 
-    public void setOpenCommand(String openCommand) {
-        this.openCommand = openCommand;
+
+    public void setChazuo(String chazuo) {
+        this.chazuo = chazuo;
     }
 
-    public String getClosedCommand() {
-        return this.closedCommand;
+
+    public int getChazuoId() {
+        return this.chazuoId;
     }
 
-    public void setClosedCommand(String closedCommand) {
-        this.closedCommand = closedCommand;
+
+    public void setChazuoId(int chazuoId) {
+        this.chazuoId = chazuoId;
     }
 }

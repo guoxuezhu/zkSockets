@@ -42,7 +42,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_60"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -54,7 +54,7 @@
                     android:gravity="center"
                     android:text="IP地址:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
                 <EditText
                     android:id="@+id/et_computer_ip"
@@ -65,13 +65,13 @@
                     android:paddingLeft="@dimen/dp_10"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:text="端口号:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
                 <EditText
                     android:id="@+id/et_computer_port"
@@ -94,13 +94,13 @@
                     android:paddingLeft="@dimen/dp_10"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -112,7 +112,7 @@
                     android:gravity="center"
                     android:text="用户名:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
                 <EditText
                     android:id="@+id/et_computer_name"
@@ -123,13 +123,13 @@
                     android:paddingLeft="@dimen/dp_10"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -141,7 +141,7 @@
                     android:gravity="center"
                     android:text="密码:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
                 <EditText
                     android:id="@+id/et_password"
@@ -152,13 +152,13 @@
                     android:paddingLeft="@dimen/dp_10"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -168,51 +168,21 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="上电命令:"
+                    android:text="插座设置:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
-                <EditText
-                    android:id="@+id/et_open_ml"
+
+                <Spinner
+                    android:id="@+id/chazuo_computer"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="@dimen/dp_150"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="断电命令:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
-
-                <EditText
-                    android:id="@+id/et_closed_ml"
-                    android:layout_width="@dimen/dp_400"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_table_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
-
-            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_computer_ok"
@@ -223,7 +193,7 @@
                 android:background="@drawable/btn_bg"
                 android:text="保存"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_24" />
+                android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
     </ScrollView>

@@ -28,8 +28,8 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         public final static Property PORT = new Property(1, String.class, "PORT", false, "PORT");
         public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
         public final static Property Password = new Property(3, String.class, "Password", false, "PASSWORD");
-        public final static Property OpenCommand = new Property(4, String.class, "openCommand", false, "OPEN_COMMAND");
-        public final static Property ClosedCommand = new Property(5, String.class, "closedCommand", false, "CLOSED_COMMAND");
+        public final static Property Chazuo = new Property(4, String.class, "chazuo", false, "CHAZUO");
+        public final static Property ChazuoId = new Property(5, int.class, "chazuoId", false, "CHAZUO_ID");
     }
 
 
@@ -49,8 +49,8 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
                 "\"PORT\" TEXT," + // 1: PORT
                 "\"USER_NAME\" TEXT," + // 2: userName
                 "\"PASSWORD\" TEXT," + // 3: Password
-                "\"OPEN_COMMAND\" TEXT," + // 4: openCommand
-                "\"CLOSED_COMMAND\" TEXT);"); // 5: closedCommand
+                "\"CHAZUO\" TEXT," + // 4: chazuo
+                "\"CHAZUO_ID\" INTEGER NOT NULL );"); // 5: chazuoId
     }
 
     /** Drops the underlying database table. */
@@ -83,15 +83,11 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
             stmt.bindString(4, Password);
         }
  
-        String openCommand = entity.getOpenCommand();
-        if (openCommand != null) {
-            stmt.bindString(5, openCommand);
+        String chazuo = entity.getChazuo();
+        if (chazuo != null) {
+            stmt.bindString(5, chazuo);
         }
- 
-        String closedCommand = entity.getClosedCommand();
-        if (closedCommand != null) {
-            stmt.bindString(6, closedCommand);
-        }
+        stmt.bindLong(6, entity.getChazuoId());
     }
 
     @Override
@@ -118,15 +114,11 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
             stmt.bindString(4, Password);
         }
  
-        String openCommand = entity.getOpenCommand();
-        if (openCommand != null) {
-            stmt.bindString(5, openCommand);
+        String chazuo = entity.getChazuo();
+        if (chazuo != null) {
+            stmt.bindString(5, chazuo);
         }
- 
-        String closedCommand = entity.getClosedCommand();
-        if (closedCommand != null) {
-            stmt.bindString(6, closedCommand);
-        }
+        stmt.bindLong(6, entity.getChazuoId());
     }
 
     @Override
@@ -141,8 +133,8 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // PORT
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // Password
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // openCommand
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // closedCommand
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chazuo
+            cursor.getInt(offset + 5) // chazuoId
         );
         return entity;
     }
@@ -153,8 +145,8 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         entity.setPORT(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setUserName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setOpenCommand(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setClosedCommand(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setChazuo(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setChazuoId(cursor.getInt(offset + 5));
      }
     
     @Override
