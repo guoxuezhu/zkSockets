@@ -24,9 +24,10 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property DeviceName = new Property(0, String.class, "deviceName", false, "DEVICE_NAME");
-        public final static Property OpenTime = new Property(1, int.class, "openTime", false, "OPEN_TIME");
-        public final static Property ClosedTime = new Property(2, int.class, "closedTime", false, "CLOSED_TIME");
+        public final static Property ChazuoId = new Property(0, Long.class, "chazuoId", false, "CHAZUO_ID");
+        public final static Property DeviceName = new Property(1, String.class, "deviceName", false, "DEVICE_NAME");
+        public final static Property OpenTime = new Property(2, int.class, "openTime", false, "OPEN_TIME");
+        public final static Property ClosedTime = new Property(3, int.class, "closedTime", false, "CLOSED_TIME");
     }
 
 
@@ -42,9 +43,10 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"POWER_DEVICE\" (" + //
-                "\"DEVICE_NAME\" TEXT," + // 0: deviceName
-                "\"OPEN_TIME\" INTEGER NOT NULL ," + // 1: openTime
-                "\"CLOSED_TIME\" INTEGER NOT NULL );"); // 2: closedTime
+                "\"CHAZUO_ID\" INTEGER," + // 0: chazuoId
+                "\"DEVICE_NAME\" TEXT," + // 1: deviceName
+                "\"OPEN_TIME\" INTEGER NOT NULL ," + // 2: openTime
+                "\"CLOSED_TIME\" INTEGER NOT NULL );"); // 3: closedTime
     }
 
     /** Drops the underlying database table. */
@@ -57,24 +59,34 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
     protected final void bindValues(DatabaseStatement stmt, PowerDevice entity) {
         stmt.clearBindings();
  
+        Long chazuoId = entity.getChazuoId();
+        if (chazuoId != null) {
+            stmt.bindLong(1, chazuoId);
+        }
+ 
         String deviceName = entity.getDeviceName();
         if (deviceName != null) {
-            stmt.bindString(1, deviceName);
+            stmt.bindString(2, deviceName);
         }
-        stmt.bindLong(2, entity.getOpenTime());
-        stmt.bindLong(3, entity.getClosedTime());
+        stmt.bindLong(3, entity.getOpenTime());
+        stmt.bindLong(4, entity.getClosedTime());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, PowerDevice entity) {
         stmt.clearBindings();
  
+        Long chazuoId = entity.getChazuoId();
+        if (chazuoId != null) {
+            stmt.bindLong(1, chazuoId);
+        }
+ 
         String deviceName = entity.getDeviceName();
         if (deviceName != null) {
-            stmt.bindString(1, deviceName);
+            stmt.bindString(2, deviceName);
         }
-        stmt.bindLong(2, entity.getOpenTime());
-        stmt.bindLong(3, entity.getClosedTime());
+        stmt.bindLong(3, entity.getOpenTime());
+        stmt.bindLong(4, entity.getClosedTime());
     }
 
     @Override
@@ -85,18 +97,20 @@ public class PowerDeviceDao extends AbstractDao<PowerDevice, Void> {
     @Override
     public PowerDevice readEntity(Cursor cursor, int offset) {
         PowerDevice entity = new PowerDevice( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // deviceName
-            cursor.getInt(offset + 1), // openTime
-            cursor.getInt(offset + 2) // closedTime
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // chazuoId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // deviceName
+            cursor.getInt(offset + 2), // openTime
+            cursor.getInt(offset + 3) // closedTime
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, PowerDevice entity, int offset) {
-        entity.setDeviceName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setOpenTime(cursor.getInt(offset + 1));
-        entity.setClosedTime(cursor.getInt(offset + 2));
+        entity.setChazuoId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setDeviceName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setOpenTime(cursor.getInt(offset + 2));
+        entity.setClosedTime(cursor.getInt(offset + 3));
      }
     
     @Override

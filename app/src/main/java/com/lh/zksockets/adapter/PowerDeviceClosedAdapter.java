@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.model.ChazuoData;
 
 import java.util.List;
 
@@ -22,10 +23,10 @@ import butterknife.OnTextChanged;
 public class PowerDeviceClosedAdapter extends RecyclerView.Adapter<PowerDeviceClosedAdapter.PowerViewHolder> {
 
     private Context mContext;
-    private List<String> datas;
+    private List<ChazuoData> datas;
     private ClosedCallBack mCallBack;
 
-    public PowerDeviceClosedAdapter(Context context, List<String> data, ClosedCallBack callBack) {
+    public PowerDeviceClosedAdapter(Context context, List<ChazuoData> data, ClosedCallBack callBack) {
         this.datas = data;
         this.mContext = context;
         this.mCallBack = callBack;
@@ -41,11 +42,15 @@ public class PowerDeviceClosedAdapter extends RecyclerView.Adapter<PowerDeviceCl
     @Override
     public void onBindViewHolder(@NonNull PowerViewHolder holder, int position) {
 
-        String name = datas.get(position);
+        ChazuoData chazuo = datas.get(position);
         holder.tv_power_serialNumber.setText(position + 1 + "");
-        holder.tv_device.setText(datas.get(position));
+        if (chazuo.bindName == null) {
+            holder.tv_device.setText(chazuo.name);
+        } else {
+            holder.tv_device.setText(chazuo.name + "(" + chazuo.bindName + ")");
+        }
         holder.et_time.setText(holder.et_time.getText().toString());
-        holder.setItem(name);
+        holder.setItem(chazuo);
 
     }
 
@@ -56,7 +61,7 @@ public class PowerDeviceClosedAdapter extends RecyclerView.Adapter<PowerDeviceCl
 
 
     public interface ClosedCallBack {
-        void setClosedEditTextChanged(String item, String time);
+        void setClosedEditTextChanged(ChazuoData item, String time);
     }
 
     public class PowerViewHolder extends RecyclerView.ViewHolder {
@@ -69,7 +74,7 @@ public class PowerDeviceClosedAdapter extends RecyclerView.Adapter<PowerDeviceCl
         EditText et_time;
 
 
-        private String item;
+        private ChazuoData item;
 
 
         public PowerViewHolder(View itemView) {
@@ -77,7 +82,7 @@ public class PowerDeviceClosedAdapter extends RecyclerView.Adapter<PowerDeviceCl
             ButterKnife.bind(this, itemView);
         }
 
-        public void setItem(String item) {
+        public void setItem(ChazuoData item) {
             this.item = item;
         }
 

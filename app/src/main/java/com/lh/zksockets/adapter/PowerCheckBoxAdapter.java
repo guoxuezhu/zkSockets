@@ -9,19 +9,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.model.ChazuoData;
 
 import java.util.List;
 
 public class PowerCheckBoxAdapter extends BaseAdapter {
 
 
-    private List<String> datas;
+    private List<ChazuoData> datas;
     private Context mContext;
     private PowerCallBack mCallBack;
 
-    public PowerCheckBoxAdapter(Context pContext, List<String> datalist, PowerCallBack powerCallBack) {
+    public PowerCheckBoxAdapter(Context pContext, List<ChazuoData> datalist, PowerCallBack powerCallBack) {
         this.mContext = pContext;
         this.datas = datalist;
         this.mCallBack = powerCallBack;
@@ -44,23 +46,39 @@ public class PowerCheckBoxAdapter extends BaseAdapter {
 
 
     public interface PowerCallBack {
-        void onPowerCheckItem(boolean isChecked, String name);
+        void onPowerCheckItem(boolean isChecked, ChazuoData chazuoData);
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.checked_item, parent, false);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = null;
+        convertView = View.inflate(mContext, R.layout.checked_item, null);
+        if (viewHolder == null) {
+            viewHolder = new ViewHolder();
+            viewHolder.powerName = (CheckBox) convertView.findViewById(R.id.check_box_power);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        CheckBox powerName = (CheckBox) convertView.findViewById(R.id.check_box_power);
-        final String name = datas.get(position);
-        powerName.setText(name);
-        powerName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        final ChazuoData chazuoData = datas.get(position);
+        if (chazuoData.bindName == null) {
+            viewHolder.powerName.setText(chazuoData.name);
+        } else {
+            viewHolder.powerName.setText(chazuoData.name + "(" + chazuoData.bindName + ")");
+        }
+
+        viewHolder.powerName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                mCallBack.onPowerCheckItem(b, name);
+                mCallBack.onPowerCheckItem(b, chazuoData);
             }
         });
+
         return convertView;
+    }
+
+    class ViewHolder {
+        CheckBox powerName;
     }
 }

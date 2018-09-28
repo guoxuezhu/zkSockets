@@ -6,14 +6,18 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class PowerDevice {
 
+    public Long chazuoId;
+
     public String deviceName;
 
     public int openTime;
 
     public int closedTime;
 
-    @Generated(hash = 1969481739)
-    public PowerDevice(String deviceName, int openTime, int closedTime) {
+    @Generated(hash = 516739837)
+    public PowerDevice(Long chazuoId, String deviceName, int openTime,
+            int closedTime) {
+        this.chazuoId = chazuoId;
         this.deviceName = deviceName;
         this.openTime = openTime;
         this.closedTime = closedTime;
@@ -26,10 +30,19 @@ public class PowerDevice {
     @Override
     public String toString() {
         return "PowerDevice{" +
-                "deviceName='" + deviceName + '\'' +
+                "chazuoId=" + chazuoId +
+                ", deviceName='" + deviceName + '\'' +
                 ", openTime=" + openTime +
                 ", closedTime=" + closedTime +
                 '}';
+    }
+
+    public Long getChazuoId() {
+        return this.chazuoId;
+    }
+
+    public void setChazuoId(Long chazuoId) {
+        this.chazuoId = chazuoId;
     }
 
     public String getDeviceName() {

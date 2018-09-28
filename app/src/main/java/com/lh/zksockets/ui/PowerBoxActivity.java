@@ -16,9 +16,11 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.PowerCheckBoxAdapter;
 import com.lh.zksockets.adapter.PowerDeviceClosedAdapter;
 import com.lh.zksockets.adapter.PowerDeviceOpenAdapter;
+import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.PowerDeviceDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
+import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.PowerDevice;
 
 import java.util.ArrayList;
@@ -46,10 +48,8 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
     @BindView(R.id.closed_power_recyclerView)
     RecyclerView closed_power_recyclerView;
 
-    private List<String> powerDatas;
-    private List<String> checkedPower = new ArrayList<>();
+    private List<ChazuoData> checkedPower = new ArrayList<>();
     private List<PowerDevice> powerDevices = new ArrayList<>();
-    private PowerDeviceDao powerDeviceDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,45 +61,21 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         LL_close.setVisibility(View.GONE);
 
         gridViewInit();
-        powerDeviceDao = MyApplication.getDaoSession().getPowerDeviceDao();
 
     }
 
     private void gridViewInit() {
-        powerDatas = new ArrayList<>();
-        ProjectorDao projectorDao = MyApplication.getDaoSession().getProjectorDao();
-        for (int i = 0; i < projectorDao.loadAll().size(); i++) {
-            powerDatas.add(projectorDao.loadAll().get(i).name);
-            powerDatas.add(projectorDao.loadAll().get(i).name + "的幕布");
-        }
-
-        ComputerDao computerDao = MyApplication.getDaoSession().getComputerDao();
-        for (int i = 0; i < computerDao.loadAll().size(); i++) {
-            powerDatas.add(computerDao.loadAll().get(i).userName + "的电脑");
-        }
-
-//        powerDatas.add("投影机一");
-//        powerDatas.add("投影机二");
-//        powerDatas.add("投影幕一");
-//        powerDatas.add("投影幕二");
-//        powerDatas.add("电脑/显示器");
-//        powerDatas.add("电视");
-//        powerDatas.add("功放");
-//        powerDatas.add("插座一");
-//        powerDatas.add("插座二");
-//        powerDatas.add("插座三");
-//        powerDatas.add("插座四");
-
-        power_gridView.setAdapter(new PowerCheckBoxAdapter(this, powerDatas, this));
+        ChazuoDataDao chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
+        power_gridView.setAdapter(new PowerCheckBoxAdapter(this, chazuoDataDao.loadAll(), this));
 
     }
 
     @Override
-    public void onPowerCheckItem(boolean isChecked, String name) {
+    public void onPowerCheckItem(boolean isChecked, ChazuoData chazuoData) {
         if (isChecked) {
-            checkedPower.add(name);
+            checkedPower.add(chazuoData);
         } else {
-            checkedPower.remove(name);
+            checkedPower.remove(chazuoData);
         }
         Log.i("lhlog", "=========checkedPower==========" + checkedPower.toString());
     }
@@ -118,18 +94,23 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         PowerDeviceOpenAdapter powerDeviceAdapter = new PowerDeviceOpenAdapter(this, checkedPower, this);
         open_power_recyclerView.setAdapter(powerDeviceAdapter);
         for (int i = 0; i < checkedPower.size(); i++) {
-            powerDevices.add(new PowerDevice(checkedPower.get(i), 0, 0));
+            if (checkedPower.get(i).bindName != null) {
+                powerDevices.add(new PowerDevice(checkedPower.get(i).id,
+                        checkedPower.get(i).name + "(" + checkedPower.get(i).bindName + ")", 0, 0));
+            } else {
+                powerDevices.add(new PowerDevice(checkedPower.get(i).id, checkedPower.get(i).name, 0, 0));
+            }
         }
     }
 
     @Override
-    public void setOpenEditTextChanged(String item, String openTime) {
+    public void setOpenEditTextChanged(ChazuoData item, String openTime) {
         Log.d("TAG", "====openTime===" + item + "=====" + openTime);
         if (item == null) {
             return;
         }
         for (int i = 0; i < powerDevices.size(); i++) {
-            if (powerDevices.get(i).deviceName.equals(item)) {
+            if (powerDevices.get(i).chazuoId == item.id) {
                 if (openTime.equals("")) {
                     powerDevices.get(i).setOpenTime(0);
                 } else {
@@ -155,18 +136,16 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         closed_power_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         PowerDeviceClosedAdapter powerDeviceAdapter = new PowerDeviceClosedAdapter(this, checkedPower, this);
         closed_power_recyclerView.setAdapter(powerDeviceAdapter);
-
-
     }
 
     @Override
-    public void setClosedEditTextChanged(String item, String closedTime) {
+    public void setClosedEditTextChanged(ChazuoData item, String closedTime) {
         Log.d("TAG", "===closedTime====" + item + "=====" + closedTime);
         if (item == null) {
             return;
         }
         for (int i = 0; i < powerDevices.size(); i++) {
-            if (powerDevices.get(i).deviceName.equals(item)) {
+            if (powerDevices.get(i).chazuoId == item.id) {
                 if (closedTime.equals("")) {
                     powerDevices.get(i).setClosedTime(0);
                 } else {
@@ -184,12 +163,16 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
                 return;
             }
         }
-
-        powerDeviceDao.deleteAll();
+        PowerDeviceDao powerDeviceDao = MyApplication.getDaoSession().getPowerDeviceDao();
+        if (powerDeviceDao.loadAll().size() != 0) {
+            powerDeviceDao.deleteAll();
+        }
         for (int j = 0; j < powerDevices.size(); j++) {
             powerDeviceDao.insert(powerDevices.get(j));
         }
-        back();
+
+        startActivity(new Intent(this, PowerDeviceActivity.class));
+        finish();
     }
 
     @OnClick(R.id.power_btn_back)
