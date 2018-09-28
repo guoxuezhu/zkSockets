@@ -40,6 +40,10 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         public final static Property ClosedCommand = new Property(13, String.class, "closedCommand", false, "CLOSED_COMMAND");
         public final static Property VGACommand = new Property(14, String.class, "VGACommand", false, "VGACOMMAND");
         public final static Property HDMICommand = new Property(15, String.class, "HDMICommand", false, "HDMICOMMAND");
+        public final static Property JiChazuo = new Property(16, String.class, "jiChazuo", false, "JI_CHAZUO");
+        public final static Property JiChazuoId = new Property(17, int.class, "jiChazuoId", false, "JI_CHAZUO_ID");
+        public final static Property BuChazuo = new Property(18, String.class, "buChazuo", false, "BU_CHAZUO");
+        public final static Property BuChazuoId = new Property(19, int.class, "buChazuoId", false, "BU_CHAZUO_ID");
     }
 
 
@@ -70,7 +74,11 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
                 "\"OPEN_COMMAND\" TEXT," + // 12: openCommand
                 "\"CLOSED_COMMAND\" TEXT," + // 13: closedCommand
                 "\"VGACOMMAND\" TEXT," + // 14: VGACommand
-                "\"HDMICOMMAND\" TEXT);"); // 15: HDMICommand
+                "\"HDMICOMMAND\" TEXT," + // 15: HDMICommand
+                "\"JI_CHAZUO\" TEXT," + // 16: jiChazuo
+                "\"JI_CHAZUO_ID\" INTEGER NOT NULL ," + // 17: jiChazuoId
+                "\"BU_CHAZUO\" TEXT," + // 18: buChazuo
+                "\"BU_CHAZUO_ID\" INTEGER NOT NULL );"); // 19: buChazuoId
     }
 
     /** Drops the underlying database table. */
@@ -142,6 +150,18 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         if (HDMICommand != null) {
             stmt.bindString(16, HDMICommand);
         }
+ 
+        String jiChazuo = entity.getJiChazuo();
+        if (jiChazuo != null) {
+            stmt.bindString(17, jiChazuo);
+        }
+        stmt.bindLong(18, entity.getJiChazuoId());
+ 
+        String buChazuo = entity.getBuChazuo();
+        if (buChazuo != null) {
+            stmt.bindString(19, buChazuo);
+        }
+        stmt.bindLong(20, entity.getBuChazuoId());
     }
 
     @Override
@@ -207,6 +227,18 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         if (HDMICommand != null) {
             stmt.bindString(16, HDMICommand);
         }
+ 
+        String jiChazuo = entity.getJiChazuo();
+        if (jiChazuo != null) {
+            stmt.bindString(17, jiChazuo);
+        }
+        stmt.bindLong(18, entity.getJiChazuoId());
+ 
+        String buChazuo = entity.getBuChazuo();
+        if (buChazuo != null) {
+            stmt.bindString(19, buChazuo);
+        }
+        stmt.bindLong(20, entity.getBuChazuoId());
     }
 
     @Override
@@ -232,7 +264,11 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // openCommand
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // closedCommand
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // VGACommand
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // HDMICommand
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // HDMICommand
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // jiChazuo
+            cursor.getInt(offset + 17), // jiChazuoId
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // buChazuo
+            cursor.getInt(offset + 19) // buChazuoId
         );
         return entity;
     }
@@ -255,6 +291,10 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         entity.setClosedCommand(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setVGACommand(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setHDMICommand(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setJiChazuo(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setJiChazuoId(cursor.getInt(offset + 17));
+        entity.setBuChazuo(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setBuChazuoId(cursor.getInt(offset + 19));
      }
     
     @Override

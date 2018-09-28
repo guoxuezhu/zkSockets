@@ -1,17 +1,19 @@
 package com.lh.zksockets.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
+import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.DbDao.ChazuoDataDao;
+import com.lh.zksockets.data.model.ChazuoData;
+import com.lh.zksockets.utils.ELog;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
 
     @Override
@@ -19,8 +21,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
+        ChazuoDataDao chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
+        if (chazuoDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < 21; i++) {
+                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null));
+            }
+        }
+        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
     }
 
     @OnClick(R.id.net_btn)

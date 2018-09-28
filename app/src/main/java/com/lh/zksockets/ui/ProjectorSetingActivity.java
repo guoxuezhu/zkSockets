@@ -3,7 +3,6 @@ package com.lh.zksockets.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -14,7 +13,10 @@ import android.widget.Toast;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.SelectAdapter;
+import com.lh.zksockets.adapter.SelectChazuoAdapter;
+import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
+import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.utils.ELog;
 
@@ -44,6 +46,11 @@ public class ProjectorSetingActivity extends Activity {
     @BindView(R.id.spinnerTyep)
     Spinner spinnerTyep;
 
+    @BindView(R.id.chazuo_ji)
+    Spinner chazuo_ji;
+    @BindView(R.id.chazuo_bu)
+    Spinner chazuo_bu;
+
     @BindView(R.id.et_open_command)
     EditText et_open_command;
     @BindView(R.id.et_closed_command)
@@ -58,6 +65,7 @@ public class ProjectorSetingActivity extends Activity {
     private List<String> dataBitList;
     private List<String> stopBitList;
     private List<String> typeList;
+    private List<ChazuoData> chazuoList;
     private ProjectorDao projectorDao;
     private String selectBaudRate;
     private String selectCheckoutBit;
@@ -70,6 +78,12 @@ public class ProjectorSetingActivity extends Activity {
     private int selectDataBitId;
     private int selectStopBitId;
     private int selectTyepId;
+    private String chazuojiselect;
+    private int chazuojiselectId;
+    private String chazuobuselect;
+    private int chazuobuselectId;
+    private ChazuoDataDao chazuoDataDao;
+    private SelectChazuoAdapter chazuoAdapter;
 
 
     @Override
@@ -86,6 +100,12 @@ public class ProjectorSetingActivity extends Activity {
         stopBitInitView();
         typeInitView();
 
+        chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
+        chazuoList = chazuoDataDao.loadAll();
+        chazuoAdapter=new SelectChazuoAdapter(this, chazuoList);
+        chazuoProjectorView();
+        chazuoBuView();
+
         projectorDao = MyApplication.getDaoSession().getProjectorDao();
         if (projectorDao.loadAll().size() != 0) {
             if (projectorDao.load((long) 1) != null) {
@@ -101,6 +121,40 @@ public class ProjectorSetingActivity extends Activity {
 
     }
 
+
+    private void chazuoProjectorView() {
+        chazuo_ji.setAdapter(chazuoAdapter);
+        chazuo_ji.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chazuojiselect = chazuoList.get(position).name;
+                chazuojiselectId = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void chazuoBuView() {
+        chazuo_bu.setAdapter(chazuoAdapter);
+        chazuo_bu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chazuobuselect = chazuoList.get(position).name;
+                chazuobuselectId = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
     private void setViewInit(Projector projector) {
         if (projector != null) {
             spinnerBaudRate.setSelection(projector.baudRateId);
@@ -108,6 +162,8 @@ public class ProjectorSetingActivity extends Activity {
             spinnerDataBit.setSelection(projector.dataBitId);
             spinnerStopBit.setSelection(projector.stopBitId);
             spinnerTyep.setSelection(projector.typeId);
+            chazuo_ji.setSelection(projector.jiChazuoId);
+            chazuo_bu.setSelection(projector.buChazuoId);
 
             et_open_command.setText(projector.openCommand);
             et_closed_command.setText(projector.closedCommand);
@@ -119,6 +175,8 @@ public class ProjectorSetingActivity extends Activity {
             spinnerDataBit.setSelection(0);
             spinnerStopBit.setSelection(0);
             spinnerTyep.setSelection(0);
+            chazuo_ji.setSelection(0);
+            chazuo_bu.setSelection(0);
 
             et_open_command.setText("");
             et_closed_command.setText("");
@@ -262,6 +320,21 @@ public class ProjectorSetingActivity extends Activity {
 
     @OnClick(R.id.btn_projector_ok)
     public void btn_projector_ok() {
+        if (chazuojiselectId == chazuobuselectId) {
+            Toast.makeText(this, "投影机与幕布插座不能相同", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (chazuoList.get(chazuojiselectId).bindName != null) {
+            Toast.makeText(this, "投影机选择的插座已经被" + chazuoList.get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (chazuoList.get(chazuobuselectId).bindName != null) {
+            Toast.makeText(this, "幕布选择的插座已经被" + chazuoList.get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         int deviceId = 0;
         String name = "";
         if (radio_btn_1.isChecked()) {
@@ -274,15 +347,43 @@ public class ProjectorSetingActivity extends Activity {
             name = "投影机二";
         }
 
+        int jidataId = chazuojiselectId + 1;
+        int budataId = chazuobuselectId + 1;
         if (projectorDao.load((long) deviceId) != null) {
+            int jidaoId = projectorDao.load((long) deviceId).jiChazuoId + 1;
+            int budaoId = projectorDao.load((long) deviceId).buChazuoId + 1;
+
+            if (deviceId == 1) {
+                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机一"));
+                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机一幕布"));
+            } else {
+                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机二"));
+                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机二幕布"));
+            }
             projectorDao.deleteByKey((long) deviceId);
+        } else {
+            if (deviceId == 1) {
+                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机一"));
+                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机一幕布"));
+            } else {
+                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机二"));
+                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机二幕布"));
+            }
         }
         projectorDao.insert(new Projector((long) deviceId, name, selectBaudRate, selectBaudRateId, selectCheckoutBit,
                 selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit, selectStopBitId, selectTyep,
                 selectTyepId, et_open_command.getText().toString(), et_closed_command.getText().toString(),
-                et_VGA_command.getText().toString(), et_HDMI_command.getText().toString()));
+                et_VGA_command.getText().toString(), et_HDMI_command.getText().toString(),
+                chazuojiselect, chazuojiselectId, chazuobuselect, chazuobuselectId));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
+        chazuoAdapter.setDatas(chazuoDataDao.loadAll());
+
     }
 
     @OnClick(R.id.projector_btn_back)
