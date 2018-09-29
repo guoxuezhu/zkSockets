@@ -94,12 +94,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         PowerDeviceOpenAdapter powerDeviceAdapter = new PowerDeviceOpenAdapter(this, checkedPower, this);
         open_power_recyclerView.setAdapter(powerDeviceAdapter);
         for (int i = 0; i < checkedPower.size(); i++) {
-            if (checkedPower.get(i).bindName != null) {
-                powerDevices.add(new PowerDevice(checkedPower.get(i).id,
-                        checkedPower.get(i).name + "(" + checkedPower.get(i).bindName + ")", 0, 0));
-            } else {
-                powerDevices.add(new PowerDevice(checkedPower.get(i).id, checkedPower.get(i).name, 0, 0));
-            }
+            powerDevices.add(new PowerDevice(checkedPower.get(i).id, checkedPower.get(i).name, checkedPower.get(i).bindName, 0, 0));
         }
     }
 

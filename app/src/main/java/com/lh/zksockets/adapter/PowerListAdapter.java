@@ -43,7 +43,12 @@ public class PowerListAdapter extends RecyclerView.Adapter<PowerListAdapter.Powe
     public void onBindViewHolder(@NonNull PowerViewHolder holder, int position) {
         PowerDevice powerDevice = datas.get(position);
         holder.tv_powerdevice_serialNumber.setText(position + 1 + "");
-        holder.tv_Powerdevice.setText(powerDevice.deviceName);
+
+        if (powerDevice.bindName == null) {
+            holder.tv_Powerdevice.setText(powerDevice.chazuoName);
+        } else {
+            holder.tv_Powerdevice.setText(powerDevice.chazuoName + "(" + powerDevice.bindName + ")");
+        }
         holder.tv_openTime.setText(powerDevice.openTime + "");
         holder.tv_closedTime.setText(powerDevice.closedTime + "");
 

@@ -17,13 +17,15 @@ public class WorksUtil {
 
         PowerDeviceDao powerDeviceDao = MyApplication.getDaoSession().getPowerDeviceDao();
 
+
         List<PowerDevice> powerDevices = powerDeviceDao.queryBuilder()
                 .orderAsc(PowerDeviceDao.Properties.OpenTime)
                 .list();
         ELog.d("====电源箱操作===OpenTime=====" + powerDevices.toString());
 
         if (powerDevices.size() != 0) {
-            TimerUtils.WorkTimer(powerDevices, 0);
+            //TimerUtils.WorkTimer(powerDevices, 0);
+            ELog.d("====电源箱操作===串口协议====");
         }
 
 

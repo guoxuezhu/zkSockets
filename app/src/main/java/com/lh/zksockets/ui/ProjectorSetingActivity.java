@@ -102,7 +102,7 @@ public class ProjectorSetingActivity extends Activity {
 
         chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
         chazuoList = chazuoDataDao.loadAll();
-        chazuoAdapter=new SelectChazuoAdapter(this, chazuoList);
+        chazuoAdapter = new SelectChazuoAdapter(this, chazuoList);
         chazuoProjectorView();
         chazuoBuView();
 
@@ -352,7 +352,10 @@ public class ProjectorSetingActivity extends Activity {
         if (projectorDao.load((long) deviceId) != null) {
             int jidaoId = projectorDao.load((long) deviceId).jiChazuoId + 1;
             int budaoId = projectorDao.load((long) deviceId).buChazuoId + 1;
-
+            if (projectorDao.load((long) deviceId).jiChazuoId != chazuojiselectId ||
+                    projectorDao.load((long) deviceId).buChazuoId != chazuobuselectId) {
+                Toast.makeText(this, "投影机插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
+            }
             if (deviceId == 1) {
                 chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
                 chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机一"));
