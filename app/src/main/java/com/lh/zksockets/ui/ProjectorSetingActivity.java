@@ -325,26 +325,32 @@ public class ProjectorSetingActivity extends Activity {
             return;
         }
 
-        if (chazuoList.get(chazuojiselectId).bindName != null) {
-            Toast.makeText(this, "投影机选择的插座已经被" + chazuoList.get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (chazuoList.get(chazuobuselectId).bindName != null) {
-            Toast.makeText(this, "幕布选择的插座已经被" + chazuoList.get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         int deviceId = 0;
         String name = "";
+        String buname = "";
         if (radio_btn_1.isChecked()) {
             deviceId = 1;
             name = "投影机一";
+            buname = "投影机一幕布";
         }
 
         if (radio_btn_2.isChecked()) {
             deviceId = 2;
             name = "投影机二";
+            buname = "投影机二幕布";
+        }
+
+        if (chazuoList.get(chazuojiselectId).bindName != null && !chazuoList.get(chazuojiselectId).bindName.equals(name)
+                && !chazuoList.get(chazuojiselectId).bindName.equals(buname)) {
+            Toast.makeText(this, "投影机选择的插座已经被" + chazuoList.get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (chazuoList.get(chazuobuselectId).bindName != null && !chazuoList.get(chazuobuselectId).bindName.equals(buname)
+                && !chazuoList.get(chazuobuselectId).bindName.equals(name)) {
+            Toast.makeText(this, "幕布选择的插座已经被" + chazuoList.get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         int jidataId = chazuojiselectId + 1;
@@ -356,27 +362,14 @@ public class ProjectorSetingActivity extends Activity {
                     projectorDao.load((long) deviceId).buChazuoId != chazuobuselectId) {
                 Toast.makeText(this, "投影机插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
             }
-            if (deviceId == 1) {
-                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
-                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机一"));
-                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
-                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机一幕布"));
-            } else {
-                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
-                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机二"));
-                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
-                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机二幕布"));
-            }
+            chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
+            chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
             projectorDao.deleteByKey((long) deviceId);
-        } else {
-            if (deviceId == 1) {
-                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机一"));
-                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机一幕布"));
-            } else {
-                chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, "投影机二"));
-                chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, "投影机二幕布"));
-            }
         }
+
+        chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, buname));
+        chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, name));
+
         projectorDao.insert(new Projector((long) deviceId, name, selectBaudRate, selectBaudRateId, selectCheckoutBit,
                 selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit, selectStopBitId, selectTyep,
                 selectTyepId, et_open_command.getText().toString(), et_closed_command.getText().toString(),

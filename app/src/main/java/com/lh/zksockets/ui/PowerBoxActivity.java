@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -17,11 +16,10 @@ import com.lh.zksockets.adapter.PowerCheckBoxAdapter;
 import com.lh.zksockets.adapter.PowerDeviceClosedAdapter;
 import com.lh.zksockets.adapter.PowerDeviceOpenAdapter;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
-import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.PowerDeviceDao;
-import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.PowerDevice;
+import com.lh.zksockets.utils.ELog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +75,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
         } else {
             checkedPower.remove(chazuoData);
         }
-        Log.i("lhlog", "=========checkedPower==========" + checkedPower.toString());
+        ELog.i("========checkedPower==========" + checkedPower.toString());
     }
 
     @OnClick(R.id.btn_to_open)
@@ -100,7 +98,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
 
     @Override
     public void setOpenEditTextChanged(ChazuoData item, String openTime) {
-        Log.d("TAG", "====openTime===" + item + "=====" + openTime);
+        ELog.i("========openTime===" + item + "=====" + openTime);
         if (item == null) {
             return;
         }
@@ -135,7 +133,7 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
 
     @Override
     public void setClosedEditTextChanged(ChazuoData item, String closedTime) {
-        Log.d("TAG", "===closedTime====" + item + "=====" + closedTime);
+        ELog.i("======closedTime====" + item + "=====" + closedTime);
         if (item == null) {
             return;
         }

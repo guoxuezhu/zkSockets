@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
@@ -16,6 +14,7 @@ import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.utils.AddCardDialog;
 import com.lh.zksockets.utils.DateUtil;
+import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
 
@@ -92,7 +91,7 @@ public class ICcardActivity extends Activity implements AddCardDialog.DialogCall
 
     @Override
     public void onClickItem(IcCard item) {
-        Log.i("lhlog", "=====item============" + item.toString());
+        ELog.i("===========item============" + item.toString());
         icCardDao.deleteByKey(item.cardNum);
         closeDialog();
     }

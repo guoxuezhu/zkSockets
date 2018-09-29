@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.adapter.UsersAdapter;
-import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
-import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.utils.AddUserDialog;
-import com.lh.zksockets.utils.DateUtil;
+import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
 
@@ -54,7 +50,7 @@ public class UsersActivity extends Activity implements AddUserDialog.UserDialogC
 
     @Override
     public void onClickItem(Users item) {
-        Log.i("lhlog", "=====item====Users========" + item.toString());
+        ELog.i("===========item====Users========" + item.toString());
         usersDao.deleteByKey(item.id);
         closeDialog();
     }

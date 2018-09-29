@@ -88,7 +88,8 @@ public class ComputerActivity extends Activity {
 
     @OnClick(R.id.btn_computer_ok)
     public void btn_computer_ok() {
-        if (chazuoDataDao.loadAll().get(chazuoSelectId).bindName != null) {
+        if (chazuoDataDao.loadAll().get(chazuoSelectId).bindName != null &&
+                !chazuoDataDao.loadAll().get(chazuoSelectId).bindName.equals("电脑")) {
             Toast.makeText(this, "电脑选择的插座已经被" + chazuoDataDao.loadAll().get(chazuoSelectId).bindName + "使用", Toast.LENGTH_SHORT).show();
             return;
         }
