@@ -26,6 +26,7 @@ public class WorksUtil {
         if (powerDevices.size() != 0) {
             //TimerUtils.WorkTimer(powerDevices, 0);
             ELog.d("====电源箱操作===串口协议====");
+            SerialPortUtil.sendMsg(1,"");
         }
 
 

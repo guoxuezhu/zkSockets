@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.WorksUtil;
 
 import java.io.BufferedReader;
@@ -37,6 +38,8 @@ public class SocketService extends Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        SerialPortUtil.open();
 
         //电源箱操作
         WorksUtil.powerWorkOpen();

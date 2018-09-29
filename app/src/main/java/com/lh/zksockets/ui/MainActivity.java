@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
                 chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null));
             }
         }
-        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
+//        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
     }
 
     @OnClick(R.id.net_btn)
