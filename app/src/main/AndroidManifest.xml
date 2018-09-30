@@ -47,7 +47,7 @@
         <activity android:name=".ui.UsersActivity" />
         <activity android:name=".ui.NetStatusActivity" />
         <activity android:name=".ui.PowerDeviceActivity" />
-        <activity android:name=".ui.ZhongKongActivity"></activity>
+        <activity android:name=".ui.ZhongKongActivity" />
 
         <receiver android:name=".BootRestartReceiver">
             <intent-filter>
@@ -55,6 +55,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ui.IOsetActivity"></activity>
     </application>
 
 </manifest>

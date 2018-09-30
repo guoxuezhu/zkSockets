@@ -65,6 +65,13 @@ public class AdvancedSetingActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.io_seting)
+    public void io_seting() {
+        startActivity(new Intent(this, IOsetActivity.class));
+        finish();
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
