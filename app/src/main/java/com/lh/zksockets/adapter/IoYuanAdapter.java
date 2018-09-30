@@ -1,6 +1,7 @@
 package com.lh.zksockets.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -23,8 +24,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTextChanged;
 
@@ -53,17 +52,26 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
     @Override
     public void onBindViewHolder(@NonNull IcCardViewHolder holder, int position) {
         IOYuan ioYuan = datas.get(position);
+        SelectAdapter selectAdapter = new SelectAdapter(mContext, outDatas);
+        holder.setItem(ioYuan, selectAdapter, position);
+
+        holder.spinner_out.setAdapter(selectAdapter);
+        holder.spinner_out.setSelection(ioYuan.outId);
         holder.tv_io_name.setText(ioYuan.name);
         if (ioYuan.isOK) {
             holder.check_box_io.setChecked(true);
+            holder.spinner_out.setEnabled(true);
+            selectAdapter.setEnabledStatus(true);
+            holder.et_io_time.setEnabled(true);
+            holder.et_io_time.setTextColor(Color.parseColor("#ff000000"));
         } else {
             holder.check_box_io.setChecked(false);
+            holder.spinner_out.setEnabled(false);
+            selectAdapter.setEnabledStatus(false);
+            holder.et_io_time.setEnabled(false);
+            holder.et_io_time.setTextColor(Color.GRAY);
         }
-
-        holder.spinner_out.setAdapter(new SelectAdapter(mContext, outDatas));
-        holder.spinner_out.setSelection(ioYuan.outId);
         holder.et_io_time.setText(ioYuan.sendTime + "");
-        holder.setItem(ioYuan, position);
     }
 
     @Override
@@ -98,6 +106,7 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
 
         private IOYuan item;
         private int adapterPosition;
+        private SelectAdapter spinnerAdapter;
 
 
         public IcCardViewHolder(View itemView) {
@@ -106,14 +115,26 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
         }
 
 
-        public void setItem(IOYuan ioYuan, int position) {
+        public void setItem(IOYuan ioYuan, SelectAdapter adapter, int position) {
             item = ioYuan;
+            spinnerAdapter = adapter;
             adapterPosition = position;
         }
 
         @OnCheckedChanged(R.id.check_box_io)
         public void OnCheckedChanged(CompoundButton compoundButton, boolean b) {
             ELog.i("=========check_box_io========" + b);
+            if (b) {
+                spinner_out.setEnabled(true);
+                spinnerAdapter.setEnabledStatus(true);
+                et_io_time.setEnabled(true);
+                et_io_time.setTextColor(Color.parseColor("#ff000000"));
+            } else {
+                spinner_out.setEnabled(false);
+                spinnerAdapter.setEnabledStatus(false);
+                et_io_time.setEnabled(false);
+                et_io_time.setTextColor(Color.GRAY);
+            }
             mCallBack.onCheckBoxClickItem(b, adapterPosition);
         }
 
@@ -122,7 +143,6 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
             ELog.i("=========spinner_out========" + adapterPosition + "==========" + spinnerPosition);
             mCallBack.onSpinnerSelected(adapterPosition, spinnerPosition);
         }
-
 
         @OnTextChanged(value = R.id.et_io_time, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
         public void afterTextChanged(Editable editable) {

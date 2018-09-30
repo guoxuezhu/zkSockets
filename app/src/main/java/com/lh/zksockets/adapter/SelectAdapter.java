@@ -1,6 +1,7 @@
 package com.lh.zksockets.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SelectAdapter extends BaseAdapter {
     private List<String> mList;
     private Context mContext;
+    private boolean isSelected = true;
 
     public SelectAdapter(Context pContext, List<String> pList) {
         this.mContext = pContext;
@@ -36,14 +38,36 @@ public class SelectAdapter extends BaseAdapter {
         return position;
     }
 
+    public void setEnabledStatus(boolean b) {
+        this.isSelected = b;
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater _LayoutInflater = LayoutInflater.from(mContext);
-        convertView = _LayoutInflater.inflate(R.layout.selsect_item, null);
-        if (convertView != null) {
-            TextView _TextView1 = (TextView) convertView.findViewById(R.id.textView1);
-            _TextView1.setText(mList.get(position));
+
+        ViewHolder viewHolder = null;
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.selsect_item, null);
+        if (viewHolder == null) {
+            viewHolder = new ViewHolder();
+            viewHolder.tv = (TextView) convertView.findViewById(R.id.textView1);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.tv.setText(mList.get(position));
+
+        if (isSelected) {
+            viewHolder.tv.setTextColor(Color.BLACK);
+        } else {
+            viewHolder.tv.setTextColor(Color.GRAY);
         }
         return convertView;
     }
+
+    public class ViewHolder {
+        TextView tv;
+    }
+
 }

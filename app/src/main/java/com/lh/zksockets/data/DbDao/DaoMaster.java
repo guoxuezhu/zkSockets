@@ -24,10 +24,10 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
         IcCardDao.createTable(db, ifNotExists);
+        IOYuanDao.createTable(db, ifNotExists);
         PowerDeviceDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
-        IOYuanDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -35,10 +35,10 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
         IcCardDao.dropTable(db, ifExists);
+        IOYuanDao.dropTable(db, ifExists);
         PowerDeviceDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
-        IOYuanDao.dropTable(db, ifExists);
     }
 
     /**
@@ -60,10 +60,10 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
         registerDaoClass(IcCardDao.class);
+        registerDaoClass(IOYuanDao.class);
         registerDaoClass(PowerDeviceDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(UsersDao.class);
-        registerDaoClass(IOYuanDao.class);
     }
 
     public DaoSession newSession() {
