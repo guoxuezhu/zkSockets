@@ -55,7 +55,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.IOsetActivity"></activity>
+        <activity android:name=".ui.IOsetActivity" />
+        <activity android:name=".ui.EventActivity"></activity>
     </application>
 
 </manifest>

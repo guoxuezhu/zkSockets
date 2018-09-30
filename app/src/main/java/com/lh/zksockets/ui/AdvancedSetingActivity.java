@@ -71,6 +71,12 @@ public class AdvancedSetingActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.event_seting)
+    public void event_seting() {
+        startActivity(new Intent(this, EventActivity.class));
+        finish();
+    }
+
 
     @Override
     protected void onDestroy() {
