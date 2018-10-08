@@ -26,7 +26,8 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property EventBaseString = new Property(2, String.class, "eventBaseString", false, "EVENT_BASE_STRING");
+        public final static Property CheckedNameStr = new Property(2, String.class, "checkedNameStr", false, "CHECKED_NAME_STR");
+        public final static Property EventBaseString = new Property(3, String.class, "eventBaseString", false, "EVENT_BASE_STRING");
     }
 
 
@@ -44,7 +45,8 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"EVENT_BIG\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"EVENT_BASE_STRING\" TEXT);"); // 2: eventBaseString
+                "\"CHECKED_NAME_STR\" TEXT," + // 2: checkedNameStr
+                "\"EVENT_BASE_STRING\" TEXT);"); // 3: eventBaseString
     }
 
     /** Drops the underlying database table. */
@@ -67,9 +69,14 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
             stmt.bindString(2, name);
         }
  
+        String checkedNameStr = entity.getCheckedNameStr();
+        if (checkedNameStr != null) {
+            stmt.bindString(3, checkedNameStr);
+        }
+ 
         String eventBaseString = entity.getEventBaseString();
         if (eventBaseString != null) {
-            stmt.bindString(3, eventBaseString);
+            stmt.bindString(4, eventBaseString);
         }
     }
 
@@ -87,9 +94,14 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
             stmt.bindString(2, name);
         }
  
+        String checkedNameStr = entity.getCheckedNameStr();
+        if (checkedNameStr != null) {
+            stmt.bindString(3, checkedNameStr);
+        }
+ 
         String eventBaseString = entity.getEventBaseString();
         if (eventBaseString != null) {
-            stmt.bindString(3, eventBaseString);
+            stmt.bindString(4, eventBaseString);
         }
     }
 
@@ -103,7 +115,8 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
         EventBig entity = new EventBig( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // eventBaseString
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // checkedNameStr
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // eventBaseString
         );
         return entity;
     }
@@ -112,7 +125,8 @@ public class EventBigDao extends AbstractDao<EventBig, Long> {
     public void readEntity(Cursor cursor, EventBig entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setEventBaseString(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCheckedNameStr(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setEventBaseString(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

@@ -8,12 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.EventBig;
-import com.lh.zksockets.data.model.IcCard;
 
 import java.util.List;
 
@@ -22,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.IcCardViewHolder> {
+public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.EventBigViewHolder> {
 
     private Context mContext;
     private List<EventBig> datas;
@@ -36,20 +32,18 @@ public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.IcCard
 
     @NonNull
     @Override
-    public IcCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventBigViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_big_item, parent, false);
-        return new IcCardViewHolder(view);
+        return new EventBigViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IcCardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventBigViewHolder holder, int position) {
         EventBig eventBig = datas.get(position);
 
         holder.tv_event_name.setText(eventBig.name);
 
-
-//
-//        holder.tv_event_datas.setText(eventBig.eventBases + "");
+        holder.tv_event_datas.setText(eventBig.checkedNameStr);
 
         holder.setItem(eventBig);
     }
@@ -68,7 +62,7 @@ public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.IcCard
         void onClickItem(EventBig item);
     }
 
-    public class IcCardViewHolder extends RecyclerView.ViewHolder {
+    public class EventBigViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_event_name)
         TextView tv_event_name;
@@ -78,7 +72,7 @@ public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.IcCard
         private EventBig item;
 
 
-        public IcCardViewHolder(View itemView) {
+        public EventBigViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

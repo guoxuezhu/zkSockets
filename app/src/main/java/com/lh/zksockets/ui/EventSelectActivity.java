@@ -7,9 +7,12 @@ import android.widget.GridView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.EventBaseAdapter;
+import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.model.EventBase;
+import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
@@ -23,6 +26,10 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
     @BindView(R.id.event_base_gridView)
     GridView event_base_gridView;
 
+    private List<EventBase> eventBaseList;
+    private EventBaseAdapter eventBaseAdapter;
+    private long eventBigId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +42,40 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
     }
 
     private void gridViewInit() {
+        eventBigId = getIntent().getLongExtra("eventBigId", 0);
         Gson gson = new Gson();
-        List<EventBase> eventBaseList = gson.fromJson(getIntent().getStringExtra("eventBases"), new TypeToken<List<EventBase>>() {
+        eventBaseList = gson.fromJson(getIntent().getStringExtra("eventBases"), new TypeToken<List<EventBase>>() {
         }.getType());
 
         ELog.i("========eventBaseList==========" + eventBaseList.toString());
-        event_base_gridView.setAdapter(new EventBaseAdapter(this, eventBaseList, this));
+        eventBaseAdapter = new EventBaseAdapter(this, eventBaseList, this);
+        event_base_gridView.setAdapter(eventBaseAdapter);
     }
 
-    @Override
-    public void onEventBaseCheckItem(boolean isChecked, EventBase eventBase) {
-        if (isChecked) {
 
-        } else {
-
+    @OnClick(R.id.event_select_ok)
+    public void event_select_ok() {
+        eventBaseList = eventBaseAdapter.getDatas();
+        ELog.i("========eventBaseList=====ok======" + eventBaseList.toString());
+        String checkedNameStr = "";
+        for (int i = 0; i < eventBaseList.size(); i++) {
+            if (eventBaseList.get(i).isChecked) {
+                if (checkedNameStr.equals("")) {
+                    checkedNameStr = eventBaseList.get(i).name;
+                } else {
+                    checkedNameStr = checkedNameStr + "," + eventBaseList.get(i).name;
+                }
+            }
         }
-        ELog.i("========eventBase==========" + eventBase.toString());
+
+        EventBigDao eventBigDao = MyApplication.getDaoSession().getEventBigDao();
+        Gson gson = new Gson();
+        String eventBasesJsonStr = gson.toJson(eventBaseList);
+        eventBigDao.loadAll().get((int) (eventBigId - 1)).setCheckedNameStr(checkedNameStr);
+        eventBigDao.loadAll().get((int) (eventBigId - 1)).setEventBaseString(eventBasesJsonStr);
+
+        back();
+
     }
 
     @OnClick(R.id.event_select_btn_back)

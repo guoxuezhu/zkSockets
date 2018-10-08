@@ -50,31 +50,31 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
     private void DataInit() {
         if (eventBigDao.loadAll().size() == 0) {
             Gson gson = new Gson();
-            eventBases.add(new EventBase(1, "开空调", ""));
-            eventBases.add(new EventBase(2, "关空调", ""));
-            eventBases.add(new EventBase(3, "开投影机", ""));
-            eventBases.add(new EventBase(4, "关投影机", ""));
-            eventBases.add(new EventBase(5, "开灯", ""));
-            eventBases.add(new EventBase(6, "关灯", ""));
-            eventBases.add(new EventBase(7, "开窗帘1", ""));
-            eventBases.add(new EventBase(8, "关窗帘1", ""));
-            eventBases.add(new EventBase(9, "开窗帘2", ""));
-            eventBases.add(new EventBase(10, "关窗帘2", ""));
-            eventBases.add(new EventBase(11, "开窗帘3", ""));
-            eventBases.add(new EventBase(12, "关窗帘3", ""));
-            eventBases.add(new EventBase(13, "开窗帘4", ""));
-            eventBases.add(new EventBase(14, "关窗帘4", ""));
+            eventBases.add(new EventBase(1, "开空调", false, "0"));
+            eventBases.add(new EventBase(2, "关空调", false, "0"));
+            eventBases.add(new EventBase(3, "开投影机", false, "0"));
+            eventBases.add(new EventBase(4, "关投影机", false, "0"));
+            eventBases.add(new EventBase(5, "开灯", false, "0"));
+            eventBases.add(new EventBase(6, "关灯", false, "0"));
+            eventBases.add(new EventBase(7, "开窗帘1", false, "0"));
+            eventBases.add(new EventBase(8, "关窗帘1", false, "0"));
+            eventBases.add(new EventBase(9, "开窗帘2", false, "0"));
+            eventBases.add(new EventBase(10, "关窗帘2", false, "0"));
+            eventBases.add(new EventBase(11, "开窗帘3", false, "0"));
+            eventBases.add(new EventBase(12, "关窗帘3", false, "0"));
+            eventBases.add(new EventBase(13, "开窗帘4", false, "0"));
+            eventBases.add(new EventBase(14, "关窗帘4", false, "0"));
 
             String eventBasesJsonStr = gson.toJson(eventBases);
 
-            eventBigDao.insert(new EventBig((long) 1, "上课", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 2, "课间休息", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 3, "下课", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 4, "锁定", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 5, "开灯", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 6, "关灯", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 7, "开窗帘", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 8, "关窗帘", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 1, "上课", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 2, "课间休息", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 3, "下课", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 4, "锁定", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 5, "开灯", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 6, "关灯", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 7, "开窗帘", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 8, "关窗帘", "", eventBasesJsonStr));
         }
 
         ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());
@@ -91,6 +91,7 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
     @Override
     public void onClickItem(EventBig item) {
         Intent intent = new Intent(this, EventSelectActivity.class);
+        intent.putExtra("eventBigId", item.id);
         intent.putExtra("eventBases", item.eventBaseString);
         startActivity(intent);
         finish();

@@ -12,12 +12,15 @@ public class EventBig {
     @Id
     public Long id;
     public String name;
+    public String checkedNameStr;
     public String eventBaseString;
 
-    @Generated(hash = 1068853358)
-    public EventBig(Long id, String name, String eventBaseString) {
+    @Generated(hash = 1597635617)
+    public EventBig(Long id, String name, String checkedNameStr,
+            String eventBaseString) {
         this.id = id;
         this.name = name;
+        this.checkedNameStr = checkedNameStr;
         this.eventBaseString = eventBaseString;
     }
 
@@ -30,6 +33,7 @@ public class EventBig {
         return "EventBig{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", checkedNameStr='" + checkedNameStr + '\'' +
                 ", eventBaseString='" + eventBaseString + '\'' +
                 '}';
     }
@@ -48,6 +52,14 @@ public class EventBig {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCheckedNameStr() {
+        return this.checkedNameStr;
+    }
+
+    public void setCheckedNameStr(String checkedNameStr) {
+        this.checkedNameStr = checkedNameStr;
     }
 
     public String getEventBaseString() {
