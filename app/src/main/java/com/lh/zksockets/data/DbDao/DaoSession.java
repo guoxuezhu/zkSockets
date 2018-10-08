@@ -10,6 +10,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Computer;
+import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.PowerDevice;
@@ -18,6 +19,7 @@ import com.lh.zksockets.data.model.Users;
 
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ComputerDao;
+import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.PowerDeviceDao;
@@ -35,6 +37,7 @@ public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig chazuoDataDaoConfig;
     private final DaoConfig computerDaoConfig;
+    private final DaoConfig eventBigDaoConfig;
     private final DaoConfig icCardDaoConfig;
     private final DaoConfig iOYuanDaoConfig;
     private final DaoConfig powerDeviceDaoConfig;
@@ -43,6 +46,7 @@ public class DaoSession extends AbstractDaoSession {
 
     private final ChazuoDataDao chazuoDataDao;
     private final ComputerDao computerDao;
+    private final EventBigDao eventBigDao;
     private final IcCardDao icCardDao;
     private final IOYuanDao iOYuanDao;
     private final PowerDeviceDao powerDeviceDao;
@@ -58,6 +62,9 @@ public class DaoSession extends AbstractDaoSession {
 
         computerDaoConfig = daoConfigMap.get(ComputerDao.class).clone();
         computerDaoConfig.initIdentityScope(type);
+
+        eventBigDaoConfig = daoConfigMap.get(EventBigDao.class).clone();
+        eventBigDaoConfig.initIdentityScope(type);
 
         icCardDaoConfig = daoConfigMap.get(IcCardDao.class).clone();
         icCardDaoConfig.initIdentityScope(type);
@@ -76,6 +83,7 @@ public class DaoSession extends AbstractDaoSession {
 
         chazuoDataDao = new ChazuoDataDao(chazuoDataDaoConfig, this);
         computerDao = new ComputerDao(computerDaoConfig, this);
+        eventBigDao = new EventBigDao(eventBigDaoConfig, this);
         icCardDao = new IcCardDao(icCardDaoConfig, this);
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
         powerDeviceDao = new PowerDeviceDao(powerDeviceDaoConfig, this);
@@ -84,6 +92,7 @@ public class DaoSession extends AbstractDaoSession {
 
         registerDao(ChazuoData.class, chazuoDataDao);
         registerDao(Computer.class, computerDao);
+        registerDao(EventBig.class, eventBigDao);
         registerDao(IcCard.class, icCardDao);
         registerDao(IOYuan.class, iOYuanDao);
         registerDao(PowerDevice.class, powerDeviceDao);
@@ -94,6 +103,7 @@ public class DaoSession extends AbstractDaoSession {
     public void clear() {
         chazuoDataDaoConfig.clearIdentityScope();
         computerDaoConfig.clearIdentityScope();
+        eventBigDaoConfig.clearIdentityScope();
         icCardDaoConfig.clearIdentityScope();
         iOYuanDaoConfig.clearIdentityScope();
         powerDeviceDaoConfig.clearIdentityScope();
@@ -107,6 +117,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public ComputerDao getComputerDao() {
         return computerDao;
+    }
+
+    public EventBigDao getEventBigDao() {
+        return eventBigDao;
     }
 
     public IcCardDao getIcCardDao() {

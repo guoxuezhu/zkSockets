@@ -23,6 +23,7 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void createAllTables(Database db, boolean ifNotExists) {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
+        EventBigDao.createTable(db, ifNotExists);
         IcCardDao.createTable(db, ifNotExists);
         IOYuanDao.createTable(db, ifNotExists);
         PowerDeviceDao.createTable(db, ifNotExists);
@@ -34,6 +35,7 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void dropAllTables(Database db, boolean ifExists) {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
+        EventBigDao.dropTable(db, ifExists);
         IcCardDao.dropTable(db, ifExists);
         IOYuanDao.dropTable(db, ifExists);
         PowerDeviceDao.dropTable(db, ifExists);
@@ -59,6 +61,7 @@ public class DaoMaster extends AbstractDaoMaster {
         super(db, SCHEMA_VERSION);
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
+        registerDaoClass(EventBigDao.class);
         registerDaoClass(IcCardDao.class);
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(PowerDeviceDao.class);

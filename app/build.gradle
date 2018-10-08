@@ -78,4 +78,5 @@ dependencies {
     //数据库//http://blog.csdn.net/axuanqq/article/details/51344299
     implementation 'org.greenrobot:greendao:3.2.2'
 
+    implementation 'com.google.code.gson:gson:2.7'
 }

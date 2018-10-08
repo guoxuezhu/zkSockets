@@ -6,10 +6,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.EventBigAdapter;
 import com.lh.zksockets.adapter.IoYuanAdapter;
+import com.lh.zksockets.data.DbDao.EventBigDao;
+import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.EventBig;
+import com.lh.zksockets.utils.ELog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +29,10 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
     @BindView(R.id.event_recyclerView)
     RecyclerView event_recyclerView;
 
+    private List<EventBase> eventBases = new ArrayList<EventBase>();
     private List<EventBig> eventBigs = new ArrayList<EventBig>();
     private EventBigAdapter eventBigAdapter;
+    private EventBigDao eventBigDao;
 
 
     @Override
@@ -33,32 +41,58 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
         setContentView(R.layout.activity_event);
         ButterKnife.bind(this);
 
+        eventBigDao = MyApplication.getDaoSession().getEventBigDao();
         DataInit();
         initRcyclerView();
 
     }
 
     private void DataInit() {
-        eventBigs.add(new EventBig(1, "上课", null));
-        eventBigs.add(new EventBig(2, "课间休息", null));
-        eventBigs.add(new EventBig(3, "下课", null));
-        eventBigs.add(new EventBig(4, "锁定", null));
-        eventBigs.add(new EventBig(5, "开灯", null));
-        eventBigs.add(new EventBig(6, "关灯", null));
-        eventBigs.add(new EventBig(7, "开窗帘", null));
-        eventBigs.add(new EventBig(8, "关窗帘", null));
+        if (eventBigDao.loadAll().size() == 0) {
+            Gson gson = new Gson();
+            eventBases.add(new EventBase(1, "开空调", ""));
+            eventBases.add(new EventBase(2, "关空调", ""));
+            eventBases.add(new EventBase(3, "开投影机", ""));
+            eventBases.add(new EventBase(4, "关投影机", ""));
+            eventBases.add(new EventBase(5, "开灯", ""));
+            eventBases.add(new EventBase(6, "关灯", ""));
+            eventBases.add(new EventBase(7, "开窗帘1", ""));
+            eventBases.add(new EventBase(8, "关窗帘1", ""));
+            eventBases.add(new EventBase(9, "开窗帘2", ""));
+            eventBases.add(new EventBase(10, "关窗帘2", ""));
+            eventBases.add(new EventBase(11, "开窗帘3", ""));
+            eventBases.add(new EventBase(12, "关窗帘3", ""));
+            eventBases.add(new EventBase(13, "开窗帘4", ""));
+            eventBases.add(new EventBase(14, "关窗帘4", ""));
+
+            String eventBasesJsonStr = gson.toJson(eventBases);
+
+            eventBigDao.insert(new EventBig((long) 1, "上课", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 2, "课间休息", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 3, "下课", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 4, "锁定", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 5, "开灯", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 6, "关灯", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 7, "开窗帘", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 8, "关窗帘", eventBasesJsonStr));
+        }
+
+        ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());
+
     }
 
     private void initRcyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         event_recyclerView.setLayoutManager(manager);
-        eventBigAdapter = new EventBigAdapter(this, eventBigs, this);
+        eventBigAdapter = new EventBigAdapter(this, eventBigDao.loadAll(), this);
         event_recyclerView.setAdapter(eventBigAdapter);
     }
 
     @Override
     public void onClickItem(EventBig item) {
-        startActivity(new Intent(this, EventSelectActivity.class));
+        Intent intent = new Intent(this, EventSelectActivity.class);
+        intent.putExtra("eventBases", item.eventBaseString);
+        startActivity(intent);
         finish();
     }
 

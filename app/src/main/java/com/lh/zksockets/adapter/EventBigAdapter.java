@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.data.model.IcCard;
 
@@ -43,7 +46,10 @@ public class EventBigAdapter extends RecyclerView.Adapter<EventBigAdapter.IcCard
         EventBig eventBig = datas.get(position);
 
         holder.tv_event_name.setText(eventBig.name);
-        holder.tv_event_datas.setText(eventBig.eventBases + "");
+
+
+//
+//        holder.tv_event_datas.setText(eventBig.eventBases + "");
 
         holder.setItem(eventBig);
     }

@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="事件"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="组成"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 

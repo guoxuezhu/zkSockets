@@ -1,17 +1,28 @@
 package com.lh.zksockets.data.model;
 
-import java.util.List;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 
+import java.util.List;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class EventBig {
 
-    public int id;
+    @Id
+    public Long id;
     public String name;
-    public List<EventBase> eventBases;
+    public String eventBaseString;
 
-    public EventBig(int id, String name, List<EventBase> eventBases) {
+    @Generated(hash = 1068853358)
+    public EventBig(Long id, String name, String eventBaseString) {
         this.id = id;
         this.name = name;
-        this.eventBases = eventBases;
+        this.eventBaseString = eventBaseString;
+    }
+
+    @Generated(hash = 1797766626)
+    public EventBig() {
     }
 
     @Override
@@ -19,7 +30,31 @@ public class EventBig {
         return "EventBig{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", eventBases=" + eventBases +
+                ", eventBaseString='" + eventBaseString + '\'' +
                 '}';
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEventBaseString() {
+        return this.eventBaseString;
+    }
+
+    public void setEventBaseString(String eventBaseString) {
+        this.eventBaseString = eventBaseString;
     }
 }
