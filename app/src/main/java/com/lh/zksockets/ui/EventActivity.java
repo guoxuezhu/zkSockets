@@ -67,14 +67,14 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
 
             String eventBasesJsonStr = gson.toJson(eventBases);
 
-            eventBigDao.insert(new EventBig((long) 1, "上课", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 2, "课间休息", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 3, "下课", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 4, "锁定", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 5, "开灯", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 6, "关灯", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 7, "开窗帘", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 8, "关窗帘", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 1, "上课", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 2, "课间休息", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 3, "下课", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 4, "锁定", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 5, "开灯", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 6, "关灯", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 7, "开窗帘", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 8, "关窗帘", "", "", eventBasesJsonStr));
         }
 
         ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());

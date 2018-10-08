@@ -57,12 +57,15 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
     public void event_select_ok() {
         eventBaseList = eventBaseAdapter.getDatas();
         ELog.i("========eventBaseList=====ok======" + eventBaseList.toString());
+        String checkedIds = "";
         String checkedNameStr = "";
         for (int i = 0; i < eventBaseList.size(); i++) {
             if (eventBaseList.get(i).isChecked) {
                 if (checkedNameStr.equals("")) {
+                    checkedIds = eventBaseList.get(i).id + "";
                     checkedNameStr = eventBaseList.get(i).name;
                 } else {
+                    checkedIds = checkedIds + "," + eventBaseList.get(i).id;
                     checkedNameStr = checkedNameStr + "," + eventBaseList.get(i).name;
                 }
             }
@@ -71,8 +74,9 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
         EventBigDao eventBigDao = MyApplication.getDaoSession().getEventBigDao();
         Gson gson = new Gson();
         String eventBasesJsonStr = gson.toJson(eventBaseList);
-        eventBigDao.loadAll().get((int) (eventBigId - 1)).setCheckedNameStr(checkedNameStr);
-        eventBigDao.loadAll().get((int) (eventBigId - 1)).setEventBaseString(eventBasesJsonStr);
+
+        EventBig eventBig = eventBigDao.load(eventBigId);
+        eventBigDao.update(new EventBig(eventBigId, eventBig.name, checkedIds, checkedNameStr, eventBasesJsonStr));
 
         back();
 
