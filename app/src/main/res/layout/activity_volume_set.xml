@@ -33,9 +33,190 @@
     </RelativeLayout>
 
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
+
+        <RadioButton
+            android:id="@+id/volume_radio_btn_1"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/dp_6"
+            android:text="音响"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
 
 
+        <RadioButton
+            android:id="@+id/volume_radio_btn_2"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/dp_6"
+            android:text="麦克风"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
 
+
+    </RadioGroup>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="音量增命令"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:text="" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="测试" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="音量减命令"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:text="" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="测试" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="静音命令"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:text="" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="测试" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_volume_ok"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>
