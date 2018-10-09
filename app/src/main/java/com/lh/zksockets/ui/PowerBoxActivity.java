@@ -63,8 +63,9 @@ public class PowerBoxActivity extends Activity implements PowerCheckBoxAdapter.P
     }
 
     private void gridViewInit() {
-        ChazuoDataDao chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        power_gridView.setAdapter(new PowerCheckBoxAdapter(this, chazuoDataDao.loadAll(), this));
+        List<ChazuoData> chazuoDataList = MyApplication.getDaoSession().getChazuoDataDao().loadAll();
+        chazuoDataList.remove(0);
+        power_gridView.setAdapter(new PowerCheckBoxAdapter(this, chazuoDataList, this));
 
     }
 
