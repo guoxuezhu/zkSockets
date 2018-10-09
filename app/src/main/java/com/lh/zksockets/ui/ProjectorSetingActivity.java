@@ -65,7 +65,6 @@ public class ProjectorSetingActivity extends Activity {
     private List<String> dataBitList;
     private List<String> stopBitList;
     private List<String> typeList;
-    private List<ChazuoData> chazuoList;
     private ProjectorDao projectorDao;
     private String selectBaudRate;
     private String selectCheckoutBit;
@@ -101,8 +100,7 @@ public class ProjectorSetingActivity extends Activity {
         typeInitView();
 
         chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        chazuoList = chazuoDataDao.loadAll();
-        chazuoAdapter = new SelectChazuoAdapter(this, chazuoList);
+        chazuoAdapter = new SelectChazuoAdapter(this, chazuoDataDao.loadAll());
         chazuoProjectorView();
         chazuoBuView();
 
@@ -127,7 +125,7 @@ public class ProjectorSetingActivity extends Activity {
         chazuo_ji.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chazuojiselect = chazuoList.get(position).name;
+                chazuojiselect = chazuoDataDao.loadAll().get(position).name;
                 chazuojiselectId = position;
                 ELog.i("=========jjjjjjj========" +position);
             }
@@ -144,7 +142,7 @@ public class ProjectorSetingActivity extends Activity {
         chazuo_bu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chazuobuselect = chazuoList.get(position).name;
+                chazuobuselect = chazuoDataDao.loadAll().get(position).name;
                 chazuobuselectId = position;
                 ELog.i("=========bbbbbbbb========" +position);
             }
@@ -347,15 +345,15 @@ public class ProjectorSetingActivity extends Activity {
             buname = "投影机二幕布";
         }
 
-        if (chazuoList.get(chazuojiselectId).bindName != null && !chazuoList.get(chazuojiselectId).bindName.equals(name)
-                && !chazuoList.get(chazuojiselectId).bindName.equals(buname)) {
-            Toast.makeText(this, "投影机选择的插座已经被" + chazuoList.get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+        if (chazuoDataDao.loadAll().get(chazuojiselectId).bindName != null && !chazuoDataDao.loadAll().get(chazuojiselectId).bindName.equals(name)
+                && !chazuoDataDao.loadAll().get(chazuojiselectId).bindName.equals(buname)) {
+            Toast.makeText(this, "投影机选择的插座已经被" + chazuoDataDao.loadAll().get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (chazuoList.get(chazuobuselectId).bindName != null && !chazuoList.get(chazuobuselectId).bindName.equals(buname)
-                && !chazuoList.get(chazuobuselectId).bindName.equals(name)) {
-            Toast.makeText(this, "幕布选择的插座已经被" + chazuoList.get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
+        if (chazuoDataDao.loadAll().get(chazuobuselectId).bindName != null && !chazuoDataDao.loadAll().get(chazuobuselectId).bindName.equals(buname)
+                && !chazuoDataDao.loadAll().get(chazuobuselectId).bindName.equals(name)) {
+            Toast.makeText(this, "幕布选择的插座已经被" + chazuoDataDao.loadAll().get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -389,7 +387,7 @@ public class ProjectorSetingActivity extends Activity {
                 chazuojiselect, chazuojiselectId, chazuobuselect, chazuobuselectId));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
+
         chazuoAdapter.setDatas(chazuoDataDao.loadAll());
 
     }

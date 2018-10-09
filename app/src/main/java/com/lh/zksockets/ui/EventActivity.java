@@ -52,10 +52,11 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
             Gson gson = new Gson();
             eventBases.add(new EventBase(1, "开空调", false, "0"));
             eventBases.add(new EventBase(2, "关空调", false, "0"));
-            eventBases.add(new EventBase(3, "开投影机", false, "0"));
-            eventBases.add(new EventBase(4, "关投影机", false, "0"));
-            eventBases.add(new EventBase(5, "开灯", false, "0"));
-            eventBases.add(new EventBase(6, "关灯", false, "0"));
+            eventBases.add(new EventBase(3, "开投影机1", false, "0"));
+            eventBases.add(new EventBase(4, "关投影机1", false, "0"));
+            eventBases.add(new EventBase(5, "开投影机2", false, "0"));
+            eventBases.add(new EventBase(6, "关投影机2", false, "0"));
+
             eventBases.add(new EventBase(7, "开窗帘1", false, "0"));
             eventBases.add(new EventBase(8, "关窗帘1", false, "0"));
             eventBases.add(new EventBase(9, "开窗帘2", false, "0"));
@@ -64,6 +65,10 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
             eventBases.add(new EventBase(12, "关窗帘3", false, "0"));
             eventBases.add(new EventBase(13, "开窗帘4", false, "0"));
             eventBases.add(new EventBase(14, "关窗帘4", false, "0"));
+
+            eventBases.add(new EventBase(15, "开灯", false, "0"));
+            eventBases.add(new EventBase(16, "关灯", false, "0"));
+
 
             String eventBasesJsonStr = gson.toJson(eventBases);
 
