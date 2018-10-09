@@ -3,20 +3,31 @@ package com.lh.zksockets.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RadioButton;
 
 import com.lh.zksockets.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EnvironmentalActivity extends Activity {
+
+    @BindView(R.id.environmental_radio_btn_1)
+    RadioButton environmental_radio_btn_1;
+    @BindView(R.id.environmental_radio_btn_2)
+    RadioButton environmental_radio_btn_2;
+    @BindView(R.id.environmental_radio_btn_3)
+    RadioButton environmental_radio_btn_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_environmental);
         ButterKnife.bind(this);
-
+        environmental_radio_btn_1.setChecked(true);
+        environmental_radio_btn_2.setChecked(false);
+        environmental_radio_btn_3.setChecked(false);
 
 
     }
