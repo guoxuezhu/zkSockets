@@ -241,7 +241,18 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/environmental_seting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="环境设置"
+                android:textSize="@dimen/text_size_20" />
         </LinearLayout>
 
         <LinearLayout

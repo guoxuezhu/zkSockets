@@ -58,7 +58,8 @@
         <activity android:name=".ui.IOsetActivity" />
         <activity android:name=".ui.EventActivity" />
         <activity android:name=".ui.EventSelectActivity" />
-        <activity android:name=".ui.VolumeSetActivity"></activity>
+        <activity android:name=".ui.VolumeSetActivity" />
+        <activity android:name=".ui.EnvironmentalActivity"></activity>
     </application>
 
 </manifest>
