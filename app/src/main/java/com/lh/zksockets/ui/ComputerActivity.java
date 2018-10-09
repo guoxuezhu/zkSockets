@@ -88,20 +88,24 @@ public class ComputerActivity extends Activity {
 
     @OnClick(R.id.btn_computer_ok)
     public void btn_computer_ok() {
-        if (chazuoDataDao.loadAll().get(chazuoSelectId).bindName != null &&
-                !chazuoDataDao.loadAll().get(chazuoSelectId).bindName.equals("电脑")) {
+        if (chazuoDataDao.loadAll().get(chazuoSelectId).bindName != null && !chazuoDataDao.loadAll().get(chazuoSelectId).bindName.equals("电脑")) {
             Toast.makeText(this, "电脑选择的插座已经被" + chazuoDataDao.loadAll().get(chazuoSelectId).bindName + "使用", Toast.LENGTH_SHORT).show();
             return;
         }
         if (computerDao.loadAll().size() != 0) {
-            int id = computerDao.loadAll().get(0).chazuoId + 1;
-            if (computerDao.loadAll().get(0).chazuoId != chazuoSelectId) {
+            int id = computerDao.loadAll().get(0).chazuoId;
+            if (id != chazuoSelectId) {
                 Toast.makeText(this, "电脑插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
             }
-            chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null));
+            if (id != 0) {
+                chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null));
+            }
             computerDao.deleteAll();
         }
-        chazuoDataDao.update(new ChazuoData((long) chazuoSelectId + 1, "插座" + (chazuoSelectId + 1), "电脑"));
+        if (chazuoSelectId != 0) {
+            chazuoDataDao.update(new ChazuoData((long) chazuoSelectId, "插座" + chazuoSelectId, "电脑"));
+        }
+
         computerDao.insert(new Computer(et_computer_ip.getText().toString(), et_computer_port.getText().toString(),
                 et_computer_name.getText().toString(), et_password.getText().toString(),
                 chazuoSelectName, chazuoSelectId));

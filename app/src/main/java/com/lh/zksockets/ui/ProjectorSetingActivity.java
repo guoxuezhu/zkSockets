@@ -129,6 +129,7 @@ public class ProjectorSetingActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chazuojiselect = chazuoList.get(position).name;
                 chazuojiselectId = position;
+                ELog.i("=========jjjjjjj========" +position);
             }
 
             @Override
@@ -145,6 +146,7 @@ public class ProjectorSetingActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chazuobuselect = chazuoList.get(position).name;
                 chazuobuselectId = position;
+                ELog.i("=========bbbbbbbb========" +position);
             }
 
             @Override
@@ -310,17 +312,21 @@ public class ProjectorSetingActivity extends Activity {
 
     @OnClick(R.id.radio_btn_1)
     public void radio_btn_1() {
+        radio_btn_1.setChecked(true);
+        radio_btn_2.setChecked(false);
         setViewInit(projectorDao.load((long) 1));
     }
 
     @OnClick(R.id.radio_btn_2)
     public void radio_btn_2() {
+        radio_btn_1.setChecked(false);
+        radio_btn_2.setChecked(true);
         setViewInit(projectorDao.load((long) 2));
     }
 
     @OnClick(R.id.btn_projector_ok)
     public void btn_projector_ok() {
-        if (chazuojiselectId == chazuobuselectId) {
+        if (chazuojiselectId == chazuobuselectId && chazuojiselectId != 0) {
             Toast.makeText(this, "投影机与幕布插座不能相同", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -353,22 +359,28 @@ public class ProjectorSetingActivity extends Activity {
             return;
         }
 
-        int jidataId = chazuojiselectId + 1;
-        int budataId = chazuobuselectId + 1;
         if (projectorDao.load((long) deviceId) != null) {
-            int jidaoId = projectorDao.load((long) deviceId).jiChazuoId + 1;
-            int budaoId = projectorDao.load((long) deviceId).buChazuoId + 1;
-            if (projectorDao.load((long) deviceId).jiChazuoId != chazuojiselectId ||
-                    projectorDao.load((long) deviceId).buChazuoId != chazuobuselectId) {
+            int jidaoId = projectorDao.load((long) deviceId).jiChazuoId;
+            int budaoId = projectorDao.load((long) deviceId).buChazuoId;
+            if (jidaoId != chazuojiselectId || budaoId != chazuobuselectId) {
                 Toast.makeText(this, "投影机插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
             }
-            chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
-            chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
+            if (jidaoId != 0) {
+                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
+            }
+            if (budaoId != 0) {
+                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
+            }
+
             projectorDao.deleteByKey((long) deviceId);
         }
 
-        chazuoDataDao.update(new ChazuoData((long) budataId, "插座" + budataId, buname));
-        chazuoDataDao.update(new ChazuoData((long) jidataId, "插座" + jidataId, name));
+        if (chazuobuselectId != 0) {
+            chazuoDataDao.update(new ChazuoData((long) chazuobuselectId, "插座" + chazuobuselectId, buname));
+        }
+        if (chazuojiselectId != 0) {
+            chazuoDataDao.update(new ChazuoData((long) chazuojiselectId, "插座" + chazuojiselectId, name));
+        }
 
         projectorDao.insert(new Projector((long) deviceId, name, selectBaudRate, selectBaudRateId, selectCheckoutBit,
                 selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit, selectStopBitId, selectTyep,
