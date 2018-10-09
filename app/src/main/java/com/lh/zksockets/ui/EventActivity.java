@@ -75,6 +75,14 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
             eventBigDao.insert(new EventBig((long) 6, "关灯", "", "", eventBasesJsonStr));
             eventBigDao.insert(new EventBig((long) 7, "开窗帘", "", "", eventBasesJsonStr));
             eventBigDao.insert(new EventBig((long) 8, "关窗帘", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 9, "开空调", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 10, "关空调", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 11, "开投影机1", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 12, "关投影机1", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 13, "开投影机2", "", "", eventBasesJsonStr));
+            eventBigDao.insert(new EventBig((long) 14, "关投影机3", "", "", eventBasesJsonStr));
+
+//            eventBigDao.insert(new EventBig((long) 15, "关空调", "", "", eventBasesJsonStr));
         }
 
         ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());

@@ -76,6 +76,11 @@ public class AdvancedSetingActivity extends Activity {
         startActivity(new Intent(this, EventActivity.class));
         finish();
     }
+    @OnClick(R.id.volume_seting)
+    public void volume_seting() {
+        startActivity(new Intent(this, VolumeSetActivity.class));
+        finish();
+    }
 
 
     @Override
