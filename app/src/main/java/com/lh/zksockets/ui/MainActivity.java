@@ -61,6 +61,18 @@ public class MainActivity extends Activity {
         finish();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        back();
+    }
+
+    private void back() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

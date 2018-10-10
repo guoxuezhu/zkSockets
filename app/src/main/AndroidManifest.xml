@@ -59,7 +59,8 @@
         <activity android:name=".ui.EventActivity" />
         <activity android:name=".ui.EventSelectActivity" />
         <activity android:name=".ui.VolumeSetActivity" />
-        <activity android:name=".ui.EnvironmentalActivity"></activity>
+        <activity android:name=".ui.EnvironmentalActivity" />
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@ public class SplashActivity extends Activity {
         Intent startIntent = new Intent(this, SocketService.class);
         startService(startIntent);
 
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 }
