@@ -15,11 +15,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SocketService extends Service {
 
-    private ServerSocket server;
+    private ServerSocket serverSocket;
     private Socket socket;
+    private SocketReadThread socketReadThread;
+    private boolean isRunReadThread = false;
 
     @Nullable
     @Override
@@ -32,12 +36,8 @@ public class SocketService extends Service {
     public void onCreate() {
         super.onCreate();
         ELog.d("======onCreate====");
-        try {
-            server = new ServerSocket(8089);
-            beginListen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        startTimer();
 
         SerialPortUtil.open();
 
@@ -45,35 +45,97 @@ public class SocketService extends Service {
         WorksUtil.powerWorkOpen();
 
 
+    }
+
+    private void startTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                if (serverSocket == null || serverSocket.isClosed()) {
+                    createServerSocket();
+                } else {
+                    if (socket == null || socket.isClosed()) {
+                        ELog.d("=======心跳=========11111=======socket=====");
+                        if (!isRunReadThread && socketReadThread == null) {
+                            isRunReadThread = true;
+                            socketReadThread = new SocketReadThread();
+                            ELog.d("=======心跳=======4444444444========socket=====");
+                            socketReadThread.start();
+                        }
+                    }
+                }
+            }
+        }, 1, 5000);
+    }
+
+    private class SocketReadThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            try {
+                createSocket();
+                InputStream in = socket.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                BufferedReader bufReader = new BufferedReader(reader);
+                String s = null;
+                while ((s = bufReader.readLine()) != null) {
+                    ELog.d("======msg====" + s);
+                    if (s.equals("0")) {
+                        //设备
+                    }
+                }
+                in.close();
+                reader.close();
+                bufReader.close();
+                stopMySocket();
+            } catch (IOException e) {
+                e.printStackTrace();
+                ELog.e("====server.accept()====IOException====" + e);
+            }
+        }
+    }
+
+
+    private void createSocket() {
+        try {
+            socket = serverSocket.accept();
+            ELog.d("=======心跳======createSocket=====");
+        } catch (IOException e) {
+            e.printStackTrace();
+            ELog.d("=======心跳======createSocket==eeeeeeeee===");
+        }
 
     }
 
-    //https://blog.csdn.net/zhangqufa/article/details/69228949
-    private void beginListen() {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    socket = server.accept();
-                    InputStream in = socket.getInputStream();
-                    InputStreamReader reader = new InputStreamReader(in);
-                    BufferedReader bufReader = new BufferedReader(reader);
-                    String s = null;
 
-                    while ((s = bufReader.readLine()) != null) {
-                        ELog.d("======msg====" + s);
-                        if(s.equals("000000")){
-                            //设备
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    ELog.e("====server.accept()====IOException====" + e);
-                }
+    private void createServerSocket() {
+        try {
+            serverSocket = new ServerSocket(8089);
+            ELog.d("=======心跳======createServerSocket=====");
+        } catch (IOException e) {
+            ELog.e("=======心跳====createServerSocket==eeeeeeeeee========");
+            e.printStackTrace();
+        }
+    }
 
+    private void stopMySocket() {
+        try {
+            if (socket != null) {
+                socket.close();
+                socket = null;
             }
-        }.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        if (socketReadThread != null) {
+            socketReadThread.interrupt();
+            socketReadThread = null;
+        }
+        isRunReadThread = false;
+        ELog.d("======msg==22222222222222222==");
     }
 
 
@@ -81,15 +143,16 @@ public class SocketService extends Service {
     public void onDestroy() {
         super.onDestroy();
         ELog.d("====onDestroy====");
+        stopMySocket();
         try {
-            if (server != null) {
-                server.close();
-            }
-            if (socket != null) {
-                socket.close();
+            if (serverSocket != null) {
+                serverSocket.close();
+                serverSocket = null;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
