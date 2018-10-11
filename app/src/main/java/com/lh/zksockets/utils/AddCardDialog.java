@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lh.zksockets.R;
 
@@ -52,9 +53,14 @@ public class AddCardDialog extends Dialog {
 
     @OnClick(R.id.dialog_btn_ok)
     public void dialog_btn_ok() {
-        mDialogCallBack.addCradInfo(et_workNumber.getText().toString(), 1,
-                et_teacherName.getText().toString(), et_department.getText().toString(),
-                et_cardNum.getText().toString());
+        if (!et_cardNum.getText().toString().equals("")) {
+            mDialogCallBack.addCradInfo(et_workNumber.getText().toString(), 1,
+                    et_teacherName.getText().toString(), et_department.getText().toString(),
+                    et_cardNum.getText().toString());
+        } else {
+            Toast.makeText(mContext, "请输入卡号", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
