@@ -25,6 +25,6 @@ public class SerialPortUtil {
     }
 
     public static void sendMsg(int type, String msg) {
-        ELog.d("===========串口数据发送=============");
+        ELog.d("===========串口数据发送=============" + msg);
     }
 }

@@ -88,8 +88,9 @@ public class SocketService extends Service {
                     String s = null;
                     while ((s = bufReader.readLine()) != null) {
                         ELog.d("======msg====" + s);
-                        if (s.equals("0")) {
+                        if (s.equals("上课")) {
                             //设备
+                            sdfsdf();
                         }
                     }
                     in.close();
@@ -107,6 +108,10 @@ public class SocketService extends Service {
                 stopMySocket();
             }
         }
+    }
+
+    private void sdfsdf() {
+        SerialPortUtil.sendMsg(1,"上课");
     }
 
 
