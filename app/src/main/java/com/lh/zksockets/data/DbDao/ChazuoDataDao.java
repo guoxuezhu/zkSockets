@@ -27,6 +27,9 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property BindName = new Property(2, String.class, "bindName", false, "BIND_NAME");
+        public final static Property IsOk = new Property(3, boolean.class, "isOk", false, "IS_OK");
+        public final static Property OpenTime = new Property(4, int.class, "openTime", false, "OPEN_TIME");
+        public final static Property ClosedTime = new Property(5, int.class, "closedTime", false, "CLOSED_TIME");
     }
 
 
@@ -44,7 +47,10 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"CHAZUO_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"BIND_NAME\" TEXT);"); // 2: bindName
+                "\"BIND_NAME\" TEXT," + // 2: bindName
+                "\"IS_OK\" INTEGER NOT NULL ," + // 3: isOk
+                "\"OPEN_TIME\" INTEGER NOT NULL ," + // 4: openTime
+                "\"CLOSED_TIME\" INTEGER NOT NULL );"); // 5: closedTime
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +77,9 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         if (bindName != null) {
             stmt.bindString(3, bindName);
         }
+        stmt.bindLong(4, entity.getIsOk() ? 1L: 0L);
+        stmt.bindLong(5, entity.getOpenTime());
+        stmt.bindLong(6, entity.getClosedTime());
     }
 
     @Override
@@ -91,6 +100,9 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         if (bindName != null) {
             stmt.bindString(3, bindName);
         }
+        stmt.bindLong(4, entity.getIsOk() ? 1L: 0L);
+        stmt.bindLong(5, entity.getOpenTime());
+        stmt.bindLong(6, entity.getClosedTime());
     }
 
     @Override
@@ -103,7 +115,10 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         ChazuoData entity = new ChazuoData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // bindName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // bindName
+            cursor.getShort(offset + 3) != 0, // isOk
+            cursor.getInt(offset + 4), // openTime
+            cursor.getInt(offset + 5) // closedTime
         );
         return entity;
     }
@@ -113,6 +128,9 @@ public class ChazuoDataDao extends AbstractDao<ChazuoData, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setBindName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setIsOk(cursor.getShort(offset + 3) != 0);
+        entity.setOpenTime(cursor.getInt(offset + 4));
+        entity.setClosedTime(cursor.getInt(offset + 5));
      }
     
     @Override

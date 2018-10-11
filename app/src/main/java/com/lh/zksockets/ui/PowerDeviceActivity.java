@@ -10,19 +10,25 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.adapter.PowerListAdapter;
+import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.PowerDeviceDao;
+import com.lh.zksockets.data.model.ChazuoData;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PowerDeviceActivity extends Activity implements PowerListAdapter.CallBack{
+public class PowerDeviceActivity extends Activity implements PowerListAdapter.CallBack {
 
     @BindView(R.id.power_device_recyclerView)
     RecyclerView power_device_recyclerView;
 
-    private PowerDeviceDao powerDeviceDao;
     private PowerListAdapter powerListAdapter;
+    private ChazuoDataDao chazuoDataDao;
+    private List<ChazuoData> chazuoDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,9 @@ public class PowerDeviceActivity extends Activity implements PowerListAdapter.Ca
         setContentView(R.layout.activity_power_device);
         ButterKnife.bind(this);
 
-        powerDeviceDao = MyApplication.getDaoSession().getPowerDeviceDao();
+        chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
+        chazuoDataList = chazuoDataDao.loadAll();
+        chazuoDataList.remove(0);
         initRcyclerView();
 
     }
@@ -38,9 +46,43 @@ public class PowerDeviceActivity extends Activity implements PowerListAdapter.Ca
     private void initRcyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         power_device_recyclerView.setLayoutManager(manager);
-        powerListAdapter = new PowerListAdapter(this, powerDeviceDao.loadAll(), this);
+        powerListAdapter = new PowerListAdapter(this, chazuoDataList, this);
         power_device_recyclerView.setAdapter(powerListAdapter);
     }
+
+    @Override
+    public void setOpenEditTextChanged(ChazuoData item, int position, String time) {
+        if (time.equals("")) {
+            chazuoDataList.get(position).setOpenTime(0);
+        } else {
+            chazuoDataList.get(position).setOpenTime(Integer.parseInt(time));
+        }
+    }
+
+    @Override
+    public void setClosedEditTextChanged(ChazuoData item, int position, String time) {
+        if (time.equals("")) {
+            chazuoDataList.get(position).setClosedTime(0);
+        } else {
+            chazuoDataList.get(position).setClosedTime(Integer.parseInt(time));
+        }
+    }
+
+    @Override
+    public void onCheckBoxClickItem(boolean isChecked, int position) {
+        if (isChecked) {
+            chazuoDataList.get(position).setIsOk(true);
+        } else {
+            chazuoDataList.get(position).setIsOk(false);
+        }
+    }
+
+    @OnClick(R.id.baocun_power)
+    public void baocun_power() {
+        ELog.i("======baocun_power=======" + chazuoDataList.toString());
+    }
+
+
 
     @OnClick(R.id.fix_power)
     public void fix_power() {

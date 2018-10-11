@@ -98,12 +98,16 @@ public class ComputerActivity extends Activity {
                 Toast.makeText(this, "电脑插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
             }
             if (id != 0) {
-                chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null));
+                chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null, chazuoDataDao.loadAll().get(id).isOk,
+                        chazuoDataDao.loadAll().get(id).openTime, chazuoDataDao.loadAll().get(id).closedTime));
             }
             computerDao.deleteAll();
         }
         if (chazuoSelectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuoSelectId, "插座" + chazuoSelectId, "电脑"));
+            chazuoDataDao.update(new ChazuoData((long) chazuoSelectId, "插座" + chazuoSelectId,
+                    "电脑", chazuoDataDao.loadAll().get(chazuoSelectId).isOk,
+                    chazuoDataDao.loadAll().get(chazuoSelectId).openTime,
+                    chazuoDataDao.loadAll().get(chazuoSelectId).closedTime));
         }
 
         computerDao.insert(new Computer(et_computer_ip.getText().toString(), et_computer_port.getText().toString(),

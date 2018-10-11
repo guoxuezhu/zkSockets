@@ -23,9 +23,9 @@ public class MainActivity extends Activity {
         ButterKnife.bind(this);
         ChazuoDataDao chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
         if (chazuoDataDao.loadAll().size() == 0) {
-            chazuoDataDao.insert(new ChazuoData((long) 0, "无", null));
+            chazuoDataDao.insert(new ChazuoData((long) 0, "无", null, false, 0, 0));
             for (int i = 1; i < 21; i++) {
-                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null));
+                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null, false, 0, 0));
             }
         }
         ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());

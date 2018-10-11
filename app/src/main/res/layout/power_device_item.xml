@@ -16,39 +16,73 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="序号"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
         <TextView
-            android:id="@+id/tv_Powerdevice"
+            android:id="@+id/tv_chazuo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="线路"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
         <TextView
-            android:id="@+id/tv_openTime"
+            android:id="@+id/tv_bindName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="aa"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
-        <TextView
-            android:id="@+id/tv_closedTime"
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="ss"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/check_box_enable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/et_openTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:inputType="number"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/et_closedTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:inputType="number"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
 
     </LinearLayout>
 

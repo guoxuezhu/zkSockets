@@ -28,7 +28,7 @@ import butterknife.OnItemSelected;
 import butterknife.OnTextChanged;
 
 
-public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardViewHolder> {
+public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IoYuanViewHolder> {
 
     private Context mContext;
     private List<IOYuan> datas;
@@ -44,13 +44,13 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
 
     @NonNull
     @Override
-    public IcCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IoYuanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.io_yuan_item, parent, false);
-        return new IcCardViewHolder(view);
+        return new IoYuanViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IcCardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IoYuanViewHolder holder, int position) {
         IOYuan ioYuan = datas.get(position);
         SelectAdapter selectAdapter = new SelectAdapter(mContext, outDatas);
         holder.setItem(ioYuan, selectAdapter, position);
@@ -92,7 +92,7 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
         void setIOSendTime(int adapterPosition, String time);
     }
 
-    public class IcCardViewHolder extends RecyclerView.ViewHolder {
+    public class IoYuanViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_io_name)
         TextView tv_io_name;
@@ -109,7 +109,7 @@ public class IoYuanAdapter extends RecyclerView.Adapter<IoYuanAdapter.IcCardView
         private SelectAdapter spinnerAdapter;
 
 
-        public IcCardViewHolder(View itemView) {
+        public IoYuanViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

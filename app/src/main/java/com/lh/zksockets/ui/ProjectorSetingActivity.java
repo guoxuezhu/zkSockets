@@ -127,7 +127,7 @@ public class ProjectorSetingActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chazuojiselect = chazuoDataDao.loadAll().get(position).name;
                 chazuojiselectId = position;
-                ELog.i("=========jjjjjjj========" +position);
+                ELog.i("=========jjjjjjj========" + position);
             }
 
             @Override
@@ -144,7 +144,7 @@ public class ProjectorSetingActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chazuobuselect = chazuoDataDao.loadAll().get(position).name;
                 chazuobuselectId = position;
-                ELog.i("=========bbbbbbbb========" +position);
+                ELog.i("=========bbbbbbbb========" + position);
             }
 
             @Override
@@ -364,20 +364,32 @@ public class ProjectorSetingActivity extends Activity {
                 Toast.makeText(this, "投影机插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
             }
             if (jidaoId != 0) {
-                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null,
+                        chazuoDataDao.loadAll().get(jidaoId).isOk,
+                        chazuoDataDao.loadAll().get(jidaoId).openTime,
+                        chazuoDataDao.loadAll().get(jidaoId).closedTime));
             }
             if (budaoId != 0) {
-                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null));
+                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null,
+                        chazuoDataDao.loadAll().get(budaoId).isOk,
+                        chazuoDataDao.loadAll().get(budaoId).openTime,
+                        chazuoDataDao.loadAll().get(budaoId).closedTime));
             }
 
             projectorDao.deleteByKey((long) deviceId);
         }
 
         if (chazuobuselectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuobuselectId, "插座" + chazuobuselectId, buname));
+            chazuoDataDao.update(new ChazuoData((long) chazuobuselectId, "插座" + chazuobuselectId, buname,
+                    chazuoDataDao.loadAll().get(chazuobuselectId).isOk,
+                    chazuoDataDao.loadAll().get(chazuobuselectId).openTime,
+                    chazuoDataDao.loadAll().get(chazuobuselectId).closedTime));
         }
         if (chazuojiselectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuojiselectId, "插座" + chazuojiselectId, name));
+            chazuoDataDao.update(new ChazuoData((long) chazuojiselectId, "插座" + chazuojiselectId, name,
+                    chazuoDataDao.loadAll().get(chazuojiselectId).isOk,
+                    chazuoDataDao.loadAll().get(chazuojiselectId).openTime,
+                    chazuoDataDao.loadAll().get(chazuojiselectId).closedTime));
         }
 
         projectorDao.insert(new Projector((long) deviceId, name, selectBaudRate, selectBaudRateId, selectCheckoutBit,
