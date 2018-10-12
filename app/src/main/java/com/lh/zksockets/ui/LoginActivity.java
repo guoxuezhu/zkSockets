@@ -26,6 +26,24 @@ public class LoginActivity extends Activity {
         finish();
     }
 
+
+    @OnClick(R.id.login_btn_back)
+    public void login_btn_back() {
+        back();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        back();
+
+    }
+
+    private void back() {
+        startActivity(new Intent(this, SplashActivity.class));
+        finish();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

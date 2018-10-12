@@ -62,20 +62,29 @@ public class MainActivity extends Activity {
     }
 
 
+
+
+    @OnClick(R.id.main_btn_back)
+    public void main_btn_back() {
+        back();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         back();
+
     }
 
     private void back() {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, SplashActivity.class));
         finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
+
+
 }
