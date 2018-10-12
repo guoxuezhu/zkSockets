@@ -32,73 +32,78 @@
 
     </RelativeLayout>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="@dimen/dp_40"
-            android:background="@drawable/layout_stroke_bg"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/dp_40"
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_400"
                 android:layout_height="@dimen/dp_40"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_marginTop="@dimen/dp_100"
+                android:background="@drawable/layout_stroke_bg"
+                android:orientation="horizontal">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:paddingLeft="@dimen/dp_10"
-                android:text="admin"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16" />
+                <ImageView
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@mipmap/ic_launcher" />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="admin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_400"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_40"
+                android:background="@drawable/layout_stroke_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@mipmap/ic_launcher" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="admin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20" />
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_40"
-            android:background="@drawable/layout_stroke_bg"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"
-                android:background="@mipmap/ic_launcher" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:inputType="textPassword"
-                android:paddingLeft="@dimen/dp_10"
-                android:text="admin"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16" />
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/dp_20"
-            android:background="@drawable/btn_bg"
-            android:text="登录"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20" />
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -33,20 +33,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <service android:name=".SocketService" />
 
-        <activity android:name=".ui.BaseSetingActivity" />
-        <activity android:name=".ui.AdvancedSetingActivity" />
-        <activity android:name=".ui.XiangDaoActivity" />
-        <activity android:name=".ui.ProjectorSetingActivity" />
-        <activity android:name=".ui.ComputerActivity" />
-        <activity android:name=".ui.ICcardActivity" />
-        <activity android:name=".ui.UsersActivity" />
-        <activity android:name=".ui.NetStatusActivity" />
-        <activity android:name=".ui.PowerDeviceActivity" />
-        <activity android:name=".ui.ZhongKongActivity" />
+        <activity
+            android:name=".ui.BaseSetingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.AdvancedSetingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.XiangDaoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.ProjectorSetingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.ComputerActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.ICcardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.UsersActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.NetStatusActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.PowerDeviceActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.ZhongKongActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <receiver android:name=".BootRestartReceiver">
             <intent-filter>
@@ -54,12 +76,24 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.IOsetActivity" />
-        <activity android:name=".ui.EventActivity" />
-        <activity android:name=".ui.EventSelectActivity" />
-        <activity android:name=".ui.VolumeSetActivity" />
-        <activity android:name=".ui.EnvironmentalActivity" />
-        <activity android:name=".ui.LoginActivity"></activity>
+        <activity
+            android:name=".ui.IOsetActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.EventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.EventSelectActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.VolumeSetActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.EnvironmentalActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
