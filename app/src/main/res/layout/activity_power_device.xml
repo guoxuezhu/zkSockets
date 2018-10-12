@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/btn_bg"
-            android:text="修改"
+            android:text="启动"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_24" />
 

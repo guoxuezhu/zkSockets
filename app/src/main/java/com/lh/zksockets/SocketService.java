@@ -43,7 +43,7 @@ public class SocketService extends Service {
         SerialPortUtil.open();
 
         //电源箱操作
-        WorksUtil.powerWorkOpen();
+       // WorksUtil.powerWorkOpen();
 
 
     }

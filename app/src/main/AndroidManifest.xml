@@ -42,7 +42,6 @@
         <activity android:name=".ui.XiangDaoActivity" />
         <activity android:name=".ui.ProjectorSetingActivity" />
         <activity android:name=".ui.ComputerActivity" />
-        <activity android:name=".ui.PowerBoxActivity" />
         <activity android:name=".ui.ICcardActivity" />
         <activity android:name=".ui.UsersActivity" />
         <activity android:name=".ui.NetStatusActivity" />

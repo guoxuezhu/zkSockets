@@ -13,7 +13,6 @@ import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IOYuan;
-import com.lh.zksockets.data.model.PowerDevice;
 import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.data.model.Users;
 
@@ -22,7 +21,6 @@ import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
-import com.lh.zksockets.data.DbDao.PowerDeviceDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 
@@ -40,7 +38,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig eventBigDaoConfig;
     private final DaoConfig icCardDaoConfig;
     private final DaoConfig iOYuanDaoConfig;
-    private final DaoConfig powerDeviceDaoConfig;
     private final DaoConfig projectorDaoConfig;
     private final DaoConfig usersDaoConfig;
 
@@ -49,7 +46,6 @@ public class DaoSession extends AbstractDaoSession {
     private final EventBigDao eventBigDao;
     private final IcCardDao icCardDao;
     private final IOYuanDao iOYuanDao;
-    private final PowerDeviceDao powerDeviceDao;
     private final ProjectorDao projectorDao;
     private final UsersDao usersDao;
 
@@ -72,9 +68,6 @@ public class DaoSession extends AbstractDaoSession {
         iOYuanDaoConfig = daoConfigMap.get(IOYuanDao.class).clone();
         iOYuanDaoConfig.initIdentityScope(type);
 
-        powerDeviceDaoConfig = daoConfigMap.get(PowerDeviceDao.class).clone();
-        powerDeviceDaoConfig.initIdentityScope(type);
-
         projectorDaoConfig = daoConfigMap.get(ProjectorDao.class).clone();
         projectorDaoConfig.initIdentityScope(type);
 
@@ -86,7 +79,6 @@ public class DaoSession extends AbstractDaoSession {
         eventBigDao = new EventBigDao(eventBigDaoConfig, this);
         icCardDao = new IcCardDao(icCardDaoConfig, this);
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
-        powerDeviceDao = new PowerDeviceDao(powerDeviceDaoConfig, this);
         projectorDao = new ProjectorDao(projectorDaoConfig, this);
         usersDao = new UsersDao(usersDaoConfig, this);
 
@@ -95,7 +87,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(EventBig.class, eventBigDao);
         registerDao(IcCard.class, icCardDao);
         registerDao(IOYuan.class, iOYuanDao);
-        registerDao(PowerDevice.class, powerDeviceDao);
         registerDao(Projector.class, projectorDao);
         registerDao(Users.class, usersDao);
     }
@@ -106,7 +97,6 @@ public class DaoSession extends AbstractDaoSession {
         eventBigDaoConfig.clearIdentityScope();
         icCardDaoConfig.clearIdentityScope();
         iOYuanDaoConfig.clearIdentityScope();
-        powerDeviceDaoConfig.clearIdentityScope();
         projectorDaoConfig.clearIdentityScope();
         usersDaoConfig.clearIdentityScope();
     }
@@ -129,10 +119,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public IOYuanDao getIOYuanDao() {
         return iOYuanDao;
-    }
-
-    public PowerDeviceDao getPowerDeviceDao() {
-        return powerDeviceDao;
     }
 
     public ProjectorDao getProjectorDao() {

@@ -88,8 +88,8 @@ public class PowerDeviceActivity extends Activity implements PowerListAdapter.Ca
 
     @OnClick(R.id.fix_power)
     public void fix_power() {
-        startActivity(new Intent(this, PowerBoxActivity.class));
-        finish();
+//        startActivity(new Intent(this, PowerBoxActivity.class));
+//        finish();
     }
 
 

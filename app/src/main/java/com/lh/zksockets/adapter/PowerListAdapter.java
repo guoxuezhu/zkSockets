@@ -15,9 +15,6 @@ import android.widget.TextView;
 
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.model.ChazuoData;
-import com.lh.zksockets.data.model.IcCard;
-import com.lh.zksockets.data.model.PowerDevice;
-import com.lh.zksockets.ui.PowerDeviceActivity;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
@@ -25,7 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 
