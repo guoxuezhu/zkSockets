@@ -3,6 +3,7 @@
     android:layout_width="600dp"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_bg_shape"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
 

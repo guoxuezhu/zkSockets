@@ -3,6 +3,7 @@
     android:layout_width="600dp"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_bg_shape"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
 
@@ -158,8 +159,8 @@
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
             android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
