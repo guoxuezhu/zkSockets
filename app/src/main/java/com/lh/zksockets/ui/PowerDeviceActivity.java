@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.adapter.PowerListAdapter;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
-import com.lh.zksockets.data.DbDao.PowerDeviceDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.utils.ELog;
 
@@ -79,9 +78,12 @@ public class PowerDeviceActivity extends Activity implements PowerListAdapter.Ca
 
     @OnClick(R.id.baocun_power)
     public void baocun_power() {
-        ELog.i("======baocun_power=======" + chazuoDataList.toString());
+        for (int i = 0; i < chazuoDataList.size(); i++) {
+            chazuoDataDao.update(chazuoDataList.get(i));
+        }
+        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        ELog.i("======chazuoDataDao=======" + chazuoDataDao.loadAll().toString());
     }
-
 
 
     @OnClick(R.id.fix_power)

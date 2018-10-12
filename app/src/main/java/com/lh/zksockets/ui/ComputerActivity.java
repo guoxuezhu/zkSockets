@@ -95,7 +95,8 @@ public class ComputerActivity extends Activity {
         if (computerDao.loadAll().size() != 0) {
             int id = computerDao.loadAll().get(0).chazuoId;
             if (id != chazuoSelectId) {
-                Toast.makeText(this, "电脑插座线路有变动，需要重新修改电源箱设置", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "电脑插座线路有变动,请注意电源箱是否需要修改",
+                        Toast.LENGTH_SHORT).show();
             }
             if (id != 0) {
                 chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null, chazuoDataDao.loadAll().get(id).isOk,

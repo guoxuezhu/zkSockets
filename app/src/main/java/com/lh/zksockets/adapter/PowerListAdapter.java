@@ -55,7 +55,7 @@ public class PowerListAdapter extends RecyclerView.Adapter<PowerListAdapter.Powe
 
         holder.tv_chazuo.setText(chazuoData.name);
 
-        if (chazuoData.bindName == null) {
+        if (chazuoData.bindName != null) {
             holder.tv_bindName.setText(chazuoData.bindName);
         } else {
             holder.tv_bindName.setText("");
