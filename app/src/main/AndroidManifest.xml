@@ -93,6 +93,9 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.LampActivity"
             android:windowSoftInputMode="stateHidden"></activity>
     </application>
 

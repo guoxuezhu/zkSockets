@@ -89,6 +89,13 @@ public class AdvancedSetingActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.lamp_seting)
+    public void lamp_seting() {
+        startActivity(new Intent(this, LampActivity.class));
+        finish();
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

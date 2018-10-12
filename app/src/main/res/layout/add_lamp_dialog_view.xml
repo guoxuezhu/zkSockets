@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_shape"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="电灯信息"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_20" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="名称:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/lamp_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="控制方式:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_10">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IO"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="总线"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="串口"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="开命令:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="关命令:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <Button
+            android:id="@+id/lamp_dialog_btn_no"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/but_bg_no"
+            android:text="取消"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <Button
+            android:id="@+id/lamp_dialog_btn_ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/but_bg"
+            android:text="确定"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+    </LinearLayout>
+
+</LinearLayout>
