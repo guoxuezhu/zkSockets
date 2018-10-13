@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.SerialPortUtil;
@@ -14,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Timer;
@@ -43,7 +47,7 @@ public class SocketService extends Service {
         SerialPortUtil.open();
 
         //电源箱操作
-       // WorksUtil.powerWorkOpen();
+        // WorksUtil.powerWorkOpen();
 
 
     }
@@ -91,6 +95,8 @@ public class SocketService extends Service {
                         if (s.equals("上课")) {
                             //设备
                             sdfsdf();
+                        } else {
+                            sendMsgClient();
                         }
                     }
                     in.close();
@@ -110,8 +116,24 @@ public class SocketService extends Service {
         }
     }
 
+    private void sendMsgClient() {
+        LampDao lampDao = MyApplication.getDaoSession().getLampDao();
+        Gson gson = new Gson();
+        String lampStr = gson.toJson(lampDao.loadAll());
+        try {
+            OutputStream outputStream = socket.getOutputStream();
+            PrintWriter out = new PrintWriter(outputStream);
+            out.print(lampStr + "\n");
+            out.flush();
+            ELog.d("=======sendMsgClient===1111=====" + lampStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+            ELog.d("=======sendMsgClient===IOException=====");
+        }
+    }
+
     private void sdfsdf() {
-        SerialPortUtil.sendMsg(1,"上课");
+        SerialPortUtil.sendMsg(1, "上课");
     }
 
 
@@ -122,7 +144,7 @@ public class SocketService extends Service {
             ELog.d("=======心跳===2222===createSocket=====" + socket);
         } catch (IOException e) {
             e.printStackTrace();
-            ELog.e("=======心跳======createSocket==IOException==="+e);
+            ELog.e("=======心跳======createSocket==IOException===" + e);
         }
 
     }
