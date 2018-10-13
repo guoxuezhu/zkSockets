@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -51,6 +52,11 @@ public class AddLampDialog extends Dialog {
     Spinner lamp_data_bit;
     @BindView(R.id.lamp_stop_bit)
     Spinner lamp_stop_bit;
+
+    @BindView(R.id.IO_LLayout)
+    LinearLayout IO_LLayout;
+    @BindView(R.id.serial_port_LLayout)
+    LinearLayout serial_port_LLayout;
 
     private Context mContext;
     private Lamp data;
@@ -108,16 +114,22 @@ public class AddLampDialog extends Dialog {
             lamp_et_name.setText(data.name + "");
             if (data.workType == 1) {
                 rbtn_1.setChecked(true);
+                IO_LLayout.setVisibility(View.VISIBLE);
+                serial_port_LLayout.setVisibility(View.GONE);
                 rbtn_2.setChecked(false);
                 rbtn_3.setChecked(false);
             } else if (data.workType == 2) {
                 rbtn_1.setChecked(false);
                 rbtn_2.setChecked(true);
+                IO_LLayout.setVisibility(View.GONE);
+                serial_port_LLayout.setVisibility(View.GONE);
                 rbtn_3.setChecked(false);
             } else if (data.workType == 3) {
                 rbtn_1.setChecked(false);
                 rbtn_2.setChecked(false);
                 rbtn_3.setChecked(true);
+                IO_LLayout.setVisibility(View.GONE);
+                serial_port_LLayout.setVisibility(View.VISIBLE);
             }
             lamp_io_num.setSelection(data.ioSelectId);
             lamp_erial_port_num.setSelection(data.serialPortSelectId);
@@ -129,7 +141,9 @@ public class AddLampDialog extends Dialog {
             lamp_et_id.setText("");
             lamp_et_id.setEnabled(true);
             lamp_et_name.setText("");
-            rbtn_1.setChecked(false);
+            rbtn_1.setChecked(true);
+            IO_LLayout.setVisibility(View.VISIBLE);
+            serial_port_LLayout.setVisibility(View.GONE);
             rbtn_2.setChecked(false);
             rbtn_3.setChecked(false);
             lamp_io_num.setSelection(0);
@@ -138,6 +152,7 @@ public class AddLampDialog extends Dialog {
             lamp_checkout_bit.setSelection(0);
             lamp_data_bit.setSelection(0);
             lamp_stop_bit.setSelection(0);
+
         }
     }
 
@@ -249,20 +264,20 @@ public class AddLampDialog extends Dialog {
 
     @OnClick(R.id.rbtn_1)
     public void rbtn_1() {
-
-
+        IO_LLayout.setVisibility(View.VISIBLE);
+        serial_port_LLayout.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.rbtn_2)
     public void rbtn_2() {
-
-
+        IO_LLayout.setVisibility(View.GONE);
+        serial_port_LLayout.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.rbtn_3)
     public void rbtn_3() {
-
-
+        IO_LLayout.setVisibility(View.GONE);
+        serial_port_LLayout.setVisibility(View.VISIBLE);
     }
 
 
