@@ -29,6 +29,37 @@
             android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:text="序号:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/lamp_et_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="名称:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
@@ -46,6 +77,7 @@
             android:textSize="@dimen/text_size_16" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,6 +105,7 @@
             android:paddingLeft="@dimen/dp_10">
 
             <RadioButton
+                android:id="@+id/rbtn_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,6 +114,7 @@
                 android:textSize="@dimen/text_size_16" />
 
             <RadioButton
+                android:id="@+id/rbtn_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,6 +123,7 @@
                 android:textSize="@dimen/text_size_16" />
 
             <RadioButton
+                android:id="@+id/rbtn_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,20 +148,19 @@
             android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="开命令:"
+            android:text="IO口:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/lamp_io_num"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
 
     </LinearLayout>
 
@@ -142,20 +176,135 @@
             android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="关命令:"
+            android:text="串口:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
-        <EditText
+        <Spinner
+            android:id="@+id/lamp_erial_port_num"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_10"
-            android:text=""
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="波特率:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
+
+
+        <Spinner
+            android:id="@+id/lamp_baud_rate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="校验位:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <Spinner
+            android:id="@+id/lamp_checkout_bit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="数据位:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <Spinner
+            android:id="@+id/lamp_data_bit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="停止位:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <Spinner
+            android:id="@+id/lamp_stop_bit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center_vertical" />
+
 
     </LinearLayout>
 

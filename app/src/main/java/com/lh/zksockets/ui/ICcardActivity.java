@@ -86,6 +86,7 @@ public class ICcardActivity extends Activity implements AddCardDialog.DialogCall
         icCardAdapter.setData(icCardDao.loadAll());
         if (addCardDialog != null) {
             addCardDialog.dismiss();
+            addCardDialog = null;
         }
     }
 

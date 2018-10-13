@@ -90,6 +90,7 @@ public class UsersActivity extends Activity implements AddUserDialog.UserDialogC
         usersAdapter.setData(usersDao.loadAll());
         if (addUserDialog != null) {
             addUserDialog.dismiss();
+            addUserDialog = null;
         }
     }
 

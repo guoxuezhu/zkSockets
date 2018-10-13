@@ -19,6 +19,7 @@ import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.SerialPortUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,11 +211,7 @@ public class ProjectorSetingActivity extends Activity {
     }
 
     private void stopBitInitView() {
-        stopBitList = new ArrayList<>();
-        stopBitList.add("1");
-        stopBitList.add("1.5");
-        stopBitList.add("2");
-
+        stopBitList = SerialPortUtil.getStopBitDatas();
 
         spinnerStopBit.setAdapter(new SelectAdapter(this, stopBitList));
         spinnerStopBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -232,13 +229,7 @@ public class ProjectorSetingActivity extends Activity {
     }
 
     private void dataBitInitView() {
-        dataBitList = new ArrayList<>();
-        dataBitList.add("8");
-        dataBitList.add("7");
-        dataBitList.add("6");
-        dataBitList.add("5");
-
-
+        dataBitList = SerialPortUtil.getDataBitDatas();
         spinnerDataBit.setAdapter(new SelectAdapter(this, dataBitList));
         spinnerDataBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -257,12 +248,7 @@ public class ProjectorSetingActivity extends Activity {
 
     private void checkoutBitInitView() {
         // 偶校验位与奇校验位
-        checkoutBitList = new ArrayList<>();
-        checkoutBitList.add("无");
-        checkoutBitList.add("奇");
-        checkoutBitList.add("偶");
-
-
+        checkoutBitList = SerialPortUtil.getCheckoutBitDatas();
         spinnerCheckoutBit.setAdapter(new SelectAdapter(this, checkoutBitList));
         spinnerCheckoutBit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -280,17 +266,7 @@ public class ProjectorSetingActivity extends Activity {
     }
 
     private void baudRateInitView() {
-        baudRateList = new ArrayList<>();
-        baudRateList.add("2400");
-        baudRateList.add("4800");
-        baudRateList.add("9600");
-        baudRateList.add("14400");
-        baudRateList.add("19200");
-        baudRateList.add("38400");
-        baudRateList.add("57600");
-        baudRateList.add("115200");
-
-
+        baudRateList = SerialPortUtil.getBaudRateDatas();
         spinnerBaudRate.setAdapter(new SelectAdapter(this, baudRateList));
         spinnerBaudRate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
