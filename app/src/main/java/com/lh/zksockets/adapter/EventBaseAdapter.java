@@ -113,7 +113,7 @@ public class EventBaseAdapter extends BaseAdapter {
 
     private void updataTime(EventBase eventBase, String etTime) {
         for (int i = 0; i < datas.size(); i++) {
-            if (datas.get(i).id == eventBase.id) {
+            if (datas.get(i).name.equals(eventBase.name)) {
                 if (etTime.equals("")) {
                     datas.get(i).setTime("0");
                 } else {
@@ -125,7 +125,7 @@ public class EventBaseAdapter extends BaseAdapter {
 
     private void updataChecked(boolean isChecked, EventBase eventBase) {
         for (int i = 0; i < datas.size(); i++) {
-            if (datas.get(i).id == eventBase.id) {
+            if (datas.get(i).name.equals(eventBase.name)) {
                 if (isChecked) {
                     datas.get(i).setChecked(true);
                 } else {

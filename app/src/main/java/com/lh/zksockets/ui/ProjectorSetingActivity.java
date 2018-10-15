@@ -36,6 +36,8 @@ public class ProjectorSetingActivity extends Activity {
     @BindView(R.id.radio_btn_2)
     RadioButton radio_btn_2;
 
+    @BindView(R.id.spinner_serial_port)
+    Spinner spinner_serial_port;
     @BindView(R.id.spinnerBaudRate)
     Spinner spinnerBaudRate;
     @BindView(R.id.spinnerCheckoutBit)
@@ -61,18 +63,21 @@ public class ProjectorSetingActivity extends Activity {
     @BindView(R.id.et_HDMI_command)
     EditText et_HDMI_command;
 
+    private List<String> serialPortList;
     private List<String> baudRateList;
     private List<String> checkoutBitList;
     private List<String> dataBitList;
     private List<String> stopBitList;
     private List<String> typeList;
     private ProjectorDao projectorDao;
+    private String selectSerialPort;
     private String selectBaudRate;
     private String selectCheckoutBit;
     private String selectDataBit;
     private String selectStopBit;
     private String selectTyep;
 
+    private int selectSerialPortId;
     private int selectBaudRateId;
     private int selectCheckoutBitId;
     private int selectDataBitId;
@@ -94,6 +99,7 @@ public class ProjectorSetingActivity extends Activity {
         radio_btn_1.setChecked(true);
         radio_btn_2.setChecked(false);
 
+        serialPortInitView();
         baudRateInitView();
         checkoutBitInitView();
         dataBitInitView();
@@ -158,6 +164,7 @@ public class ProjectorSetingActivity extends Activity {
 
     private void setViewInit(Projector projector) {
         if (projector != null) {
+            spinner_serial_port.setSelection(projector.serialPortId);
             spinnerBaudRate.setSelection(projector.baudRateId);
             spinnerCheckoutBit.setSelection(projector.checkoutBitId);
             spinnerDataBit.setSelection(projector.dataBitId);
@@ -171,6 +178,7 @@ public class ProjectorSetingActivity extends Activity {
             et_VGA_command.setText(projector.VGACommand);
             et_HDMI_command.setText(projector.HDMICommand);
         } else {
+            spinner_serial_port.setSelection(0);
             spinnerBaudRate.setSelection(0);
             spinnerCheckoutBit.setSelection(0);
             spinnerDataBit.setSelection(0);
@@ -280,8 +288,23 @@ public class ProjectorSetingActivity extends Activity {
 
             }
         });
+    }
 
+    private void serialPortInitView() {
+        serialPortList = SerialPortUtil.getSerialPortNumDatas();
+        spinner_serial_port.setAdapter(new SelectAdapter(this, serialPortList));
+        spinner_serial_port.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectSerialPort = serialPortList.get(position);
+                selectSerialPortId = position;
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @OnClick(R.id.radio_btn_1)
@@ -368,10 +391,10 @@ public class ProjectorSetingActivity extends Activity {
                     chazuoDataDao.loadAll().get(chazuojiselectId).closedTime));
         }
 
-        projectorDao.insert(new Projector((long) deviceId, name, selectBaudRate, selectBaudRateId, selectCheckoutBit,
-                selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit, selectStopBitId, selectTyep,
-                selectTyepId, et_open_command.getText().toString(), et_closed_command.getText().toString(),
-                et_VGA_command.getText().toString(), et_HDMI_command.getText().toString(),
+        projectorDao.insert(new Projector((long) deviceId, name, selectSerialPort, selectSerialPortId, selectBaudRate,
+                selectBaudRateId, selectCheckoutBit, selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit,
+                selectStopBitId, selectTyep, selectTyepId, et_open_command.getText().toString(),
+                et_closed_command.getText().toString(), et_VGA_command.getText().toString(), et_HDMI_command.getText().toString(),
                 chazuojiselect, chazuojiselectId, chazuobuselect, chazuobuselectId));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();

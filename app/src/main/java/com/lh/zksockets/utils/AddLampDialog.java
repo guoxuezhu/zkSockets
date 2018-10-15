@@ -299,12 +299,20 @@ public class AddLampDialog extends Dialog {
                     .where(LampDao.Properties.Id.eq(lamp_et_id.getText().toString().trim()))
                     .orderAsc(LampDao.Properties.Id)
                     .list();
-            ELog.i("=========lamps=====111===" + lamps.toString());
             if (lamps.size() != 0) {
                 if (data == null) {
                     Toast.makeText(mContext, "序号已存在", Toast.LENGTH_SHORT).show();
                     return;
                 }
+            }
+
+            List<Lamp> lampsName = lampDao.queryBuilder()
+                    .where(LampDao.Properties.Name.eq(lamp_et_name.getText().toString().trim()))
+                    .orderAsc(LampDao.Properties.Id)
+                    .list();
+            if (lampsName.size() != 0) {
+                Toast.makeText(mContext, lamp_et_name.getText().toString().trim() + "已存在", Toast.LENGTH_SHORT).show();
+                return;
             }
         }
 

@@ -26,24 +26,26 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property BaudRate = new Property(2, String.class, "baudRate", false, "BAUD_RATE");
-        public final static Property BaudRateId = new Property(3, int.class, "baudRateId", false, "BAUD_RATE_ID");
-        public final static Property CheckoutBit = new Property(4, String.class, "checkoutBit", false, "CHECKOUT_BIT");
-        public final static Property CheckoutBitId = new Property(5, int.class, "checkoutBitId", false, "CHECKOUT_BIT_ID");
-        public final static Property DataBit = new Property(6, String.class, "dataBit", false, "DATA_BIT");
-        public final static Property DataBitId = new Property(7, int.class, "dataBitId", false, "DATA_BIT_ID");
-        public final static Property StopBit = new Property(8, String.class, "stopBit", false, "STOP_BIT");
-        public final static Property StopBitId = new Property(9, int.class, "stopBitId", false, "STOP_BIT_ID");
-        public final static Property Type = new Property(10, String.class, "type", false, "TYPE");
-        public final static Property TypeId = new Property(11, int.class, "typeId", false, "TYPE_ID");
-        public final static Property OpenCommand = new Property(12, String.class, "openCommand", false, "OPEN_COMMAND");
-        public final static Property ClosedCommand = new Property(13, String.class, "closedCommand", false, "CLOSED_COMMAND");
-        public final static Property VGACommand = new Property(14, String.class, "VGACommand", false, "VGACOMMAND");
-        public final static Property HDMICommand = new Property(15, String.class, "HDMICommand", false, "HDMICOMMAND");
-        public final static Property JiChazuo = new Property(16, String.class, "jiChazuo", false, "JI_CHAZUO");
-        public final static Property JiChazuoId = new Property(17, int.class, "jiChazuoId", false, "JI_CHAZUO_ID");
-        public final static Property BuChazuo = new Property(18, String.class, "buChazuo", false, "BU_CHAZUO");
-        public final static Property BuChazuoId = new Property(19, int.class, "buChazuoId", false, "BU_CHAZUO_ID");
+        public final static Property SerialPort = new Property(2, String.class, "serialPort", false, "SERIAL_PORT");
+        public final static Property SerialPortId = new Property(3, int.class, "serialPortId", false, "SERIAL_PORT_ID");
+        public final static Property BaudRate = new Property(4, String.class, "baudRate", false, "BAUD_RATE");
+        public final static Property BaudRateId = new Property(5, int.class, "baudRateId", false, "BAUD_RATE_ID");
+        public final static Property CheckoutBit = new Property(6, String.class, "checkoutBit", false, "CHECKOUT_BIT");
+        public final static Property CheckoutBitId = new Property(7, int.class, "checkoutBitId", false, "CHECKOUT_BIT_ID");
+        public final static Property DataBit = new Property(8, String.class, "dataBit", false, "DATA_BIT");
+        public final static Property DataBitId = new Property(9, int.class, "dataBitId", false, "DATA_BIT_ID");
+        public final static Property StopBit = new Property(10, String.class, "stopBit", false, "STOP_BIT");
+        public final static Property StopBitId = new Property(11, int.class, "stopBitId", false, "STOP_BIT_ID");
+        public final static Property Type = new Property(12, String.class, "type", false, "TYPE");
+        public final static Property TypeId = new Property(13, int.class, "typeId", false, "TYPE_ID");
+        public final static Property OpenCommand = new Property(14, String.class, "openCommand", false, "OPEN_COMMAND");
+        public final static Property ClosedCommand = new Property(15, String.class, "closedCommand", false, "CLOSED_COMMAND");
+        public final static Property VGACommand = new Property(16, String.class, "VGACommand", false, "VGACOMMAND");
+        public final static Property HDMICommand = new Property(17, String.class, "HDMICommand", false, "HDMICOMMAND");
+        public final static Property JiChazuo = new Property(18, String.class, "jiChazuo", false, "JI_CHAZUO");
+        public final static Property JiChazuoId = new Property(19, int.class, "jiChazuoId", false, "JI_CHAZUO_ID");
+        public final static Property BuChazuo = new Property(20, String.class, "buChazuo", false, "BU_CHAZUO");
+        public final static Property BuChazuoId = new Property(21, int.class, "buChazuoId", false, "BU_CHAZUO_ID");
     }
 
 
@@ -61,24 +63,26 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"PROJECTOR\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"BAUD_RATE\" TEXT," + // 2: baudRate
-                "\"BAUD_RATE_ID\" INTEGER NOT NULL ," + // 3: baudRateId
-                "\"CHECKOUT_BIT\" TEXT," + // 4: checkoutBit
-                "\"CHECKOUT_BIT_ID\" INTEGER NOT NULL ," + // 5: checkoutBitId
-                "\"DATA_BIT\" TEXT," + // 6: dataBit
-                "\"DATA_BIT_ID\" INTEGER NOT NULL ," + // 7: dataBitId
-                "\"STOP_BIT\" TEXT," + // 8: stopBit
-                "\"STOP_BIT_ID\" INTEGER NOT NULL ," + // 9: stopBitId
-                "\"TYPE\" TEXT," + // 10: type
-                "\"TYPE_ID\" INTEGER NOT NULL ," + // 11: typeId
-                "\"OPEN_COMMAND\" TEXT," + // 12: openCommand
-                "\"CLOSED_COMMAND\" TEXT," + // 13: closedCommand
-                "\"VGACOMMAND\" TEXT," + // 14: VGACommand
-                "\"HDMICOMMAND\" TEXT," + // 15: HDMICommand
-                "\"JI_CHAZUO\" TEXT," + // 16: jiChazuo
-                "\"JI_CHAZUO_ID\" INTEGER NOT NULL ," + // 17: jiChazuoId
-                "\"BU_CHAZUO\" TEXT," + // 18: buChazuo
-                "\"BU_CHAZUO_ID\" INTEGER NOT NULL );"); // 19: buChazuoId
+                "\"SERIAL_PORT\" TEXT," + // 2: serialPort
+                "\"SERIAL_PORT_ID\" INTEGER NOT NULL ," + // 3: serialPortId
+                "\"BAUD_RATE\" TEXT," + // 4: baudRate
+                "\"BAUD_RATE_ID\" INTEGER NOT NULL ," + // 5: baudRateId
+                "\"CHECKOUT_BIT\" TEXT," + // 6: checkoutBit
+                "\"CHECKOUT_BIT_ID\" INTEGER NOT NULL ," + // 7: checkoutBitId
+                "\"DATA_BIT\" TEXT," + // 8: dataBit
+                "\"DATA_BIT_ID\" INTEGER NOT NULL ," + // 9: dataBitId
+                "\"STOP_BIT\" TEXT," + // 10: stopBit
+                "\"STOP_BIT_ID\" INTEGER NOT NULL ," + // 11: stopBitId
+                "\"TYPE\" TEXT," + // 12: type
+                "\"TYPE_ID\" INTEGER NOT NULL ," + // 13: typeId
+                "\"OPEN_COMMAND\" TEXT," + // 14: openCommand
+                "\"CLOSED_COMMAND\" TEXT," + // 15: closedCommand
+                "\"VGACOMMAND\" TEXT," + // 16: VGACommand
+                "\"HDMICOMMAND\" TEXT," + // 17: HDMICommand
+                "\"JI_CHAZUO\" TEXT," + // 18: jiChazuo
+                "\"JI_CHAZUO_ID\" INTEGER NOT NULL ," + // 19: jiChazuoId
+                "\"BU_CHAZUO\" TEXT," + // 20: buChazuo
+                "\"BU_CHAZUO_ID\" INTEGER NOT NULL );"); // 21: buChazuoId
     }
 
     /** Drops the underlying database table. */
@@ -101,67 +105,73 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
             stmt.bindString(2, name);
         }
  
+        String serialPort = entity.getSerialPort();
+        if (serialPort != null) {
+            stmt.bindString(3, serialPort);
+        }
+        stmt.bindLong(4, entity.getSerialPortId());
+ 
         String baudRate = entity.getBaudRate();
         if (baudRate != null) {
-            stmt.bindString(3, baudRate);
+            stmt.bindString(5, baudRate);
         }
-        stmt.bindLong(4, entity.getBaudRateId());
+        stmt.bindLong(6, entity.getBaudRateId());
  
         String checkoutBit = entity.getCheckoutBit();
         if (checkoutBit != null) {
-            stmt.bindString(5, checkoutBit);
+            stmt.bindString(7, checkoutBit);
         }
-        stmt.bindLong(6, entity.getCheckoutBitId());
+        stmt.bindLong(8, entity.getCheckoutBitId());
  
         String dataBit = entity.getDataBit();
         if (dataBit != null) {
-            stmt.bindString(7, dataBit);
+            stmt.bindString(9, dataBit);
         }
-        stmt.bindLong(8, entity.getDataBitId());
+        stmt.bindLong(10, entity.getDataBitId());
  
         String stopBit = entity.getStopBit();
         if (stopBit != null) {
-            stmt.bindString(9, stopBit);
+            stmt.bindString(11, stopBit);
         }
-        stmt.bindLong(10, entity.getStopBitId());
+        stmt.bindLong(12, entity.getStopBitId());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(11, type);
+            stmt.bindString(13, type);
         }
-        stmt.bindLong(12, entity.getTypeId());
+        stmt.bindLong(14, entity.getTypeId());
  
         String openCommand = entity.getOpenCommand();
         if (openCommand != null) {
-            stmt.bindString(13, openCommand);
+            stmt.bindString(15, openCommand);
         }
  
         String closedCommand = entity.getClosedCommand();
         if (closedCommand != null) {
-            stmt.bindString(14, closedCommand);
+            stmt.bindString(16, closedCommand);
         }
  
         String VGACommand = entity.getVGACommand();
         if (VGACommand != null) {
-            stmt.bindString(15, VGACommand);
+            stmt.bindString(17, VGACommand);
         }
  
         String HDMICommand = entity.getHDMICommand();
         if (HDMICommand != null) {
-            stmt.bindString(16, HDMICommand);
+            stmt.bindString(18, HDMICommand);
         }
  
         String jiChazuo = entity.getJiChazuo();
         if (jiChazuo != null) {
-            stmt.bindString(17, jiChazuo);
+            stmt.bindString(19, jiChazuo);
         }
-        stmt.bindLong(18, entity.getJiChazuoId());
+        stmt.bindLong(20, entity.getJiChazuoId());
  
         String buChazuo = entity.getBuChazuo();
         if (buChazuo != null) {
-            stmt.bindString(19, buChazuo);
+            stmt.bindString(21, buChazuo);
         }
-        stmt.bindLong(20, entity.getBuChazuoId());
+        stmt.bindLong(22, entity.getBuChazuoId());
     }
 
     @Override
@@ -178,67 +188,73 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
             stmt.bindString(2, name);
         }
  
+        String serialPort = entity.getSerialPort();
+        if (serialPort != null) {
+            stmt.bindString(3, serialPort);
+        }
+        stmt.bindLong(4, entity.getSerialPortId());
+ 
         String baudRate = entity.getBaudRate();
         if (baudRate != null) {
-            stmt.bindString(3, baudRate);
+            stmt.bindString(5, baudRate);
         }
-        stmt.bindLong(4, entity.getBaudRateId());
+        stmt.bindLong(6, entity.getBaudRateId());
  
         String checkoutBit = entity.getCheckoutBit();
         if (checkoutBit != null) {
-            stmt.bindString(5, checkoutBit);
+            stmt.bindString(7, checkoutBit);
         }
-        stmt.bindLong(6, entity.getCheckoutBitId());
+        stmt.bindLong(8, entity.getCheckoutBitId());
  
         String dataBit = entity.getDataBit();
         if (dataBit != null) {
-            stmt.bindString(7, dataBit);
+            stmt.bindString(9, dataBit);
         }
-        stmt.bindLong(8, entity.getDataBitId());
+        stmt.bindLong(10, entity.getDataBitId());
  
         String stopBit = entity.getStopBit();
         if (stopBit != null) {
-            stmt.bindString(9, stopBit);
+            stmt.bindString(11, stopBit);
         }
-        stmt.bindLong(10, entity.getStopBitId());
+        stmt.bindLong(12, entity.getStopBitId());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(11, type);
+            stmt.bindString(13, type);
         }
-        stmt.bindLong(12, entity.getTypeId());
+        stmt.bindLong(14, entity.getTypeId());
  
         String openCommand = entity.getOpenCommand();
         if (openCommand != null) {
-            stmt.bindString(13, openCommand);
+            stmt.bindString(15, openCommand);
         }
  
         String closedCommand = entity.getClosedCommand();
         if (closedCommand != null) {
-            stmt.bindString(14, closedCommand);
+            stmt.bindString(16, closedCommand);
         }
  
         String VGACommand = entity.getVGACommand();
         if (VGACommand != null) {
-            stmt.bindString(15, VGACommand);
+            stmt.bindString(17, VGACommand);
         }
  
         String HDMICommand = entity.getHDMICommand();
         if (HDMICommand != null) {
-            stmt.bindString(16, HDMICommand);
+            stmt.bindString(18, HDMICommand);
         }
  
         String jiChazuo = entity.getJiChazuo();
         if (jiChazuo != null) {
-            stmt.bindString(17, jiChazuo);
+            stmt.bindString(19, jiChazuo);
         }
-        stmt.bindLong(18, entity.getJiChazuoId());
+        stmt.bindLong(20, entity.getJiChazuoId());
  
         String buChazuo = entity.getBuChazuo();
         if (buChazuo != null) {
-            stmt.bindString(19, buChazuo);
+            stmt.bindString(21, buChazuo);
         }
-        stmt.bindLong(20, entity.getBuChazuoId());
+        stmt.bindLong(22, entity.getBuChazuoId());
     }
 
     @Override
@@ -251,24 +267,26 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
         Projector entity = new Projector( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // baudRate
-            cursor.getInt(offset + 3), // baudRateId
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // checkoutBit
-            cursor.getInt(offset + 5), // checkoutBitId
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // dataBit
-            cursor.getInt(offset + 7), // dataBitId
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // stopBit
-            cursor.getInt(offset + 9), // stopBitId
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // type
-            cursor.getInt(offset + 11), // typeId
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // openCommand
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // closedCommand
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // VGACommand
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // HDMICommand
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // jiChazuo
-            cursor.getInt(offset + 17), // jiChazuoId
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // buChazuo
-            cursor.getInt(offset + 19) // buChazuoId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // serialPort
+            cursor.getInt(offset + 3), // serialPortId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // baudRate
+            cursor.getInt(offset + 5), // baudRateId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // checkoutBit
+            cursor.getInt(offset + 7), // checkoutBitId
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // dataBit
+            cursor.getInt(offset + 9), // dataBitId
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // stopBit
+            cursor.getInt(offset + 11), // stopBitId
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // type
+            cursor.getInt(offset + 13), // typeId
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // openCommand
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // closedCommand
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // VGACommand
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // HDMICommand
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // jiChazuo
+            cursor.getInt(offset + 19), // jiChazuoId
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // buChazuo
+            cursor.getInt(offset + 21) // buChazuoId
         );
         return entity;
     }
@@ -277,24 +295,26 @@ public class ProjectorDao extends AbstractDao<Projector, Long> {
     public void readEntity(Cursor cursor, Projector entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setBaudRate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setBaudRateId(cursor.getInt(offset + 3));
-        entity.setCheckoutBit(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setCheckoutBitId(cursor.getInt(offset + 5));
-        entity.setDataBit(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setDataBitId(cursor.getInt(offset + 7));
-        entity.setStopBit(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setStopBitId(cursor.getInt(offset + 9));
-        entity.setType(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setTypeId(cursor.getInt(offset + 11));
-        entity.setOpenCommand(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setClosedCommand(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setVGACommand(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setHDMICommand(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setJiChazuo(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setJiChazuoId(cursor.getInt(offset + 17));
-        entity.setBuChazuo(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setBuChazuoId(cursor.getInt(offset + 19));
+        entity.setSerialPort(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setSerialPortId(cursor.getInt(offset + 3));
+        entity.setBaudRate(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setBaudRateId(cursor.getInt(offset + 5));
+        entity.setCheckoutBit(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setCheckoutBitId(cursor.getInt(offset + 7));
+        entity.setDataBit(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setDataBitId(cursor.getInt(offset + 9));
+        entity.setStopBit(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setStopBitId(cursor.getInt(offset + 11));
+        entity.setType(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setTypeId(cursor.getInt(offset + 13));
+        entity.setOpenCommand(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setClosedCommand(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setVGACommand(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setHDMICommand(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setJiChazuo(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setJiChazuoId(cursor.getInt(offset + 19));
+        entity.setBuChazuo(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setBuChazuoId(cursor.getInt(offset + 21));
      }
     
     @Override

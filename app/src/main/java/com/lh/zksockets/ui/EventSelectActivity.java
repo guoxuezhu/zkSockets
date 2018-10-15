@@ -62,10 +62,8 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
         for (int i = 0; i < eventBaseList.size(); i++) {
             if (eventBaseList.get(i).isChecked) {
                 if (checkedNameStr.equals("")) {
-                    checkedIds = eventBaseList.get(i).id + "";
                     checkedNameStr = eventBaseList.get(i).name;
                 } else {
-                    checkedIds = checkedIds + "," + eventBaseList.get(i).id;
                     checkedNameStr = checkedNameStr + "," + eventBaseList.get(i).name;
                 }
             }

@@ -149,7 +149,7 @@
             android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="IO口:"
+            android:text="IO口号:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -183,7 +183,7 @@
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="串口:"
+                android:text="串口号:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16" />
 

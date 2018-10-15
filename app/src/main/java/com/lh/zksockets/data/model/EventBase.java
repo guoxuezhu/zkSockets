@@ -2,24 +2,35 @@ package com.lh.zksockets.data.model;
 
 public class EventBase {
 
-    public int id;
+    public int eventType;
+    public Long eventId;
     public String name;
     public boolean isChecked;
     public String time;
 
-    public EventBase(int id, String name, boolean isChecked, String time) {
-        this.id = id;
+    public EventBase(int eventType, Long eventId, String name, boolean isChecked, String time) {
+        this.eventType = eventType;
+        this.eventId = eventId;
         this.name = name;
         this.isChecked = isChecked;
         this.time = time;
     }
 
-    public int getId() {
-        return id;
+
+    public int getEventType() {
+        return eventType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEventType(int eventType) {
+        this.eventType = eventType;
+    }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public String getName() {
@@ -49,7 +60,8 @@ public class EventBase {
     @Override
     public String toString() {
         return "EventBase{" +
-                "id=" + id +
+                "eventType=" + eventType +
+                ", eventId=" + eventId +
                 ", name='" + name + '\'' +
                 ", isChecked=" + isChecked +
                 ", time='" + time + '\'' +

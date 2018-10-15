@@ -13,11 +13,13 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.EventBigAdapter;
 import com.lh.zksockets.adapter.IoYuanAdapter;
 import com.lh.zksockets.data.DbDao.EventBigDao;
+import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,45 +51,28 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
 
     private void DataInit() {
         if (eventBigDao.loadAll().size() == 0) {
+            eventBases.add(new EventBase(1, (long) 1, "开投影机1", false, "0"));
+            eventBases.add(new EventBase(1, (long) 2, "关投影机1", false, "0"));
+            eventBases.add(new EventBase(1, (long) 3, "开投影机2", false, "0"));
+            eventBases.add(new EventBase(1, (long) 4, "关投影机2", false, "0"));
+
+
+            LampDao lampDao = MyApplication.getDaoSession().getLampDao();
+            if (lampDao.loadAll().size() != 0) {
+                for (int i = 0; i < lampDao.loadAll().size(); i++) {
+                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "开灯(" + lampDao.loadAll().get(i).name + ")", false, "0"));
+                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "关灯(" + lampDao.loadAll().get(i).name + ")", false, "0"));
+                }
+            }
+
+
             Gson gson = new Gson();
-            eventBases.add(new EventBase(1, "开空调", false, "0"));
-            eventBases.add(new EventBase(2, "关空调", false, "0"));
-            eventBases.add(new EventBase(3, "开投影机1", false, "0"));
-            eventBases.add(new EventBase(4, "关投影机1", false, "0"));
-            eventBases.add(new EventBase(5, "开投影机2", false, "0"));
-            eventBases.add(new EventBase(6, "关投影机2", false, "0"));
-
-            eventBases.add(new EventBase(7, "开窗帘1", false, "0"));
-            eventBases.add(new EventBase(8, "关窗帘1", false, "0"));
-            eventBases.add(new EventBase(9, "开窗帘2", false, "0"));
-            eventBases.add(new EventBase(10, "关窗帘2", false, "0"));
-            eventBases.add(new EventBase(11, "开窗帘3", false, "0"));
-            eventBases.add(new EventBase(12, "关窗帘3", false, "0"));
-            eventBases.add(new EventBase(13, "开窗帘4", false, "0"));
-            eventBases.add(new EventBase(14, "关窗帘4", false, "0"));
-
-            eventBases.add(new EventBase(15, "开灯", false, "0"));
-            eventBases.add(new EventBase(16, "关灯", false, "0"));
-
-
             String eventBasesJsonStr = gson.toJson(eventBases);
 
             eventBigDao.insert(new EventBig((long) 1, "上课", "", "", eventBasesJsonStr));
             eventBigDao.insert(new EventBig((long) 2, "课间休息", "", "", eventBasesJsonStr));
             eventBigDao.insert(new EventBig((long) 3, "下课", "", "", eventBasesJsonStr));
             eventBigDao.insert(new EventBig((long) 4, "锁定", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 5, "开灯", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 6, "关灯", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 7, "开窗帘", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 8, "关窗帘", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 9, "开空调", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 10, "关空调", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 11, "开投影机1", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 12, "关投影机1", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 13, "开投影机2", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 14, "关投影机3", "", "", eventBasesJsonStr));
-
-//            eventBigDao.insert(new EventBig((long) 15, "关空调", "", "", eventBasesJsonStr));
         }
 
         ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());
@@ -110,6 +95,12 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
         finish();
     }
 
+    @OnClick(R.id.event_reset_btn)
+    public void event_reset_btn() {
+        eventBigDao.deleteAll();
+        DataInit();
+        eventBigAdapter.setData(eventBigDao.loadAll());
+    }
 
     @OnClick(R.id.event_btn_back)
     public void event_btn_back() {

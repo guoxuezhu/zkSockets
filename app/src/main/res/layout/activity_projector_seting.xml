@@ -72,6 +72,44 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="串口号设置:"
+                android:textSize="@dimen/text_size_20" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/layout_stroke_bg"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_solid_bg"
+                    android:gravity="center"
+                    android:text="串口号"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+
+                <Spinner
+                    android:id="@+id/spinner_serial_port"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:dropDownVerticalOffset="40dp"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
