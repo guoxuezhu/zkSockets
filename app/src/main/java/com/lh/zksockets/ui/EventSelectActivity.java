@@ -11,8 +11,12 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.EventBaseAdapter;
 import com.lh.zksockets.data.DbDao.EventBigDao;
+import com.lh.zksockets.data.DbDao.EventKejianRestDao;
+import com.lh.zksockets.data.DbDao.EventShangkeDao;
+import com.lh.zksockets.data.DbDao.EventXiakeDao;
 import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.EventBig;
+import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
@@ -59,6 +63,21 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
         ELog.i("========eventBaseList=====ok======" + eventBaseList.toString());
         String checkedIds = "";
         String checkedNameStr = "";
+
+        EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
+        EventKejianRestDao eventKejianRestDao = MyApplication.getDaoSession().getEventKejianRestDao();
+        EventXiakeDao eventXiakeDao = MyApplication.getDaoSession().getEventXiakeDao();
+
+        if (eventBigId == 1) {
+            eventShangkeDao.deleteAll();
+        } else if (eventBigId == 2) {
+            eventKejianRestDao.deleteAll();
+        } else if (eventBigId == 3) {
+            eventXiakeDao.deleteAll();
+        } else if (eventBigId == 4) {
+            //eventShangkeDao.deleteAll();
+        }
+
         for (int i = 0; i < eventBaseList.size(); i++) {
             if (eventBaseList.get(i).isChecked) {
                 if (checkedNameStr.equals("")) {
@@ -66,8 +85,24 @@ public class EventSelectActivity extends Activity implements EventBaseAdapter.Ev
                 } else {
                     checkedNameStr = checkedNameStr + "," + eventBaseList.get(i).name;
                 }
+
+                if (eventBigId == 1) {
+                    eventShangkeDao.insert(new EventShangke(eventBaseList.get(i).eventType, eventBaseList.get(i).eventId,
+                            eventBaseList.get(i).name, eventBaseList.get(i).status, eventBaseList.get(i).isChecked, eventBaseList.get(i).time));
+                } else if (eventBigId == 2) {
+                    eventShangkeDao.insert(new EventShangke(eventBaseList.get(i).eventType, eventBaseList.get(i).eventId,
+                            eventBaseList.get(i).name, eventBaseList.get(i).status, eventBaseList.get(i).isChecked, eventBaseList.get(i).time));
+                } else if (eventBigId == 3) {
+                    eventShangkeDao.insert(new EventShangke(eventBaseList.get(i).eventType, eventBaseList.get(i).eventId,
+                            eventBaseList.get(i).name, eventBaseList.get(i).status, eventBaseList.get(i).isChecked, eventBaseList.get(i).time));
+                } else if (eventBigId == 4) {
+
+                }
+
+
             }
         }
+
 
         EventBigDao eventBigDao = MyApplication.getDaoSession().getEventBigDao();
         Gson gson = new Gson();

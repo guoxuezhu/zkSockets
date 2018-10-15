@@ -29,6 +29,9 @@ public class DaoMaster extends AbstractDaoMaster {
         LampDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
+        EventShangkeDao.createTable(db, ifNotExists);
+        EventKejianRestDao.createTable(db, ifNotExists);
+        EventXiakeDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -41,6 +44,9 @@ public class DaoMaster extends AbstractDaoMaster {
         LampDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
+        EventShangkeDao.dropTable(db, ifExists);
+        EventKejianRestDao.dropTable(db, ifExists);
+        EventXiakeDao.dropTable(db, ifExists);
     }
 
     /**
@@ -67,6 +73,9 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(LampDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(UsersDao.class);
+        registerDaoClass(EventShangkeDao.class);
+        registerDaoClass(EventKejianRestDao.class);
+        registerDaoClass(EventXiakeDao.class);
     }
 
     public DaoSession newSession() {

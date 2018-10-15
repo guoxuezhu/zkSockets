@@ -51,17 +51,17 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
 
     private void DataInit() {
         if (eventBigDao.loadAll().size() == 0) {
-            eventBases.add(new EventBase(1, (long) 1, "开投影机1", false, "0"));
-            eventBases.add(new EventBase(1, (long) 2, "关投影机1", false, "0"));
-            eventBases.add(new EventBase(1, (long) 3, "开投影机2", false, "0"));
-            eventBases.add(new EventBase(1, (long) 4, "关投影机2", false, "0"));
+            eventBases.add(new EventBase(1, (long) 1, "开投影机1", 1, false, 0));
+            eventBases.add(new EventBase(1, (long) 2, "关投影机1", 0, false, 0));
+            eventBases.add(new EventBase(1, (long) 3, "开投影机2", 1, false, 0));
+            eventBases.add(new EventBase(1, (long) 4, "关投影机2", 0, false, 0));
 
 
             LampDao lampDao = MyApplication.getDaoSession().getLampDao();
             if (lampDao.loadAll().size() != 0) {
                 for (int i = 0; i < lampDao.loadAll().size(); i++) {
-                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "开灯(" + lampDao.loadAll().get(i).name + ")", false, "0"));
-                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "关灯(" + lampDao.loadAll().get(i).name + ")", false, "0"));
+                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "开灯(" + lampDao.loadAll().get(i).name + ")", 1, false, 0));
+                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "关灯(" + lampDao.loadAll().get(i).name + ")", 0, false, 0));
                 }
             }
 

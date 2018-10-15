@@ -83,7 +83,7 @@ public class EventBaseAdapter extends BaseAdapter {
             }
         });
 
-        viewHolder.eventTime.setText(eventBase.time);
+        viewHolder.eventTime.setText(eventBase.time + "");
         viewHolder.eventTime.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -115,9 +115,9 @@ public class EventBaseAdapter extends BaseAdapter {
         for (int i = 0; i < datas.size(); i++) {
             if (datas.get(i).name.equals(eventBase.name)) {
                 if (etTime.equals("")) {
-                    datas.get(i).setTime("0");
+                    datas.get(i).setTime(0);
                 } else {
-                    datas.get(i).setTime(etTime);
+                    datas.get(i).setTime(Integer.parseInt(etTime));
                 }
             }
         }

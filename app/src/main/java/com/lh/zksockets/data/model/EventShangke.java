@@ -1,6 +1,10 @@
 package com.lh.zksockets.data.model;
 
-public class EventBase {
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
+public class EventShangke {
 
     public int eventType;
     public Long eventId;
@@ -9,8 +13,9 @@ public class EventBase {
     public boolean isChecked;
     public int time;
 
-
-    public EventBase(int eventType, Long eventId, String name, int status, boolean isChecked, int time) {
+    @Generated(hash = 1597002131)
+    public EventShangke(int eventType, Long eventId, String name, int status,
+                        boolean isChecked, int time) {
         this.eventType = eventType;
         this.eventId = eventId;
         this.name = name;
@@ -19,8 +24,12 @@ public class EventBase {
         this.time = time;
     }
 
+    @Generated(hash = 2085549123)
+    public EventShangke() {
+    }
+
     public int getEventType() {
-        return eventType;
+        return this.eventType;
     }
 
     public void setEventType(int eventType) {
@@ -28,7 +37,7 @@ public class EventBase {
     }
 
     public Long getEventId() {
-        return eventId;
+        return this.eventId;
     }
 
     public void setEventId(Long eventId) {
@@ -36,7 +45,7 @@ public class EventBase {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -44,23 +53,23 @@ public class EventBase {
     }
 
     public int getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public boolean isChecked() {
-        return isChecked;
+    public boolean getIsChecked() {
+        return this.isChecked;
     }
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
     public int getTime() {
-        return time;
+        return this.time;
     }
 
     public void setTime(int time) {
@@ -69,7 +78,7 @@ public class EventBase {
 
     @Override
     public String toString() {
-        return "EventBase{" +
+        return "EventShangke{" +
                 "eventType=" + eventType +
                 ", eventId=" + eventId +
                 ", name='" + name + '\'' +
