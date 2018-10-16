@@ -51,10 +51,10 @@ public class EventActivity extends Activity implements EventBigAdapter.CallBack 
 
     private void DataInit() {
         if (eventBigDao.loadAll().size() == 0) {
-            eventBases.add(new EventBase(1, (long) 1, "开投影机1", 1, false, 0));
-            eventBases.add(new EventBase(1, (long) 2, "关投影机1", 0, false, 0));
-            eventBases.add(new EventBase(1, (long) 3, "开投影机2", 1, false, 0));
-            eventBases.add(new EventBase(1, (long) 4, "关投影机2", 0, false, 0));
+            eventBases.add(new EventBase(1, (long) 1, "开投影机一", 1, false, 0));
+            eventBases.add(new EventBase(1, (long) 2, "关投影机一", 0, false, 0));
+            eventBases.add(new EventBase(1, (long) 3, "开投影机二", 1, false, 0));
+            eventBases.add(new EventBase(1, (long) 4, "关投影机二", 0, false, 0));
 
 
             LampDao lampDao = MyApplication.getDaoSession().getLampDao();
