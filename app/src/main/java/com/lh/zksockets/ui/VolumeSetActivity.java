@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VolumeSetActivity extends Activity {
+public class VolumeSetActivity extends BaseActivity {
 
     @BindView(R.id.volume_radio_btn_1)
     RadioButton volume_radio_btn_1;

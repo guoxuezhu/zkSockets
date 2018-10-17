@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.GridView;
@@ -25,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EventSelectActivity extends Activity implements EventBaseAdapter.EventBaseCallBack {
+public class EventSelectActivity extends BaseActivity implements EventBaseAdapter.EventBaseCallBack {
 
     @BindView(R.id.event_base_gridView)
     GridView event_base_gridView;

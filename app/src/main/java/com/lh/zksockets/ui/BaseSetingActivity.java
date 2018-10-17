@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,13 +8,12 @@ import android.widget.TextView;
 
 import com.lh.zksockets.R;
 import com.lh.zksockets.utils.DisplayTools;
-import com.lh.zksockets.utils.ELog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BaseSetingActivity extends Activity {
+public class BaseSetingActivity extends BaseActivity {
 
     @BindView(R.id.tv_IP)
     TextView tv_IP;

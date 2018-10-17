@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ICcardActivity extends Activity implements AddCardDialog.DialogCallBack, IcCardAdapter.CallBack {
+public class ICcardActivity extends BaseActivity implements AddCardDialog.DialogCallBack, IcCardAdapter.CallBack {
 
     @BindView(R.id.ic_recyclerView)
     RecyclerView ic_recyclerView;

@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,7 +9,7 @@ import com.lh.zksockets.SocketService;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,17 +1,14 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.EventBigAdapter;
-import com.lh.zksockets.adapter.IoYuanAdapter;
 import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.data.model.EventBase;
@@ -19,14 +16,13 @@ import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EventActivity extends Activity implements EventBigAdapter.CallBack {
+public class EventActivity extends BaseActivity implements EventBigAdapter.CallBack {
 
     @BindView(R.id.event_recyclerView)
     RecyclerView event_recyclerView;

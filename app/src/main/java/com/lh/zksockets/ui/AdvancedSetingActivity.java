@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,7 +8,7 @@ import com.lh.zksockets.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AdvancedSetingActivity extends Activity {
+public class AdvancedSetingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

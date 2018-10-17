@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ComputerActivity extends Activity {
+public class ComputerActivity extends BaseActivity {
 
     @BindView(R.id.et_computer_ip)
     EditText et_computer_ip;

@@ -97,6 +97,15 @@
         <activity
             android:name=".ui.LampActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5bc6a56ef1f55631f3000043" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Channel ID" />
     </application>
 
 </manifest>

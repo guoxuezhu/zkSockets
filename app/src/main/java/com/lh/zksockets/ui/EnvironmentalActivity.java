@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EnvironmentalActivity extends Activity {
+public class EnvironmentalActivity extends BaseActivity {
 
     @BindView(R.id.environmental_radio_btn_1)
     RadioButton environmental_radio_btn_1;

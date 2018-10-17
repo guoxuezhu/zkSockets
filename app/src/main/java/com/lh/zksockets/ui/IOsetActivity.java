@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.IoYuanAdapter;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
-import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.utils.ELog;
 
@@ -22,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class IOsetActivity extends Activity implements IoYuanAdapter.CallBack {
+public class IOsetActivity extends BaseActivity implements IoYuanAdapter.CallBack {
 
     @BindView(R.id.io_recyclerView)
     RecyclerView io_recyclerView;

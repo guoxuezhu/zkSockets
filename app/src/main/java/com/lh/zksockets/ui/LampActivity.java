@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.adapter.LampAdapter;
 import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.data.model.Lamp;
@@ -18,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LampActivity extends Activity implements AddLampDialog.DialogCallBack, LampAdapter.CallBack {
+public class LampActivity extends BaseActivity implements AddLampDialog.DialogCallBack, LampAdapter.CallBack {
 
     @BindView(R.id.lamp_recyclerView)
     RecyclerView lamp_recyclerView;

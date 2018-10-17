@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UsersActivity extends Activity implements AddUserDialog.UserDialogCallBack, UsersAdapter.CallBack {
+public class UsersActivity extends BaseActivity implements AddUserDialog.UserDialogCallBack, UsersAdapter.CallBack {
 
 
     @BindView(R.id.user_recyclerView)

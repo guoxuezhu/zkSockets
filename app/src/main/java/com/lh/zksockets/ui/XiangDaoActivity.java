@@ -1,21 +1,16 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.utils.ELog;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.OutputStream;
 
 import android_serialport_api.SerialPort;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class XiangDaoActivity extends Activity {
+public class XiangDaoActivity extends BaseActivity {
 
     private SerialPort serialPort;
     private OutputStream outputStream;

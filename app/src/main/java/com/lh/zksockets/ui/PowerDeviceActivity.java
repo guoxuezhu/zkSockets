@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PowerDeviceActivity extends Activity implements PowerListAdapter.CallBack {
+public class PowerDeviceActivity extends BaseActivity implements PowerListAdapter.CallBack {
 
     @BindView(R.id.power_device_recyclerView)
     RecyclerView power_device_recyclerView;

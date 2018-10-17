@@ -1,9 +1,7 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.lh.zksockets.R;
@@ -18,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZhongKongActivity extends Activity {
+public class ZhongKongActivity extends BaseActivity {
 
     @BindView(R.id.et_zk_1)
     EditText et_zk_1;

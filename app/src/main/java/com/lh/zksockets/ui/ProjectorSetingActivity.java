@@ -1,6 +1,5 @@
 package com.lh.zksockets.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProjectorSetingActivity extends Activity {
+public class ProjectorSetingActivity extends BaseActivity {
 
 
     @BindView(R.id.radio_btn_1)
