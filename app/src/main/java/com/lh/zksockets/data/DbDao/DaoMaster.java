@@ -24,14 +24,14 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
         EventBigDao.createTable(db, ifNotExists);
+        EventKejianRestDao.createTable(db, ifNotExists);
+        EventShangkeDao.createTable(db, ifNotExists);
+        EventXiakeDao.createTable(db, ifNotExists);
         IcCardDao.createTable(db, ifNotExists);
         IOYuanDao.createTable(db, ifNotExists);
         LampDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
-        EventShangkeDao.createTable(db, ifNotExists);
-        EventKejianRestDao.createTable(db, ifNotExists);
-        EventXiakeDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -39,14 +39,14 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
         EventBigDao.dropTable(db, ifExists);
+        EventKejianRestDao.dropTable(db, ifExists);
+        EventShangkeDao.dropTable(db, ifExists);
+        EventXiakeDao.dropTable(db, ifExists);
         IcCardDao.dropTable(db, ifExists);
         IOYuanDao.dropTable(db, ifExists);
         LampDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
-        EventShangkeDao.dropTable(db, ifExists);
-        EventKejianRestDao.dropTable(db, ifExists);
-        EventXiakeDao.dropTable(db, ifExists);
     }
 
     /**
@@ -68,14 +68,14 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
         registerDaoClass(EventBigDao.class);
+        registerDaoClass(EventKejianRestDao.class);
+        registerDaoClass(EventShangkeDao.class);
+        registerDaoClass(EventXiakeDao.class);
         registerDaoClass(IcCardDao.class);
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(LampDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(UsersDao.class);
-        registerDaoClass(EventShangkeDao.class);
-        registerDaoClass(EventKejianRestDao.class);
-        registerDaoClass(EventXiakeDao.class);
     }
 
     public DaoSession newSession() {

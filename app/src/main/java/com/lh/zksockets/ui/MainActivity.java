@@ -2,13 +2,17 @@ package com.lh.zksockets.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.utils.ELog;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,6 +65,18 @@ public class MainActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.shengji)
+    public void shengji() {
+        File apkFile = new File("/mnt/usbhost/Storage01/lh/中控-release-1.0.3.apk");
+        if (apkFile.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "请插入有升级包的U盘", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 
