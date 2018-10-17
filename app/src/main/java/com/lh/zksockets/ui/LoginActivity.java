@@ -3,13 +3,22 @@ package com.lh.zksockets.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lh.zksockets.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends Activity {
+
+
+    @BindView(R.id.login_name)
+    EditText login_name;
+    @BindView(R.id.login_password)
+    EditText login_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +31,22 @@ public class LoginActivity extends Activity {
 
     @OnClick(R.id.login_btn)
     public void login_btn() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        if (login_name.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (login_password.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (login_name.getText().toString().trim().equals("admin") &&
+                login_password.getText().toString().trim().equals("admin")) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } else {
+            Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 

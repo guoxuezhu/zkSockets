@@ -56,9 +56,11 @@
                     android:background="@mipmap/ic_launcher" />
 
                 <EditText
+                    android:id="@+id/login_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:hint="请输入用户名"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="admin"
                     android:textColor="@color/black"
@@ -80,9 +82,11 @@
                     android:background="@mipmap/ic_launcher" />
 
                 <EditText
+                    android:id="@+id/login_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:hint="请输入密码"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="admin"
