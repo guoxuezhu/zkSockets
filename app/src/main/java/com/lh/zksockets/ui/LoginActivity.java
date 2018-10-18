@@ -46,8 +46,8 @@ public class LoginActivity extends BaseActivity {
                 ++mSecretNumber;
                 if (5 == mSecretNumber) {
                     startActivity(new Intent(Settings.ACTION_SETTINGS));
-                    LoginActivity.this.finish();
-                    Process.killProcess(Process.myPid());//杀死进程，防止dialog.show()出现错误
+//                    LoginActivity.this.finish();
+//                    Process.killProcess(Process.myPid());//杀死进程，防止dialog.show()出现错误
                 }
             } else {
                 mSecretNumber = 0;

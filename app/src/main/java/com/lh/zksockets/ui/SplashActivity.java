@@ -23,10 +23,19 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-
     @OnClick(R.id.to_login_btn)
     public void to_login_btn() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

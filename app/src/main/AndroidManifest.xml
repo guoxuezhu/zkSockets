@@ -6,9 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <!-- 开机自启动 -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
@@ -17,22 +14,50 @@
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission
+        android:name="android.permission.BIND_APPWIDGET"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <!-- 开机自启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:restoreAnyVersion="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashActivity">
+
+        <activity
+            android:name=".ui.LauncherActivity"
+            android:clearTaskOnLaunch="true"
+            android:enabled="true"
+            android:launchMode="singleTask"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="nosensor"
+            android:stateNotNeeded="true"
+            android:taskAffinity=""
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.SplashActivity" />
+
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -70,11 +95,11 @@
             android:name=".ui.ZhongKongActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <receiver android:name=".BootRestartReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+        <!-- <receiver android:name=".BootRestartReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
 
         <activity
             android:name=".ui.IOsetActivity"
@@ -96,9 +121,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.LampActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
-
-
+            android:windowSoftInputMode="stateHidden" />
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -106,6 +129,7 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Channel ID" />
+
     </application>
 
 </manifest>
