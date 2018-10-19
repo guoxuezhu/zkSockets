@@ -31,33 +31,6 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    private static final long MIN_CLICK_INTERVAL = 5000;
-    private long mLastClickTime;
-    private int mSecretNumber = 0;
-
-    //连续点击5次，调出系统设置界面
-    @OnClick(R.id.login_tv)
-    void setting() {
-        try {
-            long currentClickTime = SystemClock.uptimeMillis();
-            long elapsedTime = currentClickTime - mLastClickTime;
-            mLastClickTime = currentClickTime;
-            if (elapsedTime < MIN_CLICK_INTERVAL) {
-                ++mSecretNumber;
-                if (5 == mSecretNumber) {
-                    startActivity(new Intent(Settings.ACTION_SETTINGS));
-//                    LoginActivity.this.finish();
-//                    Process.killProcess(Process.myPid());//杀死进程，防止dialog.show()出现错误
-                }
-            } else {
-                mSecretNumber = 0;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     @OnClick(R.id.login_btn)
     public void login_btn() {
