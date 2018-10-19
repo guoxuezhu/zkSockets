@@ -95,12 +95,6 @@
             android:name=".ui.ZhongKongActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <!-- <receiver android:name=".BootRestartReceiver"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-
         <activity
             android:name=".ui.IOsetActivity"
             android:windowSoftInputMode="stateHidden" />
