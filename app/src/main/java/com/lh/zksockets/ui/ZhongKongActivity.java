@@ -32,7 +32,7 @@ public class ZhongKongActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         try {
-            serialPort = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
+            serialPort = new SerialPort(new File("/dev/ttyS1"), 57600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
             //inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
@@ -45,23 +45,127 @@ public class ZhongKongActivity extends BaseActivity {
 
     @OnClick(R.id.btn_zk_ok)
     public void btn_zk_ok() {
+        sendSerialPortData("BB0400020" + et_zk_1.getText().toString() + "0" + et_zk_2.getText().toString() + "0055");
+    }
 
-        byte[] data = StringToBytes("BB0400020" + et_zk_1.getText().toString() + "0" + et_zk_2.getText().toString() + "0055");
+    @OnClick(R.id.btn_daiji_open)
+    public void btn_daiji_open() {
+        sendSerialPortData("481A00010100004D");
+    }
 
+    @OnClick(R.id.btn_daiji_closed)
+    public void btn_daiji_closed() {
+        sendSerialPortData("481A00010000004D");
+    }
+
+    @OnClick(R.id.btn_all_open)
+    public void btn_all_open() {
+        sendSerialPortData("481A00040100004D");
+    }
+
+    @OnClick(R.id.btn_all_closed)
+    public void btn_all_closed() {
+        sendSerialPortData("481A00040000004D");
+    }
+
+
+    @OnClick(R.id.btn_ch1_open)
+    public void btn_ch1_open() {
+        initData("00", "01");
+    }
+
+    @OnClick(R.id.btn_ch1_closed)
+    public void btn_ch1_closed() {
+        initData("00", "00");
+    }
+
+    @OnClick(R.id.btn_ch2_open)
+    public void btn_ch2_open() {
+        initData("01", "01");
+    }
+
+    @OnClick(R.id.btn_ch2_closed)
+    public void btn_ch2_closed() {
+        initData("01", "00");
+    }
+
+    @OnClick(R.id.btn_ch3_open)
+    public void btn_ch3_open() {
+        initData("02", "01");
+    }
+
+    @OnClick(R.id.btn_ch3_closed)
+    public void btn_ch3_closed() {
+        initData("02", "00");
+    }
+
+    @OnClick(R.id.btn_ch4_open)
+    public void btn_ch4_open() {
+        initData("03", "01");
+    }
+
+    @OnClick(R.id.btn_ch4_closed)
+    public void btn_ch4_closed() {
+        initData("03", "00");
+    }
+
+    @OnClick(R.id.btn_ch5_open)
+    public void btn_ch5_open() {
+        initData("04", "01");
+    }
+
+    @OnClick(R.id.btn_ch5_closed)
+    public void btn_ch5_closed() {
+        initData("04", "00");
+    }
+
+    @OnClick(R.id.btn_ch6_open)
+    public void btn_ch6_open() {
+        initData("05", "01");
+    }
+
+    @OnClick(R.id.btn_ch6_closed)
+    public void btn_ch6_closed() {
+        initData("05", "00");
+    }
+
+    @OnClick(R.id.btn_ch7_open)
+    public void btn_ch7_open() {
+        initData("06", "01");
+    }
+
+    @OnClick(R.id.btn_ch7_closed)
+    public void btn_ch7_closed() {
+        initData("06", "00");
+    }
+
+    @OnClick(R.id.btn_ch8_open)
+    public void btn_ch8_open() {
+        initData("07", "01");
+    }
+
+    @OnClick(R.id.btn_ch8_closed)
+    public void btn_ch8_closed() {
+        initData("07", "00");
+    }
+
+    private void initData(String position, String type) {
+        sendSerialPortData("481A0005" + position + type + "004D");
+    }
+
+    private void sendSerialPortData(String strDatas) {
+        byte[] data = StringToBytes(strDatas);
         try {
-            //byte[] sendData = data.getBytes(); //string转byte[]
             if (data.length > 0) {
                 outputStream.write(data);
-//                outputStream.write('\n');
-                //outputStream.write('\r'+'\n');
                 outputStream.flush();
                 ELog.e("====sendSerialPort: 串口数据发送成功");
             }
         } catch (IOException e) {
             ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
         }
-
     }
+
 
     private byte[] StringToBytes(String str) {
         byte[] bytes = new byte[str.length() / 2];
