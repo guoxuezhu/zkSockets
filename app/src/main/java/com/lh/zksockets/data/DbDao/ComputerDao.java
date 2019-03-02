@@ -28,8 +28,6 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         public final static Property PORT = new Property(1, String.class, "PORT", false, "PORT");
         public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
         public final static Property Password = new Property(3, String.class, "Password", false, "PASSWORD");
-        public final static Property Chazuo = new Property(4, String.class, "chazuo", false, "CHAZUO");
-        public final static Property ChazuoId = new Property(5, int.class, "chazuoId", false, "CHAZUO_ID");
     }
 
 
@@ -48,9 +46,7 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
                 "\"IP\" TEXT," + // 0: IP
                 "\"PORT\" TEXT," + // 1: PORT
                 "\"USER_NAME\" TEXT," + // 2: userName
-                "\"PASSWORD\" TEXT," + // 3: Password
-                "\"CHAZUO\" TEXT," + // 4: chazuo
-                "\"CHAZUO_ID\" INTEGER NOT NULL );"); // 5: chazuoId
+                "\"PASSWORD\" TEXT);"); // 3: Password
     }
 
     /** Drops the underlying database table. */
@@ -82,12 +78,6 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         if (Password != null) {
             stmt.bindString(4, Password);
         }
- 
-        String chazuo = entity.getChazuo();
-        if (chazuo != null) {
-            stmt.bindString(5, chazuo);
-        }
-        stmt.bindLong(6, entity.getChazuoId());
     }
 
     @Override
@@ -113,12 +103,6 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         if (Password != null) {
             stmt.bindString(4, Password);
         }
- 
-        String chazuo = entity.getChazuo();
-        if (chazuo != null) {
-            stmt.bindString(5, chazuo);
-        }
-        stmt.bindLong(6, entity.getChazuoId());
     }
 
     @Override
@@ -132,9 +116,7 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // IP
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // PORT
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // Password
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chazuo
-            cursor.getInt(offset + 5) // chazuoId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // Password
         );
         return entity;
     }
@@ -145,8 +127,6 @@ public class ComputerDao extends AbstractDao<Computer, Void> {
         entity.setPORT(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setUserName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setChazuo(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setChazuoId(cursor.getInt(offset + 5));
      }
     
     @Override

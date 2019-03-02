@@ -48,10 +48,6 @@ public class ProjectorSetingActivity extends BaseActivity {
     @BindView(R.id.spinnerTyep)
     Spinner spinnerTyep;
 
-    @BindView(R.id.chazuo_ji)
-    Spinner chazuo_ji;
-    @BindView(R.id.chazuo_bu)
-    Spinner chazuo_bu;
 
     @BindView(R.id.et_open_command)
     EditText et_open_command;
@@ -82,12 +78,6 @@ public class ProjectorSetingActivity extends BaseActivity {
     private int selectDataBitId;
     private int selectStopBitId;
     private int selectTyepId;
-    private String chazuojiselect;
-    private int chazuojiselectId;
-    private String chazuobuselect;
-    private int chazuobuselectId;
-    private ChazuoDataDao chazuoDataDao;
-    private SelectChazuoAdapter chazuoAdapter;
 
 
     @Override
@@ -105,10 +95,6 @@ public class ProjectorSetingActivity extends BaseActivity {
         stopBitInitView();
         typeInitView();
 
-        chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        chazuoAdapter = new SelectChazuoAdapter(this, chazuoDataDao.loadAll());
-        chazuoProjectorView();
-        chazuoBuView();
 
         projectorDao = MyApplication.getDaoSession().getProjectorDao();
         if (projectorDao.loadAll().size() != 0) {
@@ -126,39 +112,6 @@ public class ProjectorSetingActivity extends BaseActivity {
     }
 
 
-    private void chazuoProjectorView() {
-        chazuo_ji.setAdapter(chazuoAdapter);
-        chazuo_ji.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chazuojiselect = chazuoDataDao.loadAll().get(position).name;
-                chazuojiselectId = position;
-                ELog.i("=========jjjjjjj========" + position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void chazuoBuView() {
-        chazuo_bu.setAdapter(chazuoAdapter);
-        chazuo_bu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chazuobuselect = chazuoDataDao.loadAll().get(position).name;
-                chazuobuselectId = position;
-                ELog.i("=========bbbbbbbb========" + position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
 
     private void setViewInit(Projector projector) {
@@ -169,8 +122,6 @@ public class ProjectorSetingActivity extends BaseActivity {
             spinnerDataBit.setSelection(projector.dataBitId);
             spinnerStopBit.setSelection(projector.stopBitId);
             spinnerTyep.setSelection(projector.typeId);
-            chazuo_ji.setSelection(projector.jiChazuoId);
-            chazuo_bu.setSelection(projector.buChazuoId);
 
             et_open_command.setText(projector.openCommand);
             et_closed_command.setText(projector.closedCommand);
@@ -183,8 +134,6 @@ public class ProjectorSetingActivity extends BaseActivity {
             spinnerDataBit.setSelection(0);
             spinnerStopBit.setSelection(0);
             spinnerTyep.setSelection(0);
-            chazuo_ji.setSelection(0);
-            chazuo_bu.setSelection(0);
 
             et_open_command.setText("");
             et_closed_command.setText("");
@@ -322,11 +271,6 @@ public class ProjectorSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_projector_ok)
     public void btn_projector_ok() {
-        if (chazuojiselectId == chazuobuselectId && chazuojiselectId != 0) {
-            Toast.makeText(this, "投影机与幕布插座不能相同", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
 
         int deviceId = 0;
         String name = "";
@@ -343,62 +287,18 @@ public class ProjectorSetingActivity extends BaseActivity {
             buname = "投影机二幕布";
         }
 
-        if (chazuoDataDao.loadAll().get(chazuojiselectId).bindName != null && !chazuoDataDao.loadAll().get(chazuojiselectId).bindName.equals(name)
-                && !chazuoDataDao.loadAll().get(chazuojiselectId).bindName.equals(buname)) {
-            Toast.makeText(this, "投影机选择的插座已经被" + chazuoDataDao.loadAll().get(chazuojiselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (chazuoDataDao.loadAll().get(chazuobuselectId).bindName != null && !chazuoDataDao.loadAll().get(chazuobuselectId).bindName.equals(buname)
-                && !chazuoDataDao.loadAll().get(chazuobuselectId).bindName.equals(name)) {
-            Toast.makeText(this, "幕布选择的插座已经被" + chazuoDataDao.loadAll().get(chazuobuselectId).bindName + "使用", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (projectorDao.load((long) deviceId) != null) {
-            int jidaoId = projectorDao.load((long) deviceId).jiChazuoId;
-            int budaoId = projectorDao.load((long) deviceId).buChazuoId;
-            if (jidaoId != chazuojiselectId || budaoId != chazuobuselectId) {
-                Toast.makeText(this, "投影机插座线路有变动,请注意电源箱是否需要修改", Toast.LENGTH_SHORT).show();
-            }
-            if (jidaoId != 0) {
-                chazuoDataDao.update(new ChazuoData((long) jidaoId, "插座" + jidaoId, null,
-                        chazuoDataDao.loadAll().get(jidaoId).isOk,
-                        chazuoDataDao.loadAll().get(jidaoId).openTime,
-                        chazuoDataDao.loadAll().get(jidaoId).closedTime));
-            }
-            if (budaoId != 0) {
-                chazuoDataDao.update(new ChazuoData((long) budaoId, "插座" + budaoId, null,
-                        chazuoDataDao.loadAll().get(budaoId).isOk,
-                        chazuoDataDao.loadAll().get(budaoId).openTime,
-                        chazuoDataDao.loadAll().get(budaoId).closedTime));
-            }
-
             projectorDao.deleteByKey((long) deviceId);
         }
 
-        if (chazuobuselectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuobuselectId, "插座" + chazuobuselectId, buname,
-                    chazuoDataDao.loadAll().get(chazuobuselectId).isOk,
-                    chazuoDataDao.loadAll().get(chazuobuselectId).openTime,
-                    chazuoDataDao.loadAll().get(chazuobuselectId).closedTime));
-        }
-        if (chazuojiselectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuojiselectId, "插座" + chazuojiselectId, name,
-                    chazuoDataDao.loadAll().get(chazuojiselectId).isOk,
-                    chazuoDataDao.loadAll().get(chazuojiselectId).openTime,
-                    chazuoDataDao.loadAll().get(chazuojiselectId).closedTime));
-        }
 
         projectorDao.insert(new Projector((long) deviceId, name, selectSerialPort, selectSerialPortId, selectBaudRate,
                 selectBaudRateId, selectCheckoutBit, selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit,
                 selectStopBitId, selectTyep, selectTyepId, et_open_command.getText().toString(),
-                et_closed_command.getText().toString(), et_VGA_command.getText().toString(), et_HDMI_command.getText().toString(),
-                chazuojiselect, chazuojiselectId, chazuobuselect, chazuobuselectId));
+                et_closed_command.getText().toString(), et_VGA_command.getText().toString(), et_HDMI_command.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
 
-        chazuoAdapter.setDatas(chazuoDataDao.loadAll());
 
     }
 

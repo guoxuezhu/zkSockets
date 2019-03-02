@@ -156,32 +156,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-
-                <TextView
-                    android:layout_width="@dimen/dp_150"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="插座设置:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-
-                <Spinner
-                    android:id="@+id/chazuo_computer"
-                    android:layout_width="@dimen/dp_400"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_table_bg"
-                    android:dropDownVerticalOffset="40dp"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
 
 
             <Button

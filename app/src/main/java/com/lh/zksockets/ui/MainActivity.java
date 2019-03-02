@@ -7,11 +7,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.widget.Toast;
 
-import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.DbDao.ChazuoDataDao;
-import com.lh.zksockets.data.model.ChazuoData;
-import com.lh.zksockets.utils.ELog;
 
 import java.io.File;
 
@@ -29,14 +25,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        ChazuoDataDao chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        if (chazuoDataDao.loadAll().size() == 0) {
-            chazuoDataDao.insert(new ChazuoData((long) 0, "无", null, false, 0, 0));
-            for (int i = 1; i < 21; i++) {
-                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null, false, 0, 0));
-            }
-        }
-        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
+
     }
 
 

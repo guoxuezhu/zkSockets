@@ -34,7 +34,15 @@ public class PowerDeviceActivity extends BaseActivity implements PowerListAdapte
         setContentView(R.layout.activity_power_device);
         ButterKnife.bind(this);
 
+
         chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
+        if (chazuoDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < 11; i++) {
+                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null, false, 0, 0));
+            }
+        }
+        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
+
         chazuoDataList = chazuoDataDao.loadAll();
         chazuoDataList.remove(0);
         initRcyclerView();

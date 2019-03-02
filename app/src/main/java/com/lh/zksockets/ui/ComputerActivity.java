@@ -31,12 +31,6 @@ public class ComputerActivity extends BaseActivity {
     @BindView(R.id.et_password)
     EditText et_password;
 
-    @BindView(R.id.chazuo_computer)
-    Spinner chazuo_computer;
-    private ChazuoDataDao chazuoDataDao;
-    private SelectChazuoAdapter chazuoAdapter;
-    private String chazuoSelectName;
-    private int chazuoSelectId;
     private ComputerDao computerDao;
 
     @Override
@@ -45,22 +39,7 @@ public class ComputerActivity extends BaseActivity {
         setContentView(R.layout.activity_computer);
         ButterKnife.bind(this);
 
-        chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        chazuoAdapter = new SelectChazuoAdapter(this, chazuoDataDao.loadAll());
 
-        chazuo_computer.setAdapter(chazuoAdapter);
-        chazuo_computer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chazuoSelectName = chazuoDataDao.loadAll().get(position).name;
-                chazuoSelectId = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         computerDao = MyApplication.getDaoSession().getComputerDao();
 
@@ -74,48 +53,21 @@ public class ComputerActivity extends BaseActivity {
             et_computer_port.setText(computerDao.loadAll().get(0).PORT);
             et_computer_name.setText(computerDao.loadAll().get(0).userName);
             et_password.setText(computerDao.loadAll().get(0).Password);
-            chazuo_computer.setSelection(computerDao.loadAll().get(0).chazuoId);
         } else {
             et_computer_ip.setText("");
             et_computer_port.setText("");
             et_computer_name.setText("");
             et_password.setText("");
-            chazuo_computer.setSelection(0);
         }
 
     }
 
     @OnClick(R.id.btn_computer_ok)
     public void btn_computer_ok() {
-        if (chazuoDataDao.loadAll().get(chazuoSelectId).bindName != null && !chazuoDataDao.loadAll().get(chazuoSelectId).bindName.equals("电脑")) {
-            Toast.makeText(this, "电脑选择的插座已经被" + chazuoDataDao.loadAll().get(chazuoSelectId).bindName + "使用", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (computerDao.loadAll().size() != 0) {
-            int id = computerDao.loadAll().get(0).chazuoId;
-            if (id != chazuoSelectId) {
-                Toast.makeText(this, "电脑插座线路有变动,请注意电源箱是否需要修改",
-                        Toast.LENGTH_SHORT).show();
-            }
-            if (id != 0) {
-                chazuoDataDao.update(new ChazuoData((long) id, "插座" + id, null, chazuoDataDao.loadAll().get(id).isOk,
-                        chazuoDataDao.loadAll().get(id).openTime, chazuoDataDao.loadAll().get(id).closedTime));
-            }
-            computerDao.deleteAll();
-        }
-        if (chazuoSelectId != 0) {
-            chazuoDataDao.update(new ChazuoData((long) chazuoSelectId, "插座" + chazuoSelectId,
-                    "电脑", chazuoDataDao.loadAll().get(chazuoSelectId).isOk,
-                    chazuoDataDao.loadAll().get(chazuoSelectId).openTime,
-                    chazuoDataDao.loadAll().get(chazuoSelectId).closedTime));
-        }
-
         computerDao.insert(new Computer(et_computer_ip.getText().toString(), et_computer_port.getText().toString(),
-                et_computer_name.getText().toString(), et_password.getText().toString(),
-                chazuoSelectName, chazuoSelectId));
+                et_computer_name.getText().toString(), et_password.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        chazuoAdapter.setDatas(chazuoDataDao.loadAll());
 
     }
 
