@@ -94,6 +94,13 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.serial_port_seting)
+    public void serial_port_seting() {
+        startActivity(new Intent(this, SerialportActivity.class));
+        finish();
+    }
+
+
 
     @Override
     protected void onDestroy() {

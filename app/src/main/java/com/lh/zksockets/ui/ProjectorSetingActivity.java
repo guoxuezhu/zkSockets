@@ -274,17 +274,14 @@ public class ProjectorSetingActivity extends BaseActivity {
 
         int deviceId = 0;
         String name = "";
-        String buname = "";
         if (radio_btn_1.isChecked()) {
             deviceId = 1;
             name = "投影机一";
-            buname = "投影机一幕布";
         }
 
         if (radio_btn_2.isChecked()) {
             deviceId = 2;
             name = "投影机二";
-            buname = "投影机二幕布";
         }
 
         if (projectorDao.load((long) deviceId) != null) {
