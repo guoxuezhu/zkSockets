@@ -28,6 +28,7 @@ public class DaoMaster extends AbstractDaoMaster {
         EventShangkeDao.createTable(db, ifNotExists);
         EventXiakeDao.createTable(db, ifNotExists);
         IcCardDao.createTable(db, ifNotExists);
+        IoPortDataDao.createTable(db, ifNotExists);
         IOYuanDao.createTable(db, ifNotExists);
         LampDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
@@ -44,6 +45,7 @@ public class DaoMaster extends AbstractDaoMaster {
         EventShangkeDao.dropTable(db, ifExists);
         EventXiakeDao.dropTable(db, ifExists);
         IcCardDao.dropTable(db, ifExists);
+        IoPortDataDao.dropTable(db, ifExists);
         IOYuanDao.dropTable(db, ifExists);
         LampDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
@@ -74,6 +76,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(EventShangkeDao.class);
         registerDaoClass(EventXiakeDao.class);
         registerDaoClass(IcCardDao.class);
+        registerDaoClass(IoPortDataDao.class);
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(LampDao.class);
         registerDaoClass(ProjectorDao.class);

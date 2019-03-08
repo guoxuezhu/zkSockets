@@ -100,6 +100,11 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.io_port_seting)
+    public void io_port_seting() {
+        startActivity(new Intent(this, IOsetingActivity.class));
+        finish();
+    }
 
 
     @Override

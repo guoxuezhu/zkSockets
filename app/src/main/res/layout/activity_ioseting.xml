@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.SerialportActivity">
+    tools:context=".ui.IOsetingActivity">
+
 
 
     <RelativeLayout
@@ -15,7 +16,7 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/serialport_back_btn"
+            android:id="@+id/ioport_back_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -26,16 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="串口设置"
+            android:text="IO 口设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
     </RelativeLayout>
 
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/serialport_recyclerView"
+        android:id="@+id/ioport_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
 
 
 

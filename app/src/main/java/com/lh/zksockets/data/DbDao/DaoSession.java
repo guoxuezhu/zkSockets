@@ -15,6 +15,7 @@ import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.EventXiake;
 import com.lh.zksockets.data.model.IcCard;
+import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.Lamp;
 import com.lh.zksockets.data.model.Projector;
@@ -28,6 +29,7 @@ import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.EventXiakeDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
+import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
@@ -50,6 +52,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig eventShangkeDaoConfig;
     private final DaoConfig eventXiakeDaoConfig;
     private final DaoConfig icCardDaoConfig;
+    private final DaoConfig ioPortDataDaoConfig;
     private final DaoConfig iOYuanDaoConfig;
     private final DaoConfig lampDaoConfig;
     private final DaoConfig projectorDaoConfig;
@@ -63,6 +66,7 @@ public class DaoSession extends AbstractDaoSession {
     private final EventShangkeDao eventShangkeDao;
     private final EventXiakeDao eventXiakeDao;
     private final IcCardDao icCardDao;
+    private final IoPortDataDao ioPortDataDao;
     private final IOYuanDao iOYuanDao;
     private final LampDao lampDao;
     private final ProjectorDao projectorDao;
@@ -94,6 +98,9 @@ public class DaoSession extends AbstractDaoSession {
         icCardDaoConfig = daoConfigMap.get(IcCardDao.class).clone();
         icCardDaoConfig.initIdentityScope(type);
 
+        ioPortDataDaoConfig = daoConfigMap.get(IoPortDataDao.class).clone();
+        ioPortDataDaoConfig.initIdentityScope(type);
+
         iOYuanDaoConfig = daoConfigMap.get(IOYuanDao.class).clone();
         iOYuanDaoConfig.initIdentityScope(type);
 
@@ -116,6 +123,7 @@ public class DaoSession extends AbstractDaoSession {
         eventShangkeDao = new EventShangkeDao(eventShangkeDaoConfig, this);
         eventXiakeDao = new EventXiakeDao(eventXiakeDaoConfig, this);
         icCardDao = new IcCardDao(icCardDaoConfig, this);
+        ioPortDataDao = new IoPortDataDao(ioPortDataDaoConfig, this);
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
         lampDao = new LampDao(lampDaoConfig, this);
         projectorDao = new ProjectorDao(projectorDaoConfig, this);
@@ -129,6 +137,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(EventShangke.class, eventShangkeDao);
         registerDao(EventXiake.class, eventXiakeDao);
         registerDao(IcCard.class, icCardDao);
+        registerDao(IoPortData.class, ioPortDataDao);
         registerDao(IOYuan.class, iOYuanDao);
         registerDao(Lamp.class, lampDao);
         registerDao(Projector.class, projectorDao);
@@ -144,6 +153,7 @@ public class DaoSession extends AbstractDaoSession {
         eventShangkeDaoConfig.clearIdentityScope();
         eventXiakeDaoConfig.clearIdentityScope();
         icCardDaoConfig.clearIdentityScope();
+        ioPortDataDaoConfig.clearIdentityScope();
         iOYuanDaoConfig.clearIdentityScope();
         lampDaoConfig.clearIdentityScope();
         projectorDaoConfig.clearIdentityScope();
@@ -177,6 +187,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public IcCardDao getIcCardDao() {
         return icCardDao;
+    }
+
+    public IoPortDataDao getIoPortDataDao() {
+        return ioPortDataDao;
     }
 
     public IOYuanDao getIOYuanDao() {

@@ -35,7 +35,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SerialportActivity"></activity>
+        <activity android:name=".ui.IOsetingActivity"></activity>
+        <activity android:name=".ui.SerialportActivity" />
         <activity
             android:name=".ui.LauncherActivity"
             android:clearTaskOnLaunch="true"
