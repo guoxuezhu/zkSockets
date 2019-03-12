@@ -25,9 +25,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property IoName = new Property(1, String.class, "ioName", false, "IO_NAME");
-        public final static Property Vgd = new Property(2, boolean.class, "Vgd", false, "VGD");
-        public final static Property StrML = new Property(3, String.class, "strML", false, "STR_ML");
+        public final static Property Io1 = new Property(1, int.class, "io1", false, "IO1");
+        public final static Property Io2 = new Property(2, int.class, "io2", false, "IO2");
+        public final static Property Io3 = new Property(3, int.class, "io3", false, "IO3");
+        public final static Property Io4 = new Property(4, int.class, "io4", false, "IO4");
     }
 
 
@@ -44,9 +45,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IO_PORT_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"IO_NAME\" TEXT," + // 1: ioName
-                "\"VGD\" INTEGER NOT NULL ," + // 2: Vgd
-                "\"STR_ML\" TEXT);"); // 3: strML
+                "\"IO1\" INTEGER NOT NULL ," + // 1: io1
+                "\"IO2\" INTEGER NOT NULL ," + // 2: io2
+                "\"IO3\" INTEGER NOT NULL ," + // 3: io3
+                "\"IO4\" INTEGER NOT NULL );"); // 4: io4
     }
 
     /** Drops the underlying database table. */
@@ -63,17 +65,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String ioName = entity.getIoName();
-        if (ioName != null) {
-            stmt.bindString(2, ioName);
-        }
-        stmt.bindLong(3, entity.getVgd() ? 1L: 0L);
- 
-        String strML = entity.getStrML();
-        if (strML != null) {
-            stmt.bindString(4, strML);
-        }
+        stmt.bindLong(2, entity.getIo1());
+        stmt.bindLong(3, entity.getIo2());
+        stmt.bindLong(4, entity.getIo3());
+        stmt.bindLong(5, entity.getIo4());
     }
 
     @Override
@@ -84,17 +79,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String ioName = entity.getIoName();
-        if (ioName != null) {
-            stmt.bindString(2, ioName);
-        }
-        stmt.bindLong(3, entity.getVgd() ? 1L: 0L);
- 
-        String strML = entity.getStrML();
-        if (strML != null) {
-            stmt.bindString(4, strML);
-        }
+        stmt.bindLong(2, entity.getIo1());
+        stmt.bindLong(3, entity.getIo2());
+        stmt.bindLong(4, entity.getIo3());
+        stmt.bindLong(5, entity.getIo4());
     }
 
     @Override
@@ -106,9 +94,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     public IoPortData readEntity(Cursor cursor, int offset) {
         IoPortData entity = new IoPortData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // ioName
-            cursor.getShort(offset + 2) != 0, // Vgd
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // strML
+            cursor.getInt(offset + 1), // io1
+            cursor.getInt(offset + 2), // io2
+            cursor.getInt(offset + 3), // io3
+            cursor.getInt(offset + 4) // io4
         );
         return entity;
     }
@@ -116,9 +105,10 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     @Override
     public void readEntity(Cursor cursor, IoPortData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIoName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setVgd(cursor.getShort(offset + 2) != 0);
-        entity.setStrML(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setIo1(cursor.getInt(offset + 1));
+        entity.setIo2(cursor.getInt(offset + 2));
+        entity.setIo3(cursor.getInt(offset + 3));
+        entity.setIo4(cursor.getInt(offset + 4));
      }
     
     @Override
