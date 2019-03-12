@@ -25,11 +25,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property IsOK = new Property(2, boolean.class, "isOK", false, "IS_OK");
-        public final static Property OutId = new Property(3, int.class, "outId", false, "OUT_ID");
-        public final static Property OutName = new Property(4, String.class, "outName", false, "OUT_NAME");
-        public final static Property SendTime = new Property(5, int.class, "sendTime", false, "SEND_TIME");
+        public final static Property DangerIo1 = new Property(1, int.class, "dangerIo1", false, "DANGER_IO1");
+        public final static Property DangerIo2 = new Property(2, int.class, "dangerIo2", false, "DANGER_IO2");
+        public final static Property DangerIo3 = new Property(3, int.class, "dangerIo3", false, "DANGER_IO3");
+        public final static Property DangerIo4 = new Property(4, int.class, "dangerIo4", false, "DANGER_IO4");
     }
 
 
@@ -46,11 +45,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IOYUAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"NAME\" TEXT," + // 1: name
-                "\"IS_OK\" INTEGER NOT NULL ," + // 2: isOK
-                "\"OUT_ID\" INTEGER NOT NULL ," + // 3: outId
-                "\"OUT_NAME\" TEXT," + // 4: outName
-                "\"SEND_TIME\" INTEGER NOT NULL );"); // 5: sendTime
+                "\"DANGER_IO1\" INTEGER NOT NULL ," + // 1: dangerIo1
+                "\"DANGER_IO2\" INTEGER NOT NULL ," + // 2: dangerIo2
+                "\"DANGER_IO3\" INTEGER NOT NULL ," + // 3: dangerIo3
+                "\"DANGER_IO4\" INTEGER NOT NULL );"); // 4: dangerIo4
     }
 
     /** Drops the underlying database table. */
@@ -67,19 +65,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(2, name);
-        }
-        stmt.bindLong(3, entity.getIsOK() ? 1L: 0L);
-        stmt.bindLong(4, entity.getOutId());
- 
-        String outName = entity.getOutName();
-        if (outName != null) {
-            stmt.bindString(5, outName);
-        }
-        stmt.bindLong(6, entity.getSendTime());
+        stmt.bindLong(2, entity.getDangerIo1());
+        stmt.bindLong(3, entity.getDangerIo2());
+        stmt.bindLong(4, entity.getDangerIo3());
+        stmt.bindLong(5, entity.getDangerIo4());
     }
 
     @Override
@@ -90,19 +79,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(2, name);
-        }
-        stmt.bindLong(3, entity.getIsOK() ? 1L: 0L);
-        stmt.bindLong(4, entity.getOutId());
- 
-        String outName = entity.getOutName();
-        if (outName != null) {
-            stmt.bindString(5, outName);
-        }
-        stmt.bindLong(6, entity.getSendTime());
+        stmt.bindLong(2, entity.getDangerIo1());
+        stmt.bindLong(3, entity.getDangerIo2());
+        stmt.bindLong(4, entity.getDangerIo3());
+        stmt.bindLong(5, entity.getDangerIo4());
     }
 
     @Override
@@ -114,11 +94,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     public IOYuan readEntity(Cursor cursor, int offset) {
         IOYuan entity = new IOYuan( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.getShort(offset + 2) != 0, // isOK
-            cursor.getInt(offset + 3), // outId
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // outName
-            cursor.getInt(offset + 5) // sendTime
+            cursor.getInt(offset + 1), // dangerIo1
+            cursor.getInt(offset + 2), // dangerIo2
+            cursor.getInt(offset + 3), // dangerIo3
+            cursor.getInt(offset + 4) // dangerIo4
         );
         return entity;
     }
@@ -126,11 +105,10 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     @Override
     public void readEntity(Cursor cursor, IOYuan entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setIsOK(cursor.getShort(offset + 2) != 0);
-        entity.setOutId(cursor.getInt(offset + 3));
-        entity.setOutName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setSendTime(cursor.getInt(offset + 5));
+        entity.setDangerIo1(cursor.getInt(offset + 1));
+        entity.setDangerIo2(cursor.getInt(offset + 2));
+        entity.setDangerIo3(cursor.getInt(offset + 3));
+        entity.setDangerIo4(cursor.getInt(offset + 4));
      }
     
     @Override

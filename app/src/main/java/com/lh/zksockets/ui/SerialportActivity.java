@@ -13,19 +13,16 @@ import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.IoYuanAdapter;
 import com.lh.zksockets.adapter.SelectAdapter;
 import com.lh.zksockets.adapter.SerialportAdapter;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
-import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.SerialPortUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
