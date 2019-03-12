@@ -25,256 +25,270 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="环境设置"
+            android:text="继电器设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
     </RelativeLayout>
 
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_margin="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/environmental_radio_btn_1"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="match_parent"
-            android:background="@drawable/rbtn_status_1"
-            android:button="@null"
-            android:gravity="center"
-            android:padding="@dimen/dp_6"
-            android:text="空调"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/user_icon_2" />
-
-        <RadioButton
-            android:id="@+id/environmental_radio_btn_2"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="match_parent"
-            android:background="@drawable/rbtn_status_1"
-            android:button="@null"
-            android:gravity="center"
-            android:padding="@dimen/dp_6"
-            android:text="电灯"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/user_icon_2" />
-
-        <RadioButton
-            android:id="@+id/environmental_radio_btn_3"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="match_parent"
-            android:background="@drawable/rbtn_status_1"
-            android:button="@null"
-            android:gravity="center"
-            android:padding="@dimen/dp_6"
-            android:text="窗帘"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20" />
-    </RadioGroup>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_60"
+        android:background="@drawable/layout_stroke_bg"
+        android:orientation="vertical">
+
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/dp_10"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口1"
+                android:textSize="@dimen/text_size_20" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/layout_stroke_bg"
-                    android:orientation="horizontal">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/layout_solid_bg"
-                        android:gravity="center"
-                        android:text="增命令"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口2"
+                android:textSize="@dimen/text_size_20" />
 
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
-                </LinearLayout>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口3"
+                android:textSize="@dimen/text_size_20" />
 
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口4"
+                android:textSize="@dimen/text_size_20" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口5"
+                android:textSize="@dimen/text_size_20" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/layout_stroke_bg"
-                    android:orientation="horizontal">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/layout_solid_bg"
-                        android:gravity="center"
-                        android:text="减命令"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/layout_stroke_bg"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/layout_solid_bg"
-                        android:gravity="center"
-                        android:text="开命令"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/dp_20"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/layout_stroke_bg"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/layout_solid_bg"
-                        android:gravity="center"
-                        android:text="关命令"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text="测试" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_volume_ok"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/dp_20"
-                android:background="@drawable/btn_bg"
-                android:text="保存"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_24" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IO口6"
+                android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
 
-    </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#878C91" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_1_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开"  />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_2_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_3_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开"  />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_4_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_5_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开"  />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_6_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_dangerIoPort_ok"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dp_20"
+        android:background="@drawable/btn_bg"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 </LinearLayout>
