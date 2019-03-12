@@ -35,8 +35,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.IOsetingActivity"></activity>
-        <activity android:name=".ui.SerialportActivity" />
         <activity
             android:name=".ui.LauncherActivity"
             android:clearTaskOnLaunch="true"
@@ -114,6 +112,13 @@
         <activity
             android:name=".ui.LampActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.SerialportActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.IOsetingActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+
 
         <meta-data
             android:name="UMENG_APPKEY"

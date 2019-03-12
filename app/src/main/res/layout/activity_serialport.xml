@@ -32,11 +32,340 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/serialport_recyclerView"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/dp_60"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
 
+        <RadioButton
+            android:id="@+id/spt_btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口3"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口4"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口5"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口6"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口7"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+        <RadioButton
+            android:id="@+id/spt_btn_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rbtn_status_1"
+            android:button="@null"
+            android:padding="@dimen/dp_6"
+            android:text="串口8"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24" />
+
+
+    </RadioGroup>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="设备名称:"
+                android:textSize="@dimen/text_size_20" />
+
+            <EditText
+                android:id="@+id/et_device_name"
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/layout_stroke_bg"
+                android:hint="请输入设备名称"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="串口配置:"
+                android:textSize="@dimen/text_size_20" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="波特率"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerBaudRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="校验位"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <Spinner
+                        android:id="@+id/spinnerCheckoutBit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="数据位"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <Spinner
+                        android:id="@+id/spinnerDataBit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_stroke_bg"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/layout_solid_bg"
+                        android:gravity="center"
+                        android:text="停止位"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <Spinner
+                        android:id="@+id/spinnerStopBit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="命令设置:"
+                android:textSize="@dimen/text_size_20" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/serial_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="命令格式:"
+                android:textSize="@dimen/text_size_20" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
+
+                    <RadioButton
+                        android:id="@+id/radio_binary_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dp_6"
+                        android:text="十进制"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_24" />
+
+                    <RadioButton
+                        android:id="@+id/radio_binary_2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dp_6"
+                        android:text="十六进制"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_24" />
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/sport_btn_ok"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

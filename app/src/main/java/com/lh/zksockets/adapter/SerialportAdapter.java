@@ -3,30 +3,30 @@ package com.lh.zksockets.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.model.IcCard;
-import com.lh.zksockets.data.model.SerialPortData;
-import com.lh.zksockets.ui.SerialportActivity;
+import com.lh.zksockets.data.model.SerialCommand;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 
 public class SerialportAdapter extends RecyclerView.Adapter<SerialportAdapter.SerialportViewHolder> {
 
     private Context mContext;
-    private List<SerialPortData> datas;
+    private List<SerialCommand> datas;
     private CallBack mCallBack;
 
-    public SerialportAdapter(Context context, List<SerialPortData> data, CallBack callBack) {
+    public SerialportAdapter(Context context, List<SerialCommand> data, CallBack callBack) {
         this.datas = data;
         this.mContext = context;
         this.mCallBack = callBack;
@@ -41,12 +41,12 @@ public class SerialportAdapter extends RecyclerView.Adapter<SerialportAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SerialportViewHolder holder, int position) {
-        SerialPortData serialPortData = datas.get(position);
-        holder.tv_s_name.setText(serialPortData.serialPortName);
-        holder.tv_s_info.setText("波特率:" + serialPortData.baudRate + "       校验位:" + serialPortData.checkoutBit +
-                "\n" + "数据位:" + serialPortData.dataBit + "        停止位:" + serialPortData.stopBit);
+        SerialCommand serialCommand = datas.get(position);
+        holder.et_command_id.setText(serialCommand.commandId);
+        holder.et_command_name.setText(serialCommand.commandName);
+        holder.et_command_str.setText(serialCommand.commandStr);
 
-        holder.setItem(serialPortData);
+        holder.setItem(serialCommand, position);
     }
 
     @Override
@@ -54,39 +54,48 @@ public class SerialportAdapter extends RecyclerView.Adapter<SerialportAdapter.Se
         return datas == null ? 0 : datas.size();
     }
 
-    public void setData(List<SerialPortData> serialPortDataList) {
-        datas = serialPortDataList;
+    public void setData(List<SerialCommand> serialCommands) {
+        datas = serialCommands;
         notifyDataSetChanged();
     }
 
     public interface CallBack {
-//        void onClickItem(SerialPortData item);
+        void setMlEditTextChanged(SerialCommand serialCommand, int position, String ml);
+
+        void setNameEditTextChanged(SerialCommand serialCommand, int position, String name);
     }
 
     public class SerialportViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_s_name)
-        TextView tv_s_name;
-        @BindView(R.id.tv_s_info)
-        TextView tv_s_info;
+        @BindView(R.id.et_command_id)
+        TextView et_command_id;
+        @BindView(R.id.et_command_name)
+        TextView et_command_name;
+        @BindView(R.id.et_command_str)
+        TextView et_command_str;
 
 
-        private SerialPortData item;
-
+        private SerialCommand item;
+        private int position;
 
         public SerialportViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-
-        public void setItem(SerialPortData serialPortData) {
-            item = serialPortData;
+        public void setItem(SerialCommand serialCommand, int mposition) {
+            item = serialCommand;
+            this.position = mposition;
         }
 
-        @OnClick(R.id.btn_setting)
-        public void btn_setting() {
-//            mCallBack.onClickItem(item);
+        @OnTextChanged(value = R.id.et_command_name, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+        public void openTimeTextChanged(Editable editable) {
+            mCallBack.setNameEditTextChanged(item, position, editable.toString());
+        }
+
+        @OnTextChanged(value = R.id.et_command_str, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+        public void closedTimeTextChanged(Editable editable) {
+            mCallBack.setMlEditTextChanged(item, position, editable.toString());
         }
 
     }

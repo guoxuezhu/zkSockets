@@ -42,9 +42,9 @@ public class SocketService extends Service {
         super.onCreate();
         ELog.d("======onCreate====");
 
-        startTimer();
-
-        SerialPortUtil.open();
+//        startTimer();
+//
+//        SerialPortUtil.open();
 
         //电源箱操作
         // WorksUtil.powerWorkOpen();

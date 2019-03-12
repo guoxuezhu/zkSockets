@@ -26,10 +26,16 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property SerialPortName = new Property(1, String.class, "serialPortName", false, "SERIAL_PORT_NAME");
-        public final static Property BaudRate = new Property(2, String.class, "baudRate", false, "BAUD_RATE");
-        public final static Property CheckoutBit = new Property(3, String.class, "checkoutBit", false, "CHECKOUT_BIT");
-        public final static Property DataBit = new Property(4, String.class, "dataBit", false, "DATA_BIT");
-        public final static Property StopBit = new Property(5, String.class, "stopBit", false, "STOP_BIT");
+        public final static Property DeviceName = new Property(2, String.class, "deviceName", false, "DEVICE_NAME");
+        public final static Property BaudRateId = new Property(3, int.class, "baudRateId", false, "BAUD_RATE_ID");
+        public final static Property BaudRate = new Property(4, String.class, "baudRate", false, "BAUD_RATE");
+        public final static Property CheckoutBitId = new Property(5, int.class, "checkoutBitId", false, "CHECKOUT_BIT_ID");
+        public final static Property CheckoutBit = new Property(6, String.class, "checkoutBit", false, "CHECKOUT_BIT");
+        public final static Property DataBitId = new Property(7, int.class, "dataBitId", false, "DATA_BIT_ID");
+        public final static Property DataBit = new Property(8, String.class, "dataBit", false, "DATA_BIT");
+        public final static Property StopBitId = new Property(9, int.class, "stopBitId", false, "STOP_BIT_ID");
+        public final static Property StopBit = new Property(10, String.class, "stopBit", false, "STOP_BIT");
+        public final static Property JinZhi = new Property(11, int.class, "jinZhi", false, "JIN_ZHI");
     }
 
 
@@ -47,10 +53,16 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"SERIAL_PORT_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"SERIAL_PORT_NAME\" TEXT," + // 1: serialPortName
-                "\"BAUD_RATE\" TEXT," + // 2: baudRate
-                "\"CHECKOUT_BIT\" TEXT," + // 3: checkoutBit
-                "\"DATA_BIT\" TEXT," + // 4: dataBit
-                "\"STOP_BIT\" TEXT);"); // 5: stopBit
+                "\"DEVICE_NAME\" TEXT," + // 2: deviceName
+                "\"BAUD_RATE_ID\" INTEGER NOT NULL ," + // 3: baudRateId
+                "\"BAUD_RATE\" TEXT," + // 4: baudRate
+                "\"CHECKOUT_BIT_ID\" INTEGER NOT NULL ," + // 5: checkoutBitId
+                "\"CHECKOUT_BIT\" TEXT," + // 6: checkoutBit
+                "\"DATA_BIT_ID\" INTEGER NOT NULL ," + // 7: dataBitId
+                "\"DATA_BIT\" TEXT," + // 8: dataBit
+                "\"STOP_BIT_ID\" INTEGER NOT NULL ," + // 9: stopBitId
+                "\"STOP_BIT\" TEXT," + // 10: stopBit
+                "\"JIN_ZHI\" INTEGER NOT NULL );"); // 11: jinZhi
     }
 
     /** Drops the underlying database table. */
@@ -73,25 +85,35 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
             stmt.bindString(2, serialPortName);
         }
  
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getBaudRateId());
+ 
         String baudRate = entity.getBaudRate();
         if (baudRate != null) {
-            stmt.bindString(3, baudRate);
+            stmt.bindString(5, baudRate);
         }
+        stmt.bindLong(6, entity.getCheckoutBitId());
  
         String checkoutBit = entity.getCheckoutBit();
         if (checkoutBit != null) {
-            stmt.bindString(4, checkoutBit);
+            stmt.bindString(7, checkoutBit);
         }
+        stmt.bindLong(8, entity.getDataBitId());
  
         String dataBit = entity.getDataBit();
         if (dataBit != null) {
-            stmt.bindString(5, dataBit);
+            stmt.bindString(9, dataBit);
         }
+        stmt.bindLong(10, entity.getStopBitId());
  
         String stopBit = entity.getStopBit();
         if (stopBit != null) {
-            stmt.bindString(6, stopBit);
+            stmt.bindString(11, stopBit);
         }
+        stmt.bindLong(12, entity.getJinZhi());
     }
 
     @Override
@@ -108,25 +130,35 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
             stmt.bindString(2, serialPortName);
         }
  
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getBaudRateId());
+ 
         String baudRate = entity.getBaudRate();
         if (baudRate != null) {
-            stmt.bindString(3, baudRate);
+            stmt.bindString(5, baudRate);
         }
+        stmt.bindLong(6, entity.getCheckoutBitId());
  
         String checkoutBit = entity.getCheckoutBit();
         if (checkoutBit != null) {
-            stmt.bindString(4, checkoutBit);
+            stmt.bindString(7, checkoutBit);
         }
+        stmt.bindLong(8, entity.getDataBitId());
  
         String dataBit = entity.getDataBit();
         if (dataBit != null) {
-            stmt.bindString(5, dataBit);
+            stmt.bindString(9, dataBit);
         }
+        stmt.bindLong(10, entity.getStopBitId());
  
         String stopBit = entity.getStopBit();
         if (stopBit != null) {
-            stmt.bindString(6, stopBit);
+            stmt.bindString(11, stopBit);
         }
+        stmt.bindLong(12, entity.getJinZhi());
     }
 
     @Override
@@ -139,10 +171,16 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
         SerialPortData entity = new SerialPortData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // serialPortName
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // baudRate
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // checkoutBit
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // dataBit
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // stopBit
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // deviceName
+            cursor.getInt(offset + 3), // baudRateId
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // baudRate
+            cursor.getInt(offset + 5), // checkoutBitId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // checkoutBit
+            cursor.getInt(offset + 7), // dataBitId
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // dataBit
+            cursor.getInt(offset + 9), // stopBitId
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // stopBit
+            cursor.getInt(offset + 11) // jinZhi
         );
         return entity;
     }
@@ -151,10 +189,16 @@ public class SerialPortDataDao extends AbstractDao<SerialPortData, Long> {
     public void readEntity(Cursor cursor, SerialPortData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setSerialPortName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setBaudRate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCheckoutBit(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setDataBit(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setStopBit(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDeviceName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setBaudRateId(cursor.getInt(offset + 3));
+        entity.setBaudRate(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setCheckoutBitId(cursor.getInt(offset + 5));
+        entity.setCheckoutBit(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setDataBitId(cursor.getInt(offset + 7));
+        entity.setDataBit(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setStopBitId(cursor.getInt(offset + 9));
+        entity.setStopBit(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setJinZhi(cursor.getInt(offset + 11));
      }
     
     @Override
