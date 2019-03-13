@@ -32,8 +32,8 @@ import butterknife.OnClick;
 public class SerialportActivity extends BaseActivity implements SerialportAdapter.CallBack {
 
 
-    @BindView(R.id.spt_btn_1)
-    RadioButton spt_btn_1;
+    @BindView(R.id.spt_btn_2)
+    RadioButton spt_btn_2;
     @BindView(R.id.radio_binary_1)
     RadioButton radio_binary_1;
     @BindView(R.id.radio_binary_2)
@@ -90,8 +90,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         setContentView(R.layout.activity_serialport);
         ButterKnife.bind(this);
 
-        spt_btn_1.setChecked(true);
-//        spt_btn_2.setChecked(false);
+        spt_btn_2.setChecked(true);
 
         baudRateInitView();
         checkoutBitInitView();
@@ -102,41 +101,40 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
 
-        if (serialPortDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 9; i++) {
+        if (serialPortDataDao.loadAll().size() < 4) {
+            for (int i = 2; i < 9; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 2,
                         "9600", 0, "无", 0, "8", 0, "1", 10));
-                for (int j = 1; j < 11; j++) {
+                for (int j = 1; j < 10; j++) {
                     serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "-" + j, "", ""));
                 }
             }
         }
-        ELog.i("=========serialPortDataDao========" + serialPortDataDao.loadAll().toString());
-        ELog.i("=========serialCommandDao========" + serialCommandDao.loadAll().toString());
+        ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
+        ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
 
-        ViewInit(0);
+        ViewInit(2);
 
 
     }
 
-    private void ViewInit(int i) {
+    private void ViewInit(long i) {
+        et_device_name.setText(serialPortDataDao.load(i).deviceName);
+        spinnerBaudRate.setSelection(serialPortDataDao.load(i).baudRateId);
+        spinnerCheckoutBit.setSelection(serialPortDataDao.load(i).checkoutBitId);
+        spinnerDataBit.setSelection(serialPortDataDao.load(i).dataBitId);
+        spinnerStopBit.setSelection(serialPortDataDao.load(i).stopBitId);
 
-        et_device_name.setText(serialPortDataDao.loadAll().get(i).deviceName);
-        spinnerBaudRate.setSelection(serialPortDataDao.loadAll().get(i).baudRateId);
-        spinnerCheckoutBit.setSelection(serialPortDataDao.loadAll().get(i).checkoutBitId);
-        spinnerDataBit.setSelection(serialPortDataDao.loadAll().get(i).dataBitId);
-        spinnerStopBit.setSelection(serialPortDataDao.loadAll().get(i).stopBitId);
-
-        if (serialPortDataDao.loadAll().get(i).jinZhi == 10) {
+        if (serialPortDataDao.load(i).jinZhi == 10) {
             radio_binary_1.setChecked(true);
         } else {
             radio_binary_2.setChecked(true);
         }
 
-        ELog.i("=========serialCommands===00000=====" + serialPortDataDao.loadAll().get(i).toString());
+        ELog.i("=========serialCommands===00000=====" + serialPortDataDao.load(i).toString());
 
         serialCommands = serialCommandDao.queryBuilder()
-                .where(SerialCommandDao.Properties.SId.eq(i + 1))
+                .where(SerialCommandDao.Properties.SId.eq(i))
                 .orderAsc(SerialCommandDao.Properties.MlId)
                 .list();
 
@@ -238,48 +236,43 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     }
 
 
-    @OnClick(R.id.spt_btn_1)
-    public void spt_btn_1() {
-        setSelectBtn(0);
-    }
-
     @OnClick(R.id.spt_btn_2)
     public void spt_btn_2() {
-        setSelectBtn(1);
+        setSelectBtn(2);
     }
 
     @OnClick(R.id.spt_btn_3)
     public void spt_btn_3() {
-        setSelectBtn(2);
+        setSelectBtn(3);
     }
 
     @OnClick(R.id.spt_btn_4)
     public void spt_btn_4() {
-        setSelectBtn(3);
+        setSelectBtn(4);
     }
 
     @OnClick(R.id.spt_btn_5)
     public void spt_btn_5() {
-        setSelectBtn(4);
+        setSelectBtn(5);
     }
 
     @OnClick(R.id.spt_btn_6)
     public void spt_btn_6() {
-        setSelectBtn(5);
+        setSelectBtn(6);
     }
 
     @OnClick(R.id.spt_btn_7)
     public void spt_btn_7() {
-        setSelectBtn(6);
+        setSelectBtn(7);
     }
 
     @OnClick(R.id.spt_btn_8)
     public void spt_btn_8() {
-        setSelectBtn(7);
+        setSelectBtn(8);
     }
 
     private void setSelectBtn(int i) {
-        spt_btn_port = i + 1;
+        spt_btn_port = i;
         ViewInit(i);
 
     }

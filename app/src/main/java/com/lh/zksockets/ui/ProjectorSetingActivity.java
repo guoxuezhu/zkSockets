@@ -15,8 +15,12 @@ import com.lh.zksockets.adapter.SelectAdapter;
 import com.lh.zksockets.adapter.SelectChazuoAdapter;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
+import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Projector;
+import com.lh.zksockets.data.model.SerialCommand;
+import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.SerialPortUtil;
 
@@ -30,13 +34,6 @@ import butterknife.OnClick;
 public class ProjectorSetingActivity extends BaseActivity {
 
 
-    @BindView(R.id.radio_btn_1)
-    RadioButton radio_btn_1;
-    @BindView(R.id.radio_btn_2)
-    RadioButton radio_btn_2;
-
-    @BindView(R.id.spinner_serial_port)
-    Spinner spinner_serial_port;
     @BindView(R.id.spinnerBaudRate)
     Spinner spinnerBaudRate;
     @BindView(R.id.spinnerCheckoutBit)
@@ -45,8 +42,11 @@ public class ProjectorSetingActivity extends BaseActivity {
     Spinner spinnerDataBit;
     @BindView(R.id.spinnerStopBit)
     Spinner spinnerStopBit;
-    @BindView(R.id.spinnerTyep)
-    Spinner spinnerTyep;
+
+    @BindView(R.id.tyj_binary_1)
+    RadioButton tyj_binary_1;
+    @BindView(R.id.tyj_binary_2)
+    RadioButton tyj_binary_2;
 
 
     @BindView(R.id.et_open_command)
@@ -78,6 +78,8 @@ public class ProjectorSetingActivity extends BaseActivity {
     private int selectDataBitId;
     private int selectStopBitId;
     private int selectTyepId;
+    private SerialPortDataDao serialPortDataDao;
+    private SerialCommandDao serialCommandDao;
 
 
     @Override
@@ -85,86 +87,70 @@ public class ProjectorSetingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projector_seting);
         ButterKnife.bind(this);
-        radio_btn_1.setChecked(true);
-        radio_btn_2.setChecked(false);
 
-        serialPortInitView();
         baudRateInitView();
         checkoutBitInitView();
         dataBitInitView();
         stopBitInitView();
-        typeInitView();
 
 
-        projectorDao = MyApplication.getDaoSession().getProjectorDao();
-        if (projectorDao.loadAll().size() != 0) {
-            if (projectorDao.load((long) 1) != null) {
-                setViewInit(projectorDao.load((long) 1));
-            } else if (projectorDao.load((long) 2) != null) {
-                radio_btn_1.setChecked(false);
-                radio_btn_2.setChecked(true);
-                setViewInit(projectorDao.load((long) 2));
+//        projectorDao = MyApplication.getDaoSession().getProjectorDao();
+//        if (projectorDao.loadAll().size() != 0) {
+//            if (projectorDao.load((long) 1) != null) {
+//                setViewInit(projectorDao.load((long) 1));
+//            } else if (projectorDao.load((long) 2) != null) {
+//                radio_btn_1.setChecked(false);
+//                radio_btn_2.setChecked(true);
+//                setViewInit(projectorDao.load((long) 2));
+//            }
+//        }
+
+
+        serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
+        serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+
+        List<SerialPortData> serialPortDatas = serialPortDataDao.queryBuilder()
+                .where(SerialPortDataDao.Properties.Id.eq(1))
+                .list();
+
+
+        if (serialPortDatas.size() == 0) {
+            serialPortDataDao.insert(new SerialPortData((long) 1, "串口1", "投影机", 2,
+                    "9600", 0, "无", 0, "8", 0, "1", 10));
+
+
+            for (int j = 1; j < 5; j++) {
+                serialCommandDao.insert(new SerialCommand(Long.valueOf(1 + "" + j), 1, j, "1-" + 1 + "-" + j, "", ""));
             }
-        }
 
-        ELog.i("=========vvvv========" + projectorDao.loadAll().toString());
+        }
+        setInitView(serialPortDataDao.load((long) 1));
+
+        ELog.i("=========serialPortDataDao========" + serialPortDataDao.loadAll().toString());
+        ELog.i("=========serialCommandDao========" + serialCommandDao.loadAll().toString());
 
     }
 
+    private void setInitView(SerialPortData serialPortData) {
+        spinnerBaudRate.setSelection(serialPortData.baudRateId);
+        spinnerCheckoutBit.setSelection(serialPortData.checkoutBitId);
+        spinnerDataBit.setSelection(serialPortData.dataBitId);
+        spinnerStopBit.setSelection(serialPortData.stopBitId);
 
 
-
-    private void setViewInit(Projector projector) {
-        if (projector != null) {
-            spinner_serial_port.setSelection(projector.serialPortId);
-            spinnerBaudRate.setSelection(projector.baudRateId);
-            spinnerCheckoutBit.setSelection(projector.checkoutBitId);
-            spinnerDataBit.setSelection(projector.dataBitId);
-            spinnerStopBit.setSelection(projector.stopBitId);
-            spinnerTyep.setSelection(projector.typeId);
-
-            et_open_command.setText(projector.openCommand);
-            et_closed_command.setText(projector.closedCommand);
-            et_VGA_command.setText(projector.VGACommand);
-            et_HDMI_command.setText(projector.HDMICommand);
+        if (serialPortData.jinZhi == 10) {
+            tyj_binary_1.setChecked(true);
         } else {
-            spinner_serial_port.setSelection(0);
-            spinnerBaudRate.setSelection(0);
-            spinnerCheckoutBit.setSelection(0);
-            spinnerDataBit.setSelection(0);
-            spinnerStopBit.setSelection(0);
-            spinnerTyep.setSelection(0);
-
-            et_open_command.setText("");
-            et_closed_command.setText("");
-            et_VGA_command.setText("");
-            et_HDMI_command.setText("");
+            tyj_binary_2.setChecked(true);
         }
 
+//
+        et_open_command.setText(serialCommandDao.load((long) 11).commandStr);
+        et_closed_command.setText(serialCommandDao.load((long) 12).commandStr);
+        et_VGA_command.setText(serialCommandDao.load((long) 13).commandStr);
+        et_HDMI_command.setText(serialCommandDao.load((long) 14).commandStr);
     }
 
-    private void typeInitView() {
-        typeList = new ArrayList<>();
-        typeList.add("其它");
-        typeList.add("PLC-XU35");
-        typeList.add("投影机类型1");
-        typeList.add("投影机类型2");
-
-        spinnerTyep.setAdapter(new SelectAdapter(this, typeList));
-        spinnerTyep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectTyep = typeList.get(position);
-                selectTyepId = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
 
     private void stopBitInitView() {
         stopBitList = SerialPortUtil.getStopBitDatas();
@@ -238,61 +224,31 @@ public class ProjectorSetingActivity extends BaseActivity {
         });
     }
 
-    private void serialPortInitView() {
-        serialPortList = SerialPortUtil.getSerialPortNumDatas();
-        spinner_serial_port.setAdapter(new SelectAdapter(this, serialPortList));
-        spinner_serial_port.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectSerialPort = serialPortList.get(position);
-                selectSerialPortId = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    @OnClick(R.id.radio_btn_1)
-    public void radio_btn_1() {
-        radio_btn_1.setChecked(true);
-        radio_btn_2.setChecked(false);
-        setViewInit(projectorDao.load((long) 1));
-    }
-
-    @OnClick(R.id.radio_btn_2)
-    public void radio_btn_2() {
-        radio_btn_1.setChecked(false);
-        radio_btn_2.setChecked(true);
-        setViewInit(projectorDao.load((long) 2));
-    }
 
     @OnClick(R.id.btn_projector_ok)
     public void btn_projector_ok() {
 
-        int deviceId = 0;
-        String name = "";
-        if (radio_btn_1.isChecked()) {
-            deviceId = 1;
-            name = "投影机一";
+        if (tyj_binary_1.isChecked()) {
+            serialPortDataDao.update(new SerialPortData((long) 1, "串口1", "投影机",
+                    selectBaudRateId, selectBaudRate, selectCheckoutBitId, selectCheckoutBit, selectDataBitId,
+                    selectDataBit, selectStopBitId, selectStopBit, 10));
+        } else {
+            serialPortDataDao.update(new SerialPortData((long) 1, "串口1", "投影机",
+                    selectBaudRateId, selectBaudRate, selectCheckoutBitId, selectCheckoutBit, selectDataBitId,
+                    selectDataBit, selectStopBitId, selectStopBit, 16));
         }
 
-        if (radio_btn_2.isChecked()) {
-            deviceId = 2;
-            name = "投影机二";
-        }
+        serialCommandDao.update(new SerialCommand(Long.valueOf(11), 1, 1, "1-1-1",
+                "开投影机命令", et_open_command.getText().toString()));
 
-        if (projectorDao.load((long) deviceId) != null) {
-            projectorDao.deleteByKey((long) deviceId);
-        }
+        serialCommandDao.update(new SerialCommand(Long.valueOf(12), 1, 2, "1-1-2",
+                "关投影机命令", et_closed_command.getText().toString()));
 
+        serialCommandDao.update(new SerialCommand(Long.valueOf(13), 1, 3, "1-1-3",
+                "切换到VGA", et_VGA_command.getText().toString()));
 
-        projectorDao.insert(new Projector((long) deviceId, name, selectSerialPort, selectSerialPortId, selectBaudRate,
-                selectBaudRateId, selectCheckoutBit, selectCheckoutBitId, selectDataBit, selectDataBitId, selectStopBit,
-                selectStopBitId, selectTyep, selectTyepId, et_open_command.getText().toString(),
-                et_closed_command.getText().toString(), et_VGA_command.getText().toString(), et_HDMI_command.getText().toString()));
+        serialCommandDao.update(new SerialCommand(Long.valueOf(14), 1, 4, "1-1-4",
+                "切换到HDMI", et_HDMI_command.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
 

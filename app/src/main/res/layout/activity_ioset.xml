@@ -32,83 +32,40 @@
     </RelativeLayout>
 
 
-
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_900"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_60"
-        android:background="@drawable/layout_stroke_bg"
+        android:layout_marginTop="@dimen/dp_50"
         android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="IO口1"
-                android:textSize="@dimen/text_size_20" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#878C91" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="IO口2"
-                android:textSize="@dimen/text_size_20" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#878C91" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="IO口3"
-                android:textSize="@dimen/text_size_20" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#878C91" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="IO口4"
-                android:textSize="@dimen/text_size_20" />
-
-        </LinearLayout>
-
-        <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#878C91" />
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
+            android:background="@drawable/layout_stroke_bg"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="报警1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -122,6 +79,36 @@
                     android:textOn="高" />
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <Spinner
+                android:id="@+id/bj_tyep_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:dropDownVerticalOffset="40dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/layout_stroke_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="报警2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
 
             <View
                 android:layout_width="1dp"
@@ -129,9 +116,11 @@
                 android:background="#878C91" />
 
 
+
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -145,6 +134,36 @@
                     android:textOn="高" />
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <Spinner
+                android:id="@+id/bj_tyep_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:dropDownVerticalOffset="40dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/layout_stroke_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="报警3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
 
             <View
                 android:layout_width="1dp"
@@ -152,9 +171,11 @@
                 android:background="#878C91" />
 
 
+
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -168,6 +189,36 @@
                     android:textOn="高" />
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <Spinner
+                android:id="@+id/bj_tyep_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:dropDownVerticalOffset="40dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/layout_stroke_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="报警4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
 
             <View
                 android:layout_width="1dp"
@@ -175,9 +226,11 @@
                 android:background="#878C91" />
 
 
+
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -191,11 +244,28 @@
                     android:textOn="高" />
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <Spinner
+                android:id="@+id/bj_tyep_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:dropDownVerticalOffset="40dp"
+                android:gravity="center_vertical" />
 
         </LinearLayout>
 
 
+
     </LinearLayout>
+
+
+
+
 
 
     <Button
@@ -208,9 +278,6 @@
         android:text="保存"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_20" />
-
-
-
 
 
 </LinearLayout>
