@@ -41,6 +41,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="串口绑定位置:   串口1"
+                android:textSize="@dimen/text_size_20" />
 
             <TextView
                 android:layout_width="wrap_content"
