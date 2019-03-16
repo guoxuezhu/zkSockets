@@ -45,7 +45,9 @@ public class SplashActivity extends BaseActivity {
 
             inputStream3 = serialPort3.getInputStream();
             outputStream3 = serialPort3.getOutputStream();
-            new ReadThread().start(); //开始线程监控是否有数据要接收
+            new ReadThread1().start(); //开始线程监控是否有数据要接收
+            new ReadThread2().start(); //开始线程监控是否有数据要接收
+            new ReadThread3().start(); //开始线程监控是否有数据要接收
         } catch (IOException e) {
             ELog.e("======open_ck=====打开串口异常");
             e.printStackTrace();
@@ -58,7 +60,7 @@ public class SplashActivity extends BaseActivity {
     /**
      * 单开一线程，来读数据
      */
-    private class ReadThread extends Thread {
+    private class ReadThread1 extends Thread {
         @Override
         public void run() {
             super.run();
@@ -75,13 +77,16 @@ public class SplashActivity extends BaseActivity {
 
                         if (msg.substring(0, 1).equals("1")) {
                             ELog.i("========串口指令======");
-                            getCKML();
+                            getCKMLto2();
 
 
                         } else if (msg.substring(0, 1).equals("2")) {
                             ELog.i("========io口指令======");
-                        } else {
+                        } else if (msg.substring(0, 1).equals("3")) {
                             ELog.i("========继电器指令======");
+                        } else {
+                            ELog.i("========视频指令======");
+                            getCKMLto3();
                         }
                     }
                 }
@@ -92,10 +97,82 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
-    private void getCKML() {
-        sendSerialPortData1("串口指令");
+
+    private class ReadThread2 extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            //判断进程是否在运行，更安全的结束进程
+            byte[] buffer = new byte[1024];
+            int size; //读取数据的大小
+            try {
+                while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
+                    if (size > 0) {
+                        String msg = new String(buffer, 0, size);
+                        ELog.i("=========run: 接收到了数据=======" + msg);
+                        ELog.i("=========run: 接收到了数据=======" + msg.substring(0, 1));
+                        ELog.i("=========run: 接收到了数据大小=====" + size);
+
+                        if (msg.substring(1, 2).equals("ok")) {
+                            ELog.i("========ok======");
+                            getCKMLto1();
+
+
+                        } else {
+                            ELog.i("==============");
+                        }
+                    }
+                }
+
+            } catch (IOException e) {
+                ELog.i("=========run: 数据读取异常========" + e.toString());
+            }
+        }
     }
 
+
+    private class ReadThread3 extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            //判断进程是否在运行，更安全的结束进程
+            byte[] buffer = new byte[1024];
+            int size; //读取数据的大小
+            try {
+                while (true && (size = inputStream3.read(buffer, 0, 1024)) > 0) {
+                    if (size > 0) {
+                        String msg = new String(buffer, 0, size);
+                        ELog.i("=========run: 接收到了数据=======" + msg);
+                        ELog.i("=========run: 接收到了数据=======" + msg.substring(0, 1));
+                        ELog.i("=========run: 接收到了数据大小=====" + size);
+
+                        if (msg.substring(1, 2).equals("ok")) {
+                            ELog.i("========ok======");
+                            getCKMLto1();
+
+                        } else {
+                            ELog.i("==============");
+                        }
+                    }
+                }
+
+            } catch (IOException e) {
+                ELog.i("=========run: 数据读取异常========" + e.toString());
+            }
+        }
+    }
+
+    private void getCKMLto1() {
+        sendSerialPortData1("ok");
+    }
+
+    private void getCKMLto2() {
+        sendSerialPortData2("串口指令");
+    }
+
+    private void getCKMLto3() {
+        sendSerialPortData3("串口指令");
+    }
 
     private void sendSerialPortData1(String strDatas) {
         byte[] data = StringToBytes(strDatas);
@@ -103,6 +180,32 @@ public class SplashActivity extends BaseActivity {
             if (data.length > 0) {
                 outputStream1.write(data);
                 outputStream1.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
+    }
+
+    private void sendSerialPortData2(String strDatas) {
+        byte[] data = StringToBytes(strDatas);
+        try {
+            if (data.length > 0) {
+                outputStream2.write(data);
+                outputStream2.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
+    }
+
+    private void sendSerialPortData3(String strDatas) {
+        byte[] data = StringToBytes(strDatas);
+        try {
+            if (data.length > 0) {
+                outputStream3.write(data);
+                outputStream3.flush();
                 ELog.e("====sendSerialPort: 串口数据发送成功");
             }
         } catch (IOException e) {
@@ -119,11 +222,6 @@ public class SplashActivity extends BaseActivity {
         return bytes;
     }
 
-
-
-
-
-    
 
     @OnClick(R.id.to_login_btn)
     public void to_login_btn() {

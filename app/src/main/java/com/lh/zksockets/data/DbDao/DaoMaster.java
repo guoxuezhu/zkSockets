@@ -30,12 +30,12 @@ public class DaoMaster extends AbstractDaoMaster {
         IcCardDao.createTable(db, ifNotExists);
         IoPortDataDao.createTable(db, ifNotExists);
         IOYuanDao.createTable(db, ifNotExists);
+        JDQstatusDao.createTable(db, ifNotExists);
         LampDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         SerialCommandDao.createTable(db, ifNotExists);
         SerialPortDataDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
-        JDQstatusDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -49,12 +49,12 @@ public class DaoMaster extends AbstractDaoMaster {
         IcCardDao.dropTable(db, ifExists);
         IoPortDataDao.dropTable(db, ifExists);
         IOYuanDao.dropTable(db, ifExists);
+        JDQstatusDao.dropTable(db, ifExists);
         LampDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         SerialCommandDao.dropTable(db, ifExists);
         SerialPortDataDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
-        JDQstatusDao.dropTable(db, ifExists);
     }
 
     /**
@@ -82,12 +82,12 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(IcCardDao.class);
         registerDaoClass(IoPortDataDao.class);
         registerDaoClass(IOYuanDao.class);
+        registerDaoClass(JDQstatusDao.class);
         registerDaoClass(LampDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(SerialCommandDao.class);
         registerDaoClass(SerialPortDataDao.class);
         registerDaoClass(UsersDao.class);
-        registerDaoClass(JDQstatusDao.class);
     }
 
     public DaoSession newSession() {
