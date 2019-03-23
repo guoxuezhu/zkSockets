@@ -32,7 +32,7 @@ public class ZhongKongActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         try {
-            serialPort = new SerialPort(new File("/dev/ttyS1"), 57600, 0);
+            serialPort = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
             //inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
@@ -43,10 +43,29 @@ public class ZhongKongActivity extends BaseActivity {
     }
 
 
+
     @OnClick(R.id.btn_zk_ok)
     public void btn_zk_ok() {
-        sendSerialPortData("BB0400020" + et_zk_1.getText().toString() + "0" + et_zk_2.getText().toString() + "0055");
+//        sendSerialPortData("BB0400020" + et_zk_1.getText().toString() + "0" + et_zk_2.getText().toString() + "0055");
+
+        String msg = "{[VIDC:DT:A001]<" + et_zk_1.getText().toString() + ">}";
+        byte[] data = msg.getBytes();
+        try {
+            if (data.length > 0) {
+                outputStream.write(data);
+                outputStream.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
     }
+
+
+//    @OnClick(R.id.btn_zk_ok)
+//    public void btn_zk_ok() {
+//        sendSerialPortData("BB0400020" + et_zk_1.getText().toString() + "0" + et_zk_2.getText().toString() + "0055");
+//    }
 
     @OnClick(R.id.btn_daiji_open)
     public void btn_daiji_open() {

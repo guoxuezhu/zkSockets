@@ -1,7 +1,11 @@
 package com.lh.zksockets.utils;
 
+import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.JDQstatusDao;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +15,186 @@ import android_serialport_api.SerialPort;
 public class SerialPortUtil {
 
 
-    private static SerialPort serialPort;
-    private static OutputStream outputStream;
+    private static SerialPort serialPort1, serialPort2;
+    private static InputStream inputStream1, inputStream2;
+    private static OutputStream outputStream1, outputStream2;
+
 
     public static void open() {
+
+        if (serialPort1 != null) {
+            return;
+        }
+
         try {
-            serialPort = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
+            serialPort1 = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
+            serialPort2 = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
-            //inputStream = serialPort.getInputStream();
-            outputStream = serialPort.getOutputStream();
+            inputStream1 = serialPort1.getInputStream();
+            outputStream1 = serialPort1.getOutputStream();
+
+            inputStream2 = serialPort2.getInputStream();
+            outputStream2 = serialPort2.getOutputStream();
+
         } catch (IOException e) {
             ELog.e("======open_ck=====打开串口异常");
             e.printStackTrace();
         }
     }
 
-    public static void sendMsg(int type, String msg) {
-        ELog.d("===========串口数据发送=============" + msg);
+
+    public static void readMsg2() {
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                byte[] buffer = new byte[1024];
+                int size; //读取数据的大小
+                try {
+                    while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
+                        if (size > 0) {
+                            String msg = new String(buffer, 0, size);
+                            ELog.i("=========串口2===接收到了数据=======" + msg);
+                            if (msg.equals("{OK}")) {
+
+                            } else {
+
+                            }
+
+
+                        }
+                    }
+
+                } catch (IOException e) {
+                    ELog.i("=========run: 数据读取异常========" + e.toString());
+                }
+
+
+            }
+        }.start();
+
+    }
+
+
+
+
+
+
+
+    public static void sendMsg(byte[] data) {
+        try {
+            if (data.length > 0) {
+                outputStream2.write(data);
+                outputStream2.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
+    }
+
+
+
+
+    public static void readMsg1() {
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                byte[] buffer = new byte[1024];
+                int size; //读取数据的大小
+                try {
+                    while (true && (size = inputStream1.read(buffer, 0, 1024)) > 0) {
+                        if (size > 0) {
+                            String msg = new String(buffer, 0, size);
+                            ELog.i("=========串口1===接收到了数据=======" + msg);
+                            if (msg.length() == 4) {
+                                sendShipinType(msg);
+                            } else {
+                                if (msg.equals("1")) {
+                                    ELog.i("========串口指令======");
+                                    sendTouyingji();
+
+                                } else if (msg.equals("2")) {
+                                    ELog.i("========io口指令======");
+
+
+                                } else if (msg.equals("3")) {
+                                    ELog.i("========继电器指令======");
+                                } else if (msg.equals("4")) {
+                                    ELog.i("========继电器指令======");
+                                } else if (msg.equals("5")) {
+                                    ELog.i("========继电器指令======");
+                                } else if (msg.equals("6")) {
+                                    ELog.i("========继电器指令======");
+                                } else {
+                                    ELog.i("========视频指令======");
+                                }
+                            }
+
+
+                        }
+                    }
+
+                } catch (IOException e) {
+                    ELog.i("=========run: 数据读取异常========" + e.toString());
+                }
+
+
+            }
+        }.start();
+
+    }
+
+
+
+
+    private static byte[] StringToBytes(String str) {
+        byte[] bytes = new byte[str.length() / 2];
+        for (int i = 0; i < str.length(); i = i + 2) {
+            bytes[i / 2] = (byte) Integer.parseInt(str.substring(i, i + 2), 16);
+        }
+        return bytes;
+    }
+
+    private static void sendTouyingji() {
+
+        String msg = "{[VIDC:DT:A001]<222>}";
+        byte[] data = msg.getBytes();
+
+
+    }
+
+
+    private static void sendJidianqi() {
+        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+
+
+
+        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
+        byte[] data2 = StringToBytes("0F");
+        byte[] data3 = ">}".getBytes();
+
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+
+        sendMsg(data);
+
+    }
+
+    private static void sendShipinType(String str) {
+        if (str.substring(0,3).equals("VID")) {
+            String msg = "{[VIDC:DT:A001]<" + str.substring(3)+ ">}";
+            byte[] data = msg.getBytes();
+            sendMsg(data);
+        }
     }
 
 

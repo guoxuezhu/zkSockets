@@ -133,7 +133,7 @@ public class SocketService extends Service {
     }
 
     private void sdfsdf() {
-        SerialPortUtil.sendMsg(1, "上课");
+//        SerialPortUtil.sendMsg(1, "上课");
     }
 
 
