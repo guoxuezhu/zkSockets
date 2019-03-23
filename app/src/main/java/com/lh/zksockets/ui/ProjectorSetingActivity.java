@@ -120,7 +120,7 @@ public class ProjectorSetingActivity extends BaseActivity {
 
 
             for (int j = 1; j < 5; j++) {
-                serialCommandDao.insert(new SerialCommand(Long.valueOf(1 + "" + j), 1, j, "1-" + 1 + "-" + j, "", ""));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf(1 + "0" + j), 1, j, "1-" + 1 + "0" + j, "", ""));
             }
 
         }
@@ -145,10 +145,10 @@ public class ProjectorSetingActivity extends BaseActivity {
         }
 
 //
-        et_open_command.setText(serialCommandDao.load((long) 11).commandStr);
-        et_closed_command.setText(serialCommandDao.load((long) 12).commandStr);
-        et_VGA_command.setText(serialCommandDao.load((long) 13).commandStr);
-        et_HDMI_command.setText(serialCommandDao.load((long) 14).commandStr);
+        et_open_command.setText(serialCommandDao.load((long) 101).commandStr);
+        et_closed_command.setText(serialCommandDao.load((long) 102).commandStr);
+        et_VGA_command.setText(serialCommandDao.load((long) 103).commandStr);
+        et_HDMI_command.setText(serialCommandDao.load((long) 104).commandStr);
     }
 
 
@@ -238,16 +238,16 @@ public class ProjectorSetingActivity extends BaseActivity {
                     selectDataBit, selectStopBitId, selectStopBit, 16));
         }
 
-        serialCommandDao.update(new SerialCommand(Long.valueOf(11), 1, 1, "1-1-1",
+        serialCommandDao.update(new SerialCommand(Long.valueOf(101), 1, 1, "1-101",
                 "开投影机命令", et_open_command.getText().toString()));
 
-        serialCommandDao.update(new SerialCommand(Long.valueOf(12), 1, 2, "1-1-2",
+        serialCommandDao.update(new SerialCommand(Long.valueOf(102), 1, 2, "1-102",
                 "关投影机命令", et_closed_command.getText().toString()));
 
-        serialCommandDao.update(new SerialCommand(Long.valueOf(13), 1, 3, "1-1-3",
+        serialCommandDao.update(new SerialCommand(Long.valueOf(103), 1, 3, "1-103",
                 "切换到VGA", et_VGA_command.getText().toString()));
 
-        serialCommandDao.update(new SerialCommand(Long.valueOf(14), 1, 4, "1-1-4",
+        serialCommandDao.update(new SerialCommand(Long.valueOf(104), 1, 4, "1-104",
                 "切换到HDMI", et_HDMI_command.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();

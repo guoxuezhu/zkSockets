@@ -105,8 +105,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             for (int i = 2; i < 9; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 2,
                         "9600", 0, "无", 0, "8", 0, "1", 10));
-                for (int j = 1; j < 10; j++) {
-                    serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "-" + j, "", ""));
+                for (int j = 1; j < 11; j++) {
+                    if (j >= 10) {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", ""));
+                    } else {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", ""));
+                    }
                 }
             }
         }

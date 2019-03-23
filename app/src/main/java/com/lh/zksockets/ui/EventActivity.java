@@ -2,35 +2,32 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.EventBigAdapter;
-import com.lh.zksockets.data.DbDao.EventBigDao;
-import com.lh.zksockets.data.DbDao.LampDao;
-import com.lh.zksockets.data.model.EventBase;
-import com.lh.zksockets.data.model.EventBig;
+import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.utils.ELog;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EventActivity extends BaseActivity implements EventBigAdapter.CallBack {
+public class EventActivity extends BaseActivity {
 
-    @BindView(R.id.event_recyclerView)
-    RecyclerView event_recyclerView;
+    @BindView(R.id.event_et_1)
+    EditText event_et_1;
+    @BindView(R.id.event_et_2)
+    EditText event_et_2;
+    @BindView(R.id.event_et_3)
+    EditText event_et_3;
+    @BindView(R.id.event_et_4)
+    EditText event_et_4;
 
-    private List<EventBase> eventBases = new ArrayList<EventBase>();
-    private List<EventBig> eventBigs = new ArrayList<EventBig>();
-    private EventBigAdapter eventBigAdapter;
-    private EventBigDao eventBigDao;
+
+    private MLsListsDao mLsListsDao;
 
 
     @Override
@@ -39,63 +36,36 @@ public class EventActivity extends BaseActivity implements EventBigAdapter.CallB
         setContentView(R.layout.activity_event);
         ButterKnife.bind(this);
 
-        eventBigDao = MyApplication.getDaoSession().getEventBigDao();
+        mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+        if (mLsListsDao.loadAll().size() == 0) {
+            mLsListsDao.insert(new MLsLists((long) 1, "锁定1", ""));
+            mLsListsDao.insert(new MLsLists((long) 2, "锁定2", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "锁定3", ""));
+            mLsListsDao.insert(new MLsLists((long) 4, "锁定4", ""));
+        }
+
+
         DataInit();
-        initRcyclerView();
 
     }
 
     private void DataInit() {
-        if (eventBigDao.loadAll().size() == 0) {
-            eventBases.add(new EventBase(1, (long) 1, "开投影机一", 1, false, 0));
-            eventBases.add(new EventBase(1, (long) 2, "关投影机一", 0, false, 0));
-            eventBases.add(new EventBase(1, (long) 3, "开投影机二", 1, false, 0));
-            eventBases.add(new EventBase(1, (long) 4, "关投影机二", 0, false, 0));
-
-
-            LampDao lampDao = MyApplication.getDaoSession().getLampDao();
-            if (lampDao.loadAll().size() != 0) {
-                for (int i = 0; i < lampDao.loadAll().size(); i++) {
-                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "开灯(" + lampDao.loadAll().get(i).name + ")", 1, false, 0));
-                    eventBases.add(new EventBase(2, lampDao.loadAll().get(i).id, "关灯(" + lampDao.loadAll().get(i).name + ")", 0, false, 0));
-                }
-            }
-
-
-            Gson gson = new Gson();
-            String eventBasesJsonStr = gson.toJson(eventBases);
-
-            eventBigDao.insert(new EventBig((long) 1, "上课", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 2, "课间休息", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 3, "下课", "", "", eventBasesJsonStr));
-            eventBigDao.insert(new EventBig((long) 4, "锁定", "", "", eventBasesJsonStr));
-        }
-
-        ELog.i("=======eventBigDao=======" + eventBigDao.loadAll().toString());
+        event_et_1.setText(mLsListsDao.load((long) 1).strMLs);
+        event_et_2.setText(mLsListsDao.load((long) 2).strMLs);
+        event_et_3.setText(mLsListsDao.load((long) 3).strMLs);
+        event_et_4.setText(mLsListsDao.load((long) 4).strMLs);
+        ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
     }
 
-    private void initRcyclerView() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        event_recyclerView.setLayoutManager(manager);
-        eventBigAdapter = new EventBigAdapter(this, eventBigDao.loadAll(), this);
-        event_recyclerView.setAdapter(eventBigAdapter);
-    }
 
-    @Override
-    public void onClickItem(EventBig item) {
-        Intent intent = new Intent(this, EventSelectActivity.class);
-        intent.putExtra("eventBigId", item.id);
-        intent.putExtra("eventBases", item.eventBaseString);
-        startActivity(intent);
-        finish();
-    }
-
-    @OnClick(R.id.event_reset_btn)
-    public void event_reset_btn() {
-        eventBigDao.deleteAll();
-        DataInit();
-        eventBigAdapter.setData(eventBigDao.loadAll());
+    @OnClick(R.id.evbtn_ok)
+    public void evbtn_ok() {
+        mLsListsDao.update(new MLsLists((long) 1, "锁定1", event_et_1.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2, "锁定2", event_et_2.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3, "锁定3", event_et_3.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 4, "锁定4", event_et_4.getText().toString()));
+        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.event_btn_back)

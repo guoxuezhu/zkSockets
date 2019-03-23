@@ -2,6 +2,9 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
+import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.model.SerialCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,11 +81,6 @@ public class SerialPortUtil {
     }
 
 
-
-
-
-
-
     public static void sendMsg(byte[] data) {
         try {
             if (data.length > 0) {
@@ -94,8 +92,6 @@ public class SerialPortUtil {
             ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
         }
     }
-
-
 
 
     public static void readMsg1() {
@@ -117,14 +113,15 @@ public class SerialPortUtil {
                             } else {
                                 if (msg.equals("1")) {
                                     ELog.i("========串口指令======");
-                                    sendTouyingji();
+                                    makeML(Long.valueOf(msg));
 
                                 } else if (msg.equals("2")) {
                                     ELog.i("========io口指令======");
-
+                                    makeML(Long.valueOf(msg));
 
                                 } else if (msg.equals("3")) {
                                     ELog.i("========继电器指令======");
+                                    makeML(Long.valueOf(msg));
                                 } else if (msg.equals("4")) {
                                     ELog.i("========继电器指令======");
                                 } else if (msg.equals("5")) {
@@ -151,8 +148,6 @@ public class SerialPortUtil {
     }
 
 
-
-
     private static byte[] StringToBytes(String str) {
         byte[] bytes = new byte[str.length() / 2];
         for (int i = 0; i < str.length(); i = i + 2) {
@@ -161,18 +156,67 @@ public class SerialPortUtil {
         return bytes;
     }
 
-    private static void sendTouyingji() {
+    private static void makeML(Long id) {
+        MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+        String strMls = mLsListsDao.load(id).strMLs;
 
-        String msg = "{[VIDC:DT:A001]<222>}";
-        byte[] data = msg.getBytes();
+        if (strMls.length() != 0) {
 
+            String[] mls = strMls.split(",");
+
+            for (int i = 0; i < mls.length; i++) {
+                ELog.i("========11111111========" + mls[i]);
+
+                if (mls[i].substring(0, 1).equals("1")) {
+
+
+                    doSerialPort(mls[i]);
+
+                } else if (mls[i].substring(0, 1).equals("2")) {
+
+                } else if (mls[i].substring(0, 1).equals("3")) {
+
+                } else if (mls[i].substring(0, 1).equals("4")) {
+
+                } else if (mls[i].substring(0, 1).equals("5")) {
+
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+
+    private static void doSerialPort(String str) {
+        SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+
+        SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
+
+        ELog.i("========spML========" + spML.toString());
+
+        byte[] data1 = "{[COM1:DT:A003]<".getBytes();
+        byte[] data2 = StringToBytes("E050D0");
+        byte[] data3 = ">}".getBytes();
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+
+
+
+        sendMsg(data);
 
     }
 
 
     private static void sendJidianqi() {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-
 
 
         byte[] data1 = "{[REY0:DT:H001]<".getBytes();
@@ -190,8 +234,8 @@ public class SerialPortUtil {
     }
 
     private static void sendShipinType(String str) {
-        if (str.substring(0,3).equals("VID")) {
-            String msg = "{[VIDC:DT:A001]<" + str.substring(3)+ ">}";
+        if (str.substring(0, 3).equals("VID")) {
+            String msg = "{[VIDC:DT:A001]<" + str.substring(3) + ">}";
             byte[] data = msg.getBytes();
             sendMsg(data);
         }
