@@ -300,6 +300,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             serialCommands.get(j).setJinZhi(jinzhi);
             serialCommandDao.update(serialCommands.get(j));
         }
+
+        //String spStr = selectBaudRate + "," + selectCheckoutBit + "," + selectDataBit + "," + selectStopBit;
+        String spStr = selectBaudRate + ",n,8,1";
+        String msg = "{[COM" + spt_btn_port + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+        byte[] data = msg.getBytes();
+        SerialPortUtil.sendMsg(data);
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

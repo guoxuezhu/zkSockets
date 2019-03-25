@@ -251,8 +251,12 @@ public class ProjectorSetingActivity extends BaseActivity {
                 "切换到HDMI", et_HDMI_command.getText().toString(), jinzhi));
 
 
+        //String spStr = selectBaudRate + "," + selectCheckoutBit + "," + selectDataBit + "," + selectStopBit;
+        String spStr = selectBaudRate + ",n,8,1";
+        String msg = "{[COM" + 1 + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+        byte[] data = msg.getBytes();
+        SerialPortUtil.sendMsg(data);
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-
 
     }
 

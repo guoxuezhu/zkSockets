@@ -114,8 +114,6 @@ public class SerialPortUtil {
                             } else {
                                 makeML(Long.valueOf(msg));
                             }
-
-
                         }
                     }
 
@@ -372,9 +370,11 @@ public class SerialPortUtil {
 
     public static List<String> getCheckoutBitDatas() {
         List<String> checkoutBitList = new ArrayList<>();
-        checkoutBitList.add("无");
-        checkoutBitList.add("奇");
-        checkoutBitList.add("偶");
+        checkoutBitList.add("NONE");
+        checkoutBitList.add("ODD");
+        checkoutBitList.add("EVEN");
+        checkoutBitList.add("MAAR");
+        checkoutBitList.add("SPACE");
         return checkoutBitList;
     }
 
