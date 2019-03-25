@@ -1,9 +1,11 @@
 package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.SerialCommand;
 
@@ -158,9 +160,9 @@ public class SerialPortUtil {
                     } else if (mls[i].substring(0, 1).equals("2")) {
                         doJDQ(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("3")) {
-
+                        doIO(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("4")) {
-
+                        doDanger(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("5")) {
 
                     }
@@ -173,6 +175,64 @@ public class SerialPortUtil {
         }
 
 
+    }
+
+    private static void doDanger(String ml) {
+        
+    }
+
+    private static void doIO(String ml) {
+        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
+        if (ioPortDataDao.loadAll().size() == 0) {
+            return;
+        }
+        IoPortData ioPortData = ioPortDataDao.load((long) 1);
+        ELog.i("========ioPortData========" + ioPortData.toString());
+
+        String status = "";
+        if (ml.substring(2, 3).equals("1")) {
+            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ml.substring(4);
+        } else if (ml.substring(2, 3).equals("2")) {
+            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ml.substring(4) + "" + ioPortData.io1;
+        } else if (ml.substring(2, 3).equals("3")) {
+            status = ioPortData.io4 + "" + ml.substring(4) + "" + ioPortData.io2 + "" + ioPortData.io1;
+        } else if (ml.substring(2, 3).equals("4")) {
+            status = ml.substring(4) + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ioPortData.io1;
+        } else {
+            return;
+        }
+
+        ELog.i("========十六进制字符串==11======" + status);
+        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+        ELog.i("========十六进制字符串========" + hex);
+        if (hex.length() == 1) {
+            hex = "0" + hex;
+        }
+
+        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
+        byte[] data2 = StringToBytes(hex);
+        if (data2 == null) {
+            return;
+        }
+        byte[] data3 = ">}".getBytes();
+
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        sendMsg(data);
+
+        if (ml.substring(2, 3).equals("1")) {
+            ioPortDataDao.update(new IoPortData((long) 1, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
+        } else if (ml.substring(2, 3).equals("2")) {
+            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
+        } else if (ml.substring(2, 3).equals("3")) {
+            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
+        } else if (ml.substring(2, 3).equals("4")) {
+            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
+        }
+        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 1).toString());
     }
 
     private static void doJDQ(String ml) {
