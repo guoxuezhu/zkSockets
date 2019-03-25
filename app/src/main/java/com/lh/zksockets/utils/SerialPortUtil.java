@@ -149,43 +149,47 @@ public class SerialPortUtil {
 
 
     private static byte[] StringToBytes(String str) {
-        byte[] bytes = new byte[str.length() / 2];
-        for (int i = 0; i < str.length(); i = i + 2) {
-            bytes[i / 2] = (byte) Integer.parseInt(str.substring(i, i + 2), 16);
+        if (str.length() % 2 == 1) {   //是奇数
+            return null;
         }
-        return bytes;
+        try {
+            byte[] bytes = new byte[str.length() / 2];
+            for (int i = 0; i < str.length(); i = i + 2) {
+                bytes[i / 2] = (byte) Integer.parseInt(str.substring(i, i + 2), 16);
+            }
+            return bytes;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     private static void makeML(Long id) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        String strMls = mLsListsDao.load(id).strMLs;
+        if (mLsListsDao.loadAll().size() != 0) {
+            String strMls = mLsListsDao.load(id).strMLs;
+            if (strMls.length() != 0) {
+                String[] mls = strMls.split(",");
+                for (int i = 0; i < mls.length; i++) {
+                    ELog.i("========11111111========" + mls[i]);
 
-        if (strMls.length() != 0) {
+                    if (mls[i].substring(0, 1).equals("1")) {
+                        doSerialPort(mls[i]);
+                    } else if (mls[i].substring(0, 1).equals("2")) {
 
-            String[] mls = strMls.split(",");
+                    } else if (mls[i].substring(0, 1).equals("3")) {
 
-            for (int i = 0; i < mls.length; i++) {
-                ELog.i("========11111111========" + mls[i]);
+                    } else if (mls[i].substring(0, 1).equals("4")) {
 
-                if (mls[i].substring(0, 1).equals("1")) {
+                    } else if (mls[i].substring(0, 1).equals("5")) {
 
+                    }
 
-                    doSerialPort(mls[i]);
-
-                } else if (mls[i].substring(0, 1).equals("2")) {
-
-                } else if (mls[i].substring(0, 1).equals("3")) {
-
-                } else if (mls[i].substring(0, 1).equals("4")) {
-
-                } else if (mls[i].substring(0, 1).equals("5")) {
 
                 }
 
 
             }
-
-
         }
 
 
@@ -198,29 +202,56 @@ public class SerialPortUtil {
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
 
         ELog.i("========spML========" + spML.toString());
+        if (spML.commandStr.length() != 0) {
+            byte[] data = null;
+            if (spML.jinZhi == 16) {
+                String msg1 = "";
+                if (spML.commandStr.length() < 10) {
+                    msg1 = "{[COM" + spML.sId + ":DT:H00" + spML.commandStr.length() + "]<";
+                } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
+                    msg1 = "{[COM" + spML.sId + ":DT:H0" + spML.commandStr.length() + "]<";
+                } else if (spML.commandStr.length() >= 100) {
+                    msg1 = "{[COM" + spML.sId + ":DT:H" + spML.commandStr.length() + "]<";
+                }
 
-        byte[] data1 = "{[COM1:DT:A003]<".getBytes();
-        byte[] data2 = StringToBytes("E050D0");
-        byte[] data3 = ">}".getBytes();
-        byte[] data = new byte[data1.length + data2.length + data3.length];
+                byte[] data1 = msg1.getBytes();
+                byte[] data2 = StringToBytes(spML.commandStr);
+                if (data2 == null) {
+                    return;
+                }
+                byte[] data3 = ">}".getBytes();
+                data = new byte[data1.length + data2.length + data3.length];
 
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+                System.arraycopy(data1, 0, data, 0, data1.length);
+                System.arraycopy(data2, 0, data, data1.length, data2.length);
+                System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+
+            } else {
+                String msg = "";
+                if (spML.commandStr.length() < 10) {
+                    msg = "{[COM" + spML.sId + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
+                    msg = "{[COM" + spML.sId + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                } else if (spML.commandStr.length() >= 100) {
+                    msg = "{[COM" + spML.sId + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                }
+                data = msg.getBytes();
+            }
+            sendMsg(data);
 
 
-
-        sendMsg(data);
+        }
 
     }
 
 
     private static void sendJidianqi() {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-
-
         byte[] data1 = "{[REY0:DT:H001]<".getBytes();
         byte[] data2 = StringToBytes("0F");
+        if (data2 == null) {
+            return;
+        }
         byte[] data3 = ">}".getBytes();
 
         byte[] data = new byte[data1.length + data2.length + data3.length];

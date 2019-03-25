@@ -20,15 +20,18 @@ public class SerialCommand {
 
     public String commandStr;
 
-    @Generated(hash = 1701474513)
+    public int jinZhi;//10 进制   16 进制
+
+    @Generated(hash = 1287697781)
     public SerialCommand(Long sKey, int sId, int mlId, String commandId,
-            String commandName, String commandStr) {
+            String commandName, String commandStr, int jinZhi) {
         this.sKey = sKey;
         this.sId = sId;
         this.mlId = mlId;
         this.commandId = commandId;
         this.commandName = commandName;
         this.commandStr = commandStr;
+        this.jinZhi = jinZhi;
     }
 
     @Generated(hash = 2087779334)
@@ -44,6 +47,7 @@ public class SerialCommand {
                 ", commandId='" + commandId + '\'' +
                 ", commandName='" + commandName + '\'' +
                 ", commandStr='" + commandStr + '\'' +
+                ", jinZhi=" + jinZhi +
                 '}';
     }
 
@@ -93,5 +97,13 @@ public class SerialCommand {
 
     public void setCommandStr(String commandStr) {
         this.commandStr = commandStr;
+    }
+
+    public int getJinZhi() {
+        return this.jinZhi;
+    }
+
+    public void setJinZhi(int jinZhi) {
+        this.jinZhi = jinZhi;
     }
 }

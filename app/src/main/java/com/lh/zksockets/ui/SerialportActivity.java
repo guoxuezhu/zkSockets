@@ -107,9 +107,9 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                         "9600", 0, "无", 0, "8", 0, "1", 10));
                 for (int j = 1; j < 11; j++) {
                     if (j >= 10) {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", ""));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
                     } else {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", ""));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
                     }
                 }
             }
@@ -284,20 +284,20 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
     @OnClick(R.id.sport_btn_ok)
     public void sport_btn_ok() {
-
+        int jinzhi = 0;
         if (radio_binary_1.isChecked()) {
-            serialPortDataDao.update(new SerialPortData((long) spt_btn_port, "串口" + spt_btn_port,
-                    et_device_name.getText().toString(), selectBaudRateId, selectBaudRate,
-                    selectCheckoutBitId, selectCheckoutBit, selectDataBitId, selectDataBit,
-                    selectStopBitId, selectStopBit, 10));
+            jinzhi = 10;
         } else {
-            serialPortDataDao.update(new SerialPortData((long) spt_btn_port, "串口" + spt_btn_port,
-                    et_device_name.getText().toString(), selectBaudRateId, selectBaudRate,
-                    selectCheckoutBitId, selectCheckoutBit, selectDataBitId, selectDataBit,
-                    selectStopBitId, selectStopBit, 16));
+            jinzhi = 16;
         }
 
+        serialPortDataDao.update(new SerialPortData((long) spt_btn_port, "串口" + spt_btn_port,
+                et_device_name.getText().toString(), selectBaudRateId, selectBaudRate,
+                selectCheckoutBitId, selectCheckoutBit, selectDataBitId, selectDataBit,
+                selectStopBitId, selectStopBit, jinzhi));
+
         for (int j = 0; j < serialCommands.size(); j++) {
+            serialCommands.get(j).setJinZhi(jinzhi);
             serialCommandDao.update(serialCommands.get(j));
         }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();

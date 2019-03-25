@@ -30,6 +30,7 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
         public final static Property CommandId = new Property(3, String.class, "commandId", false, "COMMAND_ID");
         public final static Property CommandName = new Property(4, String.class, "commandName", false, "COMMAND_NAME");
         public final static Property CommandStr = new Property(5, String.class, "commandStr", false, "COMMAND_STR");
+        public final static Property JinZhi = new Property(6, int.class, "jinZhi", false, "JIN_ZHI");
     }
 
 
@@ -50,7 +51,8 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
                 "\"ML_ID\" INTEGER NOT NULL ," + // 2: mlId
                 "\"COMMAND_ID\" TEXT," + // 3: commandId
                 "\"COMMAND_NAME\" TEXT," + // 4: commandName
-                "\"COMMAND_STR\" TEXT);"); // 5: commandStr
+                "\"COMMAND_STR\" TEXT," + // 5: commandStr
+                "\"JIN_ZHI\" INTEGER NOT NULL );"); // 6: jinZhi
     }
 
     /** Drops the underlying database table. */
@@ -84,6 +86,7 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
         if (commandStr != null) {
             stmt.bindString(6, commandStr);
         }
+        stmt.bindLong(7, entity.getJinZhi());
     }
 
     @Override
@@ -111,6 +114,7 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
         if (commandStr != null) {
             stmt.bindString(6, commandStr);
         }
+        stmt.bindLong(7, entity.getJinZhi());
     }
 
     @Override
@@ -126,7 +130,8 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
             cursor.getInt(offset + 2), // mlId
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // commandId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // commandName
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // commandStr
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // commandStr
+            cursor.getInt(offset + 6) // jinZhi
         );
         return entity;
     }
@@ -139,6 +144,7 @@ public class SerialCommandDao extends AbstractDao<SerialCommand, Long> {
         entity.setCommandId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setCommandName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setCommandStr(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setJinZhi(cursor.getInt(offset + 6));
      }
     
     @Override
