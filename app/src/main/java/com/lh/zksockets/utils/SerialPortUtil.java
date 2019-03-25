@@ -4,6 +4,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.SerialCommand;
 
 import java.io.File;
@@ -111,26 +112,7 @@ public class SerialPortUtil {
                             if (msg.length() == 4) {
                                 sendShipinType(msg);
                             } else {
-                                if (msg.equals("1")) {
-                                    ELog.i("========串口指令======");
-                                    makeML(Long.valueOf(msg));
-
-                                } else if (msg.equals("2")) {
-                                    ELog.i("========io口指令======");
-                                    makeML(Long.valueOf(msg));
-
-                                } else if (msg.equals("3")) {
-                                    ELog.i("========继电器指令======");
-                                    makeML(Long.valueOf(msg));
-                                } else if (msg.equals("4")) {
-                                    ELog.i("========继电器指令======");
-                                } else if (msg.equals("5")) {
-                                    ELog.i("========继电器指令======");
-                                } else if (msg.equals("6")) {
-                                    ELog.i("========继电器指令======");
-                                } else {
-                                    ELog.i("========视频指令======");
-                                }
+                                makeML(Long.valueOf(msg));
                             }
 
 
@@ -176,7 +158,7 @@ public class SerialPortUtil {
                     if (mls[i].substring(0, 1).equals("1")) {
                         doSerialPort(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("2")) {
-
+                        doJDQ(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("3")) {
 
                     } else if (mls[i].substring(0, 1).equals("4")) {
@@ -195,12 +177,87 @@ public class SerialPortUtil {
 
     }
 
+    private static void doJDQ(String ml) {
+        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+        if (jdqStatusDao.loadAll().size() == 0) {
+            return;
+        }
+        JDQstatus jdqStatus = jdqStatusDao.load((long) 1);
+        ELog.i("========jdqStatus========" + jdqStatus.toString());
+
+        String status = "";
+        if (ml.substring(2, 3).equals("1")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + ml.substring(4);
+        } else if (ml.substring(2, 3).equals("2")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + ml.substring(4) + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("3")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + ml.substring(4) + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("4")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + ml.substring(4)
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("5")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + ml.substring(4) + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("6")) {
+            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + ml.substring(4) + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else {
+            return;
+        }
+
+        ELog.i("========十六进制字符串==11======" + status);
+        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+        ELog.i("========十六进制字符串========" + hex);
+        if (hex.length() == 1) {
+            hex = "0" + hex;
+        }
+
+        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
+        byte[] data2 = StringToBytes(hex);
+        if (data2 == null) {
+            return;
+        }
+        byte[] data3 = ">}".getBytes();
+
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        sendMsg(data);
+
+        if (ml.substring(2, 3).equals("1")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+        } else if (ml.substring(2, 3).equals("2")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
+                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+        } else if (ml.substring(2, 3).equals("3")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
+                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+        } else if (ml.substring(2, 3).equals("4")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
+                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+        } else if (ml.substring(2, 3).equals("5")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+                    Integer.valueOf(ml.substring(4)), jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+        } else if (ml.substring(2, 3).equals("6")) {
+            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+                    jdqStatus.jdq5, Integer.valueOf(ml.substring(4)), jdqStatus.jdq7, jdqStatus.jdq8));
+        }
+        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 1).toString());
+    }
+
 
     private static void doSerialPort(String str) {
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-
+        if (serialCommandDao.loadAll().size() == 0) {
+            return;
+        }
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
-
         ELog.i("========spML========" + spML.toString());
         if (spML.commandStr.length() != 0) {
             byte[] data = null;
@@ -238,8 +295,6 @@ public class SerialPortUtil {
                 data = msg.getBytes();
             }
             sendMsg(data);
-
-
         }
 
     }

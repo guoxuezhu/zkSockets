@@ -39,7 +39,7 @@ public class EnvironmentalActivity extends BaseActivity {
 
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, 0, 0, 0, 0, 0, 0));
+            jdqStatusDao.insert(new JDQstatus((long) 1, 0, 0, 0, 0, 0, 0, 0, 0));
         }
 
         if (jdqStatusDao.loadAll().get(0).jdq1 == 1) {
@@ -126,7 +126,7 @@ public class EnvironmentalActivity extends BaseActivity {
             io6 = 0;
         }
 
-        jdqStatusDao.update(new JDQstatus((long) 1, io1, io2, io3, io4, io5, io6));
+        jdqStatusDao.update(new JDQstatus((long) 1, io1, io2, io3, io4, io5, io6, 0, 0));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

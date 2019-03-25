@@ -31,6 +31,8 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         public final static Property Jdq4 = new Property(4, int.class, "jdq4", false, "JDQ4");
         public final static Property Jdq5 = new Property(5, int.class, "jdq5", false, "JDQ5");
         public final static Property Jdq6 = new Property(6, int.class, "jdq6", false, "JDQ6");
+        public final static Property Jdq7 = new Property(7, int.class, "jdq7", false, "JDQ7");
+        public final static Property Jdq8 = new Property(8, int.class, "jdq8", false, "JDQ8");
     }
 
 
@@ -52,7 +54,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
                 "\"JDQ3\" INTEGER NOT NULL ," + // 3: jdq3
                 "\"JDQ4\" INTEGER NOT NULL ," + // 4: jdq4
                 "\"JDQ5\" INTEGER NOT NULL ," + // 5: jdq5
-                "\"JDQ6\" INTEGER NOT NULL );"); // 6: jdq6
+                "\"JDQ6\" INTEGER NOT NULL ," + // 6: jdq6
+                "\"JDQ7\" INTEGER NOT NULL ," + // 7: jdq7
+                "\"JDQ8\" INTEGER NOT NULL );"); // 8: jdq8
     }
 
     /** Drops the underlying database table. */
@@ -75,6 +79,8 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         stmt.bindLong(5, entity.getJdq4());
         stmt.bindLong(6, entity.getJdq5());
         stmt.bindLong(7, entity.getJdq6());
+        stmt.bindLong(8, entity.getJdq7());
+        stmt.bindLong(9, entity.getJdq8());
     }
 
     @Override
@@ -91,6 +97,8 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         stmt.bindLong(5, entity.getJdq4());
         stmt.bindLong(6, entity.getJdq5());
         stmt.bindLong(7, entity.getJdq6());
+        stmt.bindLong(8, entity.getJdq7());
+        stmt.bindLong(9, entity.getJdq8());
     }
 
     @Override
@@ -107,7 +115,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
             cursor.getInt(offset + 3), // jdq3
             cursor.getInt(offset + 4), // jdq4
             cursor.getInt(offset + 5), // jdq5
-            cursor.getInt(offset + 6) // jdq6
+            cursor.getInt(offset + 6), // jdq6
+            cursor.getInt(offset + 7), // jdq7
+            cursor.getInt(offset + 8) // jdq8
         );
         return entity;
     }
@@ -121,6 +131,8 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         entity.setJdq4(cursor.getInt(offset + 4));
         entity.setJdq5(cursor.getInt(offset + 5));
         entity.setJdq6(cursor.getInt(offset + 6));
+        entity.setJdq7(cursor.getInt(offset + 7));
+        entity.setJdq8(cursor.getInt(offset + 8));
      }
     
     @Override
