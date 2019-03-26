@@ -37,6 +37,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SerialPortDataDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
         MLsListsDao.createTable(db, ifNotExists);
+        DangerOutDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -57,6 +58,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SerialPortDataDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
         MLsListsDao.dropTable(db, ifExists);
+        DangerOutDao.dropTable(db, ifExists);
     }
 
     /**
@@ -91,6 +93,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(SerialPortDataDao.class);
         registerDaoClass(UsersDao.class);
         registerDaoClass(MLsListsDao.class);
+        registerDaoClass(DangerOutDao.class);
     }
 
     public DaoSession newSession() {

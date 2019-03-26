@@ -38,10 +38,10 @@ public class EventActivity extends BaseActivity {
 
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() == 0) {
-            mLsListsDao.insert(new MLsLists((long) 1, "锁定1", ""));
-            mLsListsDao.insert(new MLsLists((long) 2, "锁定2", ""));
-            mLsListsDao.insert(new MLsLists((long) 3, "锁定3", ""));
-            mLsListsDao.insert(new MLsLists((long) 4, "锁定4", ""));
+            mLsListsDao.insert(new MLsLists((long) 1, "上课", ""));
+            mLsListsDao.insert(new MLsLists((long) 2, "下课", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "自习", ""));
+            mLsListsDao.insert(new MLsLists((long) 4, "休息", ""));
         }
 
 
@@ -61,10 +61,10 @@ public class EventActivity extends BaseActivity {
 
     @OnClick(R.id.evbtn_ok)
     public void evbtn_ok() {
-        mLsListsDao.update(new MLsLists((long) 1, "锁定1", event_et_1.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 2, "锁定2", event_et_2.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 3, "锁定3", event_et_3.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 4, "锁定4", event_et_4.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1, "上课", event_et_1.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2, "下课", event_et_2.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3, "自习", event_et_3.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 4, "休息", event_et_4.getText().toString()));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

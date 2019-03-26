@@ -39,6 +39,7 @@ public class IOsetingActivity extends BaseActivity {
         ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() == 0) {
             ioPortDataDao.insert(new IoPortData((long) 1, 0, 0, 0, 0));
+            ioPortDataDao.insert(new IoPortData((long) 2, 0, 0, 0, 0));
         }
 
         if (ioPortDataDao.loadAll().get(0).io1 == 1) {

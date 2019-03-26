@@ -1,10 +1,12 @@
 package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -178,15 +180,71 @@ public class SerialPortUtil {
     }
 
     private static void doDanger(String ml) {
-        
+        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+//        if (dangerOutDao.loadAll().size() == 0) {
+//            return;
+//        }
+        DangerOut dangerOut = dangerOutDao.load((long) 2);
+        if (dangerOut == null) {
+            return;
+        }
+        ELog.i("========DangerOut========" + dangerOut.toString());
+
+        String status = "";
+        if (ml.substring(2, 3).equals("1")) {
+            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + ml.substring(4);
+        } else if (ml.substring(2, 3).equals("2")) {
+            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + ml.substring(4) + "" + dangerOut.dangerOut1;
+        } else if (ml.substring(2, 3).equals("3")) {
+            status = dangerOut.dangerOut4 + "" + ml.substring(4) + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
+        } else if (ml.substring(2, 3).equals("4")) {
+            status = ml.substring(4) + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
+        } else {
+            return;
+        }
+
+        ELog.i("========十六进制字符串==11======" + status);
+        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+        ELog.i("========十六进制字符串========" + hex);
+        if (hex.length() == 1) {
+            hex = "0" + hex;
+        }
+
+        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
+        byte[] data2 = StringToBytes(hex);
+        if (data2 == null) {
+            return;
+        }
+        byte[] data3 = ">}".getBytes();
+
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        sendMsg(data);
+
+        if (ml.substring(2, 3).equals("1")) {
+            dangerOutDao.update(new DangerOut((long) 2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut2, dangerOut.dangerOut3, dangerOut.dangerOut4));
+        } else if (ml.substring(2, 3).equals("2")) {
+            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut3, dangerOut.dangerOut4));
+        } else if (ml.substring(2, 3).equals("3")) {
+            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut4));
+        } else if (ml.substring(2, 3).equals("4")) {
+            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, dangerOut.dangerOut3, Integer.valueOf(ml.substring(4))));
+        }
+        ELog.i("========DangerOut========" + dangerOutDao.load((long) 2).toString());
     }
 
     private static void doIO(String ml) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        if (ioPortDataDao.loadAll().size() == 0) {
+//        if (ioPortDataDao.loadAll().size() == 0) {
+//            return;
+//        }
+        IoPortData ioPortData = ioPortDataDao.load((long) 2);
+        if (ioPortData == null) {
             return;
         }
-        IoPortData ioPortData = ioPortDataDao.load((long) 1);
         ELog.i("========ioPortData========" + ioPortData.toString());
 
         String status = "";
@@ -224,23 +282,26 @@ public class SerialPortUtil {
         sendMsg(data);
 
         if (ml.substring(2, 3).equals("1")) {
-            ioPortDataDao.update(new IoPortData((long) 1, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
+            ioPortDataDao.update(new IoPortData((long) 2, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
         } else if (ml.substring(2, 3).equals("2")) {
-            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
+            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
         } else if (ml.substring(2, 3).equals("3")) {
-            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
+            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
         } else if (ml.substring(2, 3).equals("4")) {
-            ioPortDataDao.update(new IoPortData((long) 1, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
+            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
         }
-        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 1).toString());
+        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 2).toString());
     }
 
     private static void doJDQ(String ml) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-        if (jdqStatusDao.loadAll().size() == 0) {
+//        if (jdqStatusDao.loadAll().size() == 0) {
+//            return;
+//        }
+        JDQstatus jdqStatus = jdqStatusDao.load((long) 2);
+        if (jdqStatus == null) {
             return;
         }
-        JDQstatus jdqStatus = jdqStatusDao.load((long) 1);
         ELog.i("========jdqStatus========" + jdqStatus.toString());
 
         String status = "";
@@ -288,34 +349,37 @@ public class SerialPortUtil {
         sendMsg(data);
 
         if (ml.substring(2, 3).equals("1")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+            jdqStatusDao.update(new JDQstatus((long) 2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
                     jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
         } else if (ml.substring(2, 3).equals("2")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
+            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
                     jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
         } else if (ml.substring(2, 3).equals("3")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
+            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
                     jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
         } else if (ml.substring(2, 3).equals("4")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
+            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
                     jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
         } else if (ml.substring(2, 3).equals("5")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
                     Integer.valueOf(ml.substring(4)), jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
         } else if (ml.substring(2, 3).equals("6")) {
-            jdqStatusDao.update(new JDQstatus((long) 1, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
                     jdqStatus.jdq5, Integer.valueOf(ml.substring(4)), jdqStatus.jdq7, jdqStatus.jdq8));
         }
-        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 1).toString());
+        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 2).toString());
     }
 
 
     private static void doSerialPort(String str) {
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        if (serialCommandDao.loadAll().size() == 0) {
+//        if (serialCommandDao.loadAll().size() == 0) {
+//            return;
+//        }
+        SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
+        if (spML == null) {
             return;
         }
-        SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
         ELog.i("========spML========" + spML.toString());
         if (spML.commandStr.length() != 0) {
             byte[] data = null;

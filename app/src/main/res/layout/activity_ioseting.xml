@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="IO 口设置"
+            android:text="IO 输出设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 

@@ -175,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="报警设置"
+                android:text="报警输入设置"
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
@@ -219,7 +219,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="音量设置"
+                android:text="报警输出设置"
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
@@ -316,7 +316,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="IO口设置"
+                android:text="IO输出设置"
                 android:textSize="@dimen/text_size_20" />
         </LinearLayout>
 

@@ -40,6 +40,7 @@ public class EnvironmentalActivity extends BaseActivity {
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
             jdqStatusDao.insert(new JDQstatus((long) 1, 0, 0, 0, 0, 0, 0, 0, 0));
+            jdqStatusDao.insert(new JDQstatus((long) 2, 0, 0, 0, 0, 0, 0, 0, 0));
         }
 
         if (jdqStatusDao.loadAll().get(0).jdq1 == 1) {
