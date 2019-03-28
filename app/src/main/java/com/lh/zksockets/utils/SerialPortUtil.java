@@ -113,9 +113,11 @@ public class SerialPortUtil {
                         if (size > 0) {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口1===接收到了数据=======" + msg);
-                            if (msg.length() == 4) {
-                                sendShipinType(msg);
-                            } else {
+                            if (msg.length() > 3) {
+                                if (msg.substring(0, 3).equals("VID")) {
+                                    sendShipinType(msg);
+                                }
+                            } else if (msg.length() > 0 && msg.length() <= 3) {
                                 makeML(Long.valueOf(msg));
                             }
                         }
@@ -151,6 +153,9 @@ public class SerialPortUtil {
     private static void makeML(Long id) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() != 0) {
+            if (mLsListsDao.load(id) == null) {
+                return;
+            }
             String strMls = mLsListsDao.load(id).strMLs;
             if (strMls.length() != 0) {
                 String[] mls = strMls.split(",");
@@ -323,6 +328,12 @@ public class SerialPortUtil {
         } else if (ml.substring(2, 3).equals("6")) {
             status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + ml.substring(4) + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
                     + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("7")) {
+            status = 0 + "" + 1 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+        } else if (ml.substring(2, 3).equals("8")) {
+            status = 1 + "" + 0 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
         } else {
             return;
         }
@@ -442,11 +453,14 @@ public class SerialPortUtil {
     }
 
     private static void sendShipinType(String str) {
-        if (str.substring(0, 3).equals("VID")) {
-            String msg = "{[VIDC:DT:A001]<" + str.substring(3) + ">}";
-            byte[] data = msg.getBytes();
-            sendMsg(data);
+        String msg = "";
+        if (str.substring(0, 4).equals("VIDA")) {
+            msg = "{[VIDC:DT:A003]<" + str.substring(4) + ">}";
+        } else if (str.substring(0, 4).equals("VIDC")) {
+            msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
         }
+        byte[] data = msg.getBytes();
+        sendMsg(data);
     }
 
 

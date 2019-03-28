@@ -32,8 +32,8 @@ import butterknife.OnClick;
 public class SerialportActivity extends BaseActivity implements SerialportAdapter.CallBack {
 
 
-    @BindView(R.id.spt_btn_2)
-    RadioButton spt_btn_2;
+    @BindView(R.id.spt_btn_1)
+    RadioButton spt_btn_1;
     @BindView(R.id.radio_binary_1)
     RadioButton radio_binary_1;
     @BindView(R.id.radio_binary_2)
@@ -90,7 +90,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         setContentView(R.layout.activity_serialport);
         ButterKnife.bind(this);
 
-        spt_btn_2.setChecked(true);
+        spt_btn_1.setChecked(true);
 
         baudRateInitView();
         checkoutBitInitView();
@@ -101,11 +101,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
 
+
         if (serialPortDataDao.loadAll().size() < 4) {
-            for (int i = 2; i < 9; i++) {
+            for (int i = 1; i < 9; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 2,
                         "9600", 0, "无", 0, "8", 0, "1", 10));
-                for (int j = 1; j < 11; j++) {
+                for (int j = 1; j < 16; j++) {
                     if (j >= 10) {
                         serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
                     } else {
@@ -117,7 +118,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
 
-        ViewInit(2);
+        ViewInit(1);
 
 
     }
@@ -239,6 +240,10 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         });
     }
 
+    @OnClick(R.id.spt_btn_1)
+    public void spt_btn_1() {
+        setSelectBtn(1);
+    }
 
     @OnClick(R.id.spt_btn_2)
     public void spt_btn_2() {

@@ -61,8 +61,9 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.base_set)
     public void base_set() {
-        startActivity(new Intent(this, BaseSetingActivity.class));
-        finish();
+//        startActivity(new Intent(this, BaseSetingActivity.class));
+//        finish();
+        startActivity(new Intent(Settings.ACTION_SETTINGS));
     }
 
     @OnClick(R.id.sets_btn)

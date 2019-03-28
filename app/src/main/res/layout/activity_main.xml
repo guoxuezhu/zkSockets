@@ -52,7 +52,8 @@
                 android:id="@+id/net_btn"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
-                android:src="@mipmap/png_3" />
+                android:src="@mipmap/png_3"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +61,8 @@
                 android:layout_marginTop="10dp"
                 android:text="网络状况"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -154,7 +156,8 @@
                 android:id="@+id/xiangdao"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
-                android:src="@mipmap/png_4" />
+                android:src="@mipmap/png_4"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,7 +165,8 @@
                 android:layout_marginTop="10dp"
                 android:text="线路安装向导"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
         </LinearLayout>
 

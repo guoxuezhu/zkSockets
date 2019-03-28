@@ -2,6 +2,7 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -24,6 +25,15 @@ public class IOsetActivity extends BaseActivity {
     Switch danger_3_gl;
     @BindView(R.id.danger_4_gl)
     Switch danger_4_gl;
+
+    @BindView(R.id.bj_event_1)
+    EditText bj_event_1;
+    @BindView(R.id.bj_event_2)
+    EditText bj_event_2;
+    @BindView(R.id.bj_event_3)
+    EditText bj_event_3;
+    @BindView(R.id.bj_event_4)
+    EditText bj_event_4;
 
 
     private IOYuanDao ioYuanDao;
