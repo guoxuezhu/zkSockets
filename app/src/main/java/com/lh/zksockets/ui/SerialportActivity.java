@@ -308,7 +308,8 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         //String spStr = selectBaudRate + "," + selectCheckoutBit + "," + selectDataBit + "," + selectStopBit;
         String spStr = selectBaudRate + ",n,8,1";
-        String msg = "{[COM" + spt_btn_port + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+        String msg = "{[COM" + (spt_btn_port - 1) + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+        ELog.i("========sport_btn_ok=====" + msg);
         byte[] data = msg.getBytes();
         SerialPortUtil.sendMsg(data);
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();

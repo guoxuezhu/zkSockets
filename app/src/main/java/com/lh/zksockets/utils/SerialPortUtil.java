@@ -396,14 +396,15 @@ public class SerialPortUtil {
             byte[] data = null;
             if (spML.jinZhi == 16) {
                 String msg1 = "";
-                if (spML.commandStr.length() < 10) {
-                    msg1 = "{[COM" + spML.sId + ":DT:H00" + spML.commandStr.length() + "]<";
-                } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
-                    msg1 = "{[COM" + spML.sId + ":DT:H0" + spML.commandStr.length() + "]<";
-                } else if (spML.commandStr.length() >= 100) {
-                    msg1 = "{[COM" + spML.sId + ":DT:H" + spML.commandStr.length() + "]<";
+                int datalength = spML.commandStr.length()/2;
+                if (datalength < 10) {
+                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H00" + datalength + "]<";
+                } else if (datalength >= 10 && datalength < 100) {
+                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H0" + datalength + "]<";
+                } else if (datalength >= 100) {
+                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H" + datalength + "]<";
                 }
-
+                ELog.i("========msg===0000000=====" + msg1);
                 byte[] data1 = msg1.getBytes();
                 byte[] data2 = StringToBytes(spML.commandStr);
                 if (data2 == null) {
@@ -419,17 +420,17 @@ public class SerialPortUtil {
             } else {
                 String msg = "";
                 if (spML.commandStr.length() < 10) {
-                    msg = "{[COM" + spML.sId + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId-1) + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
-                    msg = "{[COM" + spML.sId + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId-1) + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 } else if (spML.commandStr.length() >= 100) {
-                    msg = "{[COM" + spML.sId + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId-1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 }
+                ELog.i("========msg===111111=====" + msg);
                 data = msg.getBytes();
             }
             sendMsg(data);
         }
-
     }
 
 
