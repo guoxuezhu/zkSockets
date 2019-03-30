@@ -215,7 +215,7 @@ public class SerialPortUtil {
             hex = "0" + hex;
         }
 
-        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
+        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
         byte[] data2 = StringToBytes(hex);
         if (data2 == null) {
             return;
