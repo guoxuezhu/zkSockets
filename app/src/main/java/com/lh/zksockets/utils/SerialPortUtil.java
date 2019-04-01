@@ -20,6 +20,8 @@ import java.util.List;
 
 import android_serialport_api.SerialPort;
 
+import static java.lang.Thread.sleep;
+
 public class SerialPortUtil {
 
 
@@ -88,10 +90,12 @@ public class SerialPortUtil {
 
     public static void sendMsg(byte[] data) {
         try {
-            if (data.length > 0) {
-                outputStream2.write(data);
-                outputStream2.flush();
-                ELog.e("====sendSerialPort: 串口数据发送成功");
+            synchronized (data) {
+                if (data.length > 0) {
+                    outputStream2.write(data);
+                    outputStream2.flush();
+                    ELog.e("====sendSerialPort: 串口数据发送成功");
+                }
             }
         } catch (IOException e) {
             ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
@@ -134,7 +138,7 @@ public class SerialPortUtil {
     }
 
 
-    private static byte[] StringToBytes(String str) {
+    public static byte[] StringToBytes(String str) {
         if (str.length() % 2 == 1) {   //是奇数
             return null;
         }
@@ -186,59 +190,82 @@ public class SerialPortUtil {
 
     private static void doDanger(String ml) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-//        if (dangerOutDao.loadAll().size() == 0) {
-//            return;
-//        }
-        DangerOut dangerOut = dangerOutDao.load((long) 2);
-        if (dangerOut == null) {
-            return;
-        }
-        ELog.i("========DangerOut========" + dangerOut.toString());
-
-        String status = "";
-        if (ml.substring(2, 3).equals("1")) {
-            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + ml.substring(4);
-        } else if (ml.substring(2, 3).equals("2")) {
-            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + ml.substring(4) + "" + dangerOut.dangerOut1;
-        } else if (ml.substring(2, 3).equals("3")) {
-            status = dangerOut.dangerOut4 + "" + ml.substring(4) + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
-        } else if (ml.substring(2, 3).equals("4")) {
-            status = ml.substring(4) + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
-        } else {
+        ELog.i("========doDanger====msg====" + ml);
+        if (dangerOutDao.loadAll().size() == 0) {
             return;
         }
 
-        ELog.i("========十六进制字符串==11======" + status);
-        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-        ELog.i("========十六进制字符串========" + hex);
-        if (hex.length() == 1) {
-            hex = "0" + hex;
+        String msg = "";
+        if (ml.substring(4).equals("1")) {
+            msg = "{[ARM" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
+            if (dangerOutDao.load(Long.valueOf(ml.substring(2, 3))).dangerOutStatus == 0) {
+                TimerUtils.setHuifuDangerOutstatus(ml.substring(2, 3), dangerOutDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
+            }
+        } else if (ml.substring(4).equals("0")) {
+            msg = "{[ARM" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
+            if (dangerOutDao.load(Long.valueOf(ml.substring(2, 3))).dangerOutStatus == 1) {
+                TimerUtils.setHuifuDangerOutstatus(ml.substring(2, 3), dangerOutDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+            }
         }
-
-        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes(hex);
-        if (data2 == null) {
-            return;
-        }
-        byte[] data3 = ">}".getBytes();
-
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        ELog.i("========doDanger====msg====" + msg);
+        byte[] data = msg.getBytes();
         sendMsg(data);
 
-        if (ml.substring(2, 3).equals("1")) {
-            dangerOutDao.update(new DangerOut((long) 2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut2, dangerOut.dangerOut3, dangerOut.dangerOut4));
-        } else if (ml.substring(2, 3).equals("2")) {
-            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut3, dangerOut.dangerOut4));
-        } else if (ml.substring(2, 3).equals("3")) {
-            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut4));
-        } else if (ml.substring(2, 3).equals("4")) {
-            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, dangerOut.dangerOut3, Integer.valueOf(ml.substring(4))));
-        }
-        ELog.i("========DangerOut========" + dangerOutDao.load((long) 2).toString());
+
+//        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+////        if (dangerOutDao.loadAll().size() == 0) {
+////            return;
+////        }
+//        DangerOut dangerOut = dangerOutDao.load((long) 2);
+//        if (dangerOut == null) {
+//            return;
+//        }
+//        ELog.i("========DangerOut========" + dangerOut.toString());
+//
+//        String status = "";
+//        if (ml.substring(2, 3).equals("1")) {
+//            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + ml.substring(4);
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + ml.substring(4) + "" + dangerOut.dangerOut1;
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            status = dangerOut.dangerOut4 + "" + ml.substring(4) + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            status = ml.substring(4) + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
+//        } else {
+//            return;
+//        }
+//
+//        ELog.i("========十六进制字符串==11======" + status);
+//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+//        ELog.i("========十六进制字符串========" + hex);
+//        if (hex.length() == 1) {
+//            hex = "0" + hex;
+//        }
+//
+//        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
+//        byte[] data2 = StringToBytes(hex);
+//        if (data2 == null) {
+//            return;
+//        }
+//        byte[] data3 = ">}".getBytes();
+//
+//        byte[] data = new byte[data1.length + data2.length + data3.length];
+//
+//        System.arraycopy(data1, 0, data, 0, data1.length);
+//        System.arraycopy(data2, 0, data, data1.length, data2.length);
+//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+//        sendMsg(data);
+//
+//        if (ml.substring(2, 3).equals("1")) {
+//            dangerOutDao.update(new DangerOut((long) 2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut2, dangerOut.dangerOut3, dangerOut.dangerOut4));
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut3, dangerOut.dangerOut4));
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut4));
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, dangerOut.dangerOut3, Integer.valueOf(ml.substring(4))));
+//        }
+//        ELog.i("========DangerOut========" + dangerOutDao.load((long) 2).toString());
     }
 
     private static void doIO(String ml) {
@@ -298,87 +325,129 @@ public class SerialPortUtil {
         ELog.i("========ioPortData========" + ioPortDataDao.load((long) 2).toString());
     }
 
-    private static void doJDQ(String ml) {
+    public static void doJDQ(String ml) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-//        if (jdqStatusDao.loadAll().size() == 0) {
-//            return;
-//        }
-        JDQstatus jdqStatus = jdqStatusDao.load((long) 2);
-        if (jdqStatus == null) {
+        if (jdqStatusDao.loadAll().size() == 0) {
             return;
         }
-        ELog.i("========jdqStatus========" + jdqStatus.toString());
+        String msg = "";
+        if (ml.substring(4).equals("1")) {
 
-        String status = "";
-        if (ml.substring(2, 3).equals("1")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + ml.substring(4);
-        } else if (ml.substring(2, 3).equals("2")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + ml.substring(4) + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("3")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + ml.substring(4) + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("4")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + ml.substring(4)
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("5")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + ml.substring(4) + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("6")) {
-            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + ml.substring(4) + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("7")) {
-            status = 0 + "" + 1 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else if (ml.substring(2, 3).equals("8")) {
-            status = 1 + "" + 0 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-        } else {
-            return;
+            if (ml.substring(2, 3).equals("7")) {
+                msg = "{[REY8:DT:A005]<CLOSE>}";
+                byte[] data = msg.getBytes();
+                sendMsg(data);
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (ml.substring(2, 3).equals("8")) {
+                msg = "{[REY7:DT:A005]<CLOSE>}";
+                byte[] data = msg.getBytes();
+                sendMsg(data);
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
+            }
+        } else if (ml.substring(4).equals("0")) {
+            msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+            }
         }
-
-        ELog.i("========十六进制字符串==11======" + status);
-        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-        ELog.i("========十六进制字符串========" + hex);
-        if (hex.length() == 1) {
-            hex = "0" + hex;
-        }
-
-        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes(hex);
-        if (data2 == null) {
-            return;
-        }
-        byte[] data3 = ">}".getBytes();
-
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        ELog.i("========doJDQ====msg====" + msg);
+        byte[] data = msg.getBytes();
         sendMsg(data);
 
-        if (ml.substring(2, 3).equals("1")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-        } else if (ml.substring(2, 3).equals("2")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
-                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-        } else if (ml.substring(2, 3).equals("3")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
-                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-        } else if (ml.substring(2, 3).equals("4")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
-                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-        } else if (ml.substring(2, 3).equals("5")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-                    Integer.valueOf(ml.substring(4)), jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-        } else if (ml.substring(2, 3).equals("6")) {
-            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-                    jdqStatus.jdq5, Integer.valueOf(ml.substring(4)), jdqStatus.jdq7, jdqStatus.jdq8));
-        }
-        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 2).toString());
+
+//        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+////        if (jdqStatusDao.loadAll().size() == 0) {
+////            return;
+////        }
+//        JDQstatus jdqStatus = jdqStatusDao.load((long) 2);
+//        if (jdqStatus == null) {
+//            return;
+//        }
+//        ELog.i("========jdqStatus========" + jdqStatus.toString());
+//
+//        String status = "";
+//        if (ml.substring(2, 3).equals("1")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + ml.substring(4);
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + ml.substring(4) + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + ml.substring(4) + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + ml.substring(4)
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("5")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + ml.substring(4) + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("6")) {
+//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + ml.substring(4) + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("7")) {
+//            status = 0 + "" + 1 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else if (ml.substring(2, 3).equals("8")) {
+//            status = 1 + "" + 0 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
+//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
+//        } else {
+//            return;
+//        }
+//
+//        ELog.i("========十六进制字符串==11======" + status);
+//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+//        ELog.i("========十六进制字符串========" + hex);
+//        if (hex.length() == 1) {
+//            hex = "0" + hex;
+//        }
+//
+//        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
+//        byte[] data2 = StringToBytes(hex);
+//        if (data2 == null) {
+//            return;
+//        }
+//        byte[] data3 = ">}".getBytes();
+//
+//        byte[] data = new byte[data1.length + data2.length + data3.length];
+//
+//        System.arraycopy(data1, 0, data, 0, data1.length);
+//        System.arraycopy(data2, 0, data, data1.length, data2.length);
+//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+//        sendMsg(data);
+//
+//        if (ml.substring(2, 3).equals("1")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
+//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
+//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
+//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+//        } else if (ml.substring(2, 3).equals("5")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+//                    Integer.valueOf(ml.substring(4)), jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
+//        } else if (ml.substring(2, 3).equals("6")) {
+//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
+//                    jdqStatus.jdq5, Integer.valueOf(ml.substring(4)), jdqStatus.jdq7, jdqStatus.jdq8));
+//        }
+//        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 2).toString());
     }
 
 
@@ -396,13 +465,13 @@ public class SerialPortUtil {
             byte[] data = null;
             if (spML.jinZhi == 16) {
                 String msg1 = "";
-                int datalength = spML.commandStr.length()/2;
+                int datalength = spML.commandStr.length() / 2;
                 if (datalength < 10) {
-                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H00" + datalength + "]<";
+                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H00" + datalength + "]<";
                 } else if (datalength >= 10 && datalength < 100) {
-                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H0" + datalength + "]<";
+                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H0" + datalength + "]<";
                 } else if (datalength >= 100) {
-                    msg1 = "{[COM" + (spML.sId-1) + ":DT:H" + datalength + "]<";
+                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H" + datalength + "]<";
                 }
                 ELog.i("========msg===0000000=====" + msg1);
                 byte[] data1 = msg1.getBytes();
@@ -420,11 +489,11 @@ public class SerialPortUtil {
             } else {
                 String msg = "";
                 if (spML.commandStr.length() < 10) {
-                    msg = "{[COM" + (spML.sId-1) + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId - 1) + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
-                    msg = "{[COM" + (spML.sId-1) + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId - 1) + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 } else if (spML.commandStr.length() >= 100) {
-                    msg = "{[COM" + (spML.sId-1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    msg = "{[COM" + (spML.sId - 1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 }
                 ELog.i("========msg===111111=====" + msg);
                 data = msg.getBytes();

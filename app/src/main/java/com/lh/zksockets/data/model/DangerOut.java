@@ -11,19 +11,18 @@ public class DangerOut {
     @Id
     public Long id;
 
-    public int dangerOut1; //1 高      0 底
-    public int dangerOut2;
-    public int dangerOut3;
-    public int dangerOut4;
+    public String name;
 
-    @Generated(hash = 712442484)
-    public DangerOut(Long id, int dangerOut1, int dangerOut2, int dangerOut3,
-            int dangerOut4) {
+    public int dangerOutStatus;//1 底      0 高
+
+    public int time;
+
+    @Generated(hash = 1650904680)
+    public DangerOut(Long id, String name, int dangerOutStatus, int time) {
         this.id = id;
-        this.dangerOut1 = dangerOut1;
-        this.dangerOut2 = dangerOut2;
-        this.dangerOut3 = dangerOut3;
-        this.dangerOut4 = dangerOut4;
+        this.name = name;
+        this.dangerOutStatus = dangerOutStatus;
+        this.time = time;
     }
 
     @Generated(hash = 1919526387)
@@ -34,10 +33,9 @@ public class DangerOut {
     public String toString() {
         return "DangerOut{" +
                 "id=" + id +
-                ", dangerOut1=" + dangerOut1 +
-                ", dangerOut2=" + dangerOut2 +
-                ", dangerOut3=" + dangerOut3 +
-                ", dangerOut4=" + dangerOut4 +
+                ", name='" + name + '\'' +
+                ", dangerOutStatus=" + dangerOutStatus +
+                ", time=" + time +
                 '}';
     }
 
@@ -49,35 +47,27 @@ public class DangerOut {
         this.id = id;
     }
 
-    public int getDangerOut1() {
-        return this.dangerOut1;
+    public String getName() {
+        return this.name;
     }
 
-    public void setDangerOut1(int dangerOut1) {
-        this.dangerOut1 = dangerOut1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getDangerOut2() {
-        return this.dangerOut2;
+    public int getDangerOutStatus() {
+        return this.dangerOutStatus;
     }
 
-    public void setDangerOut2(int dangerOut2) {
-        this.dangerOut2 = dangerOut2;
+    public void setDangerOutStatus(int dangerOutStatus) {
+        this.dangerOutStatus = dangerOutStatus;
     }
 
-    public int getDangerOut3() {
-        return this.dangerOut3;
+    public int getTime() {
+        return this.time;
     }
 
-    public void setDangerOut3(int dangerOut3) {
-        this.dangerOut3 = dangerOut3;
-    }
-
-    public int getDangerOut4() {
-        return this.dangerOut4;
-    }
-
-    public void setDangerOut4(int dangerOut4) {
-        this.dangerOut4 = dangerOut4;
+    public void setTime(int time) {
+        this.time = time;
     }
 }

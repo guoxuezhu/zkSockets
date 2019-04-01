@@ -25,10 +25,9 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property DangerOut1 = new Property(1, int.class, "dangerOut1", false, "DANGER_OUT1");
-        public final static Property DangerOut2 = new Property(2, int.class, "dangerOut2", false, "DANGER_OUT2");
-        public final static Property DangerOut3 = new Property(3, int.class, "dangerOut3", false, "DANGER_OUT3");
-        public final static Property DangerOut4 = new Property(4, int.class, "dangerOut4", false, "DANGER_OUT4");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property DangerOutStatus = new Property(2, int.class, "dangerOutStatus", false, "DANGER_OUT_STATUS");
+        public final static Property Time = new Property(3, int.class, "time", false, "TIME");
     }
 
 
@@ -45,10 +44,9 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DANGER_OUT\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"DANGER_OUT1\" INTEGER NOT NULL ," + // 1: dangerOut1
-                "\"DANGER_OUT2\" INTEGER NOT NULL ," + // 2: dangerOut2
-                "\"DANGER_OUT3\" INTEGER NOT NULL ," + // 3: dangerOut3
-                "\"DANGER_OUT4\" INTEGER NOT NULL );"); // 4: dangerOut4
+                "\"NAME\" TEXT," + // 1: name
+                "\"DANGER_OUT_STATUS\" INTEGER NOT NULL ," + // 2: dangerOutStatus
+                "\"TIME\" INTEGER NOT NULL );"); // 3: time
     }
 
     /** Drops the underlying database table. */
@@ -65,10 +63,13 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerOut1());
-        stmt.bindLong(3, entity.getDangerOut2());
-        stmt.bindLong(4, entity.getDangerOut3());
-        stmt.bindLong(5, entity.getDangerOut4());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getDangerOutStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -79,10 +80,13 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerOut1());
-        stmt.bindLong(3, entity.getDangerOut2());
-        stmt.bindLong(4, entity.getDangerOut3());
-        stmt.bindLong(5, entity.getDangerOut4());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getDangerOutStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -94,10 +98,9 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
     public DangerOut readEntity(Cursor cursor, int offset) {
         DangerOut entity = new DangerOut( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // dangerOut1
-            cursor.getInt(offset + 2), // dangerOut2
-            cursor.getInt(offset + 3), // dangerOut3
-            cursor.getInt(offset + 4) // dangerOut4
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.getInt(offset + 2), // dangerOutStatus
+            cursor.getInt(offset + 3) // time
         );
         return entity;
     }
@@ -105,10 +108,9 @@ public class DangerOutDao extends AbstractDao<DangerOut, Long> {
     @Override
     public void readEntity(Cursor cursor, DangerOut entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDangerOut1(cursor.getInt(offset + 1));
-        entity.setDangerOut2(cursor.getInt(offset + 2));
-        entity.setDangerOut3(cursor.getInt(offset + 3));
-        entity.setDangerOut4(cursor.getInt(offset + 4));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDangerOutStatus(cursor.getInt(offset + 2));
+        entity.setTime(cursor.getInt(offset + 3));
      }
     
     @Override

@@ -25,14 +25,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Jdq1 = new Property(1, int.class, "jdq1", false, "JDQ1");
-        public final static Property Jdq2 = new Property(2, int.class, "jdq2", false, "JDQ2");
-        public final static Property Jdq3 = new Property(3, int.class, "jdq3", false, "JDQ3");
-        public final static Property Jdq4 = new Property(4, int.class, "jdq4", false, "JDQ4");
-        public final static Property Jdq5 = new Property(5, int.class, "jdq5", false, "JDQ5");
-        public final static Property Jdq6 = new Property(6, int.class, "jdq6", false, "JDQ6");
-        public final static Property Jdq7 = new Property(7, int.class, "jdq7", false, "JDQ7");
-        public final static Property Jdq8 = new Property(8, int.class, "jdq8", false, "JDQ8");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property JdqStatus = new Property(2, int.class, "jdqStatus", false, "JDQ_STATUS");
+        public final static Property Time = new Property(3, int.class, "time", false, "TIME");
     }
 
 
@@ -49,14 +44,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"JDQSTATUS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"JDQ1\" INTEGER NOT NULL ," + // 1: jdq1
-                "\"JDQ2\" INTEGER NOT NULL ," + // 2: jdq2
-                "\"JDQ3\" INTEGER NOT NULL ," + // 3: jdq3
-                "\"JDQ4\" INTEGER NOT NULL ," + // 4: jdq4
-                "\"JDQ5\" INTEGER NOT NULL ," + // 5: jdq5
-                "\"JDQ6\" INTEGER NOT NULL ," + // 6: jdq6
-                "\"JDQ7\" INTEGER NOT NULL ," + // 7: jdq7
-                "\"JDQ8\" INTEGER NOT NULL );"); // 8: jdq8
+                "\"NAME\" TEXT," + // 1: name
+                "\"JDQ_STATUS\" INTEGER NOT NULL ," + // 2: jdqStatus
+                "\"TIME\" INTEGER NOT NULL );"); // 3: time
     }
 
     /** Drops the underlying database table. */
@@ -73,14 +63,13 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getJdq1());
-        stmt.bindLong(3, entity.getJdq2());
-        stmt.bindLong(4, entity.getJdq3());
-        stmt.bindLong(5, entity.getJdq4());
-        stmt.bindLong(6, entity.getJdq5());
-        stmt.bindLong(7, entity.getJdq6());
-        stmt.bindLong(8, entity.getJdq7());
-        stmt.bindLong(9, entity.getJdq8());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getJdqStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -91,14 +80,13 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getJdq1());
-        stmt.bindLong(3, entity.getJdq2());
-        stmt.bindLong(4, entity.getJdq3());
-        stmt.bindLong(5, entity.getJdq4());
-        stmt.bindLong(6, entity.getJdq5());
-        stmt.bindLong(7, entity.getJdq6());
-        stmt.bindLong(8, entity.getJdq7());
-        stmt.bindLong(9, entity.getJdq8());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getJdqStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -110,14 +98,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
     public JDQstatus readEntity(Cursor cursor, int offset) {
         JDQstatus entity = new JDQstatus( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // jdq1
-            cursor.getInt(offset + 2), // jdq2
-            cursor.getInt(offset + 3), // jdq3
-            cursor.getInt(offset + 4), // jdq4
-            cursor.getInt(offset + 5), // jdq5
-            cursor.getInt(offset + 6), // jdq6
-            cursor.getInt(offset + 7), // jdq7
-            cursor.getInt(offset + 8) // jdq8
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.getInt(offset + 2), // jdqStatus
+            cursor.getInt(offset + 3) // time
         );
         return entity;
     }
@@ -125,14 +108,9 @@ public class JDQstatusDao extends AbstractDao<JDQstatus, Long> {
     @Override
     public void readEntity(Cursor cursor, JDQstatus entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setJdq1(cursor.getInt(offset + 1));
-        entity.setJdq2(cursor.getInt(offset + 2));
-        entity.setJdq3(cursor.getInt(offset + 3));
-        entity.setJdq4(cursor.getInt(offset + 4));
-        entity.setJdq5(cursor.getInt(offset + 5));
-        entity.setJdq6(cursor.getInt(offset + 6));
-        entity.setJdq7(cursor.getInt(offset + 7));
-        entity.setJdq8(cursor.getInt(offset + 8));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setJdqStatus(cursor.getInt(offset + 2));
+        entity.setTime(cursor.getInt(offset + 3));
      }
     
     @Override

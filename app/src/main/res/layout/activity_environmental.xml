@@ -32,9 +32,6 @@
     </RelativeLayout>
 
 
-
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,6 +94,7 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#878C91" />
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
@@ -142,7 +140,7 @@
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
                     android:textOff="关"
-                    android:textOn="开"  />
+                    android:textOn="开" />
             </LinearLayout>
 
 
@@ -188,7 +186,7 @@
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
                     android:textOff="关"
-                    android:textOn="开"  />
+                    android:textOn="开" />
             </LinearLayout>
 
 
@@ -232,7 +230,7 @@
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
                     android:textOff="关"
-                    android:textOn="开"  />
+                    android:textOn="开" />
             </LinearLayout>
 
 
@@ -261,8 +259,103 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#878C91" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
 
+            <EditText
+                android:id="@+id/jdq_et_time_1"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_3"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_5"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_6"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -277,17 +370,6 @@
         android:text="保存"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_20" />
-
-
-
-
-
-
-
-
-
-
-
 
 
 </LinearLayout>

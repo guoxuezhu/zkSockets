@@ -23,6 +23,7 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void createAllTables(Database db, boolean ifNotExists) {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
+        DangerOutDao.createTable(db, ifNotExists);
         EventBigDao.createTable(db, ifNotExists);
         EventKejianRestDao.createTable(db, ifNotExists);
         EventShangkeDao.createTable(db, ifNotExists);
@@ -32,18 +33,18 @@ public class DaoMaster extends AbstractDaoMaster {
         IOYuanDao.createTable(db, ifNotExists);
         JDQstatusDao.createTable(db, ifNotExists);
         LampDao.createTable(db, ifNotExists);
+        MLsListsDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         SerialCommandDao.createTable(db, ifNotExists);
         SerialPortDataDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
-        MLsListsDao.createTable(db, ifNotExists);
-        DangerOutDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
+        DangerOutDao.dropTable(db, ifExists);
         EventBigDao.dropTable(db, ifExists);
         EventKejianRestDao.dropTable(db, ifExists);
         EventShangkeDao.dropTable(db, ifExists);
@@ -53,12 +54,11 @@ public class DaoMaster extends AbstractDaoMaster {
         IOYuanDao.dropTable(db, ifExists);
         JDQstatusDao.dropTable(db, ifExists);
         LampDao.dropTable(db, ifExists);
+        MLsListsDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         SerialCommandDao.dropTable(db, ifExists);
         SerialPortDataDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
-        MLsListsDao.dropTable(db, ifExists);
-        DangerOutDao.dropTable(db, ifExists);
     }
 
     /**
@@ -79,6 +79,7 @@ public class DaoMaster extends AbstractDaoMaster {
         super(db, SCHEMA_VERSION);
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
+        registerDaoClass(DangerOutDao.class);
         registerDaoClass(EventBigDao.class);
         registerDaoClass(EventKejianRestDao.class);
         registerDaoClass(EventShangkeDao.class);
@@ -88,12 +89,11 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(JDQstatusDao.class);
         registerDaoClass(LampDao.class);
+        registerDaoClass(MLsListsDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(SerialCommandDao.class);
         registerDaoClass(SerialPortDataDao.class);
         registerDaoClass(UsersDao.class);
-        registerDaoClass(MLsListsDao.class);
-        registerDaoClass(DangerOutDao.class);
     }
 
     public DaoSession newSession() {
