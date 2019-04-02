@@ -13,7 +13,7 @@ public class DangerOut {
 
     public String name;
 
-    public int dangerOutStatus;//1 底      0 高
+    public int dangerOutStatus;//1 低      0 高
 
     public int time;
 

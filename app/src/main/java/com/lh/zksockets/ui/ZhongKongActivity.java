@@ -162,7 +162,7 @@ public class ZhongKongActivity extends BaseActivity {
     @OnClick(R.id.btn_ch1_open)
     public void btn_ch1_open() {
 
-        String msg = "{[ARM4:DT:A004]<OPEN>}";
+        String msg = "{[IOL1:DT:A004]<OPEN>}";
 
         byte[] data = msg.getBytes();
         try {
@@ -180,7 +180,7 @@ public class ZhongKongActivity extends BaseActivity {
 
     @OnClick(R.id.btn_ch1_closed)
     public void btn_ch1_closed() {
-        String msg = "{[ARM4:DT:A005]<CLOSE>}";
+        String msg = "{[IOL1:DT:A005]<CLOSE>}";
 
         byte[] data = msg.getBytes();
         try {
@@ -197,16 +197,9 @@ public class ZhongKongActivity extends BaseActivity {
     @OnClick(R.id.btn_ch2_open)
     public void btn_ch2_open() {
 
-        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes("0E");
-        byte[] data3 = ">}".getBytes();
+        String msg = "{[IOL2:DT:A004]<OPEN>}";
 
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-
+        byte[] data = msg.getBytes();
         try {
             if (data.length > 0) {
                 outputStream.write(data);
@@ -218,21 +211,13 @@ public class ZhongKongActivity extends BaseActivity {
         }
 
 
-
     }
 
     @OnClick(R.id.btn_ch2_closed)
     public void btn_ch2_closed() {
-        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes("0D");
-        byte[] data3 = ">}".getBytes();
+        String msg = "{[IOL2:DT:A005]<CLOSE>}";
 
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-
+        byte[] data = msg.getBytes();
         try {
             if (data.length > 0) {
                 outputStream.write(data);
@@ -247,22 +232,66 @@ public class ZhongKongActivity extends BaseActivity {
 
     @OnClick(R.id.btn_ch3_open)
     public void btn_ch3_open() {
-        initData("02", "01");
+        String msg = "{[IOL3:DT:A004]<OPEN>}";
+
+        byte[] data = msg.getBytes();
+        try {
+            if (data.length > 0) {
+                outputStream.write(data);
+                outputStream.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
     }
 
     @OnClick(R.id.btn_ch3_closed)
     public void btn_ch3_closed() {
-        initData("02", "00");
+        String msg = "{[IOL3:DT:A005]<CLOSE>}";
+
+        byte[] data = msg.getBytes();
+        try {
+            if (data.length > 0) {
+                outputStream.write(data);
+                outputStream.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
     }
 
     @OnClick(R.id.btn_ch4_open)
     public void btn_ch4_open() {
-        initData("03", "01");
+        String msg = "{[IOL4:DT:A004]<OPEN>}";
+
+        byte[] data = msg.getBytes();
+        try {
+            if (data.length > 0) {
+                outputStream.write(data);
+                outputStream.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
     }
 
     @OnClick(R.id.btn_ch4_closed)
     public void btn_ch4_closed() {
-        initData("03", "00");
+        String msg = "{[IOL4:DT:A005]<CLOSE>}";
+
+        byte[] data = msg.getBytes();
+        try {
+            if (data.length > 0) {
+                outputStream.write(data);
+                outputStream.flush();
+                ELog.e("====sendSerialPort: 串口数据发送成功");
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
     }
 
     @OnClick(R.id.btn_ch5_open)

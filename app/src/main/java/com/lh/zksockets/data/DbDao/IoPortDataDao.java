@@ -25,10 +25,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Io1 = new Property(1, int.class, "io1", false, "IO1");
-        public final static Property Io2 = new Property(2, int.class, "io2", false, "IO2");
-        public final static Property Io3 = new Property(3, int.class, "io3", false, "IO3");
-        public final static Property Io4 = new Property(4, int.class, "io4", false, "IO4");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property IoOutStatus = new Property(2, int.class, "ioOutStatus", false, "IO_OUT_STATUS");
+        public final static Property Time = new Property(3, int.class, "time", false, "TIME");
     }
 
 
@@ -45,10 +44,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IO_PORT_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"IO1\" INTEGER NOT NULL ," + // 1: io1
-                "\"IO2\" INTEGER NOT NULL ," + // 2: io2
-                "\"IO3\" INTEGER NOT NULL ," + // 3: io3
-                "\"IO4\" INTEGER NOT NULL );"); // 4: io4
+                "\"NAME\" TEXT," + // 1: name
+                "\"IO_OUT_STATUS\" INTEGER NOT NULL ," + // 2: ioOutStatus
+                "\"TIME\" INTEGER NOT NULL );"); // 3: time
     }
 
     /** Drops the underlying database table. */
@@ -65,10 +63,13 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getIo1());
-        stmt.bindLong(3, entity.getIo2());
-        stmt.bindLong(4, entity.getIo3());
-        stmt.bindLong(5, entity.getIo4());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getIoOutStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -79,10 +80,13 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getIo1());
-        stmt.bindLong(3, entity.getIo2());
-        stmt.bindLong(4, entity.getIo3());
-        stmt.bindLong(5, entity.getIo4());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+        stmt.bindLong(3, entity.getIoOutStatus());
+        stmt.bindLong(4, entity.getTime());
     }
 
     @Override
@@ -94,10 +98,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     public IoPortData readEntity(Cursor cursor, int offset) {
         IoPortData entity = new IoPortData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // io1
-            cursor.getInt(offset + 2), // io2
-            cursor.getInt(offset + 3), // io3
-            cursor.getInt(offset + 4) // io4
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.getInt(offset + 2), // ioOutStatus
+            cursor.getInt(offset + 3) // time
         );
         return entity;
     }
@@ -105,10 +108,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     @Override
     public void readEntity(Cursor cursor, IoPortData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIo1(cursor.getInt(offset + 1));
-        entity.setIo2(cursor.getInt(offset + 2));
-        entity.setIo3(cursor.getInt(offset + 3));
-        entity.setIo4(cursor.getInt(offset + 4));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setIoOutStatus(cursor.getInt(offset + 2));
+        entity.setTime(cursor.getInt(offset + 3));
      }
     
     @Override

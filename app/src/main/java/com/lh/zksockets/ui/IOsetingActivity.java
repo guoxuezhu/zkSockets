@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
+import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.IoPortData;
 
 import butterknife.BindView;
@@ -27,6 +28,19 @@ public class IOsetingActivity extends BaseActivity {
     @BindView(R.id.switch_4_gl)
     Switch switch_4_gl;
 
+
+
+    @BindView(R.id.io_et_time_1)
+    EditText io_et_time_1;
+    @BindView(R.id.io_et_time_2)
+    EditText io_et_time_2;
+    @BindView(R.id.io_et_time_3)
+    EditText io_et_time_3;
+    @BindView(R.id.io_et_time_4)
+    EditText io_et_time_4;
+
+
+
     private IoPortDataDao ioPortDataDao;
 
     @Override
@@ -38,29 +52,30 @@ public class IOsetingActivity extends BaseActivity {
 
         ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() == 0) {
-            ioPortDataDao.insert(new IoPortData((long) 1, 0, 0, 0, 0));
-            ioPortDataDao.insert(new IoPortData((long) 2, 0, 0, 0, 0));
+            for (int i = 1; i < 5; i++) {
+                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, 0, 10));
+            }
         }
 
-        if (ioPortDataDao.loadAll().get(0).io1 == 1) {
+        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
             switch_1_gl.setChecked(true);
         } else {
             switch_1_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.loadAll().get(0).io2 == 1) {
+        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
             switch_2_gl.setChecked(true);
         } else {
             switch_2_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.loadAll().get(0).io3 == 1) {
+        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
             switch_3_gl.setChecked(true);
         } else {
             switch_3_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.loadAll().get(0).io4 == 1) {
+        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
             switch_4_gl.setChecked(true);
         } else {
             switch_4_gl.setChecked(false);
@@ -99,7 +114,10 @@ public class IOsetingActivity extends BaseActivity {
             io4 = 0;
         }
 
-        ioPortDataDao.update(new IoPortData((long) 1, io1, io2, io3, io4));
+        ioPortDataDao.update(new IoPortData((long) 1, "io输出" + 1, io1, Integer.valueOf(io_et_time_1.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 2, "io输出" + 2, io2, Integer.valueOf(io_et_time_2.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 3, "io输出" + 3, io3, Integer.valueOf(io_et_time_3.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 4, "io输出" + 4, io4, Integer.valueOf(io_et_time_4.getText().toString())));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

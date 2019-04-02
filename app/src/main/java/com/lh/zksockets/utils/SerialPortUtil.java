@@ -270,59 +270,78 @@ public class SerialPortUtil {
 
     private static void doIO(String ml) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-//        if (ioPortDataDao.loadAll().size() == 0) {
-//            return;
-//        }
-        IoPortData ioPortData = ioPortDataDao.load((long) 2);
-        if (ioPortData == null) {
-            return;
-        }
-        ELog.i("========ioPortData========" + ioPortData.toString());
-
-        String status = "";
-        if (ml.substring(2, 3).equals("1")) {
-            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ml.substring(4);
-        } else if (ml.substring(2, 3).equals("2")) {
-            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ml.substring(4) + "" + ioPortData.io1;
-        } else if (ml.substring(2, 3).equals("3")) {
-            status = ioPortData.io4 + "" + ml.substring(4) + "" + ioPortData.io2 + "" + ioPortData.io1;
-        } else if (ml.substring(2, 3).equals("4")) {
-            status = ml.substring(4) + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ioPortData.io1;
-        } else {
+        if (ioPortDataDao.loadAll().size() == 0) {
             return;
         }
 
-        ELog.i("========十六进制字符串==11======" + status);
-        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-        ELog.i("========十六进制字符串========" + hex);
-        if (hex.length() == 1) {
-            hex = "0" + hex;
+        String msg = "";
+        if (ml.substring(4).equals("1")) {
+            msg = "{[IOL" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
+            if (ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).ioOutStatus == 0) {
+                TimerUtils.setHuifuIoOutstatus(ml.substring(2, 3), ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
+            }
+        } else if (ml.substring(4).equals("0")) {
+            msg = "{[IOL" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
+            if (ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).ioOutStatus == 1) {
+                TimerUtils.setHuifuIoOutstatus(ml.substring(2, 3), ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+            }
         }
-
-        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes(hex);
-        if (data2 == null) {
-            return;
-        }
-        byte[] data3 = ">}".getBytes();
-
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        ELog.i("========doDanger====msg====" + msg);
+        byte[] data = msg.getBytes();
         sendMsg(data);
 
-        if (ml.substring(2, 3).equals("1")) {
-            ioPortDataDao.update(new IoPortData((long) 2, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
-        } else if (ml.substring(2, 3).equals("2")) {
-            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
-        } else if (ml.substring(2, 3).equals("3")) {
-            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
-        } else if (ml.substring(2, 3).equals("4")) {
-            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
-        }
-        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 2).toString());
+
+//
+//        IoPortData ioPortData = ioPortDataDao.load((long) 2);
+//        if (ioPortData == null) {
+//            return;
+//        }
+//        ELog.i("========ioPortData========" + ioPortData.toString());
+//
+//        String status = "";
+//        if (ml.substring(2, 3).equals("1")) {
+//            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ml.substring(4);
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ml.substring(4) + "" + ioPortData.io1;
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            status = ioPortData.io4 + "" + ml.substring(4) + "" + ioPortData.io2 + "" + ioPortData.io1;
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            status = ml.substring(4) + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ioPortData.io1;
+//        } else {
+//            return;
+//        }
+//
+//        ELog.i("========十六进制字符串==11======" + status);
+//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
+//        ELog.i("========十六进制字符串========" + hex);
+//        if (hex.length() == 1) {
+//            hex = "0" + hex;
+//        }
+//
+//        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
+//        byte[] data2 = StringToBytes(hex);
+//        if (data2 == null) {
+//            return;
+//        }
+//        byte[] data3 = ">}".getBytes();
+//
+//        byte[] data = new byte[data1.length + data2.length + data3.length];
+//
+//        System.arraycopy(data1, 0, data, 0, data1.length);
+//        System.arraycopy(data2, 0, data, data1.length, data2.length);
+//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+//        sendMsg(data);
+//
+//        if (ml.substring(2, 3).equals("1")) {
+//            ioPortDataDao.update(new IoPortData((long) 2, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
+//        } else if (ml.substring(2, 3).equals("2")) {
+//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
+//        } else if (ml.substring(2, 3).equals("3")) {
+//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
+//        } else if (ml.substring(2, 3).equals("4")) {
+//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
+//        }
+//        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 2).toString());
     }
 
     public static void doJDQ(String ml) {

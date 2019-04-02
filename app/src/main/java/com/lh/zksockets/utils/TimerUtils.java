@@ -305,4 +305,109 @@ public class TimerUtils {
     }
 
 
+    public static void setHuifuIoOutstatus(String ioOut, int time, int status) {
+        if (ioOut.equals("1")) {
+            setIoOutTimer1(time, status);
+        } else if (ioOut.equals("2")) {
+            setIoOutTimer2(time, status);
+        } else if (ioOut.equals("3")) {
+            setIoOutTimer3(time, status);
+        } else if (ioOut.equals("4")) {
+            setIoOutTimer4(time, status);
+        }
+
+    }
+
+    private static void setIoOutTimer1(int time, final int status) {
+        if (ioOutTimer1 != null) {
+            ioOutTimer1.cancel();
+        }
+        ioOutTimer1 = new Timer();
+        ioOutTimer1.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (status == 0) {
+                    SerialPortUtil.sendMsg("{[IOL1:DT:A005]<CLOSE>}".getBytes());
+                } else {
+                    SerialPortUtil.sendMsg("{[IOL1:DT:A004]<OPEN>}".getBytes());
+                }
+                ELog.d("=========ioOutTimer1==========");
+                if (ioOutTimer1 != null) {
+                    ioOutTimer1.cancel();
+                }
+
+            }
+        }, time * 1000);
+    }
+
+    private static void setIoOutTimer2(int time, final int status) {
+        if (ioOutTimer2 != null) {
+            ioOutTimer2.cancel();
+        }
+        ioOutTimer2 = new Timer();
+        ioOutTimer2.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (status == 0) {
+                    SerialPortUtil.sendMsg("{[IOL2:DT:A005]<CLOSE>}".getBytes());
+                } else {
+                    SerialPortUtil.sendMsg("{[IOL2:DT:A004]<OPEN>}".getBytes());
+                }
+                ELog.d("=========ioOutTimer2==========");
+                if (ioOutTimer2 != null) {
+                    ioOutTimer2.cancel();
+                }
+
+            }
+        }, time * 1000);
+    }
+
+    private static void setIoOutTimer3(int time, final int status) {
+        if (ioOutTimer3 != null) {
+            ioOutTimer3.cancel();
+        }
+        ioOutTimer3 = new Timer();
+        ioOutTimer3.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (status == 0) {
+                    SerialPortUtil.sendMsg("{[IOL3:DT:A005]<CLOSE>}".getBytes());
+                } else {
+                    SerialPortUtil.sendMsg("{[IOL3:DT:A004]<OPEN>}".getBytes());
+                }
+                ELog.d("=========ioOutTimer3==========");
+                if (ioOutTimer3 != null) {
+                    ioOutTimer3.cancel();
+                }
+
+            }
+        }, time * 1000);
+    }
+
+    private static void setIoOutTimer4(int time, final int status) {
+        if (ioOutTimer4 != null) {
+            ioOutTimer4.cancel();
+        }
+        ioOutTimer4= new Timer();
+        ioOutTimer4.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (status == 0) {
+                    SerialPortUtil.sendMsg("{[IOL4:DT:A005]<CLOSE>}".getBytes());
+                } else {
+                    SerialPortUtil.sendMsg("{[IOL4:DT:A004]<OPEN>}".getBytes());
+                }
+                ELog.d("=========ioOutTimer4==========");
+                if (ioOutTimer4 != null) {
+                    ioOutTimer4.cancel();
+                }
+
+            }
+        }, time * 1000);
+    }
+
+
+
+
+
 }

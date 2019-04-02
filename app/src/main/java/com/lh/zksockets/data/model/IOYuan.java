@@ -11,7 +11,7 @@ public class IOYuan {
     @Id
     public Long id;
 
-    public int dangerIo1; //1 高      0 底
+    public int dangerIo1; //1 高      0 低
     public int dangerIo2;
     public int dangerIo3;
     public int dangerIo4;

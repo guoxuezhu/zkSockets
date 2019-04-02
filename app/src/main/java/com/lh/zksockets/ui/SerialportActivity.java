@@ -118,7 +118,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
 
-        ViewInit(1);
+        setSelectBtn(1);
 
 
     }

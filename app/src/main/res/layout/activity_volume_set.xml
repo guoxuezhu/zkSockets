@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="底"
+                    android:textOff="低"
                     android:textOn="高" />
             </LinearLayout>
 
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="底"
+                    android:textOff="低"
                     android:textOn="高" />
             </LinearLayout>
 
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="底"
+                    android:textOff="低"
                     android:textOn="高" />
             </LinearLayout>
 
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:showText="true"
                     android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="底"
+                    android:textOff="低"
                     android:textOn="高" />
             </LinearLayout>
 
