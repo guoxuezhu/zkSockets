@@ -17,6 +17,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -28,6 +30,7 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
+    private static Timer serialPortReadTimer;
 
 
     public static void open() {
@@ -53,6 +56,9 @@ public class SerialPortUtil {
     }
 
 
+    private static int number = 1;
+    private static int bslength = 0;
+    private static byte[] buffer1 = new byte[1024];
     public static void readMsg2() {
 
         new Thread() {
@@ -61,6 +67,8 @@ public class SerialPortUtil {
                 super.run();
 
                 byte[] buffer = new byte[1024];
+
+
                 int size; //读取数据的大小
                 try {
                     while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
@@ -68,9 +76,33 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据===========size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
-                            if (msg.equals("{OK}")) {
 
-                            } else {
+                            if (size > 4) {
+
+                                if (number == 1) {
+                                    System.arraycopy(buffer, 0, buffer1, 0, size);
+                                    bslength = size;
+                                    number++;
+                                    startTimer();
+                                } else if (number == 2) {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    number++;
+                                } else if (number == 3) {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    number++;
+                                } else if (number == 4) {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    number++;
+                                } else if (number == 5) {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    number++;
+                                }
+
+
 
                             }
 
@@ -85,6 +117,33 @@ public class SerialPortUtil {
 
             }
         }.start();
+
+    }
+
+    private static void startTimer() {
+        if (serialPortReadTimer != null) {
+            serialPortReadTimer.cancel();
+        }
+        serialPortReadTimer = new Timer();
+        serialPortReadTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                String dataStr = new String(buffer1, 0, bslength);
+                ELog.i("=========串口2===接收到了数据==buffer1=====" + dataStr);
+
+
+
+
+
+                bslength = 0;
+                number = 1;
+                ELog.d("=========serialPortReadTimer==========");
+            }
+        }, 5 * 1000);
+
+
+
 
     }
 
@@ -480,7 +539,6 @@ public class SerialPortUtil {
             return;
         }
         ELog.i("========str========" + str);
-        ELog.i("========serialCommandDao========" + serialCommandDao.loadAll().toString());
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
         if (spML == null) {
             return;
