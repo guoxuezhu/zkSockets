@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="电脑设置"
+            android:text="温湿度传感器"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
@@ -52,12 +52,70 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="IP地址:"
+                    android:text="温度:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_computer_ip"
+                    android:id="@+id/et_ws_wen"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="22"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="湿度:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_ws_shi"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="77%"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="串口协议:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_ws_ml"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
@@ -81,83 +139,23 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="端口号:"
+                    android:text="读取间隔(分):"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_computer_port"
+                    android:id="@+id/et_ws_time"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp_10"
+                    android:inputType="number"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="@dimen/dp_150"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="用户名:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-                <EditText
-                    android:id="@+id/et_computer_name"
-                    android:layout_width="@dimen/dp_400"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_table_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="@dimen/dp_150"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="密码:"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-                <EditText
-                    android:id="@+id/et_password"
-                    android:layout_width="@dimen/dp_400"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_table_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_20" />
-
-            </LinearLayout>
-
-
-
 
             <Button
                 android:id="@+id/btn_computer_ok"

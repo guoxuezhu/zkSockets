@@ -1,6 +1,10 @@
 package com.lh.zksockets.utils;
 
 
+import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.WenShiDu;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,6 +15,7 @@ public class TimerUtils {
     private static Timer jdqTimer1, jdqTimer2, jdqTimer3, jdqTimer4, jdqTimer5, jdqTimer6, jdqTimer7, jdqTimer8;
     private static Timer dangerOutTimer1, dangerOutTimer2, dangerOutTimer3, dangerOutTimer4;
     private static Timer ioOutTimer1, ioOutTimer2, ioOutTimer3, ioOutTimer4;
+    private static Timer wenshiTimer;
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
@@ -388,7 +393,7 @@ public class TimerUtils {
         if (ioOutTimer4 != null) {
             ioOutTimer4.cancel();
         }
-        ioOutTimer4= new Timer();
+        ioOutTimer4 = new Timer();
         ioOutTimer4.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -407,7 +412,30 @@ public class TimerUtils {
     }
 
 
+    public static void setWenshiduTimer() {
 
+        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
+        if (wenShiDuDao.loadAll().size() == 0) {
+            return;
+        }
+        final String serialportML = wenShiDuDao.loadAll().get(0).serialportML;
+        if (serialportML.equals("")) {
+            return;
+        }
 
+        int time = wenShiDuDao.loadAll().get(0).timeStr;
+
+        if (wenshiTimer != null) {
+            wenshiTimer.cancel();
+        }
+        wenshiTimer = new Timer();
+        wenshiTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                SerialPortUtil.doSerialPort(serialportML);
+                ELog.d("=========wenshiTimer==========");
+            }
+        }, 1000, time * 60 * 1000);
+    }
 }

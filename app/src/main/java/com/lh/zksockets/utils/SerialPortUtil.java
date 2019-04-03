@@ -471,11 +471,16 @@ public class SerialPortUtil {
     }
 
 
-    private static void doSerialPort(String str) {
+    public static void doSerialPort(String str) {
+        if (str.equals("")) {
+            return;
+        }
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-//        if (serialCommandDao.loadAll().size() == 0) {
-//            return;
-//        }
+        if (serialCommandDao.loadAll().size() == 0) {
+            return;
+        }
+        ELog.i("========str========" + str);
+        ELog.i("========serialCommandDao========" + serialCommandDao.loadAll().toString());
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
         if (spML == null) {
             return;

@@ -13,8 +13,11 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.SelectChazuoAdapter;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ComputerDao;
+import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Computer;
+import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.utils.TimerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,16 +25,15 @@ import butterknife.OnClick;
 
 public class ComputerActivity extends BaseActivity {
 
-    @BindView(R.id.et_computer_ip)
-    EditText et_computer_ip;
-    @BindView(R.id.et_computer_port)
-    EditText et_computer_port;
-    @BindView(R.id.et_computer_name)
-    EditText et_computer_name;
-    @BindView(R.id.et_password)
-    EditText et_password;
-
-    private ComputerDao computerDao;
+    @BindView(R.id.et_ws_wen)
+    EditText et_ws_wen;
+    @BindView(R.id.et_ws_shi)
+    EditText et_ws_shi;
+    @BindView(R.id.et_ws_ml)
+    EditText et_ws_ml;
+    @BindView(R.id.et_ws_time)
+    EditText et_ws_time;
+    private WenShiDuDao wenShiDuDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +41,31 @@ public class ComputerActivity extends BaseActivity {
         setContentView(R.layout.activity_computer);
         ButterKnife.bind(this);
 
+        wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
-
-        computerDao = MyApplication.getDaoSession().getComputerDao();
+        if (wenShiDuDao.loadAll().size() == 0) {
+            wenShiDuDao.insert(new WenShiDu("", "", 1, ""));
+        }
 
         initView();
 
     }
 
     private void initView() {
-        if (computerDao.loadAll().size() != 0) {
-            et_computer_ip.setText(computerDao.loadAll().get(0).IP);
-            et_computer_port.setText(computerDao.loadAll().get(0).PORT);
-            et_computer_name.setText(computerDao.loadAll().get(0).userName);
-            et_password.setText(computerDao.loadAll().get(0).Password);
-        } else {
-            et_computer_ip.setText("");
-            et_computer_port.setText("");
-            et_computer_name.setText("");
-            et_password.setText("");
-        }
-
+        et_ws_wen.setText(wenShiDuDao.loadAll().get(0).wenStr);
+        et_ws_shi.setText(wenShiDuDao.loadAll().get(0).shiStr);
+        et_ws_time.setText(wenShiDuDao.loadAll().get(0).timeStr + "");
+        et_ws_ml.setText(wenShiDuDao.loadAll().get(0).serialportML);
     }
 
     @OnClick(R.id.btn_computer_ok)
     public void btn_computer_ok() {
-        computerDao.insert(new Computer(et_computer_ip.getText().toString(), et_computer_port.getText().toString(),
-                et_computer_name.getText().toString(), et_password.getText().toString()));
+        wenShiDuDao.deleteAll();
+        wenShiDuDao.insert(new WenShiDu(et_ws_wen.getText().toString(), et_ws_shi.getText().toString(),
+                Integer.valueOf(et_ws_time.getText().toString()), et_ws_ml.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-
+        TimerUtils.setWenshiduTimer();
     }
 
     @OnClick(R.id.computer_btn_back)

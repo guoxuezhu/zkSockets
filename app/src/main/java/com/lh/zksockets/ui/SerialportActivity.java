@@ -104,7 +104,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         if (serialPortDataDao.loadAll().size() < 4) {
             for (int i = 1; i < 9; i++) {
-                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 2,
+                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 4,
                         "9600", 0, "无", 0, "8", 0, "1", 10));
                 for (int j = 1; j < 16; j++) {
                     if (j >= 10) {
@@ -136,7 +136,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             radio_binary_2.setChecked(true);
         }
 
-        ELog.i("=========serialCommands===00000=====" + serialPortDataDao.load(i).toString());
 
         serialCommands = serialCommandDao.queryBuilder()
                 .where(SerialCommandDao.Properties.SId.eq(i))
