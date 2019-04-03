@@ -46,28 +46,31 @@ public class IOsetActivity extends BaseActivity {
 
         ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, 0, 0, 0, 0));
+            ioYuanDao.insert(new IOYuan((long) 1, 0, ""));
+            ioYuanDao.insert(new IOYuan((long) 2, 0, ""));
+            ioYuanDao.insert(new IOYuan((long) 3, 0, ""));
+            ioYuanDao.insert(new IOYuan((long) 4, 0, ""));
         }
 
-        if (ioYuanDao.loadAll().get(0).dangerIo1 == 1) {
+        if (ioYuanDao.load((long) 1).dangerIoStatus == 1) {
             danger_1_gl.setChecked(true);
         } else {
             danger_1_gl.setChecked(false);
         }
 
-        if (ioYuanDao.loadAll().get(0).dangerIo2 == 1) {
+        if (ioYuanDao.load((long) 2).dangerIoStatus == 1) {
             danger_2_gl.setChecked(true);
         } else {
             danger_2_gl.setChecked(false);
         }
 
-        if (ioYuanDao.loadAll().get(0).dangerIo3 == 1) {
+        if (ioYuanDao.load((long) 3).dangerIoStatus == 1) {
             danger_3_gl.setChecked(true);
         } else {
             danger_3_gl.setChecked(false);
         }
 
-        if (ioYuanDao.loadAll().get(0).dangerIo4 == 1) {
+        if (ioYuanDao.load((long) 4).dangerIoStatus == 1) {
             danger_4_gl.setChecked(true);
         } else {
             danger_4_gl.setChecked(false);
@@ -107,7 +110,10 @@ public class IOsetActivity extends BaseActivity {
             io4 = 0;
         }
 
-        ioYuanDao.update(new IOYuan((long) 1, io1, io2, io3, io4));
+        ioYuanDao.update(new IOYuan((long) 1, io1, bj_event_1.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 2, io2, bj_event_2.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 3, io3, bj_event_3.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 4, io4, bj_event_4.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

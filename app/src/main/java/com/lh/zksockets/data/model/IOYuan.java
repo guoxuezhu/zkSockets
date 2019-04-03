@@ -11,86 +11,51 @@ public class IOYuan {
     @Id
     public Long id;
 
-    public int dangerIo1; //1 高      0 低
-    public int dangerIo2;
-    public int dangerIo3;
-    public int dangerIo4;
+    public int dangerIoStatus; //1 高      0 低
 
+    public String dangerMl;
 
-    @Generated(hash = 364110937)
-    public IOYuan(Long id, int dangerIo1, int dangerIo2, int dangerIo3,
-            int dangerIo4) {
+    @Generated(hash = 598487363)
+    public IOYuan(Long id, int dangerIoStatus, String dangerMl) {
         this.id = id;
-        this.dangerIo1 = dangerIo1;
-        this.dangerIo2 = dangerIo2;
-        this.dangerIo3 = dangerIo3;
-        this.dangerIo4 = dangerIo4;
+        this.dangerIoStatus = dangerIoStatus;
+        this.dangerMl = dangerMl;
     }
-
 
     @Generated(hash = 1488061952)
     public IOYuan() {
     }
 
-
     @Override
     public String toString() {
         return "IOYuan{" +
                 "id=" + id +
-                ", dangerIo1=" + dangerIo1 +
-                ", dangerIo2=" + dangerIo2 +
-                ", dangerIo3=" + dangerIo3 +
-                ", dangerIo4=" + dangerIo4 +
+                ", dangerIoStatus=" + dangerIoStatus +
+                ", dangerMl='" + dangerMl + '\'' +
                 '}';
     }
-
 
     public Long getId() {
         return this.id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
 
-
-    public int getDangerIo1() {
-        return this.dangerIo1;
+    public int getDangerIoStatus() {
+        return this.dangerIoStatus;
     }
 
-
-    public void setDangerIo1(int dangerIo1) {
-        this.dangerIo1 = dangerIo1;
+    public void setDangerIoStatus(int dangerIoStatus) {
+        this.dangerIoStatus = dangerIoStatus;
     }
 
-
-    public int getDangerIo2() {
-        return this.dangerIo2;
+    public String getDangerMl() {
+        return this.dangerMl;
     }
 
-
-    public void setDangerIo2(int dangerIo2) {
-        this.dangerIo2 = dangerIo2;
-    }
-
-
-    public int getDangerIo3() {
-        return this.dangerIo3;
-    }
-
-
-    public void setDangerIo3(int dangerIo3) {
-        this.dangerIo3 = dangerIo3;
-    }
-
-
-    public int getDangerIo4() {
-        return this.dangerIo4;
-    }
-
-
-    public void setDangerIo4(int dangerIo4) {
-        this.dangerIo4 = dangerIo4;
+    public void setDangerMl(String dangerMl) {
+        this.dangerMl = dangerMl;
     }
 }

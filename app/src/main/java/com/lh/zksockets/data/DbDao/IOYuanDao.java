@@ -25,10 +25,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property DangerIo1 = new Property(1, int.class, "dangerIo1", false, "DANGER_IO1");
-        public final static Property DangerIo2 = new Property(2, int.class, "dangerIo2", false, "DANGER_IO2");
-        public final static Property DangerIo3 = new Property(3, int.class, "dangerIo3", false, "DANGER_IO3");
-        public final static Property DangerIo4 = new Property(4, int.class, "dangerIo4", false, "DANGER_IO4");
+        public final static Property DangerIoStatus = new Property(1, int.class, "dangerIoStatus", false, "DANGER_IO_STATUS");
+        public final static Property DangerMl = new Property(2, String.class, "dangerMl", false, "DANGER_ML");
     }
 
 
@@ -45,10 +43,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IOYUAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"DANGER_IO1\" INTEGER NOT NULL ," + // 1: dangerIo1
-                "\"DANGER_IO2\" INTEGER NOT NULL ," + // 2: dangerIo2
-                "\"DANGER_IO3\" INTEGER NOT NULL ," + // 3: dangerIo3
-                "\"DANGER_IO4\" INTEGER NOT NULL );"); // 4: dangerIo4
+                "\"DANGER_IO_STATUS\" INTEGER NOT NULL ," + // 1: dangerIoStatus
+                "\"DANGER_ML\" TEXT);"); // 2: dangerMl
     }
 
     /** Drops the underlying database table. */
@@ -65,10 +61,12 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerIo1());
-        stmt.bindLong(3, entity.getDangerIo2());
-        stmt.bindLong(4, entity.getDangerIo3());
-        stmt.bindLong(5, entity.getDangerIo4());
+        stmt.bindLong(2, entity.getDangerIoStatus());
+ 
+        String dangerMl = entity.getDangerMl();
+        if (dangerMl != null) {
+            stmt.bindString(3, dangerMl);
+        }
     }
 
     @Override
@@ -79,10 +77,12 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerIo1());
-        stmt.bindLong(3, entity.getDangerIo2());
-        stmt.bindLong(4, entity.getDangerIo3());
-        stmt.bindLong(5, entity.getDangerIo4());
+        stmt.bindLong(2, entity.getDangerIoStatus());
+ 
+        String dangerMl = entity.getDangerMl();
+        if (dangerMl != null) {
+            stmt.bindString(3, dangerMl);
+        }
     }
 
     @Override
@@ -94,10 +94,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     public IOYuan readEntity(Cursor cursor, int offset) {
         IOYuan entity = new IOYuan( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // dangerIo1
-            cursor.getInt(offset + 2), // dangerIo2
-            cursor.getInt(offset + 3), // dangerIo3
-            cursor.getInt(offset + 4) // dangerIo4
+            cursor.getInt(offset + 1), // dangerIoStatus
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // dangerMl
         );
         return entity;
     }
@@ -105,10 +103,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     @Override
     public void readEntity(Cursor cursor, IOYuan entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDangerIo1(cursor.getInt(offset + 1));
-        entity.setDangerIo2(cursor.getInt(offset + 2));
-        entity.setDangerIo3(cursor.getInt(offset + 3));
-        entity.setDangerIo4(cursor.getInt(offset + 4));
+        entity.setDangerIoStatus(cursor.getInt(offset + 1));
+        entity.setDangerMl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
     
     @Override

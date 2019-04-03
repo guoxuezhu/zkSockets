@@ -2,6 +2,7 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
@@ -59,6 +60,7 @@ public class SerialPortUtil {
     private static int number = 1;
     private static int bslength = 0;
     private static byte[] buffer1 = new byte[1024];
+
     public static void readMsg2() {
 
         new Thread() {
@@ -77,7 +79,16 @@ public class SerialPortUtil {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
-                            if (size > 4) {
+                            if (size == 19 && msg.substring(2, 6).equals("ARM0")) {
+                                //     取中间件1个字节转2进制
+                                byte[] bs = new byte[1];
+                                System.arraycopy(buffer, 16, bs, 0, 1);
+                                String hex = Integer.toHexString(bs[0] & 0xFF);
+
+                                baojin(hex);
+
+
+                            } else if (size > 4) {
 
                                 if (number == 1) {
                                     System.arraycopy(buffer, 0, buffer1, 0, size);
@@ -103,7 +114,6 @@ public class SerialPortUtil {
                                 }
 
 
-
                             }
 
 
@@ -120,6 +130,34 @@ public class SerialPortUtil {
 
     }
 
+    private static void baojin(String hex) {
+        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
+
+        String str2jz = JinzhiUtil.get2String(hex);
+        ELog.i("=========报警口==000====" + str2jz);
+        if (str2jz != null) {
+            if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
+                ELog.i("=========报警口======" + 4);
+            }
+
+            if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
+                ELog.i("=========报警口======" + 3);
+            }
+
+            if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
+                ELog.i("=========报警口======" + 2);
+            }
+
+            if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
+                ELog.i("=========报警口======" + 1);
+            }
+
+        }
+
+
+    }
+
+
     private static void startTimer() {
         if (serialPortReadTimer != null) {
             serialPortReadTimer.cancel();
@@ -133,16 +171,11 @@ public class SerialPortUtil {
                 ELog.i("=========串口2===接收到了数据==buffer1=====" + dataStr);
 
 
-
-
-
                 bslength = 0;
                 number = 1;
                 ELog.d("=========serialPortReadTimer==========");
             }
         }, 5 * 1000);
-
-
 
 
     }
