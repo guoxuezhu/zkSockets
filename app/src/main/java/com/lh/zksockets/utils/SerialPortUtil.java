@@ -65,6 +65,7 @@ public class SerialPortUtil {
                 try {
                     while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
                         if (size > 0) {
+                            ELog.i("=========串口2===接收到了数据===========size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
                             if (msg.equals("{OK}")) {
@@ -522,25 +523,6 @@ public class SerialPortUtil {
     }
 
 
-    private static void sendJidianqi() {
-        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
-        byte[] data2 = StringToBytes("0F");
-        if (data2 == null) {
-            return;
-        }
-        byte[] data3 = ">}".getBytes();
-
-        byte[] data = new byte[data1.length + data2.length + data3.length];
-
-        System.arraycopy(data1, 0, data, 0, data1.length);
-        System.arraycopy(data2, 0, data, data1.length, data2.length);
-        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-
-        sendMsg(data);
-
-    }
-
     private static void sendShipinType(String str) {
         String msg = "";
         if (str.substring(0, 4).equals("VIDA")) {
@@ -608,14 +590,14 @@ public class SerialPortUtil {
 
     public static List<String> getBaudRateDatas() {
         List<String> baudRateList = new ArrayList<>();
+        baudRateList.add("600");
+        baudRateList.add("1200");
         baudRateList.add("2400");
         baudRateList.add("4800");
         baudRateList.add("9600");
-        baudRateList.add("14400");
         baudRateList.add("19200");
         baudRateList.add("38400");
         baudRateList.add("57600");
-        baudRateList.add("115200");
         return baudRateList;
     }
 

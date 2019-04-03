@@ -12,6 +12,7 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.IoPortData;
+import com.lh.zksockets.utils.ELog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +80,7 @@ public class VolumeSetActivity extends BaseActivity {
         } else {
             bjout_4_gl.setChecked(false);
         }
-
+        ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
 
     }
 

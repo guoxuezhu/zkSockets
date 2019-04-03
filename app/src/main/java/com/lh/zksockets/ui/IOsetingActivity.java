@@ -11,6 +11,7 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.IoPortData;
+import com.lh.zksockets.utils.ELog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +30,6 @@ public class IOsetingActivity extends BaseActivity {
     Switch switch_4_gl;
 
 
-
     @BindView(R.id.io_et_time_1)
     EditText io_et_time_1;
     @BindView(R.id.io_et_time_2)
@@ -38,7 +38,6 @@ public class IOsetingActivity extends BaseActivity {
     EditText io_et_time_3;
     @BindView(R.id.io_et_time_4)
     EditText io_et_time_4;
-
 
 
     private IoPortDataDao ioPortDataDao;
@@ -57,29 +56,30 @@ public class IOsetingActivity extends BaseActivity {
             }
         }
 
-        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
+        if (ioPortDataDao.load((long) 1).ioOutStatus == 1) {
             switch_1_gl.setChecked(true);
         } else {
             switch_1_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
+        if (ioPortDataDao.load((long) 2).ioOutStatus == 1) {
             switch_2_gl.setChecked(true);
         } else {
             switch_2_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
+        if (ioPortDataDao.load((long) 3).ioOutStatus == 1) {
             switch_3_gl.setChecked(true);
         } else {
             switch_3_gl.setChecked(false);
         }
 
-        if (ioPortDataDao.load((long)1).ioOutStatus == 1) {
+        if (ioPortDataDao.load((long) 4).ioOutStatus == 1) {
             switch_4_gl.setChecked(true);
         } else {
             switch_4_gl.setChecked(false);
         }
+        ELog.i("========ioPortDataDao========" + ioPortDataDao.loadAll().toString());
     }
 
 
