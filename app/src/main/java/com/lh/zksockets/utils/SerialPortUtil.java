@@ -171,6 +171,60 @@ public class SerialPortUtil {
                 ELog.i("=========串口2===接收到了数据==buffer1=====" + dataStr);
 
 
+                String[] datas1 = dataStr.split("<");
+                String[] datas2 = dataStr.split(">");
+
+                if (datas1.length == 3) {
+
+                    int length1 = datas1[0].length() + 1;
+                    int length2 = datas2[0].length();
+
+                    int length3 = length1 + datas1[1].length() + 1;
+                    int length4 = length2 + 1 + datas2[1].length();
+
+
+                    int datalength1 = length2 - length1;
+                    int datalength2 = length4 - length3;
+
+
+                    ELog.i("======length1===" + length1);
+                    ELog.i("======length2===" + length2);
+                    ELog.i("======length3===" + length3);
+                    ELog.i("======length4===" + length4);
+
+
+//                    byte[] bufferd = new byte[1024];
+//
+//                    System.arraycopy(buffer1, length1, bufferd, 0, datalength1);
+//
+//                    byte[] bufferd1 = new byte[1024];
+//
+//                    System.arraycopy(buffer1, length3, bufferd1, 0, datalength2);
+//
+//                    ELog.i("=======buffer1=====" + new String(bufferd, 0, datalength1));
+//                    ELog.i("=======buffer1==2===" + new String(bufferd1, 0, datalength2));
+
+                    byte[] bufferd = new byte[1024];
+                    System.arraycopy(buffer1, length1, bufferd, 0, datalength1);
+                    System.arraycopy(buffer1, length3, bufferd, datalength1, datalength2);
+
+
+                    int databuf = datalength1 + datalength2;
+                    String ret = "";
+                    for (int j = 0; j < databuf; j++) {
+                        String hex = Integer.toHexString(bufferd[j] & 0xFF);
+                        if (hex.length() == 1) {
+                            hex = '0' + hex;
+                        }
+                        ret += hex.toUpperCase();
+                    }
+
+                    ELog.i("=======ssss=====" + ret);
+                    ELog.i("=======bufferd=====" + new String(bufferd, 0, datalength1 + datalength2));
+
+
+                }
+
                 bslength = 0;
                 number = 1;
                 ELog.d("=========serialPortReadTimer==========");
