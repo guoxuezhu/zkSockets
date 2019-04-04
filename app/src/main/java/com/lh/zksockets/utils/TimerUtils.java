@@ -436,6 +436,6 @@ public class TimerUtils {
                 SerialPortUtil.doSerialPort(serialportML);
                 ELog.d("=========wenshiTimer==========");
             }
-        }, 1000, time * 60 * 1000);
+        }, 5000, time * 60 * 1000);
     }
 }

@@ -7,15 +7,18 @@ import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.SerialCommand;
+import com.lh.zksockets.data.model.WenShiDu;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -31,7 +34,6 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
-    private static Timer serialPortReadTimer;
 
 
     public static void open() {
@@ -57,9 +59,9 @@ public class SerialPortUtil {
     }
 
 
-    private static int number = 1;
     private static int bslength = 0;
     private static byte[] buffer1 = new byte[1024];
+    private static byte[] buffer2 = new byte[1024];
 
     public static void readMsg2() {
 
@@ -75,42 +77,63 @@ public class SerialPortUtil {
                 try {
                     while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
                         if (size > 0) {
-                            ELog.i("=========串口2===接收到了数据===========size=====" + size);
+                            ELog.i("=========串口2===接收到了数据==size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
-                            if (size == 19 && msg.substring(2, 6).equals("ARM0")) {
-                                //     取中间件1个字节转2进制
-                                byte[] bs = new byte[1];
-                                System.arraycopy(buffer, 16, bs, 0, 1);
-                                String hex = Integer.toHexString(bs[0] & 0xFF);
 
-                                baojin(hex);
+                            System.arraycopy(buffer, 0, buffer1, bslength, size);
+                            bslength = bslength + size;
+                            if (msg.indexOf("]") == -1) {
+
+                            } else {
+                                String msgdata = new String(buffer1, 0, bslength);
+                                ELog.i("============msgdata====11111=============" + msgdata);
+                                if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
+                                    if (msgdata.substring(1).indexOf("[") == -1) {
+                                        bslength = 0;
+                                        buffer1 = new byte[1024];
+                                        buffer2 = new byte[1024];
+                                        ELog.i("===============222222222222222=========");
+                                    } else {
+                                        System.arraycopy(buffer1, 4, buffer2, 0, bslength - 4);
+                                        ELog.i("================3333333333333333=============" + new String(buffer2, 0, bslength - 4));
+                                        buffer1 = new byte[1024];
+                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength - 4);
+                                        buffer2 = new byte[1024];
+                                    }
+                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM0]")) {
+                                    if (msgdata.indexOf(">") == -1) {
+                                    } else {
+                                        if (bslength - 8 == 9) {
+                                            buffer2 = new byte[1024];
+                                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
+
+                                            setWenshidu();
+
+                                            bslength = 0;
+                                            buffer1 = new byte[1024];
+                                            buffer2 = new byte[1024];
+
+                                        } else if (bslength - 16 == 9) {
+                                            buffer2 = new byte[1024];
+                                            int length1 = msgdata.indexOf(">") + 1;
+                                            System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
+                                            System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
+
+                                            setWenshidu();
+
+                                            bslength = 0;
+                                            buffer1 = new byte[1024];
+                                            buffer2 = new byte[1024];
 
 
-                            } else if (size > 4) {
+                                        }
 
-                                if (number == 1) {
-                                    System.arraycopy(buffer, 0, buffer1, 0, size);
-                                    bslength = size;
-                                    number++;
-                                    startTimer();
-                                } else if (number == 2) {
-                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                    bslength = bslength + size;
-                                    number++;
-                                } else if (number == 3) {
-                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                    bslength = bslength + size;
-                                    number++;
-                                } else if (number == 4) {
-                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                    bslength = bslength + size;
-                                    number++;
-                                } else if (number == 5) {
-                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                    bslength = bslength + size;
-                                    number++;
+
+                                    }
+
+
                                 }
 
 
@@ -127,6 +150,39 @@ public class SerialPortUtil {
 
             }
         }.start();
+
+    }
+
+    private static void setWenshidu() {
+
+        String ret = "";
+        for (int j = 0; j < 9; j++) {
+            String hex = Integer.toHexString(buffer2[j] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            ret += hex.toUpperCase();
+        }
+        ELog.i("=======温度=============" + ret);
+        if (ret.substring(0, 6).equals("010404")) {
+            if (ret.substring(6, 8).equals("00")) {
+                ELog.i("=======温度====" + Integer.parseInt(ret.substring(6, 10), 16));
+                ELog.i("=======湿度====" + Integer.parseInt(ret.substring(10, 14), 16));
+
+                BigDecimal wendu = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
+
+                BigDecimal shidu = new BigDecimal(Integer.parseInt(ret.substring(10, 14), 16));
+
+                BigDecimal bigDecimal = new BigDecimal("0.1");
+
+                WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+
+                WenShiDu wenShiDu = new WenShiDu(wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
+                        wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
+                wenShiDuDao.deleteAll();
+                wenShiDuDao.insert(wenShiDu);
+            }
+        }
 
     }
 
@@ -153,83 +209,6 @@ public class SerialPortUtil {
             }
 
         }
-
-
-    }
-
-
-    private static void startTimer() {
-        if (serialPortReadTimer != null) {
-            serialPortReadTimer.cancel();
-        }
-        serialPortReadTimer = new Timer();
-        serialPortReadTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                String dataStr = new String(buffer1, 0, bslength);
-                ELog.i("=========串口2===接收到了数据==buffer1=====" + dataStr);
-
-
-                String[] datas1 = dataStr.split("<");
-                String[] datas2 = dataStr.split(">");
-
-                if (datas1.length == 3) {
-
-                    int length1 = datas1[0].length() + 1;
-                    int length2 = datas2[0].length();
-
-                    int length3 = length1 + datas1[1].length() + 1;
-                    int length4 = length2 + 1 + datas2[1].length();
-
-
-                    int datalength1 = length2 - length1;
-                    int datalength2 = length4 - length3;
-
-
-                    ELog.i("======length1===" + length1);
-                    ELog.i("======length2===" + length2);
-                    ELog.i("======length3===" + length3);
-                    ELog.i("======length4===" + length4);
-
-
-//                    byte[] bufferd = new byte[1024];
-//
-//                    System.arraycopy(buffer1, length1, bufferd, 0, datalength1);
-//
-//                    byte[] bufferd1 = new byte[1024];
-//
-//                    System.arraycopy(buffer1, length3, bufferd1, 0, datalength2);
-//
-//                    ELog.i("=======buffer1=====" + new String(bufferd, 0, datalength1));
-//                    ELog.i("=======buffer1==2===" + new String(bufferd1, 0, datalength2));
-
-                    byte[] bufferd = new byte[1024];
-                    System.arraycopy(buffer1, length1, bufferd, 0, datalength1);
-                    System.arraycopy(buffer1, length3, bufferd, datalength1, datalength2);
-
-
-                    int databuf = datalength1 + datalength2;
-                    String ret = "";
-                    for (int j = 0; j < databuf; j++) {
-                        String hex = Integer.toHexString(bufferd[j] & 0xFF);
-                        if (hex.length() == 1) {
-                            hex = '0' + hex;
-                        }
-                        ret += hex.toUpperCase();
-                    }
-
-                    ELog.i("=======ssss=====" + ret);
-                    ELog.i("=======bufferd=====" + new String(bufferd, 0, datalength1 + datalength2));
-
-
-                }
-
-                bslength = 0;
-                number = 1;
-                ELog.d("=========serialPortReadTimer==========");
-            }
-        }, 5 * 1000);
 
 
     }
@@ -618,6 +597,7 @@ public class SerialPortUtil {
 
 
     public static void doSerialPort(String str) {
+        ELog.i("========str========" + str);
         if (str.equals("")) {
             return;
         }
@@ -625,7 +605,7 @@ public class SerialPortUtil {
         if (serialCommandDao.loadAll().size() == 0) {
             return;
         }
-        ELog.i("========str========" + str);
+        ELog.i("========serialCommandDao========");
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
         if (spML == null) {
             return;
