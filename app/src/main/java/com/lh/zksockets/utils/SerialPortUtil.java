@@ -181,10 +181,28 @@ public class SerialPortUtil {
                         wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
+
+                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%";
+                sendMsg1(wsd.getBytes());
             }
         }
 
     }
+
+    public static void sendMsg1(byte[] data) {
+        try {
+            synchronized (data) {
+                if (data.length > 0) {
+                    outputStream1.write(data);
+                    outputStream1.flush();
+                    ELog.e("====sendSerialPort: 串口数据发送成功");
+                }
+            }
+        } catch (IOException e) {
+            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+        }
+    }
+
 
     private static void baojin(String hex) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
