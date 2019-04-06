@@ -84,9 +84,7 @@ public class SerialPortUtil {
 
                             System.arraycopy(buffer, 0, buffer1, bslength, size);
                             bslength = bslength + size;
-                            if (msg.indexOf("]") == -1) {
-
-                            } else {
+                            if (msg.indexOf("]") != -1) {
                                 String msgdata = new String(buffer1, 0, bslength);
                                 ELog.i("============msgdata====11111=============" + msgdata);
                                 if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
@@ -102,9 +100,16 @@ public class SerialPortUtil {
                                         System.arraycopy(buffer2, 0, buffer1, 0, bslength - 4);
                                         buffer2 = new byte[1024];
                                     }
-                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM0]")) {
-                                    if (msgdata.indexOf(">") == -1) {
-                                    } else {
+                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM0]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM1]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM2]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM3]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM4]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM5]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM6]") ||
+                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+
+                                    if (msgdata.indexOf(">") != -1) {
                                         if (bslength - 8 == 9) {
                                             buffer2 = new byte[1024];
                                             System.arraycopy(buffer1, 7, buffer2, 0, 9);
@@ -126,14 +131,28 @@ public class SerialPortUtil {
                                             bslength = 0;
                                             buffer1 = new byte[1024];
                                             buffer2 = new byte[1024];
+                                        }
+
+                                    }
+
+                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
+                                    if (msgdata.indexOf(">") != -1) {
+                                        if (bslength - 8 == 1) {
+                                            buffer2 = new byte[1024];
+                                            System.arraycopy(buffer1, 7, buffer2, 0, 1);
+
+                                            String hex = Integer.toHexString(buffer2[0] & 0xFF);
+                                            baojin(JinzhiUtil.get2String(hex));
+
+                                            bslength = 0;
+                                            buffer1 = new byte[1024];
+                                            buffer2 = new byte[1024];
+
 
 
                                         }
 
-
                                     }
-
-
                                 }
 
 
