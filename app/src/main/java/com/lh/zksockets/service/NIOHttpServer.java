@@ -45,7 +45,6 @@ public class NIOHttpServer implements HttpServerRequestCallback {
     @Override
     public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
         Log.d(TAG, "=======aaaaaaaa======");
-
         if (request.getMethod().equals("POST")) {
             Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
             Log.d(TAG, "parms ========= " + parms.toString());

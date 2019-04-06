@@ -8,9 +8,6 @@ import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
-import com.lh.zksockets.data.model.DangerOut;
-import com.lh.zksockets.data.model.IoPortData;
-import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -21,8 +18,6 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -141,14 +136,11 @@ public class SerialPortUtil {
                                             buffer2 = new byte[1024];
                                             System.arraycopy(buffer1, 7, buffer2, 0, 1);
 
-                                            String hex = Integer.toHexString(buffer2[0] & 0xFF);
-                                            baojin(JinzhiUtil.get2String(hex));
+                                            baojin(Integer.toHexString(buffer2[0] & 0xFF));
 
                                             bslength = 0;
                                             buffer1 = new byte[1024];
                                             buffer2 = new byte[1024];
-
-
 
                                         }
 
@@ -214,7 +206,7 @@ public class SerialPortUtil {
                 if (data.length > 0) {
                     outputStream1.write(data);
                     outputStream1.flush();
-                    ELog.e("====sendSerialPort: 串口数据发送成功");
+                    ELog.e("=====sendMsg1=========串口数据发送成功");
                 }
             }
         } catch (IOException e) {
@@ -231,19 +223,47 @@ public class SerialPortUtil {
         if (str2jz != null) {
             if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 4);
+                makeBaojing(ioYuanDao.load((long) 4).dangerMl);
             }
 
             if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 3);
+                makeBaojing(ioYuanDao.load((long) 3).dangerMl);
             }
 
             if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 2);
+                makeBaojing(ioYuanDao.load((long) 2).dangerMl);
             }
 
             if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 1);
+                makeBaojing(ioYuanDao.load((long) 1).dangerMl);
             }
+
+        }
+
+
+    }
+
+    private static void makeBaojing(String strMls) {
+        if (strMls.length() != 0) {
+            String[] mls = strMls.split(",");
+            for (int i = 0; i < mls.length; i++) {
+                ELog.i("========makeBaojing========" + mls[i]);
+                if (mls[i].substring(0, 1).equals("1")) {
+                    doSerialPort(mls[i]);
+                } else if (mls[i].substring(0, 1).equals("2")) {
+                    doJDQ(mls[i]);
+                } else if (mls[i].substring(0, 1).equals("3")) {
+                    doIO(mls[i]);
+                } else if (mls[i].substring(0, 1).equals("4")) {
+                    doDanger(mls[i]);
+                }
+
+
+            }
+
 
         }
 
@@ -328,7 +348,6 @@ public class SerialPortUtil {
                 String[] mls = strMls.split(",");
                 for (int i = 0; i < mls.length; i++) {
                     ELog.i("========11111111========" + mls[i]);
-
                     if (mls[i].substring(0, 1).equals("1")) {
                         doSerialPort(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("2")) {
@@ -337,8 +356,6 @@ public class SerialPortUtil {
                         doIO(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("4")) {
                         doDanger(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("5")) {
-
                     }
 
 
@@ -375,60 +392,7 @@ public class SerialPortUtil {
         sendMsg(data);
 
 
-//        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-////        if (dangerOutDao.loadAll().size() == 0) {
-////            return;
-////        }
-//        DangerOut dangerOut = dangerOutDao.load((long) 2);
-//        if (dangerOut == null) {
-//            return;
-//        }
-//        ELog.i("========DangerOut========" + dangerOut.toString());
-//
-//        String status = "";
-//        if (ml.substring(2, 3).equals("1")) {
-//            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + ml.substring(4);
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            status = dangerOut.dangerOut4 + "" + dangerOut.dangerOut3 + "" + ml.substring(4) + "" + dangerOut.dangerOut1;
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            status = dangerOut.dangerOut4 + "" + ml.substring(4) + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            status = ml.substring(4) + "" + dangerOut.dangerOut3 + "" + dangerOut.dangerOut2 + "" + dangerOut.dangerOut1;
-//        } else {
-//            return;
-//        }
-//
-//        ELog.i("========十六进制字符串==11======" + status);
-//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-//        ELog.i("========十六进制字符串========" + hex);
-//        if (hex.length() == 1) {
-//            hex = "0" + hex;
-//        }
-//
-//        byte[] data1 = "{[ARM0:DT:H001]<".getBytes();
-//        byte[] data2 = StringToBytes(hex);
-//        if (data2 == null) {
-//            return;
-//        }
-//        byte[] data3 = ">}".getBytes();
-//
-//        byte[] data = new byte[data1.length + data2.length + data3.length];
-//
-//        System.arraycopy(data1, 0, data, 0, data1.length);
-//        System.arraycopy(data2, 0, data, data1.length, data2.length);
-//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-//        sendMsg(data);
-//
-//        if (ml.substring(2, 3).equals("1")) {
-//            dangerOutDao.update(new DangerOut((long) 2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut2, dangerOut.dangerOut3, dangerOut.dangerOut4));
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut3, dangerOut.dangerOut4));
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, Integer.valueOf(ml.substring(4)), dangerOut.dangerOut4));
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            dangerOutDao.update(new DangerOut((long) 2, dangerOut.dangerOut1, dangerOut.dangerOut2, dangerOut.dangerOut3, Integer.valueOf(ml.substring(4))));
-//        }
-//        ELog.i("========DangerOut========" + dangerOutDao.load((long) 2).toString());
+
     }
 
     private static void doIO(String ml) {
@@ -449,62 +413,10 @@ public class SerialPortUtil {
                 TimerUtils.setHuifuIoOutstatus(ml.substring(2, 3), ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
             }
         }
-        ELog.i("========doDanger====msg====" + msg);
+        ELog.i("========doIO====msg====" + msg);
         byte[] data = msg.getBytes();
         sendMsg(data);
 
-
-//
-//        IoPortData ioPortData = ioPortDataDao.load((long) 2);
-//        if (ioPortData == null) {
-//            return;
-//        }
-//        ELog.i("========ioPortData========" + ioPortData.toString());
-//
-//        String status = "";
-//        if (ml.substring(2, 3).equals("1")) {
-//            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ml.substring(4);
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            status = ioPortData.io4 + "" + ioPortData.io3 + "" + ml.substring(4) + "" + ioPortData.io1;
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            status = ioPortData.io4 + "" + ml.substring(4) + "" + ioPortData.io2 + "" + ioPortData.io1;
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            status = ml.substring(4) + "" + ioPortData.io3 + "" + ioPortData.io2 + "" + ioPortData.io1;
-//        } else {
-//            return;
-//        }
-//
-//        ELog.i("========十六进制字符串==11======" + status);
-//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-//        ELog.i("========十六进制字符串========" + hex);
-//        if (hex.length() == 1) {
-//            hex = "0" + hex;
-//        }
-//
-//        byte[] data1 = "{[IOL0:DT:H001]<".getBytes();
-//        byte[] data2 = StringToBytes(hex);
-//        if (data2 == null) {
-//            return;
-//        }
-//        byte[] data3 = ">}".getBytes();
-//
-//        byte[] data = new byte[data1.length + data2.length + data3.length];
-//
-//        System.arraycopy(data1, 0, data, 0, data1.length);
-//        System.arraycopy(data2, 0, data, data1.length, data2.length);
-//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-//        sendMsg(data);
-//
-//        if (ml.substring(2, 3).equals("1")) {
-//            ioPortDataDao.update(new IoPortData((long) 2, Integer.valueOf(ml.substring(4)), ioPortData.io2, ioPortData.io3, ioPortData.io4));
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, Integer.valueOf(ml.substring(4)), ioPortData.io3, ioPortData.io4));
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, Integer.valueOf(ml.substring(4)), ioPortData.io4));
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            ioPortDataDao.update(new IoPortData((long) 2, ioPortData.io1, ioPortData.io2, ioPortData.io3, Integer.valueOf(ml.substring(4))));
-//        }
-//        ELog.i("========ioPortData========" + ioPortDataDao.load((long) 2).toString());
     }
 
     public static void doJDQ(String ml) {
@@ -549,92 +461,11 @@ public class SerialPortUtil {
         byte[] data = msg.getBytes();
         sendMsg(data);
 
-
-//        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-////        if (jdqStatusDao.loadAll().size() == 0) {
-////            return;
-////        }
-//        JDQstatus jdqStatus = jdqStatusDao.load((long) 2);
-//        if (jdqStatus == null) {
-//            return;
-//        }
-//        ELog.i("========jdqStatus========" + jdqStatus.toString());
-//
-//        String status = "";
-//        if (ml.substring(2, 3).equals("1")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + ml.substring(4);
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + ml.substring(4) + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + ml.substring(4) + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + ml.substring(4)
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("5")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + jdqStatus.jdq6 + "" + ml.substring(4) + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("6")) {
-//            status = jdqStatus.jdq8 + "" + jdqStatus.jdq7 + "" + ml.substring(4) + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("7")) {
-//            status = 0 + "" + 1 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else if (ml.substring(2, 3).equals("8")) {
-//            status = 1 + "" + 0 + "" + jdqStatus.jdq6 + "" + jdqStatus.jdq5 + "" + jdqStatus.jdq4
-//                    + "" + jdqStatus.jdq3 + "" + jdqStatus.jdq2 + "" + jdqStatus.jdq1;
-//        } else {
-//            return;
-//        }
-//
-//        ELog.i("========十六进制字符串==11======" + status);
-//        String hex = Integer.toString(Integer.parseInt(status, 2), 16);
-//        ELog.i("========十六进制字符串========" + hex);
-//        if (hex.length() == 1) {
-//            hex = "0" + hex;
-//        }
-//
-//        byte[] data1 = "{[REY0:DT:H001]<".getBytes();
-//        byte[] data2 = StringToBytes(hex);
-//        if (data2 == null) {
-//            return;
-//        }
-//        byte[] data3 = ">}".getBytes();
-//
-//        byte[] data = new byte[data1.length + data2.length + data3.length];
-//
-//        System.arraycopy(data1, 0, data, 0, data1.length);
-//        System.arraycopy(data2, 0, data, data1.length, data2.length);
-//        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-//        sendMsg(data);
-//
-//        if (ml.substring(2, 3).equals("1")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-//        } else if (ml.substring(2, 3).equals("2")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, Integer.valueOf(ml.substring(4)), jdqStatus.jdq3, jdqStatus.jdq4,
-//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-//        } else if (ml.substring(2, 3).equals("3")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, Integer.valueOf(ml.substring(4)), jdqStatus.jdq4,
-//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-//        } else if (ml.substring(2, 3).equals("4")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, Integer.valueOf(ml.substring(4)),
-//                    jdqStatus.jdq5, jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-//        } else if (ml.substring(2, 3).equals("5")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-//                    Integer.valueOf(ml.substring(4)), jdqStatus.jdq6, jdqStatus.jdq7, jdqStatus.jdq8));
-//        } else if (ml.substring(2, 3).equals("6")) {
-//            jdqStatusDao.update(new JDQstatus((long) 2, jdqStatus.jdq1, jdqStatus.jdq2, jdqStatus.jdq3, jdqStatus.jdq4,
-//                    jdqStatus.jdq5, Integer.valueOf(ml.substring(4)), jdqStatus.jdq7, jdqStatus.jdq8));
-//        }
-//        ELog.i("========jdqStatus========" + jdqStatusDao.load((long) 2).toString());
     }
 
 
     public static void doSerialPort(String str) {
-        ELog.i("========str========" + str);
+        ELog.i("======doSerialPort==str========" + str);
         if (str.equals("")) {
             return;
         }
@@ -642,12 +473,11 @@ public class SerialPortUtil {
         if (serialCommandDao.loadAll().size() == 0) {
             return;
         }
-        ELog.i("========serialCommandDao========");
         SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
         if (spML == null) {
             return;
         }
-        ELog.i("========spML========" + spML.toString());
+        ELog.i("======doSerialPort==spML========" + spML.toString());
         if (spML.commandStr.length() != 0) {
             byte[] data = null;
             if (spML.jinZhi == 16) {
@@ -660,7 +490,7 @@ public class SerialPortUtil {
                 } else if (datalength >= 100) {
                     msg1 = "{[COM" + (spML.sId - 1) + ":DT:H" + datalength + "]<";
                 }
-                ELog.i("========msg===0000000=====" + msg1);
+                ELog.i("=====doSerialPort===msg===0000000=====" + msg1);
                 byte[] data1 = msg1.getBytes();
                 byte[] data2 = StringToBytes(spML.commandStr);
                 if (data2 == null) {
@@ -682,7 +512,7 @@ public class SerialPortUtil {
                 } else if (spML.commandStr.length() >= 100) {
                     msg = "{[COM" + (spML.sId - 1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                 }
-                ELog.i("========msg===111111=====" + msg);
+                ELog.i("=====doSerialPort===msg===111111=====" + msg);
                 data = msg.getBytes();
             }
             sendMsg(data);
