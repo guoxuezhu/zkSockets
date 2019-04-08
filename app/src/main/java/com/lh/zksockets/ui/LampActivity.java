@@ -16,6 +16,7 @@ import com.lh.zksockets.data.model.Lamp;
 import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.utils.AddLampDialog;
+import com.lh.zksockets.utils.HttpUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +63,9 @@ public class LampActivity extends BaseActivity {
         luboInfoDao.insert(new LuboInfo(et_lb_ip.getText().toString(), et_lb_user.getText().toString(),
                 et_lb_mima.getText().toString(), ""));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+
+        HttpUtil.setLuboTokenTimer();
+
     }
 
 

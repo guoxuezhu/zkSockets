@@ -303,6 +303,8 @@ public class SerialPortUtil {
                             if (msg.length() > 3) {
                                 if (msg.substring(0, 3).equals("VID")) {
                                     sendShipinType(msg);
+                                } else if (msg.substring(0, 3).equals("LUB")) {
+                                    HttpUtil.setlubo(msg);
                                 }
                             } else if (msg.length() > 0 && msg.length() <= 3) {
                                 makeML(Long.valueOf(msg));
@@ -390,7 +392,6 @@ public class SerialPortUtil {
         ELog.i("========doDanger====msg====" + msg);
         byte[] data = msg.getBytes();
         sendMsg(data);
-
 
 
     }

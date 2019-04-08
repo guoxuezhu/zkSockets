@@ -84,4 +84,6 @@ dependencies {
 
     //https://www.jianshu.com/p/e475b3b87490
     implementation 'com.koushikdutta.async:androidasync:2.+'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }

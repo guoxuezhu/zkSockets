@@ -11,6 +11,7 @@ import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.service.NIOHttpServer;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
@@ -39,6 +40,7 @@ public class SplashActivity extends BaseActivity {
         setSerialport();
 
         TimerUtils.setWenshiduTimer();
+        HttpUtil.setLuboTokenTimer();
 
     }
 
