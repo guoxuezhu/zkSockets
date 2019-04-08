@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.shengji)
     public void shengji() {
-        File apkFile = new File("/mnt/usbhost/Storage01/lh/中控-release-1.0.3.apk");
+        File apkFile = new File("/mnt/usbhost/Storage01/lh/中控.apk");
         if (apkFile.exists()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

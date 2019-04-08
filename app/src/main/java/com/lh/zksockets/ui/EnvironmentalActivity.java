@@ -102,8 +102,8 @@ public class EnvironmentalActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.btn_dangerIoPort_ok)
-    public void btn_dangerIoPort_ok() {
+    @OnClick(R.id.btn_jdqIoPort_ok)
+    public void btn_jdqIoPort_ok() {
         int io1;
         int io2;
         int io3;

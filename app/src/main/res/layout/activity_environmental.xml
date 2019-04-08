@@ -361,7 +361,7 @@
 
 
     <Button
-        android:id="@+id/btn_dangerIoPort_ok"
+        android:id="@+id/btn_jdqIoPort_ok"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
