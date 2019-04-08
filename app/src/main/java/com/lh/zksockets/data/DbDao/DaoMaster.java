@@ -33,6 +33,7 @@ public class DaoMaster extends AbstractDaoMaster {
         IOYuanDao.createTable(db, ifNotExists);
         JDQstatusDao.createTable(db, ifNotExists);
         LampDao.createTable(db, ifNotExists);
+        LuboInfoDao.createTable(db, ifNotExists);
         MLsListsDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
         SerialCommandDao.createTable(db, ifNotExists);
@@ -55,6 +56,7 @@ public class DaoMaster extends AbstractDaoMaster {
         IOYuanDao.dropTable(db, ifExists);
         JDQstatusDao.dropTable(db, ifExists);
         LampDao.dropTable(db, ifExists);
+        LuboInfoDao.dropTable(db, ifExists);
         MLsListsDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
         SerialCommandDao.dropTable(db, ifExists);
@@ -91,6 +93,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(JDQstatusDao.class);
         registerDaoClass(LampDao.class);
+        registerDaoClass(LuboInfoDao.class);
         registerDaoClass(MLsListsDao.class);
         registerDaoClass(ProjectorDao.class);
         registerDaoClass(SerialCommandDao.class);

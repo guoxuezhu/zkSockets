@@ -20,6 +20,7 @@ import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.Lamp;
+import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -39,6 +40,7 @@ import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LampDao;
+import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
@@ -67,6 +69,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig iOYuanDaoConfig;
     private final DaoConfig jDQstatusDaoConfig;
     private final DaoConfig lampDaoConfig;
+    private final DaoConfig luboInfoDaoConfig;
     private final DaoConfig mLsListsDaoConfig;
     private final DaoConfig projectorDaoConfig;
     private final DaoConfig serialCommandDaoConfig;
@@ -86,6 +89,7 @@ public class DaoSession extends AbstractDaoSession {
     private final IOYuanDao iOYuanDao;
     private final JDQstatusDao jDQstatusDao;
     private final LampDao lampDao;
+    private final LuboInfoDao luboInfoDao;
     private final MLsListsDao mLsListsDao;
     private final ProjectorDao projectorDao;
     private final SerialCommandDao serialCommandDao;
@@ -133,6 +137,9 @@ public class DaoSession extends AbstractDaoSession {
         lampDaoConfig = daoConfigMap.get(LampDao.class).clone();
         lampDaoConfig.initIdentityScope(type);
 
+        luboInfoDaoConfig = daoConfigMap.get(LuboInfoDao.class).clone();
+        luboInfoDaoConfig.initIdentityScope(type);
+
         mLsListsDaoConfig = daoConfigMap.get(MLsListsDao.class).clone();
         mLsListsDaoConfig.initIdentityScope(type);
 
@@ -163,6 +170,7 @@ public class DaoSession extends AbstractDaoSession {
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
         jDQstatusDao = new JDQstatusDao(jDQstatusDaoConfig, this);
         lampDao = new LampDao(lampDaoConfig, this);
+        luboInfoDao = new LuboInfoDao(luboInfoDaoConfig, this);
         mLsListsDao = new MLsListsDao(mLsListsDaoConfig, this);
         projectorDao = new ProjectorDao(projectorDaoConfig, this);
         serialCommandDao = new SerialCommandDao(serialCommandDaoConfig, this);
@@ -182,6 +190,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(IOYuan.class, iOYuanDao);
         registerDao(JDQstatus.class, jDQstatusDao);
         registerDao(Lamp.class, lampDao);
+        registerDao(LuboInfo.class, luboInfoDao);
         registerDao(MLsLists.class, mLsListsDao);
         registerDao(Projector.class, projectorDao);
         registerDao(SerialCommand.class, serialCommandDao);
@@ -203,6 +212,7 @@ public class DaoSession extends AbstractDaoSession {
         iOYuanDaoConfig.clearIdentityScope();
         jDQstatusDaoConfig.clearIdentityScope();
         lampDaoConfig.clearIdentityScope();
+        luboInfoDaoConfig.clearIdentityScope();
         mLsListsDaoConfig.clearIdentityScope();
         projectorDaoConfig.clearIdentityScope();
         serialCommandDaoConfig.clearIdentityScope();
@@ -257,6 +267,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public LampDao getLampDao() {
         return lampDao;
+    }
+
+    public LuboInfoDao getLuboInfoDao() {
+        return luboInfoDao;
     }
 
     public MLsListsDao getMLsListsDao() {

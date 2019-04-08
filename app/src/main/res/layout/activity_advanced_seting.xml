@@ -272,16 +272,14 @@
                 android:id="@+id/lamp_seting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
-                android:visibility="gone" />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="电灯设置"
-                android:textSize="@dimen/text_size_20"
-                android:visibility="gone" />
+                android:text="录播设置"
+                android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
 

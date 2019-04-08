@@ -26,38 +26,115 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="电灯设置"
+            android:text="录播设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
     </RelativeLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_50"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="录播IP:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+        <EditText
+            android:id="@+id/et_lb_ip"
+            android:layout_width="@dimen/dp_400"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_table_bg"
+            android:digits="0123456789."
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="192.168.1.9"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="用户名:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+        <EditText
+            android:id="@+id/et_lb_user"
+            android:layout_width="@dimen/dp_400"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="admin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="密码:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+        <EditText
+            android:id="@+id/et_lb_mima"
+            android:layout_width="@dimen/dp_400"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="admin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_lubo_ok"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_20">
-
-        <Button
-            android:id="@+id/add_lamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_bg"
-            android:text="添加"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_24" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/xian" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lamp_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dp_20"
+        android:background="@drawable/btn_bg"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
 
 </LinearLayout>
