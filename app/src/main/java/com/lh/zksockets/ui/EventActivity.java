@@ -108,6 +108,11 @@ public class EventActivity extends BaseActivity {
     @BindView(R.id.event_et_45)
     EditText event_et_45;
 
+    @BindView(R.id.event_et_46)
+    EditText event_et_46;
+    @BindView(R.id.event_et_47)
+    EditText event_et_47;
+
     private MLsListsDao mLsListsDao;
 
 
@@ -165,6 +170,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", ""));
             mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "中控开机", ""));
+            mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", ""));
+            mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", ""));
         }
 
 
@@ -219,6 +226,8 @@ public class EventActivity extends BaseActivity {
         event_et_38.setText(mLsListsDao.load((long) 43).strMLs);
         event_et_38.setText(mLsListsDao.load((long) 44).strMLs);
         event_et_38.setText(mLsListsDao.load((long) 45).strMLs);
+        event_et_38.setText(mLsListsDao.load((long) 46).strMLs);
+        event_et_38.setText(mLsListsDao.load((long) 47).strMLs);
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
     }
@@ -272,7 +281,8 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 43, "空调-温度+", event_et_43.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 44, "空调-温度-", event_et_44.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 45, "中控开机", event_et_45.getText().toString()));
-
+        mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_45.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_45.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

@@ -337,7 +337,7 @@ public class SerialPortUtil {
 
     }
 
-    private static void makeML(Long id) {
+    public static void makeML(Long id) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() != 0) {
             if (mLsListsDao.load(id) == null) {
@@ -520,7 +520,7 @@ public class SerialPortUtil {
     }
 
 
-    private static void sendShipinType(String str) {
+    public static void sendShipinType(String str) {
         String msg = "";
         if (str.substring(0, 4).equals("VIDA")) {
             msg = "{[VIDC:DT:A003]<" + str.substring(4) + ">}";

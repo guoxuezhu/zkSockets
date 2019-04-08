@@ -8,6 +8,7 @@ import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
+import com.lh.zksockets.utils.SerialPortUtil;
 
 public class NIOHttpServer implements HttpServerRequestCallback {
 
@@ -47,8 +48,19 @@ public class NIOHttpServer implements HttpServerRequestCallback {
         Log.d(TAG, "=======aaaaaaaa======");
         if (request.getMethod().equals("POST")) {
             Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-            Log.d(TAG, "parms ========= " + parms.toString());
+            Log.d(TAG, "=======parms========= " + parms.toString() + "===zkbtn=== " + parms.getString("zkbtn"));
+
+            String msg = parms.getString("zkbtn");
+
+            if (msg.length() > 3) {
+                if (msg.substring(0, 3).equals("VID")) {
+                    SerialPortUtil.sendShipinType(msg);
+                }
+            } else if (msg.length() > 0 && msg.length() <= 3) {
+                SerialPortUtil.makeML(Long.valueOf(msg));
+            }
             response.send("200");
+
         }
 
 
