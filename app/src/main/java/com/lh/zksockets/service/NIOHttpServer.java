@@ -8,6 +8,7 @@ import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
+import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 
 public class NIOHttpServer implements HttpServerRequestCallback {
@@ -55,6 +56,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
             if (msg.length() > 3) {
                 if (msg.substring(0, 3).equals("VID")) {
                     SerialPortUtil.sendShipinType(msg);
+                } else if (msg.substring(0, 3).equals("LUB")) {
+                    HttpUtil.setlubo(msg);
                 }
             } else if (msg.length() > 0 && msg.length() <= 3) {
                 SerialPortUtil.makeML(Long.valueOf(msg));
