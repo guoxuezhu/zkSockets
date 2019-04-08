@@ -2,6 +2,7 @@ package com.lh.zksockets.utils;
 
 
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -16,6 +17,7 @@ public class TimerUtils {
     private static Timer dangerOutTimer1, dangerOutTimer2, dangerOutTimer3, dangerOutTimer4;
     private static Timer ioOutTimer1, ioOutTimer2, ioOutTimer3, ioOutTimer4;
     private static Timer wenshiTimer;
+    private static Timer KaijiTimer;
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
@@ -438,4 +440,32 @@ public class TimerUtils {
             }
         }, 5000, time * 60 * 1000);
     }
+
+
+
+
+
+    public static void setKaijiTimer() {
+        if (KaijiTimer != null) {
+            KaijiTimer.cancel();
+        }
+        KaijiTimer = new Timer();
+        KaijiTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                SerialPortUtil.makeML((long) 45);
+                if (KaijiTimer != null) {
+                    KaijiTimer.cancel();
+                }
+
+            }
+        }, 7 * 1000);
+
+    }
+
+
+
+
+
+
 }

@@ -21,48 +21,48 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        ChazuoDataDao.createTable(db, ifNotExists);
-        ComputerDao.createTable(db, ifNotExists);
         DangerOutDao.createTable(db, ifNotExists);
-        EventBigDao.createTable(db, ifNotExists);
         EventKejianRestDao.createTable(db, ifNotExists);
-        EventShangkeDao.createTable(db, ifNotExists);
-        EventXiakeDao.createTable(db, ifNotExists);
-        IcCardDao.createTable(db, ifNotExists);
         IoPortDataDao.createTable(db, ifNotExists);
-        IOYuanDao.createTable(db, ifNotExists);
-        JDQstatusDao.createTable(db, ifNotExists);
-        LampDao.createTable(db, ifNotExists);
-        LuboInfoDao.createTable(db, ifNotExists);
+        EventBigDao.createTable(db, ifNotExists);
+        EventXiakeDao.createTable(db, ifNotExists);
+        UsersDao.createTable(db, ifNotExists);
+        ComputerDao.createTable(db, ifNotExists);
+        ChazuoDataDao.createTable(db, ifNotExists);
         MLsListsDao.createTable(db, ifNotExists);
+        WenShiDuDao.createTable(db, ifNotExists);
+        EventShangkeDao.createTable(db, ifNotExists);
+        IcCardDao.createTable(db, ifNotExists);
         ProjectorDao.createTable(db, ifNotExists);
+        JDQstatusDao.createTable(db, ifNotExists);
+        LuboInfoDao.createTable(db, ifNotExists);
+        IOYuanDao.createTable(db, ifNotExists);
+        LampDao.createTable(db, ifNotExists);
         SerialCommandDao.createTable(db, ifNotExists);
         SerialPortDataDao.createTable(db, ifNotExists);
-        UsersDao.createTable(db, ifNotExists);
-        WenShiDuDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        ChazuoDataDao.dropTable(db, ifExists);
-        ComputerDao.dropTable(db, ifExists);
         DangerOutDao.dropTable(db, ifExists);
-        EventBigDao.dropTable(db, ifExists);
         EventKejianRestDao.dropTable(db, ifExists);
-        EventShangkeDao.dropTable(db, ifExists);
-        EventXiakeDao.dropTable(db, ifExists);
-        IcCardDao.dropTable(db, ifExists);
         IoPortDataDao.dropTable(db, ifExists);
-        IOYuanDao.dropTable(db, ifExists);
-        JDQstatusDao.dropTable(db, ifExists);
-        LampDao.dropTable(db, ifExists);
-        LuboInfoDao.dropTable(db, ifExists);
+        EventBigDao.dropTable(db, ifExists);
+        EventXiakeDao.dropTable(db, ifExists);
+        UsersDao.dropTable(db, ifExists);
+        ComputerDao.dropTable(db, ifExists);
+        ChazuoDataDao.dropTable(db, ifExists);
         MLsListsDao.dropTable(db, ifExists);
+        WenShiDuDao.dropTable(db, ifExists);
+        EventShangkeDao.dropTable(db, ifExists);
+        IcCardDao.dropTable(db, ifExists);
         ProjectorDao.dropTable(db, ifExists);
+        JDQstatusDao.dropTable(db, ifExists);
+        LuboInfoDao.dropTable(db, ifExists);
+        IOYuanDao.dropTable(db, ifExists);
+        LampDao.dropTable(db, ifExists);
         SerialCommandDao.dropTable(db, ifExists);
         SerialPortDataDao.dropTable(db, ifExists);
-        UsersDao.dropTable(db, ifExists);
-        WenShiDuDao.dropTable(db, ifExists);
     }
 
     /**
@@ -81,25 +81,25 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(ChazuoDataDao.class);
-        registerDaoClass(ComputerDao.class);
         registerDaoClass(DangerOutDao.class);
-        registerDaoClass(EventBigDao.class);
         registerDaoClass(EventKejianRestDao.class);
-        registerDaoClass(EventShangkeDao.class);
-        registerDaoClass(EventXiakeDao.class);
-        registerDaoClass(IcCardDao.class);
         registerDaoClass(IoPortDataDao.class);
-        registerDaoClass(IOYuanDao.class);
-        registerDaoClass(JDQstatusDao.class);
-        registerDaoClass(LampDao.class);
-        registerDaoClass(LuboInfoDao.class);
+        registerDaoClass(EventBigDao.class);
+        registerDaoClass(EventXiakeDao.class);
+        registerDaoClass(UsersDao.class);
+        registerDaoClass(ComputerDao.class);
+        registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(MLsListsDao.class);
+        registerDaoClass(WenShiDuDao.class);
+        registerDaoClass(EventShangkeDao.class);
+        registerDaoClass(IcCardDao.class);
         registerDaoClass(ProjectorDao.class);
+        registerDaoClass(JDQstatusDao.class);
+        registerDaoClass(LuboInfoDao.class);
+        registerDaoClass(IOYuanDao.class);
+        registerDaoClass(LampDao.class);
         registerDaoClass(SerialCommandDao.class);
         registerDaoClass(SerialPortDataDao.class);
-        registerDaoClass(UsersDao.class);
-        registerDaoClass(WenShiDuDao.class);
     }
 
     public DaoSession newSession() {

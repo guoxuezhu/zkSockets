@@ -134,8 +134,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 8, "窗帘2关", ""));
             mLsListsDao.insert(new MLsLists((long) 9, "投影机开", ""));
             mLsListsDao.insert(new MLsLists((long) 10, "投影机关", ""));
-            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", ""));
-            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", ""));
+            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-8-1"));
+            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-7-1"));
             mLsListsDao.insert(new MLsLists((long) 13, "灯光1开", ""));
             mLsListsDao.insert(new MLsLists((long) 14, "灯光1关", ""));
             mLsListsDao.insert(new MLsLists((long) 15, "灯光2开", ""));
@@ -218,16 +218,15 @@ public class EventActivity extends BaseActivity {
         event_et_36.setText(mLsListsDao.load((long) 36).strMLs);
         event_et_37.setText(mLsListsDao.load((long) 37).strMLs);
         event_et_38.setText(mLsListsDao.load((long) 38).strMLs);
-
-        event_et_38.setText(mLsListsDao.load((long) 39).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 40).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 41).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 42).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 43).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 44).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 45).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 46).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 47).strMLs);
+        event_et_39.setText(mLsListsDao.load((long) 39).strMLs);
+        event_et_40.setText(mLsListsDao.load((long) 40).strMLs);
+        event_et_41.setText(mLsListsDao.load((long) 41).strMLs);
+        event_et_42.setText(mLsListsDao.load((long) 42).strMLs);
+        event_et_43.setText(mLsListsDao.load((long) 43).strMLs);
+        event_et_44.setText(mLsListsDao.load((long) 44).strMLs);
+        event_et_45.setText(mLsListsDao.load((long) 45).strMLs);
+        event_et_46.setText(mLsListsDao.load((long) 46).strMLs);
+        event_et_47.setText(mLsListsDao.load((long) 47).strMLs);
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
     }
