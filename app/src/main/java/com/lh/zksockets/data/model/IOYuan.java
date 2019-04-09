@@ -13,13 +13,16 @@ public class IOYuan {
 
     public int dangerIoStatus; //1 高      0 低
 
-    public String dangerMl;
+    public String dangerMl;//报警操作
 
-    @Generated(hash = 598487363)
-    public IOYuan(Long id, int dangerIoStatus, String dangerMl) {
+    public String noDangerMl;//不报警操作
+
+    @Generated(hash = 1248375324)
+    public IOYuan(Long id, int dangerIoStatus, String dangerMl, String noDangerMl) {
         this.id = id;
         this.dangerIoStatus = dangerIoStatus;
         this.dangerMl = dangerMl;
+        this.noDangerMl = noDangerMl;
     }
 
     @Generated(hash = 1488061952)
@@ -32,6 +35,7 @@ public class IOYuan {
                 "id=" + id +
                 ", dangerIoStatus=" + dangerIoStatus +
                 ", dangerMl='" + dangerMl + '\'' +
+                ", noDangerMl='" + noDangerMl + '\'' +
                 '}';
     }
 
@@ -57,5 +61,13 @@ public class IOYuan {
 
     public void setDangerMl(String dangerMl) {
         this.dangerMl = dangerMl;
+    }
+
+    public String getNoDangerMl() {
+        return this.noDangerMl;
+    }
+
+    public void setNoDangerMl(String noDangerMl) {
+        this.noDangerMl = noDangerMl;
     }
 }

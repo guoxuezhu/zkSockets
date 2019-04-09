@@ -27,6 +27,7 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property DangerIoStatus = new Property(1, int.class, "dangerIoStatus", false, "DANGER_IO_STATUS");
         public final static Property DangerMl = new Property(2, String.class, "dangerMl", false, "DANGER_ML");
+        public final static Property NoDangerMl = new Property(3, String.class, "noDangerMl", false, "NO_DANGER_ML");
     }
 
 
@@ -44,7 +45,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"IOYUAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"DANGER_IO_STATUS\" INTEGER NOT NULL ," + // 1: dangerIoStatus
-                "\"DANGER_ML\" TEXT);"); // 2: dangerMl
+                "\"DANGER_ML\" TEXT," + // 2: dangerMl
+                "\"NO_DANGER_ML\" TEXT);"); // 3: noDangerMl
     }
 
     /** Drops the underlying database table. */
@@ -67,6 +69,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (dangerMl != null) {
             stmt.bindString(3, dangerMl);
         }
+ 
+        String noDangerMl = entity.getNoDangerMl();
+        if (noDangerMl != null) {
+            stmt.bindString(4, noDangerMl);
+        }
     }
 
     @Override
@@ -83,6 +90,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (dangerMl != null) {
             stmt.bindString(3, dangerMl);
         }
+ 
+        String noDangerMl = entity.getNoDangerMl();
+        if (noDangerMl != null) {
+            stmt.bindString(4, noDangerMl);
+        }
     }
 
     @Override
@@ -95,7 +107,8 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         IOYuan entity = new IOYuan( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getInt(offset + 1), // dangerIoStatus
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // dangerMl
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // dangerMl
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // noDangerMl
         );
         return entity;
     }
@@ -105,6 +118,7 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDangerIoStatus(cursor.getInt(offset + 1));
         entity.setDangerMl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setNoDangerMl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

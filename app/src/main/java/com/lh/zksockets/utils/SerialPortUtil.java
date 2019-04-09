@@ -237,28 +237,38 @@ public class SerialPortUtil {
 
     private static void baojin(String hex) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-
+        if (ioYuanDao.loadAll().size() ==0) {
+            return;
+        }
         String str2jz = JinzhiUtil.get2String(hex);
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
             if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 4);
                 makeBaojing(ioYuanDao.load((long) 4).dangerMl);
+            } else {
+                makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
             }
 
             if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 3);
                 makeBaojing(ioYuanDao.load((long) 3).dangerMl);
+            } else {
+                makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
             }
 
             if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 2);
                 makeBaojing(ioYuanDao.load((long) 2).dangerMl);
+            } else {
+                makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
             }
 
             if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 1);
                 makeBaojing(ioYuanDao.load((long) 1).dangerMl);
+            } else {
+                makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
             }
 
         }
@@ -476,8 +486,6 @@ public class SerialPortUtil {
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
             if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
                 TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
-            } else {
-                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
             }
         }
         ELog.i("========doJDQ====msg====" + msg);

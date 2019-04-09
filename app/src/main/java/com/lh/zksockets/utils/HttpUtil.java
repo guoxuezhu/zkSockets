@@ -42,7 +42,15 @@ public class HttpUtil {
         if (luboInfoDao.loadAll().size() == 0) {
             return;
         }
-
+        if (luboInfoDao.loadAll().get(0).IP.isEmpty()) {
+            return;
+        }
+        if (luboInfoDao.loadAll().get(0).userName.isEmpty()) {
+            return;
+        }
+        if (luboInfoDao.loadAll().get(0).Password.isEmpty()) {
+            return;
+        }
         if (luboTokenTimer != null) {
             luboTokenTimer.cancel();
         }

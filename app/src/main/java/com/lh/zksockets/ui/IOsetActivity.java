@@ -26,15 +26,23 @@ public class IOsetActivity extends BaseActivity {
     @BindView(R.id.danger_4_gl)
     Switch danger_4_gl;
 
-    @BindView(R.id.bj_event_1)
-    EditText bj_event_1;
-    @BindView(R.id.bj_event_2)
-    EditText bj_event_2;
-    @BindView(R.id.bj_event_3)
-    EditText bj_event_3;
-    @BindView(R.id.bj_event_4)
-    EditText bj_event_4;
+    @BindView(R.id.bj_event_ok_1)
+    EditText bj_event_ok_1;
+    @BindView(R.id.bj_event_ok_2)
+    EditText bj_event_ok_2;
+    @BindView(R.id.bj_event_ok_3)
+    EditText bj_event_ok_3;
+    @BindView(R.id.bj_event_ok_4)
+    EditText bj_event_ok_4;
 
+    @BindView(R.id.bj_event_no_1)
+    EditText bj_event_no_1;
+    @BindView(R.id.bj_event_no_2)
+    EditText bj_event_no_2;
+    @BindView(R.id.bj_event_no_3)
+    EditText bj_event_no_3;
+    @BindView(R.id.bj_event_no_4)
+    EditText bj_event_no_4;
 
     private IOYuanDao ioYuanDao;
 
@@ -46,10 +54,10 @@ public class IOsetActivity extends BaseActivity {
 
         ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, 0, ""));
-            ioYuanDao.insert(new IOYuan((long) 2, 0, ""));
-            ioYuanDao.insert(new IOYuan((long) 3, 0, ""));
-            ioYuanDao.insert(new IOYuan((long) 4, 0, ""));
+            ioYuanDao.insert(new IOYuan((long) 1, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 2, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 3, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 4, 0, "", ""));
         }
 
         if (ioYuanDao.load((long) 1).dangerIoStatus == 1) {
@@ -57,24 +65,32 @@ public class IOsetActivity extends BaseActivity {
         } else {
             danger_1_gl.setChecked(false);
         }
+        bj_event_ok_1.setText(ioYuanDao.load((long) 1).dangerMl);
+        bj_event_no_1.setText(ioYuanDao.load((long) 1).noDangerMl);
 
         if (ioYuanDao.load((long) 2).dangerIoStatus == 1) {
             danger_2_gl.setChecked(true);
         } else {
             danger_2_gl.setChecked(false);
         }
+        bj_event_ok_2.setText(ioYuanDao.load((long) 2).dangerMl);
+        bj_event_no_2.setText(ioYuanDao.load((long) 2).noDangerMl);
 
         if (ioYuanDao.load((long) 3).dangerIoStatus == 1) {
             danger_3_gl.setChecked(true);
         } else {
             danger_3_gl.setChecked(false);
         }
+        bj_event_ok_3.setText(ioYuanDao.load((long) 3).dangerMl);
+        bj_event_no_3.setText(ioYuanDao.load((long) 3).noDangerMl);
 
         if (ioYuanDao.load((long) 4).dangerIoStatus == 1) {
             danger_4_gl.setChecked(true);
         } else {
             danger_4_gl.setChecked(false);
         }
+        bj_event_ok_4.setText(ioYuanDao.load((long) 4).dangerMl);
+        bj_event_no_4.setText(ioYuanDao.load((long) 4).noDangerMl);
 
     }
 
@@ -110,10 +126,10 @@ public class IOsetActivity extends BaseActivity {
             io4 = 0;
         }
 
-        ioYuanDao.update(new IOYuan((long) 1, io1, bj_event_1.getText().toString()));
-        ioYuanDao.update(new IOYuan((long) 2, io2, bj_event_2.getText().toString()));
-        ioYuanDao.update(new IOYuan((long) 3, io3, bj_event_3.getText().toString()));
-        ioYuanDao.update(new IOYuan((long) 4, io4, bj_event_4.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 1, io1, bj_event_ok_1.getText().toString(), bj_event_no_1.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 2, io2, bj_event_ok_2.getText().toString(), bj_event_no_2.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 3, io3, bj_event_ok_3.getText().toString(), bj_event_no_3.getText().toString()));
+        ioYuanDao.update(new IOYuan((long) 4, io4, bj_event_ok_4.getText().toString(), bj_event_no_4.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

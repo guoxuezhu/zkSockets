@@ -84,7 +84,20 @@
                 android:background="#878C91" />
 
             <EditText
-                android:id="@+id/bj_event_1"
+                android:id="@+id/bj_event_ok_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/bj_event_no_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -138,7 +151,20 @@
                 android:background="#878C91" />
 
             <EditText
-                android:id="@+id/bj_event_2"
+                android:id="@+id/bj_event_ok_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/bj_event_no_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -192,7 +218,19 @@
                 android:background="#878C91" />
 
             <EditText
-                android:id="@+id/bj_event_3"
+                android:id="@+id/bj_event_ok_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/bj_event_no_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -246,7 +284,19 @@
                 android:background="#878C91" />
 
             <EditText
-                android:id="@+id/bj_event_4"
+                android:id="@+id/bj_event_ok_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/bj_event_no_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
