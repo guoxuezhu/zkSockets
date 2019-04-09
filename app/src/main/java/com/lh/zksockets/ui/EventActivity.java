@@ -280,8 +280,8 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 43, "空调-温度+", event_et_43.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 44, "空调-温度-", event_et_44.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 45, "中控开机", event_et_45.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_45.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_45.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_46.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_47.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

@@ -45,6 +45,7 @@ public class TimerUtils {
     private static void startJDQtimer1(int time, final int status) {
         if (jdqTimer1 != null) {
             jdqTimer1.cancel();
+            jdqTimer1 = null;
         }
         jdqTimer1 = new Timer();
         jdqTimer1.schedule(new TimerTask() {
@@ -58,6 +59,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer1==========");
                 if (jdqTimer1 != null) {
                     jdqTimer1.cancel();
+                    jdqTimer1 = null;
                 }
 
             }
@@ -67,6 +69,7 @@ public class TimerUtils {
     private static void startJDQtimer2(int time, final int status) {
         if (jdqTimer2 != null) {
             jdqTimer2.cancel();
+            jdqTimer2 = null;
         }
         jdqTimer2 = new Timer();
         jdqTimer2.schedule(new TimerTask() {
@@ -80,6 +83,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer2==========");
                 if (jdqTimer2 != null) {
                     jdqTimer2.cancel();
+                    jdqTimer2 = null;
                 }
             }
         }, time * 1000);
@@ -88,6 +92,7 @@ public class TimerUtils {
     private static void startJDQtimer3(int time, final int status) {
         if (jdqTimer3 != null) {
             jdqTimer3.cancel();
+            jdqTimer3 = null;
         }
         jdqTimer3 = new Timer();
         jdqTimer3.schedule(new TimerTask() {
@@ -101,6 +106,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer3==========");
                 if (jdqTimer3 != null) {
                     jdqTimer3.cancel();
+                    jdqTimer3 = null;
                 }
             }
         }, time * 1000);
@@ -109,6 +115,7 @@ public class TimerUtils {
     private static void startJDQtimer4(int time, final int status) {
         if (jdqTimer4 != null) {
             jdqTimer4.cancel();
+            jdqTimer4 = null;
         }
         jdqTimer4 = new Timer();
         jdqTimer4.schedule(new TimerTask() {
@@ -122,6 +129,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer4==========");
                 if (jdqTimer4 != null) {
                     jdqTimer4.cancel();
+                    jdqTimer4 = null;
                 }
             }
         }, time * 1000);
@@ -130,6 +138,7 @@ public class TimerUtils {
     private static void startJDQtimer5(int time, final int status) {
         if (jdqTimer5 != null) {
             jdqTimer5.cancel();
+            jdqTimer5 = null;
         }
         jdqTimer5 = new Timer();
         jdqTimer5.schedule(new TimerTask() {
@@ -143,6 +152,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer5==========");
                 if (jdqTimer5 != null) {
                     jdqTimer5.cancel();
+                    jdqTimer5 = null;
                 }
             }
         }, time * 1000);
@@ -151,6 +161,7 @@ public class TimerUtils {
     private static void startJDQtimer6(int time, final int status) {
         if (jdqTimer6 != null) {
             jdqTimer6.cancel();
+            jdqTimer6 = null;
         }
         jdqTimer6 = new Timer();
         jdqTimer6.schedule(new TimerTask() {
@@ -164,6 +175,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer6==========");
                 if (jdqTimer6 != null) {
                     jdqTimer6.cancel();
+                    jdqTimer6 = null;
                 }
             }
         }, time * 1000);
@@ -172,6 +184,7 @@ public class TimerUtils {
     private static void startJDQtimer7(int time, final int status) {
         if (jdqTimer7 != null) {
             jdqTimer7.cancel();
+            jdqTimer7 = null;
         }
         jdqTimer7 = new Timer();
         jdqTimer7.schedule(new TimerTask() {
@@ -185,6 +198,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer7==========");
                 if (jdqTimer7 != null) {
                     jdqTimer7.cancel();
+                    jdqTimer7 = null;
                 }
             }
         }, time * 1000);
@@ -193,6 +207,7 @@ public class TimerUtils {
     private static void startJDQtimer8(int time, final int status) {
         if (jdqTimer8 != null) {
             jdqTimer8.cancel();
+            jdqTimer8 = null;
         }
         jdqTimer8 = new Timer();
         jdqTimer8.schedule(new TimerTask() {
@@ -206,6 +221,7 @@ public class TimerUtils {
                 ELog.d("=========jdqTimer8==========");
                 if (jdqTimer8 != null) {
                     jdqTimer8.cancel();
+                    jdqTimer8 = null;
                 }
             }
         }, time * 1000);
@@ -226,6 +242,7 @@ public class TimerUtils {
     private static void dangerOutTimer1(int time, final int status) {
         if (dangerOutTimer1 != null) {
             dangerOutTimer1.cancel();
+            dangerOutTimer1 = null;
         }
         dangerOutTimer1 = new Timer();
         dangerOutTimer1.schedule(new TimerTask() {
@@ -239,6 +256,7 @@ public class TimerUtils {
                 ELog.d("=========dangerOutTimer1==========");
                 if (dangerOutTimer1 != null) {
                     dangerOutTimer1.cancel();
+                    dangerOutTimer1 = null;
                 }
 
             }
@@ -248,6 +266,7 @@ public class TimerUtils {
     private static void dangerOutTimer2(int time, final int status) {
         if (dangerOutTimer2 != null) {
             dangerOutTimer2.cancel();
+            dangerOutTimer2 = null;
         }
         dangerOutTimer2 = new Timer();
         dangerOutTimer2.schedule(new TimerTask() {
@@ -261,6 +280,7 @@ public class TimerUtils {
                 ELog.d("=========dangerOutTimer2==========");
                 if (dangerOutTimer2 != null) {
                     dangerOutTimer2.cancel();
+                    dangerOutTimer2 = null;
                 }
 
             }
@@ -270,6 +290,7 @@ public class TimerUtils {
     private static void dangerOutTimer3(int time, final int status) {
         if (dangerOutTimer3 != null) {
             dangerOutTimer3.cancel();
+            dangerOutTimer3 = null;
         }
         dangerOutTimer3 = new Timer();
         dangerOutTimer3.schedule(new TimerTask() {
@@ -283,6 +304,7 @@ public class TimerUtils {
                 ELog.d("=========dangerOutTimer3==========");
                 if (dangerOutTimer3 != null) {
                     dangerOutTimer3.cancel();
+                    dangerOutTimer3 = null;
                 }
 
             }
@@ -292,6 +314,7 @@ public class TimerUtils {
     private static void dangerOutTimer4(int time, final int status) {
         if (dangerOutTimer4 != null) {
             dangerOutTimer4.cancel();
+            dangerOutTimer4 = null;
         }
         dangerOutTimer4 = new Timer();
         dangerOutTimer4.schedule(new TimerTask() {
@@ -305,6 +328,7 @@ public class TimerUtils {
                 ELog.d("=========dangerOutTimer4==========");
                 if (dangerOutTimer4 != null) {
                     dangerOutTimer4.cancel();
+                    dangerOutTimer4 = null;
                 }
 
             }
@@ -328,6 +352,7 @@ public class TimerUtils {
     private static void setIoOutTimer1(int time, final int status) {
         if (ioOutTimer1 != null) {
             ioOutTimer1.cancel();
+            ioOutTimer1 = null;
         }
         ioOutTimer1 = new Timer();
         ioOutTimer1.schedule(new TimerTask() {
@@ -341,6 +366,7 @@ public class TimerUtils {
                 ELog.d("=========ioOutTimer1==========");
                 if (ioOutTimer1 != null) {
                     ioOutTimer1.cancel();
+                    ioOutTimer1 = null;
                 }
 
             }
@@ -350,6 +376,7 @@ public class TimerUtils {
     private static void setIoOutTimer2(int time, final int status) {
         if (ioOutTimer2 != null) {
             ioOutTimer2.cancel();
+            ioOutTimer2 = null;
         }
         ioOutTimer2 = new Timer();
         ioOutTimer2.schedule(new TimerTask() {
@@ -363,6 +390,7 @@ public class TimerUtils {
                 ELog.d("=========ioOutTimer2==========");
                 if (ioOutTimer2 != null) {
                     ioOutTimer2.cancel();
+                    ioOutTimer2 = null;
                 }
 
             }
@@ -372,6 +400,7 @@ public class TimerUtils {
     private static void setIoOutTimer3(int time, final int status) {
         if (ioOutTimer3 != null) {
             ioOutTimer3.cancel();
+            ioOutTimer3 = null;
         }
         ioOutTimer3 = new Timer();
         ioOutTimer3.schedule(new TimerTask() {
@@ -385,6 +414,7 @@ public class TimerUtils {
                 ELog.d("=========ioOutTimer3==========");
                 if (ioOutTimer3 != null) {
                     ioOutTimer3.cancel();
+                    ioOutTimer3 = null;
                 }
 
             }
@@ -394,6 +424,7 @@ public class TimerUtils {
     private static void setIoOutTimer4(int time, final int status) {
         if (ioOutTimer4 != null) {
             ioOutTimer4.cancel();
+            ioOutTimer4 = null;
         }
         ioOutTimer4 = new Timer();
         ioOutTimer4.schedule(new TimerTask() {
@@ -407,6 +438,7 @@ public class TimerUtils {
                 ELog.d("=========ioOutTimer4==========");
                 if (ioOutTimer4 != null) {
                     ioOutTimer4.cancel();
+                    ioOutTimer4 = null;
                 }
 
             }
@@ -448,6 +480,7 @@ public class TimerUtils {
     public static void setKaijiTimer() {
         if (KaijiTimer != null) {
             KaijiTimer.cancel();
+            KaijiTimer = null;
         }
         KaijiTimer = new Timer();
         KaijiTimer.schedule(new TimerTask() {
@@ -456,10 +489,11 @@ public class TimerUtils {
                 SerialPortUtil.makeML((long) 45);
                 if (KaijiTimer != null) {
                     KaijiTimer.cancel();
+                    KaijiTimer = null;
                 }
 
             }
-        }, 7 * 1000);
+        }, 3 * 1000);
 
     }
 

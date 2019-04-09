@@ -62,24 +62,28 @@ public class VolumeSetActivity extends BaseActivity {
         } else {
             bjout_1_gl.setChecked(false);
         }
+        danger_et_time_1.setText(dangerOutDao.load((long) 1).time + "");
 
         if (dangerOutDao.load((long) 2).dangerOutStatus == 0) {
             bjout_2_gl.setChecked(true);
         } else {
             bjout_2_gl.setChecked(false);
         }
+        danger_et_time_2.setText(dangerOutDao.load((long) 2).time + "");
 
         if (dangerOutDao.load((long) 3).dangerOutStatus == 0) {
             bjout_3_gl.setChecked(true);
         } else {
             bjout_3_gl.setChecked(false);
         }
+        danger_et_time_3.setText(dangerOutDao.load((long) 3).time + "");
 
         if (dangerOutDao.load((long) 4).dangerOutStatus == 0) {
             bjout_4_gl.setChecked(true);
         } else {
             bjout_4_gl.setChecked(false);
         }
+        danger_et_time_4.setText(dangerOutDao.load((long) 4).time + "");
         ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
 
     }

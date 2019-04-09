@@ -61,24 +61,28 @@ public class IOsetingActivity extends BaseActivity {
         } else {
             switch_1_gl.setChecked(false);
         }
+        io_et_time_1.setText(ioPortDataDao.load((long) 1).time + "");
 
         if (ioPortDataDao.load((long) 2).ioOutStatus == 1) {
             switch_2_gl.setChecked(true);
         } else {
             switch_2_gl.setChecked(false);
         }
+        io_et_time_2.setText(ioPortDataDao.load((long) 2).time + "");
 
         if (ioPortDataDao.load((long) 3).ioOutStatus == 1) {
             switch_3_gl.setChecked(true);
         } else {
             switch_3_gl.setChecked(false);
         }
+        io_et_time_3.setText(ioPortDataDao.load((long) 3).time + "");
 
         if (ioPortDataDao.load((long) 4).ioOutStatus == 1) {
             switch_4_gl.setChecked(true);
         } else {
             switch_4_gl.setChecked(false);
         }
+        io_et_time_4.setText(ioPortDataDao.load((long) 4).time + "");
         ELog.i("========ioPortDataDao========" + ioPortDataDao.loadAll().toString());
     }
 

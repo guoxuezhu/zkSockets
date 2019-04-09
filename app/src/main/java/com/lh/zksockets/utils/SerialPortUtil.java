@@ -18,6 +18,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -29,6 +31,7 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
+    private static Timer clearTimer;
 
 
     public static void open() {
@@ -77,6 +80,7 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
 
+                            startClearTimer();
                             System.arraycopy(buffer, 0, buffer1, bslength, size);
                             bslength = bslength + size;
                             if (msg.indexOf("]") != -1) {
@@ -164,6 +168,22 @@ public class SerialPortUtil {
 
     }
 
+    private static void startClearTimer() {
+        if (clearTimer != null) {
+            clearTimer.cancel();
+        }
+        clearTimer = new Timer();
+        clearTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                bslength = 0;
+                buffer1 = new byte[1024];
+                buffer2 = new byte[1024];
+                ELog.d("=========startClearTimer==========");
+            }
+        }, 8000);
+    }
+
     private static void setWenshidu() {
 
         String ret = "";
@@ -176,7 +196,7 @@ public class SerialPortUtil {
         }
         ELog.i("=======温度=============" + ret);
         if (ret.substring(0, 6).equals("010404")) {
-            if (ret.substring(6, 8).equals("00")) {
+            if (!ret.substring(6, 8).equals("FF")) {
                 ELog.i("=======温度====" + Integer.parseInt(ret.substring(6, 10), 16));
                 ELog.i("=======湿度====" + Integer.parseInt(ret.substring(10, 14), 16));
 
@@ -456,6 +476,8 @@ public class SerialPortUtil {
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
             if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
                 TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+            } else {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
             }
         }
         ELog.i("========doJDQ====msg====" + msg);

@@ -68,36 +68,42 @@ public class EnvironmentalActivity extends BaseActivity {
         } else {
             jdq_1_gl.setChecked(false);
         }
+        jdq_et_time_1.setText(jdqStatusDao.load((long) 1).time + "");
 
         if (jdqStatusDao.load((long) 2).jdqStatus == 1) {
             jdq_2_gl.setChecked(true);
         } else {
             jdq_2_gl.setChecked(false);
         }
+        jdq_et_time_2.setText(jdqStatusDao.load((long) 2).time + "");
 
         if (jdqStatusDao.load((long) 3).jdqStatus == 1) {
             jdq_3_gl.setChecked(true);
         } else {
             jdq_3_gl.setChecked(false);
         }
+        jdq_et_time_3.setText(jdqStatusDao.load((long) 3).time + "");
 
         if (jdqStatusDao.load((long) 4).jdqStatus == 1) {
             jdq_4_gl.setChecked(true);
         } else {
             jdq_4_gl.setChecked(false);
         }
+        jdq_et_time_4.setText(jdqStatusDao.load((long) 4).time + "");
 
         if (jdqStatusDao.load((long) 5).jdqStatus == 1) {
             jdq_5_gl.setChecked(true);
         } else {
             jdq_5_gl.setChecked(false);
         }
+        jdq_et_time_5.setText(jdqStatusDao.load((long) 5).time + "");
 
         if (jdqStatusDao.load((long) 6).jdqStatus == 1) {
             jdq_6_gl.setChecked(true);
         } else {
             jdq_6_gl.setChecked(false);
         }
+        jdq_et_time_6.setText(jdqStatusDao.load((long) 6).time + "");
         ELog.d("=========jdqStatusDao==========" + jdqStatusDao.loadAll().toString());
     }
 
