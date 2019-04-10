@@ -113,6 +113,11 @@ public class EventActivity extends BaseActivity {
     @BindView(R.id.event_et_47)
     EditText event_et_47;
 
+    @BindView(R.id.event_et_48)
+    EditText event_et_48;
+    @BindView(R.id.event_et_49)
+    EditText event_et_49;
+
     private MLsListsDao mLsListsDao;
 
 
@@ -163,7 +168,7 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", ""));
             mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 39, "空调-开/关", ""));
+            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", ""));
             mLsListsDao.insert(new MLsLists((long) 40, "空调-模式", ""));
             mLsListsDao.insert(new MLsLists((long) 41, "空调-风速", ""));
             mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", ""));
@@ -172,6 +177,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 45, "中控开机", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "空调-关", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", ""));
         }
 
 
@@ -227,6 +234,10 @@ public class EventActivity extends BaseActivity {
         event_et_45.setText(mLsListsDao.load((long) 45).strMLs);
         event_et_46.setText(mLsListsDao.load((long) 46).strMLs);
         event_et_47.setText(mLsListsDao.load((long) 47).strMLs);
+
+        event_et_48.setText(mLsListsDao.load((long) 48).strMLs);
+        event_et_49.setText(mLsListsDao.load((long) 49).strMLs);
+
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
     }
@@ -282,6 +293,9 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 45, "中控开机", event_et_45.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_46.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_47.getText().toString()));
+
+        mLsListsDao.update(new MLsLists((long) 48, "空调-关", event_et_48.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 49, "空调-摆风", event_et_49.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
