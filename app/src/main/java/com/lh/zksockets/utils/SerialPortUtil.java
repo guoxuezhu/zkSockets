@@ -171,6 +171,7 @@ public class SerialPortUtil {
     private static void startClearTimer() {
         if (clearTimer != null) {
             clearTimer.cancel();
+            clearTimer = null;
         }
         clearTimer = new Timer();
         clearTimer.schedule(new TimerTask() {
@@ -237,7 +238,7 @@ public class SerialPortUtil {
 
     private static void baojin(String hex) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        if (ioYuanDao.loadAll().size() ==0) {
+        if (ioYuanDao.loadAll().size() == 0) {
             return;
         }
         String str2jz = JinzhiUtil.get2String(hex);

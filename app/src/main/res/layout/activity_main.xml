@@ -124,7 +124,8 @@
                 android:id="@+id/user_btn"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
-                android:src="@mipmap/png_5" />
+                android:src="@mipmap/png_5"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -132,7 +133,8 @@
                 android:layout_marginTop="10dp"
                 android:text="用户管理"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
         </LinearLayout>
 

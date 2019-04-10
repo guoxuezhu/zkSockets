@@ -47,6 +47,17 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="名称"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
             <TextView
                 android:layout_width="100dp"
@@ -103,6 +114,19 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="初始状态"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
 
 
             <LinearLayout
@@ -204,6 +228,17 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="时间(秒)"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
             <EditText
                 android:id="@+id/io_et_time_1"
