@@ -187,7 +187,27 @@ public class HttpUtil {
     }
 
     private static void luboZhibo() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StartTs?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("====luboStop======onFailure=======" + e.toString());
+            }
 
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("======luboStop====数据=======" + responseText);
+            }
+        });
 
     }
 
