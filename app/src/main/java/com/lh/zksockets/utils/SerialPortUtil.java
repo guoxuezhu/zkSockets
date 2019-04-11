@@ -555,7 +555,7 @@ public class SerialPortUtil {
     public static void sendShipinType(String str) {
         String msg = "";
         if (str.substring(0, 4).equals("VIDA")) {
-            msg = "{[VIDC:DT:A003]<" + str.substring(4) + ">}";
+            msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
         } else if (str.substring(0, 4).equals("VIDC")) {
             msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
         }
