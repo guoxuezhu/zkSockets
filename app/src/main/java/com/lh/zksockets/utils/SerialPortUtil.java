@@ -291,6 +291,11 @@ public class SerialPortUtil {
                 } else if (mls[i].substring(0, 1).equals("4")) {
                     doDanger(mls[i]);
                 }
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
 
             }
