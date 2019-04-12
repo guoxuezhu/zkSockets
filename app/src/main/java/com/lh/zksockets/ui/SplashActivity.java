@@ -42,6 +42,7 @@ public class SplashActivity extends BaseActivity {
         TimerUtils.setWenshiduTimer();
         HttpUtil.setLuboTokenTimer();
         TimerUtils.setKaijiTimer();
+        TimerUtils.setDuandianTimer();
 
     }
 

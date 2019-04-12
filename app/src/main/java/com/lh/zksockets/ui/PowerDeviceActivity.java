@@ -2,31 +2,21 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.PowerListAdapter;
-import com.lh.zksockets.data.DbDao.ChazuoDataDao;
-import com.lh.zksockets.data.model.ChazuoData;
-import com.lh.zksockets.utils.ELog;
-
-import java.util.List;
+import com.lh.zksockets.utils.TimerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PowerDeviceActivity extends BaseActivity implements PowerListAdapter.CallBack {
+public class PowerDeviceActivity extends BaseActivity {
 
-    @BindView(R.id.power_device_recyclerView)
-    RecyclerView power_device_recyclerView;
-
-    private PowerListAdapter powerListAdapter;
-    private ChazuoDataDao chazuoDataDao;
-    private List<ChazuoData> chazuoDataList;
+    @BindView(R.id.et_dy_close_time)
+    EditText et_dy_close_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,69 +24,14 @@ public class PowerDeviceActivity extends BaseActivity implements PowerListAdapte
         setContentView(R.layout.activity_power_device);
         ButterKnife.bind(this);
 
-
-        chazuoDataDao = MyApplication.getDaoSession().getChazuoDataDao();
-        if (chazuoDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 11; i++) {
-                chazuoDataDao.insert(new ChazuoData((long) i, "插座" + i, null, false, 0, 0));
-            }
-        }
-        ELog.i("=========chazuoDataDao========" + chazuoDataDao.loadAll().toString());
-
-        chazuoDataList = chazuoDataDao.loadAll();
-        chazuoDataList.remove(0);
-        initRcyclerView();
-
     }
 
-    private void initRcyclerView() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        power_device_recyclerView.setLayoutManager(manager);
-        powerListAdapter = new PowerListAdapter(this, chazuoDataList, this);
-        power_device_recyclerView.setAdapter(powerListAdapter);
-    }
 
-    @Override
-    public void setOpenEditTextChanged(ChazuoData item, int position, String time) {
-        if (time.equals("")) {
-            chazuoDataList.get(position).setOpenTime(0);
-        } else {
-            chazuoDataList.get(position).setOpenTime(Integer.parseInt(time));
-        }
-    }
-
-    @Override
-    public void setClosedEditTextChanged(ChazuoData item, int position, String time) {
-        if (time.equals("")) {
-            chazuoDataList.get(position).setClosedTime(0);
-        } else {
-            chazuoDataList.get(position).setClosedTime(Integer.parseInt(time));
-        }
-    }
-
-    @Override
-    public void onCheckBoxClickItem(boolean isChecked, int position) {
-        if (isChecked) {
-            chazuoDataList.get(position).setIsOk(true);
-        } else {
-            chazuoDataList.get(position).setIsOk(false);
-        }
-    }
-
-    @OnClick(R.id.baocun_power)
-    public void baocun_power() {
-        for (int i = 0; i < chazuoDataList.size(); i++) {
-            chazuoDataDao.update(chazuoDataList.get(i));
-        }
+    @OnClick(R.id.btn_dy_time_ok)
+    public void btn_dy_time_ok() {
+        MyApplication.prefs.setCloseTimer(et_dy_close_time.getText().toString());
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        ELog.i("======chazuoDataDao=======" + chazuoDataDao.loadAll().toString());
-    }
-
-
-    @OnClick(R.id.fix_power)
-    public void fix_power() {
-//        startActivity(new Intent(this, PowerBoxActivity.class));
-//        finish();
+        TimerUtils.setDuandianTimer();
     }
 
 

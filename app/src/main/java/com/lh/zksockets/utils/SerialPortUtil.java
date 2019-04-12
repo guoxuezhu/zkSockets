@@ -400,15 +400,9 @@ public class SerialPortUtil {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
-
             }
         }
-
-
     }
 
     private static void doDanger(String ml) {
@@ -648,7 +642,6 @@ public class SerialPortUtil {
 //
 //        baudRateList.add("14400");
 //        baudRateList.add("56000");
-
 
 
         return baudRateList;

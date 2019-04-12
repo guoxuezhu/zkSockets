@@ -16,8 +16,7 @@ public class TimerUtils {
     private static Timer jdqTimer1, jdqTimer2, jdqTimer3, jdqTimer4, jdqTimer5, jdqTimer6, jdqTimer7, jdqTimer8;
     private static Timer dangerOutTimer1, dangerOutTimer2, dangerOutTimer3, dangerOutTimer4;
     private static Timer ioOutTimer1, ioOutTimer2, ioOutTimer3, ioOutTimer4;
-    private static Timer wenshiTimer;
-    private static Timer KaijiTimer;
+    private static Timer wenshiTimer, KaijiTimer, duandianTimer;
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
@@ -474,9 +473,6 @@ public class TimerUtils {
     }
 
 
-
-
-
     public static void setKaijiTimer() {
         if (KaijiTimer != null) {
             KaijiTimer.cancel();
@@ -498,8 +494,21 @@ public class TimerUtils {
     }
 
 
-
-
+    public static void setDuandianTimer() {
+        if (duandianTimer != null) {
+            duandianTimer.cancel();
+            duandianTimer = null;
+        }
+        duandianTimer = new Timer();
+        duandianTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (DateUtil.getHHmmss().equals(MyApplication.prefs.getCloseTimer())) {
+                    SerialPortUtil.makeML((long) 38);
+                }
+            }
+        }, 1000 * 50, 1000);
+    }
 
 
 }
