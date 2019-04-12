@@ -629,7 +629,7 @@ public class SerialPortUtil {
 
     public static List<String> getBaudRateDatas() {
         List<String> baudRateList = new ArrayList<>();
-        baudRateList.add("600");
+//        baudRateList.add("600");
         baudRateList.add("1200");
         baudRateList.add("2400");
         baudRateList.add("4800");
@@ -637,6 +637,20 @@ public class SerialPortUtil {
         baudRateList.add("19200");
         baudRateList.add("38400");
         baudRateList.add("57600");
+        baudRateList.add("115200");
+
+
+//        baudRateList.add("128000");
+//        baudRateList.add("256000");
+//
+//        baudRateList.add("110");
+//        baudRateList.add("300");
+//
+//        baudRateList.add("14400");
+//        baudRateList.add("56000");
+
+
+
         return baudRateList;
     }
 
