@@ -123,6 +123,24 @@ public class EventActivity extends BaseActivity {
     @BindView(R.id.event_et_51)
     EditText event_et_51;
 
+
+    @BindView(R.id.event_et_52)
+    EditText event_et_52;
+    @BindView(R.id.event_et_53)
+    EditText event_et_53;
+    @BindView(R.id.event_et_54)
+    EditText event_et_54;
+    @BindView(R.id.event_et_55)
+    EditText event_et_55;
+    @BindView(R.id.event_et_56)
+    EditText event_et_56;
+    @BindView(R.id.event_et_57)
+    EditText event_et_57;
+    @BindView(R.id.event_et_58)
+    EditText event_et_58;
+    @BindView(R.id.event_et_59)
+    EditText event_et_59;
+
     private MLsListsDao mLsListsDao;
 
 
@@ -186,6 +204,18 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", ""));
+
+
+            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", ""));
+            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", ""));
+            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", ""));
+
+
         }
 
         DataInit();
@@ -246,6 +276,16 @@ public class EventActivity extends BaseActivity {
 
         event_et_50.setText(mLsListsDao.load((long) 50).strMLs);
         event_et_51.setText(mLsListsDao.load((long) 51).strMLs);
+
+
+        event_et_52.setText(mLsListsDao.load((long) 52).strMLs);
+        event_et_53.setText(mLsListsDao.load((long) 53).strMLs);
+        event_et_54.setText(mLsListsDao.load((long) 54).strMLs);
+        event_et_55.setText(mLsListsDao.load((long) 55).strMLs);
+        event_et_56.setText(mLsListsDao.load((long) 56).strMLs);
+        event_et_57.setText(mLsListsDao.load((long) 57).strMLs);
+        event_et_58.setText(mLsListsDao.load((long) 58).strMLs);
+        event_et_59.setText(mLsListsDao.load((long) 59).strMLs);
 
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
@@ -308,6 +348,16 @@ public class EventActivity extends BaseActivity {
 
         mLsListsDao.update(new MLsLists((long) 50, "一体机-内置HDMI", event_et_50.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 51, "一体机-外置HDMI", event_et_51.getText().toString()));
+
+
+        mLsListsDao.update(new MLsLists((long) 52, "电视机1", event_et_52.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 53, "电视机2", event_et_53.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 54, "电视机3", event_et_54.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 55, "电视机4", event_et_55.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 56, "电视机5", event_et_56.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 57, "电视机6", event_et_57.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 58, "电视机7", event_et_58.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 59, "电视机8", event_et_59.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
