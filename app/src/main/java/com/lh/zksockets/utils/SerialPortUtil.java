@@ -123,6 +123,10 @@ public class SerialPortUtil {
                                             bslength = 0;
                                             buffer1 = new byte[1024];
                                             buffer2 = new byte[1024];
+                                        } else {
+                                            bslength = 0;
+                                            buffer1 = new byte[1024];
+                                            buffer2 = new byte[1024];
                                         }
 
                                     }

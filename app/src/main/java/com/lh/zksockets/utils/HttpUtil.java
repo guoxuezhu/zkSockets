@@ -132,6 +132,23 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboStart====数据=======" + responseText);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (jsonObject.getString("result").equals("1")) {
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
+                        ELog.e("==========数据=======" + jsonObject1.getString("token"));
+
+                        LuboInfo luboInfo = luboInfoDao.loadAll().get(0);
+                        luboInfoDao.deleteAll();
+                        luboInfoDao.insert(new LuboInfo(luboInfo.IP, luboInfo.userName, luboInfo.Password,
+                                jsonObject1.getString("token")));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -191,7 +208,7 @@ public class HttpUtil {
     private static void luboZhiboStartTs() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StartTs?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StartRtmp?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -216,7 +233,7 @@ public class HttpUtil {
     private static void luboZhiboStopTs() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StopTs?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StopRtmp?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);

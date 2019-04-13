@@ -52,17 +52,15 @@
                 android:id="@+id/net_btn"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
-                android:src="@mipmap/png_3"
-                android:visibility="gone" />
+                android:src="@mipmap/png_3" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="网络状况"
+                android:text="数据test"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20"
-                android:visibility="gone" />
+                android:textSize="@dimen/text_size_20" />
 
 
         </LinearLayout>
