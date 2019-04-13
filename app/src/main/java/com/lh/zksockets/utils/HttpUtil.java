@@ -132,20 +132,11 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboStart====数据=======" + responseText);
-
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (jsonObject.getString("result").equals("1")) {
-                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
-                        ELog.e("==========数据=======" + jsonObject1.getString("token"));
-
-                        LuboInfo luboInfo = luboInfoDao.loadAll().get(0);
-                        luboInfoDao.deleteAll();
-                        luboInfoDao.insert(new LuboInfo(luboInfo.IP, luboInfo.userName, luboInfo.Password,
-                                jsonObject1.getString("token")));
-
+                    if (!jsonObject.getString("result").equals("1")) {
+                        setLuboTokenTimer();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -174,6 +165,14 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboPause====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (!jsonObject.getString("result").equals("1")) {
+                        setLuboTokenTimer();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -200,6 +199,14 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboStop====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (!jsonObject.getString("result").equals("1")) {
+                        setLuboTokenTimer();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -225,6 +232,14 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboStop====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (!jsonObject.getString("result").equals("1")) {
+                        setLuboTokenTimer();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -250,6 +265,14 @@ public class HttpUtil {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======luboStop====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (!jsonObject.getString("result").equals("1")) {
+                        setLuboTokenTimer();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

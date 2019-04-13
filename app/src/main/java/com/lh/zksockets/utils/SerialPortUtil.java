@@ -79,83 +79,16 @@ public class SerialPortUtil {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
-
-//                            startClearTimer();
-                            System.arraycopy(buffer, 0, buffer1, bslength, size);
-                            bslength = bslength + size;
-                            if (msg.indexOf("]") != -1) {
-                                String msgdata = new String(buffer1, 0, bslength);
-                                ELog.i("============msgdata====11111=============" + msgdata);
-                                if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
-                                    if (msgdata.substring(1).indexOf("[") == -1) {
-                                        bslength = 0;
-                                        buffer1 = new byte[1024];
-                                        buffer2 = new byte[1024];
-                                        ELog.i("===============222222222222222=========");
-                                    } else {
-                                        System.arraycopy(buffer1, 4, buffer2, 0, bslength - 4);
-                                        ELog.i("================3333333333333333=============" + new String(buffer2, 0, bslength - 4));
-                                        buffer1 = new byte[1024];
-                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength - 4);
-                                        buffer2 = new byte[1024];
-                                    }
-                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
-
-                                    if (msgdata.indexOf(">") != -1) {
-                                        if (bslength - 8 == 9) {
-                                            buffer2 = new byte[1024];
-                                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
-
-                                            setWenshidu();
-
-                                            bslength = 0;
-                                            buffer1 = new byte[1024];
-                                            buffer2 = new byte[1024];
-
-                                        } else if (bslength - 16 == 9) {
-                                            buffer2 = new byte[1024];
-                                            int length1 = msgdata.indexOf(">") + 1;
-                                            System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
-                                            System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-
-                                            setWenshidu();
-
-                                            bslength = 0;
-                                            buffer1 = new byte[1024];
-                                            buffer2 = new byte[1024];
-                                        } else {
-                                            bslength = 0;
-                                            buffer1 = new byte[1024];
-                                            buffer2 = new byte[1024];
-                                        }
-
-                                    }
-
-                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
-                                    if (msgdata.indexOf(">") != -1) {
-                                        if (bslength - 8 == 1) {
-                                            buffer2 = new byte[1024];
-                                            System.arraycopy(buffer1, 7, buffer2, 0, 1);
-
-                                            baojin(Integer.toHexString(buffer2[0] & 0xFF));
-
-                                            bslength = 0;
-                                            buffer1 = new byte[1024];
-                                            buffer2 = new byte[1024];
-
-                                        }
-
-                                    }
-                                } else {
-                                    bslength = 0;
-                                    buffer1 = new byte[1024];
-                                    buffer2 = new byte[1024];
-                                }
-
-
+                            if (bslength > 50) {
+                                bslength = 0;
+                                buffer1 = new byte[1024];
+                                buffer2 = new byte[1024];
+                            } else {
+                                // startClearTimer();
+                                System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                bslength = bslength + size;
+                                makeData(msg);
                             }
-
-
                         }
                     }
 
@@ -166,6 +99,97 @@ public class SerialPortUtil {
 
             }
         }.start();
+
+    }
+
+    private static void makeData(String msg) {
+        if (msg.indexOf("]") != -1) {
+            String msgdata = new String(buffer1, 0, bslength);
+            ELog.i("============msgdata====11111=============" + msgdata);
+            if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
+                bslength = bslength - 4;
+                System.arraycopy(buffer1, 4, buffer2, 0, bslength);
+                ELog.i("==========OK======44444444444444444=============" + new String(buffer2, 0, bslength));
+                buffer1 = new byte[1024];
+                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                buffer2 = new byte[1024];
+                makeData(new String(buffer1, 0, bslength));
+            } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+
+                if (msgdata.indexOf(">") != -1) {
+                    if (bslength - 8 == 9) {
+                        buffer2 = new byte[1024];
+                        System.arraycopy(buffer1, 7, buffer2, 0, 9);
+
+                        setWenshidu();
+
+                        bslength = bslength - 17;
+                        System.arraycopy(buffer1, 17, buffer2, 0, bslength);
+                        ELog.i("===========COM7=====111111111111111111=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+
+                    } else if (bslength - 16 == 9) {
+                        buffer2 = new byte[1024];
+                        int length1 = msgdata.indexOf(">") + 1;
+                        System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
+                        System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
+
+                        setWenshidu();
+
+                        bslength = bslength - 25;
+                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
+                        ELog.i("==========COM7======2222222222222222222222=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+                    }
+
+                }
+
+            } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
+                if (msgdata.indexOf(">") != -1) {
+                    if (bslength - 8 == 1) {
+                        buffer2 = new byte[1024];
+                        System.arraycopy(buffer1, 7, buffer2, 0, 1);
+
+                        baojin(Integer.toHexString(buffer2[0] & 0xFF));
+
+                        bslength = bslength - 9;
+                        System.arraycopy(buffer1, 9, buffer2, 0, bslength);
+                        ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+                    }
+
+                }
+            } else {
+                if (msgdata.indexOf(">") != -1) {
+                    ELog.i("==========其它接收数据=======1111111111111111111111=====" + msgdata.indexOf(">"));
+                    bslength = bslength - msgdata.indexOf(">") - 1;
+                    System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+                    ELog.i("===========其它接收数据======22222222222222222222222======" + new String(buffer2, 0, bslength));
+                    buffer1 = new byte[1024];
+                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                    buffer2 = new byte[1024];
+                    makeData(new String(buffer1, 0, bslength));
+                } else {
+                    bslength = 0;
+                    buffer1 = new byte[1024];
+                    buffer2 = new byte[1024];
+                    ELog.i("==========其它接收数据=======33333333333333333333333333=====");
+                }
+
+            }
+
+
+        }
+
 
     }
 
