@@ -80,7 +80,7 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
 
-                            startClearTimer();
+//                            startClearTimer();
                             System.arraycopy(buffer, 0, buffer1, bslength, size);
                             bslength = bslength + size;
                             if (msg.indexOf("]") != -1) {
@@ -99,14 +99,7 @@ public class SerialPortUtil {
                                         System.arraycopy(buffer2, 0, buffer1, 0, bslength - 4);
                                         buffer2 = new byte[1024];
                                     }
-                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM0]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM1]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM2]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM3]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM4]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM5]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM6]") ||
-                                        msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+                                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
 
                                     if (msgdata.indexOf(">") != -1) {
                                         if (bslength - 8 == 9) {
@@ -149,6 +142,10 @@ public class SerialPortUtil {
                                         }
 
                                     }
+                                } else {
+                                    bslength = 0;
+                                    buffer1 = new byte[1024];
+                                    buffer2 = new byte[1024];
                                 }
 
 
