@@ -2,15 +2,22 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
+import com.lh.zksockets.data.model.WenShiDu;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -359,7 +366,37 @@ public class NetStatusActivity extends BaseActivity {
         }
 
 
+        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
+        if (ioYuanDao.loadAll().size() == 0) {
+            ioYuanDao.insert(new IOYuan((long) 1, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 2, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 3, 1, "1-203", "1-204"));
+            ioYuanDao.insert(new IOYuan((long) 4, 0, "", ""));
+        }
 
+
+        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+
+        if (wenShiDuDao.loadAll().size() == 0) {
+            wenShiDuDao.insert(new WenShiDu("", "", 1, "1-801"));
+        }
+
+
+        LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
+
+        if (luboInfoDao.loadAll().size() == 0) {
+            luboInfoDao.insert(new LuboInfo("192.168.1.211", "admin", "admin", ""));
+        }
+
+
+
+
+
+
+
+
+
+        Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();
 
     }
 
