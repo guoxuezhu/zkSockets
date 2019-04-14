@@ -303,32 +303,28 @@ public class SerialPortUtil {
     }
 
     private static void makeBaojing(String strMls) {
-        if (strMls.length() != 0) {
-            String[] mls = strMls.split(",");
-            for (int i = 0; i < mls.length; i++) {
-                ELog.i("========makeBaojing========" + mls[i]);
-                if (mls[i].substring(0, 1).equals("1")) {
-                    doSerialPort(mls[i]);
-                } else if (mls[i].substring(0, 1).equals("2")) {
-                    doJDQ(mls[i]);
-                } else if (mls[i].substring(0, 1).equals("3")) {
-                    doIO(mls[i]);
-                } else if (mls[i].substring(0, 1).equals("4")) {
-                    doDanger(mls[i]);
+        synchronized (strMls) {
+            if (strMls.length() != 0) {
+                String[] mls = strMls.split(",");
+                for (int i = 0; i < mls.length; i++) {
+                    ELog.i("=======串口1============makeBaojing========" + mls[i]);
+                    if (mls[i].substring(0, 1).equals("1")) {
+                        doSerialPort(mls[i]);
+                    } else if (mls[i].substring(0, 1).equals("2")) {
+                        doJDQ(mls[i]);
+                    } else if (mls[i].substring(0, 1).equals("3")) {
+                        doIO(mls[i]);
+                    } else if (mls[i].substring(0, 1).equals("4")) {
+                        doDanger(mls[i]);
+                    }
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
             }
-
-
         }
-
-
     }
 
 
@@ -401,33 +397,20 @@ public class SerialPortUtil {
     }
 
     public static void makeML(Long id) {
-        MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        if (mLsListsDao.loadAll().size() != 0) {
-            if (mLsListsDao.load(id) == null) {
-                return;
-            }
-            String strMls = mLsListsDao.load(id).strMLs;
-            if (strMls.length() != 0) {
-                String[] mls = strMls.split(",");
-                for (int i = 0; i < mls.length; i++) {
-                    ELog.i("========11111111========" + mls[i]);
-                    if (mls[i].substring(0, 1).equals("1")) {
-                        doSerialPort(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("2")) {
-                        doJDQ(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("3")) {
-                        doIO(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("4")) {
-                        doDanger(mls[i]);
-                    }
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        synchronized (id) {
+            MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+            if (mLsListsDao.loadAll().size() != 0) {
+                if (mLsListsDao.load(id) == null) {
+                    return;
+                }
+                String strMls = mLsListsDao.load(id).strMLs;
+                ELog.i("========串口1===========makeML=================" + id);
+                synchronized (strMls) {
+                    makeBaojing(strMls);
                 }
             }
         }
+
     }
 
     private static void doDanger(String ml) {
@@ -527,69 +510,74 @@ public class SerialPortUtil {
 
     public static void doSerialPort(String str) {
         ELog.i("======doSerialPort==str========" + str);
-        if (str.equals("")) {
-            return;
-        }
-        SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        if (serialCommandDao.loadAll().size() == 0) {
-            return;
-        }
-        SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
-        if (spML == null) {
-            return;
-        }
-        ELog.i("======doSerialPort==spML========" + spML.toString());
-        if (spML.commandStr.length() != 0) {
-            byte[] data = null;
-            if (spML.jinZhi == 16) {
-                String msg1 = "";
-                int datalength = spML.commandStr.length() / 2;
-                if (datalength < 10) {
-                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H00" + datalength + "]<";
-                } else if (datalength >= 10 && datalength < 100) {
-                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H0" + datalength + "]<";
-                } else if (datalength >= 100) {
-                    msg1 = "{[COM" + (spML.sId - 1) + ":DT:H" + datalength + "]<";
-                }
-                ELog.i("=====doSerialPort===msg===0000000=====" + msg1);
-                byte[] data1 = msg1.getBytes();
-                byte[] data2 = StringToBytes(spML.commandStr);
-                if (data2 == null) {
-                    return;
-                }
-                byte[] data3 = ">}".getBytes();
-                data = new byte[data1.length + data2.length + data3.length];
-
-                System.arraycopy(data1, 0, data, 0, data1.length);
-                System.arraycopy(data2, 0, data, data1.length, data2.length);
-                System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-
-            } else {
-                String msg = "";
-                if (spML.commandStr.length() < 10) {
-                    msg = "{[COM" + (spML.sId - 1) + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
-                } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
-                    msg = "{[COM" + (spML.sId - 1) + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
-                } else if (spML.commandStr.length() >= 100) {
-                    msg = "{[COM" + (spML.sId - 1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
-                }
-                ELog.i("=====doSerialPort===msg===111111=====" + msg);
-                data = msg.getBytes();
+        synchronized (str) {
+            if (str.equals("")) {
+                return;
             }
-            sendMsg(data);
+            SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+            if (serialCommandDao.loadAll().size() == 0) {
+                return;
+            }
+            SerialCommand spML = serialCommandDao.load(Long.valueOf(str.substring(2)));
+            if (spML == null) {
+                return;
+            }
+            ELog.i("======doSerialPort==spML========" + spML.toString());
+            if (spML.commandStr.length() != 0) {
+                byte[] data = null;
+                if (spML.jinZhi == 16) {
+                    String msg1 = "";
+                    int datalength = spML.commandStr.length() / 2;
+                    if (datalength < 10) {
+                        msg1 = "{[COM" + (spML.sId - 1) + ":DT:H00" + datalength + "]<";
+                    } else if (datalength >= 10 && datalength < 100) {
+                        msg1 = "{[COM" + (spML.sId - 1) + ":DT:H0" + datalength + "]<";
+                    } else if (datalength >= 100) {
+                        msg1 = "{[COM" + (spML.sId - 1) + ":DT:H" + datalength + "]<";
+                    }
+                    ELog.i("=====doSerialPort===msg===0000000=====" + msg1);
+                    byte[] data1 = msg1.getBytes();
+                    byte[] data2 = StringToBytes(spML.commandStr);
+                    if (data2 == null) {
+                        return;
+                    }
+                    byte[] data3 = ">}".getBytes();
+                    data = new byte[data1.length + data2.length + data3.length];
+
+                    System.arraycopy(data1, 0, data, 0, data1.length);
+                    System.arraycopy(data2, 0, data, data1.length, data2.length);
+                    System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+
+                } else {
+                    String msg = "";
+                    if (spML.commandStr.length() < 10) {
+                        msg = "{[COM" + (spML.sId - 1) + ":DT:A00" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    } else if (spML.commandStr.length() >= 10 && spML.commandStr.length() < 100) {
+                        msg = "{[COM" + (spML.sId - 1) + ":DT:A0" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    } else if (spML.commandStr.length() >= 100) {
+                        msg = "{[COM" + (spML.sId - 1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
+                    }
+                    ELog.i("=====doSerialPort===msg===111111=====" + msg);
+                    data = msg.getBytes();
+                }
+                sendMsg(data);
+            }
         }
+
     }
 
 
     public static void sendShipinType(String str) {
-        String msg = "";
-        if (str.substring(0, 4).equals("VIDA")) {
-            msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
-        } else if (str.substring(0, 4).equals("VIDC")) {
-            msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
+        synchronized (str) {
+            String msg = "";
+            if (str.substring(0, 4).equals("VIDA")) {
+                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
+            } else if (str.substring(0, 4).equals("VIDC")) {
+                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
+            }
+            byte[] data = msg.getBytes();
+            sendMsg(data);
         }
-        byte[] data = msg.getBytes();
-        sendMsg(data);
     }
 
 
