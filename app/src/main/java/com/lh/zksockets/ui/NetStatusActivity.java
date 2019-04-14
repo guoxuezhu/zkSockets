@@ -364,14 +364,14 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "1-604"));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "1-603"));
 
-            mLsListsDao.update(new MLsLists((long) 52, "电视机1", "1-501"));
-            mLsListsDao.update(new MLsLists((long) 53, "电视机2", "1-502"));
-            mLsListsDao.update(new MLsLists((long) 54, "电视机3", ""));
-            mLsListsDao.update(new MLsLists((long) 55, "电视机4", ""));
-            mLsListsDao.update(new MLsLists((long) 56, "电视机5", ""));
-            mLsListsDao.update(new MLsLists((long) 57, "电视机6", ""));
-            mLsListsDao.update(new MLsLists((long) 58, "电视机7", ""));
-            mLsListsDao.update(new MLsLists((long) 59, "电视机8", ""));
+            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "1-501"));
+            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "1-502"));
+            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", ""));
 
         }
 
