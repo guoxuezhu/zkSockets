@@ -32,6 +32,7 @@ public class SerialPortUtil {
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
     private static Timer clearTimer;
+    private static Timer Kaijishipin;
 
 
     public static void open() {
@@ -580,14 +581,22 @@ public class SerialPortUtil {
     }
 
 
-    public synchronized static void shipinkaiji() {
-        ELog.i("=====shipinkaiji===========msg===========1111==========");
-        try {
-            sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            ELog.i("=====shipinkaiji===========msg=======2222==============");
-        }
+    public static void shipinkaiji() {
+        Kaijishipin = new Timer();
+        Kaijishipin.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                kaijishipin();
+                if (Kaijishipin != null) {
+                    Kaijishipin.cancel();
+                    Kaijishipin = null;
+                }
+
+            }
+        }, 20 * 1000);
+    }
+
+    private static synchronized void kaijishipin() {
         sendMsg("{[VIDA:DT:A003]<1,3>}".getBytes());
         ELog.i("=====shipinkaiji===========msg==========11111111===========");
         try {
