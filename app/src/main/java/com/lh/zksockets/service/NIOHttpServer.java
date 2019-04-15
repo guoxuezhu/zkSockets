@@ -64,6 +64,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
             }
             response.send("200");
 
+        } else {
+            response.send("100");
         }
 
 

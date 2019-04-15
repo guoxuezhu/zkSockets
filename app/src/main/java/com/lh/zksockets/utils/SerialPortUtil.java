@@ -308,6 +308,11 @@ public class SerialPortUtil {
                 String[] mls = strMls.split(",");
                 for (int i = 0; i < mls.length; i++) {
                     ELog.i("=======串口1============makeBaojing========" + mls[i]);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     if (mls[i].substring(0, 1).equals("1")) {
                         doSerialPort(mls[i]);
                     } else if (mls[i].substring(0, 1).equals("2")) {
@@ -317,11 +322,7 @@ public class SerialPortUtil {
                     } else if (mls[i].substring(0, 1).equals("4")) {
                         doDanger(mls[i]);
                     }
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
                 }
             }
         }
@@ -334,11 +335,11 @@ public class SerialPortUtil {
                 if (data.length > 0) {
                     outputStream2.write(data);
                     outputStream2.flush();
-                    ELog.e("====sendSerialPort: 串口数据发送成功");
+                    ELog.e("============串口===给单片机=======串口数据发送成功==================");
                 }
             }
         } catch (IOException e) {
-            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+            ELog.e("============串口====给单片机=======串口数据发送失败==================" + e.toString());
         }
     }
 
@@ -405,9 +406,7 @@ public class SerialPortUtil {
                 }
                 String strMls = mLsListsDao.load(id).strMLs;
                 ELog.i("========串口1===========makeML=================" + id);
-                synchronized (strMls) {
-                    makeBaojing(strMls);
-                }
+                makeBaojing(strMls);
             }
         }
 
@@ -509,8 +508,8 @@ public class SerialPortUtil {
 
 
     public static void doSerialPort(String str) {
-        ELog.i("======doSerialPort==str========" + str);
         synchronized (str) {
+            ELog.i("===========doSerialPort========str========" + str);
             if (str.equals("")) {
                 return;
             }
@@ -522,7 +521,7 @@ public class SerialPortUtil {
             if (spML == null) {
                 return;
             }
-            ELog.i("======doSerialPort==spML========" + spML.toString());
+            ELog.i("==========doSerialPort===========spML========" + spML.toString());
             if (spML.commandStr.length() != 0) {
                 byte[] data = null;
                 if (spML.jinZhi == 16) {
@@ -557,7 +556,7 @@ public class SerialPortUtil {
                     } else if (spML.commandStr.length() >= 100) {
                         msg = "{[COM" + (spML.sId - 1) + ":DT:A" + spML.commandStr.length() + "]<" + spML.commandStr + ">}";
                     }
-                    ELog.i("=====doSerialPort===msg===111111=====" + msg);
+                    ELog.i("=====doSerialPort===============msg================111111=====" + msg);
                     data = msg.getBytes();
                 }
                 sendMsg(data);
