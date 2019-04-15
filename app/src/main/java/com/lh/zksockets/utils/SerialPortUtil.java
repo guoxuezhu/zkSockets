@@ -583,62 +583,69 @@ public class SerialPortUtil {
     public synchronized static void shipinkaiji() {
         ELog.i("=====shipinkaiji===========msg===========1111==========");
         try {
-            sleep(1000);
+            sleep(20000);
         } catch (InterruptedException e) {
             e.printStackTrace();
             ELog.i("=====shipinkaiji===========msg=======2222==============");
         }
         sendMsg("{[VIDA:DT:A003]<1,3>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========3333===========");
+        ELog.i("=====shipinkaiji===========msg==========11111111===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<2,4>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========222222222222222===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<3,5>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========333333333333===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<4,6>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========444444444444===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<5,7>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========5555555555555555555===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<6,8>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========6666666666666666666===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<7,9>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========7777777777777===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<8,1>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========888888888888888===========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         sendMsg("{[VIDA:DT:A003]<9,2>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg=====================");
+        ELog.i("=====shipinkaiji===========msg=============999999999999999999========");
         try {
             sleep(1000);
         } catch (InterruptedException e) {
