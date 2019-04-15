@@ -7,12 +7,14 @@ import android.widget.Toast;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -49,6 +51,16 @@ public class NetStatusActivity extends BaseActivity {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
                         "9600", 0, "无", 0, "8", 0, "1", 10));
             }
+
+
+            serialPortDataDao.insert(new SerialPortData((long) 1, "串口1", "投影机", 3,"9600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 2, "串口2", "外部继电器", 3,"9600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 3, "串口3", "电源时序器", 6,"57600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 4, "串口4", "", 3,"9600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 5, "串口5", "红外", 3,"9600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 6, "串口6", "一体机", 7,"115200", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 7, "串口7", "音量", 3,"9600", 0, "无", 0, "8", 0, "1", 10));
+            serialPortDataDao.insert(new SerialPortData((long) 8, "串口8", "温湿度", 3,"9600", 0, "无", 0, "8", 0, "1", 16));
 
 
             serialCommandDao.insert(new SerialCommand(Long.valueOf("101"), 1, 1, "1-101", "投影机开", "505752204F4E0D", 16));
@@ -243,36 +255,36 @@ public class NetStatusActivity extends BaseActivity {
             serialCommandDao.insert(new SerialCommand(Long.valueOf("630"), 6, 30, "1-630", "", "", 16));
 
 
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("701"), 7, 1, "1-701", "1音量＋", "L1_add1#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("702"), 7, 2, "1-702", "1音量＋", "L1_sub1#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("703"), 7, 3, "1-703", "1静音开", "L1_Mute 1#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("704"), 7, 4, "1-704", "1静音关", "L1_UnMute 1#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("705"), 7, 5, "1-705", "2音量＋", "L1_add2#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("706"), 7, 6, "1-706", "2音量＋", "L1_sub2#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("707"), 7, 7, "1-707", "2静音开", "L1_Mute 2#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("708"), 7, 8, "1-708", "2静音关", "L1_UnMute 2#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("709"), 7, 9, "1-709", "3音量＋", "L1_add3#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("710"), 7, 10, "1-710", "3音量＋", "L1_sub3#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("711"), 7, 11, "1-711", "3静音开", "L1_Mute 3#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("712"), 7, 12, "1-712", "3静音关", "L1_UnMute 3#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("713"), 7, 13, "1-713", "4音量＋", "L1_add4#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("714"), 7, 14, "1-714", "4音量＋", "L1_sub4#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("715"), 7, 15, "1-715", "4静音开", "L1_Mute 4#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("716"), 7, 16, "1-716", "4静音关", "L1_UnMute 4#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("717"), 7, 17, "1-717", "5音量＋", "L1_add5#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("718"), 7, 18, "1-718", "5音量＋", "L1_sub5#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("719"), 7, 19, "1-719", "5静音开", "L1_Mute 5#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("720"), 7, 20, "1-720", "5静音关", "L1_UnMute 5#", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("721"), 7, 21, "1-721", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("722"), 7, 22, "1-722", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("723"), 7, 23, "1-723", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("724"), 7, 24, "1-724", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("725"), 7, 25, "1-725", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("726"), 7, 26, "1-726", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("727"), 7, 27, "1-727", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("728"), 7, 28, "1-728", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("729"), 7, 29, "1-729", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("730"), 7, 30, "1-730", "", "", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("701"), 7, 1, "1-701", "1音量＋", "L1_add1#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("702"), 7, 2, "1-702", "1音量＋", "L1_sub1#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("703"), 7, 3, "1-703", "1静音开", "L1_Mute 1#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("704"), 7, 4, "1-704", "1静音关", "L1_UnMute 1#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("705"), 7, 5, "1-705", "2音量＋", "L1_add2#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("706"), 7, 6, "1-706", "2音量＋", "L1_sub2#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("707"), 7, 7, "1-707", "2静音开", "L1_Mute 2#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("708"), 7, 8, "1-708", "2静音关", "L1_UnMute 2#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("709"), 7, 9, "1-709", "3音量＋", "L1_add3#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("710"), 7, 10, "1-710", "3音量＋", "L1_sub3#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("711"), 7, 11, "1-711", "3静音开", "L1_Mute 3#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("712"), 7, 12, "1-712", "3静音关", "L1_UnMute 3#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("713"), 7, 13, "1-713", "4音量＋", "L1_add4#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("714"), 7, 14, "1-714", "4音量＋", "L1_sub4#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("715"), 7, 15, "1-715", "4静音开", "L1_Mute 4#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("716"), 7, 16, "1-716", "4静音关", "L1_UnMute 4#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("717"), 7, 17, "1-717", "5音量＋", "L1_add5#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("718"), 7, 18, "1-718", "5音量＋", "L1_sub5#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("719"), 7, 19, "1-719", "5静音开", "L1_Mute 5#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("720"), 7, 20, "1-720", "5静音关", "L1_UnMute 5#", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("721"), 7, 21, "1-721", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("722"), 7, 22, "1-722", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("723"), 7, 23, "1-723", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("724"), 7, 24, "1-724", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("725"), 7, 25, "1-725", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("726"), 7, 26, "1-726", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("727"), 7, 27, "1-727", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("728"), 7, 28, "1-728", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("729"), 7, 29, "1-729", "", "", 10));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("730"), 7, 30, "1-730", "", "", 10));
 
 
             serialCommandDao.insert(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "温湿度", "01040000000271CB", 16));
@@ -313,7 +325,7 @@ public class NetStatusActivity extends BaseActivity {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "上课", "1-601,1-501,1-502"));
             mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-501,1-502"));
-            mLsListsDao.insert(new MLsLists((long) 3, "自习", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "自习", "1-102,1-602,1-501,1-502,1-503,1-504"));
             mLsListsDao.insert(new MLsLists((long) 4, "休息", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-1-1"));
             mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "2-2-1"));
@@ -399,12 +411,23 @@ public class NetStatusActivity extends BaseActivity {
         }
 
 
+        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+        if (jdqStatusDao.loadAll().size() == 0) {
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 0, 10));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 0, 10));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 10));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器" + 8, 0, 180));
+        }
 
 
 
 
 
-
+        
 
         Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();
 
