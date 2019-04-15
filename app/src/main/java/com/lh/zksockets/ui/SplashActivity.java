@@ -43,16 +43,8 @@ public class SplashActivity extends BaseActivity {
         HttpUtil.setLuboTokenTimer();
         TimerUtils.setKaijiTimer();
         TimerUtils.setDuandianTimer();
+        SerialPortUtil.shipinkaiji();
 
-        shipinVIB();
-
-    }
-
-    private void shipinVIB() {
-        String msg = "{[VIB:DT:A035]<1,1;2,2;3,3;4,4;5,5;6,6;7,7;8,8;9,9>}";
-        ELog.i("========shipinVIB=====" + msg);
-        byte[] data = msg.getBytes();
-        SerialPortUtil.sendMsg(data);
     }
 
     private void setSerialport() {

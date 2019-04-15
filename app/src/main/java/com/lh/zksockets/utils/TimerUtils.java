@@ -489,7 +489,7 @@ public class TimerUtils {
                 }
 
             }
-        }, 3 * 1000);
+        }, 7 * 1000);
 
     }
 

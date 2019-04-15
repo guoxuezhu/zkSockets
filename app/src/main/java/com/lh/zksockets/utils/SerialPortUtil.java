@@ -580,6 +580,72 @@ public class SerialPortUtil {
     }
 
 
+    public synchronized static void shipinkaiji() {
+        ELog.i("=====shipinkaiji===========msg===========1111==========");
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            ELog.i("=====shipinkaiji===========msg=======2222==============");
+        }
+        sendMsg("{[VIDA:DT:A003]<1,3>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg==========3333===========");
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<2,4>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<3,5>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<4,6>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<5,7>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<6,8>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<7,9>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<8,1>}".getBytes());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sendMsg("{[VIDA:DT:A003]<9,2>}".getBytes());
+        ELog.i("=====shipinkaiji===========msg=====================");
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static List<String> getIOnumDatas() {
         List<String> IoNumList = new ArrayList<String>();
         IoNumList.add("IO口-1");
