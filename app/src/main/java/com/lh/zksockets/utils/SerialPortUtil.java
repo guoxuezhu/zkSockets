@@ -32,7 +32,6 @@ public class SerialPortUtil {
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
     private static Timer clearTimer;
-    private static Timer Kaijishipin;
 
 
     public static void open() {
@@ -581,86 +580,86 @@ public class SerialPortUtil {
     }
 
 
-    public static void shipinkaiji() {
-        Kaijishipin = new Timer();
-        Kaijishipin.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                kaijishipin();
-                if (Kaijishipin != null) {
-                    Kaijishipin.cancel();
-                    Kaijishipin = null;
-                }
-
-            }
-        }, 20 * 1000);
-    }
-
-    private static synchronized void kaijishipin() {
-        sendMsg("{[VIDA:DT:A003]<1,3>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========11111111===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<2,4>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========222222222222222===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<3,5>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========333333333333===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<4,6>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========444444444444===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<5,7>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========5555555555555555555===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<6,8>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========6666666666666666666===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<7,9>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========7777777777777===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<8,1>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg==========888888888888888===========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendMsg("{[VIDA:DT:A003]<9,2>}".getBytes());
-        ELog.i("=====shipinkaiji===========msg=============999999999999999999========");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void shipinkaiji() {
+//        Kaijishipin = new Timer();
+//        Kaijishipin.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                kaijishipin();
+//                if (Kaijishipin != null) {
+//                    Kaijishipin.cancel();
+//                    Kaijishipin = null;
+//                }
+//
+//            }
+//        }, 20 * 1000);
+//    }
+//
+//    private static synchronized void kaijishipin() {
+//        sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========11111111===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<2,4>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========222222222222222===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<3,5>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========333333333333===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<4,6>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========444444444444===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<5,7>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========5555555555555555555===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<6,8>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========6666666666666666666===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<7,9>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========7777777777777===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<8,1>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg==========888888888888888===========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        sendMsg("{[VIDA:DT:A003]<9,2>}".getBytes());
+//        ELog.i("=====shipinkaiji===========msg=============999999999999999999========");
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static List<String> getIOnumDatas() {
         List<String> IoNumList = new ArrayList<String>();

@@ -43,22 +43,17 @@ public class SplashActivity extends BaseActivity {
         HttpUtil.setLuboTokenTimer();
         TimerUtils.setKaijiTimer();
         TimerUtils.setDuandianTimer();
-        SerialPortUtil.shipinkaiji();
+        SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
 
     }
 
     private void setSerialport() {
-
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
-
         for (int j = 0; j < serialPortDataDao.loadAll().size(); j++) {
             String spStr = serialPortDataDao.loadAll().get(j).baudRate + ",n,8,1";
             String msg = "{[COM" + (serialPortDataDao.loadAll().get(j).id - 1) + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
-            ELog.i("========sport_btn_ok=====" + msg);
-            byte[] data = msg.getBytes();
-            SerialPortUtil.sendMsg(data);
+            SerialPortUtil.sendMsg(msg.getBytes());
         }
-
     }
 
 
@@ -67,11 +62,8 @@ public class SplashActivity extends BaseActivity {
         if (ioPortDataDao.loadAll().size() == 0) {
             return;
         }
-
         String status = ioPortDataDao.load((long) 4).ioOutStatus + "" + ioPortDataDao.load((long) 3).ioOutStatus + ""
                 + ioPortDataDao.load((long) 2).ioOutStatus + "" + ioPortDataDao.load((long) 1).ioOutStatus;
-
-
         ELog.i("========ioOutStatus==11======" + status);
         String hex = Integer.toString(Integer.parseInt(status, 2), 16);
         if (hex.length() == 1) {

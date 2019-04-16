@@ -63,7 +63,7 @@ public class HttpUtil {
                 login();
                 ELog.d("=========luboTokenTimer==========");
             }
-        }, 4000, 13 * 60 * 1000);
+        }, 10000, 13 * 60 * 1000);
     }
 
 
