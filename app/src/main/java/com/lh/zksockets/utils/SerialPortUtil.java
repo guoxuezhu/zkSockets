@@ -18,8 +18,6 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -31,7 +29,6 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
-    private static Timer clearTimer;
 
 
     public static void open() {
@@ -83,12 +80,11 @@ public class SerialPortUtil {
                                 bslength = 0;
                                 buffer1 = new byte[1024];
                                 buffer2 = new byte[1024];
-                            } else {
-                                // startClearTimer();
-                                System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                bslength = bslength + size;
-                                makeData(msg);
                             }
+
+                            System.arraycopy(buffer, 0, buffer1, bslength, size);
+                            bslength = bslength + size;
+                            makeData(msg);
                         }
                     }
 
@@ -191,23 +187,6 @@ public class SerialPortUtil {
         }
 
 
-    }
-
-    private static void startClearTimer() {
-        if (clearTimer != null) {
-            clearTimer.cancel();
-            clearTimer = null;
-        }
-        clearTimer = new Timer();
-        clearTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                bslength = 0;
-                buffer1 = new byte[1024];
-                buffer2 = new byte[1024];
-                ELog.d("=========startClearTimer==========");
-            }
-        }, 8000);
     }
 
     private static void setWenshidu() {
@@ -365,7 +344,12 @@ public class SerialPortUtil {
                                     HttpUtil.setlubo(msg);
                                 }
                             } else if (msg.length() > 0 && msg.length() <= 3) {
-                                makeML(Long.valueOf(msg));
+                                try {
+                                    makeML(Long.valueOf(msg));
+                                } catch (Exception e) {
+                                    ELog.i("=========串口1===接收到了数据=====异常========" + e.toString());
+                                }
+
                             }
                         }
                     }
@@ -579,87 +563,6 @@ public class SerialPortUtil {
         }
     }
 
-
-//    public static void shipinkaiji() {
-//        Kaijishipin = new Timer();
-//        Kaijishipin.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                kaijishipin();
-//                if (Kaijishipin != null) {
-//                    Kaijishipin.cancel();
-//                    Kaijishipin = null;
-//                }
-//
-//            }
-//        }, 20 * 1000);
-//    }
-//
-//    private static synchronized void kaijishipin() {
-//        sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========11111111===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<2,4>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========222222222222222===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<3,5>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========333333333333===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<4,6>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========444444444444===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<5,7>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========5555555555555555555===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<6,8>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========6666666666666666666===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<7,9>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========7777777777777===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<8,1>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg==========888888888888888===========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        sendMsg("{[VIDA:DT:A003]<9,2>}".getBytes());
-//        ELog.i("=====shipinkaiji===========msg=============999999999999999999========");
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public static List<String> getIOnumDatas() {
         List<String> IoNumList = new ArrayList<String>();
