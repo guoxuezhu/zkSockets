@@ -174,11 +174,6 @@ public class SerialPortUtil {
                     System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                     buffer2 = new byte[1024];
                     makeData(new String(buffer1, 0, bslength));
-                } else {
-                    bslength = 0;
-                    buffer1 = new byte[1024];
-                    buffer2 = new byte[1024];
-                    ELog.i("==========其它接收数据=======33333333333333333333333333=====");
                 }
 
             }
