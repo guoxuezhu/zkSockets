@@ -283,20 +283,21 @@ public class SerialPortUtil {
                 for (int i = 0; i < mls.length; i++) {
                     ELog.i("=======串口1============makeBaojing========" + mls[i]);
                     try {
+                        if (mls[i].substring(0, 1).equals("1")) {
+                            doSerialPort(mls[i]);
+                        } else if (mls[i].substring(0, 1).equals("2")) {
+                            doJDQ(mls[i]);
+                        } else if (mls[i].substring(0, 1).equals("3")) {
+                            doIO(mls[i]);
+                        } else if (mls[i].substring(0, 1).equals("4")) {
+                            doDanger(mls[i]);
+                        }
                         sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    if (mls[i].substring(0, 1).equals("1")) {
-                        doSerialPort(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("2")) {
-                        doJDQ(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("3")) {
-                        doIO(mls[i]);
-                    } else if (mls[i].substring(0, 1).equals("4")) {
-                        doDanger(mls[i]);
-                    }
-
                 }
             }
         }
