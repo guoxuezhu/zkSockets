@@ -338,14 +338,13 @@ public class SerialPortUtil {
                                     sendShipinType(msg);
                                 } else if (msg.substring(0, 3).equals("LUB")) {
                                     HttpUtil.setlubo(msg);
+                                } else if (msg.substring(0, 3).equals("MBS")) {
+                                    try {
+                                        makeML(Long.valueOf(msg.substring(3)));
+                                    } catch (Exception e) {
+                                        ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+                                    }
                                 }
-                            } else if (msg.length() > 0 && msg.length() <= 3) {
-                                try {
-                                    makeML(Long.valueOf(msg));
-                                } catch (Exception e) {
-                                    ELog.i("=========串口1===接收到了数据=====异常========" + e.toString());
-                                }
-
                             }
                         }
                     }
