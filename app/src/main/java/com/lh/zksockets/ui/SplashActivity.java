@@ -5,10 +5,13 @@ import android.os.Bundle;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.model.BaseInfo;
+import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
@@ -45,6 +48,14 @@ public class SplashActivity extends BaseActivity {
         TimerUtils.setDuandianTimer();
         SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
 
+        mqttServiceStart();
+    }
+
+    private void mqttServiceStart() {
+        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+        if (baseInfoDao.loadAll().size() != 0) {
+            MyMqttService.startService(this); //开启服务
+        }
     }
 
     private void setSerialport() {

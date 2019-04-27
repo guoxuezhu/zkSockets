@@ -76,7 +76,7 @@ public class SerialPortUtil {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
-                            if (bslength > 50) {
+                            if (bslength > 200) {
                                 bslength = 0;
                                 buffer1 = new byte[1024];
                                 buffer2 = new byte[1024];

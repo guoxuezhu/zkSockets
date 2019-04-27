@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="矩阵设置"
+            android:text="远程设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
@@ -39,274 +39,81 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_60"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_zk_1"
-                    android:layout_width="@dimen/dp_100"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_table_bg"
-                    android:gravity="center_vertical"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text="1"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
 
                 <TextView
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="切换到"
+                    android:text="中控位置:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_zk_2"
-                    android:layout_width="@dimen/dp_100"
+                    android:id="@+id/et_yc_weizhi"
+                    android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="2"
+                    android:text="101"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_24" />
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="设备标识:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:id="@+id/et_yc_deviceId"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
 
             <Button
-                android:id="@+id/btn_zk_ok"
+                android:id="@+id/btn_zkyc_ok"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/dp_20"
+                android:layout_margin="@dimen/dp_40"
                 android:background="@drawable/btn_bg"
-                android:text="完成"
+                android:text="保存"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_24" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_40"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_daiji_open"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="待机开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_daiji_closed"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="待机关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_all_open"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="全开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_all_closed"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="全关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_40"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_ch1_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="1开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch1_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="1关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch2_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="2开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch2_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="2关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch3_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="3开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch3_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="3关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch4_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="4开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch4_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="4关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch5_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="5开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch5_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="5关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch6_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="6开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch6_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="6关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch7_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="7开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch7_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="7关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch8_open"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="8开"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-                <Button
-                    android:id="@+id/btn_ch8_closed"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:background="@drawable/btn_bg"
-                    android:text="8关"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -11,6 +11,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.IoPortData;
+import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.data.model.EventXiake;
 import com.lh.zksockets.data.model.Users;
@@ -31,6 +32,7 @@ import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
+import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.DbDao.EventXiakeDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
@@ -60,6 +62,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig dangerOutDaoConfig;
     private final DaoConfig eventKejianRestDaoConfig;
     private final DaoConfig ioPortDataDaoConfig;
+    private final DaoConfig baseInfoDaoConfig;
     private final DaoConfig eventBigDaoConfig;
     private final DaoConfig eventXiakeDaoConfig;
     private final DaoConfig usersDaoConfig;
@@ -80,6 +83,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DangerOutDao dangerOutDao;
     private final EventKejianRestDao eventKejianRestDao;
     private final IoPortDataDao ioPortDataDao;
+    private final BaseInfoDao baseInfoDao;
     private final EventBigDao eventBigDao;
     private final EventXiakeDao eventXiakeDao;
     private final UsersDao usersDao;
@@ -109,6 +113,9 @@ public class DaoSession extends AbstractDaoSession {
 
         ioPortDataDaoConfig = daoConfigMap.get(IoPortDataDao.class).clone();
         ioPortDataDaoConfig.initIdentityScope(type);
+
+        baseInfoDaoConfig = daoConfigMap.get(BaseInfoDao.class).clone();
+        baseInfoDaoConfig.initIdentityScope(type);
 
         eventBigDaoConfig = daoConfigMap.get(EventBigDao.class).clone();
         eventBigDaoConfig.initIdentityScope(type);
@@ -161,6 +168,7 @@ public class DaoSession extends AbstractDaoSession {
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
         eventKejianRestDao = new EventKejianRestDao(eventKejianRestDaoConfig, this);
         ioPortDataDao = new IoPortDataDao(ioPortDataDaoConfig, this);
+        baseInfoDao = new BaseInfoDao(baseInfoDaoConfig, this);
         eventBigDao = new EventBigDao(eventBigDaoConfig, this);
         eventXiakeDao = new EventXiakeDao(eventXiakeDaoConfig, this);
         usersDao = new UsersDao(usersDaoConfig, this);
@@ -181,6 +189,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(DangerOut.class, dangerOutDao);
         registerDao(EventKejianRest.class, eventKejianRestDao);
         registerDao(IoPortData.class, ioPortDataDao);
+        registerDao(BaseInfo.class, baseInfoDao);
         registerDao(EventBig.class, eventBigDao);
         registerDao(EventXiake.class, eventXiakeDao);
         registerDao(Users.class, usersDao);
@@ -203,6 +212,7 @@ public class DaoSession extends AbstractDaoSession {
         dangerOutDaoConfig.clearIdentityScope();
         eventKejianRestDaoConfig.clearIdentityScope();
         ioPortDataDaoConfig.clearIdentityScope();
+        baseInfoDaoConfig.clearIdentityScope();
         eventBigDaoConfig.clearIdentityScope();
         eventXiakeDaoConfig.clearIdentityScope();
         usersDaoConfig.clearIdentityScope();
@@ -231,6 +241,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public IoPortDataDao getIoPortDataDao() {
         return ioPortDataDao;
+    }
+
+    public BaseInfoDao getBaseInfoDao() {
+        return baseInfoDao;
     }
 
     public EventBigDao getEventBigDao() {

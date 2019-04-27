@@ -1,23 +1,46 @@
 package com.lh.zksockets.data.model;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class BaseInfo {
 
     public String classRoom;
-    public int wifi; //1:静态IP   2:动态IP
-    public String IP;
-    public String PORT;
-    public String zkVersionName;
-    public String zkDeviceName;
+
+    public String uuid;
+
+    @Generated(hash = 641942860)
+    public BaseInfo(String classRoom, String uuid) {
+        this.classRoom = classRoom;
+        this.uuid = uuid;
+    }
+
+    @Generated(hash = 1463957903)
+    public BaseInfo() {
+    }
 
     @Override
     public String toString() {
         return "BaseInfo{" +
                 "classRoom='" + classRoom + '\'' +
-                ", wifi=" + wifi +
-                ", IP='" + IP + '\'' +
-                ", PORT='" + PORT + '\'' +
-                ", zkVersionName='" + zkVersionName + '\'' +
-                ", zkDeviceName='" + zkDeviceName + '\'' +
+                ", uuid='" + uuid + '\'' +
                 '}';
+    }
+
+    public String getClassRoom() {
+        return this.classRoom;
+    }
+
+    public void setClassRoom(String classRoom) {
+        this.classRoom = classRoom;
+    }
+
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

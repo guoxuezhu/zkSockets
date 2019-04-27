@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lh.zksockets">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -118,6 +119,11 @@
         <activity
             android:name=".ui.IOsetingActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+
+
+
+        <service android:name="org.eclipse.paho.android.service.MqttService" /> <!--MqttService-->
+        <service android:name=".service.MyMqttService"/> <!--MyMqttService-->
 
 
         <meta-data
