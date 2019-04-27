@@ -116,10 +116,11 @@ public class MyMqttService extends Service {
 
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
+        USERNAME = baseInfoDao.loadAll().get(0).mqttuser;
+        PASSWORD = baseInfoDao.loadAll().get(0).mqttpassword;
         CLIENTID = baseInfoDao.loadAll().get(0).uuid;
 
-        String serverURI = HOST; //服务器地址（协议+地址+端口号）
-        mqttAndroidClient = new MqttAndroidClient(this, serverURI, CLIENTID);
+        mqttAndroidClient = new MqttAndroidClient(this, HOST, CLIENTID);
         mqttAndroidClient.setCallback(mqttCallback); //设置监听订阅消息的回调
         mMqttConnectOptions = new MqttConnectOptions();
         mMqttConnectOptions.setCleanSession(true); //设置是否清除缓存
@@ -219,9 +220,13 @@ public class MyMqttService extends Service {
                     SerialPortUtil.sendShipinType(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
+                } else if (msg.substring(0, 3).equals("MBS")) {
+                    try {
+                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+                    } catch (Exception e) {
+                        ELog.i("=========mqtt===接收到了数据====Long.valueOf==异常========" + e.toString());
+                    }
                 }
-            } else if (msg.length() > 0 && msg.length() <= 3) {
-                SerialPortUtil.makeML(Long.valueOf(msg));
             }
 
 //            ELog.i("=========收到消息： =====" + new String(message.getPayload()));

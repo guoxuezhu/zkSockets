@@ -20,6 +20,11 @@ public class ZhongKongActivity extends BaseActivity {
 
     @BindView(R.id.et_yc_weizhi)
     EditText et_yc_weizhi;
+    @BindView(R.id.et_mqtt_user)
+    EditText et_mqtt_user;
+    @BindView(R.id.et_mqtt_mima)
+    EditText et_mqtt_mima;
+
     @BindView(R.id.et_yc_deviceId)
     TextView et_yc_deviceId;
 
@@ -33,12 +38,25 @@ public class ZhongKongActivity extends BaseActivity {
 
         baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() == 0) {
-            baseInfoDao.insert(new BaseInfo("", java.util.UUID.randomUUID().toString()));
+            et_yc_weizhi.setText("");
+            et_mqtt_user.setText("");
+            et_mqtt_mima.setText("");
+            et_yc_deviceId.setText(java.util.UUID.randomUUID().toString());
+        } else {
+            et_yc_weizhi.setText(baseInfoDao.loadAll().get(0).classRoom);
+            et_mqtt_user.setText(baseInfoDao.loadAll().get(0).mqttuser);
+            et_mqtt_mima.setText(baseInfoDao.loadAll().get(0).mqttpassword);
+            et_yc_deviceId.setText(baseInfoDao.loadAll().get(0).uuid);
         }
-        et_yc_weizhi.setText(baseInfoDao.loadAll().get(0).classRoom);
-        et_yc_deviceId.setText(baseInfoDao.loadAll().get(0).uuid);
+
     }
 
+
+    @OnClick(R.id.btn_zkyc_clean)
+    public void btn_zkyc_clean() {
+        baseInfoDao.deleteAll();
+        Toast.makeText(this, "清除成功，重新启动后生效", Toast.LENGTH_SHORT).show();
+    }
 
     @OnClick(R.id.btn_zkyc_ok)
     public void btn_zkyc_ok() {
@@ -46,8 +64,18 @@ public class ZhongKongActivity extends BaseActivity {
             Toast.makeText(this, "请输入中控位置", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (et_mqtt_user.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "请输入MQTT用户", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        BaseInfo baseInfo = new BaseInfo(et_yc_weizhi.getText().toString().trim(), baseInfoDao.loadAll().get(0).uuid);
+        if (et_mqtt_mima.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "请输入MQTT密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        BaseInfo baseInfo = new BaseInfo(et_yc_weizhi.getText().toString().trim(), et_mqtt_user.getText().toString().trim(),
+                et_mqtt_mima.getText().toString().trim(), et_yc_deviceId.getText().toString().trim());
         baseInfoDao.deleteAll();
         baseInfoDao.insert(baseInfo);
         MyMqttService.startService(this); //开启服务

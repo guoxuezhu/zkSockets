@@ -8,6 +8,7 @@ import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
+import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 
@@ -58,9 +59,13 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     SerialPortUtil.sendShipinType(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
+                } else if (msg.substring(0, 3).equals("MBS")) {
+                    try {
+                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+                    } catch (Exception e) {
+                        Log.d(TAG, "==========http===POST===接收到了数据====Long.valueOf==异常========" + e.toString());
+                    }
                 }
-            } else if (msg.length() > 0 && msg.length() <= 3) {
-                SerialPortUtil.makeML(Long.valueOf(msg));
             }
             response.send("200");
 

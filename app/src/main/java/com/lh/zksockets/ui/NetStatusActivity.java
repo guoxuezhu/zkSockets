@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
@@ -13,6 +14,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.LuboInfo;
@@ -415,6 +417,13 @@ public class NetStatusActivity extends BaseActivity {
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 10));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 0, 180));
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器" + 8, 0, 180));
+        }
+
+
+        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+        if (baseInfoDao.loadAll().size() == 0) {
+            baseInfoDao.insert(new BaseInfo("101", "cmt7p9p/zk_user_1",
+                    "vZakahehxugRHnZs", java.util.UUID.randomUUID().toString()));
         }
 
 
