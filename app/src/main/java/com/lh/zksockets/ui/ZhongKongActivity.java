@@ -57,6 +57,9 @@ public class ZhongKongActivity extends BaseActivity {
         baseInfoDao.deleteAll();
         MyMqttService.stopMqtt(this);
         Toast.makeText(this, "清除成功,已取消远程连接", Toast.LENGTH_SHORT).show();
+        et_yc_weizhi.setText("");
+        et_mqtt_user.setText("");
+        et_mqtt_mima.setText("");
     }
 
     @OnClick(R.id.btn_zkyc_ok)
