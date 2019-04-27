@@ -55,7 +55,8 @@ public class ZhongKongActivity extends BaseActivity {
     @OnClick(R.id.btn_zkyc_clean)
     public void btn_zkyc_clean() {
         baseInfoDao.deleteAll();
-        Toast.makeText(this, "清除成功，重新启动后生效", Toast.LENGTH_SHORT).show();
+        MyMqttService.stopMqtt(this);
+        Toast.makeText(this, "清除成功,已取消远程连接", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btn_zkyc_ok)

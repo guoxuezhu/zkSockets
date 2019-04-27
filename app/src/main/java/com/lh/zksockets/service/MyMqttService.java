@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
@@ -63,8 +64,9 @@ public class MyMqttService extends Service {
         if (mqttAndroidClient != null) {
             if (mqttAndroidClient.isConnected()) {
                 BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-                PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
                 try {
+                    mqttAndroidClient.unsubscribe(PUBLISH_TOPIC);
+                    PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
                     mqttAndroidClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 } catch (MqttException e) {
                     e.printStackTrace();
@@ -72,6 +74,18 @@ public class MyMqttService extends Service {
             }
         } else {
             mContext.startService(new Intent(mContext, MyMqttService.class));
+        }
+    }
+
+    public static void stopMqtt(Context mContext) {
+        if (mqttAndroidClient != null) {
+            if (mqttAndroidClient.isConnected()) {
+                try {
+                    mqttAndroidClient.unsubscribe(PUBLISH_TOPIC);
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -177,6 +191,8 @@ public class MyMqttService extends Service {
             return true;
         } else {
             ELog.i("=======mqtt==没有可用网络");
+            Toast.makeText(getApplicationContext(), "没有可用网络", Toast.LENGTH_LONG).show();
+
             /*没有可用网络的时候，延迟3秒再尝试重连*/
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -205,6 +221,7 @@ public class MyMqttService extends Service {
         public void onFailure(IMqttToken arg0, Throwable arg1) {
             arg1.printStackTrace();
             ELog.i("=======mqtt==连接失败 ");
+            Toast.makeText(getApplicationContext(), "连接失败", Toast.LENGTH_LONG).show();
         }
     };
 
