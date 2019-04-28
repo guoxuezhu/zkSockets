@@ -66,7 +66,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void back() {
-        startActivity(new Intent(this, SplashActivity.class));
         finish();
     }
 
