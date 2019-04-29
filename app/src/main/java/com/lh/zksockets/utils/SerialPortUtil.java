@@ -111,7 +111,7 @@ public class SerialPortUtil {
                 buffer2 = new byte[1024];
                 makeData(new String(buffer1, 0, bslength));
             } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
-
+                ELog.i("===========COM7=====test======111111=======" + msgdata.indexOf(">"));
                 if (msgdata.indexOf(">") != -1) {
                     if (msgdata.indexOf(">") == 16) {
                         buffer2 = new byte[1024];
