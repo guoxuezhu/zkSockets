@@ -403,7 +403,7 @@ public class NetStatusActivity extends BaseActivity {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
 
         if (luboInfoDao.loadAll().size() == 0) {
-            luboInfoDao.insert(new LuboInfo("192.168.1.211", "admin", "admin", ""));
+            luboInfoDao.insert(new LuboInfo("192.168.5.211", "admin", "admin", ""));
         }
 
 
