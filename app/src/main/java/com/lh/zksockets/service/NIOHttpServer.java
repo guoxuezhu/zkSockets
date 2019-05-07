@@ -55,8 +55,12 @@ public class NIOHttpServer implements HttpServerRequestCallback {
 
             if (request.getPath().equals("/api/updataSportInfo")) {
                 response.send(HttpRequestUtil.updataSportInfo(request));
+            } else if (request.getPath().equals("/api/updataDangerInfo")) {
+                response.send(HttpRequestUtil.updataDangerInfo(request));
+            } else if (request.getPath().equals("/api/updataEventInfo")) {
+                response.send(HttpRequestUtil.updataEventInfo(request));
             } else {
-                response.send("");
+                response.send("200");
             }
 
 //            Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
@@ -82,8 +86,13 @@ public class NIOHttpServer implements HttpServerRequestCallback {
 
             if (request.getPath().equals("/api/sportInfo")) {
                 response.send(HttpRequestUtil.getSportInfo(request));
+            } else if (request.getPath().equals("/api/dangerInfo")) {
+                response.send(HttpRequestUtil.getDangerInfo(request));
+            } else if (request.getPath().equals("/api/eventList")) {
+                response.send(HttpRequestUtil.getEventList(request));
+            } else if (request.getPath().equals("/api/sporsdtInfo")) {
             } else {
-                response.send("");
+                response.send("200");
             }
 
         }
