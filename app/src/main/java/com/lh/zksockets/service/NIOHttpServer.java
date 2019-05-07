@@ -2,15 +2,11 @@ package com.lh.zksockets.service;
 
 import android.util.Log;
 
-import com.koushikdutta.async.http.Multimap;
-import com.koushikdutta.async.http.body.AsyncHttpRequestBody;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
-import com.lh.zksockets.utils.ELog;
-import com.lh.zksockets.utils.HttpUtil;
-import com.lh.zksockets.utils.SerialPortUtil;
+import com.lh.zksockets.utils.HttpRequestUtil;
 
 public class NIOHttpServer implements HttpServerRequestCallback {
 
@@ -47,30 +43,49 @@ public class NIOHttpServer implements HttpServerRequestCallback {
 
     @Override
     public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
-        Log.d(TAG, "=======aaaaaaaa======");
+
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
+        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+        response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST");
+
+        Log.d(TAG, "=======111111=========" + request.getPath());
+        Log.d(TAG, "=======2222=========" + request.getQuery());
+
         if (request.getMethod().equals("POST")) {
-            Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-            Log.d(TAG, "=======parms========= " + parms.toString() + "===zkbtn=== " + parms.getString("zkbtn"));
 
-            String msg = parms.getString("zkbtn");
-
-            if (msg.length() > 3) {
-                if (msg.substring(0, 3).equals("VID")) {
-                    SerialPortUtil.sendShipinType(msg);
-                } else if (msg.substring(0, 3).equals("LUB")) {
-                    HttpUtil.setlubo(msg);
-                } else if (msg.substring(0, 3).equals("MBS")) {
-                    try {
-                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
-                    } catch (Exception e) {
-                        Log.d(TAG, "==========http===POST===接收到了数据====Long.valueOf==异常========" + e.toString());
-                    }
-                }
+            if (request.getPath().equals("/api/updataSportInfo")) {
+                response.send(HttpRequestUtil.updataSportInfo(request));
+            } else {
+                response.send("");
             }
-            response.send("200");
 
-        } else {
-            response.send("100");
+//            Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+//            Log.d(TAG, "=======parms========= " + parms.toString() + "===zkbtn=== " + parms.getString("zkbtn"));
+//
+//            String msg = parms.getString("zkbtn");
+//
+//            if (msg.length() > 3) {
+//                if (msg.substring(0, 3).equals("VID")) {
+//                    SerialPortUtil.sendShipinType(msg);
+//                } else if (msg.substring(0, 3).equals("LUB")) {
+//                    HttpUtil.setlubo(msg);
+//                } else if (msg.substring(0, 3).equals("MBS")) {
+//                    try {
+//                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+//                    } catch (Exception e) {
+//                        Log.d(TAG, "==========http===POST===接收到了数据====Long.valueOf==异常========" + e.toString());
+//                    }
+//                }
+//            }
+
+        } else if (request.getMethod().equals("GET")) {
+
+            if (request.getPath().equals("/api/sportInfo")) {
+                response.send(HttpRequestUtil.getSportInfo(request));
+            } else {
+                response.send("");
+            }
+
         }
 
 
