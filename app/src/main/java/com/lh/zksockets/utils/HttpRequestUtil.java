@@ -95,11 +95,11 @@ public class HttpRequestUtil {
         String[] wsdpm = request.getPath().split(",");
         if (wsdpm.length > 15) {
             WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-            BigDecimal voc = new BigDecimal(Integer.parseInt(wsdpm[5], 16));
-            BigDecimal hcho = new BigDecimal(Integer.parseInt(wsdpm[6], 16));
-            BigDecimal pm25 = new BigDecimal(Integer.parseInt(wsdpm[7], 16));
-            BigDecimal wendu = new BigDecimal(Integer.parseInt(wsdpm[8], 16));
-            BigDecimal shidu = new BigDecimal(Integer.parseInt(wsdpm[9], 16));
+            BigDecimal voc = new BigDecimal(wsdpm[5]);
+            BigDecimal hcho = new BigDecimal(wsdpm[6]);
+            BigDecimal pm25 = new BigDecimal(wsdpm[7]);
+            BigDecimal wendu = new BigDecimal(wsdpm[8]);
+            BigDecimal shidu = new BigDecimal(wsdpm[9]);
 
             BigDecimal bigDecimal = new BigDecimal("0.1");
 
