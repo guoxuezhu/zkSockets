@@ -323,14 +323,14 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-501,1-502"));
             mLsListsDao.insert(new MLsLists((long) 3, "自习", "1-102,1-602,1-501,1-502,1-503,1-504"));
             mLsListsDao.insert(new MLsLists((long) 4, "休息", ""));
-            mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-1-1"));
-            mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "2-2-1"));
+            mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-2-0"));
+            mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "2-1-0"));
             mLsListsDao.insert(new MLsLists((long) 7, "窗帘2开", ""));
             mLsListsDao.insert(new MLsLists((long) 8, "窗帘2关", ""));
             mLsListsDao.insert(new MLsLists((long) 9, "投影机开", "1-101"));
             mLsListsDao.insert(new MLsLists((long) 10, "投影机关", "1-102"));
-            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-8-1"));
-            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-7-1"));
+            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-8-0"));
+            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-7-0"));
             mLsListsDao.insert(new MLsLists((long) 13, "灯光1开", "1-205"));
             mLsListsDao.insert(new MLsLists((long) 14, "灯光1关", "1-206"));
             mLsListsDao.insert(new MLsLists((long) 15, "灯光2开", ""));
@@ -365,7 +365,7 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", ""));
             mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "中控开机", "1-319,1-201"));
-            mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "2-3-1"));
+            mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "2-4-0"));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", ""));
             mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "1-504"));
             mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "1-507"));
@@ -409,10 +409,10 @@ public class NetStatusActivity extends BaseActivity {
 
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 0, 10));
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 0, 10));
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 10));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 0, 180));
