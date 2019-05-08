@@ -97,7 +97,6 @@ public class HttpRequestUtil {
             WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
             BigDecimal voc = new BigDecimal(wsdpm[5]);
             BigDecimal hcho = new BigDecimal(wsdpm[6]);
-            BigDecimal pm25 = new BigDecimal(wsdpm[7]);
             BigDecimal wendu = new BigDecimal(wsdpm[8]);
             BigDecimal shidu = new BigDecimal(wsdpm[9]);
 
@@ -105,7 +104,7 @@ public class HttpRequestUtil {
 
             wenShiDuDao.deleteAll();
             wenShiDuDao.insert(new WenShiDu(wsdpm[4] + "ppm", voc.multiply(bigDecimal) + "ug/m3",
-                    hcho.multiply(bigDecimal) + "ug/m3", pm25.multiply(bigDecimal) + "ug/m3",
+                    hcho.multiply(bigDecimal) + "ug/m3", wsdpm[7] + "ug/m3",
                     wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%RH",
                     wsdpm[10] + "ug/m3", 1, ""));
         }
