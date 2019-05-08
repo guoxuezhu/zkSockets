@@ -465,12 +465,11 @@ public class TimerUtils {
             @Override
             public void run() {
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-                if (wenShiDuDao.loadAll().size() == 0) {
+                if (wenShiDuDao.loadAll().size() != 0) {
                     String wsd = "WSD;" + wenShiDuDao.loadAll().get(0).wenStr + ";" + wenShiDuDao.loadAll().get(0).shiStr
                             + ";" + wenShiDuDao.loadAll().get(0).PM25;
                     SerialPortUtil.sendMsg1(wsd.getBytes());
                 }
-
 //                SerialPortUtil.doSerialPort(serialportML);
                 ELog.d("=========wenshiTimer==========");
             }

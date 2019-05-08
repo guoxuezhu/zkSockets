@@ -57,10 +57,10 @@ public class EnvironmentalActivity extends BaseActivity {
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
             for (int i = 1; i < 7; i++) {
-                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, 0, 10));
+                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, 1, 1));
             }
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 0, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器" + 8, 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", 1, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 1, 180));
         }
 
         if (jdqStatusDao.load((long) 1).jdqStatus == 1) {

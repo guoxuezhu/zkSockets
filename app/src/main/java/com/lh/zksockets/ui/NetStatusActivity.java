@@ -413,10 +413,10 @@ public class NetStatusActivity extends BaseActivity {
             jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 0, 10));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 10));
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 0, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器" + 8, 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器" + 7, 1, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器" + 8, 1, 180));
         }
 
 
