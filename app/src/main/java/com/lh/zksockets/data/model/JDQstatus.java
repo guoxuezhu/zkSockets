@@ -13,7 +13,7 @@ public class JDQstatus {
 
     public String name;
 
-    public int jdqStatus;//1 开      0 关
+    public int jdqStatus;//1 关     0 开
 
     public int time;
 

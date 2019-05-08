@@ -6,12 +6,7 @@ import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
-import com.lh.zksockets.MyApplication;
-import com.lh.zksockets.data.DbDao.WenShiDuDao;
-import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.utils.HttpRequestUtil;
-
-import java.math.BigDecimal;
 
 public class NIOHttpServer implements HttpServerRequestCallback {
 
@@ -64,6 +59,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.updataDangerInfo(request));
             } else if (request.getPath().equals("/api/updataEventInfo")) {
                 response.send(HttpRequestUtil.updataEventInfo(request));
+            } else if (request.getPath().equals("/api/updataJdqInfo")) {
+                response.send(HttpRequestUtil.updataJdqInfo(request));
+            } else if (request.getPath().equals("/api/updataLuboInfo")) {
+                response.send(HttpRequestUtil.updataLuboInfo(request));
             } else {
                 response.send("200");
             }
@@ -95,6 +94,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.getDangerInfo(request));
             } else if (request.getPath().equals("/api/eventList")) {
                 response.send(HttpRequestUtil.getEventList(request));
+            } else if (request.getPath().equals("/api/jdqInfo")) {
+                response.send(HttpRequestUtil.getJDQList(request));
+            } else if (request.getPath().equals("/api/luboInfo")) {
+                response.send(HttpRequestUtil.getLuboList(request));
             } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
                 response.send(HttpRequestUtil.setWsdpm(request));
             } else {

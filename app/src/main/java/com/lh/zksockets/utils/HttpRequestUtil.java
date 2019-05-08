@@ -7,13 +7,18 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.JDQstatusDao;
+import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.JDQstatus;
+import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
@@ -83,10 +88,10 @@ public class HttpRequestUtil {
 
     public static String updataEventInfo(AsyncHttpServerRequest request) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        List<MLsLists> dangerIoYuans = gson.fromJson(request.getQuery().get("eventDatas[]").toString(), new TypeToken<List<MLsLists>>() {
+        List<MLsLists> mLsLists = gson.fromJson(request.getQuery().get("eventDatas[]").toString(), new TypeToken<List<MLsLists>>() {
         }.getType());
-        for (int i = 0; i < dangerIoYuans.size(); i++) {
-            mLsListsDao.update(dangerIoYuans.get(i));
+        for (int i = 0; i < mLsLists.size(); i++) {
+            mLsListsDao.update(mLsLists.get(i));
         }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
@@ -107,6 +112,40 @@ public class HttpRequestUtil {
                     hcho.multiply(bigDecimal) + "ug/m3", wsdpm[7] + "ug/m3",
                     wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%RH",
                     wsdpm[10] + "ug/m3", 1, ""));
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getJDQList(AsyncHttpServerRequest request) {
+        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+        return gson.toJson(new HttpResult("200", "", true, jdqStatusDao.loadAll()));
+    }
+
+    public static String updataJdqInfo(AsyncHttpServerRequest request) {
+        JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+        List<JDQstatus> jdQstatuses = gson.fromJson(request.getQuery().get("jdqDatas[]").toString(), new TypeToken<List<JDQstatus>>() {
+        }.getType());
+        for (int i = 0; i < jdQstatuses.size(); i++) {
+            jdqStatusDao.update(jdQstatuses.get(i));
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getLuboList(AsyncHttpServerRequest request) {
+        LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
+        if (luboInfoDao.loadAll().size() == 0) {
+            luboInfoDao.insert(new LuboInfo("", "", "", ""));
+        }
+        return gson.toJson(new HttpResult("200", "", true, luboInfoDao.loadAll()));
+    }
+
+    public static String updataLuboInfo(AsyncHttpServerRequest request) {
+        LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
+        List<LuboInfo> luboInfos = gson.fromJson(request.getQuery().get("luboDatas[]").toString(), new TypeToken<List<LuboInfo>>() {
+        }.getType());
+        luboInfoDao.deleteAll();
+        for (int i = 0; i < luboInfos.size(); i++) {
+            luboInfoDao.insert(luboInfos.get(i));
         }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
