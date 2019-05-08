@@ -63,42 +63,42 @@ public class EnvironmentalActivity extends BaseActivity {
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 1, 180));
         }
 
-        if (jdqStatusDao.load((long) 1).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 1).jdqStatus == 0) {
             jdq_1_gl.setChecked(true);
         } else {
             jdq_1_gl.setChecked(false);
         }
         jdq_et_time_1.setText(jdqStatusDao.load((long) 1).time + "");
 
-        if (jdqStatusDao.load((long) 2).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 2).jdqStatus == 0) {
             jdq_2_gl.setChecked(true);
         } else {
             jdq_2_gl.setChecked(false);
         }
         jdq_et_time_2.setText(jdqStatusDao.load((long) 2).time + "");
 
-        if (jdqStatusDao.load((long) 3).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 3).jdqStatus == 0) {
             jdq_3_gl.setChecked(true);
         } else {
             jdq_3_gl.setChecked(false);
         }
         jdq_et_time_3.setText(jdqStatusDao.load((long) 3).time + "");
 
-        if (jdqStatusDao.load((long) 4).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 4).jdqStatus == 0) {
             jdq_4_gl.setChecked(true);
         } else {
             jdq_4_gl.setChecked(false);
         }
         jdq_et_time_4.setText(jdqStatusDao.load((long) 4).time + "");
 
-        if (jdqStatusDao.load((long) 5).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 5).jdqStatus == 0) {
             jdq_5_gl.setChecked(true);
         } else {
             jdq_5_gl.setChecked(false);
         }
         jdq_et_time_5.setText(jdqStatusDao.load((long) 5).time + "");
 
-        if (jdqStatusDao.load((long) 6).jdqStatus == 1) {
+        if (jdqStatusDao.load((long) 6).jdqStatus == 0) {
             jdq_6_gl.setChecked(true);
         } else {
             jdq_6_gl.setChecked(false);
@@ -118,39 +118,39 @@ public class EnvironmentalActivity extends BaseActivity {
         int io6;
 
         if (jdq_1_gl.isChecked()) {
-            io1 = 1;
-        } else {
             io1 = 0;
+        } else {
+            io1 = 1;
         }
 
         if (jdq_2_gl.isChecked()) {
-            io2 = 1;
-        } else {
             io2 = 0;
+        } else {
+            io2 = 1;
         }
 
         if (jdq_3_gl.isChecked()) {
-            io3 = 1;
-        } else {
             io3 = 0;
+        } else {
+            io3 = 1;
         }
 
         if (jdq_4_gl.isChecked()) {
-            io4 = 1;
-        } else {
             io4 = 0;
+        } else {
+            io4 = 1;
         }
 
         if (jdq_5_gl.isChecked()) {
-            io5 = 1;
-        } else {
             io5 = 0;
+        } else {
+            io5 = 1;
         }
 
         if (jdq_6_gl.isChecked()) {
-            io6 = 1;
-        } else {
             io6 = 0;
+        } else {
+            io6 = 1;
         }
 
         jdqStatusDao.update(new JDQstatus((long) 1, "继电器1", io1, Integer.valueOf(jdq_et_time_1.getText().toString())));

@@ -493,12 +493,12 @@ public class SerialPortUtil {
                 }
             }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
-            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
                 TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
             }
         } else if (ml.substring(4).equals("0")) {
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
-            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
                 TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
             }
         }
