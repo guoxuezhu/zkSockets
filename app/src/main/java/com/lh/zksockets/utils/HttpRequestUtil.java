@@ -1,6 +1,8 @@
 package com.lh.zksockets.utils;
 
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
@@ -9,20 +11,22 @@ import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
+import com.lh.zksockets.data.model.WenShiDu;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class HttpRequestUtil {
 
 
     private static Gson gson = new Gson();
-    private static HttpResult httpResult = null;
 
     public static String updataSportInfo(AsyncHttpServerRequest request) {
         String sportNumer = request.getQuery().getString("sportNum");
@@ -39,8 +43,7 @@ public class HttpRequestUtil {
         for (int i = 0; i < serialCommandlist.size(); i++) {
             serialCommandDao.update(serialCommandlist.get(i));
         }
-        httpResult = new HttpResult("200", "", true, null);
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, null));
 
     }
 
@@ -54,15 +57,13 @@ public class HttpRequestUtil {
                 .list();
 
         SerialResult serialResult = new SerialResult(serialPortDataDao.load(Long.valueOf(sportNum)), serialCommands);
-        httpResult = new HttpResult("200", "", true, serialResult);
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, serialResult));
 
     }
 
     public static String getDangerInfo(AsyncHttpServerRequest request) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        httpResult = new HttpResult("200", "", true, ioYuanDao.loadAll());
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
     public static String updataDangerInfo(AsyncHttpServerRequest request) {
@@ -72,14 +73,12 @@ public class HttpRequestUtil {
         for (int i = 0; i < dangerIoYuans.size(); i++) {
             ioYuanDao.update(dangerIoYuans.get(i));
         }
-        httpResult = new HttpResult("200", "", true, null);
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, null));
     }
 
     public static String getEventList(AsyncHttpServerRequest request) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        httpResult = new HttpResult("200", "", true, mLsListsDao.loadAll());
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
 
     public static String updataEventInfo(AsyncHttpServerRequest request) {
@@ -89,7 +88,27 @@ public class HttpRequestUtil {
         for (int i = 0; i < dangerIoYuans.size(); i++) {
             mLsListsDao.update(dangerIoYuans.get(i));
         }
-        httpResult = new HttpResult("200", "", true, null);
-        return gson.toJson(httpResult);
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String setWsdpm(AsyncHttpServerRequest request) {
+        String[] wsdpm = request.getPath().split(",");
+        if (wsdpm.length > 15) {
+            WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+            BigDecimal voc = new BigDecimal(Integer.parseInt(wsdpm[5], 16));
+            BigDecimal hcho = new BigDecimal(Integer.parseInt(wsdpm[6], 16));
+            BigDecimal pm25 = new BigDecimal(Integer.parseInt(wsdpm[7], 16));
+            BigDecimal wendu = new BigDecimal(Integer.parseInt(wsdpm[8], 16));
+            BigDecimal shidu = new BigDecimal(Integer.parseInt(wsdpm[9], 16));
+
+            BigDecimal bigDecimal = new BigDecimal("0.1");
+
+            wenShiDuDao.deleteAll();
+            wenShiDuDao.insert(new WenShiDu(wsdpm[4] + "ppm", voc.multiply(bigDecimal) + "ug/m3",
+                    hcho.multiply(bigDecimal) + "ug/m3", pm25.multiply(bigDecimal) + "ug/m3",
+                    wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%RH",
+                    wsdpm[10] + "ug/m3", 1, ""));
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
     }
 }

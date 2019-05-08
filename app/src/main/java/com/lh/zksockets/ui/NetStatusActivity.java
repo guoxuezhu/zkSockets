@@ -396,7 +396,7 @@ public class NetStatusActivity extends BaseActivity {
         WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
         if (wenShiDuDao.loadAll().size() == 0) {
-            wenShiDuDao.insert(new WenShiDu("", "", 1, "1-801"));
+            wenShiDuDao.insert(new WenShiDu("", "", "", "", "", "", "", 1, "1-801"));
         }
 
 

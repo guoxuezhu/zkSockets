@@ -24,10 +24,15 @@ public class WenShiDuDao extends AbstractDao<WenShiDu, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property WenStr = new Property(0, String.class, "wenStr", false, "WEN_STR");
-        public final static Property ShiStr = new Property(1, String.class, "shiStr", false, "SHI_STR");
-        public final static Property TimeStr = new Property(2, int.class, "timeStr", false, "TIME_STR");
-        public final static Property SerialportML = new Property(3, String.class, "serialportML", false, "SERIALPORT_ML");
+        public final static Property CO2 = new Property(0, String.class, "CO2", false, "CO2");
+        public final static Property VOC = new Property(1, String.class, "VOC", false, "VOC");
+        public final static Property HCHO = new Property(2, String.class, "HCHO", false, "HCHO");
+        public final static Property PM25 = new Property(3, String.class, "PM25", false, "PM25");
+        public final static Property WenStr = new Property(4, String.class, "wenStr", false, "WEN_STR");
+        public final static Property ShiStr = new Property(5, String.class, "shiStr", false, "SHI_STR");
+        public final static Property PM10 = new Property(6, String.class, "PM10", false, "PM10");
+        public final static Property TimeStr = new Property(7, int.class, "timeStr", false, "TIME_STR");
+        public final static Property SerialportML = new Property(8, String.class, "serialportML", false, "SERIALPORT_ML");
     }
 
 
@@ -43,10 +48,15 @@ public class WenShiDuDao extends AbstractDao<WenShiDu, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WEN_SHI_DU\" (" + //
-                "\"WEN_STR\" TEXT," + // 0: wenStr
-                "\"SHI_STR\" TEXT," + // 1: shiStr
-                "\"TIME_STR\" INTEGER NOT NULL ," + // 2: timeStr
-                "\"SERIALPORT_ML\" TEXT);"); // 3: serialportML
+                "\"CO2\" TEXT," + // 0: CO2
+                "\"VOC\" TEXT," + // 1: VOC
+                "\"HCHO\" TEXT," + // 2: HCHO
+                "\"PM25\" TEXT," + // 3: PM25
+                "\"WEN_STR\" TEXT," + // 4: wenStr
+                "\"SHI_STR\" TEXT," + // 5: shiStr
+                "\"PM10\" TEXT," + // 6: PM10
+                "\"TIME_STR\" INTEGER NOT NULL ," + // 7: timeStr
+                "\"SERIALPORT_ML\" TEXT);"); // 8: serialportML
     }
 
     /** Drops the underlying database table. */
@@ -59,20 +69,45 @@ public class WenShiDuDao extends AbstractDao<WenShiDu, Void> {
     protected final void bindValues(DatabaseStatement stmt, WenShiDu entity) {
         stmt.clearBindings();
  
+        String CO2 = entity.getCO2();
+        if (CO2 != null) {
+            stmt.bindString(1, CO2);
+        }
+ 
+        String VOC = entity.getVOC();
+        if (VOC != null) {
+            stmt.bindString(2, VOC);
+        }
+ 
+        String HCHO = entity.getHCHO();
+        if (HCHO != null) {
+            stmt.bindString(3, HCHO);
+        }
+ 
+        String PM25 = entity.getPM25();
+        if (PM25 != null) {
+            stmt.bindString(4, PM25);
+        }
+ 
         String wenStr = entity.getWenStr();
         if (wenStr != null) {
-            stmt.bindString(1, wenStr);
+            stmt.bindString(5, wenStr);
         }
  
         String shiStr = entity.getShiStr();
         if (shiStr != null) {
-            stmt.bindString(2, shiStr);
+            stmt.bindString(6, shiStr);
         }
-        stmt.bindLong(3, entity.getTimeStr());
+ 
+        String PM10 = entity.getPM10();
+        if (PM10 != null) {
+            stmt.bindString(7, PM10);
+        }
+        stmt.bindLong(8, entity.getTimeStr());
  
         String serialportML = entity.getSerialportML();
         if (serialportML != null) {
-            stmt.bindString(4, serialportML);
+            stmt.bindString(9, serialportML);
         }
     }
 
@@ -80,20 +115,45 @@ public class WenShiDuDao extends AbstractDao<WenShiDu, Void> {
     protected final void bindValues(SQLiteStatement stmt, WenShiDu entity) {
         stmt.clearBindings();
  
+        String CO2 = entity.getCO2();
+        if (CO2 != null) {
+            stmt.bindString(1, CO2);
+        }
+ 
+        String VOC = entity.getVOC();
+        if (VOC != null) {
+            stmt.bindString(2, VOC);
+        }
+ 
+        String HCHO = entity.getHCHO();
+        if (HCHO != null) {
+            stmt.bindString(3, HCHO);
+        }
+ 
+        String PM25 = entity.getPM25();
+        if (PM25 != null) {
+            stmt.bindString(4, PM25);
+        }
+ 
         String wenStr = entity.getWenStr();
         if (wenStr != null) {
-            stmt.bindString(1, wenStr);
+            stmt.bindString(5, wenStr);
         }
  
         String shiStr = entity.getShiStr();
         if (shiStr != null) {
-            stmt.bindString(2, shiStr);
+            stmt.bindString(6, shiStr);
         }
-        stmt.bindLong(3, entity.getTimeStr());
+ 
+        String PM10 = entity.getPM10();
+        if (PM10 != null) {
+            stmt.bindString(7, PM10);
+        }
+        stmt.bindLong(8, entity.getTimeStr());
  
         String serialportML = entity.getSerialportML();
         if (serialportML != null) {
-            stmt.bindString(4, serialportML);
+            stmt.bindString(9, serialportML);
         }
     }
 
@@ -105,20 +165,30 @@ public class WenShiDuDao extends AbstractDao<WenShiDu, Void> {
     @Override
     public WenShiDu readEntity(Cursor cursor, int offset) {
         WenShiDu entity = new WenShiDu( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // wenStr
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // shiStr
-            cursor.getInt(offset + 2), // timeStr
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // serialportML
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // CO2
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // VOC
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // HCHO
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // PM25
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // wenStr
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // shiStr
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // PM10
+            cursor.getInt(offset + 7), // timeStr
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // serialportML
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, WenShiDu entity, int offset) {
-        entity.setWenStr(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setShiStr(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setTimeStr(cursor.getInt(offset + 2));
-        entity.setSerialportML(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setCO2(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setVOC(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setHCHO(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPM25(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setWenStr(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setShiStr(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPM10(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTimeStr(cursor.getInt(offset + 7));
+        entity.setSerialportML(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

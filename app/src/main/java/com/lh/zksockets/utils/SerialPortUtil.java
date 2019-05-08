@@ -231,12 +231,12 @@ public class SerialPortUtil {
 
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
-                WenShiDu wenShiDu = new WenShiDu(wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
+                WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
+                        "", wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
 
-                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%";
+                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%" + ";" + "0" + "ug/m3";
                 sendMsg1(wsd.getBytes());
             }
         }

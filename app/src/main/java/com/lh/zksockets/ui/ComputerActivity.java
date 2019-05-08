@@ -44,7 +44,7 @@ public class ComputerActivity extends BaseActivity {
         wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
         if (wenShiDuDao.loadAll().size() == 0) {
-            wenShiDuDao.insert(new WenShiDu("", "", 1, ""));
+            wenShiDuDao.insert(new WenShiDu("", "", "", "", "", "", "", 1, ""));
         }
 
         initView();
@@ -61,8 +61,8 @@ public class ComputerActivity extends BaseActivity {
     @OnClick(R.id.btn_computer_ok)
     public void btn_computer_ok() {
         wenShiDuDao.deleteAll();
-        wenShiDuDao.insert(new WenShiDu(et_ws_wen.getText().toString(), et_ws_shi.getText().toString(),
-                Integer.valueOf(et_ws_time.getText().toString()), et_ws_ml.getText().toString()));
+        wenShiDuDao.insert(new WenShiDu("", "", "", "", et_ws_wen.getText().toString(),
+                et_ws_shi.getText().toString(), "", Integer.valueOf(et_ws_time.getText().toString()), et_ws_ml.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
         TimerUtils.setWenshiduTimer();

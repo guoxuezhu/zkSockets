@@ -447,17 +447,15 @@ public class TimerUtils {
 
     public static void setWenshiduTimer() {
 
-        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-
-        if (wenShiDuDao.loadAll().size() == 0) {
-            return;
-        }
-        final String serialportML = wenShiDuDao.loadAll().get(0).serialportML;
-        if (serialportML.equals("")) {
-            return;
-        }
-
-        int time = wenShiDuDao.loadAll().get(0).timeStr;
+//        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+//        if (wenShiDuDao.loadAll().size() == 0) {
+//            return;
+//        }
+//        final String serialportML = wenShiDuDao.loadAll().get(0).serialportML;
+//        if (serialportML.equals("")) {
+//            return;
+//        }
+//        int time = wenShiDuDao.loadAll().get(0).timeStr;
 
         if (wenshiTimer != null) {
             wenshiTimer.cancel();
@@ -466,10 +464,17 @@ public class TimerUtils {
         wenshiTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                SerialPortUtil.doSerialPort(serialportML);
+                WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+                if (wenShiDuDao.loadAll().size() == 0) {
+                    String wsd = "WSD;" + wenShiDuDao.loadAll().get(0).wenStr + ";" + wenShiDuDao.loadAll().get(0).shiStr
+                            + ";" + wenShiDuDao.loadAll().get(0).PM25;
+                    SerialPortUtil.sendMsg1(wsd.getBytes());
+                }
+
+//                SerialPortUtil.doSerialPort(serialportML);
                 ELog.d("=========wenshiTimer==========");
             }
-        }, 12000, time * 60 * 1000);
+        }, 12000, 1 * 60 * 1000);
     }
 
 
