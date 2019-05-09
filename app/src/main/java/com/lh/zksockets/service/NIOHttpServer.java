@@ -63,6 +63,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.updataJdqInfo(request));
             } else if (request.getPath().equals("/api/updataLuboInfo")) {
                 response.send(HttpRequestUtil.updataLuboInfo(request));
+            } else if (request.getPath().equals("/api/updataMqttInfo")) {
+                response.send(HttpRequestUtil.updataMqttInfo(request));
             } else {
                 response.send("200");
             }
@@ -98,6 +100,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.getJDQList(request));
             } else if (request.getPath().equals("/api/luboInfo")) {
                 response.send(HttpRequestUtil.getLuboList(request));
+            } else if (request.getPath().equals("/api/mqttInfo")) {
+                response.send(HttpRequestUtil.getMqttinfo(request));
             } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
                 response.send(HttpRequestUtil.setWsdpm(request));
             } else {

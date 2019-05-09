@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
@@ -15,6 +16,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.JDQstatus;
@@ -147,6 +149,23 @@ public class HttpRequestUtil {
         for (int i = 0; i < luboInfos.size(); i++) {
             luboInfoDao.insert(luboInfos.get(i));
         }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getMqttinfo(AsyncHttpServerRequest request) {
+        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+        if (baseInfoDao.loadAll().size() == 0) {
+            baseInfoDao.insert(new BaseInfo("", "",
+                    "", java.util.UUID.randomUUID().toString()));
+        }
+        return gson.toJson(new HttpResult("200", "", true, baseInfoDao.loadAll().get(0)));
+    }
+
+    public static String updataMqttInfo(AsyncHttpServerRequest request) {
+        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+        BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
+        baseInfoDao.deleteAll();
+        baseInfoDao.insert(baseInfo);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 }

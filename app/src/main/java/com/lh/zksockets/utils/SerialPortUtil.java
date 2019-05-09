@@ -99,111 +99,117 @@ public class SerialPortUtil {
     }
 
     private static void makeData(String msg) {
-        if (msg.indexOf("]") != -1) {
-            String msgdata = new String(buffer1, 0, bslength);
-            ELog.i("============msgdata====11111=============" + msgdata);
-            if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
-                bslength = bslength - 4;
-                System.arraycopy(buffer1, 4, buffer2, 0, bslength);
-                ELog.i("==========OK======44444444444444444=============" + new String(buffer2, 0, bslength));
-                buffer1 = new byte[1024];
-                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                buffer2 = new byte[1024];
-                makeData(new String(buffer1, 0, bslength));
-            } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
-                ELog.i("===========COM7=====test======111111=======" + msgdata.indexOf(">"));
-                if (msgdata.indexOf(">") != -1) {
-                    if (msgdata.indexOf(">") == 16) {
-                        buffer2 = new byte[1024];
-                        System.arraycopy(buffer1, 7, buffer2, 0, 9);
+        try {
+            if (msg.indexOf("]") != -1) {
+                String msgdata = new String(buffer1, 0, bslength);
+                ELog.i("============msgdata====11111=============" + msgdata);
+                if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
+                    bslength = bslength - 4;
+                    System.arraycopy(buffer1, 4, buffer2, 0, bslength);
+                    ELog.i("==========OK======44444444444444444=============" + new String(buffer2, 0, bslength));
+                    buffer1 = new byte[1024];
+                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                    buffer2 = new byte[1024];
+                    makeData(new String(buffer1, 0, bslength));
+                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+                    ELog.i("===========COM7=====test======111111=======" + msgdata.indexOf(">"));
+                    if (msgdata.indexOf(">") != -1) {
+                        if (msgdata.indexOf(">") == 16) {
+                            buffer2 = new byte[1024];
+                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
 
-                        setWenshidu();
+                            setWenshidu();
 
-                        bslength = bslength - 17;
-                        System.arraycopy(buffer1, 17, buffer2, 0, bslength);
-                        ELog.i("===========COM7=====00000000=============" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-                    } else {
-                        if (msgdata.indexOf("]", 6) != -1) {
-                            ELog.i("===========COM7=====1111111=============" + msgdata.substring(msgdata.indexOf(">") + 1, msgdata.indexOf("]", 6) + 1));
-                            if (msgdata.substring(msgdata.indexOf(">") + 1, msgdata.indexOf("]", 6) + 1).equals("[COM7]")) {
+                            bslength = bslength - 17;
+                            System.arraycopy(buffer1, 17, buffer2, 0, bslength);
+                            ELog.i("===========COM7=====00000000=============" + new String(buffer2, 0, bslength));
+                            buffer1 = new byte[1024];
+                            System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                            buffer2 = new byte[1024];
+                            makeData(new String(buffer1, 0, bslength));
+                        } else {
+                            if (msgdata.indexOf("]", 6) != -1) {
+                                ELog.i("===========COM7=====1111111=============" + msgdata.substring(msgdata.indexOf(">") + 1, msgdata.indexOf("]", 6) + 1));
+                                if (msgdata.substring(msgdata.indexOf(">") + 1, msgdata.indexOf("]", 6) + 1).equals("[COM7]")) {
 
-                                if (bslength - 16 == 9) {
-                                    buffer2 = new byte[1024];
-                                    int length1 = msgdata.indexOf(">") + 1;
-                                    System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
-                                    System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
+                                    if (bslength - 16 == 9) {
+                                        buffer2 = new byte[1024];
+                                        int length1 = msgdata.indexOf(">") + 1;
+                                        System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
+                                        System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
 
-                                    setWenshidu();
+                                        setWenshidu();
 
-                                    bslength = bslength - 25;
-                                    System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-                                    ELog.i("==========COM7======2222222222222222222222=============" + new String(buffer2, 0, bslength));
-                                    buffer1 = new byte[1024];
-                                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                    buffer2 = new byte[1024];
-                                    makeData(new String(buffer1, 0, bslength));
+                                        bslength = bslength - 25;
+                                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
+                                        ELog.i("==========COM7======2222222222222222222222=============" + new String(buffer2, 0, bslength));
+                                        buffer1 = new byte[1024];
+                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                                        buffer2 = new byte[1024];
+                                        makeData(new String(buffer1, 0, bslength));
+                                    } else {
+                                        buffer2 = new byte[1024];
+                                        bslength = bslength - msgdata.indexOf(">") - 1;
+                                        System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+                                        ELog.i("===========COM7======333333333333333333======" + new String(buffer2, 0, bslength));
+                                        buffer1 = new byte[1024];
+                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                                        buffer2 = new byte[1024];
+                                        makeData(new String(buffer1, 0, bslength));
+                                    }
                                 } else {
                                     buffer2 = new byte[1024];
                                     bslength = bslength - msgdata.indexOf(">") - 1;
                                     System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                    ELog.i("===========COM7======333333333333333333======" + new String(buffer2, 0, bslength));
+                                    ELog.i("===========COM7======444444444444======" + new String(buffer2, 0, bslength));
                                     buffer1 = new byte[1024];
                                     System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                     buffer2 = new byte[1024];
                                     makeData(new String(buffer1, 0, bslength));
                                 }
-                            } else {
-                                buffer2 = new byte[1024];
-                                bslength = bslength - msgdata.indexOf(">") - 1;
-                                System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                ELog.i("===========COM7======444444444444======" + new String(buffer2, 0, bslength));
-                                buffer1 = new byte[1024];
-                                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                buffer2 = new byte[1024];
-                                makeData(new String(buffer1, 0, bslength));
                             }
                         }
                     }
+
+                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
+                    if (msgdata.indexOf(">") != -1) {
+                        buffer2 = new byte[1024];
+                        System.arraycopy(buffer1, 7, buffer2, 0, 1);
+
+                        baojin(Integer.toHexString(buffer2[0] & 0xFF));
+
+                        bslength = bslength - 9;
+                        System.arraycopy(buffer1, 9, buffer2, 0, bslength);
+                        ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+
+                    }
+                } else {
+                    if (msgdata.indexOf(">") != -1) {
+                        ELog.i("==========其它接收数据=======1111111111111111111111=====" + msgdata.indexOf(">"));
+                        buffer2 = new byte[1024];
+                        bslength = bslength - msgdata.indexOf(">") - 1;
+                        System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+                        ELog.i("===========其它接收数据======22222222222222222222222======" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+                    }
+
                 }
 
-            } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
-                if (msgdata.indexOf(">") != -1) {
-                    buffer2 = new byte[1024];
-                    System.arraycopy(buffer1, 7, buffer2, 0, 1);
-
-                    baojin(Integer.toHexString(buffer2[0] & 0xFF));
-
-                    bslength = bslength - 9;
-                    System.arraycopy(buffer1, 9, buffer2, 0, bslength);
-                    ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
-                    buffer1 = new byte[1024];
-                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                    buffer2 = new byte[1024];
-                    makeData(new String(buffer1, 0, bslength));
-
-                }
-            } else {
-                if (msgdata.indexOf(">") != -1) {
-                    ELog.i("==========其它接收数据=======1111111111111111111111=====" + msgdata.indexOf(">"));
-                    buffer2 = new byte[1024];
-                    bslength = bslength - msgdata.indexOf(">") - 1;
-                    System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                    ELog.i("===========其它接收数据======22222222222222222222222======" + new String(buffer2, 0, bslength));
-                    buffer1 = new byte[1024];
-                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                    buffer2 = new byte[1024];
-                    makeData(new String(buffer1, 0, bslength));
-                }
 
             }
-
-
+        } catch (Exception e) {
+            ELog.i("=========串口2===接收到了数据==处理异常======" + e.toString());
+            bslength = 0;
+            buffer1 = new byte[1024];
+            buffer2 = new byte[1024];
         }
-
 
     }
 
