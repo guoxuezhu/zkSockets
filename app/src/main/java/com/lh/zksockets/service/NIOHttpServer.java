@@ -65,6 +65,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.updataLuboInfo(request));
             } else if (request.getPath().equals("/api/updataMqttInfo")) {
                 response.send(HttpRequestUtil.updataMqttInfo(request));
+            } else if (request.getPath().equals("/api/updataIoOutInfo")) {
+                response.send(HttpRequestUtil.updataIoOutInfo(request));
+            } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
+                response.send(HttpRequestUtil.updataDangerOutInfo(request));
             } else {
                 response.send("200");
             }
@@ -102,6 +106,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(HttpRequestUtil.getLuboList(request));
             } else if (request.getPath().equals("/api/mqttInfo")) {
                 response.send(HttpRequestUtil.getMqttinfo(request));
+            } else if (request.getPath().equals("/api/iooutInfo")) {
+                response.send(HttpRequestUtil.getIoOutinfo(request));
+            } else if (request.getPath().equals("/api/dangerOutInfo")) {
+                response.send(HttpRequestUtil.getDangerOutInfo(request));
             } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
                 response.send(HttpRequestUtil.setWsdpm(request));
             } else {

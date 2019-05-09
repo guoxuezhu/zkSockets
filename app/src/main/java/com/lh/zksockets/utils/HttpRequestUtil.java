@@ -10,6 +10,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
@@ -17,8 +18,10 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.BaseInfo;
+import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
@@ -166,6 +169,46 @@ public class HttpRequestUtil {
         BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
         baseInfoDao.deleteAll();
         baseInfoDao.insert(baseInfo);
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getIoOutinfo(AsyncHttpServerRequest request) {
+        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
+        if (ioPortDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < 5; i++) {
+                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, 0, 10));
+            }
+        }
+        return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
+    }
+
+    public static String updataIoOutInfo(AsyncHttpServerRequest request) {
+        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
+        List<IoPortData> ioPortDatas = gson.fromJson(request.getQuery().get("ioOutDatas[]").toString(), new TypeToken<List<IoPortData>>() {
+        }.getType());
+        for (int i = 0; i < ioPortDatas.size(); i++) {
+            ioPortDataDao.update(ioPortDatas.get(i));
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getDangerOutInfo(AsyncHttpServerRequest request) {
+        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+        if (dangerOutDao.loadAll().size() == 0) {
+            for (int i = 1; i < 5; i++) {
+                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, 1, 10));
+            }
+        }
+        return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));
+    }
+
+    public static String updataDangerOutInfo(AsyncHttpServerRequest request) {
+        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+        List<DangerOut> dangerOuts = gson.fromJson(request.getQuery().get("dangerOutDatas[]").toString(), new TypeToken<List<DangerOut>>() {
+        }.getType());
+        for (int i = 0; i < dangerOuts.size(); i++) {
+            dangerOutDao.update(dangerOuts.get(i));
+        }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 }
