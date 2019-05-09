@@ -1,8 +1,6 @@
 package com.lh.zksockets.utils;
 
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
@@ -58,9 +56,22 @@ public class HttpRequestUtil {
     }
 
     public static String getSportInfo(AsyncHttpServerRequest request) {
-        String sportNum = request.getQuery().getString("sportNum");
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+        if (serialPortDataDao.loadAll().size() < 4) {
+            for (int i = 1; i < 9; i++) {
+                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
+                        "9600", 0, "无", 0, "8", 0, "1", 10));
+                for (int j = 1; j < 31; j++) {
+                    if (j >= 10) {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                    } else {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                    }
+                }
+            }
+        }
+        String sportNum = request.getQuery().getString("sportNum");
         List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                 .where(SerialCommandDao.Properties.SId.eq(sportNum))
                 .orderAsc(SerialCommandDao.Properties.MlId)
@@ -73,6 +84,12 @@ public class HttpRequestUtil {
 
     public static String getDangerInfo(AsyncHttpServerRequest request) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
+        if (ioYuanDao.loadAll().size() == 0) {
+            ioYuanDao.insert(new IOYuan((long) 1, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 2, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 3, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 4, 0, "", ""));
+        }
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
@@ -88,6 +105,68 @@ public class HttpRequestUtil {
 
     public static String getEventList(AsyncHttpServerRequest request) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+        if (mLsListsDao.loadAll().size() == 0) {
+            mLsListsDao.insert(new MLsLists((long) 1, "上课", ""));
+            mLsListsDao.insert(new MLsLists((long) 2, "下课", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "自习", ""));
+            mLsListsDao.insert(new MLsLists((long) 4, "休息", ""));
+            mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", ""));
+            mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", ""));
+            mLsListsDao.insert(new MLsLists((long) 7, "窗帘2开", ""));
+            mLsListsDao.insert(new MLsLists((long) 8, "窗帘2关", ""));
+            mLsListsDao.insert(new MLsLists((long) 9, "投影机开", ""));
+            mLsListsDao.insert(new MLsLists((long) 10, "投影机关", ""));
+            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-7-1"));
+            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-8-1"));
+            mLsListsDao.insert(new MLsLists((long) 13, "灯光1开", ""));
+            mLsListsDao.insert(new MLsLists((long) 14, "灯光1关", ""));
+            mLsListsDao.insert(new MLsLists((long) 15, "灯光2开", ""));
+            mLsListsDao.insert(new MLsLists((long) 16, "灯光2关", ""));
+            mLsListsDao.insert(new MLsLists((long) 17, "灯光3开", ""));
+            mLsListsDao.insert(new MLsLists((long) 18, "灯光3关", ""));
+            mLsListsDao.insert(new MLsLists((long) 19, "灯光4开", ""));
+            mLsListsDao.insert(new MLsLists((long) 20, "灯光4关", ""));
+            mLsListsDao.insert(new MLsLists((long) 21, "总音量+", ""));
+            mLsListsDao.insert(new MLsLists((long) 22, "总音量-", ""));
+            mLsListsDao.insert(new MLsLists((long) 23, "总音量静音开", ""));
+            mLsListsDao.insert(new MLsLists((long) 24, "总音量静音关", ""));
+            mLsListsDao.insert(new MLsLists((long) 25, "音响音量+", ""));
+            mLsListsDao.insert(new MLsLists((long) 26, "音响音量-", ""));
+            mLsListsDao.insert(new MLsLists((long) 27, "音响静音开", ""));
+            mLsListsDao.insert(new MLsLists((long) 28, "音响静音关", ""));
+            mLsListsDao.insert(new MLsLists((long) 29, "麦克风音量+", ""));
+            mLsListsDao.insert(new MLsLists((long) 30, "麦克风音量-", ""));
+            mLsListsDao.insert(new MLsLists((long) 31, "麦克风静音开", ""));
+            mLsListsDao.insert(new MLsLists((long) 32, "麦克风静音关", ""));
+            mLsListsDao.insert(new MLsLists((long) 33, "录播-录制", ""));
+            mLsListsDao.insert(new MLsLists((long) 34, "录播-暂停", ""));
+            mLsListsDao.insert(new MLsLists((long) 35, "录播-停止", ""));
+            mLsListsDao.insert(new MLsLists((long) 36, "录播-直播", ""));
+            mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", ""));
+            mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", ""));
+            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", ""));
+            mLsListsDao.insert(new MLsLists((long) 40, "空调-模式", ""));
+            mLsListsDao.insert(new MLsLists((long) 41, "空调-风速", ""));
+            mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", ""));
+            mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", ""));
+            mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", ""));
+            mLsListsDao.insert(new MLsLists((long) 45, "中控开机", ""));
+            mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", ""));
+            mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "空调-关", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", ""));
+            mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", ""));
+            mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", ""));
+            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", ""));
+            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", ""));
+            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", ""));
+        }
+
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
 
@@ -123,6 +202,16 @@ public class HttpRequestUtil {
 
     public static String getJDQList(AsyncHttpServerRequest request) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
+        if (jdqStatusDao.loadAll().size() == 0) {
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", 1, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 1, 180));
+        }
         return gson.toJson(new HttpResult("200", "", true, jdqStatusDao.loadAll()));
     }
 
