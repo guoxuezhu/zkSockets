@@ -2,10 +2,12 @@ package com.lh.zksockets.service;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
+import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.utils.HttpRequestUtil;
 
 public class NIOHttpServer implements HttpServerRequestCallback {
@@ -51,27 +53,28 @@ public class NIOHttpServer implements HttpServerRequestCallback {
         Log.d(TAG, "=======111111=========" + request.getPath());
         Log.d(TAG, "=======2222=========" + request.getQuery());
 
-        if (request.getMethod().equals("POST")) {
+        try {
+            if (request.getMethod().equals("POST")) {
 
-            if (request.getPath().equals("/api/updataSportInfo")) {
-                response.send(HttpRequestUtil.updataSportInfo(request));
-            } else if (request.getPath().equals("/api/updataDangerInfo")) {
-                response.send(HttpRequestUtil.updataDangerInfo(request));
-            } else if (request.getPath().equals("/api/updataEventInfo")) {
-                response.send(HttpRequestUtil.updataEventInfo(request));
-            } else if (request.getPath().equals("/api/updataJdqInfo")) {
-                response.send(HttpRequestUtil.updataJdqInfo(request));
-            } else if (request.getPath().equals("/api/updataLuboInfo")) {
-                response.send(HttpRequestUtil.updataLuboInfo(request));
-            } else if (request.getPath().equals("/api/updataMqttInfo")) {
-                response.send(HttpRequestUtil.updataMqttInfo(request));
-            } else if (request.getPath().equals("/api/updataIoOutInfo")) {
-                response.send(HttpRequestUtil.updataIoOutInfo(request));
-            } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
-                response.send(HttpRequestUtil.updataDangerOutInfo(request));
-            } else {
-                response.send("200");
-            }
+                if (request.getPath().equals("/api/updataSportInfo")) {
+                    response.send(HttpRequestUtil.updataSportInfo(request));
+                } else if (request.getPath().equals("/api/updataDangerInfo")) {
+                    response.send(HttpRequestUtil.updataDangerInfo(request));
+                } else if (request.getPath().equals("/api/updataEventInfo")) {
+                    response.send(HttpRequestUtil.updataEventInfo(request));
+                } else if (request.getPath().equals("/api/updataJdqInfo")) {
+                    response.send(HttpRequestUtil.updataJdqInfo(request));
+                } else if (request.getPath().equals("/api/updataLuboInfo")) {
+                    response.send(HttpRequestUtil.updataLuboInfo(request));
+                } else if (request.getPath().equals("/api/updataMqttInfo")) {
+                    response.send(HttpRequestUtil.updataMqttInfo(request));
+                } else if (request.getPath().equals("/api/updataIoOutInfo")) {
+                    response.send(HttpRequestUtil.updataIoOutInfo(request));
+                } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
+                    response.send(HttpRequestUtil.updataDangerOutInfo(request));
+                } else {
+                    response.send("200");
+                }
 
 //            Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
 //            Log.d(TAG, "=======parms========= " + parms.toString() + "===zkbtn=== " + parms.getString("zkbtn"));
@@ -92,32 +95,35 @@ public class NIOHttpServer implements HttpServerRequestCallback {
 //                }
 //            }
 
-        } else if (request.getMethod().equals("GET")) {
+            } else if (request.getMethod().equals("GET")) {
 
-            if (request.getPath().equals("/api/sportInfo")) {
-                response.send(HttpRequestUtil.getSportInfo(request));
-            } else if (request.getPath().equals("/api/dangerInfo")) {
-                response.send(HttpRequestUtil.getDangerInfo(request));
-            } else if (request.getPath().equals("/api/eventList")) {
-                response.send(HttpRequestUtil.getEventList(request));
-            } else if (request.getPath().equals("/api/jdqInfo")) {
-                response.send(HttpRequestUtil.getJDQList(request));
-            } else if (request.getPath().equals("/api/luboInfo")) {
-                response.send(HttpRequestUtil.getLuboList(request));
-            } else if (request.getPath().equals("/api/mqttInfo")) {
-                response.send(HttpRequestUtil.getMqttinfo(request));
-            } else if (request.getPath().equals("/api/iooutInfo")) {
-                response.send(HttpRequestUtil.getIoOutinfo(request));
-            } else if (request.getPath().equals("/api/dangerOutInfo")) {
-                response.send(HttpRequestUtil.getDangerOutInfo(request));
-            } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
-                response.send(HttpRequestUtil.setWsdpm(request));
-            } else {
-                response.send("200");
+                if (request.getPath().equals("/api/sportInfo")) {
+                    response.send(HttpRequestUtil.getSportInfo(request));
+                } else if (request.getPath().equals("/api/dangerInfo")) {
+                    response.send(HttpRequestUtil.getDangerInfo(request));
+                } else if (request.getPath().equals("/api/eventList")) {
+                    response.send(HttpRequestUtil.getEventList(request));
+                } else if (request.getPath().equals("/api/jdqInfo")) {
+                    response.send(HttpRequestUtil.getJDQList(request));
+                } else if (request.getPath().equals("/api/luboInfo")) {
+                    response.send(HttpRequestUtil.getLuboList(request));
+                } else if (request.getPath().equals("/api/mqttInfo")) {
+                    response.send(HttpRequestUtil.getMqttinfo(request));
+                } else if (request.getPath().equals("/api/iooutInfo")) {
+                    response.send(HttpRequestUtil.getIoOutinfo(request));
+                } else if (request.getPath().equals("/api/dangerOutInfo")) {
+                    response.send(HttpRequestUtil.getDangerOutInfo(request));
+                } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
+                    response.send(HttpRequestUtil.setWsdpm(request));
+                } else {
+                    response.send("200");
+                }
+
             }
 
+        } catch (Exception e) {
+            response.send(new Gson().toJson(new HttpResult("-200", "数据异常或不能为空", false, null)));
         }
-
 
     }
 }
