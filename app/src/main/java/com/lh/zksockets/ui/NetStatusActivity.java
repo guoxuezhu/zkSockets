@@ -22,6 +22,7 @@ import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.utils.SerialPortUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -431,11 +432,46 @@ public class NetStatusActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.test_fm_ok)
+    public void test_fm_ok() {
+        SerialPortUtil.sendMsg("{[BEP0:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_fm_no)
+    public void test_fm_no() {
+        SerialPortUtil.sendMsg("{[BEP0:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger_ok)
+    public void test_danger_ok() {
+        SerialPortUtil.sendMsg("{[ARM2:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger_no)
+    public void test_danger_no() {
+        SerialPortUtil.sendMsg("{[ARM2:DT:A005]<CLOSE>}".getBytes());
+    }
+
+
+    @OnClick(R.id.test_io_ok)
+    public void test_io_ok() {
+        SerialPortUtil.sendMsg("{[IOL2:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io_no)
+    public void test_io_no() {
+        SerialPortUtil.sendMsg("{[IOL2:DT:A005]<CLOSE>}".getBytes());
+    }
+
+
+
 
     @OnClick(R.id.net_btn_back)
     public void net_btn_back() {
         back();
     }
+
+
 
     @Override
     public void onBackPressed() {

@@ -186,8 +186,8 @@ public class HttpRequestUtil {
             WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
             BigDecimal voc = new BigDecimal(wsdpm[5]);
             BigDecimal hcho = new BigDecimal(wsdpm[6]);
-            BigDecimal wendu = new BigDecimal(wsdpm[8]);
-            BigDecimal shidu = new BigDecimal(wsdpm[9]);
+            BigDecimal wendu = new BigDecimal(wsdpm[9]);
+            BigDecimal shidu = new BigDecimal(wsdpm[8]);
 
             BigDecimal bigDecimal = new BigDecimal("0.1");
 

@@ -34,6 +34,76 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/test_io_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="io开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="io关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_danger_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="danger开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="danger关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_fm_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="fm开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_fm_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="fm关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
