@@ -126,6 +126,30 @@
                 android:text="继电器6"
                 android:textSize="@dimen/text_size_20" />
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="继电器7"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="继电器8"
+                android:textSize="@dimen/text_size_20" />
+
         </LinearLayout>
 
         <View
@@ -280,7 +304,49 @@
                     android:textOff="关"
                     android:textOn="开" />
             </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_7_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/jdq_8_gl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchMinWidth="@dimen/dp_60"
+                    android:textOff="关"
+                    android:textOn="开" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -384,6 +450,36 @@
 
             <EditText
                 android:id="@+id/jdq_et_time_6"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_7"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/jdq_et_time_8"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:background="@null"
