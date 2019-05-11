@@ -464,11 +464,15 @@ public class TimerUtils {
         wenshiTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-                if (wenShiDuDao.loadAll().size() != 0) {
-                    String wsd = "WSD;" + wenShiDuDao.loadAll().get(0).wenStr + ";" + wenShiDuDao.loadAll().get(0).shiStr
-                            + ";" + wenShiDuDao.loadAll().get(0).PM25;
-                    SerialPortUtil.sendMsg1(wsd.getBytes());
+                try {
+                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+                    if (wenShiDuDao.loadAll().size() != 0) {
+                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
+                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+                        SerialPortUtil.sendMsg1(wsd.getBytes());
+                    }
+                } catch (Exception e) {
+                    ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
 //                SerialPortUtil.doSerialPort(serialportML);
                 ELog.d("=========wenshiTimer==========");
