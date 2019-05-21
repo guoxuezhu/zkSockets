@@ -365,6 +365,8 @@ public class SerialPortUtil {
                             if (msg.length() > 3) {
                                 if (msg.substring(0, 3).equals("VID")) {
                                     sendShipinType(msg);
+                                } else if (msg.substring(0, 3).equals("FWS")) {
+                                    sendFWstatus(msg);
                                 } else if (msg.substring(0, 3).equals("LUB")) {
                                     HttpUtil.setlubo(msg);
                                 } else if (msg.substring(0, 3).equals("MBS")) {
@@ -587,6 +589,14 @@ public class SerialPortUtil {
         }
     }
 
+
+    public static void sendFWstatus(String str) {
+        synchronized (str) {
+            if(str.equals("FWS0")){
+                sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
+            }
+        }
+    }
 
     public static List<String> getIOnumDatas() {
         List<String> IoNumList = new ArrayList<String>();

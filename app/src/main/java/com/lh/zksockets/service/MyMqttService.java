@@ -235,6 +235,8 @@ public class MyMqttService extends Service {
             if (msg.length() > 3) {
                 if (msg.substring(0, 3).equals("VID")) {
                     SerialPortUtil.sendShipinType(msg);
+                } else if (msg.substring(0, 3).equals("FWS")) {
+                    SerialPortUtil.sendFWstatus(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
                 } else if (msg.substring(0, 3).equals("MBS")) {
