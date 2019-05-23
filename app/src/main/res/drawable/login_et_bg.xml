@@ -3,15 +3,15 @@
 
     <!-- 设置填充颜色 -->
 
-    <solid android:color="#2E8CED" />
+    <solid android:color="#003c62" />
 
     <!-- 设置圆角矩形 -->
 
-    <corners android:radius="10dp" />
+    <corners android:radius="2dp" />
 
     <!-- 设置边框 -->
     <stroke
-        android:width="2dp"
-        android:color="#2373C5" />
+        android:width="1dp"
+        android:color="#ffffff" />
 
 </shape>

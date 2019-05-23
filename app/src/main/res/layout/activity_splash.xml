@@ -38,56 +38,34 @@
             android:layout_weight="5"
             android:orientation="vertical">
 
-            <LinearLayout
+
+            <EditText
+                android:id="@+id/login_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/login_et_bg"
+                android:drawableLeft="@drawable/name"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="请输入管理员帐号"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="admin"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
-                <ImageView
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@mipmap/ic_launcher" />
-
-                <EditText
-                    android:id="@+id/login_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:hint="请输入用户名"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text="admin"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_16" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_40"
-                android:background="@drawable/layout_stroke_bg"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@mipmap/ic_launcher" />
-
-                <EditText
-                    android:id="@+id/login_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:hint="请输入密码"
-                    android:inputType="textPassword"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text="admin"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_16" />
-
-            </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/login_et_bg"
+                android:drawableLeft="@drawable/mima"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="请输入管理员帐号"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="admin"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
 
             <Button
