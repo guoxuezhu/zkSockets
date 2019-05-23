@@ -38,7 +38,7 @@ public class HttpRequestUtil {
 
     public static String updataSportInfo(AsyncHttpServerRequest request) {
         String sportNumer = request.getQuery().getString("sportNum");
-        List<SerialCommand> serialCommandlist = gson.fromJson(request.getQuery().get("sportMls[]").toString(), new TypeToken<List<SerialCommand>>() {
+        List<SerialCommand> serialCommandlist = gson.fromJson(request.getQuery().get("sportMls[]").toString().replace("%22"," "), new TypeToken<List<SerialCommand>>() {
         }.getType());
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
