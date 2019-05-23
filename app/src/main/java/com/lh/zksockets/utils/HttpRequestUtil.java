@@ -3,6 +3,8 @@ package com.lh.zksockets.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.koushikdutta.async.http.Multimap;
+import com.koushikdutta.async.http.body.AsyncHttpRequestBody;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
@@ -37,20 +39,22 @@ public class HttpRequestUtil {
     private static Gson gson = new Gson();
 
     public static String updataSportInfo(AsyncHttpServerRequest request) {
-        String sportNumer = request.getQuery().getString("sportNum");
-        List<SerialCommand> serialCommandlist = gson.fromJson(request.getQuery().get("sportMls[]").toString().replace("%22"," "), new TypeToken<List<SerialCommand>>() {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        String sportNumer = parms.getString("sportNum");
+        List<SerialCommand> serialCommandlist = gson.fromJson(parms.getString("sportMls"), new TypeToken<List<SerialCommand>>() {
         }.getType());
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        serialPortDataDao.update(new SerialPortData(Long.valueOf(sportNumer), "串口" + sportNumer, request.getQuery().getString("deviceName"),
-                Integer.valueOf(request.getQuery().getString("baudRateId")), request.getQuery().getString("baudRate"),
-                Integer.valueOf(request.getQuery().getString("checkoutBitId")), request.getQuery().getString("checkoutBit"),
-                Integer.valueOf(request.getQuery().getString("dataBitId")), request.getQuery().getString("dataBit"),
-                Integer.valueOf(request.getQuery().getString("stopBitId")), request.getQuery().getString("stopBit"),
-                Integer.valueOf(request.getQuery().getString("jinZhi"))));
+        serialPortDataDao.update(new SerialPortData(Long.valueOf(sportNumer), "串口" + sportNumer, parms.getString("deviceName"),
+                Integer.valueOf(parms.getString("baudRateId")), parms.getString("baudRate"),
+                Integer.valueOf(parms.getString("checkoutBitId")), parms.getString("checkoutBit"),
+                Integer.valueOf(parms.getString("dataBitId")), parms.getString("dataBit"),
+                Integer.valueOf(parms.getString("stopBitId")), parms.getString("stopBit"),
+                Integer.valueOf(parms.getString("jinZhi"))));
         for (int i = 0; i < serialCommandlist.size(); i++) {
             serialCommandDao.update(serialCommandlist.get(i));
         }
+
         return gson.toJson(new HttpResult("200", "", true, null));
 
     }
