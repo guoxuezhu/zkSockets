@@ -42,17 +42,17 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
-    @OnClick(R.id.user_btn)
-    public void user_btn() {
-        startActivity(new Intent(this, UsersActivity.class));
-        finish();
-    }
+//    @OnClick(R.id.user_btn)
+//    public void user_btn() {
+//        startActivity(new Intent(this, UsersActivity.class));
+//        finish();
+//    }
 
-    @OnClick(R.id.xiangdao)
-    public void xiangdao() {
-        startActivity(new Intent(this, XiangDaoActivity.class));
-        finish();
-    }
+//    @OnClick(R.id.xiangdao)
+//    public void xiangdao() {
+//        startActivity(new Intent(this, XiangDaoActivity.class));
+//        finish();
+//    }
 
     @OnClick(R.id.shengji)
     public void shengji() {
@@ -68,10 +68,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.main_btn_back)
-    public void main_btn_back() {
-        back();
-    }
+
 
     @Override
     public void onBackPressed() {

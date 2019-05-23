@@ -55,7 +55,9 @@
                 <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SplashActivity" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -107,9 +109,7 @@
         <activity
             android:name=".ui.EnvironmentalActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.LoginActivity"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".ui.LampActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -121,9 +121,8 @@
             android:windowSoftInputMode="stateHidden"></activity>
 
 
-
         <service android:name="org.eclipse.paho.android.service.MqttService" /> <!--MqttService-->
-        <service android:name=".service.MyMqttService"/> <!--MyMqttService-->
+        <service android:name=".service.MyMqttService" /> <!--MyMqttService-->
 
 
         <meta-data

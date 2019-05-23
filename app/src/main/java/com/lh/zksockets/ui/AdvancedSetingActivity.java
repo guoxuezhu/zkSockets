@@ -18,10 +18,6 @@ public class AdvancedSetingActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.back_btn)
-    public void back_btn() {
-        back();
-    }
 
     @Override
     public void onBackPressed() {
@@ -34,17 +30,17 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
-    @OnClick(R.id.projector_seting)
-    public void projector_seting() {
-        startActivity(new Intent(this, ProjectorSetingActivity.class));
-        finish();
-    }
+//    @OnClick(R.id.projector_seting)
+//    public void projector_seting() {
+//        startActivity(new Intent(this, ProjectorSetingActivity.class));
+//        finish();
+//    }
 
-    @OnClick(R.id.diannao_seting)
-    public void diannao_seting() {
-        startActivity(new Intent(this, ComputerActivity.class));
-        finish();
-    }
+//    @OnClick(R.id.diannao_seting)
+//    public void diannao_seting() {
+//        startActivity(new Intent(this, ComputerActivity.class));
+//        finish();
+//    }
 
     @OnClick(R.id.power_box)
     public void power_box() {
@@ -52,11 +48,11 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
-    @OnClick(R.id.ic_seting)
-    public void ic_seting() {
-        startActivity(new Intent(this, ICcardActivity.class));
-        finish();
-    }
+//    @OnClick(R.id.ic_seting)
+//    public void ic_seting() {
+//        startActivity(new Intent(this, ICcardActivity.class));
+//        finish();
+//    }
 
     @OnClick(R.id.zk_seting)
     public void zk_seting() {

@@ -2,6 +2,8 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
@@ -18,10 +20,17 @@ import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SplashActivity extends BaseActivity {
+
+
+    @BindView(R.id.login_name)
+    EditText login_name;
+    @BindView(R.id.login_password)
+    EditText login_password;
 
 
     @Override
@@ -164,9 +173,23 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.to_login_btn)
-    public void to_login_btn() {
-        startActivity(new Intent(this, LoginActivity.class));
+    @OnClick(R.id.login_btn)
+    public void login_btn() {
+        if (login_name.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (login_password.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (login_name.getText().toString().trim().equals("admin") &&
+                login_password.getText().toString().trim().equals("admin")) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
