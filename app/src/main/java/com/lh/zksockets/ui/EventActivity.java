@@ -140,6 +140,8 @@ public class EventActivity extends BaseActivity {
     EditText event_et_58;
     @BindView(R.id.event_et_59)
     EditText event_et_59;
+    @BindView(R.id.event_et_60)
+    EditText event_et_60;
 
     private MLsListsDao mLsListsDao;
 
@@ -214,6 +216,7 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", ""));
             mLsListsDao.insert(new MLsLists((long) 58, "电视机7", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "电视机8", ""));
+            mLsListsDao.insert(new MLsLists((long) 60, "其它", ""));
 
 
         }
@@ -286,6 +289,7 @@ public class EventActivity extends BaseActivity {
         event_et_57.setText(mLsListsDao.load((long) 57).strMLs);
         event_et_58.setText(mLsListsDao.load((long) 58).strMLs);
         event_et_59.setText(mLsListsDao.load((long) 59).strMLs);
+        event_et_60.setText(mLsListsDao.load((long) 60).strMLs);
 
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
@@ -358,6 +362,7 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 57, "电视机6", event_et_57.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 58, "电视机7", event_et_58.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 59, "电视机8", event_et_59.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 60, "其它", event_et_60.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

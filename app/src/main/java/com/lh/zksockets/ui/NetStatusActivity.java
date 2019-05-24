@@ -381,6 +381,7 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", ""));
             mLsListsDao.insert(new MLsLists((long) 58, "电视机7", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "电视机8", ""));
+            mLsListsDao.insert(new MLsLists((long) 60, "其它", ""));
 
         }
 

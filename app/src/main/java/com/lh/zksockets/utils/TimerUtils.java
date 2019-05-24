@@ -495,10 +495,28 @@ public class TimerUtils {
                     KaijiTimer.cancel();
                     KaijiTimer = null;
                 }
-
+                qitacaozuo();
             }
         }, 5 * 1000);
 
+    }
+
+    private static void qitacaozuo() {
+        if (KaijiTimer != null) {
+            KaijiTimer.cancel();
+            KaijiTimer = null;
+        }
+        KaijiTimer = new Timer();
+        KaijiTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                SerialPortUtil.makeML((long) 60);
+                if (KaijiTimer != null) {
+                    KaijiTimer.cancel();
+                    KaijiTimer = null;
+                }
+            }
+        }, 30 * 1000);
     }
 
 
