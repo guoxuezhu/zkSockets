@@ -3,8 +3,6 @@ package com.lh.zksockets.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.umeng.analytics.MobclickAgent;
-
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -18,13 +16,13 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+//        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+//        MobclickAgent.onResume(this);
     }
 
 }
