@@ -139,7 +139,7 @@ public class MyMqttService extends Service {
         mMqttConnectOptions = new MqttConnectOptions();
         mMqttConnectOptions.setCleanSession(true); //设置是否清除缓存
         mMqttConnectOptions.setConnectionTimeout(10); //设置超时时间，单位：秒
-        mMqttConnectOptions.setKeepAliveInterval(20); //设置心跳包发送间隔，单位：秒
+//        mMqttConnectOptions.setKeepAliveInterval(20); //设置心跳包发送间隔，单位：秒
         mMqttConnectOptions.setUserName(USERNAME); //设置用户名
         mMqttConnectOptions.setPassword(PASSWORD.toCharArray()); //设置密码
 
