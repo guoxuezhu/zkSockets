@@ -64,60 +64,60 @@ public class EnvironmentalActivity extends BaseActivity {
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
             for (int i = 1; i < 9; i++) {
-                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, 1, 1));
+                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, 0, 1));
             }
         }
 
-        if (jdqStatusDao.load((long) 1).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 1).jdqStatus == 1) {
             jdq_1_gl.setChecked(true);
         } else {
             jdq_1_gl.setChecked(false);
         }
         jdq_et_time_1.setText(jdqStatusDao.load((long) 1).time + "");
 
-        if (jdqStatusDao.load((long) 2).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 2).jdqStatus == 1) {
             jdq_2_gl.setChecked(true);
         } else {
             jdq_2_gl.setChecked(false);
         }
         jdq_et_time_2.setText(jdqStatusDao.load((long) 2).time + "");
 
-        if (jdqStatusDao.load((long) 3).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 3).jdqStatus == 1) {
             jdq_3_gl.setChecked(true);
         } else {
             jdq_3_gl.setChecked(false);
         }
         jdq_et_time_3.setText(jdqStatusDao.load((long) 3).time + "");
 
-        if (jdqStatusDao.load((long) 4).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 4).jdqStatus == 1) {
             jdq_4_gl.setChecked(true);
         } else {
             jdq_4_gl.setChecked(false);
         }
         jdq_et_time_4.setText(jdqStatusDao.load((long) 4).time + "");
 
-        if (jdqStatusDao.load((long) 5).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 5).jdqStatus == 1) {
             jdq_5_gl.setChecked(true);
         } else {
             jdq_5_gl.setChecked(false);
         }
         jdq_et_time_5.setText(jdqStatusDao.load((long) 5).time + "");
 
-        if (jdqStatusDao.load((long) 6).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 6).jdqStatus == 1) {
             jdq_6_gl.setChecked(true);
         } else {
             jdq_6_gl.setChecked(false);
         }
         jdq_et_time_6.setText(jdqStatusDao.load((long) 6).time + "");
 
-        if (jdqStatusDao.load((long) 7).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 7).jdqStatus == 1) {
             jdq_7_gl.setChecked(true);
         } else {
             jdq_7_gl.setChecked(false);
         }
         jdq_et_time_7.setText(jdqStatusDao.load((long) 7).time + "");
 
-        if (jdqStatusDao.load((long) 8).jdqStatus == 0) {
+        if (jdqStatusDao.load((long) 8).jdqStatus == 1) {
             jdq_8_gl.setChecked(true);
         } else {
             jdq_8_gl.setChecked(false);
@@ -140,50 +140,50 @@ public class EnvironmentalActivity extends BaseActivity {
         int io8;
 
         if (jdq_1_gl.isChecked()) {
-            io1 = 0;
-        } else {
             io1 = 1;
+        } else {
+            io1 = 0;
         }
 
         if (jdq_2_gl.isChecked()) {
-            io2 = 0;
-        } else {
             io2 = 1;
+        } else {
+            io2 = 0;
         }
 
         if (jdq_3_gl.isChecked()) {
-            io3 = 0;
-        } else {
             io3 = 1;
+        } else {
+            io3 = 0;
         }
 
         if (jdq_4_gl.isChecked()) {
-            io4 = 0;
-        } else {
             io4 = 1;
+        } else {
+            io4 = 0;
         }
 
         if (jdq_5_gl.isChecked()) {
-            io5 = 0;
-        } else {
             io5 = 1;
+        } else {
+            io5 = 0;
         }
 
         if (jdq_6_gl.isChecked()) {
-            io6 = 0;
-        } else {
             io6 = 1;
+        } else {
+            io6 = 0;
         }
 
         if (jdq_7_gl.isChecked()) {
-            io7 = 0;
-        } else {
             io7 = 1;
+        } else {
+            io7 = 0;
         }
         if (jdq_8_gl.isChecked()) {
-            io8 = 0;
-        } else {
             io8 = 1;
+        } else {
+            io8 = 0;
         }
 
         jdqStatusDao.update(new JDQstatus((long) 1, "继电器1", io1, Integer.valueOf(jdq_et_time_1.getText().toString())));

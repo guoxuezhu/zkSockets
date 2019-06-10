@@ -411,14 +411,14 @@ public class NetStatusActivity extends BaseActivity {
 
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", 1, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 1, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 0, 180));
         }
 
 
@@ -464,14 +464,20 @@ public class NetStatusActivity extends BaseActivity {
         SerialPortUtil.sendMsg("{[IOL2:DT:A005]<CLOSE>}".getBytes());
     }
 
+    @OnClick(R.id.test_jdq_ok)
+    public void test_jdq_ok() {
+        SerialPortUtil.sendMsg("{[REY82:DT:A004]<OPEN>}".getBytes());
+    }
 
-
+    @OnClick(R.id.test_jdq_no)
+    public void test_jdq_no() {
+        SerialPortUtil.sendMsg("{[REY2:DT:A005]<CLOSE>}".getBytes());
+    }
 
     @OnClick(R.id.net_btn_back)
     public void net_btn_back() {
         back();
     }
-
 
 
     @Override
