@@ -269,6 +269,7 @@ public class SerialPortUtil {
         if (ioYuanDao.loadAll().size() == 0) {
             return;
         }
+        ELog.i("=========报警口==hex====" + hex);
         String str2jz = JinzhiUtil.get2String(hex);
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
@@ -592,7 +593,7 @@ public class SerialPortUtil {
 
     public static void sendFWstatus(String str) {
         synchronized (str) {
-            if(str.equals("FWS0")){
+            if (str.equals("FWS0")) {
                 sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
             }
         }
