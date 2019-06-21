@@ -129,7 +129,7 @@
             android:windowSoftInputMode="stateHidden"></activity>
 
 
-        <service android:name="org.eclipse.paho.android.service.MqttService" /> <!--MqttService-->
+        <!--<service android:name="org.eclipse.paho.android.service.MqttService" /> &lt;!&ndash;MqttService&ndash;&gt;-->
         <service android:name=".service.MyMqttService" /> <!--MyMqttService-->
 
         <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->

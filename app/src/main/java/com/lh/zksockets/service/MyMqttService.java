@@ -17,14 +17,19 @@ import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.internal.wire.MqttConnack;
+import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Author       wildma
@@ -35,7 +40,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MyMqttService extends Service {
 
-    private static MqttAndroidClient mqttAndroidClient;
     private MqttConnectOptions mMqttConnectOptions;
     public String HOST = "wss://cmt7p9p.mqtt.iot.gz.baidubce.com:8884/mqtt";//服务器地址（协议+地址+端口号）
     public String USERNAME = "cmt7p9p/zk_user_1";//用户名
@@ -44,6 +48,8 @@ public class MyMqttService extends Service {
 //    public static String RESPONSE_TOPIC = "message_arrived";//响应主题
 
     public String CLIENTID = "";//客户端ID，一般以客户端唯一标识符表示，这里用设备序列号表示
+    private static MqttClient mqttClient;
+    private Timer mqttTimer;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -61,13 +67,13 @@ public class MyMqttService extends Service {
      * 开启服务
      */
     public static void startService(Context mContext) {
-        if (mqttAndroidClient != null) {
-            if (mqttAndroidClient.isConnected()) {
+        if (mqttClient != null) {
+            if (mqttClient.isConnected()) {
                 BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
                 try {
-                    mqttAndroidClient.unsubscribe(PUBLISH_TOPIC);
+                    mqttClient.unsubscribe(PUBLISH_TOPIC);
                     PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
-                    mqttAndroidClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
+                    mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
@@ -78,50 +84,16 @@ public class MyMqttService extends Service {
     }
 
     public static void stopMqtt(Context mContext) {
-        if (mqttAndroidClient != null) {
-            if (mqttAndroidClient.isConnected()) {
+        if (mqttClient != null) {
+            if (mqttClient.isConnected()) {
                 try {
-                    mqttAndroidClient.unsubscribe(PUBLISH_TOPIC);
+                    mqttClient.unsubscribe(PUBLISH_TOPIC);
                 } catch (MqttException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
-//    /**
-//     * 发布 （模拟其他客户端发布消息）
-//     *
-//     * @param message 消息
-//     */
-//    public static void publish(String message) {
-//        String topic = PUBLISH_TOPIC;
-//        Integer qos = 0;
-//        Boolean retained = false;
-//        try {
-//            //参数分别为：主题、消息的字节数组、服务质量、是否在服务器保留断开连接后的最后一条消息
-//            mqttAndroidClient.publish(topic, message.getBytes(), qos.intValue(), retained.booleanValue());
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    /**
-//     * 响应 （收到其他客户端的消息后，响应给对方告知消息已到达或者消息有问题等）
-//     *
-//     * @param message 消息
-//     */
-//    public void response(String message) {
-//        String topic = RESPONSE_TOPIC;
-//        Integer qos = 0;
-//        Boolean retained = false;
-//        try {
-//            //参数分别为：主题、消息的字节数组、服务质量、是否在服务器保留断开连接后的最后一条消息
-//            mqttAndroidClient.publish(topic, message.getBytes(), qos.intValue(), retained.booleanValue());
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * 初始化
@@ -134,12 +106,23 @@ public class MyMqttService extends Service {
         PASSWORD = baseInfoDao.loadAll().get(0).mqttpassword;
         CLIENTID = baseInfoDao.loadAll().get(0).uuid;
 
-        mqttAndroidClient = new MqttAndroidClient(this, HOST, CLIENTID);
-        mqttAndroidClient.setCallback(mqttCallback); //设置监听订阅消息的回调
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        MqttDefaultFilePersistence dataStore = new MqttDefaultFilePersistence(tmpDir);
+
+        try {
+            mqttClient = new MqttClient(HOST, CLIENTID, dataStore);
+            mqttClient.setCallback(mqttCallback);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+
+//        mqttAndroidClient = new MqttAndroidClient(this, HOST, CLIENTID);
+//        mqttAndroidClient.setCallback(mqttCallback); //设置监听订阅消息的回调
         mMqttConnectOptions = new MqttConnectOptions();
         mMqttConnectOptions.setCleanSession(true); //设置是否清除缓存
         mMqttConnectOptions.setConnectionTimeout(10); //设置超时时间，单位：秒
-//        mMqttConnectOptions.setKeepAliveInterval(20); //设置心跳包发送间隔，单位：秒
+        mMqttConnectOptions.setKeepAliveInterval(20); //设置心跳包发送间隔，单位：秒
         mMqttConnectOptions.setUserName(USERNAME); //设置用户名
         mMqttConnectOptions.setPassword(PASSWORD.toCharArray()); //设置密码
 
@@ -157,7 +140,6 @@ public class MyMqttService extends Service {
             } catch (Exception e) {
                 ELog.i("======mqtt===Exception Occured==============" + e);
                 doConnect = false;
-                iMqttActionListener.onFailure(null, e);
             }
         }
         if (doConnect) {
@@ -165,16 +147,40 @@ public class MyMqttService extends Service {
         }
     }
 
+
+    private void CreateTimer() {
+        if (mqttTimer != null) {
+            mqttTimer.cancel();
+            mqttTimer = null;
+        }
+        mqttTimer = new Timer();
+        mqttTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ELog.d("=========mqttTimer==========" + mqttClient.isConnected());
+                if(!mqttClient.isConnected()){
+                    init();
+                }
+            }
+        }, 0, 1000 * 30);
+    }
+
+
     /**
      * 连接MQTT服务器
      */
     private void doClientConnection() {
-        if (!mqttAndroidClient.isConnected() && isConnectIsNomarl()) {
+        if (!mqttClient.isConnected() && isConnectIsNomarl()) {
             try {
                 ELog.i("============mqtt===doClientConnection=========");
-                mqttAndroidClient.connect(mMqttConnectOptions, null, iMqttActionListener);
+                mqttClient.connect(mMqttConnectOptions);
+                ELog.i("============mqtt===连接MQTT服务器===ok======");
+                mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
+                ELog.i("============mqtt===订阅主题==ok=======");
+                CreateTimer();
             } catch (MqttException e) {
                 e.printStackTrace();
+                ELog.i("============mqtt=====MqttException=======");
             }
         }
     }
@@ -191,39 +197,18 @@ public class MyMqttService extends Service {
             return true;
         } else {
             ELog.i("=======mqtt==没有可用网络");
-            Toast.makeText(getApplicationContext(), "没有可用网络", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), "没有可用网络", Toast.LENGTH_LONG).show();
 
-            /*没有可用网络的时候，延迟3秒再尝试重连*/
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    doClientConnection();
-                }
-            }, 1000 * 60);
+//            /*没有可用网络的时候，延迟3秒再尝试重连*/
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    doClientConnection();
+//                }
+//            }, 1000 * 60);
             return false;
         }
     }
-
-    //MQTT是否连接成功的监听
-    private IMqttActionListener iMqttActionListener = new IMqttActionListener() {
-
-        @Override
-        public void onSuccess(IMqttToken arg0) {
-            ELog.i("=======mqtt==连接成功 ");
-            try {
-                mqttAndroidClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
-            } catch (MqttException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onFailure(IMqttToken arg0, Throwable arg1) {
-            arg1.printStackTrace();
-            ELog.i("=======mqtt==连接失败 ");
-            Toast.makeText(getApplicationContext(), "连接失败", Toast.LENGTH_LONG).show();
-        }
-    };
 
     //订阅主题的回调
     private MqttCallback mqttCallback = new MqttCallback() {
@@ -262,14 +247,14 @@ public class MyMqttService extends Service {
 
         @Override
         public void connectionLost(Throwable arg0) {
-            ELog.i("=====mqtt====连接断开 ");
+            ELog.i("=====mqtt====连接断开==========" + mqttClient.isConnected());
         }
     };
 
     @Override
     public void onDestroy() {
         try {
-            mqttAndroidClient.disconnect(); //断开连接
+            mqttClient.disconnect(); //断开连接
         } catch (MqttException e) {
             e.printStackTrace();
         }
