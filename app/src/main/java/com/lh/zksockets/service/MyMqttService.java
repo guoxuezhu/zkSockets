@@ -41,9 +41,9 @@ import java.util.TimerTask;
 public class MyMqttService extends Service {
 
     private MqttConnectOptions mMqttConnectOptions;
-    public String HOST = "wss://cmt7p9p.mqtt.iot.gz.baidubce.com:8884/mqtt";//服务器地址（协议+地址+端口号）
-    public String USERNAME = "cmt7p9p/zk_user_1";//用户名
-    public String PASSWORD = "vZakahehxugRHnZs";//密码
+    public String HOST = "wss://uc5xuva.mqtt.iot.gz.baidubce.com:8884/mqtt";//服务器地址（协议+地址+端口号）
+    public String USERNAME = "";//用户名 uc5xuva/admin
+    public String PASSWORD = "";//密码 aYBMf7Ci9eCKkx57
     public static String PUBLISH_TOPIC = "";//发布主题
 //    public static String RESPONSE_TOPIC = "message_arrived";//响应主题
 
@@ -72,7 +72,7 @@ public class MyMqttService extends Service {
                 BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
                 try {
                     mqttClient.unsubscribe(PUBLISH_TOPIC);
-                    PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
+                    PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
                     mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 } catch (MqttException e) {
                     e.printStackTrace();
@@ -101,7 +101,7 @@ public class MyMqttService extends Service {
     private void init() {
 
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-        PUBLISH_TOPIC = "mytopic/DeviceId-numer" + baseInfoDao.loadAll().get(0).classRoom;
+        PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
         USERNAME = baseInfoDao.loadAll().get(0).mqttuser;
         PASSWORD = baseInfoDao.loadAll().get(0).mqttpassword;
         CLIENTID = baseInfoDao.loadAll().get(0).uuid;

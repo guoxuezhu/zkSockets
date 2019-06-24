@@ -424,8 +424,8 @@ public class NetStatusActivity extends BaseActivity {
 
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() == 0) {
-            baseInfoDao.insert(new BaseInfo("101", "cmt7p9p/zk_user_1",
-                    "vZakahehxugRHnZs", java.util.UUID.randomUUID().toString()));
+            baseInfoDao.insert(new BaseInfo("101", "uc5xuva/admin",
+                    "aYBMf7Ci9eCKkx57", java.util.UUID.randomUUID().toString()));
         }
 
 
