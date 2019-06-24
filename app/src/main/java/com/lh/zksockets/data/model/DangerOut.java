@@ -13,14 +13,18 @@ public class DangerOut {
 
     public String name;
 
+    public String deviceName;
+
     public int dangerOutStatus;//1 低      0 高
 
     public int time;
 
-    @Generated(hash = 1650904680)
-    public DangerOut(Long id, String name, int dangerOutStatus, int time) {
+    @Generated(hash = 189532859)
+    public DangerOut(Long id, String name, String deviceName, int dangerOutStatus,
+            int time) {
         this.id = id;
         this.name = name;
+        this.deviceName = deviceName;
         this.dangerOutStatus = dangerOutStatus;
         this.time = time;
     }
@@ -34,6 +38,7 @@ public class DangerOut {
         return "DangerOut{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", deviceName='" + deviceName + '\'' +
                 ", dangerOutStatus=" + dangerOutStatus +
                 ", time=" + time +
                 '}';
@@ -53,6 +58,14 @@ public class DangerOut {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDeviceName() {
+        return this.deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 
     public int getDangerOutStatus() {

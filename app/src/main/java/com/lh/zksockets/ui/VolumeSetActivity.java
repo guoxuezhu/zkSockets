@@ -40,6 +40,15 @@ public class VolumeSetActivity extends BaseActivity {
     EditText danger_et_time_4;
 
 
+    @BindView(R.id.danger_et_devicename_1)
+    EditText danger_et_devicename_1;
+    @BindView(R.id.danger_et_devicename_2)
+    EditText danger_et_devicename_2;
+    @BindView(R.id.danger_et_devicename_3)
+    EditText danger_et_devicename_3;
+    @BindView(R.id.danger_et_devicename_4)
+    EditText danger_et_devicename_4;
+
     private DangerOutDao dangerOutDao;
 
 
@@ -53,7 +62,7 @@ public class VolumeSetActivity extends BaseActivity {
         dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
         if (dangerOutDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
-                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, 1, 10));
+                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
             }
         }
 
@@ -63,6 +72,7 @@ public class VolumeSetActivity extends BaseActivity {
             bjout_1_gl.setChecked(false);
         }
         danger_et_time_1.setText(dangerOutDao.load((long) 1).time + "");
+        danger_et_devicename_1.setText(dangerOutDao.load((long) 1).deviceName);
 
         if (dangerOutDao.load((long) 2).dangerOutStatus == 0) {
             bjout_2_gl.setChecked(true);
@@ -70,6 +80,7 @@ public class VolumeSetActivity extends BaseActivity {
             bjout_2_gl.setChecked(false);
         }
         danger_et_time_2.setText(dangerOutDao.load((long) 2).time + "");
+        danger_et_devicename_2.setText(dangerOutDao.load((long) 2).deviceName);
 
         if (dangerOutDao.load((long) 3).dangerOutStatus == 0) {
             bjout_3_gl.setChecked(true);
@@ -77,6 +88,7 @@ public class VolumeSetActivity extends BaseActivity {
             bjout_3_gl.setChecked(false);
         }
         danger_et_time_3.setText(dangerOutDao.load((long) 3).time + "");
+        danger_et_devicename_3.setText(dangerOutDao.load((long) 3).deviceName);
 
         if (dangerOutDao.load((long) 4).dangerOutStatus == 0) {
             bjout_4_gl.setChecked(true);
@@ -84,6 +96,7 @@ public class VolumeSetActivity extends BaseActivity {
             bjout_4_gl.setChecked(false);
         }
         danger_et_time_4.setText(dangerOutDao.load((long) 4).time + "");
+        danger_et_devicename_4.setText(dangerOutDao.load((long) 4).deviceName);
         ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
 
     }
@@ -120,10 +133,10 @@ public class VolumeSetActivity extends BaseActivity {
             io4 = 1;
         }
 
-        dangerOutDao.update(new DangerOut((long) 1, "报警输出" + 1, io1, Integer.valueOf(danger_et_time_1.getText().toString())));
-        dangerOutDao.update(new DangerOut((long) 2, "报警输出" + 2, io2, Integer.valueOf(danger_et_time_2.getText().toString())));
-        dangerOutDao.update(new DangerOut((long) 3, "报警输出" + 3, io3, Integer.valueOf(danger_et_time_3.getText().toString())));
-        dangerOutDao.update(new DangerOut((long) 4, "报警输出" + 4, io4, Integer.valueOf(danger_et_time_4.getText().toString())));
+        dangerOutDao.update(new DangerOut((long) 1, "报警输出" + 1, danger_et_devicename_1.getText().toString(), io1, Integer.valueOf(danger_et_time_1.getText().toString())));
+        dangerOutDao.update(new DangerOut((long) 2, "报警输出" + 2, danger_et_devicename_2.getText().toString(), io2, Integer.valueOf(danger_et_time_2.getText().toString())));
+        dangerOutDao.update(new DangerOut((long) 3, "报警输出" + 3, danger_et_devicename_3.getText().toString(), io3, Integer.valueOf(danger_et_time_3.getText().toString())));
+        dangerOutDao.update(new DangerOut((long) 4, "报警输出" + 4, danger_et_devicename_4.getText().toString(), io4, Integer.valueOf(danger_et_time_4.getText().toString())));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

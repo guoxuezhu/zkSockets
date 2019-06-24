@@ -9,6 +9,7 @@ import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.lh.zksockets.data.model.DangerOut;
+import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.BaseInfo;
@@ -30,6 +31,7 @@ import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
@@ -60,6 +62,7 @@ import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig dangerOutDaoConfig;
+    private final DaoConfig zkInfoDaoConfig;
     private final DaoConfig eventKejianRestDaoConfig;
     private final DaoConfig ioPortDataDaoConfig;
     private final DaoConfig baseInfoDaoConfig;
@@ -81,6 +84,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig serialPortDataDaoConfig;
 
     private final DangerOutDao dangerOutDao;
+    private final ZkInfoDao zkInfoDao;
     private final EventKejianRestDao eventKejianRestDao;
     private final IoPortDataDao ioPortDataDao;
     private final BaseInfoDao baseInfoDao;
@@ -107,6 +111,9 @@ public class DaoSession extends AbstractDaoSession {
 
         dangerOutDaoConfig = daoConfigMap.get(DangerOutDao.class).clone();
         dangerOutDaoConfig.initIdentityScope(type);
+
+        zkInfoDaoConfig = daoConfigMap.get(ZkInfoDao.class).clone();
+        zkInfoDaoConfig.initIdentityScope(type);
 
         eventKejianRestDaoConfig = daoConfigMap.get(EventKejianRestDao.class).clone();
         eventKejianRestDaoConfig.initIdentityScope(type);
@@ -166,6 +173,7 @@ public class DaoSession extends AbstractDaoSession {
         serialPortDataDaoConfig.initIdentityScope(type);
 
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
+        zkInfoDao = new ZkInfoDao(zkInfoDaoConfig, this);
         eventKejianRestDao = new EventKejianRestDao(eventKejianRestDaoConfig, this);
         ioPortDataDao = new IoPortDataDao(ioPortDataDaoConfig, this);
         baseInfoDao = new BaseInfoDao(baseInfoDaoConfig, this);
@@ -187,6 +195,7 @@ public class DaoSession extends AbstractDaoSession {
         serialPortDataDao = new SerialPortDataDao(serialPortDataDaoConfig, this);
 
         registerDao(DangerOut.class, dangerOutDao);
+        registerDao(ZkInfo.class, zkInfoDao);
         registerDao(EventKejianRest.class, eventKejianRestDao);
         registerDao(IoPortData.class, ioPortDataDao);
         registerDao(BaseInfo.class, baseInfoDao);
@@ -210,6 +219,7 @@ public class DaoSession extends AbstractDaoSession {
     
     public void clear() {
         dangerOutDaoConfig.clearIdentityScope();
+        zkInfoDaoConfig.clearIdentityScope();
         eventKejianRestDaoConfig.clearIdentityScope();
         ioPortDataDaoConfig.clearIdentityScope();
         baseInfoDaoConfig.clearIdentityScope();
@@ -233,6 +243,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public DangerOutDao getDangerOutDao() {
         return dangerOutDao;
+    }
+
+    public ZkInfoDao getZkInfoDao() {
+        return zkInfoDao;
     }
 
     public EventKejianRestDao getEventKejianRestDao() {

@@ -26,8 +26,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property IoOutStatus = new Property(2, int.class, "ioOutStatus", false, "IO_OUT_STATUS");
-        public final static Property Time = new Property(3, int.class, "time", false, "TIME");
+        public final static Property DeviceName = new Property(2, String.class, "deviceName", false, "DEVICE_NAME");
+        public final static Property IoOutStatus = new Property(3, int.class, "ioOutStatus", false, "IO_OUT_STATUS");
+        public final static Property Time = new Property(4, int.class, "time", false, "TIME");
     }
 
 
@@ -45,8 +46,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"IO_PORT_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"IO_OUT_STATUS\" INTEGER NOT NULL ," + // 2: ioOutStatus
-                "\"TIME\" INTEGER NOT NULL );"); // 3: time
+                "\"DEVICE_NAME\" TEXT," + // 2: deviceName
+                "\"IO_OUT_STATUS\" INTEGER NOT NULL ," + // 3: ioOutStatus
+                "\"TIME\" INTEGER NOT NULL );"); // 4: time
     }
 
     /** Drops the underlying database table. */
@@ -68,8 +70,13 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (name != null) {
             stmt.bindString(2, name);
         }
-        stmt.bindLong(3, entity.getIoOutStatus());
-        stmt.bindLong(4, entity.getTime());
+ 
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getIoOutStatus());
+        stmt.bindLong(5, entity.getTime());
     }
 
     @Override
@@ -85,8 +92,13 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         if (name != null) {
             stmt.bindString(2, name);
         }
-        stmt.bindLong(3, entity.getIoOutStatus());
-        stmt.bindLong(4, entity.getTime());
+ 
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getIoOutStatus());
+        stmt.bindLong(5, entity.getTime());
     }
 
     @Override
@@ -99,8 +111,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
         IoPortData entity = new IoPortData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.getInt(offset + 2), // ioOutStatus
-            cursor.getInt(offset + 3) // time
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // deviceName
+            cursor.getInt(offset + 3), // ioOutStatus
+            cursor.getInt(offset + 4) // time
         );
         return entity;
     }
@@ -109,8 +122,9 @@ public class IoPortDataDao extends AbstractDao<IoPortData, Long> {
     public void readEntity(Cursor cursor, IoPortData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setIoOutStatus(cursor.getInt(offset + 2));
-        entity.setTime(cursor.getInt(offset + 3));
+        entity.setDeviceName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setIoOutStatus(cursor.getInt(offset + 3));
+        entity.setTime(cursor.getInt(offset + 4));
      }
     
     @Override

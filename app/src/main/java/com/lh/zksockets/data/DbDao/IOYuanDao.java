@@ -25,9 +25,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property DangerIoStatus = new Property(1, int.class, "dangerIoStatus", false, "DANGER_IO_STATUS");
-        public final static Property DangerMl = new Property(2, String.class, "dangerMl", false, "DANGER_ML");
-        public final static Property NoDangerMl = new Property(3, String.class, "noDangerMl", false, "NO_DANGER_ML");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property DeviceName = new Property(2, String.class, "deviceName", false, "DEVICE_NAME");
+        public final static Property DangerIoStatus = new Property(3, int.class, "dangerIoStatus", false, "DANGER_IO_STATUS");
+        public final static Property DangerMl = new Property(4, String.class, "dangerMl", false, "DANGER_ML");
+        public final static Property NoDangerMl = new Property(5, String.class, "noDangerMl", false, "NO_DANGER_ML");
     }
 
 
@@ -44,9 +46,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IOYUAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"DANGER_IO_STATUS\" INTEGER NOT NULL ," + // 1: dangerIoStatus
-                "\"DANGER_ML\" TEXT," + // 2: dangerMl
-                "\"NO_DANGER_ML\" TEXT);"); // 3: noDangerMl
+                "\"NAME\" TEXT," + // 1: name
+                "\"DEVICE_NAME\" TEXT," + // 2: deviceName
+                "\"DANGER_IO_STATUS\" INTEGER NOT NULL ," + // 3: dangerIoStatus
+                "\"DANGER_ML\" TEXT," + // 4: dangerMl
+                "\"NO_DANGER_ML\" TEXT);"); // 5: noDangerMl
     }
 
     /** Drops the underlying database table. */
@@ -63,16 +67,26 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerIoStatus());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+ 
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getDangerIoStatus());
  
         String dangerMl = entity.getDangerMl();
         if (dangerMl != null) {
-            stmt.bindString(3, dangerMl);
+            stmt.bindString(5, dangerMl);
         }
  
         String noDangerMl = entity.getNoDangerMl();
         if (noDangerMl != null) {
-            stmt.bindString(4, noDangerMl);
+            stmt.bindString(6, noDangerMl);
         }
     }
 
@@ -84,16 +98,26 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getDangerIoStatus());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
+        }
+ 
+        String deviceName = entity.getDeviceName();
+        if (deviceName != null) {
+            stmt.bindString(3, deviceName);
+        }
+        stmt.bindLong(4, entity.getDangerIoStatus());
  
         String dangerMl = entity.getDangerMl();
         if (dangerMl != null) {
-            stmt.bindString(3, dangerMl);
+            stmt.bindString(5, dangerMl);
         }
  
         String noDangerMl = entity.getNoDangerMl();
         if (noDangerMl != null) {
-            stmt.bindString(4, noDangerMl);
+            stmt.bindString(6, noDangerMl);
         }
     }
 
@@ -106,9 +130,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     public IOYuan readEntity(Cursor cursor, int offset) {
         IOYuan entity = new IOYuan( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getInt(offset + 1), // dangerIoStatus
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // dangerMl
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // noDangerMl
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // deviceName
+            cursor.getInt(offset + 3), // dangerIoStatus
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // dangerMl
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // noDangerMl
         );
         return entity;
     }
@@ -116,9 +142,11 @@ public class IOYuanDao extends AbstractDao<IOYuan, Long> {
     @Override
     public void readEntity(Cursor cursor, IOYuan entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDangerIoStatus(cursor.getInt(offset + 1));
-        entity.setDangerMl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setNoDangerMl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDeviceName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setDangerIoStatus(cursor.getInt(offset + 3));
+        entity.setDangerMl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setNoDangerMl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

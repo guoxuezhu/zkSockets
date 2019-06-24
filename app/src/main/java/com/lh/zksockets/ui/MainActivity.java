@@ -42,17 +42,17 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
-//    @OnClick(R.id.user_btn)
-//    public void user_btn() {
-//        startActivity(new Intent(this, UsersActivity.class));
-//        finish();
-//    }
+    @OnClick(R.id.base_info_btn)
+    public void base_info_btn() {
+        startActivity(new Intent(this, BaseSetingActivity.class));
+        finish();
+    }
 
-//    @OnClick(R.id.xiangdao)
-//    public void xiangdao() {
-//        startActivity(new Intent(this, XiangDaoActivity.class));
-//        finish();
-//    }
+    @OnClick(R.id.tupu_btn)
+    public void tupu_btn() {
+        startActivity(new Intent(this, XiangDaoActivity.class));
+        finish();
+    }
 
     @OnClick(R.id.shengji)
     public void shengji() {

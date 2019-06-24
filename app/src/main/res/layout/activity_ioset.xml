@@ -61,6 +61,19 @@
                 android:background="#878C91" />
 
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="绑定的设备"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
 
             <TextView
                 android:layout_width="0dp"
@@ -70,6 +83,7 @@
                 android:text="报警状态"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -116,6 +130,20 @@
                 android:text="报警1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/bj_devicename_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
 
             <View
                 android:layout_width="1dp"
@@ -189,6 +217,19 @@
                 android:layout_height="match_parent"
                 android:background="#878C91" />
 
+            <EditText
+                android:id="@+id/bj_devicename_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -256,6 +297,19 @@
                 android:layout_height="match_parent"
                 android:background="#878C91" />
 
+            <EditText
+                android:id="@+id/bj_devicename_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -286,6 +340,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -322,6 +377,19 @@
                 android:layout_height="match_parent"
                 android:background="#878C91" />
 
+            <EditText
+                android:id="@+id/bj_devicename_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -352,6 +420,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"

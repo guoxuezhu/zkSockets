@@ -48,7 +48,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="名称"
@@ -116,7 +116,85 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="绑定的设备"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/io_et_devicename_1"
                 android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/io_et_devicename_2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/io_et_devicename_3"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <EditText
+                android:id="@+id/io_et_devicename_4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#878C91" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="初始状态"
@@ -126,7 +204,6 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#878C91" />
-
 
 
             <LinearLayout
@@ -229,7 +306,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="时间(秒)"
@@ -265,6 +342,7 @@
                 android:inputType="number"
                 android:text="10"
                 android:textSize="@dimen/text_size_20" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -296,8 +374,6 @@
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>

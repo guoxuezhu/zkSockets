@@ -89,10 +89,10 @@ public class HttpRequestUtil {
     public static String getDangerInfo(AsyncHttpServerRequest request) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 2, 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 4, 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "", 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
         }
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
@@ -208,14 +208,14 @@ public class HttpRequestUtil {
     public static String getJDQList(AsyncHttpServerRequest request) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", 0, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "", 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "", 0, 180));
         }
         return gson.toJson(new HttpResult("200", "", true, jdqStatusDao.loadAll()));
     }
@@ -270,7 +270,7 @@ public class HttpRequestUtil {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
-                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, 0, 10));
+                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
             }
         }
         return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
@@ -290,7 +290,7 @@ public class HttpRequestUtil {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
         if (dangerOutDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
-                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, 1, 10));
+                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
             }
         }
         return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));

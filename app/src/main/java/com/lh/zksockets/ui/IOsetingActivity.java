@@ -39,6 +39,14 @@ public class IOsetingActivity extends BaseActivity {
     @BindView(R.id.io_et_time_4)
     EditText io_et_time_4;
 
+    @BindView(R.id.io_et_devicename_1)
+    EditText io_et_devicename_1;
+    @BindView(R.id.io_et_devicename_2)
+    EditText io_et_devicename_2;
+    @BindView(R.id.io_et_devicename_3)
+    EditText io_et_devicename_3;
+    @BindView(R.id.io_et_devicename_4)
+    EditText io_et_devicename_4;
 
     private IoPortDataDao ioPortDataDao;
 
@@ -52,7 +60,7 @@ public class IOsetingActivity extends BaseActivity {
         ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
-                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, 0, 10));
+                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
             }
         }
 
@@ -62,6 +70,7 @@ public class IOsetingActivity extends BaseActivity {
             switch_1_gl.setChecked(false);
         }
         io_et_time_1.setText(ioPortDataDao.load((long) 1).time + "");
+        io_et_devicename_1.setText(ioPortDataDao.load((long) 1).deviceName);
 
         if (ioPortDataDao.load((long) 2).ioOutStatus == 1) {
             switch_2_gl.setChecked(true);
@@ -69,6 +78,7 @@ public class IOsetingActivity extends BaseActivity {
             switch_2_gl.setChecked(false);
         }
         io_et_time_2.setText(ioPortDataDao.load((long) 2).time + "");
+        io_et_devicename_2.setText(ioPortDataDao.load((long) 2).deviceName);
 
         if (ioPortDataDao.load((long) 3).ioOutStatus == 1) {
             switch_3_gl.setChecked(true);
@@ -76,6 +86,7 @@ public class IOsetingActivity extends BaseActivity {
             switch_3_gl.setChecked(false);
         }
         io_et_time_3.setText(ioPortDataDao.load((long) 3).time + "");
+        io_et_devicename_3.setText(ioPortDataDao.load((long) 3).deviceName);
 
         if (ioPortDataDao.load((long) 4).ioOutStatus == 1) {
             switch_4_gl.setChecked(true);
@@ -83,6 +94,7 @@ public class IOsetingActivity extends BaseActivity {
             switch_4_gl.setChecked(false);
         }
         io_et_time_4.setText(ioPortDataDao.load((long) 4).time + "");
+        io_et_devicename_4.setText(ioPortDataDao.load((long) 4).deviceName);
         ELog.i("========ioPortDataDao========" + ioPortDataDao.loadAll().toString());
     }
 
@@ -118,10 +130,10 @@ public class IOsetingActivity extends BaseActivity {
             io4 = 0;
         }
 
-        ioPortDataDao.update(new IoPortData((long) 1, "io输出" + 1, io1, Integer.valueOf(io_et_time_1.getText().toString())));
-        ioPortDataDao.update(new IoPortData((long) 2, "io输出" + 2, io2, Integer.valueOf(io_et_time_2.getText().toString())));
-        ioPortDataDao.update(new IoPortData((long) 3, "io输出" + 3, io3, Integer.valueOf(io_et_time_3.getText().toString())));
-        ioPortDataDao.update(new IoPortData((long) 4, "io输出" + 4, io4, Integer.valueOf(io_et_time_4.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 1, "io输出" + 1, io_et_devicename_1.getText().toString(), io1, Integer.valueOf(io_et_time_1.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 2, "io输出" + 2, io_et_devicename_2.getText().toString(), io2, Integer.valueOf(io_et_time_2.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 3, "io输出" + 3, io_et_devicename_3.getText().toString(), io3, Integer.valueOf(io_et_time_3.getText().toString())));
+        ioPortDataDao.update(new IoPortData((long) 4, "io输出" + 4, io_et_devicename_4.getText().toString(), io4, Integer.valueOf(io_et_time_4.getText().toString())));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

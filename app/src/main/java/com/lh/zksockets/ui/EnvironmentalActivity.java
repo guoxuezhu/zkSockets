@@ -52,6 +52,23 @@ public class EnvironmentalActivity extends BaseActivity {
     @BindView(R.id.jdq_et_time_8)
     EditText jdq_et_time_8;
 
+    @BindView(R.id.jdq_et_devicename_1)
+    EditText jdq_et_devicename_1;
+    @BindView(R.id.jdq_et_devicename_2)
+    EditText jdq_et_devicename_2;
+    @BindView(R.id.jdq_et_devicename_3)
+    EditText jdq_et_devicename_3;
+    @BindView(R.id.jdq_et_devicename_4)
+    EditText jdq_et_devicename_4;
+    @BindView(R.id.jdq_et_devicename_5)
+    EditText jdq_et_devicename_5;
+    @BindView(R.id.jdq_et_devicename_6)
+    EditText jdq_et_devicename_6;
+    @BindView(R.id.jdq_et_devicename_7)
+    EditText jdq_et_devicename_7;
+    @BindView(R.id.jdq_et_devicename_8)
+    EditText jdq_et_devicename_8;
+
     private JDQstatusDao jdqStatusDao;
 
 
@@ -64,7 +81,7 @@ public class EnvironmentalActivity extends BaseActivity {
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
             for (int i = 1; i < 9; i++) {
-                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, 0, 1));
+                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, "", 0, 1));
             }
         }
 
@@ -74,6 +91,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_1_gl.setChecked(false);
         }
         jdq_et_time_1.setText(jdqStatusDao.load((long) 1).time + "");
+        jdq_et_devicename_1.setText(jdqStatusDao.load((long) 1).deviceName);
 
         if (jdqStatusDao.load((long) 2).jdqStatus == 1) {
             jdq_2_gl.setChecked(true);
@@ -81,6 +99,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_2_gl.setChecked(false);
         }
         jdq_et_time_2.setText(jdqStatusDao.load((long) 2).time + "");
+        jdq_et_devicename_2.setText(jdqStatusDao.load((long) 2).deviceName);
 
         if (jdqStatusDao.load((long) 3).jdqStatus == 1) {
             jdq_3_gl.setChecked(true);
@@ -88,6 +107,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_3_gl.setChecked(false);
         }
         jdq_et_time_3.setText(jdqStatusDao.load((long) 3).time + "");
+        jdq_et_devicename_3.setText(jdqStatusDao.load((long) 3).deviceName);
 
         if (jdqStatusDao.load((long) 4).jdqStatus == 1) {
             jdq_4_gl.setChecked(true);
@@ -95,6 +115,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_4_gl.setChecked(false);
         }
         jdq_et_time_4.setText(jdqStatusDao.load((long) 4).time + "");
+        jdq_et_devicename_4.setText(jdqStatusDao.load((long) 4).deviceName);
 
         if (jdqStatusDao.load((long) 5).jdqStatus == 1) {
             jdq_5_gl.setChecked(true);
@@ -102,6 +123,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_5_gl.setChecked(false);
         }
         jdq_et_time_5.setText(jdqStatusDao.load((long) 5).time + "");
+        jdq_et_devicename_5.setText(jdqStatusDao.load((long) 5).deviceName);
 
         if (jdqStatusDao.load((long) 6).jdqStatus == 1) {
             jdq_6_gl.setChecked(true);
@@ -109,6 +131,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_6_gl.setChecked(false);
         }
         jdq_et_time_6.setText(jdqStatusDao.load((long) 6).time + "");
+        jdq_et_devicename_6.setText(jdqStatusDao.load((long) 6).deviceName);
 
         if (jdqStatusDao.load((long) 7).jdqStatus == 1) {
             jdq_7_gl.setChecked(true);
@@ -116,6 +139,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_7_gl.setChecked(false);
         }
         jdq_et_time_7.setText(jdqStatusDao.load((long) 7).time + "");
+        jdq_et_devicename_7.setText(jdqStatusDao.load((long) 7).deviceName);
 
         if (jdqStatusDao.load((long) 8).jdqStatus == 1) {
             jdq_8_gl.setChecked(true);
@@ -123,6 +147,7 @@ public class EnvironmentalActivity extends BaseActivity {
             jdq_8_gl.setChecked(false);
         }
         jdq_et_time_8.setText(jdqStatusDao.load((long) 8).time + "");
+        jdq_et_devicename_8.setText(jdqStatusDao.load((long) 8).deviceName);
 
         ELog.d("=========jdqStatusDao==========" + jdqStatusDao.loadAll().toString());
     }
@@ -186,14 +211,14 @@ public class EnvironmentalActivity extends BaseActivity {
             io8 = 0;
         }
 
-        jdqStatusDao.update(new JDQstatus((long) 1, "继电器1", io1, Integer.valueOf(jdq_et_time_1.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 2, "继电器2", io2, Integer.valueOf(jdq_et_time_2.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 3, "继电器3", io3, Integer.valueOf(jdq_et_time_3.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 4, "继电器4", io4, Integer.valueOf(jdq_et_time_4.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 5, "继电器5", io5, Integer.valueOf(jdq_et_time_5.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 6, "继电器6", io6, Integer.valueOf(jdq_et_time_6.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 7, "继电器7", io7, Integer.valueOf(jdq_et_time_7.getText().toString())));
-        jdqStatusDao.update(new JDQstatus((long) 8, "继电器8", io8, Integer.valueOf(jdq_et_time_8.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 1, "继电器1", jdq_et_devicename_1.getText().toString(), io1, Integer.valueOf(jdq_et_time_1.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 2, "继电器2", jdq_et_devicename_2.getText().toString(), io2, Integer.valueOf(jdq_et_time_2.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 3, "继电器3", jdq_et_devicename_3.getText().toString(), io3, Integer.valueOf(jdq_et_time_3.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 4, "继电器4", jdq_et_devicename_4.getText().toString(), io4, Integer.valueOf(jdq_et_time_4.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 5, "继电器5", jdq_et_devicename_5.getText().toString(), io5, Integer.valueOf(jdq_et_time_5.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 6, "继电器6", jdq_et_devicename_6.getText().toString(), io6, Integer.valueOf(jdq_et_time_6.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 7, "继电器7", jdq_et_devicename_7.getText().toString(), io7, Integer.valueOf(jdq_et_time_7.getText().toString())));
+        jdqStatusDao.update(new JDQstatus((long) 8, "继电器8", jdq_et_devicename_8.getText().toString(), io8, Integer.valueOf(jdq_et_time_8.getText().toString())));
 
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
