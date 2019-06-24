@@ -390,7 +390,7 @@ public class NetStatusActivity extends BaseActivity {
         if (ioYuanDao.loadAll().size() == 0) {
             ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
             ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "人体感应", 0, "1-203", "1-204"));
+            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "人体感应", 1, "1-203", "1-204"));
             ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
         }
 

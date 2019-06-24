@@ -25,8 +25,8 @@ public class BaseSetingActivity extends BaseActivity {
     TextView tv_IP;
     @BindView(R.id.tv_zkVersionName)
     TextView tv_zkVersionName;
-//    @BindView(R.id.tv_zkDeviceName)
-//    TextView tv_zkDeviceName;
+    @BindView(R.id.tv_zkDeviceName)
+    TextView tv_zkDeviceName;
 
     private ZkInfoDao zkInfoDao;
 
@@ -38,7 +38,7 @@ public class BaseSetingActivity extends BaseActivity {
 
         tv_IP.setText(DisplayTools.getIPAddress(this));
         tv_zkVersionName.setText(DisplayTools.getVersionName(this));
-//        tv_zkDeviceName.setText("orangepi android_" + Build.VERSION.RELEASE);
+        tv_zkDeviceName.setText("" + MyApplication.geendaoVersion());
 
         zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
@@ -52,7 +52,7 @@ public class BaseSetingActivity extends BaseActivity {
     public void btn_baseset_ok() {
         zkInfoDao.deleteAll();
         zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
-                tv_zkVersionName.getText().toString()));
+                tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString()));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

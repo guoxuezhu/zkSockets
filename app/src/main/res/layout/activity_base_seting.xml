@@ -210,15 +210,14 @@
                 android:layout_height="@dimen/dp_60"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
 
                 <TextView
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="系统版本:"
+                    android:text="数据库版本:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 

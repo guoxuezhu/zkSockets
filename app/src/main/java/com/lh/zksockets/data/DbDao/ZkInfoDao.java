@@ -27,6 +27,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         public final static Property Zkname = new Property(0, String.class, "zkname", false, "ZKNAME");
         public final static Property Zkip = new Property(1, String.class, "zkip", false, "ZKIP");
         public final static Property ZkVersion = new Property(2, String.class, "zkVersion", false, "ZK_VERSION");
+        public final static Property GeendaoVersion = new Property(3, String.class, "geendaoVersion", false, "GEENDAO_VERSION");
     }
 
 
@@ -44,7 +45,8 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         db.execSQL("CREATE TABLE " + constraint + "\"ZK_INFO\" (" + //
                 "\"ZKNAME\" TEXT," + // 0: zkname
                 "\"ZKIP\" TEXT," + // 1: zkip
-                "\"ZK_VERSION\" TEXT);"); // 2: zkVersion
+                "\"ZK_VERSION\" TEXT," + // 2: zkVersion
+                "\"GEENDAO_VERSION\" TEXT);"); // 3: geendaoVersion
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +73,11 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         if (zkVersion != null) {
             stmt.bindString(3, zkVersion);
         }
+ 
+        String geendaoVersion = entity.getGeendaoVersion();
+        if (geendaoVersion != null) {
+            stmt.bindString(4, geendaoVersion);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         if (zkVersion != null) {
             stmt.bindString(3, zkVersion);
         }
+ 
+        String geendaoVersion = entity.getGeendaoVersion();
+        if (geendaoVersion != null) {
+            stmt.bindString(4, geendaoVersion);
+        }
     }
 
     @Override
@@ -103,7 +115,8 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         ZkInfo entity = new ZkInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // zkname
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // zkip
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // zkVersion
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // zkVersion
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // geendaoVersion
         );
         return entity;
     }
@@ -113,6 +126,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         entity.setZkname(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setZkip(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setZkVersion(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setGeendaoVersion(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override
