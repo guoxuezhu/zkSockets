@@ -100,89 +100,10 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="串口1"
+                        android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
 
-                    <TextView
-                        android:id="@+id/tp_ck_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口2"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/tp_ck_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口3"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口4"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/tp_ck_5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口5"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口6"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/tp_ck_7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口7"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口8"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -217,87 +138,17 @@
 
 
                     <TextView
+                        android:id="@+id/jdq_tuopu_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
+                        android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -333,47 +184,15 @@
 
 
                     <TextView
+                        android:id="@+id/tuopu_dangerOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
+                        android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
 
 
                 </LinearLayout>
@@ -411,43 +230,13 @@
 
 
                     <TextView
+                        android:id="@+id/danger_in_tuopu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
+                        android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
 
@@ -487,43 +276,13 @@
 
 
                     <TextView
+                        android:id="@+id/tuopu_ioOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="串口1:name1"
+                        android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
 
@@ -632,7 +391,8 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <View
                     android:layout_width="2dp"
@@ -651,7 +411,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="网络"
+                        android:text="控制"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
@@ -662,7 +422,7 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="录播"
+                        android:text="web"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
 
@@ -672,10 +432,9 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
                         android:padding="@dimen/dp_6"
-                        android:text="mqtt服务器"
+                        android:text="手机"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
-
 
 
                 </LinearLayout>
