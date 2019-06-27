@@ -15,11 +15,14 @@ public class MLsLists {
 
     public String strMLs;
 
-    @Generated(hash = 295336955)
-    public MLsLists(Long id, String name, String strMLs) {
+    public String time;
+
+    @Generated(hash = 934382541)
+    public MLsLists(Long id, String name, String strMLs, String time) {
         this.id = id;
         this.name = name;
         this.strMLs = strMLs;
+        this.time = time;
     }
 
     @Generated(hash = 525193264)
@@ -32,6 +35,7 @@ public class MLsLists {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", strMLs='" + strMLs + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 
@@ -57,5 +61,13 @@ public class MLsLists {
 
     public void setStrMLs(String strMLs) {
         this.strMLs = strMLs;
+    }
+
+    public String getTime() {
+        return this.time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

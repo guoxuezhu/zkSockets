@@ -27,6 +27,7 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property StrMLs = new Property(2, String.class, "strMLs", false, "STR_MLS");
+        public final static Property Time = new Property(3, String.class, "time", false, "TIME");
     }
 
 
@@ -44,7 +45,8 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"MLS_LISTS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"STR_MLS\" TEXT);"); // 2: strMLs
+                "\"STR_MLS\" TEXT," + // 2: strMLs
+                "\"TIME\" TEXT);"); // 3: time
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +73,11 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         if (strMLs != null) {
             stmt.bindString(3, strMLs);
         }
+ 
+        String time = entity.getTime();
+        if (time != null) {
+            stmt.bindString(4, time);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         if (strMLs != null) {
             stmt.bindString(3, strMLs);
         }
+ 
+        String time = entity.getTime();
+        if (time != null) {
+            stmt.bindString(4, time);
+        }
     }
 
     @Override
@@ -103,7 +115,8 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         MLsLists entity = new MLsLists( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // strMLs
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // strMLs
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // time
         );
         return entity;
     }
@@ -113,6 +126,7 @@ public class MLsListsDao extends AbstractDao<MLsLists, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setStrMLs(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setTime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

@@ -65,6 +65,18 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+
+                <TextView
+                    android:id="@+id/event_tv_time_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+
                 <EditText
                     android:id="@+id/event_et_1"
                     android:layout_width="0dp"
@@ -98,6 +110,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="下课"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -138,6 +160,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_3"
                     android:layout_width="0dp"
@@ -171,6 +203,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="休息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -210,6 +252,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_5"
                     android:layout_width="0dp"
@@ -243,6 +295,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="窗帘1关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -282,6 +344,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_7"
                     android:layout_width="0dp"
@@ -315,6 +387,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="窗帘2关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -354,6 +436,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_9"
                     android:layout_width="0dp"
@@ -387,6 +479,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="投影机关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -427,6 +529,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_11"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_11"
                     android:layout_width="0dp"
@@ -463,6 +575,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_12"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_12"
                     android:layout_width="0dp"
@@ -496,6 +618,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="灯光1开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_13"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -536,6 +668,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_14"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_14"
                     android:layout_width="0dp"
@@ -570,6 +712,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="灯光2开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_15"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -610,6 +762,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_16"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_16"
                     android:layout_width="0dp"
@@ -644,6 +806,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="灯光3开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_17"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -684,6 +856,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_18"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_18"
                     android:layout_width="0dp"
@@ -717,6 +899,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="灯光4开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_19"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -757,6 +949,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_20"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_20"
                     android:layout_width="0dp"
@@ -790,6 +992,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="总音量+"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_21"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -829,6 +1041,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_22"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_22"
                     android:layout_width="0dp"
@@ -865,6 +1087,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_23"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_23"
                     android:layout_width="0dp"
@@ -898,6 +1130,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="总音量静音关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_24"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -938,6 +1180,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_25"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_25"
                     android:layout_width="0dp"
@@ -971,6 +1223,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="音响音量-"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_26"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1010,6 +1272,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_27"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_27"
                     android:layout_width="0dp"
@@ -1043,6 +1315,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="音响静音关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_28"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1083,6 +1365,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_29"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_29"
                     android:layout_width="0dp"
@@ -1116,6 +1408,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="麦克风音量-"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1155,6 +1457,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_31"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_31"
                     android:layout_width="0dp"
@@ -1188,6 +1500,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="麦克风静音关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_32"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1228,6 +1550,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_33"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_33"
                     android:layout_width="0dp"
@@ -1262,6 +1594,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="录播-暂停"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_34"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1302,6 +1644,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_35"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_35"
                     android:layout_width="0dp"
@@ -1336,6 +1688,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="录播-直播"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_36"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1376,6 +1738,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_37"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_37"
                     android:layout_width="0dp"
@@ -1410,6 +1782,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="电源-全关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_38"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1450,6 +1832,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_39"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_39"
                     android:layout_width="0dp"
@@ -1484,6 +1876,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="空调-模式"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_40"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1524,6 +1926,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_41"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_41"
                     android:layout_width="0dp"
@@ -1557,6 +1969,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="空调-风向"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_42"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1597,6 +2019,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_43"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_43"
                     android:layout_width="0dp"
@@ -1634,6 +2066,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_44"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_44"
                     android:layout_width="0dp"
@@ -1645,7 +2087,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -1672,6 +2113,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_45"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_45"
                     android:layout_width="0dp"
@@ -1683,7 +2134,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -1707,6 +2157,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="门禁-前门"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_46"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1746,6 +2206,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_47"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_47"
                     android:layout_width="0dp"
@@ -1779,6 +2249,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="空调-关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_48"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1819,6 +2299,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_49"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_49"
                     android:layout_width="0dp"
@@ -1852,6 +2342,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="一体机-内置HDMI"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1891,6 +2391,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_51"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_51"
                     android:layout_width="0dp"
@@ -1902,11 +2412,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
-
-
-
-
 
 
             <LinearLayout
@@ -1933,6 +2438,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_52"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_52"
                     android:layout_width="0dp"
@@ -1944,9 +2459,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
-
-
 
 
             <LinearLayout
@@ -1970,6 +2482,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="电视机2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_53"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2010,6 +2532,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_54"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_54"
                     android:layout_width="0dp"
@@ -2021,8 +2553,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -2049,6 +2579,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_55"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_55"
                     android:layout_width="0dp"
@@ -2060,8 +2600,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -2088,6 +2626,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_56"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_56"
                     android:layout_width="0dp"
@@ -2099,7 +2647,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -2126,6 +2673,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_57"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_57"
                     android:layout_width="0dp"
@@ -2137,7 +2694,6 @@
                     android:textSize="@dimen/text_size_16" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -2161,6 +2717,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="电视机7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_58"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2201,6 +2767,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
+                <TextView
+                    android:id="@+id/event_tv_time_59"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
                 <EditText
                     android:id="@+id/event_et_59"
                     android:layout_width="0dp"
@@ -2234,6 +2810,16 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="其它"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_60"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

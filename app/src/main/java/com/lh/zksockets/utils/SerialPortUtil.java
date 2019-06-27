@@ -415,6 +415,8 @@ public class SerialPortUtil {
                 if (mLsListsDao.load(id) == null) {
                     return;
                 }
+                mLsListsDao.load(id).setTime(DateUtil.getNow());
+                mLsListsDao.update(mLsListsDao.load(id));
                 String strMls = mLsListsDao.load(id).strMLs;
                 ELog.i("========串口1===========makeML=================" + id);
                 makeBaojing(strMls);
