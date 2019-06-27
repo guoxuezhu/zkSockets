@@ -95,7 +95,7 @@
 
                     <TextView
                         android:id="@+id/tp_ck_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/layout_tuobu_bg"
@@ -103,6 +103,84 @@
                         android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
                         android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <TextView
+                        android:id="@+id/tp_ck_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:background="@drawable/layout_tuobu_bg"
+                        android:padding="@dimen/dp_6"
+                        android:text="无设备"
+                        android:textColor="@color/user_icon_default_gray"
+                        android:textSize="@dimen/text_size_16" />
+
 
                 </LinearLayout>
             </LinearLayout>
