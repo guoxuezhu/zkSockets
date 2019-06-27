@@ -12,10 +12,6 @@ import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
-import com.lh.zksockets.data.model.DangerOut;
-import com.lh.zksockets.data.model.IOYuan;
-import com.lh.zksockets.data.model.IoPortData;
-import com.lh.zksockets.data.model.JDQstatus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,23 +19,68 @@ import butterknife.OnClick;
 
 public class XiangDaoActivity extends BaseActivity {
 
-    @BindView(R.id.tp_ck_1) TextView tp_ck_1;
-    @BindView(R.id.tp_ck_2) TextView tp_ck_2;
-    @BindView(R.id.tp_ck_3) TextView tp_ck_3;
-    @BindView(R.id.tp_ck_4) TextView tp_ck_4;
-    @BindView(R.id.tp_ck_5) TextView tp_ck_5;
-    @BindView(R.id.tp_ck_6) TextView tp_ck_6;
-    @BindView(R.id.tp_ck_7) TextView tp_ck_7;
-    @BindView(R.id.tp_ck_8) TextView tp_ck_8;
+    @BindView(R.id.tp_ck_1)
+    TextView tp_ck_1;
+    @BindView(R.id.tp_ck_2)
+    TextView tp_ck_2;
+    @BindView(R.id.tp_ck_3)
+    TextView tp_ck_3;
+    @BindView(R.id.tp_ck_4)
+    TextView tp_ck_4;
+    @BindView(R.id.tp_ck_5)
+    TextView tp_ck_5;
+    @BindView(R.id.tp_ck_6)
+    TextView tp_ck_6;
+    @BindView(R.id.tp_ck_7)
+    TextView tp_ck_7;
+    @BindView(R.id.tp_ck_8)
+    TextView tp_ck_8;
 
-    @BindView(R.id.jdq_tuopu_name)
-    TextView jdq_tuopu_name;
-    @BindView(R.id.danger_in_tuopu)
-    TextView danger_in_tuopu;
-    @BindView(R.id.tuopu_dangerOut)
-    TextView tuopu_dangerOut;
-    @BindView(R.id.tuopu_ioOut)
-    TextView tuopu_ioOut;
+    @BindView(R.id.jdq_tuopu_name_1)
+    TextView jdq_tuopu_name_1;
+    @BindView(R.id.jdq_tuopu_name_2)
+    TextView jdq_tuopu_name_2;
+    @BindView(R.id.jdq_tuopu_name_3)
+    TextView jdq_tuopu_name_3;
+    @BindView(R.id.jdq_tuopu_name_4)
+    TextView jdq_tuopu_name_4;
+    @BindView(R.id.jdq_tuopu_name_5)
+    TextView jdq_tuopu_name_5;
+    @BindView(R.id.jdq_tuopu_name_6)
+    TextView jdq_tuopu_name_6;
+    @BindView(R.id.jdq_tuopu_name_7)
+    TextView jdq_tuopu_name_7;
+    @BindView(R.id.jdq_tuopu_name_8)
+    TextView jdq_tuopu_name_8;
+
+    @BindView(R.id.danger_in_tuopu_1)
+    TextView danger_in_tuopu_1;
+    @BindView(R.id.danger_in_tuopu_2)
+    TextView danger_in_tuopu_2;
+    @BindView(R.id.danger_in_tuopu_3)
+    TextView danger_in_tuopu_3;
+    @BindView(R.id.danger_in_tuopu_4)
+    TextView danger_in_tuopu_4;
+
+
+    @BindView(R.id.tuopu_dangerOut_1)
+    TextView tuopu_dangerOut_1;
+    @BindView(R.id.tuopu_dangerOut_2)
+    TextView tuopu_dangerOut_2;
+    @BindView(R.id.tuopu_dangerOut_3)
+    TextView tuopu_dangerOut_3;
+    @BindView(R.id.tuopu_dangerOut_4)
+    TextView tuopu_dangerOut_4;
+
+
+    @BindView(R.id.tuopu_ioOut_1)
+    TextView tuopu_ioOut_1;
+    @BindView(R.id.tuopu_ioOut_2)
+    TextView tuopu_ioOut_2;
+    @BindView(R.id.tuopu_ioOut_3)
+    TextView tuopu_ioOut_3;
+    @BindView(R.id.tuopu_ioOut_4)
+    TextView tuopu_ioOut_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,123 +94,92 @@ public class XiangDaoActivity extends BaseActivity {
     private void initView() {
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         if (serialPortDataDao.loadAll().size() != 0) {
-            if (!serialPortDataDao.load((long) 1).deviceName.equals("")) {
-                tp_ck_1.setText("串口1：" +serialPortDataDao.load((long) 1).deviceName);
-                tp_ck_1.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_1.setText("串口1：无设备");
-//                tp_ck_1.setTextColor(Color.parseColor("#ff9e9e9e"));
-                tp_ck_1.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
+            tp_ck_1.setText(serialPortDataDao.load((long) 1).deviceName.equals("") ? "串口1：无设备" : "串口1：" + serialPortDataDao.load((long) 1).deviceName);
+            tp_ck_2.setText(serialPortDataDao.load((long) 2).deviceName.equals("") ? "串口2：无设备" : "串口2：" + serialPortDataDao.load((long) 2).deviceName);
+            tp_ck_3.setText(serialPortDataDao.load((long) 3).deviceName.equals("") ? "串口3：无设备" : "串口3：" + serialPortDataDao.load((long) 3).deviceName);
+            tp_ck_4.setText(serialPortDataDao.load((long) 4).deviceName.equals("") ? "串口4：无设备" : "串口4：" + serialPortDataDao.load((long) 4).deviceName);
+            tp_ck_5.setText(serialPortDataDao.load((long) 5).deviceName.equals("") ? "串口5：无设备" : "串口5：" + serialPortDataDao.load((long) 5).deviceName);
+            tp_ck_6.setText(serialPortDataDao.load((long) 6).deviceName.equals("") ? "串口6：无设备" : "串口6：" + serialPortDataDao.load((long) 6).deviceName);
+            tp_ck_7.setText(serialPortDataDao.load((long) 7).deviceName.equals("") ? "串口7：无设备" : "串口7：" + serialPortDataDao.load((long) 7).deviceName);
+            tp_ck_8.setText(serialPortDataDao.load((long) 8).deviceName.equals("") ? "串口8：无设备" : "串口8：" + serialPortDataDao.load((long) 8).deviceName);
 
-            if (!serialPortDataDao.load((long) 2).deviceName.equals("")) {
-                tp_ck_2.setText("串口2：" +serialPortDataDao.load((long) 2).deviceName);
-                tp_ck_2.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_2.setText("串口2：无设备");
-                tp_ck_2.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
 
-            if (!serialPortDataDao.load((long) 3).deviceName.equals("")) {
-                tp_ck_3.setText("串口3：" +serialPortDataDao.load((long)3).deviceName);
-                tp_ck_3.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_3.setText("串口3：无设备");
-                tp_ck_3.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
+            tp_ck_1.setTextColor(serialPortDataDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_2.setTextColor(serialPortDataDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_3.setTextColor(serialPortDataDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_4.setTextColor(serialPortDataDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_5.setTextColor(serialPortDataDao.load((long) 5).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_6.setTextColor(serialPortDataDao.load((long) 6).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_7.setTextColor(serialPortDataDao.load((long) 7).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tp_ck_8.setTextColor(serialPortDataDao.load((long) 8).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
 
-            if (!serialPortDataDao.load((long) 4).deviceName.equals("")) {
-                tp_ck_4.setText("串口4：" +serialPortDataDao.load((long) 4).deviceName);
-                tp_ck_4.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_4.setText("串口4：无设备");
-                tp_ck_4.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
-
-            if (!serialPortDataDao.load((long) 5).deviceName.equals("")) {
-                tp_ck_5.setText("串口5：" +serialPortDataDao.load((long) 5).deviceName);
-                tp_ck_5.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_5.setText("串口5：无设备");
-                tp_ck_5.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
-
-            if (!serialPortDataDao.load((long) 6).deviceName.equals("")) {
-                tp_ck_6.setText("串口6：" +serialPortDataDao.load((long) 6).deviceName);
-                tp_ck_6.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_6.setText("串口6：无设备");
-                tp_ck_6.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
-
-            if (!serialPortDataDao.load((long) 7).deviceName.equals("")) {
-                tp_ck_7.setText("串口7：" +serialPortDataDao.load((long) 7).deviceName);
-                tp_ck_7.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_7.setText("串口7：无设备");
-                tp_ck_7.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
-
-            if (!serialPortDataDao.load((long) 8).deviceName.equals("")) {
-                tp_ck_8.setText("串口8：" +serialPortDataDao.load((long) 8).deviceName);
-                tp_ck_8.setTextColor(Color.parseColor("#19F124"));
-            } else {
-                tp_ck_8.setText("串口8：无设备");
-                tp_ck_8.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
-            }
 
         }
 
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() != 0) {
-            String serialmsg1 = "";
-            for (int i = 1; i < 9; i++) {
-                if (!jdqStatusDao.load((long) i).deviceName.equals("")) {
-                    serialmsg1 = serialmsg1 + "继电器" + i + "：" + jdqStatusDao.load((long) i).deviceName + "\n";
-                } else {
-                    serialmsg1 = serialmsg1 + "继电器" + i + "：无设备" + "\n";
-                }
-            }
-            jdq_tuopu_name.setText(serialmsg1);
+
+            jdq_tuopu_name_1.setText(jdqStatusDao.load((long) 1).deviceName.equals("") ? "继电器1：无设备" : "继电器1：" + jdqStatusDao.load((long) 1).deviceName);
+            jdq_tuopu_name_2.setText(jdqStatusDao.load((long) 2).deviceName.equals("") ? "继电器2：无设备" : "继电器2：" + jdqStatusDao.load((long) 2).deviceName);
+            jdq_tuopu_name_3.setText(jdqStatusDao.load((long) 3).deviceName.equals("") ? "继电器3：无设备" : "继电器3：" + jdqStatusDao.load((long) 3).deviceName);
+            jdq_tuopu_name_4.setText(jdqStatusDao.load((long) 4).deviceName.equals("") ? "继电器4：无设备" : "继电器4：" + jdqStatusDao.load((long) 4).deviceName);
+            jdq_tuopu_name_5.setText(jdqStatusDao.load((long) 5).deviceName.equals("") ? "继电器5：无设备" : "继电器5：" + jdqStatusDao.load((long) 5).deviceName);
+            jdq_tuopu_name_6.setText(jdqStatusDao.load((long) 6).deviceName.equals("") ? "继电器6：无设备" : "继电器6：" + jdqStatusDao.load((long) 6).deviceName);
+            jdq_tuopu_name_7.setText(jdqStatusDao.load((long) 7).deviceName.equals("") ? "继电器7：无设备" : "继电器7：" + jdqStatusDao.load((long) 7).deviceName);
+            jdq_tuopu_name_8.setText(jdqStatusDao.load((long) 8).deviceName.equals("") ? "继电器8：无设备" : "继电器8：" + jdqStatusDao.load((long) 8).deviceName);
+
+            jdq_tuopu_name_1.setTextColor(jdqStatusDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_2.setTextColor(jdqStatusDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_3.setTextColor(jdqStatusDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_4.setTextColor(jdqStatusDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_5.setTextColor(jdqStatusDao.load((long) 5).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_6.setTextColor(jdqStatusDao.load((long) 6).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_7.setTextColor(jdqStatusDao.load((long) 7).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            jdq_tuopu_name_8.setTextColor(jdqStatusDao.load((long) 8).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+
+
         }
 
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() != 0) {
-            String serialmsg2 = "";
-            for (int i = 1; i < 5; i++) {
-                if (!ioYuanDao.load((long) i).deviceName.equals("")) {
-                    serialmsg2 = serialmsg2 + "报警输入" + i + "：" + ioYuanDao.load((long) i).deviceName + "\n";
-                } else {
-                    serialmsg2 = serialmsg2 + "报警输入" + i + "：无设备" + "\n";
-                }
-            }
-            danger_in_tuopu.setText(serialmsg2);
+            danger_in_tuopu_1.setText(ioYuanDao.load((long) 1).deviceName.equals("") ? "报警输入1：无设备" : "报警输入1：" + ioYuanDao.load((long) 1).deviceName);
+            danger_in_tuopu_2.setText(ioYuanDao.load((long) 2).deviceName.equals("") ? "报警输入2：无设备" : "报警输入2：" + ioYuanDao.load((long) 2).deviceName);
+            danger_in_tuopu_3.setText(ioYuanDao.load((long) 3).deviceName.equals("") ? "报警输入3：无设备" : "报警输入3：" + ioYuanDao.load((long) 3).deviceName);
+            danger_in_tuopu_4.setText(ioYuanDao.load((long) 4).deviceName.equals("") ? "报警输入4：无设备" : "报警输入4：" + ioYuanDao.load((long) 4).deviceName);
+
+            danger_in_tuopu_1.setTextColor(ioYuanDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            danger_in_tuopu_2.setTextColor(ioYuanDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            danger_in_tuopu_3.setTextColor(ioYuanDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            danger_in_tuopu_4.setTextColor(ioYuanDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+
         }
 
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
         if (dangerOutDao.loadAll().size() != 0) {
-            String serialmsg3 = "";
-            for (int i = 1; i < 5; i++) {
-                if (!dangerOutDao.load((long) i).deviceName.equals("")) {
-                    serialmsg3 = serialmsg3 + "报警输出" + i + "：" + dangerOutDao.load((long) i).deviceName + "\n";
-                } else {
-                    serialmsg3 = serialmsg3 + "报警输出" + i + "：无设备" + "\n";
-                }
-            }
-            tuopu_dangerOut.setText(serialmsg3);
+            tuopu_dangerOut_1.setText(dangerOutDao.load((long) 1).deviceName.equals("") ? "报警输出1：无设备" : "报警输出1：" + dangerOutDao.load((long) 1).deviceName);
+            tuopu_dangerOut_2.setText(dangerOutDao.load((long) 2).deviceName.equals("") ? "报警输出2：无设备" : "报警输出2：" + dangerOutDao.load((long) 2).deviceName);
+            tuopu_dangerOut_3.setText(dangerOutDao.load((long) 3).deviceName.equals("") ? "报警输出3：无设备" : "报警输出3：" + dangerOutDao.load((long) 3).deviceName);
+            tuopu_dangerOut_4.setText(dangerOutDao.load((long) 4).deviceName.equals("") ? "报警输出4：无设备" : "报警输出4：" + dangerOutDao.load((long) 4).deviceName);
+
+            tuopu_dangerOut_1.setTextColor(dangerOutDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_dangerOut_2.setTextColor(dangerOutDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_dangerOut_3.setTextColor(dangerOutDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_dangerOut_4.setTextColor(dangerOutDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
         }
 
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() != 0) {
-            String serialmsg4 = "";
-            for (int i = 1; i < 5; i++) {
-                if (!ioPortDataDao.load((long) i).deviceName.equals("")) {
-                    serialmsg4 = serialmsg4 + "io输出" + i + "：" + ioPortDataDao.load((long) i).deviceName + "\n";
-                } else {
-                    serialmsg4 = serialmsg4 + "io输出" + i + "：无设备" + "\n";
-                }
-            }
-            tuopu_ioOut.setText(serialmsg4);
+
+            tuopu_ioOut_1.setText(ioPortDataDao.load((long) 1).deviceName.equals("") ? "io输出1：无设备" : "io输出1：" + ioPortDataDao.load((long) 1).deviceName);
+            tuopu_ioOut_2.setText(ioPortDataDao.load((long) 2).deviceName.equals("") ? "io输出2：无设备" : "io输出2：" + ioPortDataDao.load((long) 2).deviceName);
+            tuopu_ioOut_3.setText(ioPortDataDao.load((long) 3).deviceName.equals("") ? "io输出3：无设备" : "io输出3：" + ioPortDataDao.load((long) 3).deviceName);
+            tuopu_ioOut_4.setText(ioPortDataDao.load((long) 4).deviceName.equals("") ? "io输出4：无设备" : "io输出4：" + ioPortDataDao.load((long) 4).deviceName);
+
+            tuopu_ioOut_1.setTextColor(ioPortDataDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_ioOut_2.setTextColor(ioPortDataDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_ioOut_3.setTextColor(ioPortDataDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+            tuopu_ioOut_4.setTextColor(ioPortDataDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+
         }
 
     }
