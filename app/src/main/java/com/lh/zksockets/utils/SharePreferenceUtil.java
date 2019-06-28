@@ -29,7 +29,7 @@ public class SharePreferenceUtil {
     }
 
     public String getCloseTimer() {
-        return sp.getString("closeTimer", "");
+        return sp.getString("closeTimer", "22:00:00");
     }
 
 

@@ -27,7 +27,8 @@ public class BaseSetingActivity extends BaseActivity {
     TextView tv_zkVersionName;
     @BindView(R.id.tv_zkDeviceName)
     TextView tv_zkDeviceName;
-
+    @BindView(R.id.et_vid_num)
+    EditText et_vid_num;
     private ZkInfoDao zkInfoDao;
 
     @Override
@@ -51,8 +52,13 @@ public class BaseSetingActivity extends BaseActivity {
     @OnClick(R.id.btn_baseset_ok)
     public void btn_baseset_ok() {
         zkInfoDao.deleteAll();
-        zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
-                tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString()));
+        if (et_vid_num.getText().toString().equals("")) {
+            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
+                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), 0));
+        } else {
+            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
+                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString())));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

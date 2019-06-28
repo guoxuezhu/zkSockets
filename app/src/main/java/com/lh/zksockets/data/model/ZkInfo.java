@@ -10,14 +10,16 @@ public class ZkInfo {
     public String zkip;
     public String zkVersion;
     public String geendaoVersion;
+    public int hudongVIDnum;
 
-    @Generated(hash = 1510729296)
+    @Generated(hash = 1888324428)
     public ZkInfo(String zkname, String zkip, String zkVersion,
-            String geendaoVersion) {
+            String geendaoVersion, int hudongVIDnum) {
         this.zkname = zkname;
         this.zkip = zkip;
         this.zkVersion = zkVersion;
         this.geendaoVersion = geendaoVersion;
+        this.hudongVIDnum = hudongVIDnum;
     }
 
     @Generated(hash = 632246380)
@@ -31,6 +33,7 @@ public class ZkInfo {
                 ", zkip='" + zkip + '\'' +
                 ", zkVersion='" + zkVersion + '\'' +
                 ", geendaoVersion='" + geendaoVersion + '\'' +
+                ", hudongVIDnum=" + hudongVIDnum +
                 '}';
     }
 
@@ -64,5 +67,13 @@ public class ZkInfo {
 
     public void setGeendaoVersion(String geendaoVersion) {
         this.geendaoVersion = geendaoVersion;
+    }
+
+    public int getHudongVIDnum() {
+        return this.hudongVIDnum;
+    }
+
+    public void setHudongVIDnum(int hudongVIDnum) {
+        this.hudongVIDnum = hudongVIDnum;
     }
 }

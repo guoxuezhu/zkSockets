@@ -3,6 +3,7 @@ package com.lh.zksockets.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lh.zksockets.MyApplication;
@@ -12,6 +13,7 @@ import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,6 +83,9 @@ public class XiangDaoActivity extends BaseActivity {
     TextView tuopu_ioOut_3;
     @BindView(R.id.tuopu_ioOut_4)
     TextView tuopu_ioOut_4;
+
+    @BindView(R.id.LL_vid_layout)
+    LinearLayout LL_vid_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +185,34 @@ public class XiangDaoActivity extends BaseActivity {
             tuopu_ioOut_3.setTextColor(ioPortDataDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
             tuopu_ioOut_4.setTextColor(ioPortDataDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
 
+        }
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        if (zkInfoDao.loadAll().size() == 0 || zkInfoDao.loadAll().get(0).hudongVIDnum == 0) {
+            TextView textView = new TextView(this);
+            textView.setText("无设备");
+            textView.setTextSize(16);
+            textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+            textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
+            textView.setPadding(6, 6, 6, 6);
+            layoutParams.setMargins(0, 6, 0, 0);
+            textView.setLayoutParams(layoutParams);
+            LL_vid_layout.addView(textView);
+        } else {
+            for (int i = 1; i < zkInfoDao.loadAll().get(0).hudongVIDnum + 1; i++) {
+                TextView textView = new TextView(this);
+                textView.setText("互动大屏" + i);
+                textView.setTextSize(16);
+                textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
+                textView.setPadding(6, 6, 6, 6);
+                layoutParams.setMargins(0, 6, 0, 0);
+                textView.setLayoutParams(layoutParams);
+                LL_vid_layout.addView(textView);
+            }
         }
 
     }

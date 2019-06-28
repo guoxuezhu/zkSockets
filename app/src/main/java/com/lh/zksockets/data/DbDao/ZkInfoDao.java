@@ -28,6 +28,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         public final static Property Zkip = new Property(1, String.class, "zkip", false, "ZKIP");
         public final static Property ZkVersion = new Property(2, String.class, "zkVersion", false, "ZK_VERSION");
         public final static Property GeendaoVersion = new Property(3, String.class, "geendaoVersion", false, "GEENDAO_VERSION");
+        public final static Property HudongVIDnum = new Property(4, int.class, "hudongVIDnum", false, "HUDONG_VIDNUM");
     }
 
 
@@ -46,7 +47,8 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
                 "\"ZKNAME\" TEXT," + // 0: zkname
                 "\"ZKIP\" TEXT," + // 1: zkip
                 "\"ZK_VERSION\" TEXT," + // 2: zkVersion
-                "\"GEENDAO_VERSION\" TEXT);"); // 3: geendaoVersion
+                "\"GEENDAO_VERSION\" TEXT," + // 3: geendaoVersion
+                "\"HUDONG_VIDNUM\" INTEGER NOT NULL );"); // 4: hudongVIDnum
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         if (geendaoVersion != null) {
             stmt.bindString(4, geendaoVersion);
         }
+        stmt.bindLong(5, entity.getHudongVIDnum());
     }
 
     @Override
@@ -103,6 +106,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         if (geendaoVersion != null) {
             stmt.bindString(4, geendaoVersion);
         }
+        stmt.bindLong(5, entity.getHudongVIDnum());
     }
 
     @Override
@@ -116,7 +120,8 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // zkname
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // zkip
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // zkVersion
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // geendaoVersion
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // geendaoVersion
+            cursor.getInt(offset + 4) // hudongVIDnum
         );
         return entity;
     }
@@ -127,6 +132,7 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         entity.setZkip(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setZkVersion(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setGeendaoVersion(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setHudongVIDnum(cursor.getInt(offset + 4));
      }
     
     @Override

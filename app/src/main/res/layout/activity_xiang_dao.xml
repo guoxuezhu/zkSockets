@@ -562,6 +562,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/LL_vid_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -576,66 +577,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏1"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏2"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏3"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏4"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏5"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="互动大屏6"
-                        android:textColor="@color/profile_badge_3"
-                        android:textSize="@dimen/text_size_16" />
 
                 </LinearLayout>
 
