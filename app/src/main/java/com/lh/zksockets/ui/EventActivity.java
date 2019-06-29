@@ -512,7 +512,7 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 36, "录播-直播", event_et_36.getText().toString(), event_tv_time_36.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 37, "电源-全开", event_et_37.getText().toString(), event_tv_time_37.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 38, "电源-全关", event_et_38.getText().toString(), event_tv_time_38.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 39, "空调-开/关", event_et_39.getText().toString(), event_tv_time_39.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 39, "空调-开", event_et_39.getText().toString(), event_tv_time_39.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 40, "空调-模式", event_et_40.getText().toString(), event_tv_time_40.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 41, "空调-风速", event_et_41.getText().toString(), event_tv_time_41.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 42, "空调-风向", event_et_42.getText().toString(), event_tv_time_42.getText().toString()));

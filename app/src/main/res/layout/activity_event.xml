@@ -1828,7 +1828,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-开/关"
+                    android:text="空调-开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
