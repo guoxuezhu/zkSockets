@@ -601,6 +601,14 @@ public class SerialPortUtil {
         }
     }
 
+    public static void sendKJban(String str) {
+        synchronized (str) {
+            if (str.equals("SKJAA")) {
+                sendMsg1("SKJAA".getBytes());
+            }
+        }
+    }
+
     public static List<String> getIOnumDatas() {
         List<String> IoNumList = new ArrayList<String>();
         IoNumList.add("IO口-1");

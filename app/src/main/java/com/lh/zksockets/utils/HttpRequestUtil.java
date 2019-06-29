@@ -305,4 +305,36 @@ public class HttpRequestUtil {
         }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
+
+
+    public static String zksendmsg(AsyncHttpServerRequest request) {
+        String msg = request.getQuery().getString("zkbtn");
+        ELog.i("========http======zkbtn======msg========" + msg);
+        if (msg.length() > 3) {
+            try {
+                if (msg.substring(0, 3).equals("VID")) {
+                    SerialPortUtil.sendShipinType(msg);
+                } else if (msg.substring(0, 3).equals("SKJ")) {
+                    SerialPortUtil.sendKJban(msg);
+                } else if (msg.substring(0, 3).equals("FWS")) {
+                    SerialPortUtil.sendFWstatus(msg);
+                } else if (msg.substring(0, 3).equals("LUB")) {
+                    HttpUtil.setlubo(msg);
+                } else if (msg.substring(0, 3).equals("MBS")) {
+                    try {
+                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+                    } catch (Exception e) {
+                        ELog.i("============Long.valueOf==异常========" + e.toString());
+                        return gson.toJson(new HttpResult("-101", "中控命令格式错误", false, null));
+                    }
+                }
+            } catch (Exception e) {
+                return gson.toJson(new HttpResult("-101", "Exception", false, null));
+            }
+            return gson.toJson(new HttpResult("200", "", true, null));
+        } else {
+            return gson.toJson(new HttpResult("-200", "中控命令格式错误", false, null));
+        }
+
+    }
 }

@@ -72,28 +72,11 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataIoOutInfo(request));
                 } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
                     response.send(HttpRequestUtil.updataDangerOutInfo(request));
+                } else if (request.getPath().equals("/api/zkczbtn")) {
+                    response.send(HttpRequestUtil.zksendmsg(request));
                 } else {
                     response.send("200");
                 }
-
-//            Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-//            Log.d(TAG, "=======parms========= " + parms.toString() + "===zkbtn=== " + parms.getString("zkbtn"));
-//
-//            String msg = parms.getString("zkbtn");
-//
-//            if (msg.length() > 3) {
-//                if (msg.substring(0, 3).equals("VID")) {
-//                    SerialPortUtil.sendShipinType(msg);
-//                } else if (msg.substring(0, 3).equals("LUB")) {
-//                    HttpUtil.setlubo(msg);
-//                } else if (msg.substring(0, 3).equals("MBS")) {
-//                    try {
-//                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
-//                    } catch (Exception e) {
-//                        Log.d(TAG, "==========http===POST===接收到了数据====Long.valueOf==异常========" + e.toString());
-//                    }
-//                }
-//            }
 
             } else if (request.getMethod().equals("GET")) {
 
