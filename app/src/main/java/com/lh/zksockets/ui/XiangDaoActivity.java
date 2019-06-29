@@ -195,7 +195,6 @@ public class XiangDaoActivity extends BaseActivity {
             TextView textView = new TextView(this);
             textView.setText("无设备");
             textView.setTextSize(16);
-            textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
             textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
             textView.setPadding(6, 6, 6, 6);
             layoutParams.setMargins(0, 6, 0, 0);
