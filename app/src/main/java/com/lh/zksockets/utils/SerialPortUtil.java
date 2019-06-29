@@ -604,7 +604,7 @@ public class SerialPortUtil {
     public static void sendKJban(String str) {
         synchronized (str) {
             if (str.equals("SKJAA")) {
-                sendMsg1("SKJAA".getBytes());
+                sendMsg1("SKJ;AA".getBytes());
             }
         }
     }
