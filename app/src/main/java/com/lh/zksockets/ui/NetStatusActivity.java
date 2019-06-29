@@ -188,18 +188,18 @@ public class NetStatusActivity extends BaseActivity {
             serialCommandDao.insert(new SerialCommand(Long.valueOf("430"), 4, 30, "1-430", "", "", 16));
 
 
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("501"), 5, 1, "1-501", "电视机１", "7E07003433343314010068", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("502"), 5, 2, "1-502", "电视机２", "7E07003433343314020069", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("503"), 5, 3, "1-503", "空调-开", "7E0700343334331403006A", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("504"), 5, 4, "1-504", "空调-关", "7E0700343334331404006B", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("505"), 5, 5, "1-505", "模式", "7E0700343334331405006C", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("506"), 5, 6, "1-506", "风速", "7E0700343334331406006D", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("507"), 5, 7, "1-507", "", "7E0700343334331407006E", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("508"), 5, 8, "1-508", "", "7E0700343334331408006F", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("509"), 5, 9, "1-509", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("510"), 5, 10, "1-510", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("511"), 5, 11, "1-511", "", "", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("512"), 5, 12, "1-512", "", "", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("501"), 5, 1, "1-501", "空调-开", "7E07004433443314010088", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("502"), 5, 2, "1-502", "空调-关", "7E07004433443314020089", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("503"), 5, 3, "1-503", "23", "7E0700443344331403008A", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("504"), 5, 4, "1-504", "26", "7E0700443344331404008B", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("505"), 5, 5, "1-505", "模式", "7E0700443344331405008C", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("506"), 5, 6, "1-506", "风速", "7E0700443344331406008D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("507"), 5, 7, "1-507", "", "7E0700443344331407008E", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("508"), 5, 8, "1-508", "", "7E0700443344331408008F", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("509"), 5, 9, "1-509", "电视机1", "7E07004433443314090090", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("510"), 5, 10, "1-510", "电视机2", "7E070044334433140A0091", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("511"), 5, 11, "1-511", "电视机3", "7E070044334433140B0092", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("512"), 5, 12, "1-512", "", "7E070044334433140C0093", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("513"), 5, 13, "1-513", "", "", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("514"), 5, 14, "1-514", "", "", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("515"), 5, 15, "1-515", "", "", 16));
@@ -320,9 +320,9 @@ public class NetStatusActivity extends BaseActivity {
 
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() == 0) {
-            mLsListsDao.insert(new MLsLists((long) 1, "上课", "1-601,1-501,1-502", ""));
-            mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-501,1-502", ""));
-            mLsListsDao.insert(new MLsLists((long) 3, "自习", "1-102,1-602,1-501,1-502,1-503,1-504", ""));
+            mLsListsDao.insert(new MLsLists((long) 1, "上课", "1-601,1-601,1-509,1-510,1-511", ""));
+            mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-602,1-509,1-510,1-511", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "自习", "", ""));
             mLsListsDao.insert(new MLsLists((long) 4, "休息", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-2-1", ""));
             mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "2-1-1", ""));
@@ -330,8 +330,8 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 8, "窗帘2关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 9, "投影机开", "1-101", ""));
             mLsListsDao.insert(new MLsLists((long) 10, "投影机关", "1-102", ""));
-            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-7-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-8-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-8-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-7-1", ""));
             mLsListsDao.insert(new MLsLists((long) 13, "灯光1开", "1-205", ""));
             mLsListsDao.insert(new MLsLists((long) 14, "灯光1关", "1-206", ""));
             mLsListsDao.insert(new MLsLists((long) 15, "灯光2开", "", ""));
@@ -359,23 +359,23 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", "1-319", ""));
             mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", "1-102,1-320", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "1-503", ""));
+            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "1-502", ""));
             mLsListsDao.insert(new MLsLists((long) 40, "空调-模式", "1-505", ""));
             mLsListsDao.insert(new MLsLists((long) 41, "空调-风速", "1-506", ""));
             mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", "1-504", ""));
+            mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", "1-503", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "中控开机", "1-319,1-201", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "2-4-1", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "1-504", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "1-501", ""));
             mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "1-507", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "1-604", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "1-603", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "1-501", ""));
-            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "1-502", ""));
-            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "1-509", ""));
+            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "1-510", ""));
+            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "1-511", ""));
             mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "", ""));
             mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "", ""));
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
