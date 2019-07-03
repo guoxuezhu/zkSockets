@@ -56,7 +56,7 @@ public class NetStatusActivity extends BaseActivity {
             serialPortDataDao.insert(new SerialPortData((long) 4, "串口4", "", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
             serialPortDataDao.insert(new SerialPortData((long) 5, "串口5", "红外", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
             serialPortDataDao.insert(new SerialPortData((long) 6, "串口6", "一体机", 7, "115200", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 7, "串口7", "音量", 3, "9600", 0, "无", 0, "8", 0, "1", 10));
+            serialPortDataDao.insert(new SerialPortData((long) 7, "串口7", "音量", 7, "115200", 0, "无", 0, "8", 0, "1", 10));
             serialPortDataDao.insert(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
 
 
