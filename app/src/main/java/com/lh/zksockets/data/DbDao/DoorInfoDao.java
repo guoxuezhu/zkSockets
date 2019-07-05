@@ -26,6 +26,7 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
     public static class Properties {
         public final static Property IP = new Property(0, String.class, "IP", false, "IP");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property IsStart = new Property(2, int.class, "isStart", false, "IS_START");
     }
 
 
@@ -42,7 +43,8 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DOOR_INFO\" (" + //
                 "\"IP\" TEXT," + // 0: IP
-                "\"NAME\" TEXT);"); // 1: name
+                "\"NAME\" TEXT," + // 1: name
+                "\"IS_START\" INTEGER NOT NULL );"); // 2: isStart
     }
 
     /** Drops the underlying database table. */
@@ -64,6 +66,7 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
         if (name != null) {
             stmt.bindString(2, name);
         }
+        stmt.bindLong(3, entity.getIsStart());
     }
 
     @Override
@@ -79,6 +82,7 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
         if (name != null) {
             stmt.bindString(2, name);
         }
+        stmt.bindLong(3, entity.getIsStart());
     }
 
     @Override
@@ -90,7 +94,8 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
     public DoorInfo readEntity(Cursor cursor, int offset) {
         DoorInfo entity = new DoorInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // IP
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // name
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.getInt(offset + 2) // isStart
         );
         return entity;
     }
@@ -99,6 +104,7 @@ public class DoorInfoDao extends AbstractDao<DoorInfo, Void> {
     public void readEntity(Cursor cursor, DoorInfo entity, int offset) {
         entity.setIP(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setIsStart(cursor.getInt(offset + 2));
      }
     
     @Override

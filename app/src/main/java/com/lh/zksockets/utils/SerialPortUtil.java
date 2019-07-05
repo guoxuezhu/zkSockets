@@ -2,12 +2,14 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -366,8 +368,10 @@ public class SerialPortUtil {
                             if (msg.length() > 3) {
                                 if (msg.substring(0, 3).equals("VID")) {
                                     sendShipinType(msg);
-                                } else if (msg.substring(0, 3).equals("FWS")) {
+                                } else if (msg.substring(0, 3).equals("FWS")) {//复位
                                     sendFWstatus(msg);
+                                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                                    makemenjin(msg);
                                 } else if (msg.substring(0, 3).equals("LUB")) {
                                     HttpUtil.setlubo(msg);
                                 } else if (msg.substring(0, 3).equals("MBS")) {
@@ -389,6 +393,19 @@ public class SerialPortUtil {
             }
         }.start();
 
+    }
+
+    public static void makemenjin(String msg) {
+        DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
+        if (doorInfoDao.loadAll().size() != 0 && doorInfoDao.loadAll().get(0).isStart == 1) {
+            DoorUtil.opendoor(doorInfoDao.loadAll().get(0).IP);
+        } else {
+            try {
+                makeML(Long.valueOf(msg.substring(3)));
+            } catch (Exception e) {
+                ELog.i("=========门禁====Long.valueOf==异常========" + e.toString());
+            }
+        }
     }
 
 

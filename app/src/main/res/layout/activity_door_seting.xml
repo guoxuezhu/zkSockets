@@ -28,6 +28,18 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
+        <Switch
+            android:id="@+id/door_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:showText="true"
+            android:switchMinWidth="@dimen/dp_60"
+            android:textOff="关"
+            android:textOn="开" />
+
 
     </RelativeLayout>
 
@@ -59,6 +71,7 @@
             android:text="前门"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_20" />
+
 
     </LinearLayout>
 

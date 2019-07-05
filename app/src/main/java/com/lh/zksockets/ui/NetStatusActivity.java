@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
+import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
@@ -15,6 +16,7 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.BaseInfo;
+import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.LuboInfo;
@@ -428,6 +430,11 @@ public class NetStatusActivity extends BaseActivity {
                     "aYBMf7Ci9eCKkx57", java.util.UUID.randomUUID().toString()));
         }
 
+        DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
+
+        if (doorInfoDao.loadAll().size() == 0) {
+            doorInfoDao.insert(new DoorInfo("192.168.11.66", "101-前门", 1));
+        }
 
         Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();
 

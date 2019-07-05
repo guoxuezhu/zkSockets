@@ -158,7 +158,7 @@ public class MyMqttService extends Service {
             @Override
             public void run() {
                 ELog.d("=========mqttTimer==========" + mqttClient.isConnected());
-                if(!mqttClient.isConnected()){
+                if (!mqttClient.isConnected()) {
                     init();
                 }
             }
@@ -222,6 +222,10 @@ public class MyMqttService extends Service {
                     SerialPortUtil.sendShipinType(msg);
                 } else if (msg.substring(0, 3).equals("FWS")) {
                     SerialPortUtil.sendFWstatus(msg);
+                } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
+                    SerialPortUtil.sendKJban(msg);
+                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                    SerialPortUtil.makemenjin(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
                 } else if (msg.substring(0, 3).equals("MBS")) {

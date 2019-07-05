@@ -314,8 +314,10 @@ public class HttpRequestUtil {
             try {
                 if (msg.substring(0, 3).equals("VID")) {
                     SerialPortUtil.sendShipinType(msg);
-                } else if (msg.substring(0, 3).equals("SKJ")) {
+                } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
                     SerialPortUtil.sendKJban(msg);
+                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                    SerialPortUtil.makemenjin(msg);
                 } else if (msg.substring(0, 3).equals("FWS")) {
                     SerialPortUtil.sendFWstatus(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {

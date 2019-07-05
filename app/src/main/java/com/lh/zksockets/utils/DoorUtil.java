@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 public class DoorUtil {
 
-    public static int createFile(String IP) {
+    public static int opendoor(String IP) {
 
         byte[] byteCmd = new byte[]{(byte) 0x17, (byte) 0x40,
                 (byte) 0x00, (byte) 0x00, (byte) 0xff, (byte) 0xff,
