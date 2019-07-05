@@ -26,32 +26,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="事件设置"
+            android:text="视频状态监听"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
+
+        <Switch
+            android:id="@+id/vid_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:showText="true"
+            android:switchMinWidth="@dimen/dp_60"
+            android:textOff="关"
+            android:textOn="开" />
+
+
     </RelativeLayout>
 
+
     <GridView
-        android:id="@+id/event_base_gridView"
+        android:id="@+id/vid_status_gridView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_100"
         android:layout_weight="1"
-        android:horizontalSpacing="@dimen/dp_10"
-        android:numColumns="3"
-        android:verticalSpacing="@dimen/dp_20" />
+        android:horizontalSpacing="@dimen/dp_40"
+        android:numColumns="4"
+        android:verticalSpacing="@dimen/dp_40" />
 
-
-    <Button
-        android:id="@+id/event_select_ok"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/dp_20"
-        android:background="@drawable/btn_bg"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_20" />
 
 </LinearLayout>
