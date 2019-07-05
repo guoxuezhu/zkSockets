@@ -30,17 +30,17 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
-//    @OnClick(R.id.projector_seting)
-//    public void projector_seting() {
-//        startActivity(new Intent(this, ProjectorSetingActivity.class));
-//        finish();
-//    }
+    @OnClick(R.id.door_seting)
+    public void door_seting() {
+        startActivity(new Intent(this, DoorSetingActivity.class));
+        finish();
+    }
 
-//    @OnClick(R.id.diannao_seting)
-//    public void diannao_seting() {
-//        startActivity(new Intent(this, ComputerActivity.class));
-//        finish();
-//    }
+    @OnClick(R.id.vidStatus_seting)
+    public void vidStatus_seting() {
+        startActivity(new Intent(this, EventSelectActivity.class));
+        finish();
+    }
 
     @OnClick(R.id.power_box)
     public void power_box() {

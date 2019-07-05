@@ -67,7 +67,7 @@ public class EventSelectActivity extends BaseActivity {
     }
 
     private void back() {
-        startActivity(new Intent(this, EventActivity.class));
+        startActivity(new Intent(this, AdvancedSetingActivity.class));
         finish();
     }
 
