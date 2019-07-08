@@ -33,17 +33,17 @@ public class EventSelectActivity extends BaseActivity {
 
     private void gridViewInit() {
         List<Vidstatus> vidstatuses=new ArrayList<>();
-        vidstatuses.add(new Vidstatus("录播输入",1));
-        vidstatuses.add(new Vidstatus("电脑输入",1));
+        vidstatuses.add(new Vidstatus("录播输入",0));
+        vidstatuses.add(new Vidstatus("电脑输入",0));
 
-        vidstatuses.add(new Vidstatus("投影输出",1));
-        vidstatuses.add(new Vidstatus("电脑输出",0));
-        vidstatuses.add(new Vidstatus("录播输出",0));
+        vidstatuses.add(new Vidstatus("投影输出",0));
+        vidstatuses.add(new Vidstatus("电脑输出",1));
+        vidstatuses.add(new Vidstatus("录播输出",1));
         vidstatuses.add(new Vidstatus("小组一输出",1));
         vidstatuses.add(new Vidstatus("小组二输出",1));
         vidstatuses.add(new Vidstatus("小组三输出",1));
         vidstatuses.add(new Vidstatus("小组四输出",1));
-        vidstatuses.add(new Vidstatus("小组五输出",5));
+        vidstatuses.add(new Vidstatus("小组五输出",1));
         vidstatuses.add(new Vidstatus("小组六输出",1));
 
         VidstatusAdapter vidstatusAdapter = new VidstatusAdapter(this, vidstatuses);

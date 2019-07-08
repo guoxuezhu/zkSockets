@@ -141,8 +141,8 @@ public class EventActivity extends BaseActivity {
     EditText event_et_58;
     @BindView(R.id.event_et_59)
     EditText event_et_59;
-    @BindView(R.id.event_et_60)
-    EditText event_et_60;
+//    @BindView(R.id.event_et_60)
+//    EditText event_et_60;
 
     @BindView(R.id.event_tv_time_1)
     TextView event_tv_time_1;
@@ -263,8 +263,8 @@ public class EventActivity extends BaseActivity {
     TextView event_tv_time_58;
     @BindView(R.id.event_tv_time_59)
     TextView event_tv_time_59;
-    @BindView(R.id.event_tv_time_60)
-    TextView event_tv_time_60;
+//    @BindView(R.id.event_tv_time_60)
+//    TextView event_tv_time_60;
 
     private MLsListsDao mLsListsDao;
 
@@ -336,7 +336,7 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
             mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 60, "其它", "", ""));
+//            mLsListsDao.insert(new MLsLists((long) 60, "其它", "", ""));
         }
 
         DataInit();
@@ -403,7 +403,7 @@ public class EventActivity extends BaseActivity {
         event_et_57.setText(mLsListsDao.load((long) 57).strMLs);
         event_et_58.setText(mLsListsDao.load((long) 58).strMLs);
         event_et_59.setText(mLsListsDao.load((long) 59).strMLs);
-        event_et_60.setText(mLsListsDao.load((long) 60).strMLs);
+//        event_et_60.setText(mLsListsDao.load((long) 60).strMLs);
 
 
         event_tv_time_1.setText(mLsListsDao.load((long) 1).time);
@@ -465,7 +465,7 @@ public class EventActivity extends BaseActivity {
         event_tv_time_57.setText(mLsListsDao.load((long) 57).time);
         event_tv_time_58.setText(mLsListsDao.load((long) 58).time);
         event_tv_time_59.setText(mLsListsDao.load((long) 59).time);
-        event_tv_time_60.setText(mLsListsDao.load((long) 60).time);
+//        event_tv_time_60.setText(mLsListsDao.load((long) 60).time);
 
         ELog.i("=======mLsListsDao=======" + mLsListsDao.loadAll().toString());
 
@@ -533,7 +533,7 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 57, "电视机6", event_et_57.getText().toString(), event_tv_time_57.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 58, "电视机7", event_et_58.getText().toString(), event_tv_time_58.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 59, "电视机8", event_et_59.getText().toString(), event_tv_time_59.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 60, "其它", event_et_60.getText().toString(), event_tv_time_60.getText().toString()));
+//        mLsListsDao.update(new MLsLists((long) 60, "其它", event_et_60.getText().toString(), event_tv_time_60.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

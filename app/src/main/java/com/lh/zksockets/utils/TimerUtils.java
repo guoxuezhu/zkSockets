@@ -495,7 +495,6 @@ public class TimerUtils {
                     KaijiTimer.cancel();
                     KaijiTimer = null;
                 }
-                qitacaozuo();
             }
         }, 5 * 1000);
 
