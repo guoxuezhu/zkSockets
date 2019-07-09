@@ -69,8 +69,6 @@
             android:name=".ui.DoorSetingActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <service android:name=".SocketService" />
-
         <activity
             android:name=".ui.BaseSetingActivity"
             android:windowSoftInputMode="stateHidden" />
