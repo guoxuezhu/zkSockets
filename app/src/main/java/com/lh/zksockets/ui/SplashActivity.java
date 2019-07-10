@@ -20,6 +20,9 @@ import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,6 +35,7 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.login_password)
     EditText login_password;
 
+    private Timer stimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +43,34 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        SerialPortUtil.open();
-        SerialPortUtil.readMsg1();
-        SerialPortUtil.readMsg2();
+        stimer = new Timer();
+        stimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
 
-        jdqOpenStatus();
-        dangerOutStatus();
-        ioOutStatus();
-        NIOHttpServer.getInstance().startServer();
+                SerialPortUtil.open();
+                SerialPortUtil.readMsg1();
+                SerialPortUtil.readMsg2();
 
+                setSerialport();
+                jdqOpenStatus();
+                dangerOutStatus();
+                ioOutStatus();
 
-        setSerialport();
+                NIOHttpServer.getInstance().startServer();
 
-        TimerUtils.setWenshiduTimer();
-        HttpUtil.setLuboTokenTimer();
-        TimerUtils.setKaijiTimer();
-        TimerUtils.setDuandianTimer();
-        SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
+                TimerUtils.setWenshiduTimer();
+                HttpUtil.setLuboTokenTimer();
+                TimerUtils.setKaijiTimer();
+                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
+                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
 
-        mqttServiceStart();
+                mqttServiceStart();
+
+                stimer.cancel();
+            }
+        }, 500);
+
     }
 
     private void mqttServiceStart() {

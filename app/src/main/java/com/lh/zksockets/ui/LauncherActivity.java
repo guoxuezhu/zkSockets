@@ -26,7 +26,7 @@ public class LauncherActivity extends BaseActivity {
                 startActivity(new Intent(LauncherActivity.this, SplashActivity.class));
                 timer.cancel();
             }
-        }, 1000);
+        }, 1500);
     }
 
     @Override

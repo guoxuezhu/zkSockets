@@ -1,6 +1,5 @@
 package com.lh.zksockets.service;
 
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -45,22 +44,21 @@ public class MyMqttService extends Service {
     public String USERNAME = "";//用户名 uc5xuva/admin
     public String PASSWORD = "";//密码 aYBMf7Ci9eCKkx57
     public static String PUBLISH_TOPIC = "";//发布主题
-//    public static String RESPONSE_TOPIC = "message_arrived";//响应主题
 
     public String CLIENTID = "";//客户端ID，一般以客户端唯一标识符表示，这里用设备序列号表示
     private static MqttClient mqttClient;
     private Timer mqttTimer;
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        init();
-        return super.onStartCommand(intent, flags, startId);
-    }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        CreateTimer();
     }
 
     /**
@@ -83,17 +81,29 @@ public class MyMqttService extends Service {
         }
     }
 
-    public static void stopMqtt(Context mContext) {
-        if (mqttClient != null) {
-            if (mqttClient.isConnected()) {
-                try {
-                    mqttClient.unsubscribe(PUBLISH_TOPIC);
-                } catch (MqttException e) {
-                    e.printStackTrace();
+
+    private void CreateTimer() {
+        if (mqttTimer != null) {
+            mqttTimer.cancel();
+            mqttTimer = null;
+        }
+        mqttTimer = new Timer();
+        mqttTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (mqttClient != null) {
+                    ELog.d("=========mqttTimer==========" + mqttClient.isConnected());
+                    if (!mqttClient.isConnected()) {
+                        init();
+                    }
+                } else {
+                    ELog.d("=========mqttTimer======init====");
+                    init();
                 }
             }
-        }
+        }, 0, 1000 * 30);
     }
+
 
     /**
      * 初始化
@@ -148,24 +158,6 @@ public class MyMqttService extends Service {
     }
 
 
-    private void CreateTimer() {
-        if (mqttTimer != null) {
-            mqttTimer.cancel();
-            mqttTimer = null;
-        }
-        mqttTimer = new Timer();
-        mqttTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                ELog.d("=========mqttTimer==========" + mqttClient.isConnected());
-                if (!mqttClient.isConnected()) {
-                    init();
-                }
-            }
-        }, 0, 1000 * 30);
-    }
-
-
     /**
      * 连接MQTT服务器
      */
@@ -177,10 +169,9 @@ public class MyMqttService extends Service {
                 ELog.i("============mqtt===连接MQTT服务器===ok======");
                 mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 ELog.i("============mqtt===订阅主题==ok=======");
-                CreateTimer();
             } catch (MqttException e) {
                 e.printStackTrace();
-                ELog.i("============mqtt=====MqttException=======");
+                ELog.i("============mqtt=====MqttException=======" + e.toString());
             }
         }
     }
@@ -197,15 +188,6 @@ public class MyMqttService extends Service {
             return true;
         } else {
             ELog.i("=======mqtt==没有可用网络");
-//            Toast.makeText(getApplicationContext(), "没有可用网络", Toast.LENGTH_LONG).show();
-
-//            /*没有可用网络的时候，延迟3秒再尝试重连*/
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    doClientConnection();
-//                }
-//            }, 1000 * 60);
             return false;
         }
     }
@@ -237,11 +219,6 @@ public class MyMqttService extends Service {
                 }
             }
 
-//            ELog.i("=========收到消息： =====" + new String(message.getPayload()));
-            //收到消息，这里弹出Toast表示。如果需要更新UI，可以使用广播或者EventBus进行发送
-//            Toast.makeText(getApplicationContext(), "messageArrived: " + new String(message.getPayload()), Toast.LENGTH_LONG).show();
-            //收到其他客户端的消息后，响应给对方告知消息已到达或者消息有问题等
-//            response("message arrived");
         }
 
         @Override
@@ -254,6 +231,20 @@ public class MyMqttService extends Service {
             ELog.i("=====mqtt====连接断开==========" + mqttClient.isConnected());
         }
     };
+
+
+    public static void stopMqtt(Context mContext) {
+        if (mqttClient != null) {
+            if (mqttClient.isConnected()) {
+                try {
+                    mqttClient.unsubscribe(PUBLISH_TOPIC);
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onDestroy() {
