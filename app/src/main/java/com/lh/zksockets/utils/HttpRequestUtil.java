@@ -253,7 +253,7 @@ public class HttpRequestUtil {
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() == 0) {
             baseInfoDao.insert(new BaseInfo("", "",
-                    "", java.util.UUID.randomUUID().toString()));
+                    "", java.util.UUID.randomUUID().toString(), 0));
         }
         return gson.toJson(new HttpResult("200", "", true, baseInfoDao.loadAll().get(0)));
     }

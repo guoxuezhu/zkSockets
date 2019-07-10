@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
+import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
@@ -48,6 +49,7 @@ public class MyMqttService extends Service {
     public String CLIENTID = "";//客户端ID，一般以客户端唯一标识符表示，这里用设备序列号表示
     private static MqttClient mqttClient;
     private Timer mqttTimer;
+    private BaseInfoDao baseInfoDao;
 
     @Nullable
     @Override
@@ -58,6 +60,7 @@ public class MyMqttService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         CreateTimer();
     }
 
@@ -110,7 +113,6 @@ public class MyMqttService extends Service {
      */
     private void init() {
 
-        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
         USERNAME = baseInfoDao.loadAll().get(0).mqttuser;
         PASSWORD = baseInfoDao.loadAll().get(0).mqttpassword;
@@ -169,7 +171,21 @@ public class MyMqttService extends Service {
                 ELog.i("============mqtt===连接MQTT服务器===ok======");
                 mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 ELog.i("============mqtt===订阅主题==ok=======");
+                BaseInfo baseInfo = new BaseInfo(baseInfoDao.loadAll().get(0).classRoom,
+                        baseInfoDao.loadAll().get(0).mqttuser,
+                        baseInfoDao.loadAll().get(0).mqttpassword,
+                        baseInfoDao.loadAll().get(0).uuid,
+                        1);
+                baseInfoDao.deleteAll();
+                baseInfoDao.insert(baseInfo);
             } catch (MqttException e) {
+                BaseInfo baseInfo = new BaseInfo(baseInfoDao.loadAll().get(0).classRoom,
+                        baseInfoDao.loadAll().get(0).mqttuser,
+                        baseInfoDao.loadAll().get(0).mqttpassword,
+                        baseInfoDao.loadAll().get(0).uuid,
+                        4);
+                baseInfoDao.deleteAll();
+                baseInfoDao.insert(baseInfo);
                 e.printStackTrace();
                 ELog.i("============mqtt=====MqttException=======" + e.toString());
             }

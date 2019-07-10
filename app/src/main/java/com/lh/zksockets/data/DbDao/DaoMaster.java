@@ -25,6 +25,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
         DangerOutDao.createTable(db, ifNotExists);
+        DoorInfoDao.createTable(db, ifNotExists);
         EventBigDao.createTable(db, ifNotExists);
         EventKejianRestDao.createTable(db, ifNotExists);
         EventShangkeDao.createTable(db, ifNotExists);
@@ -42,7 +43,6 @@ public class DaoMaster extends AbstractDaoMaster {
         UsersDao.createTable(db, ifNotExists);
         WenShiDuDao.createTable(db, ifNotExists);
         ZkInfoDao.createTable(db, ifNotExists);
-        DoorInfoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -51,6 +51,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
         DangerOutDao.dropTable(db, ifExists);
+        DoorInfoDao.dropTable(db, ifExists);
         EventBigDao.dropTable(db, ifExists);
         EventKejianRestDao.dropTable(db, ifExists);
         EventShangkeDao.dropTable(db, ifExists);
@@ -68,7 +69,6 @@ public class DaoMaster extends AbstractDaoMaster {
         UsersDao.dropTable(db, ifExists);
         WenShiDuDao.dropTable(db, ifExists);
         ZkInfoDao.dropTable(db, ifExists);
-        DoorInfoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -91,6 +91,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
         registerDaoClass(DangerOutDao.class);
+        registerDaoClass(DoorInfoDao.class);
         registerDaoClass(EventBigDao.class);
         registerDaoClass(EventKejianRestDao.class);
         registerDaoClass(EventShangkeDao.class);
@@ -108,7 +109,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(UsersDao.class);
         registerDaoClass(WenShiDuDao.class);
         registerDaoClass(ZkInfoDao.class);
-        registerDaoClass(DoorInfoDao.class);
     }
 
     public DaoSession newSession() {

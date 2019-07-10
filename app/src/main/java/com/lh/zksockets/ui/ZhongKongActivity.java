@@ -27,6 +27,8 @@ public class ZhongKongActivity extends BaseActivity {
 
     @BindView(R.id.et_yc_deviceId)
     TextView et_yc_deviceId;
+    @BindView(R.id.et_yc_mqtt_status)
+    TextView et_yc_mqtt_status;
 
     private BaseInfoDao baseInfoDao;
 
@@ -38,17 +40,20 @@ public class ZhongKongActivity extends BaseActivity {
 
         baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() == 0) {
-            et_yc_weizhi.setText("");
-            et_mqtt_user.setText("");
-            et_mqtt_mima.setText("");
-            et_yc_deviceId.setText(java.util.UUID.randomUUID().toString());
-        } else {
-            et_yc_weizhi.setText(baseInfoDao.loadAll().get(0).classRoom);
-            et_mqtt_user.setText(baseInfoDao.loadAll().get(0).mqttuser);
-            et_mqtt_mima.setText(baseInfoDao.loadAll().get(0).mqttpassword);
-            et_yc_deviceId.setText(baseInfoDao.loadAll().get(0).uuid);
+            baseInfoDao.insert(new BaseInfo("", "",
+                    "", java.util.UUID.randomUUID().toString(), 0));
         }
-
+        et_yc_weizhi.setText(baseInfoDao.loadAll().get(0).classRoom);
+        et_mqtt_user.setText(baseInfoDao.loadAll().get(0).mqttuser);
+        et_mqtt_mima.setText(baseInfoDao.loadAll().get(0).mqttpassword);
+        et_yc_deviceId.setText(baseInfoDao.loadAll().get(0).uuid);
+        if (baseInfoDao.loadAll().get(0).status == 0) {
+            et_yc_mqtt_status.setText("断开");
+            et_yc_mqtt_status.setTextColor(getResources().getColor(R.color.user_icon_8));
+        } else {
+            et_yc_mqtt_status.setText("在线");
+            et_yc_mqtt_status.setTextColor(getResources().getColor(R.color.profile_badge_3));
+        }
     }
 
 
@@ -79,7 +84,7 @@ public class ZhongKongActivity extends BaseActivity {
         }
 
         BaseInfo baseInfo = new BaseInfo(et_yc_weizhi.getText().toString().trim(), et_mqtt_user.getText().toString().trim(),
-                et_mqtt_mima.getText().toString().trim(), et_yc_deviceId.getText().toString().trim());
+                et_mqtt_mima.getText().toString().trim(), et_yc_deviceId.getText().toString().trim(), baseInfoDao.loadAll().get(0).status);
         baseInfoDao.deleteAll();
         baseInfoDao.insert(baseInfo);
         MyMqttService.startService(this); //开启服务

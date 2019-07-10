@@ -427,7 +427,7 @@ public class NetStatusActivity extends BaseActivity {
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() == 0) {
             baseInfoDao.insert(new BaseInfo("101", "uc5xuva/admin",
-                    "aYBMf7Ci9eCKkx57", java.util.UUID.randomUUID().toString()));
+                    "aYBMf7Ci9eCKkx57", java.util.UUID.randomUUID().toString(), 0));
         }
 
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();

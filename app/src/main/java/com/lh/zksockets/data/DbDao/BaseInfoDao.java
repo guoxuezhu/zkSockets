@@ -28,6 +28,7 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
         public final static Property Mqttuser = new Property(1, String.class, "mqttuser", false, "MQTTUSER");
         public final static Property Mqttpassword = new Property(2, String.class, "mqttpassword", false, "MQTTPASSWORD");
         public final static Property Uuid = new Property(3, String.class, "uuid", false, "UUID");
+        public final static Property Status = new Property(4, int.class, "status", false, "STATUS");
     }
 
 
@@ -46,7 +47,8 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
                 "\"CLASS_ROOM\" TEXT," + // 0: classRoom
                 "\"MQTTUSER\" TEXT," + // 1: mqttuser
                 "\"MQTTPASSWORD\" TEXT," + // 2: mqttpassword
-                "\"UUID\" TEXT);"); // 3: uuid
+                "\"UUID\" TEXT," + // 3: uuid
+                "\"STATUS\" INTEGER NOT NULL );"); // 4: status
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,7 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
         if (uuid != null) {
             stmt.bindString(4, uuid);
         }
+        stmt.bindLong(5, entity.getStatus());
     }
 
     @Override
@@ -103,6 +106,7 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
         if (uuid != null) {
             stmt.bindString(4, uuid);
         }
+        stmt.bindLong(5, entity.getStatus());
     }
 
     @Override
@@ -116,7 +120,8 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // classRoom
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mqttuser
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // mqttpassword
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // uuid
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // uuid
+            cursor.getInt(offset + 4) // status
         );
         return entity;
     }
@@ -127,6 +132,7 @@ public class BaseInfoDao extends AbstractDao<BaseInfo, Void> {
         entity.setMqttuser(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setMqttpassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUuid(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setStatus(cursor.getInt(offset + 4));
      }
     
     @Override
