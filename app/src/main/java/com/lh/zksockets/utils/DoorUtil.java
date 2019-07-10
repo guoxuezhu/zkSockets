@@ -42,34 +42,37 @@ public class DoorUtil {
         byte content[] = null;
         DatagramSocket datagramSocket = null;
         try {
-            ELog.i("=====0000000===========");
+            ELog.i("=======opendoor=====0000000===========");
             datagramSocket = new DatagramSocket();
             DatagramPacket dp = new DatagramPacket(byteCmd, byteCmd.length);
             dp.setSocketAddress(new InetSocketAddress(IP, 60000));
+            ELog.i("=======opendoor=====222222===========");
             datagramSocket.send(dp);//发送一条信息
+            ELog.i("=======opendoor=====333333===========");
 
-
-            byte recvDataByte[] = new byte[64];
-
-            Thread.sleep(200);
-            DatagramPacket dataPacket = new DatagramPacket(recvDataByte, recvDataByte.length);
-            datagramSocket.receive(dataPacket);
-
-            content = dataPacket.getData();
-            ELog.i("========content=======" + content);
+//            byte recvDataByte[] = new byte[64];
+//
+//            Thread.sleep(200);
+//            DatagramPacket dataPacket = new DatagramPacket(recvDataByte, recvDataByte.length);
+//            ELog.i("=======opendoor=====44444444===========");
+//            datagramSocket.receive(dataPacket);
+//            ELog.i("=======opendoor=====555555555===========");
+//
+//            content = dataPacket.getData();
+//            ELog.i("=====opendoor===content=======" + content);
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
-            ELog.i("======UnknownHostException===========");
+            ELog.i("=======opendoor====UnknownHostException===========");
         } catch (SocketException e) {
             e.printStackTrace();
-            ELog.i("======SocketException===========");
+            ELog.i("=======opendoor====SocketException===========");
         } catch (IOException e) {
             e.printStackTrace();
-            ELog.i("======IOException===========");
+            ELog.i("======opendoor=====IOException===========");
         } catch (Exception e) {
             e.printStackTrace();
-            ELog.i("======Exception===========");
+            ELog.i("=======opendoor====Exception===========");
         } finally {
             if (datagramSocket != null) {
                 datagramSocket.close();
