@@ -433,7 +433,7 @@ public class NetStatusActivity extends BaseActivity {
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
 
         if (doorInfoDao.loadAll().size() == 0) {
-            doorInfoDao.insert(new DoorInfo("192.168.11.66", "101-前门", 1));
+            doorInfoDao.insert(new DoorInfo("192.168.11.66", "101-前门", 0));
         }
 
         Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();

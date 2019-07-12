@@ -76,7 +76,10 @@ public class SplashActivity extends BaseActivity {
     private void mqttServiceStart() {
         BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         if (baseInfoDao.loadAll().size() != 0) {
-            MyMqttService.startService(this); //开启服务
+            if (!baseInfoDao.loadAll().get(0).classRoom.equals("") && !baseInfoDao.loadAll().get(0).mqttuser.equals("")
+                    && !baseInfoDao.loadAll().get(0).mqttpassword.equals("")) {
+                MyMqttService.startService(this); //开启服务
+            }
         }
     }
 
