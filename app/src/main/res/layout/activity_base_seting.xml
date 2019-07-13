@@ -311,6 +311,14 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="中控名称 设置必须保证与别的学校不同，并且容易记住，作为远程控制连接"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_24" />
+
             <Button
                 android:id="@+id/btn_baseset_ok"
                 android:layout_width="300dp"

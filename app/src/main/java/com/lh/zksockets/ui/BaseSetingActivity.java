@@ -53,11 +53,18 @@ public class BaseSetingActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             et_classRoom.setText("");
             uuid = java.util.UUID.randomUUID().toString();
+            rbtn_mqtt_no.setChecked(true);
         } else {
             et_classRoom.setText(zkInfoDao.loadAll().get(0).zkname);
             uuid = zkInfoDao.loadAll().get(0).uuid;
+            if (zkInfoDao.loadAll().get(0).ismqttStart == 1) {
+                rbtn_mqtt_ok.setChecked(true);
+            } else {
+                rbtn_mqtt_no.setChecked(true);
+            }
         }
-        rbtn_mqtt_ok.setChecked(true);
+
+
     }
 
     @OnClick(R.id.btn_baseset_ok)

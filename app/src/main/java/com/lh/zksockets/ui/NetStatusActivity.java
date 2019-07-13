@@ -15,6 +15,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.IOYuan;
@@ -24,6 +25,7 @@ import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.SerialPortUtil;
 
 import butterknife.ButterKnife;
@@ -428,6 +430,12 @@ public class NetStatusActivity extends BaseActivity {
         if (baseInfoDao.loadAll().size() == 0) {
             baseInfoDao.insert(new BaseInfo("101", "uc5xuva/admin",
                     "aYBMf7Ci9eCKkx57", java.util.UUID.randomUUID().toString(), 0));
+        }
+
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            zkInfoDao.insert(new ZkInfo("lh101", "0.0.0.0", "1.0.1",
+                    "1", 0, java.util.UUID.randomUUID().toString(), 0));
         }
 
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();

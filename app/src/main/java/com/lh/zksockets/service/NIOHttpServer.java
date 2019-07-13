@@ -68,6 +68,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataLuboInfo(request));
                 } else if (request.getPath().equals("/api/updataMqttInfo")) {
                     response.send(HttpRequestUtil.updataMqttInfo(request));
+                } else if (request.getPath().equals("/api/updataZKbaseInfo")) {
+                    response.send(HttpRequestUtil.updataZkBaseInfo(request));
                 } else if (request.getPath().equals("/api/updataIoOutInfo")) {
                     response.send(HttpRequestUtil.updataIoOutInfo(request));
                 } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
@@ -92,6 +94,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getLuboList(request));
                 } else if (request.getPath().equals("/api/mqttInfo")) {
                     response.send(HttpRequestUtil.getMqttinfo(request));
+                } else if (request.getPath().equals("/api/zkBaseInfo")) {
+                    response.send(HttpRequestUtil.getZkBaseInfo(request));
                 } else if (request.getPath().equals("/api/iooutInfo")) {
                     response.send(HttpRequestUtil.getIoOutinfo(request));
                 } else if (request.getPath().equals("/api/dangerOutInfo")) {

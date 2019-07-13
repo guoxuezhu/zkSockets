@@ -17,6 +17,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpResult;
@@ -29,6 +30,7 @@ import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.ZkInfo;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -263,6 +265,24 @@ public class HttpRequestUtil {
         BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
         baseInfoDao.deleteAll();
         baseInfoDao.insert(baseInfo);
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+
+    public static String getZkBaseInfo(AsyncHttpServerRequest request) {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            zkInfoDao.insert(new ZkInfo("", "0.0.0.0", "1.0.1",
+                    "1", 0, java.util.UUID.randomUUID().toString(), 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, zkInfoDao.loadAll().get(0)));
+    }
+
+    public static String updataZkBaseInfo(AsyncHttpServerRequest request) {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        ZkInfo zkInfo = gson.fromJson(request.getQuery().getString("zkbaseInfoData"), ZkInfo.class);
+        zkInfoDao.deleteAll();
+        zkInfoDao.insert(zkInfo);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
