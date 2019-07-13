@@ -52,10 +52,12 @@ public class BaseSetingActivity extends BaseActivity {
         zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             et_classRoom.setText("");
+            et_vid_num.setText("0");
             uuid = java.util.UUID.randomUUID().toString();
             rbtn_mqtt_no.setChecked(true);
         } else {
             et_classRoom.setText(zkInfoDao.loadAll().get(0).zkname);
+            et_vid_num.setText(zkInfoDao.loadAll().get(0).hudongVIDnum + "");
             uuid = zkInfoDao.loadAll().get(0).uuid;
             if (zkInfoDao.loadAll().get(0).ismqttStart == 1) {
                 rbtn_mqtt_ok.setChecked(true);
@@ -79,8 +81,8 @@ public class BaseSetingActivity extends BaseActivity {
         }
         zkInfoDao.deleteAll();
         if (rbtn_mqtt_ok.isChecked()) {
-            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
-                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), 0, uuid, 1));
+            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
+                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 1));
         } else {
             zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
                     tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 0));
