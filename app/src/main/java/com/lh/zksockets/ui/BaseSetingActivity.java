@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,14 @@ public class BaseSetingActivity extends BaseActivity {
     TextView tv_zkDeviceName;
     @BindView(R.id.et_vid_num)
     EditText et_vid_num;
+
+    @BindView(R.id.rbtn_mqtt_ok)
+    RadioButton rbtn_mqtt_ok;
+    @BindView(R.id.rbtn_mqtt_no)
+    RadioButton rbtn_mqtt_no;
+
     private ZkInfoDao zkInfoDao;
+    private String uuid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +52,31 @@ public class BaseSetingActivity extends BaseActivity {
         zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             et_classRoom.setText("");
+            uuid = java.util.UUID.randomUUID().toString();
         } else {
             et_classRoom.setText(zkInfoDao.loadAll().get(0).zkname);
+            uuid = zkInfoDao.loadAll().get(0).uuid;
         }
+        rbtn_mqtt_ok.setChecked(true);
     }
 
     @OnClick(R.id.btn_baseset_ok)
     public void btn_baseset_ok() {
-        zkInfoDao.deleteAll();
+        if (et_classRoom.getText().toString().equals("")) {
+            Toast.makeText(this, "请输入中控名称", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (et_vid_num.getText().toString().equals("")) {
+            Toast.makeText(this, "请输入显示屏个数", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        zkInfoDao.deleteAll();
+        if (rbtn_mqtt_ok.isChecked()) {
             zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
-                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), 0));
+                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), 0, uuid, 1));
         } else {
-            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(),
-                    tv_zkVersionName.getText().toString(), tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString())));
+            zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
+                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 0));
         }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

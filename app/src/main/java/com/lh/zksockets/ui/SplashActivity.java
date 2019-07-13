@@ -12,6 +12,7 @@ import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
@@ -74,12 +75,10 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void mqttServiceStart() {
-        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-        if (baseInfoDao.loadAll().size() != 0) {
-            if (!baseInfoDao.loadAll().get(0).classRoom.equals("") && !baseInfoDao.loadAll().get(0).mqttuser.equals("")
-                    && !baseInfoDao.loadAll().get(0).mqttpassword.equals("")) {
-                MyMqttService.startService(this); //开启服务
-            }
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() != 0 && zkInfoDao.loadAll().get(0).ismqttStart == 1) {
+            ELog.d("=======SplashActivity==mqtt开启服务==========" + zkInfoDao.loadAll().get(0).zkname);
+            MyMqttService.startService(this); //开启服务
         }
     }
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
@@ -42,14 +43,13 @@ public class MyMqttService extends Service {
 
     private MqttConnectOptions mMqttConnectOptions;
     public String HOST = "wss://uc5xuva.mqtt.iot.gz.baidubce.com:8884/mqtt";//服务器地址（协议+地址+端口号）
-    public String USERNAME = "";//用户名 uc5xuva/admin
-    public String PASSWORD = "";//密码 aYBMf7Ci9eCKkx57
+    public String USERNAME = "uc5xuva/admin";//用户名 uc5xuva/admin
+    public String PASSWORD = "aYBMf7Ci9eCKkx57";//密码 aYBMf7Ci9eCKkx57
     public static String PUBLISH_TOPIC = "";//发布主题
 
     public String CLIENTID = "";//客户端ID，一般以客户端唯一标识符表示，这里用设备序列号表示
     private static MqttClient mqttClient;
     private Timer mqttTimer;
-    private BaseInfoDao baseInfoDao;
 
     @Nullable
     @Override
@@ -60,7 +60,6 @@ public class MyMqttService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
         CreateTimer();
     }
 
@@ -68,20 +67,21 @@ public class MyMqttService extends Service {
      * 开启服务
      */
     public static void startService(Context mContext) {
-        if (mqttClient != null) {
-            if (mqttClient.isConnected()) {
-                BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-                try {
-                    mqttClient.unsubscribe(PUBLISH_TOPIC);
-                    PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
-                    mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
-                } catch (MqttException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            mContext.startService(new Intent(mContext, MyMqttService.class));
-        }
+        mContext.startService(new Intent(mContext, MyMqttService.class));
+//        if (mqttClient != null) {
+//            if (mqttClient.isConnected()) {
+//                BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+//                try {
+//                    mqttClient.unsubscribe(PUBLISH_TOPIC);
+//                    PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
+//                    mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
+//                } catch (MqttException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } else {
+//            mContext.startService(new Intent(mContext, MyMqttService.class));
+//        }
     }
 
 
@@ -112,12 +112,9 @@ public class MyMqttService extends Service {
      * 初始化
      */
     private void init() {
-
-        PUBLISH_TOPIC = "lhzktopic/device" + baseInfoDao.loadAll().get(0).classRoom;
-        USERNAME = baseInfoDao.loadAll().get(0).mqttuser;
-        PASSWORD = baseInfoDao.loadAll().get(0).mqttpassword;
-        CLIENTID = baseInfoDao.loadAll().get(0).uuid;
-
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        PUBLISH_TOPIC = "lhzktopic/device" + zkInfoDao.loadAll().get(0).zkname;
+        CLIENTID = zkInfoDao.loadAll().get(0).uuid;
         String tmpDir = System.getProperty("java.io.tmpdir");
         MqttDefaultFilePersistence dataStore = new MqttDefaultFilePersistence(tmpDir);
 
@@ -171,21 +168,7 @@ public class MyMqttService extends Service {
                 ELog.i("============mqtt===连接MQTT服务器===ok======");
                 mqttClient.subscribe(PUBLISH_TOPIC, 0);//订阅主题，参数：主题、服务质量
                 ELog.i("============mqtt===订阅主题==ok=======");
-                BaseInfo baseInfo = new BaseInfo(baseInfoDao.loadAll().get(0).classRoom,
-                        baseInfoDao.loadAll().get(0).mqttuser,
-                        baseInfoDao.loadAll().get(0).mqttpassword,
-                        baseInfoDao.loadAll().get(0).uuid,
-                        1);
-                baseInfoDao.deleteAll();
-                baseInfoDao.insert(baseInfo);
             } catch (MqttException e) {
-                BaseInfo baseInfo = new BaseInfo(baseInfoDao.loadAll().get(0).classRoom,
-                        baseInfoDao.loadAll().get(0).mqttuser,
-                        baseInfoDao.loadAll().get(0).mqttpassword,
-                        baseInfoDao.loadAll().get(0).uuid,
-                        4);
-                baseInfoDao.deleteAll();
-                baseInfoDao.insert(baseInfo);
                 e.printStackTrace();
                 ELog.i("============mqtt=====MqttException=======" + e.toString());
             }
