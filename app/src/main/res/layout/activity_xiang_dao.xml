@@ -44,7 +44,7 @@
             android:background="@drawable/layout_tuobu_bg"
             android:gravity="center"
             android:padding="@dimen/dp_6"
-            android:text="中控主机"
+            android:text="主机"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_20" />
 

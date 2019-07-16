@@ -321,7 +321,7 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", "", ""));
             mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", "", ""));
             mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 45, "中控开机", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "", ""));
@@ -518,7 +518,7 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 42, "空调-风向", event_et_42.getText().toString(), event_tv_time_42.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 43, "空调-温度+", event_et_43.getText().toString(), event_tv_time_43.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 44, "空调-温度-", event_et_44.getText().toString(), event_tv_time_44.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 45, "中控开机", event_et_45.getText().toString(), event_tv_time_45.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 45, "开机", event_et_45.getText().toString(), event_tv_time_45.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_46.getText().toString(), event_tv_time_46.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_47.getText().toString(), event_tv_time_47.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 48, "空调-关", event_et_48.getText().toString(), event_tv_time_48.getText().toString()));

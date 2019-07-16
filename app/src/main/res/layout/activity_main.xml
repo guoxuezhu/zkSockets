@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn_img_1"
-                    android:text="中控信息"
+                    android:text="基本信息"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 

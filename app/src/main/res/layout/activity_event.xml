@@ -2109,7 +2109,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="中控开机"
+                    android:text="开机"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

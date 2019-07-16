@@ -72,7 +72,7 @@ public class BaseSetingActivity extends BaseActivity {
     @OnClick(R.id.btn_baseset_ok)
     public void btn_baseset_ok() {
         if (et_classRoom.getText().toString().equals("")) {
-            Toast.makeText(this, "请输入中控名称", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入设备名称", Toast.LENGTH_SHORT).show();
             return;
         }
         if (et_vid_num.getText().toString().equals("")) {

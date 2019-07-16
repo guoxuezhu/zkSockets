@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="基本设置"
+            android:text="基本信息"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
-                android:text="中控名称 设置必须保证与别的学校不同，并且容易记住，作为远程控制连接"
+                android:text="设备名称 设置必须保证与别的学校不同，并且容易记住，作为远程控制连接"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_20" />
 
@@ -62,7 +62,7 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="中控名称:"
+                    android:text="设备名称:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
@@ -197,7 +197,7 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="中控版本:"
+                    android:text="系统版本:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 

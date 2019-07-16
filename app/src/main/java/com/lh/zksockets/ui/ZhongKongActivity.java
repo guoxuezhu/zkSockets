@@ -70,7 +70,7 @@ public class ZhongKongActivity extends BaseActivity {
     @OnClick(R.id.btn_zkyc_ok)
     public void btn_zkyc_ok() {
         if (et_yc_weizhi.getText().toString().trim().length() == 0) {
-            Toast.makeText(this, "请输入中控位置", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入设备名称", Toast.LENGTH_SHORT).show();
             return;
         }
         if (et_mqtt_user.getText().toString().trim().length() == 0) {

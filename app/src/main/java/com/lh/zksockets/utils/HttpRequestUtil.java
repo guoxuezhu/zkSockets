@@ -156,7 +156,7 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", "", ""));
             mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", "", ""));
             mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 45, "中控开机", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "", ""));
@@ -347,7 +347,7 @@ public class HttpRequestUtil {
                         SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
                     } catch (Exception e) {
                         ELog.i("============Long.valueOf==异常========" + e.toString());
-                        return gson.toJson(new HttpResult("-101", "中控命令格式错误", false, null));
+                        return gson.toJson(new HttpResult("-101", "命令格式错误", false, null));
                     }
                 }
             } catch (Exception e) {
@@ -355,7 +355,7 @@ public class HttpRequestUtil {
             }
             return gson.toJson(new HttpResult("200", "", true, null));
         } else {
-            return gson.toJson(new HttpResult("-200", "中控命令格式错误", false, null));
+            return gson.toJson(new HttpResult("-200", "命令格式错误", false, null));
         }
 
     }
