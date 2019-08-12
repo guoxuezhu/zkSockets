@@ -61,7 +61,7 @@
                 android:background="@drawable/login_et_bg"
                 android:drawableLeft="@drawable/mima"
                 android:drawablePadding="@dimen/dp_10"
-                android:hint="请输入管理员帐号"
+                android:hint="请输入管理员密码"
                 android:paddingLeft="@dimen/dp_10"
                 android:inputType="textPassword"
                 android:text=""
