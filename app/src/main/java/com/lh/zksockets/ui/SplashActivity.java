@@ -60,11 +60,11 @@ public class SplashActivity extends BaseActivity {
 
                 NIOHttpServer.getInstance().startServer();
 
-                TimerUtils.setWenshiduTimer();
-                HttpUtil.setLuboTokenTimer();
+//                TimerUtils.setWenshiduTimer();
+//                HttpUtil.setLuboTokenTimer();
                 TimerUtils.setKaijiTimer();
-                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
-                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
+//                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
+//                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<1,3;2,4;3,5;4,6;5,7;6,8;7,9;8,1;9,2>}".getBytes());
 
                 mqttServiceStart();
 
