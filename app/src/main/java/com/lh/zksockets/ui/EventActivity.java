@@ -334,8 +334,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "", ""));
             mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "", ""));
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "新风开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "新风关", "", ""));
 //            mLsListsDao.insert(new MLsLists((long) 60, "其它", "", ""));
         }
 
@@ -531,8 +531,8 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 55, "电视机4", event_et_55.getText().toString(), event_tv_time_55.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 56, "电视机5", event_et_56.getText().toString(), event_tv_time_56.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 57, "电视机6", event_et_57.getText().toString(), event_tv_time_57.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 58, "电视机7", event_et_58.getText().toString(), event_tv_time_58.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 59, "电视机8", event_et_59.getText().toString(), event_tv_time_59.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 58, "新风开", event_et_58.getText().toString(), event_tv_time_58.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 59, "新风关", event_et_59.getText().toString(), event_tv_time_59.getText().toString()));
 //        mLsListsDao.update(new MLsLists((long) 60, "其它", event_et_60.getText().toString(), event_tv_time_60.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
