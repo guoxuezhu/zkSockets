@@ -385,8 +385,14 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
             mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 60, "其它", "", ""));
-
+            mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "", ""));
         }
 
 

@@ -156,7 +156,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="自习"
+                    android:text="窗帘开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -202,7 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="休息"
+                    android:text="窗帘关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -617,7 +617,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光1开"
+                    android:text="灯光开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -664,7 +664,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光1关"
+                    android:text="灯光关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -711,7 +711,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光2开"
+                    android:text="灯光1开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -758,7 +758,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光2关"
+                    android:text="灯光1关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -805,7 +805,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光3开"
+                    android:text="灯光2开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -852,7 +852,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光3关"
+                    android:text="灯光2关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -898,7 +898,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光4开"
+                    android:text="灯光3开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -945,7 +945,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光4关"
+                    android:text="灯光3关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1546,7 +1546,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="录播-录制"
+                    android:text="新风-自动"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1593,7 +1593,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="录播-暂停"
+                    android:text="新风-低速"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1640,7 +1640,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="录播-停止"
+                    android:text="新风-中速"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1687,7 +1687,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="录播-直播"
+                    android:text="新风-高速"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1875,7 +1875,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-模式"
+                    android:text="空调-关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1922,7 +1922,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-风速"
+                    android:text="空调-自动"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -1968,7 +1968,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-风向"
+                    android:text="空调-制冷"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2015,7 +2015,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-温度+"
+                    android:text="空调-制热"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2062,7 +2062,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-温度-"
+                    android:text="空调-风速"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2248,7 +2248,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-关"
+                    android:text="空调-模式"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2716,7 +2716,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="新风开"
+                    android:text="电视机7"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2763,7 +2763,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="新风关"
+                    android:text="电视机8"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2793,7 +2793,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
                 android:layout_marginTop="@dimen/dp_10"
-                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView
@@ -2810,7 +2809,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="其它"
+                    android:text="新风开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2836,6 +2835,328 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="61"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="新风关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_61"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_61"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="62"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘3开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_62"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_62"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="63"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘3关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_63"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_63"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="64"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘4开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_64"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_64"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="65"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘4关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_65"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_65"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="66"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘5开"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_66"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_66"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="67"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="窗帘5关"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/event_tv_time_67"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="yyyy-MM-dd HH:mm:ss"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+                <EditText
+                    android:id="@+id/event_et_67"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="3-3-1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/evbtn_ok"
@@ -2847,8 +3168,6 @@
                 android:text="保存"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_20" />
-
-
 
 
         </LinearLayout>
