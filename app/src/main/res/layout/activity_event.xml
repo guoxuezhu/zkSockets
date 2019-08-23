@@ -711,7 +711,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光1开"
+                    android:text="灯光1开(关)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -805,7 +805,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光2开"
+                    android:text="灯光2开(关)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -898,7 +898,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光3开"
+                    android:text="灯光3开(关)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
