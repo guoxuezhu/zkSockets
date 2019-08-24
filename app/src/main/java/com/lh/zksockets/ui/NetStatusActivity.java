@@ -192,19 +192,21 @@ public class NetStatusActivity extends BaseActivity {
             serialCommandDao.insert(new SerialCommand(Long.valueOf("430"), 4, 30, "1-430", "", "", 16));
 
 
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("501"), 5, 1, "1-501", "空调-开", "7E07004433443314010088", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("502"), 5, 2, "1-502", "空调-关", "7E07004433443314020089", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("503"), 5, 3, "1-503", "23", "7E0700443344331403008A", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("504"), 5, 4, "1-504", "26", "7E0700443344331404008B", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("505"), 5, 5, "1-505", "模式", "7E0700443344331405008C", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("506"), 5, 6, "1-506", "风速", "7E0700443344331406008D", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("507"), 5, 7, "1-507", "", "7E0700443344331407008E", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("508"), 5, 8, "1-508", "", "7E0700443344331408008F", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("509"), 5, 9, "1-509", "电视机1", "7E07004433443314090090", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("510"), 5, 10, "1-510", "电视机2", "7E070044334433140A0091", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("511"), 5, 11, "1-511", "电视机3", "7E070044334433140B0092", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("512"), 5, 12, "1-512", "", "7E070044334433140C0093", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("513"), 5, 13, "1-513", "", "", 16));
+
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("501"), 5, 1, "1-501", "电视1", "7E07003433343314010068", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("502"), 5, 2, "1-502", "空调开关", "7E07003433343314020069", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("503"), 5, 3, "1-503", "空调开关", "7E0700343334331403006A", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("504"), 5, 4, "1-504", "空调自动", "7E0700343334331404006B", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("505"), 5, 5, "1-505", "灯A", "7E0700343334331405006C", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("506"), 5, 6, "1-506", "灯B", "7E0700343334331406006D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("507"), 5, 7, "1-507", "灯C", "7E0700343334331407006E", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("508"), 5, 8, "1-508", "灯D", "7E0700343334331408006F", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("509"), 5, 9, "1-509", "灯ON", "7E07003433343314090070", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("510"), 5, 10, "1-510", "灯OFF", "7E070034333433140A0071", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("511"), 5, 11, "1-511", "空调制冷", "7E070034333433120B0070", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("512"), 5, 12, "1-512", "电视Hisense", "7E070034333433140C0073", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("513"), 5, 13, "1-513", "电视KONKA", "7E070034333433140D0074", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("514"), 5, 14, "1-514", "", "", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("515"), 5, 15, "1-515", "", "", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("516"), 5, 16, "1-516", "", "", 16));
