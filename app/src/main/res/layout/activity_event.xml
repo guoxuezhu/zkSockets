@@ -3158,17 +3158,45 @@
             </LinearLayout>
 
 
-            <Button
-                android:id="@+id/evbtn_ok"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/dp_20"
-                android:background="@drawable/btn_bg"
-                android:text="保存"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/evbtn_ok"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="保存"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+                <Button
+                    android:id="@+id/btn_event_huifu"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:text="云恢复"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+                <Button
+                    android:id="@+id/btn_event_beifen"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:text="云备份"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

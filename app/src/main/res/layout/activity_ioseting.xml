@@ -48,7 +48,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="名称"
@@ -60,7 +60,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="IO口1"
@@ -72,7 +72,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="IO口2"
@@ -84,7 +84,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="IO口3"
@@ -96,7 +96,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="IO口4"
@@ -116,7 +116,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="绑定的设备"
@@ -129,7 +129,7 @@
 
             <EditText
                 android:id="@+id/io_et_devicename_1"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -144,7 +144,7 @@
 
             <EditText
                 android:id="@+id/io_et_devicename_2"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -158,7 +158,7 @@
 
             <EditText
                 android:id="@+id/io_et_devicename_3"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -172,7 +172,7 @@
 
             <EditText
                 android:id="@+id/io_et_devicename_4"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -194,7 +194,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="初始状态"
@@ -207,7 +207,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -230,7 +230,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -253,7 +253,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -276,7 +276,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -306,7 +306,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="时间(秒)"
@@ -319,7 +319,7 @@
 
             <EditText
                 android:id="@+id/io_et_time_1"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -335,7 +335,7 @@
 
             <EditText
                 android:id="@+id/io_et_time_2"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -350,7 +350,7 @@
 
             <EditText
                 android:id="@+id/io_et_time_3"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -365,7 +365,7 @@
 
             <EditText
                 android:id="@+id/io_et_time_4"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -379,16 +379,41 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_ioPort_ok"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/dp_20"
-        android:background="@drawable/btn_bg"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_20" />
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btn_ioPort_ok"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24" />
 
+        <Button
+            android:id="@+id/btn_ioPort_huifu"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="云恢复"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24" />
+
+        <Button
+            android:id="@+id/btn_ioPort_beifen"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="云备份"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24" />
+
+    </LinearLayout>
 </LinearLayout>

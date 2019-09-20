@@ -1,8 +1,9 @@
 package com.lh.zksockets.ui;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -13,10 +14,24 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.DisplayTools;
+import com.lh.zksockets.utils.ELog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class BaseSetingActivity extends BaseActivity {
 
@@ -38,6 +53,21 @@ public class BaseSetingActivity extends BaseActivity {
 
     private ZkInfoDao zkInfoDao;
     private String uuid;
+
+
+    private Handler baseHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 11:
+                    ELog.e("======baseHandler=====11====" + msg.obj.toString());
+                    break;
+
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +118,109 @@ public class BaseSetingActivity extends BaseActivity {
                     tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 0));
         }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+    }
+
+    private void httpdeviceget() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://lihong.h09.66571.com/api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+
+                    String data = jsonObject.getString("data");
+                    ELog.e("==========数据=======" + data);
+
+                    JSONObject jsonObjects = new JSONObject(data);
+
+                    ELog.e("==========数据=======" + jsonObjects);
+                    JSONArray ja = jsonObjects.getJSONArray("rows");
+                    ELog.e("==========数据=======" + ja);
+
+                    Message message = new Message();
+                    message.obj = data;
+                    message.what = 11;
+                    baseHandler.sendMessage(message);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    @OnClick(R.id.btn_baseset_tongbu)
+    public void btn_baseset_tongbu() {
+        httpdeviceget();
+    }
+
+
+    @OnClick(R.id.btn_baseset_beifen)
+    public void btn_baseset_beifen() {
+        httpdeviceadd();
+    }
+
+    private void httpdeviceadd() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder()
+//                .add("cate_id", "10023")
+//                .add("ip", DisplayTools.getIPAddress(this))
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
+                .add("title", zkInfoDao.loadAll().get(0).zkname)
+                .add("version", zkInfoDao.loadAll().get(0).zkVersion)
+                .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)
+                .add("video_num", zkInfoDao.loadAll().get(0).hudongVIDnum + "")
+                .add("show", zkInfoDao.loadAll().get(0).ismqttStart == 1 ? "on" : "off")
+//                .add("uuid", zkInfoDao.loadAll().get(0).uuid)
+                .build();
+
+
+        Request request = new Request.Builder()
+                .url("http://lihong.h09.66571.com/api/edit_center_set")
+                .post(requestBody)
+                .build();
+
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    ELog.e("==========数据=======" + jsonObject);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @OnClick(R.id.baseSet_btn_back)

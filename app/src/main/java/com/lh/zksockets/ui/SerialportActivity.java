@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.SelectAdapter;
@@ -18,16 +19,31 @@ import com.lh.zksockets.adapter.SerialportAdapter;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
+import com.lh.zksockets.data.model.SerialResult;
+import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.SerialPortUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SerialportActivity extends BaseActivity implements SerialportAdapter.CallBack {
 
@@ -312,6 +328,87 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.btn_sport_huifu)
+    public void btn_sport_huifu() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://lihong.h09.66571.com/api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("======串口====数据=======" + responseText);
+
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_sport_beifen)
+    public void btn_sport_beifen() {
+        List<SerialResult> serialResults = new ArrayList<SerialResult>();
+
+        for (int n = 1; n < 9; n++) {
+            List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
+                    .where(SerialCommandDao.Properties.SId.eq(n))
+                    .orderAsc(SerialCommandDao.Properties.MlId)
+                    .list();
+            serialResults.add(new SerialResult(serialPortDataDao.load(Long.valueOf(n)), serialCommands));
+        }
+
+        ELog.e("==========1111111=======" + serialResults.toString());
+
+        Gson gson = new Gson();
+        ELog.e("==========1111111=ss======" + gson.toJson(serialResults));
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("ip", DisplayTools.getIPAddress(this))
+                .add("serial", gson.toJson(serialResults))
+//                .add("show", zkInfoDao.loadAll().get(0).ismqttStart == 1 ? "on" : "off")
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://lihong.h09.66571.com/api/edit_serial_set")
+                .post(requestBody)
+                .build();
+
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("======串口====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    ELog.e("==========数据=======" + jsonObject);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     @OnClick(R.id.serialport_back_btn)
     public void serialport_back_btn() {
