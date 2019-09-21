@@ -67,7 +67,7 @@ public class HttpRequestUtil {
         if (serialPortDataDao.loadAll().size() < 4) {
             for (int i = 1; i < 9; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "无", 0, "8", 0, "1", 10));
+                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
                 for (int j = 1; j < 31; j++) {
                     if (j >= 10) {
                         serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));

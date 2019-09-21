@@ -116,7 +116,7 @@ public class ProjectorSetingActivity extends BaseActivity {
 
         if (serialPortDatas.size() == 0) {
             serialPortDataDao.insert(new SerialPortData((long) 1, "串口1", "投影机", 2,
-                    "9600", 0, "无", 0, "8", 0, "1", 10));
+                    "9600", 0, "NONE", 0, "8", 0, "1", 10));
 
 
             for (int j = 1; j < 5; j++) {

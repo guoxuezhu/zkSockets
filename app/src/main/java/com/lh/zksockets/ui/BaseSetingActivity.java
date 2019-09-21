@@ -123,7 +123,7 @@ public class BaseSetingActivity extends BaseActivity {
     private void httpdeviceget() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -164,6 +164,48 @@ public class BaseSetingActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.btn_baseip_get)
+    public void btn_baseip_get() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add("ip", DisplayTools.getIPAddress(this))
+                .add("name", et_classRoom.getText().toString())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/exist_center_set")
+                .post(requestBody)
+                .build();
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    ELog.e("==========数据=======" + jsonObject);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+    }
+
     @OnClick(R.id.btn_baseset_tongbu)
     public void btn_baseset_tongbu() {
         httpdeviceget();
@@ -179,20 +221,18 @@ public class BaseSetingActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-//                .add("cate_id", "10023")
-//                .add("ip", DisplayTools.getIPAddress(this))
-                .add("ip", zkInfoDao.loadAll().get(0).zkip)
+                .add("ip", DisplayTools.getIPAddress(this))
+//                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("title", zkInfoDao.loadAll().get(0).zkname)
                 .add("version", zkInfoDao.loadAll().get(0).zkVersion)
                 .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)
                 .add("video_num", zkInfoDao.loadAll().get(0).hudongVIDnum + "")
                 .add("show", zkInfoDao.loadAll().get(0).ismqttStart == 1 ? "on" : "off")
-//                .add("uuid", zkInfoDao.loadAll().get(0).uuid)
                 .build();
 
 
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/edit_center_set")
+                .url(MyApplication.BASEURL + "api/edit_center_set")
                 .post(requestBody)
                 .build();
 

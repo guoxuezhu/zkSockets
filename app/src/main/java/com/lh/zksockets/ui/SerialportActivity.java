@@ -119,7 +119,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         if (serialPortDataDao.loadAll().size() < 4) {
             for (int i = 1; i < 9; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "无", 0, "8", 0, "1", 10));
+                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
                 for (int j = 1; j < 31; j++) {
                     if (j >= 10) {
                         serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
@@ -332,7 +332,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     public void btn_sport_huifu() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(MyApplication.BASEURL + "api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -349,7 +349,15 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======串口====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    ELog.e("======串口====数据=======" + jsonObject);
 
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -365,9 +373,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     .list();
             serialResults.add(new SerialResult(serialPortDataDao.load(Long.valueOf(n)), serialCommands));
         }
-
-        ELog.e("==========1111111=======" + serialResults.toString());
-
         Gson gson = new Gson();
         ELog.e("==========1111111=ss======" + gson.toJson(serialResults));
 
@@ -379,7 +384,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/edit_serial_set")
+                .url(MyApplication.BASEURL + "api/edit_serial_set")
                 .post(requestBody)
                 .build();
 

@@ -54,14 +54,14 @@ public class NetStatusActivity extends BaseActivity {
 
 
         if (serialPortDataDao.loadAll().size() < 4) {
-            serialPortDataDao.insert(new SerialPortData((long) 1, "串口1", "投影机", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 2, "串口2", "外部继电器", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 3, "串口3", "电源时序器", 6, "57600", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 4, "串口4", "", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 5, "串口5", "红外", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 6, "串口6", "一体机", 7, "115200", 0, "无", 0, "8", 0, "1", 16));
-            serialPortDataDao.insert(new SerialPortData((long) 7, "串口7", "音量", 7, "115200", 0, "无", 0, "8", 0, "1", 10));
-            serialPortDataDao.insert(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "无", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 1, "串口1", "投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 2, "串口2", "外部继电器", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 3, "串口3", "电源时序器", 6, "57600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 4, "串口4", "", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 5, "串口5", "红外", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 6, "串口6", "一体机", 7, "115200", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 7, "串口7", "音量", 7, "115200", 0, "NONE", 0, "8", 0, "1", 10));
+            serialPortDataDao.insert(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
 
 
             serialCommandDao.insert(new SerialCommand(Long.valueOf("101"), 1, 1, "1-101", "投影机开", "505752204F4E0D", 16));

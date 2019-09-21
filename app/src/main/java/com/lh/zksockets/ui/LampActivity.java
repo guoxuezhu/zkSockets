@@ -87,7 +87,7 @@ public class LampActivity extends BaseActivity {
     public void btn_lubo_huifu() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/get_record_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(MyApplication.BASEURL + "api/get_record_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -116,14 +116,15 @@ public class LampActivity extends BaseActivity {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
-                .add("title", "")
+//                .add("title", "录播")
                 .add("record_ip", luboInfoDao.loadAll().get(0).IP)
                 .add("record_user", luboInfoDao.loadAll().get(0).userName)
                 .add("record_pass", luboInfoDao.loadAll().get(0).Password)
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(luboInfoDao.loadAll()));
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/edit_record_set")
+                .url(MyApplication.BASEURL + "api/edit_record_set")
+                .addHeader("Content-Type","application/x-www-form-urlencoded")
                 .post(requestBody)
                 .build();
 

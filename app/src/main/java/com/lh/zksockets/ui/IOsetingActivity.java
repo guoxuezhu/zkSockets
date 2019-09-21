@@ -157,7 +157,7 @@ public class IOsetingActivity extends BaseActivity {
     public void btn_ioPort_huifu() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/get_io_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(MyApplication.BASEURL + "api/get_io_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -186,11 +186,11 @@ public class IOsetingActivity extends BaseActivity {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
-                .add("relay", gson.toJson(ioPortDataDao.loadAll()))
+                .add("io", gson.toJson(ioPortDataDao.loadAll()))
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(ioPortDataDao.loadAll()));
         Request request = new Request.Builder()
-                .url("http://lihong.h09.66571.com/api/edit_io_set")
+                .url(MyApplication.BASEURL + "api/edit_io_set")
                 .post(requestBody)
                 .build();
 
