@@ -2,9 +2,12 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
@@ -14,19 +17,32 @@ import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
+import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
+import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SplashActivity extends BaseActivity {
 
@@ -37,6 +53,21 @@ public class SplashActivity extends BaseActivity {
     EditText login_password;
 
     private Timer stimer;
+
+    private Handler splashHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 10:
+                    ELog.e("======splashHandler=====10====" + msg.obj.toString());
+                    Toast.makeText(SplashActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,12 +229,49 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (login_name.getText().toString().trim().equals("admin") &&
-                login_password.getText().toString().trim().equals("admin")) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else {
-            Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add("user_name", login_name.getText().toString().trim())
+                .add("user_pass", login_password.getText().toString().trim())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/user_login")
+                .post(requestBody)
+                .build();
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========数据==11=====" + httpData.toString());
+
+                if (httpData.flag == 1) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                } else {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 10;
+                    splashHandler.sendMessage(message);
+                }
+            }
+        });
+
 
     }
 
