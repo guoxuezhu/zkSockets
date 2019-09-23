@@ -2,24 +2,31 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.model.DangerOut;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.HttpUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +72,25 @@ public class VolumeSetActivity extends BaseActivity {
 
     private DangerOutDao dangerOutDao;
 
+    private Handler bjoutHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 71:
+                    ELog.e("======Handler=====1====" + msg.obj.toString());
+                    Toast.makeText(VolumeSetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 72:
+                    ELog.e("======Handler=====2====" + msg.obj.toString());
+                    initView();
+                    Toast.makeText(VolumeSetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +105,12 @@ public class VolumeSetActivity extends BaseActivity {
                 dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
             }
         }
+        initView();
+        ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
 
+    }
+
+    private void initView() {
         if (dangerOutDao.load((long) 1).dangerOutStatus == 0) {
             bjout_1_gl.setChecked(true);
         } else {
@@ -111,8 +142,6 @@ public class VolumeSetActivity extends BaseActivity {
         }
         danger_et_time_4.setText(dangerOutDao.load((long) 4).time + "");
         danger_et_devicename_4.setText(dangerOutDao.load((long) 4).deviceName);
-        ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
-
     }
 
 
@@ -176,7 +205,22 @@ public class VolumeSetActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("=======报警输出===数据=======" + responseText);
-
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<DangerOut>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<DangerOut>>>>() {}.getType());
+                ELog.e("=========io输出=数据=======" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+                    for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
+                        dangerOutDao.update(new DangerOut(httpRowHttpData.getData().getRows().get(i).id,
+                                httpRowHttpData.getData().getRows().get(i).name,
+                                httpRowHttpData.getData().getRows().get(i).deviceName,
+                                httpRowHttpData.getData().getRows().get(i).dangerOutStatus,
+                                httpRowHttpData.getData().getRows().get(i).time));
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 72;
+                    bjoutHandler.sendMessage(message);
+                }
             }
         });
     }
@@ -213,12 +257,15 @@ public class VolumeSetActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("=======报警输出===数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========报警输出==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 71;
+                    bjoutHandler.sendMessage(message);
                 }
             }
         });

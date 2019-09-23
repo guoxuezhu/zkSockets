@@ -1,17 +1,32 @@
 package com.lh.zksockets.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class ZkInfo {
 
+    @SerializedName("title")
     public String zkname;
+
+    @SerializedName("ip")
     public String zkip;
+
+    @SerializedName("version")
     public String zkVersion;
+
+    @SerializedName("data_version")
     public String geendaoVersion;
+
+    @SerializedName("video_num")
     public int hudongVIDnum;
+
+    @SerializedName("uuid")
     public String uuid;
+
+    @SerializedName("show")
     public int ismqttStart;
 
 

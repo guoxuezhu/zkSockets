@@ -2,20 +2,26 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.LampAdapter;
 import com.lh.zksockets.data.DbDao.LampDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.Lamp;
 import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.AddLampDialog;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
@@ -25,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +54,25 @@ public class LampActivity extends BaseActivity {
     EditText et_lb_mima;
     private LuboInfoDao luboInfoDao;
 
+    private Handler luboHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 31:
+                    ELog.e("======baseHandler=====21====" + msg.obj.toString());
+                    Toast.makeText(LampActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 32:
+                    ELog.e("======baseHandler=====22====" + msg.obj.toString());
+                    initView();
+                    Toast.makeText(LampActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
 
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +128,20 @@ public class LampActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                ELog.e("======录播====数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData<LuboInfo> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<LuboInfo>>() {}.getType());
+                ELog.e("=========录播=数据=======" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+
+                    luboInfoDao.deleteAll();
+                    luboInfoDao.insert(new LuboInfo(httpRowHttpData.getData().IP, httpRowHttpData.getData().userName,
+                            httpRowHttpData.getData().Password, ""));
+
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 32;
+                    luboHandler.sendMessage(message);
+                }
 
             }
         });
@@ -116,12 +154,10 @@ public class LampActivity extends BaseActivity {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
-//                .add("title", "录播")
                 .add("record_ip", luboInfoDao.loadAll().get(0).IP)
                 .add("record_user", luboInfoDao.loadAll().get(0).userName)
                 .add("record_pass", luboInfoDao.loadAll().get(0).Password)
                 .build();
-        ELog.e("==========1111111=ss======" + gson.toJson(luboInfoDao.loadAll()));
         Request request = new Request.Builder()
                 .url(MyApplication.BASEURL + "api/edit_record_set")
                 .addHeader("Content-Type","application/x-www-form-urlencoded")
@@ -144,12 +180,15 @@ public class LampActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("=======录播===数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("=========录播=数据==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 31;
+                    luboHandler.sendMessage(message);
                 }
             }
         });

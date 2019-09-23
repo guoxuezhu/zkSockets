@@ -2,22 +2,30 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.model.DangerOut;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.HttpUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -309,6 +317,26 @@ public class EventActivity extends BaseActivity {
     TextView event_tv_time_67;
 
     private MLsListsDao mLsListsDao;
+
+    private Handler eventHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 81:
+                    ELog.e("======Handler=====1====" + msg.obj.toString());
+                    Toast.makeText(EventActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 82:
+                    ELog.e("======Handler=====2====" + msg.obj.toString());
+                    DataInit();
+                    Toast.makeText(EventActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
+
+        }
+    };
 
 
     @Override
@@ -635,7 +663,21 @@ public class EventActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("========事件==数据=======" + responseText);
-
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<MLsLists>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<MLsLists>>>>() {}.getType());
+                ELog.e("=========事件=数据==get=====" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+                    for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
+                        mLsListsDao.update(new MLsLists(httpRowHttpData.getData().getRows().get(i).id,
+                                httpRowHttpData.getData().getRows().get(i).name,
+                                httpRowHttpData.getData().getRows().get(i).strMLs,
+                                httpRowHttpData.getData().getRows().get(i).time));
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 82;
+                    eventHandler.sendMessage(message);
+                }
             }
         });
     }
@@ -672,12 +714,15 @@ public class EventActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("========事件==数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========事件==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 81;
+                    eventHandler.sendMessage(message);
                 }
             }
         });

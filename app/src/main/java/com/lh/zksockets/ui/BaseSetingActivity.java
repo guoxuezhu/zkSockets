@@ -9,18 +9,23 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
+import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,10 +65,15 @@ public class BaseSetingActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 11:
-                    ELog.e("======baseHandler=====11====" + msg.obj.toString());
+                case 21:
+                    ELog.e("======baseHandler=====21====" + msg.obj.toString());
+                    Toast.makeText(BaseSetingActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
                     break;
-
+                case 22:
+                    ELog.e("======baseHandler=====22====" + msg.obj.toString());
+                    initView();
+                    Toast.makeText(BaseSetingActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
             }
 
         }
@@ -80,6 +90,12 @@ public class BaseSetingActivity extends BaseActivity {
         tv_zkDeviceName.setText("" + MyApplication.geendaoVersion());
 
         zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+
+        initView();
+
+    }
+
+    private void initView() {
         if (zkInfoDao.loadAll().size() == 0) {
             et_classRoom.setText("");
             et_vid_num.setText("0");
@@ -95,8 +111,7 @@ public class BaseSetingActivity extends BaseActivity {
                 rbtn_mqtt_no.setChecked(true);
             }
         }
-
-
+        ELog.e("=======zkInfoDao====" + zkInfoDao.loadAll().get(0).toString());
     }
 
     @OnClick(R.id.btn_baseset_ok)
@@ -120,52 +135,9 @@ public class BaseSetingActivity extends BaseActivity {
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 
-    private void httpdeviceget() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
-                .build();
-        //3.创建一个call对象,参数就是Request请求对象
-        Call call = okHttpClient.newCall(request);
-        //4.请求加入调度，重写回调方法
-        call.enqueue(new Callback() {
-            //请求失败执行的方法
-            @Override
-            public void onFailure(Call call, IOException e) {
-                ELog.e("==========onFailure=======" + e.toString());
-            }
 
-            //请求成功执行的方法
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseText = response.body().string();
-                ELog.e("==========数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-
-                    String data = jsonObject.getString("data");
-                    ELog.e("==========数据=======" + data);
-
-                    JSONObject jsonObjects = new JSONObject(data);
-
-                    ELog.e("==========数据=======" + jsonObjects);
-                    JSONArray ja = jsonObjects.getJSONArray("rows");
-                    ELog.e("==========数据=======" + ja);
-
-                    Message message = new Message();
-                    message.obj = data;
-                    message.what = 11;
-                    baseHandler.sendMessage(message);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-
-    @OnClick(R.id.btn_baseip_get)
-    public void btn_baseip_get() {
+    @OnClick(R.id.btn_baseip_name)
+    public void btn_baseip_name() {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
@@ -193,12 +165,15 @@ public class BaseSetingActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("==========数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========数据==11=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
                 }
             }
         });
@@ -208,21 +183,58 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseset_tongbu)
     public void btn_baseset_tongbu() {
-        httpdeviceget();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<ZkInfo>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<ZkInfo>>>>() {
+                }.getType());
+                ELog.e("=========httpRow=数据=======" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+
+                    zkInfoDao.deleteAll();
+
+                    zkInfoDao.insert(new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
+                            httpRowHttpData.getData().getRows().get(0).zkip,
+                            httpRowHttpData.getData().getRows().get(0).zkVersion,
+                            httpRowHttpData.getData().getRows().get(0).geendaoVersion,
+                            httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
+                            uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart));
+
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 22;
+                    baseHandler.sendMessage(message);
+                }
+
+            }
+        });
+
     }
 
 
     @OnClick(R.id.btn_baseset_beifen)
     public void btn_baseset_beifen() {
-        httpdeviceadd();
-    }
-
-    private void httpdeviceadd() {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
-//                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("title", zkInfoDao.loadAll().get(0).zkname)
                 .add("version", zkInfoDao.loadAll().get(0).zkVersion)
                 .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)
@@ -252,12 +264,15 @@ public class BaseSetingActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("==========数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========数据==11=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
                 }
             }
         });

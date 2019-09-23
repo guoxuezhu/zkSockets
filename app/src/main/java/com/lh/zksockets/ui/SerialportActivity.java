@@ -2,6 +2,8 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.SelectAdapter;
@@ -19,12 +22,16 @@ import com.lh.zksockets.adapter.SerialportAdapter;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpResult;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.SerialCommand;
+import com.lh.zksockets.data.model.SerialGetResult;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 
 import org.json.JSONException;
@@ -98,6 +105,26 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     private SerialportAdapter serialportAdapter;
     private List<SerialCommand> serialCommands;
     private int spt_btn_port;
+
+    private Handler skHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 91:
+                    ELog.e("======Handler=====1====" + msg.obj.toString());
+                    Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 92:
+                    ELog.e("======Handler=====2====" + msg.obj.toString());
+//                    initView();
+                    Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
+
+        }
+    };
 
 
     @Override
@@ -349,15 +376,43 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======串口====数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("======串口====数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<SerialGetResult>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<SerialGetResult>>>>() {}.getType());
+                ELog.e("=========串口=数据===get====" + httpRowHttpData);
+                ELog.e("=========串口=数据===get=11===" + httpRowHttpData.getData().getRows().size());
 
+                if (httpRowHttpData.flag == 1) {
+                    for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
+                        ELog.e("=========串口=数据===iiiiii====" + i);
+//                        serialPortDataDao.update(new SerialPortData(httpRowHttpData.getData().getRows().get(i).id,
+//                                "串口" + i,
+//                                httpRowHttpData.getData().getRows().get(i).deviceName,
+//                                httpRowHttpData.getData().getRows().get(i).baudRateId,
+//                                httpRowHttpData.getData().getRows().get(i).baudRate,
+//                                httpRowHttpData.getData().getRows().get(i).checkoutBitId,
+//                                httpRowHttpData.getData().getRows().get(i).checkoutBit,
+//                                httpRowHttpData.getData().getRows().get(i).dataBitId,
+//                                httpRowHttpData.getData().getRows().get(i).dataBit,
+//                                httpRowHttpData.getData().getRows().get(i).stopBitId,
+//                                httpRowHttpData.getData().getRows().get(i).stopBit,
+//                                httpRowHttpData.getData().getRows().get(i).jinZhi));
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        for (int j = 0; j < 30; j++) {
+                            try {
+//                                serialCommandDao.update(httpRowHttpData.getData().getRows().get(i).command.get(j));
+                                ELog.e("=======serialCommandDao====" + j + "=====" + httpRowHttpData.getData().getRows().get(i).command.get(j));
+                            } catch (Exception e) {
+                                ELog.e("=======serialCommandDao==e====" + j + "=====" + httpRowHttpData.getData().getRows().get(i).command.get(j));
+                            }
+                        }
+                        ELog.e("=========串口=数据========000000====");
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 92;
+                    skHandler.sendMessage(message);
                 }
+
             }
         });
     }
@@ -404,12 +459,15 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======串口====数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========io输出==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 91;
+                    skHandler.sendMessage(message);
                 }
             }
         });

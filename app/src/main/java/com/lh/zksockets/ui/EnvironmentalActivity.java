@@ -2,24 +2,32 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.JDQstatus;
+import com.lh.zksockets.data.model.LuboInfo;
+import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.HttpUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,6 +95,25 @@ public class EnvironmentalActivity extends BaseActivity {
 
     private JDQstatusDao jdqStatusDao;
 
+    private Handler jdqHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 41:
+                    ELog.e("======baseHandler=====1====" + msg.obj.toString());
+                    Toast.makeText(EnvironmentalActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 42:
+                    ELog.e("======baseHandler=====2====" + msg.obj.toString());
+                    initView();
+                    Toast.makeText(EnvironmentalActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +128,11 @@ public class EnvironmentalActivity extends BaseActivity {
             }
         }
 
+        initView();
+        ELog.d("=========jdqStatusDao==========" + jdqStatusDao.loadAll().toString());
+    }
+
+    private void initView() {
         if (jdqStatusDao.load((long) 1).jdqStatus == 1) {
             jdq_1_gl.setChecked(true);
         } else {
@@ -165,7 +197,6 @@ public class EnvironmentalActivity extends BaseActivity {
         jdq_et_time_8.setText(jdqStatusDao.load((long) 8).time + "");
         jdq_et_devicename_8.setText(jdqStatusDao.load((long) 8).deviceName);
 
-        ELog.d("=========jdqStatusDao==========" + jdqStatusDao.loadAll().toString());
     }
 
 
@@ -260,8 +291,23 @@ public class EnvironmentalActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                ELog.e("=======继电器===数据=======" + responseText);
-
+                ELog.e("==========数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<JDQstatus>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<JDQstatus>>>>() {}.getType());
+                ELog.e("=========继电器=数据=======" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+                    for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
+                        jdqStatusDao.update(new JDQstatus(httpRowHttpData.getData().getRows().get(i).id,
+                                httpRowHttpData.getData().getRows().get(i).name,
+                                httpRowHttpData.getData().getRows().get(i).deviceName,
+                                httpRowHttpData.getData().getRows().get(i).jdqStatus,
+                                httpRowHttpData.getData().getRows().get(i).time));
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 42;
+                    jdqHandler.sendMessage(message);
+                }
             }
         });
 
@@ -298,13 +344,15 @@ public class EnvironmentalActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                ELog.e("=======继电器===数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========继电器==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 41;
+                    jdqHandler.sendMessage(message);
                 }
             }
         });

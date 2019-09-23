@@ -1,14 +1,20 @@
 package com.lh.zksockets.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class LuboInfo {
 
+    @SerializedName("record_ip")
     public String IP;
+    @SerializedName("record_user")
     public String userName;
+    @SerializedName("record_pass")
     public String Password;
+    @SerializedName("token")
     public String token;
 
     @Generated(hash = 1597435763)

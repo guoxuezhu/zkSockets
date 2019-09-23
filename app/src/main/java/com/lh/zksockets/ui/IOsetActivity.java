@@ -2,22 +2,26 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.lh.zksockets.utils.HttpUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,6 +74,26 @@ public class IOsetActivity extends BaseActivity {
 
     private IOYuanDao ioYuanDao;
 
+    private Handler bjHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 51:
+                    ELog.e("======Handler=====1====" + msg.obj.toString());
+                    Toast.makeText(IOsetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 52:
+                    ELog.e("======Handler=====2====" + msg.obj.toString());
+                    initView();
+                    Toast.makeText(IOsetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    HttpUtil.setLuboTokenTimer();
+                    break;
+            }
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +108,10 @@ public class IOsetActivity extends BaseActivity {
             ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
         }
 
+        initView();
+    }
+
+    private void initView() {
         if (ioYuanDao.load((long) 1).dangerIoStatus == 1) {
             danger_1_gl.setChecked(true);
         } else {
@@ -184,7 +212,23 @@ public class IOsetActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("======报警====数据=======" + responseText);
-
+                Gson gson = new Gson();
+                HttpData<HttpRow<List<IOYuan>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<IOYuan>>>>() {}.getType());
+                ELog.e("=========报警=数据=======" + httpRowHttpData);
+                if (httpRowHttpData.flag == 1) {
+                    for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
+                        ioYuanDao.update(new IOYuan(httpRowHttpData.getData().getRows().get(i).id,
+                                httpRowHttpData.getData().getRows().get(i).name,
+                                httpRowHttpData.getData().getRows().get(i).deviceName,
+                                httpRowHttpData.getData().getRows().get(i).dangerIoStatus,
+                                httpRowHttpData.getData().getRows().get(i).dangerMl,
+                                httpRowHttpData.getData().getRows().get(i).noDangerMl));
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 52;
+                    bjHandler.sendMessage(message);
+                }
             }
         });
     }
@@ -222,12 +266,15 @@ public class IOsetActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 ELog.e("========报警==数据=======" + responseText);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    ELog.e("==========数据=======" + jsonObject);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========报警==post=====" + httpData.toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (httpData.flag == 1) {
+                    Message message = new Message();
+                    message.obj = httpData.msg;
+                    message.what = 51;
+                    bjHandler.sendMessage(message);
                 }
             }
         });
