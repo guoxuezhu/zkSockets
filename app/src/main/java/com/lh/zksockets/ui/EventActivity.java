@@ -581,11 +581,11 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 52, "电视机1", event_et_52.getText().toString(), event_tv_time_52.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 53, "电视机2", event_et_53.getText().toString(), event_tv_time_53.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 54, "电视机3", event_et_54.getText().toString(), event_tv_time_54.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 55, "电视机4", event_et_55.getText().toString(), event_tv_time_55.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 56, "电视机5", event_et_56.getText().toString(), event_tv_time_56.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 57, "电视机6", event_et_57.getText().toString(), event_tv_time_57.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 58, "电视机7", event_et_58.getText().toString(), event_tv_time_58.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 59, "电视机8", event_et_59.getText().toString(), event_tv_time_59.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 55, "窗帘1停", event_et_55.getText().toString(), event_tv_time_55.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 56, "窗帘2停", event_et_56.getText().toString(), event_tv_time_56.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 57, "窗帘3停", event_et_57.getText().toString(), event_tv_time_57.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 58, "窗帘4停", event_et_58.getText().toString(), event_tv_time_58.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 59, "窗帘5停", event_et_59.getText().toString(), event_tv_time_59.getText().toString()));
 
 
         mLsListsDao.update(new MLsLists((long) 60, "新风开", event_et_60.getText().toString(), event_tv_time_60.getText().toString()));

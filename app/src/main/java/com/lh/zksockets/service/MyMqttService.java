@@ -197,8 +197,9 @@ public class MyMqttService extends Service {
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {
             ELog.i("===========mqtt====收到消息========" + message.toString());
-            String msg = message.toString();
-            if (msg.length() > 3) {
+            String msg = message.toString().substring(4);
+            String name = message.toString().substring(0, 4);
+            if (msg.length() > 3 && name.equals("HBWH")) {
                 if (msg.substring(0, 3).equals("VID")) {
                     SerialPortUtil.sendShipinType(msg);
                 } else if (msg.substring(0, 3).equals("FWS")) {
