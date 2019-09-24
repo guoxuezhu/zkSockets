@@ -1,5 +1,6 @@
 package com.lh.zksockets.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -119,12 +120,16 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     ELog.e("======Handler=====2====" + msg.obj.toString());
                     ViewInit(spt_btn_port);
                     Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    HttpUtil.setLuboTokenTimer();
+                    stopDialog();
                     break;
             }
 
         }
     };
+
+
+
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -162,6 +167,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         setSelectBtn(1);
 
 
+    }
+
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     private void ViewInit(long i) {
@@ -357,6 +368,13 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
     @OnClick(R.id.btn_sport_huifu)
     public void btn_sport_huifu() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在恢复数据");
+        progressDialog.setCanceledOnTouchOutside(false);
+
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(MyApplication.BASEURL + "api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))

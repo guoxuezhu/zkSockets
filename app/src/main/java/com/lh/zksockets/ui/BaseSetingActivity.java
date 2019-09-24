@@ -110,8 +110,8 @@ public class BaseSetingActivity extends BaseActivity {
             } else {
                 rbtn_mqtt_no.setChecked(true);
             }
+            ELog.e("=======zkInfoDao====" + zkInfoDao.loadAll().get(0).toString());
         }
-        ELog.e("=======zkInfoDao====" + zkInfoDao.loadAll().get(0).toString());
     }
 
     @OnClick(R.id.btn_baseset_ok)

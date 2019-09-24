@@ -85,7 +85,6 @@ public class VolumeSetActivity extends BaseActivity {
                     ELog.e("======Handler=====2====" + msg.obj.toString());
                     initView();
                     Toast.makeText(VolumeSetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    HttpUtil.setLuboTokenTimer();
                     break;
             }
 

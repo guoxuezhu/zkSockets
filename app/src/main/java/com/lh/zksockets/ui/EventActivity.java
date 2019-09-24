@@ -1,5 +1,6 @@
 package com.lh.zksockets.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -331,13 +332,19 @@ public class EventActivity extends BaseActivity {
                     ELog.e("======Handler=====2====" + msg.obj.toString());
                     DataInit();
                     Toast.makeText(EventActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    HttpUtil.setLuboTokenTimer();
+                    stopDialog();
                     break;
             }
 
         }
     };
+    private ProgressDialog progressDialog;
 
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -644,6 +651,12 @@ public class EventActivity extends BaseActivity {
 
     @OnClick(R.id.btn_event_huifu)
     public void btn_event_huifu() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在恢复数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(MyApplication.BASEURL + "api/get_event_list?ip=" + DisplayTools.getIPAddress(this))

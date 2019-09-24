@@ -87,7 +87,6 @@ public class IOsetActivity extends BaseActivity {
                     ELog.e("======Handler=====2====" + msg.obj.toString());
                     initView();
                     Toast.makeText(IOsetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    HttpUtil.setLuboTokenTimer();
                     break;
             }
 
