@@ -359,11 +359,11 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
             mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "", ""));
             mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "窗帘1停", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "窗帘2停", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "窗帘3停", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "窗帘4停", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "窗帘5停", "", ""));
 
             mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
