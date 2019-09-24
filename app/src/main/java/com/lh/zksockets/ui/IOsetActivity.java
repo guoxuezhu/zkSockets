@@ -213,20 +213,23 @@ public class IOsetActivity extends BaseActivity {
                 String responseText = response.body().string();
                 ELog.e("======报警====数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<IOYuan>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<IOYuan>>>>() {}.getType());
-                ELog.e("=========报警=数据=======" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========报警==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<IOYuan>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<IOYuan>>>>() {
+                    }.getType());
+                    ELog.e("=========报警=数据=======" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
-                        ioYuanDao.update(new IOYuan(httpRowHttpData.getData().getRows().get(i).id,
-                                httpRowHttpData.getData().getRows().get(i).name,
-                                httpRowHttpData.getData().getRows().get(i).deviceName,
-                                httpRowHttpData.getData().getRows().get(i).dangerIoStatus,
-                                httpRowHttpData.getData().getRows().get(i).dangerMl,
-                                httpRowHttpData.getData().getRows().get(i).noDangerMl));
+                        ioYuanDao.update(httpRowHttpData.getData().getRows().get(i));
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 52;
+                    bjHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 51;
                     bjHandler.sendMessage(message);
                 }
             }

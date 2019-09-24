@@ -293,19 +293,23 @@ public class EnvironmentalActivity extends BaseActivity {
                 String responseText = response.body().string();
                 ELog.e("==========数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<JDQstatus>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<JDQstatus>>>>() {}.getType());
-                ELog.e("=========继电器=数据=======" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========继电器==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<JDQstatus>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<JDQstatus>>>>() {
+                    }.getType());
+                    ELog.e("=========继电器=数据=======" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
-                        jdqStatusDao.update(new JDQstatus(httpRowHttpData.getData().getRows().get(i).id,
-                                httpRowHttpData.getData().getRows().get(i).name,
-                                httpRowHttpData.getData().getRows().get(i).deviceName,
-                                httpRowHttpData.getData().getRows().get(i).jdqStatus,
-                                httpRowHttpData.getData().getRows().get(i).time));
+                        jdqStatusDao.update(httpRowHttpData.getData().getRows().get(i));
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 42;
+                    jdqHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 41;
                     jdqHandler.sendMessage(message);
                 }
             }

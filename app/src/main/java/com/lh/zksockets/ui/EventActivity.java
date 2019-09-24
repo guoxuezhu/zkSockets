@@ -664,18 +664,23 @@ public class EventActivity extends BaseActivity {
                 String responseText = response.body().string();
                 ELog.e("========事件==数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<MLsLists>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<MLsLists>>>>() {}.getType());
-                ELog.e("=========事件=数据==get=====" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========事件==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<MLsLists>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<MLsLists>>>>() {
+                    }.getType());
+                    ELog.e("=========事件=数据==get=====" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
-                        mLsListsDao.update(new MLsLists(httpRowHttpData.getData().getRows().get(i).id,
-                                httpRowHttpData.getData().getRows().get(i).name,
-                                httpRowHttpData.getData().getRows().get(i).strMLs,
-                                httpRowHttpData.getData().getRows().get(i).time));
+                        mLsListsDao.update(httpRowHttpData.getData().getRows().get(i));
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 82;
+                    eventHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 81;
                     eventHandler.sendMessage(message);
                 }
             }

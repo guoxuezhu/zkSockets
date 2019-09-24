@@ -104,7 +104,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     private SerialCommandDao serialCommandDao;
     private SerialportAdapter serialportAdapter;
     private List<SerialCommand> serialCommands;
-    private int spt_btn_port;
+    private int spt_btn_port = 1;
 
     private Handler skHandler = new Handler() {
         @Override
@@ -117,7 +117,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     break;
                 case 92:
                     ELog.e("======Handler=====2====" + msg.obj.toString());
-//                    initView();
+                    ViewInit(spt_btn_port);
                     Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
                     HttpUtil.setLuboTokenTimer();
                     break;
@@ -377,39 +377,42 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 String responseText = response.body().string();
                 ELog.e("======串口====数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<SerialGetResult>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<SerialGetResult>>>>() {}.getType());
-                ELog.e("=========串口=数据===get====" + httpRowHttpData);
-                ELog.e("=========串口=数据===get=11===" + httpRowHttpData.getData().getRows().size());
-
-                if (httpRowHttpData.flag == 1) {
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========报警==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<SerialGetResult>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<SerialGetResult>>>>() {
+                    }.getType());
+                    ELog.e("=========串口=数据===get====" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
-                        ELog.e("=========串口=数据===iiiiii====" + i);
-//                        serialPortDataDao.update(new SerialPortData(httpRowHttpData.getData().getRows().get(i).id,
-//                                "串口" + i,
-//                                httpRowHttpData.getData().getRows().get(i).deviceName,
-//                                httpRowHttpData.getData().getRows().get(i).baudRateId,
-//                                httpRowHttpData.getData().getRows().get(i).baudRate,
-//                                httpRowHttpData.getData().getRows().get(i).checkoutBitId,
-//                                httpRowHttpData.getData().getRows().get(i).checkoutBit,
-//                                httpRowHttpData.getData().getRows().get(i).dataBitId,
-//                                httpRowHttpData.getData().getRows().get(i).dataBit,
-//                                httpRowHttpData.getData().getRows().get(i).stopBitId,
-//                                httpRowHttpData.getData().getRows().get(i).stopBit,
-//                                httpRowHttpData.getData().getRows().get(i).jinZhi));
+                        serialPortDataDao.update(new SerialPortData(httpRowHttpData.getData().getRows().get(i).id,
+                                "串口" + i,
+                                httpRowHttpData.getData().getRows().get(i).deviceName,
+                                httpRowHttpData.getData().getRows().get(i).baudRateId,
+                                httpRowHttpData.getData().getRows().get(i).baudRate,
+                                httpRowHttpData.getData().getRows().get(i).checkoutBitId,
+                                httpRowHttpData.getData().getRows().get(i).checkoutBit,
+                                httpRowHttpData.getData().getRows().get(i).dataBitId,
+                                httpRowHttpData.getData().getRows().get(i).dataBit,
+                                httpRowHttpData.getData().getRows().get(i).stopBitId,
+                                httpRowHttpData.getData().getRows().get(i).stopBit,
+                                httpRowHttpData.getData().getRows().get(i).jinZhi));
 
                         for (int j = 0; j < 30; j++) {
                             try {
-//                                serialCommandDao.update(httpRowHttpData.getData().getRows().get(i).command.get(j));
-                                ELog.e("=======serialCommandDao====" + j + "=====" + httpRowHttpData.getData().getRows().get(i).command.get(j));
+                                serialCommandDao.update(httpRowHttpData.getData().getRows().get(i).command.get(j));
                             } catch (Exception e) {
                                 ELog.e("=======serialCommandDao==e====" + j + "=====" + httpRowHttpData.getData().getRows().get(i).command.get(j));
                             }
                         }
-                        ELog.e("=========串口=数据========000000====");
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 92;
+                    skHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 91;
                     skHandler.sendMessage(message);
                 }
 
@@ -435,7 +438,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
                 .add("serial", gson.toJson(serialResults))
-//                .add("show", zkInfoDao.loadAll().get(0).ismqttStart == 1 ? "on" : "off")
                 .build();
 
         Request request = new Request.Builder()
@@ -461,7 +463,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 ELog.e("======串口====数据=======" + responseText);
                 Gson gson = new Gson();
                 HttpData httpData = gson.fromJson(responseText, HttpData.class);
-                ELog.e("==========io输出==post=====" + httpData.toString());
+                ELog.e("==========串口==post=====" + httpData.toString());
 
                 if (httpData.flag == 1) {
                     Message message = new Message();

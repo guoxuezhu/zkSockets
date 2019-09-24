@@ -201,15 +201,15 @@ public class BaseSetingActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                ELog.e("==========数据=======" + responseText);
+                ELog.e("=======中控===数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<ZkInfo>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<ZkInfo>>>>() {
-                }.getType());
-                ELog.e("=========httpRow=数据=======" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
-
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========中控==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<ZkInfo>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<ZkInfo>>>>() {
+                    }.getType());
+                    ELog.e("========中控=httpRow=数据=======" + httpRowHttpData);
                     zkInfoDao.deleteAll();
-
                     zkInfoDao.insert(new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
                             httpRowHttpData.getData().getRows().get(0).zkip,
                             httpRowHttpData.getData().getRows().get(0).zkVersion,
@@ -221,8 +221,12 @@ public class BaseSetingActivity extends BaseActivity {
                     message.obj = "数据恢复成功";
                     message.what = 22;
                     baseHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
                 }
-
             }
         });
 

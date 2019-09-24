@@ -128,18 +128,24 @@ public class LampActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
+                ELog.e("=======录播===数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<LuboInfo> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<LuboInfo>>() {}.getType());
-                ELog.e("=========录播=数据=======" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
-
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========录播==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<LuboInfo> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<LuboInfo>>() {
+                    }.getType());
+                    ELog.e("=========录播=数据=======" + httpRowHttpData);
                     luboInfoDao.deleteAll();
-                    luboInfoDao.insert(new LuboInfo(httpRowHttpData.getData().IP, httpRowHttpData.getData().userName,
-                            httpRowHttpData.getData().Password, ""));
-
+                    luboInfoDao.insert(httpRowHttpData.getData());
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 32;
+                    luboHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 31;
                     luboHandler.sendMessage(message);
                 }
 

@@ -206,19 +206,23 @@ public class VolumeSetActivity extends BaseActivity {
                 String responseText = response.body().string();
                 ELog.e("=======报警输出===数据=======" + responseText);
                 Gson gson = new Gson();
-                HttpData<HttpRow<List<DangerOut>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<DangerOut>>>>() {}.getType());
-                ELog.e("=========io输出=数据=======" + httpRowHttpData);
-                if (httpRowHttpData.flag == 1) {
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========报警输出==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<DangerOut>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<DangerOut>>>>() {
+                    }.getType());
+                    ELog.e("=========报警输出=数据=======" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
-                        dangerOutDao.update(new DangerOut(httpRowHttpData.getData().getRows().get(i).id,
-                                httpRowHttpData.getData().getRows().get(i).name,
-                                httpRowHttpData.getData().getRows().get(i).deviceName,
-                                httpRowHttpData.getData().getRows().get(i).dangerOutStatus,
-                                httpRowHttpData.getData().getRows().get(i).time));
+                        dangerOutDao.update(httpRowHttpData.getData().getRows().get(i));
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
                     message.what = 72;
+                    bjoutHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 71;
                     bjoutHandler.sendMessage(message);
                 }
             }
