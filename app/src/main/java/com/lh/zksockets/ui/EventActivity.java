@@ -327,6 +327,7 @@ public class EventActivity extends BaseActivity {
                 case 81:
                     ELog.e("======Handler=====1====" + msg.obj.toString());
                     Toast.makeText(EventActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 82:
                     ELog.e("======Handler=====2====" + msg.obj.toString());

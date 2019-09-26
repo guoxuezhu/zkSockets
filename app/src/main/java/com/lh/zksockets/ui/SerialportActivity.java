@@ -115,6 +115,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 case 91:
                     ELog.e("======Handler=====1====" + msg.obj.toString());
                     Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 92:
                     ELog.e("======Handler=====2====" + msg.obj.toString());
