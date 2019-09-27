@@ -250,12 +250,9 @@ public class HttpRequestUtil {
 
     public static String updataLuboInfo(AsyncHttpServerRequest request) {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
-        List<LuboInfo> luboInfos = gson.fromJson(request.getQuery().get("luboDatas[]").toString(), new TypeToken<List<LuboInfo>>() {
-        }.getType());
+        LuboInfo luboInfos = gson.fromJson(request.getQuery().getString("luboDatas"), LuboInfo.class);
         luboInfoDao.deleteAll();
-        for (int i = 0; i < luboInfos.size(); i++) {
-            luboInfoDao.insert(luboInfos.get(i));
-        }
+        luboInfoDao.insert(luboInfos);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
