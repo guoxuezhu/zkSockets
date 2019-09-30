@@ -1,6 +1,12 @@
 package com.lh.zksockets.ui;
 
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
@@ -16,12 +23,17 @@ import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.model.ApkInfo;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
+import com.lh.zksockets.data.model.LuboInfo;
+import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.FileUtil;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
@@ -29,7 +41,9 @@ import com.lh.zksockets.utils.TimerUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -99,9 +113,87 @@ public class SplashActivity extends BaseActivity {
 
                 mqttServiceStart();
 
+                updataAPK();
+
                 stimer.cancel();
             }
         }, 500);
+
+    }
+
+    private void updataAPK() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/get_soft_info?title=主机&version_code="
+                        + DisplayTools.getVersionCode(this)
+                        + "&version_name=" + DisplayTools.getVersionName(this))
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("========升级==数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========升级==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<ApkInfo> apkInfoHttpData = gson.fromJson(responseText, new TypeToken<HttpData<ApkInfo>>() {
+                    }.getType());
+                    ELog.e("==========升级==url=====" + apkInfoHttpData.getData().files);
+
+                    DownloadFile(apkInfoHttpData.getData().files);
+
+                }
+            }
+        });
+    }
+
+    private void DownloadFile(String url) {
+        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//        request.setVisibleInDownloadsUi(true);
+        request.setMimeType("application/vnd.android.package-archive");
+        FileUtil.createFile();
+        request.setDestinationInExternalPublicDir("lhFile/apkFile/", "主机.apk");
+        ELog.e("==========升级==111=====");
+        long downloadId = downloadManager.enqueue(request);
+        ELog.e("==========升级==downloadId=====" + downloadId);
+
+        listener(downloadId);
+    }
+
+    private void listener(final long Id) {
+
+        // 注册广播监听系统的下载完成事件。
+        IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                long ID = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                if (ID == Id) {
+                    ELog.e("==========升级==downloadId=====" + " 下载完成!");
+                    Toast.makeText(getApplicationContext(), "任务:" + Id + " 下载完成!", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    /**
+     * 安装APK
+     * @param context
+     * @param apkPath 安装包的路径
+     */
+    public static void installApk(Context context, Uri apkPath) {
 
     }
 
@@ -121,7 +213,6 @@ public class SplashActivity extends BaseActivity {
             SerialPortUtil.sendMsg(msg.getBytes());
         }
     }
-
 
     private void ioOutStatus() {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
@@ -185,7 +276,6 @@ public class SplashActivity extends BaseActivity {
         SerialPortUtil.sendMsg(data);
 
     }
-
 
     private void dangerOutStatus() {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();

@@ -101,6 +101,23 @@ public class DisplayTools {
         return version;
     }
 
+    /**
+     * @return 包
+     * @throws Exception
+     */
+    public static int getVersionCode(Context context) {
+        // 获取packagemanager的实例
+        PackageManager packageManager = context.getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = null;
+        try {
+            packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        int versionCode = packInfo.versionCode;
+        return versionCode;
+    }
 
 //    /**
 //     * @return uuid

@@ -16,7 +16,8 @@ public class MyApplication extends Application {
     public static DaoSession daoSession;
     public static Context context;
     public static int geendaoVersion;
-    public static final String BASEURL = "http://192.168.0.100/";
+    // http://lihong.h09.66571.com/    http://192.168.0.100/
+    public static final String BASEURL = "http://lihong.h09.66571.com/";
 
     @Override
     public void onCreate() {

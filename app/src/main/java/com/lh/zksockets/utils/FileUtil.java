@@ -6,12 +6,14 @@ import java.io.File;
 
 public class FileUtil {
 
-    public static void createFile() {
-        String path = Environment.getExternalStorageDirectory() + "";
+    public static String createFile() {
+        String path = Environment.getExternalStorageDirectory() + "lhFile/apkFile/主机.apk";
         File file = new File(path);
-        if (!file.exists()) {
+        if (file.exists()) {
             ELog.i("=======FileUtil====2====" + path);
         }
+        ELog.i("=======file.getPath()========" + file.getPath());
+        return file.getPath();
 
     }
 }
