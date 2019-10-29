@@ -1,6 +1,8 @@
 package com.lh.zksockets.utils;
 
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
@@ -286,8 +288,10 @@ public class HttpRequestUtil {
     public static String updataZkBaseInfo(AsyncHttpServerRequest request) {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         ZkInfo zkInfo = gson.fromJson(request.getQuery().getString("zkbaseInfoData"), ZkInfo.class);
+        zkInfo.setUuid(zkInfoDao.loadAll().get(0).uuid);
         zkInfoDao.deleteAll();
         zkInfoDao.insert(zkInfo);
+        ELog.e("=======zkInfoDao==11==" + zkInfoDao.loadAll().get(0).toString());
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
