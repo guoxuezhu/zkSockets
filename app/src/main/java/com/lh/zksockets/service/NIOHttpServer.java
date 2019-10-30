@@ -82,28 +82,7 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 }
 
             } else if (request.getMethod().equals("GET")) {
-                if (request.getPath().equals("/api/updataSportInfo")) {
-                    response.send(HttpRequestUtil.updataSportInfo(request));
-                } else if (request.getPath().equals("/api/updataDangerInfo")) {
-                    response.send(HttpRequestUtil.updataDangerInfo(request));
-                } else if (request.getPath().equals("/api/updataEventInfo")) {
-                    response.send(HttpRequestUtil.updataEventInfo(request));
-                } else if (request.getPath().equals("/api/updataJdqInfo")) {
-                    response.send(HttpRequestUtil.updataJdqInfo(request));
-                } else if (request.getPath().equals("/api/updataLuboInfo")) {
-                    response.send(HttpRequestUtil.updataLuboInfo(request));
-                } else if (request.getPath().equals("/api/updataMqttInfo")) {
-                    response.send(HttpRequestUtil.updataMqttInfo(request));
-                } else if (request.getPath().equals("/api/updataZKbaseInfo")) {
-                    response.send(HttpRequestUtil.updataZkBaseInfo(request));
-                } else if (request.getPath().equals("/api/updataIoOutInfo")) {
-                    response.send(HttpRequestUtil.updataIoOutInfo(request));
-                } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
-                    response.send(HttpRequestUtil.updataDangerOutInfo(request));
-                } else if (request.getPath().equals("/api/zkczbtn")) {
-                    response.send(HttpRequestUtil.zksendmsg(request));
-
-                } else if (request.getPath().equals("/api/sportInfo")) {
+                if (request.getPath().equals("/api/sportInfo")) {
                     response.send(HttpRequestUtil.getSportInfo(request));
                 } else if (request.getPath().equals("/api/dangerInfo")) {
                     response.send(HttpRequestUtil.getDangerInfo(request));

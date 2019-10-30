@@ -1,8 +1,5 @@
 package com.lh.zksockets.utils;
 
-
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
@@ -44,6 +41,7 @@ public class HttpRequestUtil {
 
     public static String updataSportInfo(AsyncHttpServerRequest request) {
         Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("==============1==333====" + parms);
         String sportNumer = parms.getString("sportNum");
         List<SerialCommand> serialCommandlist = gson.fromJson(parms.getString("sportMls"), new TypeToken<List<SerialCommand>>() {
         }.getType());
@@ -102,8 +100,10 @@ public class HttpRequestUtil {
     }
 
     public static String updataDangerInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        List<IOYuan> dangerIoYuans = gson.fromJson(request.getQuery().get("dangerDatas[]").toString(), new TypeToken<List<IOYuan>>() {
+        List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
         }.getType());
         for (int i = 0; i < dangerIoYuans.size(); i++) {
             ioYuanDao.update(dangerIoYuans.get(i));
@@ -188,9 +188,12 @@ public class HttpRequestUtil {
     }
 
     public static String updataEventInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        List<MLsLists> mLsLists = gson.fromJson(request.getQuery().get("eventDatas[]").toString(), new TypeToken<List<MLsLists>>() {
+        List<MLsLists> mLsLists = gson.fromJson(parms.getString("eventDatas"), new TypeToken<List<MLsLists>>() {
         }.getType());
+        ELog.i("==============1==333====" + mLsLists.toString());
         for (int i = 0; i < mLsLists.size(); i++) {
             mLsListsDao.update(mLsLists.get(i));
         }
@@ -233,9 +236,12 @@ public class HttpRequestUtil {
     }
 
     public static String updataJdqInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-        List<JDQstatus> jdQstatuses = gson.fromJson(request.getQuery().get("jdqDatas[]").toString(), new TypeToken<List<JDQstatus>>() {
+        List<JDQstatus> jdQstatuses = gson.fromJson(parms.getString("jdqDatas"), new TypeToken<List<JDQstatus>>() {
         }.getType());
+        ELog.i("==============1==333====" + jdQstatuses.toString());
         for (int i = 0; i < jdQstatuses.size(); i++) {
             jdqStatusDao.update(jdQstatuses.get(i));
         }
@@ -251,8 +257,11 @@ public class HttpRequestUtil {
     }
 
     public static String updataLuboInfo(AsyncHttpServerRequest request) {
+
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
-        LuboInfo luboInfos = gson.fromJson(request.getQuery().getString("luboDatas"), LuboInfo.class);
+        LuboInfo luboInfos = gson.fromJson(parms.getString("luboDatas"), LuboInfo.class);
         luboInfoDao.deleteAll();
         luboInfoDao.insert(luboInfos);
         return gson.toJson(new HttpResult("200", "", true, null));
@@ -286,12 +295,13 @@ public class HttpRequestUtil {
     }
 
     public static String updataZkBaseInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
-        ZkInfo zkInfo = gson.fromJson(request.getQuery().getString("zkbaseInfoData"), ZkInfo.class);
+        ZkInfo zkInfo = gson.fromJson(parms.getString("zkbaseInfoData"), ZkInfo.class);
         zkInfo.setUuid(zkInfoDao.loadAll().get(0).uuid);
         zkInfoDao.deleteAll();
         zkInfoDao.insert(zkInfo);
-        ELog.e("=======zkInfoDao==11==" + zkInfoDao.loadAll().get(0).toString());
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
@@ -306,9 +316,12 @@ public class HttpRequestUtil {
     }
 
     public static String updataIoOutInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        List<IoPortData> ioPortDatas = gson.fromJson(request.getQuery().get("ioOutDatas[]").toString(), new TypeToken<List<IoPortData>>() {
+        List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
         }.getType());
+        ELog.i("==============1==333====" + ioPortDatas.toString());
         for (int i = 0; i < ioPortDatas.size(); i++) {
             ioPortDataDao.update(ioPortDatas.get(i));
         }
@@ -326,9 +339,12 @@ public class HttpRequestUtil {
     }
 
     public static String updataDangerOutInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        List<DangerOut> dangerOuts = gson.fromJson(request.getQuery().get("dangerOutDatas[]").toString(), new TypeToken<List<DangerOut>>() {
+        List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
         }.getType());
+        ELog.i("=============1==333====" + dangerOuts.toString());
         for (int i = 0; i < dangerOuts.size(); i++) {
             dangerOutDao.update(dangerOuts.get(i));
         }
