@@ -365,7 +365,10 @@ public class HttpRequestUtil {
     }
 
     public static String zksendmsg(AsyncHttpServerRequest request) {
-        String msg = request.getQuery().getString("zkbtn");
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
+        String msg = parms.getString("zkbtn");
+//        String msg = request.getQuery().getString("zkbtn");
         ELog.i("========http======zkbtn======msg========" + msg);
         if (msg.length() > 3) {
             try {
