@@ -7,12 +7,19 @@ import java.io.File;
 public class FileUtil {
 
     public static String createFile() {
-        String path = Environment.getExternalStorageDirectory() + "lhFile/apkFile/主机.apk";
+        String path = Environment.getExternalStorageDirectory() + "/lhFile/apkFile/";
         File file = new File(path);
-        if (file.exists()) {
-            ELog.i("=======FileUtil====2====" + path);
+        if (!file.exists()) {
+            return null;
         }
-        ELog.i("=======file.getPath()========" + file.getPath());
+
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                f.delete();
+            }
+        }
+        ELog.i("=====FileUtil==file.getPath()========" + file.getPath());
         return file.getPath();
 
     }
