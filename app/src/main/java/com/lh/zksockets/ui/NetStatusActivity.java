@@ -497,6 +497,12 @@ public class NetStatusActivity extends BaseActivity {
         SerialPortUtil.sendMsg("{[REY2:DT:A005]<CLOSE>}".getBytes());
     }
 
+    @OnClick(R.id.test_hdmi_10)
+    public void test_hdmi_10() {
+        SerialPortUtil.sendMsg("{[VIDC:DT:A001]<9>}".getBytes());
+    }
+
+
     @OnClick(R.id.net_btn_back)
     public void net_btn_back() {
         back();
