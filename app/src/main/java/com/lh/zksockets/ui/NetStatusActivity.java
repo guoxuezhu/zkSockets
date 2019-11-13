@@ -342,10 +342,10 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 14, "灯光关", "1-206", ""));
             mLsListsDao.insert(new MLsLists((long) 15, "灯光1开(关)", "", ""));
             mLsListsDao.insert(new MLsLists((long) 16, "灯光1关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 17, "灯光2开(关)", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 18, "灯光2关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 19, "灯光3开(关)", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 20, "灯光3关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 17, "灯光2开(关)", "3-1-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 18, "灯光2关", "3-2-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 19, "灯光3开(关)", "3-3-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 20, "灯光3关", "3-4-1", ""));
             mLsListsDao.insert(new MLsLists((long) 21, "总音量+", "1-701,1-705,1-709", ""));
             mLsListsDao.insert(new MLsLists((long) 22, "总音量-", "1-702,1-706,1-710", ""));
             mLsListsDao.insert(new MLsLists((long) 23, "总音量静音开", "1-703,1-707,1-711", ""));
@@ -365,36 +365,36 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", "1-319", ""));
             mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", "1-102,1-320", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "1-502", ""));
-            mLsListsDao.insert(new MLsLists((long) 40, "空调-模式", "1-505", ""));
-            mLsListsDao.insert(new MLsLists((long) 41, "空调-风速", "1-506", ""));
-            mLsListsDao.insert(new MLsLists((long) 42, "空调-风向", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 43, "空调-温度+", "1-504", ""));
-            mLsListsDao.insert(new MLsLists((long) 44, "空调-温度-", "1-503", ""));
+            mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 40, "空调-关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 41, "空调-自动", "4-1-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 42, "空调-制冷", "4-2-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 43, "空调-制热", "4-3-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 44, "空调-风速", "4-4-1", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "1-319,1-201", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "2-4-1", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 48, "空调-关", "1-501", ""));
-            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "1-507", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "空调-模式", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "1-604", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "1-603", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "1-509", ""));
-            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "1-510", ""));
-            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "1-511", ""));
-            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "2-1-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "2-2-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "2-3-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "2-4-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "2-5-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "2-6-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "2-7-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "2-8-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 60, "新风开", "1-101", ""));
+            mLsListsDao.insert(new MLsLists((long) 61, "新风关", "1-201", ""));
+            mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "1-301", ""));
+            mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "1-401", ""));
+            mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "1-501", ""));
+            mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "1-601", ""));
+            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "1-701", ""));
+            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "1-801", ""));
         }
 
 
