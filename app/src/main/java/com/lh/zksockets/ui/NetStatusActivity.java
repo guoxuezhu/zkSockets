@@ -489,7 +489,7 @@ public class NetStatusActivity extends BaseActivity {
 
     @OnClick(R.id.test_jdq_ok)
     public void test_jdq_ok() {
-        SerialPortUtil.sendMsg("{[REY82:DT:A004]<OPEN>}".getBytes());
+        SerialPortUtil.sendMsg("{[REY2:DT:A004]<OPEN>}".getBytes());
     }
 
     @OnClick(R.id.test_jdq_no)
