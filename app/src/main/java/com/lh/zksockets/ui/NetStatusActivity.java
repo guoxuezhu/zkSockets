@@ -367,10 +367,10 @@ public class NetStatusActivity extends BaseActivity {
 
             mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 40, "空调-关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 41, "空调-自动", "4-1-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 42, "空调-制冷", "4-2-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 43, "空调-制热", "4-3-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 44, "空调-风速", "4-4-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 41, "空调-自动", "4-1-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 42, "空调-制冷", "4-2-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 43, "空调-制热", "4-3-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 44, "空调-风速", "4-4-0", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "1-319,1-201", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "2-4-1", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
