@@ -328,8 +328,8 @@ public class NetStatusActivity extends BaseActivity {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "上课", "1-601,1-601,1-509,1-510,1-511", ""));
             mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-602,1-509,1-510,1-511", ""));
-            mLsListsDao.insert(new MLsLists((long) 3, "自习", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 4, "休息", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "窗帘开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 4, "窗帘关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-2-1", ""));
             mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "2-1-1", ""));
             mLsListsDao.insert(new MLsLists((long) 7, "窗帘2开", "", ""));
@@ -358,13 +358,12 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 30, "麦克风音量-", "1-706", ""));
             mLsListsDao.insert(new MLsLists((long) 31, "麦克风静音开", "1-707", ""));
             mLsListsDao.insert(new MLsLists((long) 32, "麦克风静音关", "1-708", ""));
-            mLsListsDao.insert(new MLsLists((long) 33, "录播-录制", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 34, "录播-暂停", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 35, "录播-停止", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 36, "录播-直播", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 33, "新风-自动", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 34, "新风-低速", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 35, "新风-中速", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 36, "新风-高速", "", ""));
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", "1-319", ""));
             mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", "1-102,1-320", ""));
-
             mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 40, "空调-关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 41, "空调-自动", "4-1-0", ""));
@@ -378,7 +377,6 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "1-604", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "1-603", ""));
-
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "2-1-1", ""));
             mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "2-2-1", ""));
             mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "2-3-1", ""));
