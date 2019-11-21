@@ -20,6 +20,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 
@@ -57,8 +59,11 @@ public class SerialPortUtil {
 
 
     private static int bslength = 0;
+    private static int wsdbslength = 0;
     private static byte[] buffer1 = new byte[1024];
     private static byte[] buffer2 = new byte[1024];
+    private static byte[] wsdbuffer = new byte[1024];
+
 
     public static void readMsg2() {
 
@@ -86,7 +91,7 @@ public class SerialPortUtil {
 
                             System.arraycopy(buffer, 0, buffer1, bslength, size);
                             bslength = bslength + size;
-                            makeData(msg);
+                            makeData(new String(buffer1, 0, bslength));
                         }
                     }
 
@@ -100,11 +105,11 @@ public class SerialPortUtil {
 
     }
 
-    private static void makeData(String msg) {
+    private static void makeData(String msgdata) {
         try {
-            if (msg.indexOf("]") != -1) {
-                String msgdata = new String(buffer1, 0, bslength);
-                ELog.i("============msgdata====11111=============" + msgdata);
+            ELog.i("============msgdata====0000=============" + msgdata);
+            if (msgdata.indexOf("]") != -1) {
+                ELog.i("============msgdata====11111=============");
                 if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
                     bslength = bslength - 4;
                     System.arraycopy(buffer1, 4, buffer2, 0, bslength);
@@ -113,6 +118,29 @@ public class SerialPortUtil {
                     System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                     buffer2 = new byte[1024];
                     makeData(new String(buffer1, 0, bslength));
+
+//                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+//                    ELog.i("===========COM7=====test========" + msgdata.indexOf(">"));
+//                    if (msgdata.indexOf(">") != -1) {
+//                        int length2 = msgdata.indexOf(">") + 1;
+//                        System.arraycopy(buffer1, 7, wsdbuffer, wsdbslength, length2 - 8);
+//                        wsdbslength = wsdbslength + length2 - 8;
+//                        if (wsdbslength >= 27) {
+//                            readWenshidu();
+//                        }
+//                        buffer2 = new byte[1024];
+//                        bslength = bslength - msgdata.indexOf(">") - 1;
+//                        System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+//                        ELog.i("===========COM7======11111======" + new String(buffer2, 0, bslength));
+//                        buffer1 = new byte[1024];
+//                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+//                        buffer2 = new byte[1024];
+//                        makeData(new String(buffer1, 0, bslength));
+//                    }
+
+
+
+
 //                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
 //                    ELog.i("===========COM7=====test======111111=======" + msgdata.indexOf(">"));
 //                    if (msgdata.indexOf(">") != -1) {
@@ -214,6 +242,55 @@ public class SerialPortUtil {
         }
 
     }
+
+
+    private static void readWenshidu() {
+        String ret = "";
+        ELog.i("=======温度======wsdbslength=======" + wsdbslength);
+        for (int j = 0; j < wsdbslength; j++) {
+            String hex = Integer.toHexString(wsdbuffer[j] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            ret += hex.toUpperCase();
+        }
+        ELog.i("=======温度=============" + ret);
+        ELog.i("=======温度====11=========" + ret.substring(18, 22));
+        ELog.i("=======温度====22=========" + ret.substring(22, 26));
+        BigDecimal wendu = new BigDecimal(ret.substring(18, 22));
+        BigDecimal shidu = new BigDecimal(ret.substring(22, 26));
+        BigDecimal bigDecimal = new BigDecimal("0.1");
+        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+        WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
+                "", wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
+        wenShiDuDao.deleteAll();
+        wenShiDuDao.insert(wenShiDu);
+        ELog.i("=======温度=============" + wenShiDu.toString());
+        wsdclean();
+    }
+
+    private static Timer cleanTimer;
+
+    private static void wsdclean() {
+        if (cleanTimer != null) {
+            cleanTimer.cancel();
+            cleanTimer = null;
+        }
+        cleanTimer = new Timer();
+        cleanTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                wsdbslength = 0;
+                wsdbuffer = new byte[1024];
+                ELog.i("=======温度======wsdclean=======");
+                if (cleanTimer != null) {
+                    cleanTimer.cancel();
+                    cleanTimer = null;
+                }
+            }
+        }, 2000);
+    }
+
 
     private static void setWenshidu() {
 
