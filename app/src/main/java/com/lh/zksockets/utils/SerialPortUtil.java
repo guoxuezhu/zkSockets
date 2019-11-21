@@ -1,5 +1,8 @@
 package com.lh.zksockets.utils;
 
+import android.os.Message;
+
+import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
@@ -9,7 +12,9 @@ import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DoorInfo;
+import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -22,6 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android_serialport_api.SerialPort;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static java.lang.Thread.sleep;
 
@@ -370,6 +382,8 @@ public class SerialPortUtil {
                                     sendShipinType(msg);
                                 } else if (msg.substring(0, 3).equals("FWS")) {//复位
                                     sendFWstatus(msg);
+                                } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
+                                    sendCardLog(msg);
                                 } else if (msg.substring(0, 3).equals("MJD")) {//门禁
                                     makemenjin(msg);
                                 } else if (msg.substring(0, 3).equals("LUB")) {
@@ -393,6 +407,46 @@ public class SerialPortUtil {
             }
         }.start();
 
+    }
+
+    private static void sendCardLog(String msg) {
+        makeML((long)37);
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("card_no", msg.substring(3))
+                .add("detail", "刷卡打开 " + zkInfoDao.loadAll().get(0).zkname + "(" + zkInfoDao.loadAll().get(0).zkip + ") 的操作面板")
+                .add("addtime", DateUtil.getNow())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/add_ic_logs")
+                .post(requestBody)
+                .build();
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("==========数据=======" + responseText);
+//                Gson gson = new Gson();
+//                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+//                ELog.e("==========数据==11=====" + httpData.toString());
+            }
+        });
     }
 
     public static void makemenjin(String msg) {
