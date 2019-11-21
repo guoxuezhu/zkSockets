@@ -86,7 +86,7 @@ public class SerialPortUtil {
 
                             System.arraycopy(buffer, 0, buffer1, bslength, size);
                             bslength = bslength + size;
-                            makeData(msg);
+                            makeData(new String(buffer1, 0, bslength));
                         }
                     }
 
@@ -100,10 +100,10 @@ public class SerialPortUtil {
 
     }
 
-    private static void makeData(String msg) {
+    private static void makeData(String msgdata) {
         try {
-            if (msg.indexOf("]") != -1) {
-                String msgdata = new String(buffer1, 0, bslength);
+            ELog.i("============msgdata====00=============" + msgdata);
+            if (msgdata.indexOf("]") != -1) {
                 ELog.i("============msgdata====11111=============" + msgdata);
                 if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
                     bslength = bslength - 4;
