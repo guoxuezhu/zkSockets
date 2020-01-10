@@ -678,7 +678,7 @@ public class SerialPortUtil {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
 //                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
-                msg = "BB0" + str.substring(4, 5) + "0" + str.substring(6) + "80";
+                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
             } else if (str.substring(0, 4).equals("VIDC")) {
 //                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
                 msg = "BB050" + str.substring(4) + "80";
