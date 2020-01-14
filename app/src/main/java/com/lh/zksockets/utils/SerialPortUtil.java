@@ -409,6 +409,48 @@ public class SerialPortUtil {
 
     }
 
+    public static void wsdSendLog(WenShiDu wenShiDu) {
+        if (wenShiDu == null) {
+            return;
+        }
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
+        Gson gson = new Gson();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
+                .add("room_data", gson.toJson(wenShiDu))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/env_log")
+                .post(requestBody)
+                .build();
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("=======wsdSendLog===onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("========wsdSendLog==数据=======" + responseText);
+//                Gson gson = new Gson();
+//                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+//                ELog.e("==========数据==11=====" + httpData.toString());
+            }
+        });
+    }
+
     private static void sendCardLog(String msg) {
         makeML((long)37);
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();

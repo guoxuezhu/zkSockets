@@ -17,6 +17,7 @@ public class TimerUtils {
     private static Timer dangerOutTimer1, dangerOutTimer2, dangerOutTimer3, dangerOutTimer4;
     private static Timer ioOutTimer1, ioOutTimer2, ioOutTimer3, ioOutTimer4;
     private static Timer wenshiTimer, KaijiTimer, duandianTimer;
+    private static int wsdCount = 0;
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
@@ -465,11 +466,16 @@ public class TimerUtils {
             @Override
             public void run() {
                 try {
+                    wsdCount++;
                     WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
                     if (wenShiDuDao.loadAll().size() != 0) {
                         WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
                         String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
                         SerialPortUtil.sendMsg1(wsd.getBytes());
+                        if (wsdCount >= 60) {
+                            SerialPortUtil.wsdSendLog(wenShiDu);
+                            wsdCount = 0;
+                        }
                     }
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
