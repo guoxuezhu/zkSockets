@@ -421,7 +421,13 @@ public class SerialPortUtil {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", zkInfoDao.loadAll().get(0).zkip)
-                .add("room_data", gson.toJson(wenShiDu))
+                .add("CO2", wenShiDu.CO2)
+                .add("HCHO", wenShiDu.HCHO)
+                .add("PM10", wenShiDu.PM10)
+                .add("PM25", wenShiDu.PM25)
+                .add("VOC", wenShiDu.VOC)
+                .add("shiStr", wenShiDu.shiStr)
+                .add("wenStr", wenShiDu.wenStr)
                 .build();
 
         Request request = new Request.Builder()
