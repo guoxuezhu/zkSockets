@@ -417,7 +417,6 @@ public class SerialPortUtil {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
-        Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", zkInfoDao.loadAll().get(0).zkip)
