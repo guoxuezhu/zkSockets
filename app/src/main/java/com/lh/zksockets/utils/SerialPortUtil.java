@@ -444,7 +444,11 @@ public class SerialPortUtil {
                             ELog.i("=========串口1===接收到了数据=======" + msg);
                             if (msg.length() > 3) {
                                 if (msg.substring(0, 3).equals("VID")) {
-                                    sendShipinType(msg);
+                                    if (msg.substring(0, 4).equals("VIDS")) {
+                                        sendSMShipinType(msg);
+                                    } else {
+                                        sendShipinType(msg);
+                                    }
                                 } else if (msg.substring(0, 3).equals("FWS")) {//复位
                                     sendFWstatus(msg);
                                 } else if (msg.substring(0, 3).equals("MJD")) {//门禁
@@ -686,6 +690,18 @@ public class SerialPortUtil {
         }
     }
 
+    public static void sendSMShipinType(String str) {
+        synchronized (str) {
+            String msg = "";
+            if (str.substring(0, 6).equals("VIDSMA")) {
+                msg = "BB0" + str.substring(8) + "0" + str.substring(6, 7) + "80";
+            } else if (str.substring(0, 6).equals("VIDAMC")) {
+                msg = "BB050" + str.substring(6) + "80";
+            }
+            byte[] data = StringToBytes(msg);
+            sendMsg(data);
+        }
+    }
 
     public static void sendFWstatus(String str) {
         synchronized (str) {

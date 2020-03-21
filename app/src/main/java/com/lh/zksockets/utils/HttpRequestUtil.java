@@ -353,7 +353,11 @@ public class HttpRequestUtil {
         if (msg.length() > 3) {
             try {
                 if (msg.substring(0, 3).equals("VID")) {
-                    SerialPortUtil.sendShipinType(msg);
+                    if (msg.substring(0, 4).equals("VIDS")) {
+                        SerialPortUtil.sendSMShipinType(msg);
+                    } else {
+                        SerialPortUtil.sendShipinType(msg);
+                    }
                 } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
                     SerialPortUtil.sendKJban(msg);
                 } else if (msg.substring(0, 3).equals("MJD")) {//门禁

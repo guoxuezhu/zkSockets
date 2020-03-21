@@ -200,7 +200,11 @@ public class MyMqttService extends Service {
             String msg = message.toString();
             if (msg.length() > 3) {
                 if (msg.substring(0, 3).equals("VID")) {
-                    SerialPortUtil.sendShipinType(msg);
+                    if (msg.substring(0, 4).equals("VIDS")) {
+                        SerialPortUtil.sendSMShipinType(msg);
+                    } else {
+                        SerialPortUtil.sendShipinType(msg);
+                    }
                 } else if (msg.substring(0, 3).equals("FWS")) {
                     SerialPortUtil.sendFWstatus(msg);
                 } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
