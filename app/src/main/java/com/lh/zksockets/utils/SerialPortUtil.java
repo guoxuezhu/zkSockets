@@ -672,16 +672,15 @@ public class SerialPortUtil {
 
     }
 
-
     public static void sendShipinType(String str) {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
-                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
+                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
             } else if (str.substring(0, 4).equals("VIDC")) {
-                msg = "BB050" + str.substring(4) + "80";
+                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
             }
-            byte[] data = StringToBytes(msg);
+            byte[] data = msg.getBytes();
             sendMsg(data);
         }
     }
