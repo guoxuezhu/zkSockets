@@ -326,8 +326,8 @@ public class NetStatusActivity extends BaseActivity {
 
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() == 0) {
-            mLsListsDao.insert(new MLsLists((long) 1, "上课", "1-601,1-601,1-501,1-512,1-513", ""));
-            mLsListsDao.insert(new MLsLists((long) 2, "下课", "1-102,1-602,1-602,1-501,1-512,1-513", ""));
+            mLsListsDao.insert(new MLsLists((long) 1, "上课", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 2, "下课", "", ""));
             mLsListsDao.insert(new MLsLists((long) 3, "窗帘开", "2-2-1", ""));
             mLsListsDao.insert(new MLsLists((long) 4, "窗帘关", "2-1-1", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "2-2-1", ""));
@@ -398,10 +398,10 @@ public class NetStatusActivity extends BaseActivity {
 
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "人体感应", 1, "1-203", "1-204"));
-            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
+            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "3-1-1", "3-1-0"));
+            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "3-2-1", "3-2-0"));
+            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "人体感应", 1, "3-3-1", "3-3-0"));
+            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "3-4-1", "3-4-0"));
         }
 
 
@@ -425,8 +425,8 @@ public class NetStatusActivity extends BaseActivity {
             jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "窗帘开", 0, 1));
             jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 0, 1));
             jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "门禁", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 0, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 10));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 10));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布升", 0, 180));
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布降", 0, 180));
         }
