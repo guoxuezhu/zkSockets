@@ -696,19 +696,20 @@ public class SerialPortUtil {
 
     }
 
-
     public static void sendShipinType(String str) {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
-                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
+                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
             } else if (str.substring(0, 4).equals("VIDC")) {
-                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
+                msg = "BB050" + str.substring(4) + "80";
             }
-            byte[] data = msg.getBytes();
+            byte[] data = StringToBytes(msg);
             sendMsg(data);
         }
     }
+
+
 
 
     public static void sendFWstatus(String str) {
