@@ -15,6 +15,7 @@ import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -578,11 +579,17 @@ public class SerialPortUtil {
         String msg = "";
         if (ml.substring(4).equals("1")) {
             msg = "{[IOL" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
+            IoPortData ioPortData = ioPortDataDao.load(Long.valueOf(ml.substring(2, 3)));
+            ioPortData.setIoOutStatus(1);
+            ioPortDataDao.update(ioPortData);
 //            if (ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).ioOutStatus == 0) {
 //                TimerUtils.setHuifuIoOutstatus(ml.substring(2, 3), ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
 //            }
         } else if (ml.substring(4).equals("0")) {
             msg = "{[IOL" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
+            IoPortData ioPortData = ioPortDataDao.load(Long.valueOf(ml.substring(2, 3)));
+            ioPortData.setIoOutStatus(0);
+            ioPortDataDao.update(ioPortData);
 //            if (ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).ioOutStatus == 1) {
 //                TimerUtils.setHuifuIoOutstatus(ml.substring(2, 3), ioPortDataDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
 //            }
