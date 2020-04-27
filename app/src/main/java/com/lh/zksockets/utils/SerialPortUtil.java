@@ -1,12 +1,14 @@
 package com.lh.zksockets.utils;
 
 import android.os.Message;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
@@ -15,6 +17,7 @@ import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
@@ -389,6 +392,8 @@ public class SerialPortUtil {
                                     makemenjin(msg);
                                 } else if (msg.substring(0, 3).equals("LUB")) {
                                     HttpUtil.setlubo(msg);
+                                } else if (msg.substring(0, 3).equals("ICK")) {
+                                    shuaka(msg);
                                 } else if (msg.substring(0, 3).equals("MBS")) {
                                     try {
                                         makeML(Long.valueOf(msg.substring(3)));
@@ -408,6 +413,19 @@ public class SerialPortUtil {
             }
         }.start();
 
+    }
+
+    private static void shuaka(String msg) {
+        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+        List<IcCard> icCards = icCardDao.queryBuilder()
+                .where(IcCardDao.Properties.CardNum.eq(msg.substring(3)))
+                .orderAsc(IcCardDao.Properties.TerName)
+                .list();
+        if (icCards.size() != 0) {
+            sendMsg1("ICKSUCCESS".getBytes());
+        } else {
+            sendMsg1("ICKERROR".getBytes());
+        }
     }
 
     public static void wsdSendLog(WenShiDu wenShiDu) {
