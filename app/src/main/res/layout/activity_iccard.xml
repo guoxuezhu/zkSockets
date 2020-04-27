@@ -38,6 +38,15 @@
         android:layout_margin="@dimen/dp_20">
 
         <Button
+            android:id="@+id/get_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="云恢复"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24" />
+
+        <Button
             android:id="@+id/add_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,6 +97,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="卡类型"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16" />
 
@@ -97,6 +107,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="更新时间"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16" />
 
@@ -115,6 +126,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="所属部门"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16" />
 

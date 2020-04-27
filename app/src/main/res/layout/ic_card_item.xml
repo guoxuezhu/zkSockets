@@ -37,6 +37,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="卡类型"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -47,6 +48,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="更新时间"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -67,6 +69,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="所属部门"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
