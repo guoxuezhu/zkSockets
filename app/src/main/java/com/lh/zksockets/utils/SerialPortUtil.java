@@ -625,27 +625,26 @@ public class SerialPortUtil {
         }
         String msg = "";
         if (ml.substring(4).equals("1")) {
-
-            if (ml.substring(2, 3).equals("7")) {
-                msg = "{[REY8:DT:A005]<CLOSE>}";
-                byte[] data = msg.getBytes();
-                sendMsg(data);
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            } else if (ml.substring(2, 3).equals("8")) {
-                msg = "{[REY7:DT:A005]<CLOSE>}";
-                byte[] data = msg.getBytes();
-                sendMsg(data);
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (ml.substring(2, 3).equals("7")) {
+//                msg = "{[REY8:DT:A005]<CLOSE>}";
+//                byte[] data = msg.getBytes();
+//                sendMsg(data);
+//                try {
+//                    sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            } else if (ml.substring(2, 3).equals("8")) {
+//                msg = "{[REY7:DT:A005]<CLOSE>}";
+//                byte[] data = msg.getBytes();
+//                sendMsg(data);
+//                try {
+//                    sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
             if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
                 if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
@@ -653,6 +652,25 @@ public class SerialPortUtil {
                 }
             }
         } else if (ml.substring(4).equals("0")) {
+            if (ml.substring(2, 3).equals("7")) {
+                msg = "{[REY8:DT:A004]<OPEN>}";
+                byte[] data = msg.getBytes();
+                sendMsg(data);
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (ml.substring(2, 3).equals("8")) {
+                msg = "{[REY7:DT:A004]<OPEN>}";
+                byte[] data = msg.getBytes();
+                sendMsg(data);
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
             if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
                 if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
