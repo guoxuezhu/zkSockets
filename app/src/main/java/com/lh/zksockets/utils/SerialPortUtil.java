@@ -418,11 +418,11 @@ public class SerialPortUtil {
     private static void shuaka(String msg) {
         IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
         List<IcCard> icCards = icCardDao.queryBuilder()
-                .where(IcCardDao.Properties.CardNum.eq(msg.substring(3)))
-                .orderAsc(IcCardDao.Properties.TerName)
+                .where(IcCardDao.Properties.Card_no.eq(msg.substring(3)))
+                .orderAsc(IcCardDao.Properties.CardNumId)
                 .list();
         if (icCards.size() != 0) {
-            sendMsg1("ICKSUCCESS".getBytes());
+            sendMsg1("SKJAA".getBytes());
         } else {
             sendMsg1("ICKERROR".getBytes());
         }

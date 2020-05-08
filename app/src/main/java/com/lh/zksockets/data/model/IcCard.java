@@ -9,27 +9,32 @@ public class IcCard {
 
     public String workNum;
 
-    public int icType;
+    public String name;
 
-    public String terName;
-
-    public String department;
+    public String card_no;
 
     @Id
-    public Long cardNum;
+    public Long cardNumId;
+
+    public int role;
 
     public String updataTime;
 
-    @Generated(hash = 827250967)
-    public IcCard(String workNum, int icType, String terName, String department,
-            Long cardNum, String updataTime) {
+    public String status;
+
+
+    @Generated(hash = 1566743293)
+    public IcCard(String workNum, String name, String card_no, Long cardNumId,
+            int role, String updataTime, String status) {
         this.workNum = workNum;
-        this.icType = icType;
-        this.terName = terName;
-        this.department = department;
-        this.cardNum = cardNum;
+        this.name = name;
+        this.card_no = card_no;
+        this.cardNumId = cardNumId;
+        this.role = role;
         this.updataTime = updataTime;
+        this.status = status;
     }
+
 
     @Generated(hash = 2135423348)
     public IcCard() {
@@ -39,11 +44,12 @@ public class IcCard {
     public String toString() {
         return "IcCard{" +
                 "workNum='" + workNum + '\'' +
-                ", icType=" + icType +
-                ", terName='" + terName + '\'' +
-                ", department='" + department + '\'' +
-                ", cardNum=" + cardNum +
+                ", name='" + name + '\'' +
+                ", card_no='" + card_no + '\'' +
+                ", cardNumId=" + cardNumId +
+                ", role=" + role +
                 ", updataTime='" + updataTime + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 
@@ -51,47 +57,68 @@ public class IcCard {
         return this.workNum;
     }
 
+
     public void setWorkNum(String workNum) {
         this.workNum = workNum;
     }
 
-    public int getIcType() {
-        return this.icType;
+
+    public String getName() {
+        return this.name;
     }
 
-    public void setIcType(int icType) {
-        this.icType = icType;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTerName() {
-        return this.terName;
+
+    public String getCard_no() {
+        return this.card_no;
     }
 
-    public void setTerName(String terName) {
-        this.terName = terName;
+
+    public void setCard_no(String card_no) {
+        this.card_no = card_no;
     }
 
-    public String getDepartment() {
-        return this.department;
+
+    public Long getCardNumId() {
+        return this.cardNumId;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+
+    public void setCardNumId(Long cardNumId) {
+        this.cardNumId = cardNumId;
     }
 
-    public Long getCardNum() {
-        return this.cardNum;
+
+    public int getRole() {
+        return this.role;
     }
 
-    public void setCardNum(Long cardNum) {
-        this.cardNum = cardNum;
+
+    public void setRole(int role) {
+        this.role = role;
     }
+
 
     public String getUpdataTime() {
         return this.updataTime;
     }
 
+
     public void setUpdataTime(String updataTime) {
         this.updataTime = updataTime;
+    }
+
+
+    public String getStatus() {
+        return this.status;
+    }
+
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
