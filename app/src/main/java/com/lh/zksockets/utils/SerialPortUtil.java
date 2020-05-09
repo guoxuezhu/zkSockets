@@ -547,6 +547,20 @@ public class SerialPortUtil {
 
     public static void makeML(Long id) {
         synchronized (id) {
+            if (id == 1) {
+                sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
             if (mLsListsDao.loadAll().size() != 0) {
                 if (mLsListsDao.load(id) == null) {
@@ -557,6 +571,20 @@ public class SerialPortUtil {
                 String strMls = mLsListsDao.load(id).strMLs;
                 ELog.i("========串口1===========makeML=================" + id);
                 makeBaojing(strMls);
+            }
+            if (id == 2) {
+                try {
+                    sleep(3 * 60 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
             }
         }
 
