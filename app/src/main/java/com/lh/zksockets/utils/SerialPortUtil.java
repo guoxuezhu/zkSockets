@@ -29,6 +29,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 import okhttp3.Call;
@@ -47,6 +49,7 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
+    private static Timer xiakeTimer;
 
 
     public static void open() {
@@ -548,6 +551,7 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             if (id == 1) {
+                closeXiakeTimer();
                 sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
                 try {
                     sleep(1000);
@@ -573,11 +577,18 @@ public class SerialPortUtil {
                 makeBaojing(strMls);
             }
             if (id == 2) {
-                try {
-                    sleep(3 * 60 * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                setXiakeTimer();
+            }
+        }
+
+    }
+
+    private static void setXiakeTimer() {
+        closeXiakeTimer();
+        xiakeTimer = new Timer();
+        xiakeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
                 sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
                 try {
                     sleep(1000);
@@ -585,9 +596,16 @@ public class SerialPortUtil {
                     e.printStackTrace();
                 }
                 sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
+                closeXiakeTimer();
             }
-        }
+        }, 3 * 60 * 1000);
+    }
 
+    private static void closeXiakeTimer() {
+        if (xiakeTimer != null) {
+            xiakeTimer.cancel();
+            xiakeTimer = null;
+        }
     }
 
     private static void doDanger(String ml) {
