@@ -454,6 +454,8 @@ public class NetStatusActivity extends BaseActivity {
 
     }
 
+
+
     @OnClick(R.id.test_fm_ok)
     public void test_fm_ok() {
         SerialPortUtil.sendMsg("{[BEP0:DT:A004]<OPEN>}".getBytes());
@@ -464,41 +466,197 @@ public class NetStatusActivity extends BaseActivity {
         SerialPortUtil.sendMsg("{[BEP0:DT:A005]<CLOSE>}".getBytes());
     }
 
-    @OnClick(R.id.test_danger_ok)
-    public void test_danger_ok() {
+    @OnClick(R.id.test_danger1_ok)
+    public void test_danger1_ok() {
+        SerialPortUtil.sendMsg("{[ARM1:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger2_ok)
+    public void test_danger2_ok() {
         SerialPortUtil.sendMsg("{[ARM2:DT:A004]<OPEN>}".getBytes());
     }
 
-    @OnClick(R.id.test_danger_no)
-    public void test_danger_no() {
+    @OnClick(R.id.test_danger3_ok)
+    public void test_danger3_ok() {
+        SerialPortUtil.sendMsg("{[ARM3:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger4_ok)
+    public void test_danger4_ok() {
+        SerialPortUtil.sendMsg("{[ARM4:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger1_no)
+    public void test_danger1_no() {
+        SerialPortUtil.sendMsg("{[ARM1:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_danger2_no)
+    public void test_danger2_no() {
         SerialPortUtil.sendMsg("{[ARM2:DT:A005]<CLOSE>}".getBytes());
     }
 
+    @OnClick(R.id.test_danger3_no)
+    public void test_danger3_no() {
+        SerialPortUtil.sendMsg("{[ARM3:DT:A005]<CLOSE>}".getBytes());
+    }
 
-    @OnClick(R.id.test_io_ok)
-    public void test_io_ok() {
+    @OnClick(R.id.test_danger4_no)
+    public void test_danger4_no() {
+        SerialPortUtil.sendMsg("{[ARM4:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io1_ok)
+    public void test_io1_ok() {
+        SerialPortUtil.sendMsg("{[IOL1:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io2_ok)
+    public void test_io2_ok() {
         SerialPortUtil.sendMsg("{[IOL2:DT:A004]<OPEN>}".getBytes());
     }
 
-    @OnClick(R.id.test_io_no)
-    public void test_io_no() {
+    @OnClick(R.id.test_io3_ok)
+    public void test_io3_ok() {
+        SerialPortUtil.sendMsg("{[IOL3:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io4_ok)
+    public void test_io4_ok() {
+        SerialPortUtil.sendMsg("{[IOL4:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io1_no)
+    public void test_io1_no() {
+        SerialPortUtil.sendMsg("{[IOL1:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io2_no)
+    public void test_io2_no() {
         SerialPortUtil.sendMsg("{[IOL2:DT:A005]<CLOSE>}".getBytes());
     }
 
-    @OnClick(R.id.test_jdq_ok)
-    public void test_jdq_ok() {
+    @OnClick(R.id.test_io3_no)
+    public void test_io3_no() {
+        SerialPortUtil.sendMsg("{[IOL3:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_io4_no)
+    public void test_io4_no() {
+        SerialPortUtil.sendMsg("{[IOL4:DT:A005]<CLOSE>}".getBytes());
+    }
+
+
+    @OnClick(R.id.test_jdq1_ok)
+    public void test_jdq1_ok() {
+        SerialPortUtil.sendMsg("{[REY1:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq2_ok)
+    public void test_jdq2_ok() {
         SerialPortUtil.sendMsg("{[REY2:DT:A004]<OPEN>}".getBytes());
     }
 
-    @OnClick(R.id.test_jdq_no)
-    public void test_jdq_no() {
+    @OnClick(R.id.test_jdq3_ok)
+    public void test_jdq3_ok() {
+        SerialPortUtil.sendMsg("{[REY3:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq4_ok)
+    public void test_jdq4_ok() {
+        SerialPortUtil.sendMsg("{[REY4:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq5_ok)
+    public void test_jdq5_ok() {
+        SerialPortUtil.sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq6_ok)
+    public void test_jdq6_ok() {
+        SerialPortUtil.sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq7_ok)
+    public void test_jdq7_ok() {
+        SerialPortUtil.sendMsg("{[REY7:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq8_ok)
+    public void test_jdq8_ok() {
+        SerialPortUtil.sendMsg("{[REY8:DT:A004]<OPEN>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq1_no)
+    public void test_jdq1_no() {
+        SerialPortUtil.sendMsg("{[REY1:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq2_no)
+    public void test_jdq2_no() {
         SerialPortUtil.sendMsg("{[REY2:DT:A005]<CLOSE>}".getBytes());
     }
 
-    @OnClick(R.id.test_hdmi_10)
-    public void test_hdmi_10() {
+    @OnClick(R.id.test_jdq3_no)
+    public void test_jdq3_no() {
+        SerialPortUtil.sendMsg("{[REY3:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq4_no)
+    public void test_jdq4_no() {
+        SerialPortUtil.sendMsg("{[REY4:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq5_no)
+    public void test_jdq5_no() {
+        SerialPortUtil.sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq6_no)
+    public void test_jdq6_no() {
+        SerialPortUtil.sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq7_no)
+    public void test_jdq7_no() {
+        SerialPortUtil.sendMsg("{[REY7:DT:A005]<CLOSE>}".getBytes());
+    }
+
+    @OnClick(R.id.test_jdq8_no)
+    public void test_jdq8_no() {
+        SerialPortUtil.sendMsg("{[REY8:DT:A005]<CLOSE>}".getBytes());
+    }
+
+
+    @OnClick(R.id.test_vid_0)
+    public void test_vid_0() {
+        SerialPortUtil.sendMsg("{[VIDA:DT:A003]<4,4>}".getBytes());
+    }
+
+    @OnClick(R.id.test_vid_10)
+    public void test_vid_10() {
         SerialPortUtil.sendMsg("{[VIDC:DT:A001]<9>}".getBytes());
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @OnClick(R.id.net_btn_back)

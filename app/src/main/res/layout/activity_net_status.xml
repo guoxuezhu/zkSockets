@@ -32,51 +32,23 @@
     </RelativeLayout>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/test_io_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/btn_bg"
-            android:text="io开"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20" />
-
-        <Button
-            android:id="@+id/test_io_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/btn_bg"
-            android:text="io关"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20" />
-
-
-        <Button
-            android:id="@+id/test_danger_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/btn_bg"
-            android:text="danger开"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20" />
-
-        <Button
-            android:id="@+id/test_danger_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/btn_bg"
-            android:text="danger关"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20" />
-
 
         <Button
             android:id="@+id/test_fm_ok"
@@ -84,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_40"
             android:background="@drawable/btn_bg"
-            android:text="fm开"
+            android:text="fm关"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
@@ -94,29 +66,97 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_40"
             android:background="@drawable/btn_bg"
-            android:text="fm关"
+            android:text="fm开"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
 
 
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <Button
-            android:id="@+id/test_jdq_ok"
+            android:id="@+id/test_jdq1_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/btn_bg"
-            android:text="jdq开"
+            android:text="jdq1关"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
         <Button
-            android:id="@+id/test_jdq_no"
+            android:id="@+id/test_jdq2_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/btn_bg"
-            android:text="jdq关"
+            android:text="jdq2关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq3_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq3关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq4_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq4关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_jdq5_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq5关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq6_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq6关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq7_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq7关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+        <Button
+            android:id="@+id/test_jdq8_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq8关"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
@@ -127,19 +167,295 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <Button
-            android:id="@+id/test_hdmi_10"
+            android:id="@+id/test_jdq1_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/btn_bg"
-            android:text="hdmi-10"
+            android:text="jdq1开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq2_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq2开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq3_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq3开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_jdq4_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq4开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq5_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq5开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq6_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq6开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_jdq7_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq7开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_jdq8_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="jdq8开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/test_io1_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io1开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io2_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io2开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io3_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io3开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io4_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io4开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger1_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out1关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger2_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out2关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger3_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out3关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger4_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out4关"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/test_io1_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io1关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io2_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io2关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io3_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io3关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_io4_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="io4关"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_danger1_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out1开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_danger2_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out2开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_danger3_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out3开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <Button
+            android:id="@+id/test_danger4_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/btn_bg"
+            android:text="报警out4开"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/test_vid_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="HDMI10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+        <Button
+            android:id="@+id/test_vid_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_40"
+            android:background="@drawable/btn_bg"
+            android:text="HDMI0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

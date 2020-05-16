@@ -96,16 +96,29 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据==size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
-
-                            if (bslength > 200) {
-                                bslength = 0;
-                                buffer1 = new byte[1024];
-                                buffer2 = new byte[1024];
+                            try {
+                                if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM0]")) {
+                                    sendMsg("{[COM0:DT:A006]<111111>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM1]")) {
+                                    sendMsg("{[COM1:DT:A006]<222222>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM2]")) {
+                                    sendMsg("{[COM2:DT:A006]<333333>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM3]")) {
+                                    sendMsg("{[COM3:DT:A006]<444444>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM4]")) {
+                                    sendMsg("{[COM4:DT:A006]<555555>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM5]")) {
+                                    sendMsg("{[COM5:DT:A006]<666666>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM6]")) {
+                                    sendMsg("{[COM6:DT:A006]<777777>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[COM7]")) {
+                                    sendMsg("{[COM7:DT:A006]<888888>}".getBytes());
+                                } else if (msg.substring(0, msg.indexOf("]") + 1).equals("[ARM0]")) {
+                                    baojin(Integer.toHexString(buffer[7] & 0xFF));
+                                }
+                            } catch (Exception e) {
+                                ELog.i("=========sssss数据读取异常========" + e.toString());
                             }
-
-                            System.arraycopy(buffer, 0, buffer1, bslength, size);
-                            bslength = bslength + size;
-                            makeData(new String(buffer1, 0, bslength));
                         }
                     }
 
@@ -296,34 +309,32 @@ public class SerialPortUtil {
         if (str2jz != null) {
             if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 4);
-                makeBaojing(ioYuanDao.load((long) 4).dangerMl);
+                sendMsg("{[IOL4:DT:A004]<OPEN>}".getBytes());
             } else {
-                makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
+                sendMsg("{[IOL4:DT:A005]<CLOSE>}".getBytes());
             }
 
             if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 3);
-                makeBaojing(ioYuanDao.load((long) 3).dangerMl);
+                sendMsg("{[IOL3:DT:A004]<OPEN>}".getBytes());
             } else {
-                makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
+                sendMsg("{[IOL3:DT:A005]<CLOSE>}".getBytes());
             }
 
             if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 2);
-                makeBaojing(ioYuanDao.load((long) 2).dangerMl);
+                sendMsg("{[IOL2:DT:A004]<OPEN>}".getBytes());
             } else {
-                makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
+                sendMsg("{[IOL2:DT:A005]<CLOSE>}".getBytes());
             }
 
             if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
                 ELog.i("=========报警口======" + 1);
-                makeBaojing(ioYuanDao.load((long) 1).dangerMl);
+                sendMsg("{[IOL1:DT:A004]<OPEN>}".getBytes());
             } else {
-                makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
+                sendMsg("{[IOL1:DT:A005]<CLOSE>}".getBytes());
             }
-
         }
-
 
     }
 
