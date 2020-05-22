@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,18 +16,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.ApkInfo;
-import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.HttpData;
-import com.lh.zksockets.data.model.HttpRow;
-import com.lh.zksockets.data.model.LuboInfo;
-import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
 import com.lh.zksockets.utils.DisplayTools;
@@ -38,12 +32,7 @@ import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,7 +55,7 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.login_password)
     EditText login_password;
 
-    private Timer stimer;
+    private Timer stimer, reOpentimer;
 
     private Handler splashHandler = new Handler() {
         @Override
@@ -89,12 +78,45 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
+        initdata();
+    }
+
+    private void initdata() {
+        if (SerialPortUtil.open()) {
+            startMysystem();
+        } else {
+            serialPortOpen();
+        }
+    }
+
+    private void serialPortOpen() {
+        if (reOpentimer != null) {
+            reOpentimer.cancel();
+            reOpentimer = null;
+        }
+        reOpentimer = new Timer();
+        reOpentimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                initdata();
+                if (reOpentimer != null) {
+                    reOpentimer.cancel();
+                    reOpentimer = null;
+                }
+            }
+        }, 1000 * 2);
+    }
+
+    private void startMysystem() {
+        if (stimer != null) {
+            stimer.cancel();
+            stimer = null;
+        }
         stimer = new Timer();
         stimer.schedule(new TimerTask() {
             @Override
             public void run() {
 
-                SerialPortUtil.open();
                 SerialPortUtil.readMsg1();
                 SerialPortUtil.readMsg2();
 
@@ -115,7 +137,10 @@ public class SplashActivity extends BaseActivity {
 
                 updataAPK();
 
-                stimer.cancel();
+                if (stimer != null) {
+                    stimer.cancel();
+                    stimer = null;
+                }
             }
         }, 500);
 
