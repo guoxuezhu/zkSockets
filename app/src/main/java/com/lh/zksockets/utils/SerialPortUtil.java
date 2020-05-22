@@ -1,9 +1,5 @@
 package com.lh.zksockets.utils;
 
-import android.os.Message;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
@@ -15,8 +11,6 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
-import com.lh.zksockets.data.model.DoorInfo;
-import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -52,12 +46,7 @@ public class SerialPortUtil {
     private static Timer xiakeTimer;
 
 
-    public static void open() {
-
-        if (serialPort1 != null) {
-            return;
-        }
-
+    public static boolean open() {
         try {
             serialPort1 = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
             serialPort2 = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
@@ -67,10 +56,11 @@ public class SerialPortUtil {
 
             inputStream2 = serialPort2.getInputStream();
             outputStream2 = serialPort2.getOutputStream();
-
-        } catch (IOException e) {
+            return true;
+        } catch (Exception e) {
             ELog.e("======open_ck=====打开串口异常");
             e.printStackTrace();
+            return false;
         }
     }
 
