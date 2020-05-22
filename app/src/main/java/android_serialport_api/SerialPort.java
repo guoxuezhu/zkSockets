@@ -16,6 +16,8 @@
 
 package android_serialport_api;
 
+import com.baidu.mobstat.StatService;
+import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.utils.ELog;
 
 import java.io.File;
@@ -50,6 +52,7 @@ public class SerialPort {
                 if ((su.waitFor() != 0) || !device.canRead()
                         || !device.canWrite()) {
                     ELog.i("=======SerialPort==SerialPort=打开串口不能读写异常");
+                    StatService.recordException(MyApplication.context, new Exception("打开串口不能读写异常"));
                     throw new SecurityException();
                 }
             } catch (Exception e) {
