@@ -16,6 +16,9 @@
 
 package android_serialport_api;
 
+import com.baidu.mobstat.StatService;
+import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.utils.DateUtil;
 import com.lh.zksockets.utils.ELog;
 
 import java.io.File;
@@ -25,6 +28,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SerialPort {
 
@@ -50,6 +55,9 @@ public class SerialPort {
                 if ((su.waitFor() != 0) || !device.canRead()
                         || !device.canWrite()) {
                     ELog.i("=======SerialPort==SerialPort=打开串口不能读写异常");
+                    Map<String, String> attributes = new HashMap<String, String>();
+                    attributes.put("时间", DateUtil.getNow());
+                    StatService.onEvent(MyApplication.context,  "打开串口异常", "异常", 1, attributes);
                     throw new SecurityException();
                 }
             } catch (Exception e) {
