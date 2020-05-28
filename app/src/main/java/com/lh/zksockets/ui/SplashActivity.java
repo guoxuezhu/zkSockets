@@ -98,11 +98,12 @@ public class SplashActivity extends BaseActivity {
         reOpentimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                initdata();
                 if (reOpentimer != null) {
                     reOpentimer.cancel();
                     reOpentimer = null;
                 }
+                initdata();
+                ELog.i("========串口===timer=======");
             }
         }, 1000 * 2);
     }
