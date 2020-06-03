@@ -122,9 +122,14 @@ public class EnvironmentalActivity extends BaseActivity {
 
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            for (int i = 1; i < 9; i++) {
-                jdqStatusDao.insert(new JDQstatus((long) i, "继电器" + i, "", 1, 1));
-            }
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 0, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布升", 0, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布降", 0, 180));
         }
 
         initView();
