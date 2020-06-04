@@ -78,7 +78,10 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        initdata();
+        boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
+        if (!isReset) {
+            initdata();
+        }
     }
 
     private void initdata() {
