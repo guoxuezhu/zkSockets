@@ -365,8 +365,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 8, "窗帘2关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 9, "投影机开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 10, "投影机关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-7-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-8-1", ""));
+            mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-7-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-8-0", ""));
             mLsListsDao.insert(new MLsLists((long) 13, "灯光开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 14, "灯光关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 15, "灯光1开(关)", "", ""));
