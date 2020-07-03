@@ -12,6 +12,7 @@ import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.ChazuoData;
 import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
+import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventBig;
 import com.lh.zksockets.data.model.EventKejianRest;
@@ -35,6 +36,7 @@ import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.ChazuoDataDao;
 import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.EventBigDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
@@ -67,6 +69,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig chazuoDataDaoConfig;
     private final DaoConfig computerDaoConfig;
     private final DaoConfig dangerOutDaoConfig;
+    private final DaoConfig dangerStatusDaoConfig;
     private final DaoConfig doorInfoDaoConfig;
     private final DaoConfig eventBigDaoConfig;
     private final DaoConfig eventKejianRestDaoConfig;
@@ -90,6 +93,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ChazuoDataDao chazuoDataDao;
     private final ComputerDao computerDao;
     private final DangerOutDao dangerOutDao;
+    private final DangerStatusDao dangerStatusDao;
     private final DoorInfoDao doorInfoDao;
     private final EventBigDao eventBigDao;
     private final EventKejianRestDao eventKejianRestDao;
@@ -124,6 +128,9 @@ public class DaoSession extends AbstractDaoSession {
 
         dangerOutDaoConfig = daoConfigMap.get(DangerOutDao.class).clone();
         dangerOutDaoConfig.initIdentityScope(type);
+
+        dangerStatusDaoConfig = daoConfigMap.get(DangerStatusDao.class).clone();
+        dangerStatusDaoConfig.initIdentityScope(type);
 
         doorInfoDaoConfig = daoConfigMap.get(DoorInfoDao.class).clone();
         doorInfoDaoConfig.initIdentityScope(type);
@@ -183,6 +190,7 @@ public class DaoSession extends AbstractDaoSession {
         chazuoDataDao = new ChazuoDataDao(chazuoDataDaoConfig, this);
         computerDao = new ComputerDao(computerDaoConfig, this);
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
+        dangerStatusDao = new DangerStatusDao(dangerStatusDaoConfig, this);
         doorInfoDao = new DoorInfoDao(doorInfoDaoConfig, this);
         eventBigDao = new EventBigDao(eventBigDaoConfig, this);
         eventKejianRestDao = new EventKejianRestDao(eventKejianRestDaoConfig, this);
@@ -206,6 +214,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(ChazuoData.class, chazuoDataDao);
         registerDao(Computer.class, computerDao);
         registerDao(DangerOut.class, dangerOutDao);
+        registerDao(DangerStatus.class, dangerStatusDao);
         registerDao(DoorInfo.class, doorInfoDao);
         registerDao(EventBig.class, eventBigDao);
         registerDao(EventKejianRest.class, eventKejianRestDao);
@@ -231,6 +240,7 @@ public class DaoSession extends AbstractDaoSession {
         chazuoDataDaoConfig.clearIdentityScope();
         computerDaoConfig.clearIdentityScope();
         dangerOutDaoConfig.clearIdentityScope();
+        dangerStatusDaoConfig.clearIdentityScope();
         doorInfoDaoConfig.clearIdentityScope();
         eventBigDaoConfig.clearIdentityScope();
         eventKejianRestDaoConfig.clearIdentityScope();
@@ -265,6 +275,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public DangerOutDao getDangerOutDao() {
         return dangerOutDao;
+    }
+
+    public DangerStatusDao getDangerStatusDao() {
+        return dangerStatusDao;
     }
 
     public DoorInfoDao getDoorInfoDao() {

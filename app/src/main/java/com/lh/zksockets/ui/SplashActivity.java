@@ -17,11 +17,13 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.ApkInfo;
+import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
@@ -77,6 +79,10 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+        DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+        dangerStatusDao.deleteAll();
+        dangerStatusDao.insert(new DangerStatus((long) 1,0,0,0,0));
 
         boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
         if (!isReset) {

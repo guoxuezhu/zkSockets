@@ -2,6 +2,7 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
@@ -11,6 +12,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -284,37 +286,51 @@ public class SerialPortUtil {
         String str2jz = JinzhiUtil.get2String(hex);
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
-            if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 4);
-                makeBaojing(ioYuanDao.load((long) 4).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
+            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+
+            if (!str2jz.substring(0, 1).equals(dangerStatusDao.load((long) 1).dangerStatus4 + "")) {
+                if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 4);
+                    makeBaojing(ioYuanDao.load((long) 4).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
+                }
             }
 
-            if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 3);
-                makeBaojing(ioYuanDao.load((long) 3).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
+            if (!str2jz.substring(1, 2).equals(dangerStatusDao.load((long) 1).dangerStatus3 + "")) {
+                if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 3);
+                    makeBaojing(ioYuanDao.load((long) 3).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
+                }
             }
 
-            if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 2);
-                makeBaojing(ioYuanDao.load((long) 2).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
+            if (!str2jz.substring(2, 3).equals(dangerStatusDao.load((long) 1).dangerStatus2 + "")) {
+                if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 2);
+                    makeBaojing(ioYuanDao.load((long) 2).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
+                }
             }
 
-            if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 1);
-                makeBaojing(ioYuanDao.load((long) 1).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
+            if (!str2jz.substring(3, 4).equals(dangerStatusDao.load((long) 1).dangerStatus1 + "")) {
+                if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 1);
+                    makeBaojing(ioYuanDao.load((long) 1).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
+                }
             }
+
+            dangerStatusDao.deleteAll();
+            dangerStatusDao.insert(new DangerStatus((long) 1, Integer.valueOf(str2jz.substring(3, 4)),
+                    Integer.valueOf(str2jz.substring(2, 3)),
+                    Integer.valueOf(str2jz.substring(1, 2)),
+                    Integer.valueOf(str2jz.substring(0, 1))));
 
         }
-
-
     }
 
     private static void makeBaojing(String strMls) {
