@@ -1,5 +1,6 @@
 package com.lh.zksockets.utils;
 
+import com.baidu.mobstat.StatService;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
@@ -94,10 +95,14 @@ public class SerialPortUtil {
                                 buffer1 = new byte[1024];
                                 buffer2 = new byte[1024];
                             }
-
-                            System.arraycopy(buffer, 0, buffer1, bslength, size);
-                            bslength = bslength + size;
-                            makeData(new String(buffer1, 0, bslength));
+                            try {
+                                System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                bslength = bslength + size;
+                                makeData(new String(buffer1, 0, bslength));
+                            } catch (Exception e) {
+                                ELog.i("========run====System.arraycopy====" + e.toString());
+                                StatService.recordException(MyApplication.context, e);
+                            }
                         }
                     }
 
