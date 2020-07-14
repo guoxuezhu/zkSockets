@@ -381,6 +381,8 @@ public class HttpRequestUtil {
                     SerialPortUtil.sendFWstatus(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
+                } else if (msg.substring(0, 3).equals("JZF")) {
+                    SerialPortUtil.sendShipinFenping(msg);
                 } else if (msg.substring(0, 3).equals("MBS")) {
                     try {
                         SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
