@@ -819,7 +819,7 @@ public class SerialPortUtil {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 5).equals("JZFGB")) {
-                msg = "BB030009" + str.substring(5) + "000055";
+                msg = "BB0300090" + str.substring(5) + "000055";
             } else if (str.equals("JZFFP2")) {
                 msg = "BB02005200000055";
             } else if (str.equals("JZFFP1")) {
@@ -837,6 +837,7 @@ public class SerialPortUtil {
             System.arraycopy(data1, 0, data, 0, data1.length);
             System.arraycopy(data2, 0, data, data1.length, data2.length);
             System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+            ELog.i("========分屏=========" + msg);
             sendMsg(data);
         }
     }
