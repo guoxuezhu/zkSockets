@@ -395,28 +395,33 @@ public class SerialPortUtil {
                         if (size > 0) {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口1===接收到了数据=======" + msg);
-                            if (msg.length() > 3) {
-                                if (msg.substring(0, 3).equals("VID")) {
-                                    sendShipinType(msg);
-                                } else if (msg.substring(0, 3).equals("FWS")) {//复位
-                                    sendFWstatus(msg);
-                                } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
-                                    sendCardLog(msg);
-                                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
-                                    makemenjin(msg);
-                                } else if (msg.substring(0, 3).equals("LUB")) {
-                                    HttpUtil.setlubo(msg);
-                                } else if (msg.substring(0, 3).equals("JZF")) {
-                                    sendShipinFenping(msg);
-                                } else if (msg.substring(0, 3).equals("ICK")) {
-                                    shuaka(msg);
-                                } else if (msg.substring(0, 3).equals("MBS")) {
-                                    try {
-                                        makeML(Long.valueOf(msg.substring(3)));
-                                    } catch (Exception e) {
-                                        ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+                            try {
+                                if (msg.length() > 3) {
+                                    if (msg.substring(0, 3).equals("VID")) {
+                                        sendShipinType(msg);
+                                    } else if (msg.substring(0, 3).equals("FWS")) {//复位
+                                        sendFWstatus(msg);
+                                    } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
+                                        sendCardLog(msg);
+                                    } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                                        makemenjin(msg);
+                                    } else if (msg.substring(0, 3).equals("LUB")) {
+                                        HttpUtil.setlubo(msg);
+                                    } else if (msg.substring(0, 3).equals("JZF")) {
+                                        sendShipinFenping(msg);
+                                    } else if (msg.substring(0, 3).equals("ICK")) {
+                                        shuaka(msg);
+                                    } else if (msg.substring(0, 3).equals("MBS")) {
+                                        try {
+                                            makeML(Long.valueOf(msg.substring(3)));
+                                        } catch (Exception e) {
+                                            ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+                                        }
                                     }
                                 }
+                            } catch (Exception e) {
+                                ELog.i("======串口1===接收数据===run======" + e.toString());
+                                StatService.recordException(MyApplication.context, e);
                             }
                         }
                     }
@@ -824,22 +829,47 @@ public class SerialPortUtil {
                 msg = "BB02005200000055";
             } else if (str.equals("JZFFP1")) {
                 msg = "BB02005100000055";
+                sendshipinCommand(msg);
+                try {
+                    sleep(600);
+                    sendshipinCommand("BB04000201000055");
+                    sleep(600);
+                    sendshipinCommand("BB04000202020055");
+                    sleep(600);
+                    sendshipinCommand("BB04000203030055");
+                    sleep(600);
+                    sendshipinCommand("BB04000204040055");
+                    sleep(600);
+                    sendshipinCommand("BB04000205050055");
+                    sleep(600);
+                    sendshipinCommand("BB04000206060055");
+                    sleep(600);
+                    sendshipinCommand("BB04000207070055");
+                    sleep(600);
+                    msg = "BB04000208080055";
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (str.substring(0, 5).equals("JZFAA")) {
                 msg = "BB0400020" + str.substring(5) + "000055";
             } else if (str.substring(0, 5).equals("JZFBB")) {
                 msg = "BB0400020" + str.substring(5) + "010055";
             }
+            sendshipinCommand(msg);
 
-            byte[] data1 = "{[COM0:DT:H008]<".getBytes();
-            byte[] data2 = StringToBytes(msg);
-            byte[] data3 = ">}".getBytes();
-            byte[] data = new byte[data1.length + data2.length + data3.length];
-            System.arraycopy(data1, 0, data, 0, data1.length);
-            System.arraycopy(data2, 0, data, data1.length, data2.length);
-            System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
-            ELog.i("========分屏=========" + msg);
-            sendMsg(data);
         }
+    }
+
+    private static void sendshipinCommand(String msg) {
+        byte[] data1 = "{[COM0:DT:H008]<".getBytes();
+        byte[] data2 = StringToBytes(msg);
+        byte[] data3 = ">}".getBytes();
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        ELog.i("========分屏=========" + msg);
+        sendMsg(data);
     }
 
 
