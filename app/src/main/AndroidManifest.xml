@@ -68,7 +68,6 @@
         <activity
             android:name=".ui.DoorSetingActivity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".ui.BaseSetingActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -98,6 +97,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.ZhongKongActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ui.UdptcpActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.IOsetActivity"

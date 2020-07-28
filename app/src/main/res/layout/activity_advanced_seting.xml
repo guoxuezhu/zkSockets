@@ -89,7 +89,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/udptvp_seting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="第三方网络设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 

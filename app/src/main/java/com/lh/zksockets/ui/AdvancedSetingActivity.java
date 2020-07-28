@@ -48,11 +48,11 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
-//    @OnClick(R.id.ic_seting)
-//    public void ic_seting() {
-//        startActivity(new Intent(this, ICcardActivity.class));
-//        finish();
-//    }
+    @OnClick(R.id.udptvp_seting)
+    public void udptvp_seting() {
+        startActivity(new Intent(this, UdptcpActivity.class));
+        finish();
+    }
 
     @OnClick(R.id.zk_seting)
     public void zk_seting() {

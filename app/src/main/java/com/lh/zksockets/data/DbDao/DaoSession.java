@@ -28,6 +28,7 @@ import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.Projector;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
+import com.lh.zksockets.data.model.UDPInfo;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
@@ -52,6 +53,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.UDPInfoDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
@@ -85,6 +87,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig projectorDaoConfig;
     private final DaoConfig serialCommandDaoConfig;
     private final DaoConfig serialPortDataDaoConfig;
+    private final DaoConfig uDPInfoDaoConfig;
     private final DaoConfig usersDaoConfig;
     private final DaoConfig wenShiDuDaoConfig;
     private final DaoConfig zkInfoDaoConfig;
@@ -109,6 +112,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ProjectorDao projectorDao;
     private final SerialCommandDao serialCommandDao;
     private final SerialPortDataDao serialPortDataDao;
+    private final UDPInfoDao uDPInfoDao;
     private final UsersDao usersDao;
     private final WenShiDuDao wenShiDuDao;
     private final ZkInfoDao zkInfoDao;
@@ -177,6 +181,9 @@ public class DaoSession extends AbstractDaoSession {
         serialPortDataDaoConfig = daoConfigMap.get(SerialPortDataDao.class).clone();
         serialPortDataDaoConfig.initIdentityScope(type);
 
+        uDPInfoDaoConfig = daoConfigMap.get(UDPInfoDao.class).clone();
+        uDPInfoDaoConfig.initIdentityScope(type);
+
         usersDaoConfig = daoConfigMap.get(UsersDao.class).clone();
         usersDaoConfig.initIdentityScope(type);
 
@@ -206,6 +213,7 @@ public class DaoSession extends AbstractDaoSession {
         projectorDao = new ProjectorDao(projectorDaoConfig, this);
         serialCommandDao = new SerialCommandDao(serialCommandDaoConfig, this);
         serialPortDataDao = new SerialPortDataDao(serialPortDataDaoConfig, this);
+        uDPInfoDao = new UDPInfoDao(uDPInfoDaoConfig, this);
         usersDao = new UsersDao(usersDaoConfig, this);
         wenShiDuDao = new WenShiDuDao(wenShiDuDaoConfig, this);
         zkInfoDao = new ZkInfoDao(zkInfoDaoConfig, this);
@@ -230,6 +238,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Projector.class, projectorDao);
         registerDao(SerialCommand.class, serialCommandDao);
         registerDao(SerialPortData.class, serialPortDataDao);
+        registerDao(UDPInfo.class, uDPInfoDao);
         registerDao(Users.class, usersDao);
         registerDao(WenShiDu.class, wenShiDuDao);
         registerDao(ZkInfo.class, zkInfoDao);
@@ -256,6 +265,7 @@ public class DaoSession extends AbstractDaoSession {
         projectorDaoConfig.clearIdentityScope();
         serialCommandDaoConfig.clearIdentityScope();
         serialPortDataDaoConfig.clearIdentityScope();
+        uDPInfoDaoConfig.clearIdentityScope();
         usersDaoConfig.clearIdentityScope();
         wenShiDuDaoConfig.clearIdentityScope();
         zkInfoDaoConfig.clearIdentityScope();
@@ -339,6 +349,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public SerialPortDataDao getSerialPortDataDao() {
         return serialPortDataDao;
+    }
+
+    public UDPInfoDao getUDPInfoDao() {
+        return uDPInfoDao;
     }
 
     public UsersDao getUsersDao() {

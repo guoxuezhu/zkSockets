@@ -33,6 +33,7 @@ import com.lh.zksockets.utils.FileUtil;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
+import com.lh.zksockets.utils.UDPUtil;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -144,7 +145,7 @@ public class SplashActivity extends BaseActivity {
 //                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
 
                 mqttServiceStart();
-
+                UDPUtil.getMsg();
                 updataAPK();
 
                 if (stimer != null) {

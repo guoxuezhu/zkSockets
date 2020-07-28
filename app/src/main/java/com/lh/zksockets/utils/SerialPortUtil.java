@@ -11,6 +11,7 @@ import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.UDPInfoDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
@@ -24,6 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.net.DatagramPacket;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -595,9 +598,37 @@ public class SerialPortUtil {
                 makeBaojing(strMls);
             }
             if (id == 2) {
+                guanDiannao();
                 setXiakeTimer();
             }
+            if (id == 13) {
+                UDPUtil.ClientSend(StringToBytes("FE0829020264D40106000102"));
+            }
+            if (id == 14) {
+                UDPUtil.ClientSend(StringToBytes("FE0829020264D40106000102"));
+            }
+            if (id == 15) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202BF520106000101"));
+                UDPUtil.ClientSend(StringToBytes("FE0829020240760106000101"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202B2E80106000102"));
+            }
+            if (id == 16) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202BF520106000100"));
+                UDPUtil.ClientSend(StringToBytes("FE0829020240760106000100"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202B2E80106000102"));
+            }
         }
+
+    }
+
+    private static void guanDiannao() {
+        UDPInfoDao udpInfoDao = MyApplication.getDaoSession().getUDPInfoDao();
+        if (udpInfoDao.loadAll().size() == 0) {
+            return;
+        }
+        ELog.d("=======udpInfoDao=====guanDiannao======" + udpInfoDao.loadAll().toString());
+        UDPUtil.sendUDPMsg(udpInfoDao.loadAll().get(0).diannaoIP,udpInfoDao.loadAll().get(0).diannaoPort,
+                udpInfoDao.loadAll().get(0).diannaoMl.getBytes());
 
     }
 
