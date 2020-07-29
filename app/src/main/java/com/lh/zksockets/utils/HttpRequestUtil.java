@@ -177,8 +177,8 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 64, "一体机开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 65, "一体机关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
         }

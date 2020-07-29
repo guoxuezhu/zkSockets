@@ -2993,7 +2993,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘4开"
+                    android:text="一体机开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -3039,7 +3039,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘4关"
+                    android:text="一体机关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
