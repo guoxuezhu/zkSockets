@@ -602,20 +602,20 @@ public class SerialPortUtil {
                 setXiakeTimer();
             }
             if (id == 13) {
-                UDPUtil.ClientSend(StringToBytes("FE0829020264D40106000102"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202C3560106000102"));
             }
             if (id == 14) {
-                UDPUtil.ClientSend(StringToBytes("FE0829020264D40106000102"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202C3560106000102"));
             }
             if (id == 15) {
-                UDPUtil.ClientSend(StringToBytes("FE08290202BF520106000101"));
-                UDPUtil.ClientSend(StringToBytes("FE0829020240760106000101"));
-                UDPUtil.ClientSend(StringToBytes("FE08290202B2E80106000102"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202D54E0106000101"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202D3D20106000101"));
+                UDPUtil.ClientSend(StringToBytes("FE082902021A2E0106000102"));
             }
             if (id == 16) {
-                UDPUtil.ClientSend(StringToBytes("FE08290202BF520106000100"));
-                UDPUtil.ClientSend(StringToBytes("FE0829020240760106000100"));
-                UDPUtil.ClientSend(StringToBytes("FE08290202B2E80106000102"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202D54E0106000100"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202D3D20106000100"));
+                UDPUtil.ClientSend(StringToBytes("FE082902021A2E0106000102"));
             }
         }
 

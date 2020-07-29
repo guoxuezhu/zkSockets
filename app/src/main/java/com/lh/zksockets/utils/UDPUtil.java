@@ -87,35 +87,35 @@ public class UDPUtil {
                         String[] mls = ret.split("FE");
                         for (int i = 0; i < mls.length; i++) {
                             ELog.d("========ret=====" + mls[i]);
-                            if (mls[i].equals("0D6902027AFC010600000A0100001001FF")) {
-                                //窗帘开
+                            if (mls[i].equals("0D690202AAEE010600000A01000010013D") || mls[i].equals("0D690202C7FA010600000A010000100144")) {
+                                //窗帘开 0D690202AAEE010600000A01000010013D  0D690202C7FA010600000A010000100144
                                 ELog.d("==========窗帘开=====");
                                 SerialPortUtil.makeML((long)3);
-                            } else if (mls[i].equals("0D6902027AFC010600000A0100001000")) {
-                                //窗帘关
+                            } else if (mls[i].equals("0D690202AAEE010600000A01000010003C") || mls[i].equals("0D690202C7FA010600000A010000100045")) {
+                                //窗帘关 0D690202AAEE010600000A01000010003C  0D690202C7FA010600000A010000100045
                                 ELog.d("=========窗帘关=====");
                                 SerialPortUtil.makeML((long)4);
-                            } else if (mls[i].equals("0D6902027AFC020600000A0100001001FC")) {
+                            } else if (mls[i].equals("0D690202AAEE020600000A01000010013E") || mls[i].equals("0D690202C7FA020600000A010000100147")) {
                                 //教室灯开
                                 ELog.d("==========教室灯开=====");
 //                                SerialPortUtil.makeML((long)15);
-                            } else if (mls[i].equals("0D6902027AFC020600000A0100001000FD")) {
+                            } else if (mls[i].equals("0D690202AAEE020600000A01000010003F") || mls[i].equals("0D690202C7FA020600000A010000100046")) {
                                 //教室灯关
                                 ELog.d("=========教室灯关=====");
 //                                SerialPortUtil.makeML((long)16);
-                            } else if (mls[i].equals("0D6902027AFC030600000A0100001001FD")) {
+                            } else if (mls[i].equals("0D690202AAEE030600000A01000010013F") || mls[i].equals("0D690202C7FA030600000A010000100146")) {
                                 //场景开
                                 ELog.d("========场景开=====");
                                 SerialPortUtil.makeML((long)66);
-                            } else if (mls[i].equals("0D6902027AFC030600000A0100001000FC")) {
+                            } else if (mls[i].equals("0D690202AAEE030600000A01000010003E") || mls[i].equals("0D690202C7FA030600000A010000100047")) {
                                 //场景关
                                 ELog.d("==========场景关=====");
                                 SerialPortUtil.makeML((long)67);
-                            } else if (mls[i].equals("0D6902027AFC040600000A0100001001FA")) {
+                            } else if (mls[i].equals("0D690202AAEE040600000A010000100138") || mls[i].equals("0D690202C7FA040600000A010000100141")) {
                                 //黑板灯开
                                 ELog.d("==========黑板灯开=====");
 //                                SerialPortUtil.makeML((long)13);
-                            } else if (mls[i].equals("0D6902027AFC040600000A0100001000FB")) {
+                            } else if (mls[i].equals("0D690202AAEE040600000A010000100039") || mls[i].equals("0D690202C7FA040600000A010000100040")) {
                                 //黑板灯关
                                 ELog.d("=========黑板灯关=====");
 //                                SerialPortUtil.makeML((long)14);
