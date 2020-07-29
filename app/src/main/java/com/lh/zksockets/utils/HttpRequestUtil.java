@@ -179,8 +179,8 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
         }
 
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));

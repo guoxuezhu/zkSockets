@@ -391,8 +391,8 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "1-401", ""));
             mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "1-501", ""));
             mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "1-601", ""));
-            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "1-701", ""));
-            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "1-801", ""));
+            mLsListsDao.insert(new MLsLists((long) 66, "场景开", "1-701", ""));
+            mLsListsDao.insert(new MLsLists((long) 67, "场景关", "1-801", ""));
         }
 
 

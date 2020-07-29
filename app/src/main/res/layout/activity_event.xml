@@ -3085,7 +3085,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘5开"
+                    android:text="场景开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -3131,7 +3131,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘5关"
+                    android:text="场景关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

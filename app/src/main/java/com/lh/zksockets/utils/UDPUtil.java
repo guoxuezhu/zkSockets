@@ -17,7 +17,6 @@ public class UDPUtil {
     private static DatagramSocket cUdpSocket;
     private static boolean isRun;
     private static Timer timer1;
-    private static Timer timer2;
 
     public static void getMsg() {
         try {
@@ -33,8 +32,9 @@ public class UDPUtil {
         try {
             DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
             dp.setSocketAddress(new InetSocketAddress(hostname, port));
-            if (cUdpSocket == null) {
+            if (cUdpSocket != null) {
                 cUdpSocket.send(dp);//发送一条信息
+                ELog.d("=======发送一条信息===ok========");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,8 +51,9 @@ public class UDPUtil {
         try {
             DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
             dp.setSocketAddress(new InetSocketAddress(udpInfoDao.loadAll().get(0).wlip, 8989));
-            if (cUdpSocket == null) {
+            if (cUdpSocket != null) {
                 cUdpSocket.send(dp);//发送一条信息
+                ELog.d("=======发送一条信息==11=ok========");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,27 +90,35 @@ public class UDPUtil {
                             if (mls[i].equals("0D6902027AFC010600000A0100001001FF")) {
                                 //窗帘开
                                 ELog.d("==========窗帘开=====");
+                                SerialPortUtil.makeML((long)3);
                             } else if (mls[i].equals("0D6902027AFC010600000A0100001000")) {
                                 //窗帘关
                                 ELog.d("=========窗帘关=====");
+                                SerialPortUtil.makeML((long)4);
                             } else if (mls[i].equals("0D6902027AFC020600000A0100001001FC")) {
                                 //教室灯开
                                 ELog.d("==========教室灯开=====");
+//                                SerialPortUtil.makeML((long)15);
                             } else if (mls[i].equals("0D6902027AFC020600000A0100001000FD")) {
                                 //教室灯关
                                 ELog.d("=========教室灯关=====");
+//                                SerialPortUtil.makeML((long)16);
                             } else if (mls[i].equals("0D6902027AFC030600000A0100001001FD")) {
                                 //场景开
                                 ELog.d("========场景开=====");
+                                SerialPortUtil.makeML((long)66);
                             } else if (mls[i].equals("0D6902027AFC030600000A0100001000FC")) {
                                 //场景关
                                 ELog.d("==========场景关=====");
+                                SerialPortUtil.makeML((long)67);
                             } else if (mls[i].equals("0D6902027AFC040600000A0100001001FA")) {
                                 //黑板灯开
                                 ELog.d("==========黑板灯开=====");
+//                                SerialPortUtil.makeML((long)13);
                             } else if (mls[i].equals("0D6902027AFC040600000A0100001000FB")) {
                                 //黑板灯关
                                 ELog.d("=========黑板灯关=====");
+//                                SerialPortUtil.makeML((long)14);
                             }
                         }
 
