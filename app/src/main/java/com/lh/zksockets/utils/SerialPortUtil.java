@@ -659,7 +659,7 @@ public class SerialPortUtil {
                 sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
                 closeXiakeTimer();
             }
-        }, 3 * 60 * 1000);
+        }, 2 * 60 * 1000);
     }
 
     private static void closeXiakeTimer() {
