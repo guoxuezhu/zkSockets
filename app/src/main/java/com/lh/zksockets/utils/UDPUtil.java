@@ -91,15 +91,15 @@ public class UDPUtil {
                                 //窗帘开 0D690202AAEE010600000A01000010013D  0D690202C7FA010600000A010000100144
                                 ELog.d("==========窗帘开=====");
                                 SerialPortUtil.makeML((long)3);
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000101"));
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000101"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000101"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000101"));
                                 SerialPortUtil.sendMsg1("KZQ;0101".getBytes());
                             } else if (mls[i].equals("0D690202AAEE010600000A01000010003C") || mls[i].equals("0D690202C7FA010600000A010000100045")) {
                                 //窗帘关 0D690202AAEE010600000A01000010003C  0D690202C7FA010600000A010000100045
                                 ELog.d("=========窗帘关=====");
                                 SerialPortUtil.makeML((long)4);
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000100"));
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000100"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000100"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000100"));
                                 SerialPortUtil.sendMsg1("KZQ;0100".getBytes());
                             } else if (mls[i].equals("0D690202AAEE020600000A01000010013E") || mls[i].equals("0D690202C7FA020600000A010000100147")) {
                                 //教室灯开
@@ -115,15 +115,15 @@ public class UDPUtil {
                                 //场景开
                                 ELog.d("========场景开=====");
                                 SerialPortUtil.makeML((long)66);
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000101"));
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000101"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000101"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000101"));
                                 SerialPortUtil.sendMsg1("KZQ;0301".getBytes());
                             } else if (mls[i].equals("0D690202AAEE030600000A01000010003E") || mls[i].equals("0D690202C7FA030600000A010000100047")) {
                                 //场景关
                                 ELog.d("==========场景关=====");
                                 SerialPortUtil.makeML((long)67);
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000100"));
-                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000100"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000100"));
+//                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000100"));
                                 SerialPortUtil.sendMsg1("KZQ;0300".getBytes());
                             } else if (mls[i].equals("0D690202AAEE040600000A010000100138") || mls[i].equals("0D690202C7FA040600000A010000100141")) {
                                 //黑板灯开
