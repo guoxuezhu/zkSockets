@@ -91,34 +91,50 @@ public class UDPUtil {
                                 //窗帘开 0D690202AAEE010600000A01000010013D  0D690202C7FA010600000A010000100144
                                 ELog.d("==========窗帘开=====");
                                 SerialPortUtil.makeML((long)3);
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000101"));
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000101"));
+                                SerialPortUtil.sendMsg1("KZQ;0101".getBytes());
                             } else if (mls[i].equals("0D690202AAEE010600000A01000010003C") || mls[i].equals("0D690202C7FA010600000A010000100045")) {
                                 //窗帘关 0D690202AAEE010600000A01000010003C  0D690202C7FA010600000A010000100045
                                 ELog.d("=========窗帘关=====");
                                 SerialPortUtil.makeML((long)4);
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0106000100"));
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0106000100"));
+                                SerialPortUtil.sendMsg1("KZQ;0100".getBytes());
                             } else if (mls[i].equals("0D690202AAEE020600000A01000010013E") || mls[i].equals("0D690202C7FA020600000A010000100147")) {
                                 //教室灯开
                                 ELog.d("==========教室灯开=====");
 //                                SerialPortUtil.makeML((long)15);
+                                SerialPortUtil.sendMsg1("KZQ;0201".getBytes());
                             } else if (mls[i].equals("0D690202AAEE020600000A01000010003F") || mls[i].equals("0D690202C7FA020600000A010000100046")) {
                                 //教室灯关
                                 ELog.d("=========教室灯关=====");
 //                                SerialPortUtil.makeML((long)16);
+                                SerialPortUtil.sendMsg1("KZQ;0200".getBytes());
                             } else if (mls[i].equals("0D690202AAEE030600000A01000010013F") || mls[i].equals("0D690202C7FA030600000A010000100146")) {
                                 //场景开
                                 ELog.d("========场景开=====");
                                 SerialPortUtil.makeML((long)66);
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000101"));
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000101"));
+                                SerialPortUtil.sendMsg1("KZQ;0301".getBytes());
                             } else if (mls[i].equals("0D690202AAEE030600000A01000010003E") || mls[i].equals("0D690202C7FA030600000A010000100047")) {
                                 //场景关
                                 ELog.d("==========场景关=====");
                                 SerialPortUtil.makeML((long)67);
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202C7FA0306000100"));
+                                ClientSend(SerialPortUtil.StringToBytes("FE08290202AAEE0306000100"));
+                                SerialPortUtil.sendMsg1("KZQ;0300".getBytes());
                             } else if (mls[i].equals("0D690202AAEE040600000A010000100138") || mls[i].equals("0D690202C7FA040600000A010000100141")) {
                                 //黑板灯开
                                 ELog.d("==========黑板灯开=====");
 //                                SerialPortUtil.makeML((long)13);
+                                SerialPortUtil.sendMsg1("KZQ;0401".getBytes());
                             } else if (mls[i].equals("0D690202AAEE040600000A010000100039") || mls[i].equals("0D690202C7FA040600000A010000100040")) {
                                 //黑板灯关
                                 ELog.d("=========黑板灯关=====");
 //                                SerialPortUtil.makeML((long)14);
+                                SerialPortUtil.sendMsg1("KZQ;0400".getBytes());
                             }
                         }
 
