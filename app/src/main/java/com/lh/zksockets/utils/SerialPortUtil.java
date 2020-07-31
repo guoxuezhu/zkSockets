@@ -601,6 +601,14 @@ public class SerialPortUtil {
                 guanDiannao();
                 setXiakeTimer();
             }
+            if (id == 3) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202C7FA0106000101"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202AAEE0106000101"));
+            }
+            if (id == 4) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202C7FA0106000100"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202AAEE0106000100"));
+            }
             if (id == 13) {
                 UDPUtil.ClientSend(StringToBytes("FE08290202C3560106000101"));
 
@@ -628,6 +636,14 @@ public class SerialPortUtil {
 
                 UDPUtil.ClientSend(StringToBytes("FE08290202C7FA0206000100"));
                 UDPUtil.ClientSend(StringToBytes("FE08290202AAEE0206000100"));
+            }
+            if (id == 66) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202C7FA0306000101"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202AAEE0306000101"));
+            }
+            if (id == 67) {
+                UDPUtil.ClientSend(StringToBytes("FE08290202C7FA0306000100"));
+                UDPUtil.ClientSend(StringToBytes("FE08290202AAEE0306000100"));
             }
         }
 
