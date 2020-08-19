@@ -89,19 +89,20 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据==size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
-
-                            if (bslength > 200) {
-                                bslength = 0;
-                                buffer1 = new byte[1024];
-                                buffer2 = new byte[1024];
-                            }
-                            try {
-                                System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                bslength = bslength + size;
-                                makeData(new String(buffer1, 0, bslength));
-                            } catch (Exception e) {
-                                ELog.i("========run====System.arraycopy====" + e.toString());
-                                StatService.recordException(MyApplication.context, e);
+                            if (msg.indexOf("[") != -1 && msg.indexOf("]") != -1) {
+                                if (bslength > 200) {
+                                    bslength = 0;
+                                    buffer1 = new byte[1024];
+                                    buffer2 = new byte[1024];
+                                }
+                                try {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    makeData(new String(buffer1, 0, bslength));
+                                } catch (Exception e) {
+                                    ELog.i("========run====System.arraycopy====" + e.toString());
+                                    StatService.recordException(MyApplication.context, e);
+                                }
                             }
                         }
                     }
