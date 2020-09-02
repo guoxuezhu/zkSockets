@@ -57,5 +57,7 @@ public class MyApplication extends Application {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         Process.killProcess(Process.myPid()); //结束进程之前可以把你程序的注销或者退出代码放在这段代码之前
+        System.exit(0);
+        System.gc();
     }
 }
