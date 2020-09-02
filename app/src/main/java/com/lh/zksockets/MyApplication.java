@@ -9,7 +9,11 @@ import com.baidu.mobstat.StatService;
 import com.lh.zksockets.data.DbDao.DaoMaster;
 import com.lh.zksockets.data.DbDao.DaoSession;
 import com.lh.zksockets.ui.LauncherActivity;
+import com.lh.zksockets.utils.DateUtil;
 import com.lh.zksockets.utils.SharePreferenceUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyApplication extends Application {
 
@@ -48,6 +52,9 @@ public class MyApplication extends Application {
     private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
         public void uncaughtException(Thread thread, Throwable ex) {
             StatService.recordException(context, ex);
+            Map<String, String> attributes = new HashMap<String, String>();
+            attributes.put("时间", DateUtil.getNow());
+            StatService.onEvent(MyApplication.context,  "test", "崩溃异常", 1, attributes);
             restartApp(); //发生崩溃异常时,重启应用
         }
     };
