@@ -34,4 +34,14 @@ public class SharePreferenceUtil {
 
 
 
+    public void setIsReboot(boolean isReboot) {
+        editor.putBoolean("isReboot", isReboot);
+        editor.commit();
+    }
+
+    public boolean getIsReboot() {
+        return sp.getBoolean("isReboot", false);
+    }
+
+
 }

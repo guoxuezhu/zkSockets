@@ -80,12 +80,11 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
-        dangerStatusDao.deleteAll();
-        dangerStatusDao.insert(new DangerStatus((long) 1,0,0,0,0));
-
         boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
         if (!isReset) {
+            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+            dangerStatusDao.deleteAll();
+            dangerStatusDao.insert(new DangerStatus((long) 1,0,0,0,0));
             initdata();
         }
     }
@@ -130,10 +129,14 @@ public class SplashActivity extends BaseActivity {
                 SerialPortUtil.readMsg1();
                 SerialPortUtil.readMsg2();
 
-                setSerialport();
-                jdqOpenStatus();
-                dangerOutStatus();
-                ioOutStatus();
+                if (MyApplication.prefs.getIsReboot()) {
+                    MyApplication.prefs.setIsReboot(false);
+                } else {
+                    setSerialport();
+                    jdqOpenStatus();
+                    dangerOutStatus();
+                    ioOutStatus();
+                }
 
                 NIOHttpServer.getInstance().startServer();
 

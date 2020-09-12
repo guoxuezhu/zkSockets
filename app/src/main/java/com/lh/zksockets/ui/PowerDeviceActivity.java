@@ -24,7 +24,7 @@ public class PowerDeviceActivity extends BaseActivity {
         setContentView(R.layout.activity_power_device);
         ButterKnife.bind(this);
 
-        et_dy_close_time.setText( MyApplication.prefs.getCloseTimer());
+        et_dy_close_time.setText(MyApplication.prefs.getCloseTimer());
     }
 
 

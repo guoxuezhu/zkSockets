@@ -9,10 +9,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URL;
 import java.util.Enumeration;
 
 
@@ -79,6 +83,23 @@ public class DisplayTools {
             if (mNetworkInfo != null) {
                 return mNetworkInfo.isAvailable();
             }
+        }
+        return false;
+    }
+
+
+    /**
+     * 在子线程里开启该方法，可检测当前网络是否能打开网页
+     * true是可以上网，false是不能上网
+     */
+    public static boolean isOnline() {
+        try {
+            new URL("https://www.baidu.com").openStream();
+            return true;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }
