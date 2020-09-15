@@ -118,6 +118,7 @@
             android:button="@null"
             android:padding="@dimen/dp_6"
             android:text="串口5"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
@@ -129,6 +130,7 @@
             android:button="@null"
             android:padding="@dimen/dp_6"
             android:text="串口6"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
@@ -140,6 +142,7 @@
             android:button="@null"
             android:padding="@dimen/dp_6"
             android:text="串口7"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
@@ -151,6 +154,7 @@
             android:button="@null"
             android:padding="@dimen/dp_6"
             android:text="串口8"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_24" />
 
