@@ -32,6 +32,14 @@ public class SharePreferenceUtil {
         return sp.getString("closeTimer", "22:00:00");
     }
 
+    public void setIsReboot(boolean isReboot) {
+        editor.putBoolean("isReboot", isReboot);
+        editor.commit();
+    }
+
+    public boolean getIsReboot() {
+        return sp.getBoolean("isReboot", false);
+    }
 
 
 }

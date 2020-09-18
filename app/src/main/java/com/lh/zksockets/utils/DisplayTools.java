@@ -9,10 +9,13 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import java.io.IOException;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URL;
 import java.util.Enumeration;
 
 
@@ -82,6 +85,22 @@ public class DisplayTools {
         }
         return false;
     }
+
+
+    //判断网络能不能上网
+    public static boolean isOnline() {
+        try {
+            new URL("https://www.baidu.com").openStream();
+            return true;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
     /**
      * @return 包

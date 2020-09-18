@@ -6,6 +6,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.WenShiDu;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -535,11 +536,29 @@ public class TimerUtils {
             @Override
             public void run() {
                 if (DateUtil.getHHmmss().equals(MyApplication.prefs.getCloseTimer())) {
-                    SerialPortUtil.makeML((long) 38);
+//                    SerialPortUtil.makeML((long) 38);
+                    reboot();
                 }
             }
         }, 1000 * 50, 1000);
     }
+
+
+    public static void reboot() {
+        if (DisplayTools.isOnline()) {
+            MyApplication.prefs.setIsReboot(true);
+            try {
+                Runtime.getRuntime().exec(new String[]{"su", "-c", "reboot"});
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
 
 
 }

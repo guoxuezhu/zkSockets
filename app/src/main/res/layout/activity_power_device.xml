@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="电源时序器设置"
+            android:text="系统重启设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
@@ -41,6 +41,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="每天系统定时重启，防止系统长时间使用出现负载"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_20" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
@@ -53,7 +64,7 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="关机时间:"
+                    android:text="系统重启时间:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 

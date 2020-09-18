@@ -2,12 +2,13 @@ package com.lh.zksockets;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Process;
 
 import com.baidu.mobstat.StatService;
 import com.lh.zksockets.data.DbDao.DaoMaster;
 import com.lh.zksockets.data.DbDao.DaoSession;
-import com.lh.zksockets.utils.DateUtil;
-import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.ui.LauncherActivity;
 import com.lh.zksockets.utils.SharePreferenceUtil;
 
 public class MyApplication extends Application {
@@ -48,6 +49,16 @@ public class MyApplication extends Application {
         public void uncaughtException(Thread thread, Throwable ex) {
 //            String error = DateUtil.getNow() + " 发生崩溃异常时,重启应用 bug : " + ex.toString();
             StatService.recordException(context, ex);
+            restartApp();
         }
     };
+
+    public void restartApp() {
+        Intent intent = new Intent(this, LauncherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+        Process.killProcess(Process.myPid());
+        System.exit(0);
+        System.gc();
+    }
 }

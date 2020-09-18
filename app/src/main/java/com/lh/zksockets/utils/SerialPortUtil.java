@@ -1,7 +1,9 @@
 package com.lh.zksockets.utils;
 
+import com.baidu.mobstat.StatService;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
@@ -10,6 +12,7 @@ import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
@@ -82,15 +85,21 @@ public class SerialPortUtil {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
 
-                            if (bslength > 200) {
-                                bslength = 0;
-                                buffer1 = new byte[1024];
-                                buffer2 = new byte[1024];
+                            if (msg.indexOf("[") != -1 && msg.indexOf("]") != -1) {
+                                if (bslength > 200) {
+                                    bslength = 0;
+                                    buffer1 = new byte[1024];
+                                    buffer2 = new byte[1024];
+                                }
+                                try {
+                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
+                                    bslength = bslength + size;
+                                    makeData(new String(buffer1, 0, bslength));
+                                } catch (Exception e) {
+                                    ELog.i("========run====System.arraycopy====" + e.toString());
+                                    StatService.recordException(MyApplication.context, e);
+                                }
                             }
-
-                            System.arraycopy(buffer, 0, buffer1, bslength, size);
-                            bslength = bslength + size;
-                            makeData(new String(buffer1, 0, bslength));
                         }
                     }
 
@@ -279,37 +288,46 @@ public class SerialPortUtil {
         String str2jz = JinzhiUtil.get2String(hex);
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
-            if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 4);
-                makeBaojing(ioYuanDao.load((long) 4).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
+            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+            if (!str2jz.substring(0, 1).equals(dangerStatusDao.load((long) 1).dangerStatus4 + "")) {
+                if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 4);
+                    makeBaojing(ioYuanDao.load((long) 4).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 4).noDangerMl);
+                }
             }
-
-            if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 3);
-                makeBaojing(ioYuanDao.load((long) 3).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
+            if (!str2jz.substring(1, 2).equals(dangerStatusDao.load((long) 1).dangerStatus3 + "")) {
+                if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 3);
+                    makeBaojing(ioYuanDao.load((long) 3).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 3).noDangerMl);
+                }
             }
-
-            if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 2);
-                makeBaojing(ioYuanDao.load((long) 2).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
+            if (!str2jz.substring(2, 3).equals(dangerStatusDao.load((long) 1).dangerStatus2 + "")) {
+                if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
+                    ELog.i("=========报警口======" + 2);
+                    makeBaojing(ioYuanDao.load((long) 2).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 2).noDangerMl);
+                }
             }
-
-            if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
-                ELog.i("=========报警口======" + 1);
-                makeBaojing(ioYuanDao.load((long) 1).dangerMl);
-            } else {
-                makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
+            if (!str2jz.substring(3, 4).equals(dangerStatusDao.load((long) 1).dangerStatus1 + "")) {
+                if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
+                    ELog.i("========报警口======" + 1);
+                    makeBaojing(ioYuanDao.load((long) 1).dangerMl);
+                } else {
+                    makeBaojing(ioYuanDao.load((long) 1).noDangerMl);
+                }
             }
+            dangerStatusDao.deleteAll();
+            dangerStatusDao.insert(new DangerStatus((long) 1, Integer.valueOf(str2jz.substring(3, 4)),
+                    Integer.valueOf(str2jz.substring(2, 3)),
+                    Integer.valueOf(str2jz.substring(1, 2)),
+                    Integer.valueOf(str2jz.substring(0, 1))));
 
         }
-
-
     }
 
     private static void makeBaojing(String strMls) {
@@ -369,24 +387,29 @@ public class SerialPortUtil {
                         if (size > 0) {
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口1===接收到了数据=======" + msg);
-                            if (msg.length() > 3) {
-                                if (msg.substring(0, 3).equals("VID")) {
-                                    sendShipinType(msg);
-                                } else if (msg.substring(0, 3).equals("FWS")) {//复位
-                                    sendFWstatus(msg);
-                                } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
-                                    sendCardLog(msg);
-                                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
-                                    makemenjin(msg);
-                                } else if (msg.substring(0, 3).equals("LUB")) {
-                                    HttpUtil.setlubo(msg);
-                                } else if (msg.substring(0, 3).equals("MBS")) {
-                                    try {
-                                        makeML(Long.valueOf(msg.substring(3)));
-                                    } catch (Exception e) {
-                                        ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+                            try {
+                                if (msg.length() > 3) {
+                                    if (msg.substring(0, 3).equals("VID")) {
+                                        sendShipinType(msg);
+                                    } else if (msg.substring(0, 3).equals("FWS")) {//复位
+                                        sendFWstatus(msg);
+                                    } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
+                                        sendCardLog(msg);
+                                    } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                                        makemenjin(msg);
+                                    } else if (msg.substring(0, 3).equals("LUB")) {
+                                        HttpUtil.setlubo(msg);
+                                    } else if (msg.substring(0, 3).equals("MBS")) {
+                                        try {
+                                            makeML(Long.valueOf(msg.substring(3)));
+                                        } catch (Exception e) {
+                                            ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+                                        }
                                     }
                                 }
+                            } catch (Exception e) {
+                                ELog.i("=========串口1===接收到了数据=====异常========" + e.toString());
+                                StatService.recordException(MyApplication.context, e);
                             }
                         }
                     }
@@ -449,7 +472,7 @@ public class SerialPortUtil {
     }
 
     private static void sendCardLog(String msg) {
-        makeML((long)37);
+        makeML((long) 37);
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             return;

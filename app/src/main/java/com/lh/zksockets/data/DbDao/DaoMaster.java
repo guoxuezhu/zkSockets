@@ -25,6 +25,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.createTable(db, ifNotExists);
         ComputerDao.createTable(db, ifNotExists);
         DangerOutDao.createTable(db, ifNotExists);
+        DangerStatusDao.createTable(db, ifNotExists);
         DoorInfoDao.createTable(db, ifNotExists);
         EventBigDao.createTable(db, ifNotExists);
         EventKejianRestDao.createTable(db, ifNotExists);
@@ -51,6 +52,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ChazuoDataDao.dropTable(db, ifExists);
         ComputerDao.dropTable(db, ifExists);
         DangerOutDao.dropTable(db, ifExists);
+        DangerStatusDao.dropTable(db, ifExists);
         DoorInfoDao.dropTable(db, ifExists);
         EventBigDao.dropTable(db, ifExists);
         EventKejianRestDao.dropTable(db, ifExists);
@@ -91,6 +93,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ChazuoDataDao.class);
         registerDaoClass(ComputerDao.class);
         registerDaoClass(DangerOutDao.class);
+        registerDaoClass(DangerStatusDao.class);
         registerDaoClass(DoorInfoDao.class);
         registerDaoClass(EventBigDao.class);
         registerDaoClass(EventKejianRestDao.class);

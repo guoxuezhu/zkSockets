@@ -17,11 +17,13 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.ApkInfo;
+import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
@@ -80,6 +82,9 @@ public class SplashActivity extends BaseActivity {
 
         boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
         if (!isReset) {
+            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+            dangerStatusDao.deleteAll();
+            dangerStatusDao.insert(new DangerStatus((long) 1, 0, 0, 0, 0));
             initdata();
         }
     }
@@ -124,18 +129,22 @@ public class SplashActivity extends BaseActivity {
                 SerialPortUtil.readMsg1();
                 SerialPortUtil.readMsg2();
 
-                setSerialport();
-                jdqOpenStatus();
-                dangerOutStatus();
-                ioOutStatus();
+                if (MyApplication.prefs.getIsReboot()) {
+                    MyApplication.prefs.setIsReboot(false);
+                } else {
+                    setSerialport();
+                    jdqOpenStatus();
+                    dangerOutStatus();
+                    ioOutStatus();
+                    TimerUtils.setKaijiTimer();
+                    SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
+                }
 
                 NIOHttpServer.getInstance().startServer();
 
                 TimerUtils.setWenshiduTimer();
                 HttpUtil.setLuboTokenTimer();
-                TimerUtils.setKaijiTimer();
                 TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
-                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
 
                 mqttServiceStart();
 
@@ -219,6 +228,7 @@ public class SplashActivity extends BaseActivity {
 
     /**
      * 安装APK
+     *
      * @param context
      * @param apkPath 安装包的路径
      */
