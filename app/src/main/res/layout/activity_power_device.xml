@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
-                android:text="每天系统定时重启，防止系统长时间使用出现负载"
+                android:text="每天定时系统重启，防止长时间使用造成超负荷运行"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_20" />
 
