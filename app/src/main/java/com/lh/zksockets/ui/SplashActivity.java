@@ -136,13 +136,13 @@ public class SplashActivity extends BaseActivity {
                     jdqOpenStatus();
                     dangerOutStatus();
                     ioOutStatus();
+                    TimerUtils.setKaijiTimer();
                 }
 
                 NIOHttpServer.getInstance().startServer();
 
                 TimerUtils.setWenshiduTimer();
                 HttpUtil.setLuboTokenTimer();
-                TimerUtils.setKaijiTimer();
                 TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
 //                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
 
