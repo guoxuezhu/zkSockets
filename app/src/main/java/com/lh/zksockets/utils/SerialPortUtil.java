@@ -368,16 +368,18 @@ public class SerialPortUtil {
 
 
     public static void sendMsg(byte[] data) {
-        try {
-            synchronized (data) {
-                if (data.length > 0) {
-                    outputStream2.write(data);
-                    outputStream2.flush();
-                    ELog.e("============串口===给单片机=======串口数据发送成功==================");
+        if (data != null) {
+            try {
+                synchronized (data) {
+                    if (data.length > 0) {
+                        outputStream2.write(data);
+                        outputStream2.flush();
+                        ELog.e("============串口===给单片机=======串口数据发送成功==================");
+                    }
                 }
+            } catch (IOException e) {
+                ELog.e("============串口====给单片机=======串口数据发送失败==================" + e.toString());
             }
-        } catch (IOException e) {
-            ELog.e("============串口====给单片机=======串口数据发送失败==================" + e.toString());
         }
     }
 
