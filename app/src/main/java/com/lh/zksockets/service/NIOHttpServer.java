@@ -75,6 +75,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataIoOutInfo(request));
                 } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
                     response.send(HttpRequestUtil.updataDangerOutInfo(request));
+                } else if (request.getPath().equals("/api/updataDoorInfo")) {
+                    response.send(HttpRequestUtil.updataDoorInfo(request));
+                } else if (request.getPath().equals("/api/updataRebootTime")) {
+                    response.send(HttpRequestUtil.updataRebootTime(request));
                 } else if (request.getPath().equals("/api/zkczbtn")) {
                     response.send(HttpRequestUtil.zksendmsg(request));
                 } else {
@@ -100,6 +104,10 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getIoOutinfo(request));
                 } else if (request.getPath().equals("/api/dangerOutInfo")) {
                     response.send(HttpRequestUtil.getDangerOutInfo(request));
+                } else if (request.getPath().equals("/api/doorSeting")) {
+                    response.send(HttpRequestUtil.getDoorInfo(request));
+                } else if (request.getPath().equals("/api/rebootTime")) {
+                    response.send(HttpRequestUtil.getRebootTime(request));
                 } else if (request.getPath().equals("/api/wsddata")) {
                     response.send(HttpRequestUtil.getWSD(request));
                 } else if (request.getPath().substring(0, 5).equals("/wsd/")) {

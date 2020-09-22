@@ -8,6 +8,7 @@ import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
@@ -19,6 +20,7 @@ import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DangerOut;
+import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.IoPortData;
@@ -397,5 +399,35 @@ public class HttpRequestUtil {
             return gson.toJson(new HttpResult("-200", "命令格式错误", false, null));
         }
 
+    }
+
+    public static String getRebootTime(AsyncHttpServerRequest request) {
+        return gson.toJson(new HttpResult("200", "", true, MyApplication.prefs.getCloseTimer()));
+    }
+
+    public static String updataRebootTime(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
+        MyApplication.prefs.setCloseTimer(parms.getString("rebootTime"));
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getDoorInfo(AsyncHttpServerRequest request) {
+        DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
+        if (doorInfoDao.loadAll().size() == 0) {
+            doorInfoDao.insert(new DoorInfo("", "", 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, doorInfoDao.loadAll().get(0)));
+    }
+
+
+    public static String updataDoorInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
+        DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
+        DoorInfo doorInfo = gson.fromJson(parms.getString("doorDatas"), DoorInfo.class);
+        doorInfoDao.deleteAll();
+        doorInfoDao.insert(doorInfo);
+        return gson.toJson(new HttpResult("200", "", true, null));
     }
 }
