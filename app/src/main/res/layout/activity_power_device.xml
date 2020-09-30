@@ -48,6 +48,7 @@
                 android:gravity="center"
                 android:text="每天定时系统重启，防止长时间使用造成超负荷运行"
                 android:textColor="@color/red"
+                android:visibility="gone"
                 android:textSize="@dimen/text_size_20" />
 
             <LinearLayout
