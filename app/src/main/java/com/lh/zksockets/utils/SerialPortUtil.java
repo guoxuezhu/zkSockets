@@ -500,7 +500,7 @@ public class SerialPortUtil {
     }
 
     private static void sendCardLog(String msg) {
-        makeML((long)37);
+        makeML((long) 37);
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             return;
@@ -571,6 +571,7 @@ public class SerialPortUtil {
 
     public static void makeML(Long id) {
         synchronized (id) {
+            UDPUtil.makeWangguan(id);
             if (id == 1) {
                 closeXiakeTimer();
                 sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
