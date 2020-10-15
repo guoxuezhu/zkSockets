@@ -16,13 +16,17 @@ public class LuboInfo {
     public String Password;
     @SerializedName("token")
     public String token;
+    @SerializedName("status")
+    public int status;
 
-    @Generated(hash = 1597435763)
-    public LuboInfo(String IP, String userName, String Password, String token) {
+    @Generated(hash = 1657002293)
+    public LuboInfo(String IP, String userName, String Password, String token,
+            int status) {
         this.IP = IP;
         this.userName = userName;
         this.Password = Password;
         this.token = token;
+        this.status = status;
     }
 
     @Generated(hash = 351647369)
@@ -36,6 +40,7 @@ public class LuboInfo {
                 ", userName='" + userName + '\'' +
                 ", Password='" + Password + '\'' +
                 ", token='" + token + '\'' +
+                ", status=" + status +
                 '}';
     }
 
@@ -69,5 +74,13 @@ public class LuboInfo {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

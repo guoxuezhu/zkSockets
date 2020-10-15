@@ -28,6 +28,7 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
         public final static Property UserName = new Property(1, String.class, "userName", false, "USER_NAME");
         public final static Property Password = new Property(2, String.class, "Password", false, "PASSWORD");
         public final static Property Token = new Property(3, String.class, "token", false, "TOKEN");
+        public final static Property Status = new Property(4, int.class, "status", false, "STATUS");
     }
 
 
@@ -46,7 +47,8 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
                 "\"IP\" TEXT," + // 0: IP
                 "\"USER_NAME\" TEXT," + // 1: userName
                 "\"PASSWORD\" TEXT," + // 2: Password
-                "\"TOKEN\" TEXT);"); // 3: token
+                "\"TOKEN\" TEXT," + // 3: token
+                "\"STATUS\" INTEGER NOT NULL );"); // 4: status
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,7 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
         if (token != null) {
             stmt.bindString(4, token);
         }
+        stmt.bindLong(5, entity.getStatus());
     }
 
     @Override
@@ -103,6 +106,7 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
         if (token != null) {
             stmt.bindString(4, token);
         }
+        stmt.bindLong(5, entity.getStatus());
     }
 
     @Override
@@ -116,7 +120,8 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // IP
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // userName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // Password
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // token
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // token
+            cursor.getInt(offset + 4) // status
         );
         return entity;
     }
@@ -127,6 +132,7 @@ public class LuboInfoDao extends AbstractDao<LuboInfo, Void> {
         entity.setUserName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setToken(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setStatus(cursor.getInt(offset + 4));
      }
     
     @Override

@@ -192,8 +192,6 @@ public class NetStatusActivity extends BaseActivity {
             serialCommandDao.insert(new SerialCommand(Long.valueOf("430"), 4, 30, "1-430", "", "", 16));
 
 
-
-
             serialCommandDao.insert(new SerialCommand(Long.valueOf("501"), 5, 1, "1-501", "电视1", "7E07003433343314010068", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("502"), 5, 2, "1-502", "空调开关", "7E07003433343314020069", 16));
             serialCommandDao.insert(new SerialCommand(Long.valueOf("503"), 5, 3, "1-503", "空调开关", "7E0700343334331403006A", 16));
@@ -385,8 +383,8 @@ public class NetStatusActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "2-6-1", ""));
             mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "2-7-1", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "2-8-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 60, "新风开",  "1-101", ""));
-            mLsListsDao.insert(new MLsLists((long) 61, "新风关",  "1-201", ""));
+            mLsListsDao.insert(new MLsLists((long) 60, "新风开", "1-101", ""));
+            mLsListsDao.insert(new MLsLists((long) 61, "新风关", "1-201", ""));
             mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "1-301", ""));
             mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "1-401", ""));
             mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "1-501", ""));
@@ -415,7 +413,7 @@ public class NetStatusActivity extends BaseActivity {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
 
         if (luboInfoDao.loadAll().size() == 0) {
-            luboInfoDao.insert(new LuboInfo("192.168.5.211", "admin", "admin", ""));
+            luboInfoDao.insert(new LuboInfo("192.168.5.211", "admin", "admin", "", 0));
         }
 
 

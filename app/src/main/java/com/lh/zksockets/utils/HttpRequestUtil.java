@@ -169,12 +169,12 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
             mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 54, "电视机3", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 55, "电视机4", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 56, "电视机5", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 57, "电视机6", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 58, "电视机7", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 59, "电视机8", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 54, "开始录制", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 55, "暂停录制", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 56, "继续录制", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 57, "停止录制", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 58, "开始直播", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 59, "停止直播", "", ""));
             mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 62, "黑板灯开", "", ""));
@@ -252,7 +252,7 @@ public class HttpRequestUtil {
     public static String getLuboList(AsyncHttpServerRequest request) {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
         if (luboInfoDao.loadAll().size() == 0) {
-            luboInfoDao.insert(new LuboInfo("", "", "", ""));
+            luboInfoDao.insert(new LuboInfo("", "", "", "", 0));
         }
         return gson.toJson(new HttpResult("200", "", true, luboInfoDao.loadAll()));
     }

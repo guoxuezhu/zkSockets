@@ -2528,7 +2528,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机3"
+                    android:text="开始录制"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2575,7 +2575,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机4"
+                    android:text="暂停录制"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2622,7 +2622,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机5"
+                    android:text="继续录制"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2669,7 +2669,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机6"
+                    android:text="停止录制"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2716,7 +2716,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机7"
+                    android:text="开始直播"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2763,7 +2763,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="电视机8"
+                    android:text="停止直播"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

@@ -28,18 +28,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
-        <Switch
-            android:id="@+id/door_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_20"
-            android:showText="true"
-            android:switchMinWidth="@dimen/dp_60"
-            android:textOff="关"
-            android:textOn="开" />
-
 
     </RelativeLayout>
 
@@ -107,6 +95,51 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="是否启用:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20" />
+
+
+        <RadioGroup
+            android:layout_width="@dimen/dp_400"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbtn_door_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="启用"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
+
+            <RadioButton
+                android:id="@+id/rbtn_door_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_50"
+                android:text="禁用"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_door_ok"

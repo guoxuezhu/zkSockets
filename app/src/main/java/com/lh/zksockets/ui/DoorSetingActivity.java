@@ -3,6 +3,7 @@ package com.lh.zksockets.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -22,8 +23,10 @@ public class DoorSetingActivity extends BaseActivity {
     @BindView(R.id.et_door_ip)
     EditText et_door_ip;
 
-    @BindView(R.id.door_switch)
-    Switch door_switch;
+    @BindView(R.id.rbtn_door_ok)
+    RadioButton rbtn_door_ok;
+    @BindView(R.id.rbtn_door_no)
+    RadioButton rbtn_door_no;
 
 
     private DoorInfoDao doorInfoDao;
@@ -44,7 +47,9 @@ public class DoorSetingActivity extends BaseActivity {
         et_door_ip.setText(doorInfoDao.loadAll().get(0).IP);
 
         if (doorInfoDao.loadAll().get(0).isStart == 1) {
-            door_switch.setChecked(true);
+            rbtn_door_ok.setChecked(true);
+        } else {
+            rbtn_door_no.setChecked(true);
         }
 
     }
@@ -52,7 +57,7 @@ public class DoorSetingActivity extends BaseActivity {
     @OnClick(R.id.btn_door_ok)
     public void btn_door_ok() {
         doorInfoDao.deleteAll();
-        if (door_switch.isChecked()) {
+        if (rbtn_door_ok.isChecked()) {
             doorInfoDao.insert(new DoorInfo(et_door_ip.getText().toString(), et_door_name.getText().toString(), 1));
         } else {
             doorInfoDao.insert(new DoorInfo(et_door_ip.getText().toString(), et_door_name.getText().toString(), 0));
