@@ -252,9 +252,9 @@ public class EnvironmentalActivity extends BaseActivity {
         }
 
         if (jdq_7_gl.isChecked()) {
-            io7 = 1;
-        } else {
             io7 = 0;
+        } else {
+            io7 = 1;
         }
         if (jdq_8_gl.isChecked()) {
             io8 = 0;
