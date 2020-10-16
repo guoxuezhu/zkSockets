@@ -148,7 +148,7 @@ public class SplashActivity extends BaseActivity {
 
                 mqttServiceStart();
 
-                updataAPK();
+//                updataAPK();
 
                 if (stimer != null) {
                     stimer.cancel();

@@ -545,6 +545,7 @@ public class SerialPortUtil {
 
     public static void makeML(Long id) {
         synchronized (id) {
+            UDPUtil.makeWangguan(id);
             MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
             if (mLsListsDao.loadAll().size() != 0) {
                 if (mLsListsDao.load(id) == null) {

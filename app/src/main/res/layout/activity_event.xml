@@ -2901,7 +2901,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘3开"
+                    android:text="黑板灯开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2947,7 +2947,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘3关"
+                    android:text="黑板灯关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2993,7 +2993,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘4开"
+                    android:text="教室灯开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -3039,7 +3039,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘4关"
+                    android:text="教室灯关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -3085,7 +3085,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘5开"
+                    android:text="场景开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -3131,7 +3131,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘5关"
+                    android:text="场景关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

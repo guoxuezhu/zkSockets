@@ -417,12 +417,12 @@ public class EventActivity extends BaseActivity {
 
             mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 62, "窗帘3开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 63, "窗帘3关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 64, "窗帘4开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 65, "窗帘4关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 66, "窗帘5开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 67, "窗帘5关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 62, "黑板灯开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 63, "黑板灯关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 64, "教室灯开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 65, "教室灯关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
         }
 
         DataInit();
@@ -640,12 +640,12 @@ public class EventActivity extends BaseActivity {
 
         mLsListsDao.update(new MLsLists((long) 60, "新风开", event_et_60.getText().toString(), event_tv_time_60.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 61, "新风关", event_et_61.getText().toString(), event_tv_time_61.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 62, "窗帘3开", event_et_62.getText().toString(), event_tv_time_62.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 63, "窗帘3关", event_et_63.getText().toString(), event_tv_time_63.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 64, "窗帘4开", event_et_64.getText().toString(), event_tv_time_64.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 65, "窗帘4关", event_et_65.getText().toString(), event_tv_time_65.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 66, "窗帘5开", event_et_66.getText().toString(), event_tv_time_66.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 67, "窗帘5关", event_et_67.getText().toString(), event_tv_time_67.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 62, "黑板灯开", event_et_62.getText().toString(), event_tv_time_62.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 63, "黑板灯关", event_et_63.getText().toString(), event_tv_time_63.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 64, "教室灯开", event_et_64.getText().toString(), event_tv_time_64.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 65, "教室灯关", event_et_65.getText().toString(), event_tv_time_65.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 66, "场景开", event_et_66.getText().toString(), event_tv_time_66.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 67, "场景关", event_et_67.getText().toString(), event_tv_time_67.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
