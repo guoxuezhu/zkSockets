@@ -41,6 +41,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +68,9 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     @BindView(R.id.et_device_name)
     EditText et_device_name;
 
+    @BindView(R.id.spinner_deviceName)
+    Spinner spinner_deviceName;
+
     @BindView(R.id.spinnerBaudRate)
     Spinner spinnerBaudRate;
     @BindView(R.id.spinnerCheckoutBit)
@@ -84,7 +89,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     private List<String> checkoutBitList;
     private List<String> dataBitList;
     private List<String> stopBitList;
-    private List<String> typeList;
+    private List<String> tyjtypeList;
     private ProjectorDao projectorDao;
     private String selectSerialPort;
     private String selectBaudRate;
@@ -123,14 +128,23 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     Toast.makeText(SerialportActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
                     stopDialog();
                     break;
+                case 155:
+                    ELog.e("======Handler=====155====");
+                    setSelectBtn(1);
+                    break;
+                case 122:
+                    ELog.e("======Handler=====122====" + msg.obj.toString());
+                    tyjViewInit(Long.valueOf(msg.obj.toString()));
+                    break;
+
             }
 
         }
     };
 
 
-
     private ProgressDialog progressDialog;
+    private Timer ckdataTimer;
 
 
     @Override
@@ -141,34 +155,97 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         spt_btn_1.setChecked(true);
 
+        spinnerTyjInitView();
         baudRateInitView();
         checkoutBitInitView();
         dataBitInitView();
         stopBitInitView();
 
+//        serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        serialportAdapter = new SerialportAdapter(this, serialCommands, this);
+//        serial_recyclerView.setAdapter(serialportAdapter);
 
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
         if (serialPortDataDao.loadAll().size() < 4) {
-            for (int i = 1; i < 9; i++) {
-                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
-                for (int j = 1; j < 31; j++) {
-                    if (j >= 10) {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
-                    } else {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
-                    }
-                }
-            }
+            ckData();
+        } else {
+            setSelectBtn(1);
         }
+
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
 
-        setSelectBtn(1);
-
 
     }
+
+
+    private void ckData() {
+        if (ckdataTimer != null) {
+            ckdataTimer.cancel();
+            ckdataTimer = null;
+        }
+        ckdataTimer = new Timer();
+        ckdataTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (int i = 1; i < 5; i++) {
+                    serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
+                            "9600", 0, "NONE", 0, "8", 0, "1", 10));
+                    for (int j = 1; j < 31; j++) {
+                        if (j >= 10) {
+                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                        } else {
+                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                        }
+                    }
+                }
+
+                serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 12, "串口1", "奥图码投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 13, "串口1", "英士投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 14, "串口1", "理光(K360/X600)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 15, "串口1", "理光(WX6170N/X6180N)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 16, "串口1", "理光(K310/K320)投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 17, "串口1", "理光(K7000/K8500/K9000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialPortDataDao.insert(new SerialPortData((long) 18, "串口1", "理光(W1000/W2000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("901"), 11, 1, "1-101", "开机", "505752204F4E0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("902"), 11, 2, "1-102", "关机", "505752204F46460D", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("903"), 11, 1, "1-101", "开机", "7E3030303020310D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("904"), 11, 2, "1-102", "关机", "7E3030303020300D", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("905"), 11, 1, "1-101", "开机", "4330300D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("906"), 11, 2, "1-102", "关机", "4330310D", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("907"), 11, 1, "1-101", "开机", "23504F4E0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("908"), 11, 2, "1-102", "关机", "23504F460D", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("909"), 11, 1, "1-101", "开机", "23504F4E", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("910"), 11, 2, "1-102", "关机", "23504446", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("911"), 11, 1, "1-101", "开机", "4130300D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("912"), 11, 2, "1-102", "关机", "4130310D", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
+
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3AOD", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463AOD", 16));
+
+                skHandler.sendEmptyMessage(155);
+
+                if (ckdataTimer != null) {
+                    ckdataTimer.cancel();
+                    ckdataTimer = null;
+                }
+            }
+        }, 1);
+
+    }
+
 
     private void stopDialog() {
         if (progressDialog != null) {
@@ -176,8 +253,84 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         }
     }
 
+    private void tyjViewInit(long i) {
+        ELog.i("=========投影机===iiiii=====" + i);
+        et_device_name.setText(serialPortDataDao.load(i).deviceName);
+        spinnerBaudRate.setSelection(serialPortDataDao.load(i).baudRateId);
+        spinnerCheckoutBit.setSelection(serialPortDataDao.load(i).checkoutBitId);
+        spinnerDataBit.setSelection(serialPortDataDao.load(i).dataBitId);
+        spinnerStopBit.setSelection(serialPortDataDao.load(i).stopBitId);
+
+        if (serialPortDataDao.load(i).jinZhi == 10) {
+            radio_binary_1.setChecked(true);
+        } else {
+            radio_binary_2.setChecked(true);
+        }
+        ELog.i("=========serialCommands===tyjViewInit===0000==" + serialCommands.toString());
+
+        if (i == 11) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 901).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 901).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 902).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 902).commandStr);
+        }
+        if (i == 12) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 903).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 903).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 904).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 904).commandStr);
+        }
+
+        if (i == 13) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 905).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 905).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 906).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 906).commandStr);
+        }
+        if (i == 14) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 907).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 907).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 908).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 908).commandStr);
+        }
+        if (i == 15) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 909).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 909).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 910).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 910).commandStr);
+        }
+        if (i == 16) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 911).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 911).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 912).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 912).commandStr);
+        }
+        if (i == 17) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 913).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 913).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 914).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 914).commandStr);
+        }
+        if (i == 18) {
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 915).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 915).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 916).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 916).commandStr);
+        }
+
+
+        ELog.i("=========serialCommands===tyjViewInit=====" + serialCommands.toString());
+
+        serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        serialportAdapter = new SerialportAdapter(this, serialCommands, this);
+        serial_recyclerView.setAdapter(serialportAdapter);
+//        serialportAdapter.setDatas(serialCommands);
+
+    }
+
     private void ViewInit(long i) {
         et_device_name.setText(serialPortDataDao.load(i).deviceName);
+        spinner_deviceName.setSelection(0);
         spinnerBaudRate.setSelection(serialPortDataDao.load(i).baudRateId);
         spinnerCheckoutBit.setSelection(serialPortDataDao.load(i).checkoutBitId);
         spinnerDataBit.setSelection(serialPortDataDao.load(i).dataBitId);
@@ -195,11 +348,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 .orderAsc(SerialCommandDao.Properties.MlId)
                 .list();
 
-        ELog.i("=========serialCommands===1111=====" + serialCommands.toString());
+        ELog.i("=========serialCommands===ViewInit=====" + serialCommands.toString());
 
         serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         serialportAdapter = new SerialportAdapter(this, serialCommands, this);
         serial_recyclerView.setAdapter(serialportAdapter);
+//        serialportAdapter.setDatas(serialCommands);
 
 
     }
@@ -292,6 +446,40 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         });
     }
 
+
+    private void spinnerTyjInitView() {
+        tyjtypeList = new ArrayList<>();
+        tyjtypeList.add("其它设备");
+        tyjtypeList.add("爱普生投影机");
+        tyjtypeList.add("奥图码投影机");
+        tyjtypeList.add("英士投影机");
+        tyjtypeList.add("理光(K360/X600)投影机");
+        tyjtypeList.add("理光(WX6170N/X6180N)投影机");
+        tyjtypeList.add("理光(K310/K320)投影机");
+        tyjtypeList.add("理光(K7000/K8500/K9000)投影机");
+        tyjtypeList.add("理光(W1000/W2000)投影机");
+
+        spinner_deviceName.setAdapter(new SelectAdapter(this, tyjtypeList));
+        spinner_deviceName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ELog.i("=========投影机========" + position);
+                if (position != 0) {
+//                    tyjViewInit(position + 10);
+                    Message message = new Message();
+                    message.obj = position + 10;
+                    message.what = 122;
+                    skHandler.sendMessage(message);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     @OnClick(R.id.spt_btn_1)
     public void spt_btn_1() {
         setSelectBtn(1);
@@ -353,9 +541,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 selectCheckoutBitId, selectCheckoutBit, selectDataBitId, selectDataBit,
                 selectStopBitId, selectStopBit, jinzhi));
 
+        ELog.i("========sport_btn_ok==1111===" + serialCommands.toString());
+
         for (int j = 0; j < serialCommands.size(); j++) {
             serialCommands.get(j).setJinZhi(jinzhi);
             serialCommandDao.update(serialCommands.get(j));
+            ELog.i("========222222222===" + serialCommands.get(j));
         }
 
         //String spStr = selectBaudRate + "," + selectCheckoutBit + "," + selectDataBit + "," + selectStopBit;
