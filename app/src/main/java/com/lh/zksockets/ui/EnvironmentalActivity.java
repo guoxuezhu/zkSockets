@@ -126,8 +126,8 @@ public class EnvironmentalActivity extends BaseActivity {
             jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "时序器5", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "时序器6", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布升", 1, 180));
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布降", 1, 180));
         }

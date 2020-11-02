@@ -82,9 +82,9 @@ public class SplashActivity extends BaseActivity {
 
         boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
         if (!isReset) {
-            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
-            dangerStatusDao.deleteAll();
-            dangerStatusDao.insert(new DangerStatus((long) 1,0,0,0,0));
+//            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+//            dangerStatusDao.deleteAll();
+//            dangerStatusDao.insert(new DangerStatus((long) 1,0,0,0,0));
             initdata();
         }
     }
@@ -134,8 +134,8 @@ public class SplashActivity extends BaseActivity {
                 } else {
                     setSerialport();
                     jdqOpenStatus();
-                    dangerOutStatus();
-                    ioOutStatus();
+//                    dangerOutStatus();
+//                    ioOutStatus();
                     TimerUtils.setKaijiTimer();
                 }
 

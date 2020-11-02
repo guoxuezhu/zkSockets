@@ -130,7 +130,7 @@
             android:value="tSicoUdNymbV7aAG4H2bxEw6STWTU5xr" /> <!-- 渠道商编号 -->
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="Baidu Market" /> <!-- 是否开启错误日志统计，默认为false -->
+            android:value="lh01-1/1" /> <!-- 是否开启错误日志统计，默认为false -->
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"
             android:value="true" /> <!-- 日志仅在wifi网络下发送，默认为false -->
