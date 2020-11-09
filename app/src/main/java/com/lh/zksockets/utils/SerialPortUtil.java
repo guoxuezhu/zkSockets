@@ -257,7 +257,7 @@ public class SerialPortUtil {
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
                 WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        "", wenShiDuDao.loadAll().get(0).timeStr, wenShiDuDao.loadAll().get(0).serialportML);
+                        "", 1, "");
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
 
