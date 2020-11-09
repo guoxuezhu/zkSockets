@@ -2248,7 +2248,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-模式"
+                    android:text="一体机-开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2295,7 +2295,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-摆风"
+                    android:text="一体机-关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
