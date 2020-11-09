@@ -162,7 +162,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             }
             serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3,
                     "9600", 0, "NONE", 0, "8", 0, "1", 16));
-            serialCommandDao.insert(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "温湿度",
+            serialCommandDao.update(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "温湿度",
                     "01040000000271CB", 16));
 
         }
