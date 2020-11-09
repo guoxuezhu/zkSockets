@@ -129,7 +129,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     };
 
 
-
     private ProgressDialog progressDialog;
 
 
@@ -149,18 +148,23 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        if (serialPortDataDao.loadAll().size() < 4) {
-            for (int i = 1; i < 9; i++) {
+        if (serialPortDataDao.loadAll().size() < 3) {
+            for (int i = 1; i < 5; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
+                        "9600", 0, "NONE", 0, "8", 0, "1", 16));
                 for (int j = 1; j < 31; j++) {
                     if (j >= 10) {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 16));
                     } else {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 16));
                     }
                 }
             }
+            serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3,
+                    "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "温湿度",
+                    "01040000000271CB", 16));
+
         }
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());

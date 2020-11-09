@@ -3,7 +3,9 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
 
 import java.io.IOException;
@@ -449,15 +451,14 @@ public class TimerUtils {
 
     public static void setWenshiduTimer() {
 
-//        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-//        if (wenShiDuDao.loadAll().size() == 0) {
-//            return;
-//        }
-//        final String serialportML = wenShiDuDao.loadAll().get(0).serialportML;
-//        if (serialportML.equals("")) {
-//            return;
-//        }
-//        int time = wenShiDuDao.loadAll().get(0).timeStr;
+        SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+        if (serialCommandDao.loadAll().size() == 0) {
+            return;
+        }
+        String spML = serialCommandDao.load(Long.valueOf("405")).commandStr;
+        if (spML == null || spML.length() == 0) {
+            return;
+        }
 
         if (wenshiTimer != null) {
             wenshiTimer.cancel();
@@ -466,22 +467,22 @@ public class TimerUtils {
         wenshiTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    wsdCount++;
-                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-                    if (wenShiDuDao.loadAll().size() != 0) {
-                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
-                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-                        SerialPortUtil.sendMsg1(wsd.getBytes());
-                        if (wsdCount >= 60) {
-                            SerialPortUtil.wsdSendLog(wenShiDu);
-                            wsdCount = 0;
-                        }
-                    }
-                } catch (Exception e) {
-                    ELog.d("=========wenshiTimer===Exception=======" + e.toString());
-                }
-//                SerialPortUtil.doSerialPort(serialportML);
+//                try {
+//                    wsdCount++;
+//                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+//                    if (wenShiDuDao.loadAll().size() != 0) {
+//                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
+//                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+//                        SerialPortUtil.sendMsg1(wsd.getBytes());
+//                        if (wsdCount >= 60) {
+//                            SerialPortUtil.wsdSendLog(wenShiDu);
+//                            wsdCount = 0;
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                    ELog.d("=========wenshiTimer===Exception=======" + e.toString());
+//                }
+                SerialPortUtil.doSerialPort("1-405");
                 ELog.d("=========wenshiTimer==========");
             }
         }, 12000, 1 * 60 * 1000);
