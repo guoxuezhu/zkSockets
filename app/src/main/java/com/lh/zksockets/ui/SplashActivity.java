@@ -144,7 +144,7 @@ public class SplashActivity extends BaseActivity {
 
                 TimerUtils.setWenshiduTimer();
                 HttpUtil.setLuboTokenTimer();
-                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
+//                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
 
                 mqttServiceStart();
 

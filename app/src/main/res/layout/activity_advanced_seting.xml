@@ -65,7 +65,6 @@
                     android:textSize="@dimen/text_size_20" />
 
 
-
                 <Button
                     android:id="@+id/door_seting"
                     android:layout_width="match_parent"
@@ -76,16 +75,11 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <Button
-                    android:id="@+id/zk_seting"
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@mipmap/btn_img_1"
-                    android:text="网关控制器设置"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
-
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -176,6 +170,17 @@
                     android:layout_weight="1"
                     android:background="@mipmap/btn_img_1"
                     android:text="系统重启设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/zk_seting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="网关控制器设置"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 

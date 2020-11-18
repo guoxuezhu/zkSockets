@@ -161,6 +161,8 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     }
                 }
             }
+            serialPortDataDao.update(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialCommandDao.update(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "温湿度", "01040000000271CB", 16));
         }
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
