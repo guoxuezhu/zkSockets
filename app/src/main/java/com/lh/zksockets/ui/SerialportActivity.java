@@ -634,7 +634,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     public void btn_sport_beifen() {
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
 
-        for (int n = 1; n < 9; n++) {
+        for (int n = 1; n < 5; n++) {
             List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                     .where(SerialCommandDao.Properties.SId.eq(n))
                     .orderAsc(SerialCommandDao.Properties.MlId)
