@@ -232,8 +232,8 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 serialCommandDao.insert(new SerialCommand(Long.valueOf("913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
                 serialCommandDao.insert(new SerialCommand(Long.valueOf("914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3AOD", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463AOD", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3A0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463A0D", 16));
 
                 skHandler.sendEmptyMessage(155);
 
