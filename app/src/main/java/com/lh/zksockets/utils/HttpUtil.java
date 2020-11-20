@@ -90,15 +90,22 @@ public class HttpUtil {
                 login();
                 ELog.d("=========luboTokenTimer==========");
             }
-        }, 10000, 13 * 60 * 1000);
+        }, 10000, 1000 * 60 * 50);
     }
 
-
+    //http://172.31.20.84:8234/join?deviceId=_sunrise_unique&username=admin&password=613be55ddb2d6ae6552efb5c6f67a48e&dynamic=hzlh
     private static void login() {
+        String password = luboInfoDao.loadAll().get(0).Password + "hzlh";
+        String passwordmd5 = "";
+        try {
+            passwordmd5 = Coder.hashMD5(password.getBytes("utf8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/LoginSystem?{\"token\":\"\",\"userName\":\"" +
-                        luboInfoDao.loadAll().get(0).userName + "\",\"password\":\"" + luboInfoDao.loadAll().get(0).Password + "\",\"md5Flag\":0}")
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/join?deviceId=_sunrise_unique&username=" +
+                        luboInfoDao.loadAll().get(0).userName + "&password=" + passwordmd5 + "&dynamic=hzlh")
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -117,14 +124,14 @@ public class HttpUtil {
                 ELog.e("======HttpUtil====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (jsonObject.getString("result").equals("1")) {
-                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
-                        ELog.e("==========数据=======" + jsonObject1.getString("token"));
+                    if (jsonObject.getString("rc").equals("0")) {
+//                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
+//                        ELog.e("==========token=======" + jsonObject1.getString("token"));
 
                         LuboInfo luboInfo = luboInfoDao.loadAll().get(0);
                         luboInfoDao.deleteAll();
                         luboInfoDao.insert(new LuboInfo(luboInfo.IP, luboInfo.userName, luboInfo.Password,
-                                jsonObject1.getString("token"), luboInfo.status));
+                                jsonObject.getString("token"), luboInfo.status));
 
                     }
 
@@ -138,11 +145,11 @@ public class HttpUtil {
 
     }
 
-
+    //http://<ip>:8234/startRec?token=<token>
     private static void luboStart() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StartRecord?token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/startRec?token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -161,7 +168,7 @@ public class HttpUtil {
                 ELog.e("======luboStart====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (!jsonObject.getString("result").equals("1")) {
+                    if (!jsonObject.getString("rc").equals("0")) {
                         setLuboTokenTimer();
                     }
                 } catch (JSONException e) {
@@ -172,10 +179,11 @@ public class HttpUtil {
 
     }
 
+    //http://<ip>:8234/pauseRec?token=<token>
     private static void luboPause() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/PauseRecord?token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/pauseRec?token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -194,7 +202,7 @@ public class HttpUtil {
                 ELog.e("======luboPause====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (!jsonObject.getString("result").equals("1")) {
+                    if (!jsonObject.getString("rc").equals("0")) {
                         setLuboTokenTimer();
                     }
                 } catch (JSONException e) {
@@ -205,11 +213,11 @@ public class HttpUtil {
 
     }
 
-
+    // http://<ip>:8234/stopRec?token=<token>
     private static void luboStop() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StopRecord?token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/stopRec?token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -228,7 +236,7 @@ public class HttpUtil {
                 ELog.e("======luboStop====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (!jsonObject.getString("result").equals("1")) {
+                    if (!jsonObject.getString("rc").equals("0")) {
                         setLuboTokenTimer();
                     }
                 } catch (JSONException e) {
@@ -239,10 +247,11 @@ public class HttpUtil {
 
     }
 
+    //http://<ip>:8234/startLive?token=<token>
     private static void luboZhiboStartTs() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StartRtmp?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/startLive?token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -261,7 +270,7 @@ public class HttpUtil {
                 ELog.e("======luboStop====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (!jsonObject.getString("result").equals("1")) {
+                    if (!jsonObject.getString("rc").equals("0")) {
                         setLuboTokenTimer();
                     }
                 } catch (JSONException e) {
@@ -272,10 +281,11 @@ public class HttpUtil {
 
     }
 
+    //http://<ip>:8234/stopLive?token=<token>
     private static void luboZhiboStopTs() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://" + luboInfoDao.loadAll().get(0).IP + "/sdk/StopRtmp?channel=0&token=" + luboInfoDao.loadAll().get(0).token)
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/stopLive?token=" + luboInfoDao.loadAll().get(0).token)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -294,7 +304,7 @@ public class HttpUtil {
                 ELog.e("======luboStop====数据=======" + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    if (!jsonObject.getString("result").equals("1")) {
+                    if (!jsonObject.getString("rc").equals("0")) {
                         setLuboTokenTimer();
                     }
                 } catch (JSONException e) {
