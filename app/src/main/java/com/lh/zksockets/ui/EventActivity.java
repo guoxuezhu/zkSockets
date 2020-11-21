@@ -402,8 +402,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 48, "空调-模式", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "一体机-开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "一体机-关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
@@ -624,8 +624,8 @@ public class EventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 45, "开机", event_et_45.getText().toString(), event_tv_time_45.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 46, "门禁-前门", event_et_46.getText().toString(), event_tv_time_46.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 47, "门禁-后门", event_et_47.getText().toString(), event_tv_time_47.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 48, "空调-模式", event_et_48.getText().toString(), event_tv_time_48.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 49, "空调-摆风", event_et_49.getText().toString(), event_tv_time_49.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 48, "一体机-开", event_et_48.getText().toString(), event_tv_time_48.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 49, "一体机-关", event_et_49.getText().toString(), event_tv_time_49.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 50, "一体机-内置HDMI", event_et_50.getText().toString(), event_tv_time_50.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 51, "一体机-外置HDMI", event_et_51.getText().toString(), event_tv_time_51.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 52, "电视机1", event_et_52.getText().toString(), event_tv_time_52.getText().toString()));

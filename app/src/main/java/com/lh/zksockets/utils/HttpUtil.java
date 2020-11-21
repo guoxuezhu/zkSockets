@@ -13,8 +13,10 @@ import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpUtil {
@@ -34,6 +36,8 @@ public class HttpUtil {
                 luboZhiboStartTs();
             } else if (msg.equals("LUB5")) {
                 luboZhiboStopTs();
+            } else if (msg.equals("LUB6")) {
+                luboRestart();
             }
         } else {
             if (msg.equals("LUB1")) {
@@ -138,8 +142,6 @@ public class HttpUtil {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         });
 
@@ -182,8 +184,12 @@ public class HttpUtil {
     //http://<ip>:8234/pauseRec?token=<token>
     private static void luboPause() {
         OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("pause", "1")
+                .build();
         Request request = new Request.Builder()
                 .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/pauseRec?token=" + luboInfoDao.loadAll().get(0).token)
+                .post(body)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -212,6 +218,44 @@ public class HttpUtil {
         });
 
     }
+
+    private static void luboRestart() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("pause", "0")
+                .build();
+        Request request = new Request.Builder()
+                .url("http://" + luboInfoDao.loadAll().get(0).IP + ":8234/pauseRec?token=" + luboInfoDao.loadAll().get(0).token)
+                .post(body)
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("====luboPause======onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("======luboPause====数据=======" + responseText);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseText);
+                    if (!jsonObject.getString("rc").equals("0")) {
+                        setLuboTokenTimer();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
 
     // http://<ip>:8234/stopRec?token=<token>
     private static void luboStop() {

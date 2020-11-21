@@ -163,8 +163,8 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 48, "空调-模式", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "一体机-开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "一体机-关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
