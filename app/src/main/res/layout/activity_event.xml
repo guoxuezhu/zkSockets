@@ -156,7 +156,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘开"
+                    android:text="窗帘开(全开)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -202,7 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="窗帘关"
+                    android:text="窗帘关(全关)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -617,7 +617,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光开"
+                    android:text="灯光开(全开)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -664,7 +664,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光关"
+                    android:text="灯光关(全关)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -711,7 +711,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光1开(关)"
+                    android:text="灯光1开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -805,7 +805,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光2开(关)"
+                    android:text="灯光2开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -898,7 +898,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="灯光3开(关)"
+                    android:text="灯光3开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2248,7 +2248,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-模式"
+                    android:text="一体机-开"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2295,7 +2295,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="空调-摆风"
+                    android:text="一体机-关"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 
@@ -2341,7 +2341,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="一体机-内置HDMI"
+                    android:text="一体机-内置显示"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16" />
 

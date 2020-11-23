@@ -118,8 +118,8 @@ public class HttpRequestUtil {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "上课", "", ""));
             mLsListsDao.insert(new MLsLists((long) 2, "下课", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 3, "窗帘开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 4, "窗帘关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 3, "窗帘开(全开)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 4, "窗帘关(全关)", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 6, "窗帘1关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 7, "窗帘2开", "", ""));
@@ -128,13 +128,13 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 10, "投影机关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 11, "幕布升", "2-7-1", ""));
             mLsListsDao.insert(new MLsLists((long) 12, "幕布降", "2-8-1", ""));
-            mLsListsDao.insert(new MLsLists((long) 13, "灯光开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 14, "灯光关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 15, "灯光1开(关)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 13, "灯光开(全开)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 14, "灯光关(全关)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 15, "灯光1开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 16, "灯光1关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 17, "灯光2开(关)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 17, "灯光2开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 18, "灯光2关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 19, "灯光3开(关)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 19, "灯光3开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 20, "灯光3关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 21, "总音量+", "", ""));
             mLsListsDao.insert(new MLsLists((long) 22, "总音量-", "", ""));
@@ -163,9 +163,9 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
             mLsListsDao.insert(new MLsLists((long) 46, "门禁-前门", "", ""));
             mLsListsDao.insert(new MLsLists((long) 47, "门禁-后门", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 48, "空调-模式", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 49, "空调-摆风", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置HDMI", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 48, "一体机-开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 49, "一体机-关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 50, "一体机-内置显示", "", ""));
             mLsListsDao.insert(new MLsLists((long) 51, "一体机-外置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
             mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "", ""));
