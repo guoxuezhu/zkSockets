@@ -481,7 +481,7 @@ public class TimerUtils {
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
-                SerialPortUtil.doSerialPort("1-801");
+//                SerialPortUtil.doSerialPort("1-801");
                 ELog.d("=========wenshiTimer==========");
             }
         }, 12000, 1 * 60 * 1000);
