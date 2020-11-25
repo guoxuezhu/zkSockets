@@ -34,6 +34,8 @@ public class HttpUtil {
                 luboZhiboStartTs();
             } else if (msg.equals("LUB5")) {
                 luboZhiboStopTs();
+            } else if (msg.equals("LUB6")) {
+                luboPause();
             }
         } else {
             if (msg.equals("LUB1")) {
