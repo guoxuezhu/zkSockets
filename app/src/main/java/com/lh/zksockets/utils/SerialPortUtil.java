@@ -152,23 +152,28 @@ public class SerialPortUtil {
                         }
                     } else {
                         if (msgdata.indexOf("]", 6) != -1) {
-                            ELog.i("===========COM3=====电能表====2222=========" + msgdata.substring(msgdata.indexOf("[", 3), msgdata.indexOf("]", 6) + 1));
-                            if (msgdata.substring(msgdata.indexOf("[", 3), msgdata.indexOf("]", 6) + 1).equals("[COM3]")) {
+                            ELog.i("===========COM3=====电能表====2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
+                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM3]")) {
                                 if (bslength - 16 == 9) {
                                     ELog.i("==========COM3====电能表===两条数据============");
                                     buffer2 = new byte[1024];
-                                    int length1 = msgdata.indexOf("[", 3);
+                                    int length1 = msgdata.indexOf(">[", 3) + 1;
                                     ELog.i("==========COM3====电能表===length1============" + length1);
                                     System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
                                     System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
                                     getDianLiang();
                                     bslength = bslength - 25;
-                                    System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-                                    ELog.i("==========COM3====电能表==33333=============" + new String(buffer2, 0, bslength));
-                                    buffer1 = new byte[1024];
-                                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                    buffer2 = new byte[1024];
-                                    makeData(new String(buffer1, 0, bslength));
+                                    if (bslength != 0) {
+                                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
+                                        ELog.i("==========COM3====电能表==33333=============" + new String(buffer2, 0, bslength));
+                                        buffer1 = new byte[1024];
+                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                                        buffer2 = new byte[1024];
+                                        makeData(new String(buffer1, 0, bslength));
+                                    } else {
+                                        buffer1 = new byte[1024];
+                                        buffer2 = new byte[1024];
+                                    }
                                 } else {
                                     buffer2 = new byte[1024];
                                     bslength = bslength - msgdata.indexOf(">") - 1;
@@ -191,8 +196,6 @@ public class SerialPortUtil {
                             }
                         }
                     }
-
-
 //                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
 //                    ELog.i("===========COM7=====test======111111=======" + msgdata.indexOf(">"));
 //                    if (msgdata.indexOf(">") != -1) {
@@ -252,7 +255,6 @@ public class SerialPortUtil {
 //                            }
 //                        }
 //                    }
-
                 } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
                     if (msgdata.indexOf(">") != -1) {
                         buffer2 = new byte[1024];
