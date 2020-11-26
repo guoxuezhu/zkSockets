@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/myBgLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.DengguangActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/dg_event_btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="灯光绑定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_900"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_50"
+                android:background="@drawable/layout_stroke_bg"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="ID"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="名称"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="最后一次操作时间"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:text="指令"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="13"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光开(全开)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-101"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="14"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光关(全关)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-201"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="15"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光1开"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-301"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="16"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光1关"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-401"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="17"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光2开"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-501"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="18"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光2关"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-601"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="19"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光3开"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-701"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="灯光3关"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="1-801"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_event_dg_ok"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_bg"
+                    android:text="保存"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_24" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

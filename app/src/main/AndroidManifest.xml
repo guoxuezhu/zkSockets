@@ -41,6 +41,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.WangguanEventActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ui.YinpinEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.PcEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.DoorEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.KongtiaoEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.LuboEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.DengguangActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.ChuanglianActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.TyjEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.LauncherActivity"
             android:clearTaskOnLaunch="true"
             android:enabled="true"
@@ -68,7 +95,6 @@
         <activity
             android:name=".ui.DoorSetingActivity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".ui.BaseSetingActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -106,6 +132,9 @@
             android:name=".ui.EventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".ui.OnekeyEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.EventSelectActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -130,7 +159,7 @@
             android:value="tSicoUdNymbV7aAG4H2bxEw6STWTU5xr" /> <!-- 渠道商编号 -->
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
-            android:value="Baidu Market 9" /> <!-- 是否开启错误日志统计，默认为false -->
+            android:value="web-vid9-master-1/1" /> <!-- 是否开启错误日志统计，默认为false -->
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"
             android:value="true" /> <!-- 日志仅在wifi网络下发送，默认为false -->
