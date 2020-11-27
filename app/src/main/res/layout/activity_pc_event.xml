@@ -270,7 +270,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="大屏一体机内置HDMI"
+                        android:text="大屏一体机内置显示"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 

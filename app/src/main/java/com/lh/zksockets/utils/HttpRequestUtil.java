@@ -181,7 +181,7 @@ public class HttpRequestUtil {
 
             mLsListsDao.insert(new MLsLists((long) 5001, "大屏一体机开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5002, "大屏一体机关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5003, "大屏一体机内置HDMI", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5003, "大屏一体机内置显示", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5004, "大屏一体机外置HDMI", "", ""));
 
             mLsListsDao.insert(new MLsLists((long) 5005, "电视机1", "", ""));
