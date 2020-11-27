@@ -87,7 +87,7 @@ public class PcEventActivity extends BaseActivity {
 
         mLsListsDao.update(new MLsLists((long) 5001, "大屏一体机开", event_et_5001.getText().toString(), event_tv_time_5001.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5002, "大屏一体机关", event_et_5002.getText().toString(), event_tv_time_5002.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5003, "大屏一体机内置HDMI", event_et_5003.getText().toString(), event_tv_time_5003.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5003, "大屏一体机内置显示", event_et_5003.getText().toString(), event_tv_time_5003.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5004, "大屏一体机外置HDMI", event_et_5004.getText().toString(), event_tv_time_5004.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5005, "电视机1", event_et_5005.getText().toString(), event_tv_time_5005.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5006, "电视机2", event_et_5006.getText().toString(), event_tv_time_5006.getText().toString()));
