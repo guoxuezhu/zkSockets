@@ -45,6 +45,12 @@ public class UDPUtil {
         if (id == 67) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100080A0D"));
         }
+        if (id == 13) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100090A0D"));
+        }
+        if (id == 14) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100100A0D"));
+        }
 
     }
 
