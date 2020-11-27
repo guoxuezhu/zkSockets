@@ -260,13 +260,17 @@ public class SerialPortUtil {
                         baojin(Integer.toHexString(buffer2[0] & 0xFF));
 
                         bslength = bslength - 9;
-                        System.arraycopy(buffer1, 9, buffer2, 0, bslength);
-                        ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-
+                        if (bslength != 0) {
+                            System.arraycopy(buffer1, 9, buffer2, 0, bslength);
+                            ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
+                            buffer1 = new byte[1024];
+                            System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                            buffer2 = new byte[1024];
+                            makeData(new String(buffer1, 0, bslength));
+                        } else {
+                            buffer1 = new byte[1024];
+                            buffer2 = new byte[1024];
+                        }
                     }
                 } else {
                     if (msgdata.indexOf(">") != -1) {
