@@ -139,9 +139,10 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 5003, "大屏一体机内置HDMI", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5004, "大屏一体机外置HDMI", "", ""));
 
-
-            mLsListsDao.insert(new MLsLists((long) 52, "电视机1", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 53, "电视机2", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5005, "电视机1", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5006, "电视机2", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5007, "电视机3", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5008, "电视机4", "", ""));
 
 
             mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));

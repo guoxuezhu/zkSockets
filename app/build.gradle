@@ -17,8 +17,8 @@ android {
         applicationId "com.lh.zksockets"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.2.3"
+        versionCode 4
+        versionName "1.4.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {

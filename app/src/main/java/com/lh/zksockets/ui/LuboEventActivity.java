@@ -57,7 +57,7 @@ public class LuboEventActivity extends BaseActivity {
         event_et_56.setText(mLsListsDao.load((long) 56).strMLs);
         event_et_57.setText(mLsListsDao.load((long) 57).strMLs);
         event_et_58.setText(mLsListsDao.load((long) 58).strMLs);
-        event_et_58.setText(mLsListsDao.load((long) 59).strMLs);
+        event_et_59.setText(mLsListsDao.load((long) 59).strMLs);
 
         event_tv_time_54.setText(mLsListsDao.load((long) 54).time);
         event_tv_time_55.setText(mLsListsDao.load((long) 55).time);
