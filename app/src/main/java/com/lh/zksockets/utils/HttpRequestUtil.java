@@ -9,6 +9,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
+import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
@@ -21,6 +22,7 @@ import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
+import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.IoPortData;
@@ -457,4 +459,18 @@ public class HttpRequestUtil {
         doorInfoDao.insert(doorInfo);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
+
+    public static String getDeviceStatus(AsyncHttpServerRequest request) {
+        EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
+        if (eventShangkeDao.loadAll().size() == 0) {
+            eventShangkeDao.insert(new EventShangke(0, (long) 1, "投影机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 2, "窗帘", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 3, "灯光", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 4, "大屏一体机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 5, "空调", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 6, "录播", 0, false, 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.loadAll()));
+    }
+
 }

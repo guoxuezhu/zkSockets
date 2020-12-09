@@ -2,11 +2,13 @@ package com.lh.zksockets.data.model;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class EventShangke {
 
     public int eventType;
+    @Id
     public Long eventId;
     public String name;
     public int status;
