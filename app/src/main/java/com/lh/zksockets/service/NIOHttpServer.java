@@ -81,6 +81,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataRebootTime(request));
                 } else if (request.getPath().equals("/api/zkczbtn")) {
                     response.send(HttpRequestUtil.zksendmsg(request));
+                } else if (request.getPath().equals("/api/updataWgkzqInfo")) {
+                    response.send(HttpRequestUtil.updataWgkzqInfo(request));
                 } else {
                     response.send("200");
                 }
@@ -114,6 +116,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.setWsdpm(request));
                 } else if (request.getPath().equals("/api/deviceStatus")) {
                     response.send(HttpRequestUtil.getDeviceStatus(request));
+                } else if (request.getPath().equals("/api/wgkzqInfo")) {
+                    response.send(HttpRequestUtil.getWgkzqInfo(request));
                 } else {
                     response.send("200");
                 }

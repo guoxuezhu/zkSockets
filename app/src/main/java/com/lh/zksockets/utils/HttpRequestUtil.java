@@ -9,6 +9,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
+import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
@@ -22,6 +23,7 @@ import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
+import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.IOYuan;
@@ -473,4 +475,22 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.loadAll()));
     }
 
+    public static String getWgkzqInfo(AsyncHttpServerRequest request) {
+        EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
+        if (wangguandata.loadAll().size() == 0) {
+            wangguandata.insert(new EventKejianRest(1, (long) 1, "192.168.0.220",
+                    0, false, 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll().get(0)));
+    }
+
+    public static String updataWgkzqInfo(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
+        EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
+        EventKejianRest doorInfo = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
+        wangguandata.deleteAll();
+        wangguandata.insert(doorInfo);
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
 }
