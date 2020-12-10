@@ -25,15 +25,22 @@ public class HttpUtil {
     public static void setlubo(String msg) {
         if (msg.equals("LUB1")) {
             luboStart();
+            DeviceStatusUtil.setDeviceStatus((long) 54);
         } else if (msg.equals("LUB2")) {
             luboPause();
+            DeviceStatusUtil.setDeviceStatus((long) 55);
         } else if (msg.equals("LUB3")) {
             luboStop();
+            DeviceStatusUtil.setDeviceStatus((long) 57);
         } else if (msg.equals("LUB4")) {
             luboZhiboStartTs();
+            DeviceStatusUtil.setDeviceStatus((long) 58);
         } else if (msg.equals("LUB5")) {
             luboZhiboStopTs();
-
+            DeviceStatusUtil.setDeviceStatus((long) 59);
+        } else if (msg.equals("LUB6")) {
+            luboPause();
+            DeviceStatusUtil.setDeviceStatus((long) 56);
         }
     }
 

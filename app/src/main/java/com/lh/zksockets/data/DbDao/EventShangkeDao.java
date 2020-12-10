@@ -15,7 +15,7 @@ import com.lh.zksockets.data.model.EventShangke;
 /** 
  * DAO for table "EVENT_SHANGKE".
 */
-public class EventShangkeDao extends AbstractDao<EventShangke, Void> {
+public class EventShangkeDao extends AbstractDao<EventShangke, Long> {
 
     public static final String TABLENAME = "EVENT_SHANGKE";
 
@@ -25,7 +25,7 @@ public class EventShangkeDao extends AbstractDao<EventShangke, Void> {
      */
     public static class Properties {
         public final static Property EventType = new Property(0, int.class, "eventType", false, "EVENT_TYPE");
-        public final static Property EventId = new Property(1, Long.class, "eventId", false, "EVENT_ID");
+        public final static Property EventId = new Property(1, Long.class, "eventId", true, "_id");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Status = new Property(3, int.class, "status", false, "STATUS");
         public final static Property IsChecked = new Property(4, boolean.class, "isChecked", false, "IS_CHECKED");
@@ -46,7 +46,7 @@ public class EventShangkeDao extends AbstractDao<EventShangke, Void> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"EVENT_SHANGKE\" (" + //
                 "\"EVENT_TYPE\" INTEGER NOT NULL ," + // 0: eventType
-                "\"EVENT_ID\" INTEGER," + // 1: eventId
+                "\"_id\" INTEGER PRIMARY KEY ," + // 1: eventId
                 "\"NAME\" TEXT," + // 2: name
                 "\"STATUS\" INTEGER NOT NULL ," + // 3: status
                 "\"IS_CHECKED\" INTEGER NOT NULL ," + // 4: isChecked
@@ -98,8 +98,8 @@ public class EventShangkeDao extends AbstractDao<EventShangke, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1);
     }    
 
     @Override
@@ -126,20 +126,23 @@ public class EventShangkeDao extends AbstractDao<EventShangke, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(EventShangke entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(EventShangke entity, long rowId) {
+        entity.setEventId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(EventShangke entity) {
-        return null;
+    public Long getKey(EventShangke entity) {
+        if(entity != null) {
+            return entity.getEventId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(EventShangke entity) {
-        // TODO
-        return false;
+        return entity.getEventId() != null;
     }
 
     @Override
