@@ -483,9 +483,9 @@ public class HttpRequestUtil {
         Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
         ELog.i("=================" + parms.toString());
         EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
-        EventKejianRest doorInfo = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
+        EventKejianRest wgkzqData = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
         wangguandata.deleteAll();
-        wangguandata.insert(doorInfo);
+        wangguandata.insert(wgkzqData);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 }
