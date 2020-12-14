@@ -276,7 +276,7 @@ public class HttpRequestUtil {
     public static String getLuboList(AsyncHttpServerRequest request) {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
         if (luboInfoDao.loadAll().size() == 0) {
-            luboInfoDao.insert(new LuboInfo("", "", "", ""));
+            luboInfoDao.insert(new LuboInfo("", "", "", "", 0));
         }
         return gson.toJson(new HttpResult("200", "", true, luboInfoDao.loadAll()));
     }

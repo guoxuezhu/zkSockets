@@ -104,7 +104,7 @@ public class HttpUtil {
                         LuboInfo luboInfo = luboInfoDao.loadAll().get(0);
                         luboInfoDao.deleteAll();
                         luboInfoDao.insert(new LuboInfo(luboInfo.IP, luboInfo.userName, luboInfo.Password,
-                                jsonObject1.getString("token")));
+                                jsonObject1.getString("token"), luboInfo.status));
 
                     }
 
