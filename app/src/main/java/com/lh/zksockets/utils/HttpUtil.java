@@ -23,34 +23,62 @@ public class HttpUtil {
     private static Timer luboTokenTimer;
 
     public static void setlubo(String msg) {
-        if (msg.equals("LUB1")) {
-            luboStart();
-            DeviceStatusUtil.setDeviceStatus((long) 54);
-        } else if (msg.equals("LUB2")) {
-            luboPause();
-            DeviceStatusUtil.setDeviceStatus((long) 55);
-        } else if (msg.equals("LUB3")) {
-            luboStop();
-            DeviceStatusUtil.setDeviceStatus((long) 57);
-        } else if (msg.equals("LUB4")) {
-            luboZhiboStartTs();
-            DeviceStatusUtil.setDeviceStatus((long) 58);
-        } else if (msg.equals("LUB5")) {
-            luboZhiboStopTs();
-            DeviceStatusUtil.setDeviceStatus((long) 59);
-        } else if (msg.equals("LUB6")) {
-            luboPause();
-            DeviceStatusUtil.setDeviceStatus((long) 56);
+        if (getLuboData()) {
+            if (msg.equals("LUB1")) {
+                luboStart();
+                DeviceStatusUtil.setDeviceStatus((long) 54);
+            } else if (msg.equals("LUB2")) {
+                luboPause();
+                DeviceStatusUtil.setDeviceStatus((long) 55);
+            } else if (msg.equals("LUB3")) {
+                luboStop();
+                DeviceStatusUtil.setDeviceStatus((long) 57);
+            } else if (msg.equals("LUB4")) {
+                luboZhiboStartTs();
+                DeviceStatusUtil.setDeviceStatus((long) 58);
+            } else if (msg.equals("LUB5")) {
+                luboZhiboStopTs();
+                DeviceStatusUtil.setDeviceStatus((long) 59);
+            } else if (msg.equals("LUB6")) {
+                luboPause();
+                DeviceStatusUtil.setDeviceStatus((long) 56);
+            }
+        } else {
+            if (msg.equals("LUB1")) {
+                SerialPortUtil.makeML((long) 54);
+            } else if (msg.equals("LUB2")) {
+                SerialPortUtil.makeML((long) 55);
+            } else if (msg.equals("LUB3")) {
+                SerialPortUtil.makeML((long) 57);
+            } else if (msg.equals("LUB4")) {
+                SerialPortUtil.makeML((long) 58);
+            } else if (msg.equals("LUB5")) {
+                SerialPortUtil.makeML((long) 59);
+            } else if (msg.equals("LUB6")) {
+                SerialPortUtil.makeML((long) 56);
+            }
         }
     }
 
 
     public static void setLuboTokenTimer() {
+        if (getLuboData()) {
+            getToken();
+        }
+    }
 
+    private static boolean getLuboData() {
         luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
         if (luboInfoDao.loadAll().size() == 0) {
-            return;
+            return false;
         }
+        if (luboInfoDao.loadAll().get(0).status == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    private static void getToken() {
         if (luboInfoDao.loadAll().get(0).IP.isEmpty()) {
             return;
         }
