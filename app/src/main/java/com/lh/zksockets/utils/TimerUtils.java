@@ -448,16 +448,6 @@ public class TimerUtils {
 
     public static void setWenshiduTimer() {
 
-//        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-//        if (wenShiDuDao.loadAll().size() == 0) {
-//            return;
-//        }
-//        final String serialportML = wenShiDuDao.loadAll().get(0).serialportML;
-//        if (serialportML.equals("")) {
-//            return;
-//        }
-//        int time = wenShiDuDao.loadAll().get(0).timeStr;
-
         if (wenshiTimer != null) {
             wenshiTimer.cancel();
         }
@@ -470,8 +460,8 @@ public class TimerUtils {
                     WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
                     if (wenShiDuDao.loadAll().size() != 0) {
                         WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
-                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-                        SerialPortUtil.sendMsg1(wsd.getBytes());
+//                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+//                        SerialPortUtil.sendMsg1(wsd.getBytes());
                         if (wsdCount >= 60) {
                             SerialPortUtil.wsdSendLog(wenShiDu);
                             wsdCount = 0;
@@ -480,8 +470,7 @@ public class TimerUtils {
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
-//                SerialPortUtil.doSerialPort("1-405");
-                ELog.d("=========wenshiTimer==========");
+                SerialPortUtil.doSerialPort("1-405");
             }
         }, 12000, 1 * 60 * 1000);
     }
