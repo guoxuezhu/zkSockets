@@ -143,7 +143,7 @@ public class SerialPortUtil {
                         if (msgdata.length() == 17) {
                             buffer2 = new byte[1024];
                             System.arraycopy(buffer1, 7, buffer2, 0, 9);
-                            getDianLiang();
+                            setWenshidu();
                             bslength = 0;
                             buffer1 = new byte[1024];
                             buffer2 = new byte[1024];
@@ -159,7 +159,7 @@ public class SerialPortUtil {
                                     ELog.i("==========COM3====电能表===length1============" + length1);
                                     System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
                                     System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-                                    getDianLiang();
+                                    setWenshidu();
                                     bslength = bslength - 25;
                                     if (bslength != 0) {
                                         System.arraycopy(buffer1, 25, buffer2, 0, bslength);
