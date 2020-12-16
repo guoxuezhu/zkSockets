@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -41,17 +40,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
                 android:text="每天定时系统重启，防止长时间使用造成超负荷运行"
-                android:visibility="gone"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_20" />
-
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"

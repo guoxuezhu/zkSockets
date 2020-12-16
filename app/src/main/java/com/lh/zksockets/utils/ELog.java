@@ -2,9 +2,7 @@ package com.lh.zksockets.utils;
 
 import android.util.Log;
 
-
 import com.lh.zksockets.BuildConfig;
-
 
 /**
  * 打印log日志
@@ -29,7 +27,6 @@ public class ELog {
             Log.e("mylog", "" + msg);
         }
     }
-
 
 
 }

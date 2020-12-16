@@ -13,17 +13,11 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
-import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
-import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
-import com.lh.zksockets.utils.HttpUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -89,6 +83,7 @@ public class IOsetingActivity extends BaseActivity {
 
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

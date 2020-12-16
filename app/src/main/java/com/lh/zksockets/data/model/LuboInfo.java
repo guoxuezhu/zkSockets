@@ -21,7 +21,7 @@ public class LuboInfo {
 
     @Generated(hash = 1657002293)
     public LuboInfo(String IP, String userName, String Password, String token,
-            int status) {
+                    int status) {
         this.IP = IP;
         this.userName = userName;
         this.Password = Password;
@@ -40,6 +40,7 @@ public class LuboInfo {
                 ", userName='" + userName + '\'' +
                 ", Password='" + Password + '\'' +
                 ", token='" + token + '\'' +
+                ", status=" + status +
                 '}';
     }
 

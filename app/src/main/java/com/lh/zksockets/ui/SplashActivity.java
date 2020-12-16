@@ -137,7 +137,6 @@ public class SplashActivity extends BaseActivity {
                     dangerOutStatus();
                     ioOutStatus();
                     TimerUtils.setKaijiTimer();
-                    SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
                 }
 
                 NIOHttpServer.getInstance().startServer();
@@ -145,6 +144,7 @@ public class SplashActivity extends BaseActivity {
                 TimerUtils.setWenshiduTimer();
                 HttpUtil.setLuboTokenTimer();
 //                TimerUtils.setDuandianTimer();//电源时序器夜晚自动关机
+//                SerialPortUtil.sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
 
                 mqttServiceStart();
 

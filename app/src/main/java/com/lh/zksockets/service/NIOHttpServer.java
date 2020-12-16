@@ -67,8 +67,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataJdqInfo(request));
                 } else if (request.getPath().equals("/api/updataLuboInfo")) {
                     response.send(HttpRequestUtil.updataLuboInfo(request));
-                } else if (request.getPath().equals("/api/updataMqttInfo")) {
-                    response.send(HttpRequestUtil.updataMqttInfo(request));
+//                } else if (request.getPath().equals("/api/updataMqttInfo")) {
+//                    response.send(HttpRequestUtil.updataMqttInfo(request));
                 } else if (request.getPath().equals("/api/updataZKbaseInfo")) {
                     response.send(HttpRequestUtil.updataZkBaseInfo(request));
                 } else if (request.getPath().equals("/api/updataIoOutInfo")) {
@@ -98,8 +98,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getJDQList(request));
                 } else if (request.getPath().equals("/api/luboInfo")) {
                     response.send(HttpRequestUtil.getLuboList(request));
-                } else if (request.getPath().equals("/api/mqttInfo")) {
-                    response.send(HttpRequestUtil.getMqttinfo(request));
+//                } else if (request.getPath().equals("/api/mqttInfo")) {
+//                    response.send(HttpRequestUtil.getMqttinfo(request));
                 } else if (request.getPath().equals("/api/zkBaseInfo")) {
                     response.send(HttpRequestUtil.getZkBaseInfo(request));
                 } else if (request.getPath().equals("/api/iooutInfo")) {
@@ -112,12 +112,12 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getRebootTime(request));
                 } else if (request.getPath().equals("/api/wsddata")) {
                     response.send(HttpRequestUtil.getWSD(request));
+                } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
+                    response.send(HttpRequestUtil.setWsdpm(request));
                 } else if (request.getPath().equals("/api/deviceStatus")) {
                     response.send(HttpRequestUtil.getDeviceStatus(request));
                 } else if (request.getPath().equals("/api/wgkzqInfo")) {
                     response.send(HttpRequestUtil.getWgkzqInfo(request));
-                } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
-                    response.send(HttpRequestUtil.setWsdpm(request));
                 } else {
                     response.send("200");
                 }

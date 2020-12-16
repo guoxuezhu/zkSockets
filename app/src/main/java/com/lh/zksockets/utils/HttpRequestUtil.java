@@ -6,7 +6,6 @@ import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.body.AsyncHttpRequestBody;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
-import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
@@ -20,7 +19,6 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
-import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
@@ -124,6 +122,7 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 2, "下课", "", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "开机", "", ""));
 
+
             mLsListsDao.insert(new MLsLists((long) 3, "窗帘开(全开)", "", ""));
             mLsListsDao.insert(new MLsLists((long) 4, "窗帘关(全关)", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5, "窗帘1开", "", ""));
@@ -186,10 +185,12 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 5002, "大屏一体机关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5003, "大屏一体机内置显示", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5004, "大屏一体机外置HDMI", "", ""));
+
             mLsListsDao.insert(new MLsLists((long) 5005, "电视机1", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5006, "电视机2", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5007, "电视机3", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5008, "电视机4", "", ""));
+
 
             mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
@@ -197,6 +198,7 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 34, "新风-低速", "", ""));
             mLsListsDao.insert(new MLsLists((long) 35, "新风-中速", "", ""));
             mLsListsDao.insert(new MLsLists((long) 36, "新风-高速", "", ""));
+
 
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 38, "电源-全关", "", ""));
@@ -208,6 +210,7 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
         }
+
 
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
@@ -291,23 +294,23 @@ public class HttpRequestUtil {
         luboInfoDao.insert(luboInfos);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
-
-    public static String getMqttinfo(AsyncHttpServerRequest request) {
-        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-        if (baseInfoDao.loadAll().size() == 0) {
-            baseInfoDao.insert(new BaseInfo("", "",
-                    "", java.util.UUID.randomUUID().toString(), 0));
-        }
-        return gson.toJson(new HttpResult("200", "", true, baseInfoDao.loadAll().get(0)));
-    }
-
-    public static String updataMqttInfo(AsyncHttpServerRequest request) {
-        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
-        BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
-        baseInfoDao.deleteAll();
-        baseInfoDao.insert(baseInfo);
-        return gson.toJson(new HttpResult("200", "", true, null));
-    }
+//
+//    public static String getMqttinfo(AsyncHttpServerRequest request) {
+//        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+//        if (baseInfoDao.loadAll().size() == 0) {
+//            baseInfoDao.insert(new BaseInfo("", "",
+//                    "", java.util.UUID.randomUUID().toString(), 0));
+//        }
+//        return gson.toJson(new HttpResult("200", "", true, baseInfoDao.loadAll().get(0)));
+//    }
+//
+//    public static String updataMqttInfo(AsyncHttpServerRequest request) {
+//        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
+//        BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
+//        baseInfoDao.deleteAll();
+//        baseInfoDao.insert(baseInfo);
+//        return gson.toJson(new HttpResult("200", "", true, null));
+//    }
 
 
     public static String getZkBaseInfo(AsyncHttpServerRequest request) {
@@ -407,6 +410,8 @@ public class HttpRequestUtil {
                     SerialPortUtil.sendFWstatus(msg);
                 } else if (msg.substring(0, 3).equals("LUB")) {
                     HttpUtil.setlubo(msg);
+                } else if (msg.substring(0, 3).equals("JZF")) {
+                    SerialPortUtil.sendShipinFenping(msg);
                 } else if (msg.substring(0, 3).equals("MBS")) {
                     try {
                         SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
@@ -455,7 +460,6 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-
     public static String getDeviceStatus(AsyncHttpServerRequest request) {
         EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
         if (eventShangkeDao.loadAll().size() == 0) {
@@ -468,7 +472,6 @@ public class HttpRequestUtil {
         }
         return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.loadAll()));
     }
-
 
     public static String getWgkzqInfo(AsyncHttpServerRequest request) {
         EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();

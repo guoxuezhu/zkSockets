@@ -23,14 +23,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
-
-    @OnClick(R.id.net_btn)
-    public void net_btn() {
-        startActivity(new Intent(this, NetStatusActivity.class));
-        finish();
-    }
-
     @OnClick(R.id.base_set)
     public void base_set() {
         startActivity(new Intent(Settings.ACTION_SETTINGS));
@@ -51,6 +43,12 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.tupu_btn)
     public void tupu_btn() {
         startActivity(new Intent(this, XiangDaoActivity.class));
+        finish();
+    }
+
+    @OnClick(R.id.ic_btn)
+    public void ic_btn() {
+        startActivity(new Intent(this, ICcardActivity.class));
         finish();
     }
 
@@ -78,8 +76,6 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "请插入有升级包的U盘", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
 
     @Override

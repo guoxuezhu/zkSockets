@@ -1,6 +1,5 @@
 package com.lh.zksockets.utils;
 
-
 public class JinzhiUtil {
 
     public static String get2String(String hex) {

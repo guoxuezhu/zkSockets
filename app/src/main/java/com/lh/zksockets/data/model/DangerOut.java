@@ -7,7 +7,6 @@ import org.greenrobot.greendao.annotation.Id;
 @Entity
 public class DangerOut {
 
-
     @Id
     public Long id;
 

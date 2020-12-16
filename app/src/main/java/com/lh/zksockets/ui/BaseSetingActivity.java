@@ -16,13 +16,9 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
-import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;

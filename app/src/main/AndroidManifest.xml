@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.lh.zksockets">
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission
-        android:name="android.permission.BIND_APPWIDGET"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" /> <!-- 开机自启动 -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".MyApplication"
@@ -39,7 +19,8 @@
         android:restoreAnyVersion="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Zksockets"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.WangguanEventActivity"
             android:windowSoftInputMode="stateHidden"></activity>
@@ -68,31 +49,6 @@
             android:name=".ui.TyjEventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ui.LauncherActivity"
-            android:clearTaskOnLaunch="true"
-            android:enabled="true"
-            android:launchMode="singleTask"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="nosensor"
-            android:stateNotNeeded="true"
-            android:taskAffinity=""
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.SplashActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name=".ui.DoorSetingActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -105,9 +61,6 @@
             android:name=".ui.XiangDaoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ui.ProjectorSetingActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
             android:name=".ui.ComputerActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -115,9 +68,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.UsersActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.NetStatusActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.PowerDeviceActivity"
@@ -151,30 +101,34 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.IOsetingActivity"
-            android:windowSoftInputMode="stateHidden" /> <!-- <service android:name="org.eclipse.paho.android.service.MqttService" /> &lt;!&ndash;MqttService&ndash;&gt; -->
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.LauncherActivity"
+            android:clearTaskOnLaunch="true"
+            android:enabled="true"
+            android:launchMode="singleTask"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="nosensor"
+            android:stateNotNeeded="true"
+            android:taskAffinity=""
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+        </activity>
+
         <service android:name=".service.MyMqttService" /> <!-- MyMqttService -->
-        <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
-        <meta-data
-            android:name="BaiduMobAd_STAT_ID"
-            android:value="tSicoUdNymbV7aAG4H2bxEw6STWTU5xr" /> <!-- 渠道商编号 -->
-        <meta-data
-            android:name="BaiduMobAd_CHANNEL"
-            android:value="web-vid9-master-1/1" /> <!-- 是否开启错误日志统计，默认为false -->
-        <meta-data
-            android:name="BaiduMobAd_EXCEPTION_LOG"
-            android:value="true" /> <!-- 日志仅在wifi网络下发送，默认为false -->
-        <meta-data
-            android:name="BaiduMobAd_ONLY_WIFI"
-            android:value="false" /> <!-- 是否获取基站位置信息 ,默认为true -->
-        <meta-data
-            android:name="BaiduMobAd_CELL_LOCATION"
-            android:value="true" /> <!-- 是否获取GPS位置信息，默认为true -->
-        <meta-data
-            android:name="BaiduMobAd_GPS_LOCATION"
-            android:value="true" /> <!-- 是否获取WIFI位置信息，默认为true -->
-        <meta-data
-            android:name="BaiduMobAd_WIFI_LOCATION"
-            android:value="true" />
     </application>
 
 </manifest>

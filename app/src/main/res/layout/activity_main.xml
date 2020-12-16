@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/set_bg"
@@ -62,16 +61,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <Button
-                    android:id="@+id/net_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/btn_img_1"
-                    android:text="数据test"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -114,6 +103,15 @@
                     android:text="高级设置"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
+
+                <Button
+                    android:id="@+id/ic_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="IC卡管理"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
 
 
@@ -137,187 +135,5 @@
 
 
     </LinearLayout>
-
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:visibility="gone">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:src="@mipmap/shenji_img" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="升级"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20" />-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:src="@mipmap/jb_set" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="基本设置"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:background="@mipmap/gj_seting" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="高级设置"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:src="@mipmap/user_img" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="数据test"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20" />-->
-
-
-    <!--</LinearLayout>-->
-
-
-    <!--</LinearLayout>-->
-
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:visibility="gone">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/xiangdao"-->
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:src="@mipmap/png_4"-->
-    <!--android:visibility="gone" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="线路安装向导"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20"-->
-    <!--android:visibility="gone" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/user_btn"-->
-    <!--android:layout_width="@dimen/dp_100"-->
-    <!--android:layout_height="@dimen/dp_100"-->
-    <!--android:src="@mipmap/png_5"-->
-    <!--android:visibility="gone" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="用户管理"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_20"-->
-    <!--android:visibility="gone" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--</LinearLayout>-->
 
 </LinearLayout>

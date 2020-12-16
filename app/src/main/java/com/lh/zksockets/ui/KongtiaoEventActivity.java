@@ -1,7 +1,6 @@
 package com.lh.zksockets.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -79,7 +78,6 @@ public class KongtiaoEventActivity extends BaseActivity {
         event_tv_time_48.setText(mLsListsDao.load((long) 48).time);
         event_tv_time_49.setText(mLsListsDao.load((long) 49).time);
     }
-
 
 
     @OnClick(R.id.btn_event_kt_ok)

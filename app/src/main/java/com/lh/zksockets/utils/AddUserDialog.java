@@ -11,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 public class AddUserDialog extends Dialog {
 
     @BindView(R.id.et_userName)
@@ -50,7 +49,7 @@ public class AddUserDialog extends Dialog {
 
     @OnClick(R.id.dialog_user_btn_ok)
     public void dialog_user_btn_ok() {
-        mUserDialogCallBack.addUserInfo(et_userName.getText().toString(),et_userPaw.getText().toString(),
+        mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(),
                 1);
     }
 

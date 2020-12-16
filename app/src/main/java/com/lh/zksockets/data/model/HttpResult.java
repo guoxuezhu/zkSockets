@@ -7,7 +7,6 @@ public class HttpResult<T> {
     public String message;
     public boolean success;
 
-//    @SerializedName("data")
     T data;
 
     public T getData() {

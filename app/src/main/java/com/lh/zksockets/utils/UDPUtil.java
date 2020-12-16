@@ -53,6 +53,7 @@ public class UDPUtil {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100040A0D"));
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100060A0D"));
         }
+
     }
 
     private static void sendUdpMsg(String ip, byte[] msgbyte) {
@@ -61,7 +62,7 @@ public class UDPUtil {
             cUdpSocket = new DatagramSocket(10101);
             DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
             dp.setSocketAddress(new InetSocketAddress(ip, 10101));
-            cUdpSocket.send(dp);//鍙戦€佷竴鏉″箍鎾­淇℃伅
+            cUdpSocket.send(dp);//发送一条广播信息
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -2,24 +2,37 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.data.DbDao.IcCardDao;
+import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.utils.AddCardDialog;
 import com.lh.zksockets.utils.DateUtil;
 import com.lh.zksockets.utils.ELog;
 
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ICcardActivity extends BaseActivity implements AddCardDialog.DialogCallBack, IcCardAdapter.CallBack {
 
@@ -30,6 +43,25 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     private IcCardDao icCardDao;
     private IcCardAdapter icCardAdapter;
 
+    private Handler cardHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 151:
+                    ELog.e("======Handler=====1====" + msg.obj.toString());
+                    icCardAdapter.setData(icCardDao.loadAll());
+                    Toast.makeText(ICcardActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+                case 152:
+                    ELog.e("======Handler=====2====" + msg.obj.toString());
+                    Toast.makeText(ICcardActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    break;
+            }
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +71,54 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
         icCardDao = MyApplication.getDaoSession().getIcCardDao();
         initRcyclerView();
 
+
+    }
+
+    private void getIcdata() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(MyApplication.BASEURL + "api/get_ic_card_list")
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("=======getIcdata===数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========getIcdata==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<IcCard>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<IcCard>>>>() {
+                    }.getType());
+                    ELog.i("=========ic=====数据=======" + httpRowHttpData.getData());
+                    icCardDao.deleteAll();
+                    List<IcCard> icCards = httpRowHttpData.getData().getRows();
+                    for (int i = 0; i < icCards.size(); i++) {
+                        icCardDao.insert(icCards.get(i));
+                    }
+                    Message message = new Message();
+                    message.obj = "数据恢复成功";
+                    message.what = 151;
+                    cardHandler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.obj = "无数据/恢复失败";
+                    message.what = 152;
+                    cardHandler.sendMessage(message);
+                }
+
+            }
+        });
     }
 
     private void initRcyclerView() {
@@ -46,6 +126,13 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
         ic_recyclerView.setLayoutManager(manager);
         icCardAdapter = new IcCardAdapter(this, icCardDao.loadAll(), this);
         ic_recyclerView.setAdapter(icCardAdapter);
+        ELog.i("===========icCardDao.loadAll()============" + icCardDao.loadAll().toString());
+    }
+
+
+    @OnClick(R.id.get_card)
+    public void get_card() {
+        getIcdata();
     }
 
     @OnClick(R.id.add_card)
@@ -66,17 +153,17 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     public void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum) {
         if (icCardDao.loadAll().size() != 0) {
             List<IcCard> icCards = icCardDao.queryBuilder()
-                    .where(IcCardDao.Properties.CardNum.eq(cardNum))
-                    .orderAsc(IcCardDao.Properties.TerName)
+                    .where(IcCardDao.Properties.Card_no.eq(cardNum))
+                    .orderAsc(IcCardDao.Properties.CardNumId)
                     .list();
             if (icCards.size() != 0) {
                 Toast.makeText(this, "卡号已经存在", Toast.LENGTH_SHORT).show();
             } else {
-                icCardDao.insert(new IcCard(workNumber, icType, teacherName, department, Long.parseLong(cardNum), DateUtil.getNow()));
+                icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
                 closeDialog();
             }
         } else {
-            icCardDao.insert(new IcCard(workNumber, icType, teacherName, department, Long.parseLong(cardNum), DateUtil.getNow()));
+            icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
             closeDialog();
         }
     }
@@ -92,7 +179,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     @Override
     public void onClickItem(IcCard item) {
         ELog.i("===========item============" + item.toString());
-        icCardDao.deleteByKey(item.cardNum);
+        icCardDao.deleteByKey(item.cardNumId);
         closeDialog();
     }
 
@@ -108,7 +195,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     }
 
     private void back() {
-        startActivity(new Intent(this, AdvancedSetingActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

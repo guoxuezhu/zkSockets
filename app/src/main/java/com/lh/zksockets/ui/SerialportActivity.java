@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -20,11 +22,9 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.SelectAdapter;
 import com.lh.zksockets.adapter.SerialportAdapter;
-import com.lh.zksockets.data.DbDao.ProjectorDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.model.HttpData;
-import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialGetResult;
@@ -32,11 +32,7 @@ import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
-import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,26 +80,20 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     RecyclerView serial_recyclerView;
 
 
-    private List<String> serialPortList;
     private List<String> baudRateList;
     private List<String> checkoutBitList;
     private List<String> dataBitList;
     private List<String> stopBitList;
     private List<String> tyjtypeList;
-    private ProjectorDao projectorDao;
-    private String selectSerialPort;
     private String selectBaudRate;
     private String selectCheckoutBit;
     private String selectDataBit;
     private String selectStopBit;
-    private String selectTyep;
 
-    private int selectSerialPortId;
     private int selectBaudRateId;
     private int selectCheckoutBitId;
     private int selectDataBitId;
     private int selectStopBitId;
-    private int selectTyepId;
 
 
     private SerialPortDataDao serialPortDataDao;
@@ -161,10 +151,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         dataBitInitView();
         stopBitInitView();
 
-//        serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        serialportAdapter = new SerialportAdapter(this, serialCommands, this);
-//        serial_recyclerView.setAdapter(serialportAdapter);
-
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
         if (serialPortDataDao.loadAll().size() < 4) {
@@ -189,7 +175,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ckdataTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 1; i < 9; i++) {
+                for (int i = 1; i < 5; i++) {
                     serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
                             "9600", 0, "NONE", 0, "8", 0, "1", 10));
                     for (int j = 1; j < 31; j++) {
@@ -200,11 +186,11 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                         }
                     }
                 }
-                serialPortDataDao.update(new SerialPortData((long) 8, "串口8", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialCommandDao.update(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "电能表", "0104010000027037", 16));
+//                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+//                serialCommandDao.update(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "电能表", "0104010000027037", 16));
 
-//                serialPortDataDao.update(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-//                serialCommandDao.update(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "温湿度", "01040000000271CB", 16));
+//                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+//                serialCommandDao.update(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "温湿度", "01040000000271CB", 16));
 
 
                 serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
@@ -330,7 +316,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         serialportAdapter = new SerialportAdapter(this, serialCommands, this);
         serial_recyclerView.setAdapter(serialportAdapter);
-//        serialportAdapter.setDatas(serialCommands);
 
     }
 
@@ -359,9 +344,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         serial_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         serialportAdapter = new SerialportAdapter(this, serialCommands, this);
         serial_recyclerView.setAdapter(serialportAdapter);
-//        serialportAdapter.setDatas(serialCommands);
-
-
     }
 
 
@@ -640,7 +622,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     public void btn_sport_beifen() {
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
 
-        for (int n = 1; n < 9; n++) {
+        for (int n = 1; n < 5; n++) {
             List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                     .where(SerialCommandDao.Properties.SId.eq(n))
                     .orderAsc(SerialCommandDao.Properties.MlId)

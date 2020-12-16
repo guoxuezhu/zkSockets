@@ -33,7 +33,7 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        ELog.d("======LauncherActivity===onRestart==========");
+        ELog.d("========LauncherActivity======onRestart==========");
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -45,6 +45,7 @@ public class LauncherActivity extends BaseActivity {
             }
         }, 1500);
     }
+
 
     @Override
     public void onBackPressed() {

@@ -68,8 +68,6 @@ public class LuboEventActivity extends BaseActivity {
     }
 
 
-
-
     @OnClick(R.id.btn_event_lubo_ok)
     public void btn_event_lubo_ok() {
         mLsListsDao.update(new MLsLists((long) 54, "开始录制", event_et_54.getText().toString(), event_tv_time_54.getText().toString()));

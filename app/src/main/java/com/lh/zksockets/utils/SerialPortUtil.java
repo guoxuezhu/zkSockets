@@ -1,11 +1,11 @@
 package com.lh.zksockets.utils;
 
-import com.baidu.mobstat.StatService;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
@@ -13,6 +13,7 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
+import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.WenShiDu;
@@ -26,6 +27,8 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 import okhttp3.Call;
@@ -44,6 +47,7 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
+    private static Timer xiakeTimer;
 
 
     public static boolean open() {
@@ -86,7 +90,6 @@ public class SerialPortUtil {
                             ELog.i("=========串口2===接收到了数据==size=====" + size);
                             String msg = new String(buffer, 0, size);
                             ELog.i("=========串口2===接收到了数据=======" + msg);
-
                             if (msg.indexOf("[") != -1 && msg.indexOf("]") != -1) {
                                 if (bslength > 200) {
                                     bslength = 0;
@@ -99,7 +102,6 @@ public class SerialPortUtil {
                                     makeData(new String(buffer1, 0, bslength));
                                 } catch (Exception e) {
                                     ELog.i("========run====System.arraycopy====" + e.toString());
-                                    StatService.recordException(MyApplication.context, e);
                                 }
                             }
                         }
@@ -114,7 +116,6 @@ public class SerialPortUtil {
         }.start();
 
     }
-
 
     private static void makeData(String msgdata) {
         try {
@@ -135,34 +136,34 @@ public class SerialPortUtil {
                         buffer2 = new byte[1024];
                     }
 
-                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
-                    ELog.i("===========COM7==============");
+                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM3]")) {
+                    ELog.i("===========COM3=====电能表=========");
                     if (msgdata.indexOf("[", 2) == -1) {
-                        ELog.i("===========COM7===========111111=======" + msgdata.length());
+                        ELog.i("===========COM3=====电能表======111111=======" + msgdata.length());
                         if (msgdata.length() == 17) {
                             buffer2 = new byte[1024];
                             System.arraycopy(buffer1, 7, buffer2, 0, 9);
-                            setWenshidu();
+                            getDianLiang();
                             bslength = 0;
                             buffer1 = new byte[1024];
                             buffer2 = new byte[1024];
                         }
                     } else {
                         if (msgdata.indexOf("]", 6) != -1) {
-                            ELog.i("===========COM7=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
-                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
+                            ELog.i("===========COM3=====电能表====2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
+                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM3]")) {
                                 if (bslength - 16 == 9) {
-                                    ELog.i("==========COM7=======两条数据============");
+                                    ELog.i("==========COM3====电能表===两条数据============");
                                     buffer2 = new byte[1024];
                                     int length1 = msgdata.indexOf(">[", 3) + 1;
-                                    ELog.i("==========COM7=======length1============" + length1);
+                                    ELog.i("==========COM3====电能表===length1============" + length1);
                                     System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
                                     System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-                                    setWenshidu();
+                                    getDianLiang();
                                     bslength = bslength - 25;
                                     if (bslength != 0) {
                                         System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-                                        ELog.i("==========COM7======33333=============" + new String(buffer2, 0, bslength));
+                                        ELog.i("==========COM3====电能表==33333=============" + new String(buffer2, 0, bslength));
                                         buffer1 = new byte[1024];
                                         System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                         buffer2 = new byte[1024];
@@ -175,7 +176,7 @@ public class SerialPortUtil {
                                     buffer2 = new byte[1024];
                                     bslength = bslength - msgdata.indexOf(">") - 1;
                                     System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                    ELog.i("===========COM7======两条数据错误======" + new String(buffer2, 0, bslength));
+                                    ELog.i("===========COM3====电能表==两条数据错误======" + new String(buffer2, 0, bslength));
                                     buffer1 = new byte[1024];
                                     System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                     buffer2 = new byte[1024];
@@ -185,7 +186,7 @@ public class SerialPortUtil {
                                 buffer2 = new byte[1024];
                                 bslength = bslength - msgdata.indexOf(">") - 1;
                                 System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                ELog.i("===========COM7=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
+                                ELog.i("===========COM3===电能表==去掉有问题数据后=======" + new String(buffer2, 0, bslength));
                                 buffer1 = new byte[1024];
                                 System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                 buffer2 = new byte[1024];
@@ -260,17 +261,13 @@ public class SerialPortUtil {
                         baojin(Integer.toHexString(buffer2[0] & 0xFF));
 
                         bslength = bslength - 9;
-                        if (bslength != 0) {
-                            System.arraycopy(buffer1, 9, buffer2, 0, bslength);
-                            ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
-                            buffer1 = new byte[1024];
-                            System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                            buffer2 = new byte[1024];
-                            makeData(new String(buffer1, 0, bslength));
-                        } else {
-                            buffer1 = new byte[1024];
-                            buffer2 = new byte[1024];
-                        }
+                        System.arraycopy(buffer1, 9, buffer2, 0, bslength);
+                        ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+
                     }
                 } else {
                     if (msgdata.indexOf(">") != -1) {
@@ -297,7 +294,6 @@ public class SerialPortUtil {
         }
 
     }
-
 
     private static void getDianLiang() {
         byte[] buffer3 = new byte[4];
@@ -338,7 +334,7 @@ public class SerialPortUtil {
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
                 WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        "", 60000, "1-801");
+                        "", 0, "1-405");
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
 
@@ -348,7 +344,6 @@ public class SerialPortUtil {
         }
 
     }
-
 
     public static void sendMsg1(byte[] data) {
         try {
@@ -375,6 +370,7 @@ public class SerialPortUtil {
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
             DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+
             if (!str2jz.substring(0, 1).equals(dangerStatusDao.load((long) 1).dangerStatus4 + "")) {
                 if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
                     ELog.i("=========报警口======" + 4);
@@ -383,6 +379,7 @@ public class SerialPortUtil {
                     getEventId(ioYuanDao.load((long) 4).noDangerMl);
                 }
             }
+
             if (!str2jz.substring(1, 2).equals(dangerStatusDao.load((long) 1).dangerStatus3 + "")) {
                 if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
                     ELog.i("=========报警口======" + 3);
@@ -391,6 +388,7 @@ public class SerialPortUtil {
                     getEventId(ioYuanDao.load((long) 3).noDangerMl);
                 }
             }
+
             if (!str2jz.substring(2, 3).equals(dangerStatusDao.load((long) 1).dangerStatus2 + "")) {
                 if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
                     ELog.i("=========报警口======" + 2);
@@ -399,37 +397,22 @@ public class SerialPortUtil {
                     getEventId(ioYuanDao.load((long) 2).noDangerMl);
                 }
             }
+
             if (!str2jz.substring(3, 4).equals(dangerStatusDao.load((long) 1).dangerStatus1 + "")) {
                 if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
-                    ELog.i("========报警口======" + 1);
+                    ELog.i("=========报警口======" + 1);
                     getEventId(ioYuanDao.load((long) 1).dangerMl);
                 } else {
                     getEventId(ioYuanDao.load((long) 1).noDangerMl);
                 }
             }
+
             dangerStatusDao.deleteAll();
             dangerStatusDao.insert(new DangerStatus((long) 1, Integer.valueOf(str2jz.substring(3, 4)),
                     Integer.valueOf(str2jz.substring(2, 3)),
                     Integer.valueOf(str2jz.substring(1, 2)),
                     Integer.valueOf(str2jz.substring(0, 1))));
 
-        }
-    }
-
-    private static void getEventId(String strMls) {
-        if (strMls.length() != 0) {
-            String[] mls = strMls.split(",");
-            for (int i = 0; i < mls.length; i++) {
-                ELog.i("=======getEventId========" + mls[i]);
-                try {
-                    makeML(Long.valueOf(mls[i]));
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -504,6 +487,10 @@ public class SerialPortUtil {
                                         makemenjin(msg);
                                     } else if (msg.substring(0, 3).equals("LUB")) {
                                         HttpUtil.setlubo(msg);
+                                    } else if (msg.substring(0, 3).equals("JZF")) {
+                                        sendShipinFenping(msg);
+                                    } else if (msg.substring(0, 3).equals("ICK")) {
+                                        shuaka(msg);
                                     } else if (msg.substring(0, 3).equals("MBS")) {
                                         try {
                                             makeML(Long.valueOf(msg.substring(3)));
@@ -513,8 +500,7 @@ public class SerialPortUtil {
                                     }
                                 }
                             } catch (Exception e) {
-                                ELog.i("=========串口1===接收到了数据=====异常========" + e.toString());
-                                StatService.recordException(MyApplication.context, e);
+                                ELog.i("======串口1===接收数据===run======" + e.toString());
                             }
                         }
                     }
@@ -527,6 +513,19 @@ public class SerialPortUtil {
             }
         }.start();
 
+    }
+
+    private static void shuaka(String msg) {
+        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+        List<IcCard> icCards = icCardDao.queryBuilder()
+                .where(IcCardDao.Properties.Card_no.eq(msg.substring(3)))
+                .orderAsc(IcCardDao.Properties.CardNumId)
+                .list();
+        if (icCards.size() != 0) {
+            sendMsg1("SKJAA".getBytes());
+        } else {
+            sendMsg1("ICKERROR".getBytes());
+        }
     }
 
     public static void wsdSendLog(WenShiDu wenShiDu) {
@@ -649,6 +648,21 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             UDPUtil.makeWangguan(id);
+            if (id == 1) {
+                closeXiakeTimer();
+                sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
             if (mLsListsDao.loadAll().size() != 0) {
                 if (mLsListsDao.load(id) == null) {
@@ -665,11 +679,54 @@ public class SerialPortUtil {
                 }
             }
             if (id == 2) {
-                sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
+                setXiakeTimer();
             }
             DeviceStatusUtil.setDeviceStatus(id);
         }
 
+    }
+
+    private static void getEventId(String strMls) {
+        if (strMls.length() != 0) {
+            String[] mls = strMls.split(",");
+            for (int i = 0; i < mls.length; i++) {
+                ELog.i("=======getEventId========" + mls[i]);
+                try {
+                    makeML(Long.valueOf(mls[i]));
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private static void setXiakeTimer() {
+        closeXiakeTimer();
+        xiakeTimer = new Timer();
+        xiakeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
+                closeXiakeTimer();
+            }
+        }, 60 * 1500);
+    }
+
+    private static void closeXiakeTimer() {
+        if (xiakeTimer != null) {
+            xiakeTimer.cancel();
+            xiakeTimer = null;
+        }
     }
 
     private static void doDanger(String ml) {
@@ -756,8 +813,10 @@ public class SerialPortUtil {
 //                }
 //            }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
-            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
-                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
+            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
+                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
+                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
+                }
             }
         } else if (ml.substring(4).equals("0")) {
             if (ml.substring(2, 3).equals("7")) {
@@ -780,8 +839,10 @@ public class SerialPortUtil {
                 }
             }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
-            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
-                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
+                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
+                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
+                }
             }
         }
         ELog.i("========doJDQ====msg====" + msg);
@@ -849,18 +910,69 @@ public class SerialPortUtil {
 
     }
 
-
     public static void sendShipinType(String str) {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
-                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
+                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
             } else if (str.substring(0, 4).equals("VIDC")) {
-                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
+                msg = "BB050" + str.substring(4) + "80";
             }
-            byte[] data = msg.getBytes();
+            byte[] data = StringToBytes(msg);
             sendMsg(data);
         }
+    }
+
+    public static void sendShipinFenping(String str) {
+        synchronized (str) {
+            String msg = "";
+            if (str.substring(0, 5).equals("JZFGB")) {
+                msg = "BB0300090" + str.substring(5) + "000055";
+            } else if (str.equals("JZFFP2")) {
+                msg = "BB02005200000055";
+            } else if (str.equals("JZFFP1")) {
+                msg = "BB02005100000055";
+                sendshipinCommand(msg);
+                try {
+                    sleep(600);
+                    sendshipinCommand("BB04000201000055");
+                    sleep(600);
+                    sendshipinCommand("BB04000202020055");
+                    sleep(600);
+                    sendshipinCommand("BB04000203030055");
+                    sleep(600);
+                    sendshipinCommand("BB04000204040055");
+                    sleep(600);
+                    sendshipinCommand("BB04000205050055");
+                    sleep(600);
+                    sendshipinCommand("BB04000206060055");
+                    sleep(600);
+                    sendshipinCommand("BB04000207070055");
+                    sleep(600);
+                    msg = "BB04000208080055";
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (str.substring(0, 5).equals("JZFAA")) {
+                msg = "BB0400020" + str.substring(5) + "000055";
+            } else if (str.substring(0, 5).equals("JZFBB")) {
+                msg = "BB0400020" + str.substring(5) + "010055";
+            }
+            sendshipinCommand(msg);
+
+        }
+    }
+
+    private static void sendshipinCommand(String msg) {
+        byte[] data1 = "{[COM0:DT:H008]<".getBytes();
+        byte[] data2 = StringToBytes(msg);
+        byte[] data3 = ">}".getBytes();
+        byte[] data = new byte[data1.length + data2.length + data3.length];
+        System.arraycopy(data1, 0, data, 0, data1.length);
+        System.arraycopy(data2, 0, data, data1.length, data2.length);
+        System.arraycopy(data3, 0, data, data1.length + data2.length, data3.length);
+        ELog.i("========分屏=========" + msg);
+        sendMsg(data);
     }
 
 

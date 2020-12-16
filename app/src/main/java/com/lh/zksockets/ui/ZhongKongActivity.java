@@ -4,23 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.DbDao.BaseInfoDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
-import com.lh.zksockets.data.model.BaseInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
-import com.lh.zksockets.service.MyMqttService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ZhongKongActivity extends BaseActivity {
-
 
     @BindView(R.id.wg_ip)
     EditText wg_ip;
@@ -31,6 +26,7 @@ public class ZhongKongActivity extends BaseActivity {
     RadioButton rbtn_wg_no;
 
     private EventKejianRestDao wangguandata;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +39,13 @@ public class ZhongKongActivity extends BaseActivity {
             wangguandata.insert(new EventKejianRest(1, (long) 1, "192.168.0.220",
                     0, false, 0));
         }
-
         wg_ip.setText(wangguandata.loadAll().get(0).name);
         if (wangguandata.loadAll().get(0).status == 1) {
             rbtn_wg_ok.setChecked(true);
         } else {
             rbtn_wg_no.setChecked(true);
         }
-
     }
-
 
     @OnClick(R.id.btn_wg_baocun)
     public void btn_wg_baocun() {

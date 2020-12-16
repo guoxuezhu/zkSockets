@@ -2,12 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.SerialportActivity">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +74,8 @@
             android:padding="@dimen/dp_6"
             android:text="串口1"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_2"
@@ -87,7 +86,8 @@
             android:padding="@dimen/dp_6"
             android:text="串口2"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_3"
@@ -98,7 +98,8 @@
             android:padding="@dimen/dp_6"
             android:text="串口3"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_4"
@@ -109,7 +110,8 @@
             android:padding="@dimen/dp_6"
             android:text="串口4"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_5"
@@ -120,7 +122,9 @@
             android:padding="@dimen/dp_6"
             android:text="串口5"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            android:visibility="gone"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_6"
@@ -131,7 +135,9 @@
             android:padding="@dimen/dp_6"
             android:text="串口6"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            android:visibility="gone"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_7"
@@ -142,7 +148,9 @@
             android:padding="@dimen/dp_6"
             android:text="串口7"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            android:visibility="gone"
+            app:buttonCompat="@null" />
 
         <RadioButton
             android:id="@+id/spt_btn_8"
@@ -153,7 +161,9 @@
             android:padding="@dimen/dp_6"
             android:text="串口8"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            android:visibility="gone"
+            app:buttonCompat="@null" />
 
 
     </RadioGroup>
@@ -349,7 +359,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/serial_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="1800dp" />

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -285,7 +284,7 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="外网控制:"
+                    android:text="远程控制:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
@@ -348,8 +347,8 @@
                     android:id="@+id/btn_baseip_name"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
                     android:text="检测"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_24" />
@@ -358,8 +357,8 @@
                     android:id="@+id/btn_baseset_tongbu"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
                     android:text="云恢复"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_24" />
@@ -368,8 +367,8 @@
                     android:id="@+id/btn_baseset_beifen"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/btn_bg"
                     android:text="云备份"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_24" />

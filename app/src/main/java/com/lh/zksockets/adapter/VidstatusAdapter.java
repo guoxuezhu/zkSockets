@@ -2,18 +2,12 @@ package com.lh.zksockets.adapter;
 
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.model.EventBase;
 import com.lh.zksockets.data.model.Vidstatus;
 
 import java.util.List;

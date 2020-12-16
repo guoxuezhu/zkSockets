@@ -13,7 +13,6 @@ public class SharePreferenceUtil {
     private SharedPreferences sp;
     private Editor editor;
 
-
     /**
      * 构造函数
      */
@@ -31,6 +30,7 @@ public class SharePreferenceUtil {
     public String getCloseTimer() {
         return sp.getString("closeTimer", "22:00:00");
     }
+
 
     public void setIsReboot(boolean isReboot) {
         editor.putBoolean("isReboot", isReboot);

@@ -18,7 +18,6 @@ import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
-import com.lh.zksockets.utils.HttpUtil;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.lh.zksockets.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -103,20 +102,20 @@ public class XiangDaoActivity extends BaseActivity {
             tp_ck_2.setText(serialPortDataDao.load((long) 2).deviceName.equals("") ? "串口2：无设备" : "串口2：" + serialPortDataDao.load((long) 2).deviceName);
             tp_ck_3.setText(serialPortDataDao.load((long) 3).deviceName.equals("") ? "串口3：无设备" : "串口3：" + serialPortDataDao.load((long) 3).deviceName);
             tp_ck_4.setText(serialPortDataDao.load((long) 4).deviceName.equals("") ? "串口4：无设备" : "串口4：" + serialPortDataDao.load((long) 4).deviceName);
-            tp_ck_5.setText(serialPortDataDao.load((long) 5).deviceName.equals("") ? "串口5：无设备" : "串口5：" + serialPortDataDao.load((long) 5).deviceName);
-            tp_ck_6.setText(serialPortDataDao.load((long) 6).deviceName.equals("") ? "串口6：无设备" : "串口6：" + serialPortDataDao.load((long) 6).deviceName);
-            tp_ck_7.setText(serialPortDataDao.load((long) 7).deviceName.equals("") ? "串口7：无设备" : "串口7：" + serialPortDataDao.load((long) 7).deviceName);
-            tp_ck_8.setText(serialPortDataDao.load((long) 8).deviceName.equals("") ? "串口8：无设备" : "串口8：" + serialPortDataDao.load((long) 8).deviceName);
+//            tp_ck_5.setText(serialPortDataDao.load((long) 5).deviceName.equals("") ? "串口5：无设备" : "串口5：" + serialPortDataDao.load((long) 5).deviceName);
+//            tp_ck_6.setText(serialPortDataDao.load((long) 6).deviceName.equals("") ? "串口6：无设备" : "串口6：" + serialPortDataDao.load((long) 6).deviceName);
+//            tp_ck_7.setText(serialPortDataDao.load((long) 7).deviceName.equals("") ? "串口7：无设备" : "串口7：" + serialPortDataDao.load((long) 7).deviceName);
+//            tp_ck_8.setText(serialPortDataDao.load((long) 8).deviceName.equals("") ? "串口8：无设备" : "串口8：" + serialPortDataDao.load((long) 8).deviceName);
 
 
             tp_ck_1.setTextColor(serialPortDataDao.load((long) 1).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
             tp_ck_2.setTextColor(serialPortDataDao.load((long) 2).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
             tp_ck_3.setTextColor(serialPortDataDao.load((long) 3).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
             tp_ck_4.setTextColor(serialPortDataDao.load((long) 4).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
-            tp_ck_5.setTextColor(serialPortDataDao.load((long) 5).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
-            tp_ck_6.setTextColor(serialPortDataDao.load((long) 6).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
-            tp_ck_7.setTextColor(serialPortDataDao.load((long) 7).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
-            tp_ck_8.setTextColor(serialPortDataDao.load((long) 8).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+//            tp_ck_5.setTextColor(serialPortDataDao.load((long) 5).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+//            tp_ck_6.setTextColor(serialPortDataDao.load((long) 6).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+//            tp_ck_7.setTextColor(serialPortDataDao.load((long) 7).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+//            tp_ck_8.setTextColor(serialPortDataDao.load((long) 8).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
 
 
         }

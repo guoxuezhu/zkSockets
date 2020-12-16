@@ -27,6 +27,7 @@ public class DateUtil {
     public static String getTimeyyyyMMdd() {
         return getNow("yyyy-MM-dd");
     }
+
     /**
      * 根据指定的format格式获取当前时间
      *
@@ -60,6 +61,7 @@ public class DateUtil {
 
     /**
      * 判断日期大小
+     *
      * @param DATE1
      * @param DATE2
      * @return

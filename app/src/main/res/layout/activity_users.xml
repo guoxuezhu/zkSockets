@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/myBgLayout"
     android:orientation="vertical"
     tools:context=".ui.UsersActivity">
 
@@ -119,7 +118,7 @@
             android:layout_height="2dp"
             android:background="@color/xian" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

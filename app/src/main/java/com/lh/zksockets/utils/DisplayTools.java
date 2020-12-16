@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 
 import java.io.IOException;
 import java.net.Inet6Address;
@@ -87,7 +86,10 @@ public class DisplayTools {
     }
 
 
-    //判断网络能不能上网
+    /**
+     * 在子线程里开启该方法，可检测当前网络是否能打开网页
+     * true是可以上网，false是不能上网
+     */
     public static boolean isOnline() {
         try {
             new URL("https://www.baidu.com").openStream();
@@ -99,8 +101,6 @@ public class DisplayTools {
         }
         return false;
     }
-
-
 
     /**
      * @return 包

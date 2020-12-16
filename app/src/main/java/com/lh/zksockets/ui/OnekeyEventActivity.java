@@ -51,9 +51,6 @@ public class OnekeyEventActivity extends BaseActivity {
     }
 
 
-
-
-
     @OnClick(R.id.btn_event_cj_ok)
     public void btn_event_cj_ok() {
         mLsListsDao.update(new MLsLists((long) 1, "上课", event_et_1.getText().toString(), event_tv_time_1.getText().toString()));

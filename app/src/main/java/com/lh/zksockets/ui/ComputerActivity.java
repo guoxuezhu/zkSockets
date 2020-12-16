@@ -2,20 +2,12 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.SelectChazuoAdapter;
-import com.lh.zksockets.data.DbDao.ChazuoDataDao;
-import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
-import com.lh.zksockets.data.model.ChazuoData;
-import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.utils.TimerUtils;
 

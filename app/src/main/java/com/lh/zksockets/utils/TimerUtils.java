@@ -2,7 +2,6 @@ package com.lh.zksockets.utils;
 
 
 import com.lh.zksockets.MyApplication;
-import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -472,7 +471,7 @@ public class TimerUtils {
                     if (wenShiDuDao.loadAll().size() != 0) {
                         WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
                         String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-//                        SerialPortUtil.sendMsg1(wsd.getBytes());
+                        SerialPortUtil.sendMsg1(wsd.getBytes());
                         if (wsdCount >= 60) {
                             SerialPortUtil.wsdSendLog(wenShiDu);
                             wsdCount = 0;
@@ -481,7 +480,7 @@ public class TimerUtils {
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
-                SerialPortUtil.doSerialPort("1-801");
+//                SerialPortUtil.doSerialPort("1-405");
                 ELog.d("=========wenshiTimer==========");
             }
         }, 12000, 1 * 60 * 1000);
@@ -543,7 +542,6 @@ public class TimerUtils {
         }, 1000 * 50, 1000);
     }
 
-
     public static void reboot() {
         if (DisplayTools.isOnline()) {
             MyApplication.prefs.setIsReboot(true);
@@ -554,11 +552,6 @@ public class TimerUtils {
             }
         }
     }
-
-
-
-
-
 
 
 }

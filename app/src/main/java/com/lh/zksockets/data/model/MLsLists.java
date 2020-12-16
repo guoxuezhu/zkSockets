@@ -7,7 +7,6 @@ import org.greenrobot.greendao.annotation.Id;
 @Entity
 public class MLsLists {
 
-
     @Id
     public Long id;
 

@@ -25,11 +25,12 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
      */
     public static class Properties {
         public final static Property WorkNum = new Property(0, String.class, "workNum", false, "WORK_NUM");
-        public final static Property IcType = new Property(1, int.class, "icType", false, "IC_TYPE");
-        public final static Property TerName = new Property(2, String.class, "terName", false, "TER_NAME");
-        public final static Property Department = new Property(3, String.class, "department", false, "DEPARTMENT");
-        public final static Property CardNum = new Property(4, Long.class, "cardNum", true, "_id");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Card_no = new Property(2, String.class, "card_no", false, "CARD_NO");
+        public final static Property CardNumId = new Property(3, Long.class, "cardNumId", true, "_id");
+        public final static Property Role = new Property(4, int.class, "role", false, "ROLE");
         public final static Property UpdataTime = new Property(5, String.class, "updataTime", false, "UPDATA_TIME");
+        public final static Property Status = new Property(6, String.class, "status", false, "STATUS");
     }
 
 
@@ -46,11 +47,12 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"IC_CARD\" (" + //
                 "\"WORK_NUM\" TEXT," + // 0: workNum
-                "\"IC_TYPE\" INTEGER NOT NULL ," + // 1: icType
-                "\"TER_NAME\" TEXT," + // 2: terName
-                "\"DEPARTMENT\" TEXT," + // 3: department
-                "\"_id\" INTEGER PRIMARY KEY ," + // 4: cardNum
-                "\"UPDATA_TIME\" TEXT);"); // 5: updataTime
+                "\"NAME\" TEXT," + // 1: name
+                "\"CARD_NO\" TEXT," + // 2: card_no
+                "\"_id\" INTEGER PRIMARY KEY ," + // 3: cardNumId
+                "\"ROLE\" INTEGER NOT NULL ," + // 4: role
+                "\"UPDATA_TIME\" TEXT," + // 5: updataTime
+                "\"STATUS\" TEXT);"); // 6: status
     }
 
     /** Drops the underlying database table. */
@@ -67,26 +69,31 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
         if (workNum != null) {
             stmt.bindString(1, workNum);
         }
-        stmt.bindLong(2, entity.getIcType());
  
-        String terName = entity.getTerName();
-        if (terName != null) {
-            stmt.bindString(3, terName);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
         }
  
-        String department = entity.getDepartment();
-        if (department != null) {
-            stmt.bindString(4, department);
+        String card_no = entity.getCard_no();
+        if (card_no != null) {
+            stmt.bindString(3, card_no);
         }
  
-        Long cardNum = entity.getCardNum();
-        if (cardNum != null) {
-            stmt.bindLong(5, cardNum);
+        Long cardNumId = entity.getCardNumId();
+        if (cardNumId != null) {
+            stmt.bindLong(4, cardNumId);
         }
+        stmt.bindLong(5, entity.getRole());
  
         String updataTime = entity.getUpdataTime();
         if (updataTime != null) {
             stmt.bindString(6, updataTime);
+        }
+ 
+        String status = entity.getStatus();
+        if (status != null) {
+            stmt.bindString(7, status);
         }
     }
 
@@ -98,43 +105,49 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
         if (workNum != null) {
             stmt.bindString(1, workNum);
         }
-        stmt.bindLong(2, entity.getIcType());
  
-        String terName = entity.getTerName();
-        if (terName != null) {
-            stmt.bindString(3, terName);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
         }
  
-        String department = entity.getDepartment();
-        if (department != null) {
-            stmt.bindString(4, department);
+        String card_no = entity.getCard_no();
+        if (card_no != null) {
+            stmt.bindString(3, card_no);
         }
  
-        Long cardNum = entity.getCardNum();
-        if (cardNum != null) {
-            stmt.bindLong(5, cardNum);
+        Long cardNumId = entity.getCardNumId();
+        if (cardNumId != null) {
+            stmt.bindLong(4, cardNumId);
         }
+        stmt.bindLong(5, entity.getRole());
  
         String updataTime = entity.getUpdataTime();
         if (updataTime != null) {
             stmt.bindString(6, updataTime);
         }
+ 
+        String status = entity.getStatus();
+        if (status != null) {
+            stmt.bindString(7, status);
+        }
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4);
+        return cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3);
     }    
 
     @Override
     public IcCard readEntity(Cursor cursor, int offset) {
         IcCard entity = new IcCard( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // workNum
-            cursor.getInt(offset + 1), // icType
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // terName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // department
-            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // cardNum
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // updataTime
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // card_no
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // cardNumId
+            cursor.getInt(offset + 4), // role
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // updataTime
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // status
         );
         return entity;
     }
@@ -142,23 +155,24 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
     @Override
     public void readEntity(Cursor cursor, IcCard entity, int offset) {
         entity.setWorkNum(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setIcType(cursor.getInt(offset + 1));
-        entity.setTerName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setDepartment(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setCardNum(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setCard_no(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCardNumId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setRole(cursor.getInt(offset + 4));
         entity.setUpdataTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setStatus(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override
     protected final Long updateKeyAfterInsert(IcCard entity, long rowId) {
-        entity.setCardNum(rowId);
+        entity.setCardNumId(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(IcCard entity) {
         if(entity != null) {
-            return entity.getCardNum();
+            return entity.getCardNumId();
         } else {
             return null;
         }
@@ -166,7 +180,7 @@ public class IcCardDao extends AbstractDao<IcCard, Long> {
 
     @Override
     public boolean hasKey(IcCard entity) {
-        return entity.getCardNum() != null;
+        return entity.getCardNumId() != null;
     }
 
     @Override

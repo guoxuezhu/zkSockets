@@ -2,12 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/myBgLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.LampActivity">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -191,8 +189,8 @@
             android:id="@+id/btn_lubo_huifu"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
             android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/btn_bg"
             android:text="云恢复"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_24" />
@@ -201,8 +199,8 @@
             android:id="@+id/btn_lubo_beifen"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
             android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/btn_bg"
             android:text="云备份"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_24" />

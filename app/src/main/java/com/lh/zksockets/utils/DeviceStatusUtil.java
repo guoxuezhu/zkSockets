@@ -18,7 +18,6 @@ public class DeviceStatusUtil {
             eventShangkeDao.insert(new EventShangke(0, (long) 5, "空调", 0, false, 0));
             eventShangkeDao.insert(new EventShangke(0, (long) 6, "录播", 0, false, 0));
         }
-        ELog.e("=======id=========" + id);
         if (id == 9) {
             eventShangkeDao.update(new EventShangke(0, (long) 1, "投影机", 1, false, 0));
         }
