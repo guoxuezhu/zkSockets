@@ -234,7 +234,7 @@ public class BaseSetingActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", DisplayTools.getIPAddress(this))
+                .add("ip", tv_IP.getText().toString())
                 .add("title", zkInfoDao.loadAll().get(0).zkname)
                 .add("version", zkInfoDao.loadAll().get(0).zkVersion)
                 .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)
