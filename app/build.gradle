@@ -81,7 +81,8 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:10.2.3"
 
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    // okhttp3 高版本需要 API 21+　
+    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
