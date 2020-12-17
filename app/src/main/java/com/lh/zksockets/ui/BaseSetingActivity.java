@@ -137,7 +137,7 @@ public class BaseSetingActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", DisplayTools.getIPAddress(this))
+                .add("ip", tv_IP.getText().toString())
                 .add("name", et_classRoom.getText().toString())
                 .build();
 
@@ -181,7 +181,7 @@ public class BaseSetingActivity extends BaseActivity {
     public void btn_baseset_tongbu() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + tv_IP.getText().toString())
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
