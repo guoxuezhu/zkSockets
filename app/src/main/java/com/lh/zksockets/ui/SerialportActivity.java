@@ -187,10 +187,10 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     }
                 }
 //                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-//                serialCommandDao.update(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "电能表", "0104010000027037", 16));
+//                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "电能表", "0104010000027037", 16));
 
                 serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialCommandDao.update(new SerialCommand(Long.valueOf("405"), 4, 5, "1-405", "温湿度", "01040000000271CB", 16));
+                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "温湿度", "01040000000271CB", 16));
 
 
                 serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
