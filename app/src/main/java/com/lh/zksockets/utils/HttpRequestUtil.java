@@ -70,16 +70,25 @@ public class HttpRequestUtil {
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
         if (serialPortDataDao.loadAll().size() < 4) {
             for (int i = 1; i < 5; i++) {
-                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
+                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
                 for (int j = 1; j < 31; j++) {
                     if (j >= 10) {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 16));
                     } else {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 16));
                     }
                 }
             }
+
+            serialPortDataDao.insert(new SerialPortData((long) 9, "串口" + 9, "", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            for (int j = 1; j < 31; j++) {
+                if (j >= 10) {
+                    serialCommandDao.insert(new SerialCommand(Long.valueOf(9 + "" + j), 9, j, "1-" + 9 + "" + j, "", "", 16));
+                } else {
+                    serialCommandDao.insert(new SerialCommand(Long.valueOf(9 + "0" + j), 9, j, "1-" + 9 + "0" + j, "", "", 16));
+                }
+            }
+
         }
         String sportNum = request.getQuery().getString("sportNum");
         List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()

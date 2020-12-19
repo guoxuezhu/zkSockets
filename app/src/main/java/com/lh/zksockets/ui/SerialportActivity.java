@@ -177,15 +177,27 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             public void run() {
                 for (int i = 1; i < 5; i++) {
                     serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                            "9600", 0, "NONE", 0, "8", 0, "1", 10));
+                            "9600", 0, "NONE", 0, "8", 0, "1", 16));
                     for (int j = 1; j < 31; j++) {
                         if (j >= 10) {
-                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 16));
                         } else {
-                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 16));
                         }
                     }
                 }
+
+                serialPortDataDao.insert(new SerialPortData((long) 9, "串口" + 9, "", 3,
+                        "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                for (int j = 1; j < 31; j++) {
+                    if (j >= 10) {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(9 + "" + j), 9, j, "1-" + 9 + "" + j, "", "", 16));
+                    } else {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(9 + "0" + j), 9, j, "1-" + 9 + "0" + j, "", "", 16));
+                    }
+                }
+
+
 //                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
 //                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "电能表", "0104010000027037", 16));
 
@@ -203,29 +215,29 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 serialPortDataDao.insert(new SerialPortData((long) 18, "串口1", "理光(W1000/W2000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
 
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("901"), 11, 1, "1-101", "开机", "505752204F4E0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("902"), 11, 2, "1-102", "关机", "505752204F46460D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1901"), 11, 1, "1-101", "开机", "505752204F4E0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1902"), 11, 2, "1-102", "关机", "505752204F46460D", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("903"), 11, 1, "1-101", "开机", "7E3030303020310D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("904"), 11, 2, "1-102", "关机", "7E3030303020300D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1903"), 11, 1, "1-101", "开机", "7E3030303020310D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1904"), 11, 2, "1-102", "关机", "7E3030303020300D", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("905"), 11, 1, "1-101", "开机", "4330300D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("906"), 11, 2, "1-102", "关机", "4330310D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1905"), 11, 1, "1-101", "开机", "4330300D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1906"), 11, 2, "1-102", "关机", "4330310D", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("907"), 11, 1, "1-101", "开机", "23504F4E0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("908"), 11, 2, "1-102", "关机", "23504F460D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1907"), 11, 1, "1-101", "开机", "23504F4E0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1908"), 11, 2, "1-102", "关机", "23504F460D", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("909"), 11, 1, "1-101", "开机", "23504F4E", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("910"), 11, 2, "1-102", "关机", "23504446", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1909"), 11, 1, "1-101", "开机", "23504F4E", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1910"), 11, 2, "1-102", "关机", "23504446", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("911"), 11, 1, "1-101", "开机", "4130300D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("912"), 11, 2, "1-102", "关机", "4130310D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1911"), 11, 1, "1-101", "开机", "4130300D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1912"), 11, 2, "1-102", "关机", "4130310D", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
 
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3A0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463A0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1915"), 11, 1, "1-101", "开机", "23504F4E3A0D", 16));
+                serialCommandDao.insert(new SerialCommand(Long.valueOf("1916"), 11, 2, "1-102", "关机", "23504F463A0D", 16));
 
                 skHandler.sendEmptyMessage(155);
 
@@ -261,53 +273,53 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ELog.i("=========serialCommands===tyjViewInit===0000==" + serialCommands.toString());
 
         if (i == 11) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 901).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 901).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 902).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 902).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1901).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1901).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1902).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1902).commandStr);
         }
         if (i == 12) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 903).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 903).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 904).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 904).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1903).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1903).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1904).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1904).commandStr);
         }
 
         if (i == 13) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 905).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 905).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 906).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 906).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1905).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1905).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1906).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1906).commandStr);
         }
         if (i == 14) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 907).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 907).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 908).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 908).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1907).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1907).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1908).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1908).commandStr);
         }
         if (i == 15) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 909).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 909).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 910).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 910).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1909).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1909).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1910).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1910).commandStr);
         }
         if (i == 16) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 911).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 911).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 912).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 912).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1911).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1911).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1912).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1912).commandStr);
         }
         if (i == 17) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 913).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 913).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 914).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 914).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1913).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1913).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1914).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1914).commandStr);
         }
         if (i == 18) {
-            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 915).commandName);
-            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 915).commandStr);
-            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 916).commandName);
-            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 916).commandStr);
+            serialCommands.get(0).setCommandName(serialCommandDao.load((long) 1915).commandName);
+            serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 1915).commandStr);
+            serialCommands.get(1).setCommandName(serialCommandDao.load((long) 1916).commandName);
+            serialCommands.get(1).setCommandStr(serialCommandDao.load((long) 1916).commandStr);
         }
 
 
@@ -506,6 +518,11 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     @OnClick(R.id.spt_btn_8)
     public void spt_btn_8() {
         setSelectBtn(8);
+    }
+
+    @OnClick(R.id.spt_btn_9)
+    public void spt_btn_9() {
+        setSelectBtn(9);
     }
 
     private void setSelectBtn(int i) {
