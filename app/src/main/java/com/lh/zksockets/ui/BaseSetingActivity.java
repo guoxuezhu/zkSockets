@@ -46,6 +46,8 @@ public class BaseSetingActivity extends BaseActivity {
     TextView tv_zkDeviceName;
     @BindView(R.id.et_vid_num)
     EditText et_vid_num;
+    @BindView(R.id.et_ser_ip)
+    EditText et_ser_ip;
 
     @BindView(R.id.rbtn_mqtt_ok)
     RadioButton rbtn_mqtt_ok;
@@ -101,6 +103,7 @@ public class BaseSetingActivity extends BaseActivity {
             et_classRoom.setText(zkInfoDao.loadAll().get(0).zkname);
             et_vid_num.setText(zkInfoDao.loadAll().get(0).hudongVIDnum + "");
             uuid = zkInfoDao.loadAll().get(0).uuid;
+            et_ser_ip.setText(zkInfoDao.loadAll().get(0).ser_ip);
             if (zkInfoDao.loadAll().get(0).ismqttStart == 1) {
                 rbtn_mqtt_ok.setChecked(true);
             } else {
@@ -123,10 +126,10 @@ public class BaseSetingActivity extends BaseActivity {
         zkInfoDao.deleteAll();
         if (rbtn_mqtt_ok.isChecked()) {
             zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
-                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 1));
+                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), et_ser_ip.getText().toString(), uuid, 1));
         } else {
             zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
-                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), uuid, 0));
+                    tv_zkDeviceName.getText().toString(), Integer.valueOf(et_vid_num.getText().toString()), et_ser_ip.getText().toString(), uuid, 0));
         }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
@@ -211,6 +214,7 @@ public class BaseSetingActivity extends BaseActivity {
                             httpRowHttpData.getData().getRows().get(0).zkVersion,
                             httpRowHttpData.getData().getRows().get(0).geendaoVersion,
                             httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
+                            httpRowHttpData.getData().getRows().get(0).ser_ip,
                             uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart));
 
                     Message message = new Message();
@@ -239,6 +243,7 @@ public class BaseSetingActivity extends BaseActivity {
                 .add("version", zkInfoDao.loadAll().get(0).zkVersion)
                 .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)
                 .add("video_num", zkInfoDao.loadAll().get(0).hudongVIDnum + "")
+                .add("ser_ip", zkInfoDao.loadAll().get(0).ser_ip + "")
                 .add("show", zkInfoDao.loadAll().get(0).ismqttStart == 1 ? "on" : "off")
                 .build();
 

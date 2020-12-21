@@ -176,6 +176,7 @@ public class LampActivity extends BaseActivity {
                 .add("record_ip", luboInfoDao.loadAll().get(0).IP)
                 .add("record_user", luboInfoDao.loadAll().get(0).userName)
                 .add("record_pass", luboInfoDao.loadAll().get(0).Password)
+                .add("status", luboInfoDao.loadAll().get(0).status + "")
                 .build();
         Request request = new Request.Builder()
                 .url(MyApplication.BASEURL + "api/edit_record_set")

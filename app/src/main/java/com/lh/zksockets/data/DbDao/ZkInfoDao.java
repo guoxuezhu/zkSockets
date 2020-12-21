@@ -29,8 +29,9 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         public final static Property ZkVersion = new Property(2, String.class, "zkVersion", false, "ZK_VERSION");
         public final static Property GeendaoVersion = new Property(3, String.class, "geendaoVersion", false, "GEENDAO_VERSION");
         public final static Property HudongVIDnum = new Property(4, int.class, "hudongVIDnum", false, "HUDONG_VIDNUM");
-        public final static Property Uuid = new Property(5, String.class, "uuid", false, "UUID");
-        public final static Property IsmqttStart = new Property(6, int.class, "ismqttStart", false, "ISMQTT_START");
+        public final static Property Ser_ip = new Property(5, String.class, "ser_ip", false, "SER_IP");
+        public final static Property Uuid = new Property(6, String.class, "uuid", false, "UUID");
+        public final static Property IsmqttStart = new Property(7, int.class, "ismqttStart", false, "ISMQTT_START");
     }
 
 
@@ -51,8 +52,9 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
                 "\"ZK_VERSION\" TEXT," + // 2: zkVersion
                 "\"GEENDAO_VERSION\" TEXT," + // 3: geendaoVersion
                 "\"HUDONG_VIDNUM\" INTEGER NOT NULL ," + // 4: hudongVIDnum
-                "\"UUID\" TEXT," + // 5: uuid
-                "\"ISMQTT_START\" INTEGER NOT NULL );"); // 6: ismqttStart
+                "\"SER_IP\" TEXT," + // 5: ser_ip
+                "\"UUID\" TEXT," + // 6: uuid
+                "\"ISMQTT_START\" INTEGER NOT NULL );"); // 7: ismqttStart
     }
 
     /** Drops the underlying database table. */
@@ -86,11 +88,16 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         }
         stmt.bindLong(5, entity.getHudongVIDnum());
  
+        String ser_ip = entity.getSer_ip();
+        if (ser_ip != null) {
+            stmt.bindString(6, ser_ip);
+        }
+ 
         String uuid = entity.getUuid();
         if (uuid != null) {
-            stmt.bindString(6, uuid);
+            stmt.bindString(7, uuid);
         }
-        stmt.bindLong(7, entity.getIsmqttStart());
+        stmt.bindLong(8, entity.getIsmqttStart());
     }
 
     @Override
@@ -118,11 +125,16 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         }
         stmt.bindLong(5, entity.getHudongVIDnum());
  
+        String ser_ip = entity.getSer_ip();
+        if (ser_ip != null) {
+            stmt.bindString(6, ser_ip);
+        }
+ 
         String uuid = entity.getUuid();
         if (uuid != null) {
-            stmt.bindString(6, uuid);
+            stmt.bindString(7, uuid);
         }
-        stmt.bindLong(7, entity.getIsmqttStart());
+        stmt.bindLong(8, entity.getIsmqttStart());
     }
 
     @Override
@@ -138,8 +150,9 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // zkVersion
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // geendaoVersion
             cursor.getInt(offset + 4), // hudongVIDnum
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // uuid
-            cursor.getInt(offset + 6) // ismqttStart
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // ser_ip
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // uuid
+            cursor.getInt(offset + 7) // ismqttStart
         );
         return entity;
     }
@@ -151,8 +164,9 @@ public class ZkInfoDao extends AbstractDao<ZkInfo, Void> {
         entity.setZkVersion(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setGeendaoVersion(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setHudongVIDnum(cursor.getInt(offset + 4));
-        entity.setUuid(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setIsmqttStart(cursor.getInt(offset + 6));
+        entity.setSer_ip(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setUuid(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setIsmqttStart(cursor.getInt(offset + 7));
      }
     
     @Override

@@ -316,8 +316,8 @@ public class HttpRequestUtil {
     public static String getZkBaseInfo(AsyncHttpServerRequest request) {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
-            zkInfoDao.insert(new ZkInfo("", "0.0.0.0", "1.0.1",
-                    "1", 0, java.util.UUID.randomUUID().toString(), 0));
+            zkInfoDao.insert(new ZkInfo("", "0.0.0.0", "1.0.1", "1", 0,
+                    "http://192.168.0.115/", java.util.UUID.randomUUID().toString(), 0));
         }
         return gson.toJson(new HttpResult("200", "", true, zkInfoDao.loadAll().get(0)));
     }
