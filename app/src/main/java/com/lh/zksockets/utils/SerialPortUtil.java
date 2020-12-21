@@ -490,7 +490,7 @@ public class SerialPortUtil {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/env_log")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/env_log")
                 .post(requestBody)
                 .build();
 
@@ -530,7 +530,7 @@ public class SerialPortUtil {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/add_ic_logs")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/add_ic_logs")
                 .post(requestBody)
                 .build();
 

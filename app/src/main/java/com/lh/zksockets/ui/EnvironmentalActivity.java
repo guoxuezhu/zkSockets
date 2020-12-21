@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.JDQstatus;
@@ -270,9 +271,13 @@ public class EnvironmentalActivity extends BaseActivity {
 
     @OnClick(R.id.btn_jdqPort_huifu)
     public void btn_jdqPort_huifu() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_relay_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_relay_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -317,6 +322,10 @@ public class EnvironmentalActivity extends BaseActivity {
 
     @OnClick(R.id.btn_jdqPort_beifen)
     public void btn_jdqPort_beifen() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -326,7 +335,7 @@ public class EnvironmentalActivity extends BaseActivity {
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(jdqStatusDao.loadAll()));
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/edit_relay_set")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/edit_relay_set")
                 .post(requestBody)
                 .build();
 

@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IOYuan;
@@ -191,9 +192,13 @@ public class IOsetActivity extends BaseActivity {
 
     @OnClick(R.id.btn_dangerIoPort_huifu)
     public void btn_dangerIoPort_huifu() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_alarm_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_alarm_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -236,6 +241,10 @@ public class IOsetActivity extends BaseActivity {
 
     @OnClick(R.id.btn_dangerIoPort_beifen)
     public void btn_dangerIoPort_beifen() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -246,8 +255,8 @@ public class IOsetActivity extends BaseActivity {
         ELog.e("==========1111111=ss======" + gson.toJson(ioYuanDao.loadAll()));
         //{'Content-Type': 'application/x-www-form-urlencoded'}
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/edit_alarm_set")
-                .addHeader("Content-Type","application/x-www-form-urlencoded")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/edit_alarm_set")
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .post(requestBody)
                 .build();
 

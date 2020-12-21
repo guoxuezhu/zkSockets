@@ -24,6 +24,7 @@ import com.lh.zksockets.adapter.SelectAdapter;
 import com.lh.zksockets.adapter.SerialportAdapter;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.SerialCommand;
@@ -548,6 +549,10 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
     @OnClick(R.id.btn_sport_huifu)
     public void btn_sport_huifu() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
         }
@@ -557,7 +562,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_serial_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -620,6 +625,10 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
     @OnClick(R.id.btn_sport_beifen)
     public void btn_sport_beifen() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
 
         for (int n = 1; n < 5; n++) {
@@ -639,7 +648,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 .build();
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/edit_serial_set")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/edit_serial_set")
                 .post(requestBody)
                 .build();
 

@@ -15,6 +15,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.IcCardAdapter;
 import com.lh.zksockets.data.DbDao.IcCardDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IcCard;
@@ -75,9 +76,13 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     }
 
     private void getIcdata() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_ic_card_list")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_ic_card_list")
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);

@@ -145,7 +145,7 @@ public class BaseSetingActivity extends BaseActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/exist_center_set")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/exist_center_set")
                 .post(requestBody)
                 .build();
 
@@ -184,7 +184,7 @@ public class BaseSetingActivity extends BaseActivity {
     public void btn_baseset_tongbu() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_center_list?ip=" + tv_IP.getText().toString())
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_center_list?ip=" + tv_IP.getText().toString())
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -249,7 +249,7 @@ public class BaseSetingActivity extends BaseActivity {
 
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/edit_center_set")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/edit_center_set")
                 .post(requestBody)
                 .build();
 

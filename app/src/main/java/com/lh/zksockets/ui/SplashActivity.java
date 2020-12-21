@@ -160,9 +160,13 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void updataAPK() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_soft_info?title=主机&version_code="
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_soft_info?title=主机&version_code="
                         + DisplayTools.getVersionCode(this)
                         + "&version_name=" + DisplayTools.getVersionName(this))
                 .build();
@@ -363,7 +367,10 @@ public class SplashActivity extends BaseActivity {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }
-
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
@@ -372,7 +379,7 @@ public class SplashActivity extends BaseActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/user_login")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/user_login")
                 .post(requestBody)
                 .build();
 

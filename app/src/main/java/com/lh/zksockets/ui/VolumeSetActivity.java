@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
+import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
@@ -179,9 +180,13 @@ public class VolumeSetActivity extends BaseActivity {
 
     @OnClick(R.id.btn_bjout_huifu)
     public void btn_bjout_huifu() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/get_alarm_out_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_alarm_out_list?ip=" + DisplayTools.getIPAddress(this))
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -225,6 +230,10 @@ public class VolumeSetActivity extends BaseActivity {
 
     @OnClick(R.id.btn_bjout_beifen)
     public void btn_bjout_beifen() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -234,7 +243,7 @@ public class VolumeSetActivity extends BaseActivity {
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(dangerOutDao.loadAll()));
         Request request = new Request.Builder()
-                .url(MyApplication.BASEURL + "api/edit_alarm_out_set")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/edit_alarm_out_set")
                 .post(requestBody)
                 .build();
 
