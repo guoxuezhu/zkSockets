@@ -82,7 +82,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
         }
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_ic_card_list")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_ic_card_list?rows=100")
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);

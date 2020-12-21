@@ -457,9 +457,30 @@ public class SerialPortUtil {
     }
 
     private static void shuaka(String msg) {
+        String kahao = Long.parseLong(msg.substring(3), 16) + "";
+        if (kahao.length() == 9) {
+            kahao = "0" + kahao;
+        } else if (kahao.length() == 8) {
+            kahao = "00" + kahao;
+        } else if (kahao.length() == 7) {
+            kahao = "000" + kahao;
+        } else if (kahao.length() == 6) {
+            kahao = "0000" + kahao;
+        } else if (kahao.length() == 5) {
+            kahao = "00000" + kahao;
+        } else if (kahao.length() == 4) {
+            kahao = "000000" + kahao;
+        } else if (kahao.length() == 3) {
+            kahao = "0000000" + kahao;
+        } else if (kahao.length() == 2) {
+            kahao = "00000000" + kahao;
+        } else if (kahao.length() == 1) {
+            kahao = "000000000" + kahao;
+        }
+        ELog.d("=====shuaka==kahao=======" + kahao);
         IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
         List<IcCard> icCards = icCardDao.queryBuilder()
-                .where(IcCardDao.Properties.Card_no.eq(msg.substring(3)))
+                .where(IcCardDao.Properties.Card_no.eq(kahao))
                 .orderAsc(IcCardDao.Properties.CardNumId)
                 .list();
         if (icCards.size() != 0) {
