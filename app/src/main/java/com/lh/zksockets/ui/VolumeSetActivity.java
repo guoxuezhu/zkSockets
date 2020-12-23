@@ -1,5 +1,6 @@
 package com.lh.zksockets.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -75,6 +76,7 @@ public class VolumeSetActivity extends BaseActivity {
                 case 71:
                     ELog.e("======Handler=====1====" + msg.obj.toString());
                     Toast.makeText(VolumeSetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 72:
                     ELog.e("======Handler=====2====" + msg.obj.toString());
@@ -85,7 +87,13 @@ public class VolumeSetActivity extends BaseActivity {
 
         }
     };
+    private ProgressDialog progressDialog;
 
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,6 +192,12 @@ public class VolumeSetActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在恢复数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_alarm_out_list?ip=" + DisplayTools.getIPAddress(this))
@@ -196,6 +210,12 @@ public class VolumeSetActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (bjoutHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 71;
+                    bjoutHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -234,6 +254,12 @@ public class VolumeSetActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在备份数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -256,6 +282,12 @@ public class VolumeSetActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (bjoutHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 71;
+                    bjoutHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法

@@ -191,6 +191,12 @@ public class EventActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (eventHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 81;
+                    eventHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -229,9 +235,14 @@ public class EventActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在备份数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
-
         RequestBody requestBody = new FormBody.Builder()
                 .add("ip", DisplayTools.getIPAddress(this))
                 .add("event", gson.toJson(mLsListsDao.loadAll()))
@@ -251,6 +262,12 @@ public class EventActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (eventHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 81;
+                    eventHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法

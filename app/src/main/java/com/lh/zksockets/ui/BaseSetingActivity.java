@@ -1,5 +1,6 @@
 package com.lh.zksockets.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,6 +67,7 @@ public class BaseSetingActivity extends BaseActivity {
                 case 21:
                     ELog.e("======baseHandler=====21====" + msg.obj.toString());
                     Toast.makeText(BaseSetingActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 22:
                     ELog.e("======baseHandler=====22====" + msg.obj.toString());
@@ -76,6 +78,14 @@ public class BaseSetingActivity extends BaseActivity {
 
         }
     };
+
+    private ProgressDialog progressDialog;
+
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +147,12 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseip_name)
     public void btn_baseip_name() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在检测数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
@@ -157,6 +173,12 @@ public class BaseSetingActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (baseHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -182,6 +204,12 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseset_tongbu)
     public void btn_baseset_tongbu() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在恢复数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_center_list?ip=" + tv_IP.getText().toString())
@@ -194,6 +222,12 @@ public class BaseSetingActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (baseHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -235,6 +269,12 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseset_beifen)
     public void btn_baseset_beifen() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在备份数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
@@ -262,6 +302,12 @@ public class BaseSetingActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (baseHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 21;
+                    baseHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法

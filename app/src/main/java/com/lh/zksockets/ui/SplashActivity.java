@@ -1,6 +1,7 @@
 package com.lh.zksockets.ui;
 
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -67,13 +68,22 @@ public class SplashActivity extends BaseActivity {
                 case 10:
                     ELog.e("======splashHandler=====10====" + msg.obj.toString());
                     Toast.makeText(SplashActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
-
+                case 111:
+                    stopDialog();
+                    break;
             }
 
         }
     };
+    private ProgressDialog progressDialog;
 
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,6 +186,12 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (splashHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 10;
+                    splashHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -362,8 +378,15 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在登录");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("hzlhadmin")) {
+            splashHandler.sendEmptyMessage(111);
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }
@@ -391,6 +414,12 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (splashHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 10;
+                    splashHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -403,6 +432,7 @@ public class SplashActivity extends BaseActivity {
                 ELog.e("==========数据==11=====" + httpData.toString());
 
                 if (httpData.flag == 1) {
+                    splashHandler.sendEmptyMessage(111);
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 } else {
                     Message message = new Message();

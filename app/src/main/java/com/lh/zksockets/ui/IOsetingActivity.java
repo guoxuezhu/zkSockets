@@ -1,5 +1,6 @@
 package com.lh.zksockets.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,6 +75,7 @@ public class IOsetingActivity extends BaseActivity {
                 case 61:
                     ELog.e("======Handler=====1====" + msg.obj.toString());
                     Toast.makeText(IOsetingActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 62:
                     ELog.e("======Handler=====2====" + msg.obj.toString());
@@ -84,7 +86,13 @@ public class IOsetingActivity extends BaseActivity {
 
         }
     };
+    private ProgressDialog progressDialog;
 
+    private void stopDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +191,12 @@ public class IOsetingActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在恢复数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_io_list?ip=" + DisplayTools.getIPAddress(this))
@@ -195,6 +209,12 @@ public class IOsetingActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (ioHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 61;
+                    ioHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -232,6 +252,12 @@ public class IOsetingActivity extends BaseActivity {
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在备份数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         Gson gson = new Gson();
         OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -254,6 +280,12 @@ public class IOsetingActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (ioHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 61;
+                    ioHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法

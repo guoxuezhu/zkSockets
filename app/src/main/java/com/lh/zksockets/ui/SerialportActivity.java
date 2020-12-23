@@ -572,6 +572,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (skHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 91;
+                    skHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
@@ -629,8 +635,13 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         if (zkInfoDao.loadAll().size() == 0) {
             return;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在备份数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
-
         for (int n = 1; n < 5; n++) {
             List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                     .where(SerialCommandDao.Properties.SId.eq(n))
@@ -652,7 +663,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                 .post(requestBody)
                 .build();
 
-
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
         //4.请求加入调度，重写回调方法
@@ -661,6 +671,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             @Override
             public void onFailure(Call call, IOException e) {
                 ELog.e("==========onFailure=======" + e.toString());
+                if (skHandler != null) {
+                    Message message = new Message();
+                    message.obj = "服务器连接失败,请检测网络";
+                    message.what = 91;
+                    skHandler.sendMessage(message);
+                }
             }
 
             //请求成功执行的方法
