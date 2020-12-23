@@ -334,7 +334,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             radio_binary_2.setChecked(true);
         }
 
-
+        serialCommandDao.detachAll();
         serialCommands = serialCommandDao.queryBuilder()
                 .where(SerialCommandDao.Properties.SId.eq(i))
                 .orderAsc(SerialCommandDao.Properties.MlId)

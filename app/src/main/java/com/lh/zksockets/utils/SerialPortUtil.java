@@ -821,6 +821,7 @@ public class SerialPortUtil {
                 return;
             }
             SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
+            serialCommandDao.detachAll();
             if (serialCommandDao.loadAll().size() == 0) {
                 return;
             }
