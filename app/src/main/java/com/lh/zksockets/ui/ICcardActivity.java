@@ -56,6 +56,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
                     ELog.e("======Handler=====1====" + msg.obj.toString());
                     icCardAdapter.setData(icCardDao.loadAll());
                     Toast.makeText(ICcardActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
                 case 152:
                     ELog.e("======Handler=====2====" + msg.obj.toString());
@@ -88,6 +89,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     private void getIcdata() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {

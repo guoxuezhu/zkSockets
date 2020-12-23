@@ -65,6 +65,7 @@ public class LampActivity extends BaseActivity {
                     ELog.e("======baseHandler=====22====" + msg.obj.toString());
                     initView();
                     Toast.makeText(LampActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     HttpUtil.setLuboTokenTimer();
                     break;
             }
@@ -127,6 +128,7 @@ public class LampActivity extends BaseActivity {
     public void btn_lubo_huifu() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {
@@ -195,6 +197,7 @@ public class LampActivity extends BaseActivity {
     public void btn_lubo_beifen() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {

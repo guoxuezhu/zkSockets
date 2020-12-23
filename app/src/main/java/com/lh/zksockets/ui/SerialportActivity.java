@@ -551,6 +551,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     public void btn_sport_huifu() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {
@@ -633,6 +634,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
     public void btn_sport_beifen() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {

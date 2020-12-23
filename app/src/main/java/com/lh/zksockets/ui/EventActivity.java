@@ -171,6 +171,7 @@ public class EventActivity extends BaseActivity {
     public void btn_event_huifu() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {
@@ -233,6 +234,7 @@ public class EventActivity extends BaseActivity {
     public void btn_event_beifen() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {

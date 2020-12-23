@@ -392,6 +392,7 @@ public class SplashActivity extends BaseActivity {
         }
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先使用管理员帐号设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         OkHttpClient okHttpClient = new OkHttpClient();

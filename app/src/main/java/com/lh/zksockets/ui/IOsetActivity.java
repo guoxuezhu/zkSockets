@@ -89,6 +89,7 @@ public class IOsetActivity extends BaseActivity {
                     ELog.e("======Handler=====2====" + msg.obj.toString());
                     initView();
                     Toast.makeText(IOsetActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
             }
 
@@ -203,6 +204,7 @@ public class IOsetActivity extends BaseActivity {
     public void btn_dangerIoPort_huifu() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {
@@ -264,6 +266,7 @@ public class IOsetActivity extends BaseActivity {
     public void btn_dangerIoPort_beifen() {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
             return;
         }
         if (progressDialog == null) {

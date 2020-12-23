@@ -73,6 +73,7 @@ public class BaseSetingActivity extends BaseActivity {
                     ELog.e("======baseHandler=====22====" + msg.obj.toString());
                     initView();
                     Toast.makeText(BaseSetingActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
+                    stopDialog();
                     break;
             }
 
@@ -133,6 +134,10 @@ public class BaseSetingActivity extends BaseActivity {
             Toast.makeText(this, "请输入显示屏个数", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!et_ser_ip.getText().toString().contains("http://") || !et_ser_ip.getText().toString().contains("https://")) {
+            Toast.makeText(this, "http:// 或者 https:// 没发现", Toast.LENGTH_SHORT).show();
+            return;
+        }
         zkInfoDao.deleteAll();
         if (rbtn_mqtt_ok.isChecked()) {
             zkInfoDao.insert(new ZkInfo(et_classRoom.getText().toString(), tv_IP.getText().toString(), tv_zkVersionName.getText().toString(),
@@ -147,6 +152,10 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseip_name)
     public void btn_baseip_name() {
+        if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
         }
@@ -204,6 +213,10 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseset_tongbu)
     public void btn_baseset_tongbu() {
+        if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
         }
@@ -269,6 +282,10 @@ public class BaseSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_baseset_beifen)
     public void btn_baseset_beifen() {
+        if (zkInfoDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请先设置基本信息", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
         }
