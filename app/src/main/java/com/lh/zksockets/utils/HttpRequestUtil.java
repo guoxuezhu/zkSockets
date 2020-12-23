@@ -1,5 +1,7 @@
 package com.lh.zksockets.utils;
 
+import android.os.Message;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
@@ -11,6 +13,7 @@ import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
@@ -23,8 +26,11 @@ import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.EventShangke;
+import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpResult;
+import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.LuboInfo;
@@ -35,8 +41,15 @@ import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class HttpRequestUtil {
 
@@ -398,8 +411,51 @@ public class HttpRequestUtil {
         String msg = parms.getString("msg");
         if (msg.equals("icdata")) {
             //更新卡号
+            getIcData();
         }
         return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    private static void getIcData() {
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_ic_card_list?zk_ip=" + zkInfoDao.loadAll().get(0).zkip)
+                .build();
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("==========onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("=======getIcdata===数据=======" + responseText);
+                Gson gson = new Gson();
+                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+                ELog.e("==========getIcdata==response=====" + httpData.toString());
+                if (httpData.flag == 1) {
+                    HttpData<HttpRow<List<IcCard>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<IcCard>>>>() {
+                    }.getType());
+                    ELog.i("=========ic=====数据=======" + httpRowHttpData.getData());
+                    IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+                    icCardDao.deleteAll();
+                    List<IcCard> icCards = httpRowHttpData.getData().getRows();
+                    for (int i = 0; i < icCards.size(); i++) {
+                        icCardDao.insert(icCards.get(i));
+                    }
+                }
+            }
+        });
     }
 
     public static String zksendmsg(AsyncHttpServerRequest request) {
