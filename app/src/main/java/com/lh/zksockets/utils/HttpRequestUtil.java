@@ -392,6 +392,16 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "无数据", true, null));
     }
 
+    public static String updataMsg(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("=================" + parms.toString());
+        String msg = parms.getString("msg");
+        if (msg.equals("icdata")) {
+            //更新卡号
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
     public static String zksendmsg(AsyncHttpServerRequest request) {
         Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
         ELog.i("=================" + parms.toString());

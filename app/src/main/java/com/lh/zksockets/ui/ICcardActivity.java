@@ -21,6 +21,7 @@ import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.utils.AddCardDialog;
 import com.lh.zksockets.utils.DateUtil;
+import com.lh.zksockets.utils.DeleteDialog;
 import com.lh.zksockets.utils.ELog;
 
 import java.io.IOException;
@@ -35,12 +36,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ICcardActivity extends BaseActivity implements AddCardDialog.DialogCallBack, IcCardAdapter.CallBack {
+public class ICcardActivity extends BaseActivity implements AddCardDialog.DialogCallBack, DeleteDialog.DialogCallBack, IcCardAdapter.CallBack {
 
     @BindView(R.id.ic_recyclerView)
     RecyclerView ic_recyclerView;
 
     private AddCardDialog addCardDialog;
+    private DeleteDialog deleteDialog;
     private IcCardDao icCardDao;
     private IcCardAdapter icCardAdapter;
 
@@ -179,11 +181,27 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
             addCardDialog.dismiss();
             addCardDialog = null;
         }
+        if (deleteDialog != null) {
+            deleteDialog.dismiss();
+            deleteDialog = null;
+        }
     }
 
     @Override
     public void onClickItem(IcCard item) {
         ELog.i("===========item============" + item.toString());
+        if (deleteDialog == null) {
+            deleteDialog = new DeleteDialog(this, this, item);
+        }
+        if (deleteDialog != null) {
+            deleteDialog.show();
+            deleteDialog.setCanceledOnTouchOutside(false);
+        }
+
+    }
+
+    @Override
+    public void deleteInfo(IcCard item) {
         icCardDao.deleteByKey(item.cardNumId);
         closeDialog();
     }
@@ -208,6 +226,5 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     protected void onDestroy() {
         super.onDestroy();
     }
-
 
 }

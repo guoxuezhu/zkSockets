@@ -42,23 +42,31 @@ public class AddCardDialog extends Dialog {
         ButterKnife.bind(this);
     }
 
+    private void initView() {
+        et_workNumber.setText("");
+        et_teacherName.setText("");
+        et_department.setText("");
+        et_cardNum.setText("");
+    }
+
     public interface DialogCallBack {
         void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum);
     }
 
     @OnClick(R.id.dialog_btn_no)
     public void dialog_btn_no() {
+        initView();
         dismiss();
     }
 
     @OnClick(R.id.dialog_btn_ok)
     public void dialog_btn_ok() {
-        if (!et_cardNum.getText().toString().equals("")) {
+        if (!et_cardNum.getText().toString().equals("") && et_cardNum.getText().toString().length() == 10) {
             mDialogCallBack.addCradInfo(et_workNumber.getText().toString(), 1,
                     et_teacherName.getText().toString(), et_department.getText().toString(),
                     et_cardNum.getText().toString());
         } else {
-            Toast.makeText(mContext, "请输入卡号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请输入正确的十位卡号", Toast.LENGTH_SHORT).show();
         }
 
     }
