@@ -134,7 +134,7 @@ public class BaseSetingActivity extends BaseActivity {
             Toast.makeText(this, "请输入显示屏个数", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!et_ser_ip.getText().toString().contains("http://") || !et_ser_ip.getText().toString().contains("https://")) {
+        if (!et_ser_ip.getText().toString().contains("http://") && !et_ser_ip.getText().toString().contains("https://")) {
             Toast.makeText(this, "http:// 或者 https:// 没发现", Toast.LENGTH_SHORT).show();
             return;
         }
