@@ -595,7 +595,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     ELog.e("=========串口=数据===get====" + httpRowHttpData);
                     for (int i = 0; i < httpRowHttpData.getData().getRows().size(); i++) {
                         serialPortDataDao.update(new SerialPortData(httpRowHttpData.getData().getRows().get(i).id,
-                                "串口" + i,
+                                "串口" + (i + 1),
                                 httpRowHttpData.getData().getRows().get(i).deviceName,
                                 httpRowHttpData.getData().getRows().get(i).baudRateId,
                                 httpRowHttpData.getData().getRows().get(i).baudRate,
