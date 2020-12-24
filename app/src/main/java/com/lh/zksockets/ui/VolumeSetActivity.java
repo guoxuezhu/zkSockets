@@ -95,6 +95,7 @@ public class VolumeSetActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,7 +203,7 @@ public class VolumeSetActivity extends BaseActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_alarm_out_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_alarm_out_list?ip=" + zkInfoDao.loadAll().get(0).zkip)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -267,7 +268,7 @@ public class VolumeSetActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", DisplayTools.getIPAddress(this))
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("alarm", gson.toJson(dangerOutDao.loadAll()))
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(dangerOutDao.loadAll()));

@@ -165,7 +165,7 @@ public class BaseSetingActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", tv_IP.getText().toString())
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("name", et_classRoom.getText().toString())
                 .build();
 
@@ -225,7 +225,7 @@ public class BaseSetingActivity extends BaseActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_center_list?ip=" + tv_IP.getText().toString())
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_center_list?ip=" + zkInfoDao.loadAll().get(0).zkip)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -295,7 +295,7 @@ public class BaseSetingActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", tv_IP.getText().toString())
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("title", zkInfoDao.loadAll().get(0).zkname)
                 .add("version", zkInfoDao.loadAll().get(0).zkVersion)
                 .add("data_version", zkInfoDao.loadAll().get(0).geendaoVersion)

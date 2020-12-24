@@ -117,6 +117,7 @@ public class EnvironmentalActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -293,7 +294,7 @@ public class EnvironmentalActivity extends BaseActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_relay_list?ip=" + DisplayTools.getIPAddress(this))
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/get_relay_list?ip=" + zkInfoDao.loadAll().get(0).zkip)
                 .build();
         //3.创建一个call对象,参数就是Request请求对象
         Call call = okHttpClient.newCall(request);
@@ -359,7 +360,7 @@ public class EnvironmentalActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("ip", DisplayTools.getIPAddress(this))
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("relay", gson.toJson(jdqStatusDao.loadAll()))
                 .build();
         ELog.e("==========1111111=ss======" + gson.toJson(jdqStatusDao.loadAll()));
