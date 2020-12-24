@@ -73,7 +73,11 @@ public class HttpRequestUtil {
         for (int i = 0; i < serialCommandlist.size(); i++) {
             serialCommandDao.update(serialCommandlist.get(i));
         }
-
+        String spStr = parms.getString("baudRate") + ",n,8,1";
+        String msg = "{[COM" + (Long.valueOf(sportNumer) - 1) + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+        ELog.i("========updataSportInfo==SerialPortUtil===" + msg);
+        byte[] data = msg.getBytes();
+        SerialPortUtil.sendMsg(data);
         return gson.toJson(new HttpResult("200", "", true, null));
 
     }

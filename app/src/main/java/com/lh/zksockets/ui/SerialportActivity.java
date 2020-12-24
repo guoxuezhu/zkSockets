@@ -614,6 +614,11 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                                 ELog.e("=======serialCommandDao==e====" + j + "=====" + httpRowHttpData.getData().getRows().get(i).command.get(j));
                             }
                         }
+                        String spStr = httpRowHttpData.getData().getRows().get(i).baudRate + ",n,8,1";
+                        String msg = "{[COM" + (httpRowHttpData.getData().getRows().get(i).id - 1) + ":ST:A0" + spStr.length() + "]<" + spStr + ">}";
+                        ELog.i("========sport==SerialPortUtil===" + msg);
+                        byte[] data = msg.getBytes();
+                        SerialPortUtil.sendMsg(data);
                     }
                     Message message = new Message();
                     message.obj = "数据恢复成功";
