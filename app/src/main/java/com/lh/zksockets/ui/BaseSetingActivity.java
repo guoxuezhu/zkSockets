@@ -255,19 +255,33 @@ public class BaseSetingActivity extends BaseActivity {
                     HttpData<HttpRow<List<ZkInfo>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<ZkInfo>>>>() {
                     }.getType());
                     ELog.e("========中控=httpRow=数据=======" + httpRowHttpData);
-                    zkInfoDao.deleteAll();
-                    zkInfoDao.insert(new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
-                            httpRowHttpData.getData().getRows().get(0).zkip,
-                            httpRowHttpData.getData().getRows().get(0).zkVersion,
-                            httpRowHttpData.getData().getRows().get(0).geendaoVersion,
-                            httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
-                            httpRowHttpData.getData().getRows().get(0).ser_ip,
-                            uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart));
+                    if (httpRowHttpData.getData().getRows().get(0).ser_ip != null) {
+                        if (!httpRowHttpData.getData().getRows().get(0).ser_ip.contains("http://") && !httpRowHttpData.getData().getRows().get(0).ser_ip.contains("https://")) {
+                            Message message = new Message();
+                            message.obj = "服务器地址错误";
+                            message.what = 21;
+                            baseHandler.sendMessage(message);
+                        } else {
+                            zkInfoDao.deleteAll();
+                            zkInfoDao.insert(new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
+                                    httpRowHttpData.getData().getRows().get(0).zkip,
+                                    httpRowHttpData.getData().getRows().get(0).zkVersion,
+                                    httpRowHttpData.getData().getRows().get(0).geendaoVersion,
+                                    httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
+                                    httpRowHttpData.getData().getRows().get(0).ser_ip,
+                                    uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart));
+                            Message message = new Message();
+                            message.obj = "数据恢复成功";
+                            message.what = 22;
+                            baseHandler.sendMessage(message);
+                        }
+                    } else {
+                        Message message = new Message();
+                        message.obj = "服务器地址错误";
+                        message.what = 21;
+                        baseHandler.sendMessage(message);
+                    }
 
-                    Message message = new Message();
-                    message.obj = "数据恢复成功";
-                    message.what = 22;
-                    baseHandler.sendMessage(message);
                 } else {
                     Message message = new Message();
                     message.obj = "无数据/恢复失败";
