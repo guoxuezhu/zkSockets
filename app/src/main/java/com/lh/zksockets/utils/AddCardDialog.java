@@ -3,10 +3,13 @@ package com.lh.zksockets.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lh.zksockets.R;
+import com.lh.zksockets.ui.ICcardActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +32,19 @@ public class AddCardDialog extends Dialog {
     private Context mContext;
     private DialogCallBack mDialogCallBack;
 
+    private Handler addCardDialogHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 369:
+                    ELog.e("======Handler=====369====" + msg.obj.toString());
+                    et_cardNum.setText(msg.obj.toString());
+                    break;
+            }
+
+        }
+    };
     public AddCardDialog(Context context, DialogCallBack dialogCallBack) {
         super(context, R.style.FullHeightDialog);
         mContext = context;
@@ -40,6 +56,27 @@ public class AddCardDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card_dialog_view);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ELog.i("========onStart=========");
+        SerialPortUtil.setReadCradNum(addCardDialogHandler);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ELog.i("========onStop=========");
+        SerialPortUtil.disReadCradNum();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        initView();
+        dismiss();
     }
 
     private void initView() {

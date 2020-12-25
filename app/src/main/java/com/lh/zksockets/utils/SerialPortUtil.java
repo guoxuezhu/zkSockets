@@ -1,5 +1,8 @@
 package com.lh.zksockets.utils;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
@@ -48,6 +51,7 @@ public class SerialPortUtil {
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
     private static Timer xiakeTimer;
+    private static Handler readCradHandler;
 
 
     public static boolean open() {
@@ -456,6 +460,14 @@ public class SerialPortUtil {
 
     }
 
+    public static void setReadCradNum(Handler addCardDialogHandler) {
+        readCradHandler = addCardDialogHandler;
+    }
+
+    public static void disReadCradNum() {
+        readCradHandler = null;
+    }
+
     private static void shuaka(String msg) {
         String kahao = Long.parseLong(msg.substring(3), 16) + "";
         if (kahao.length() == 9) {
@@ -478,15 +490,23 @@ public class SerialPortUtil {
             kahao = "000000000" + kahao;
         }
         ELog.d("=====shuaka==kahao=======" + kahao);
-        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
-        List<IcCard> icCards = icCardDao.queryBuilder()
-                .where(IcCardDao.Properties.Card_no.eq(kahao))
-                .orderAsc(IcCardDao.Properties.CardNumId)
-                .list();
-        if (icCards.size() != 0) {
-            sendMsg1("SKJAA".getBytes());
-        } else {
+        if (readCradHandler != null) {
+            Message message = new Message();
+            message.obj = kahao;
+            message.what = 369;
+            readCradHandler.sendMessage(message);
             sendMsg1("ICKERROR".getBytes());
+        } else {
+            IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+            List<IcCard> icCards = icCardDao.queryBuilder()
+                    .where(IcCardDao.Properties.Card_no.eq(kahao))
+                    .orderAsc(IcCardDao.Properties.CardNumId)
+                    .list();
+            if (icCards.size() != 0) {
+                sendMsg1("SKJAA".getBytes());
+            } else {
+                sendMsg1("ICKERROR".getBytes());
+            }
         }
     }
 
@@ -1033,6 +1053,4 @@ public class SerialPortUtil {
 
         return baudRateList;
     }
-
-
 }

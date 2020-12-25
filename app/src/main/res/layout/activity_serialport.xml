@@ -384,7 +384,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="指令名称"
+                        android:text="命令名称"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
@@ -398,7 +398,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="指令协议"
+                        android:text="命令"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
