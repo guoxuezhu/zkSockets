@@ -180,7 +180,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -194,7 +194,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -208,7 +208,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -222,7 +222,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -236,7 +236,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -250,7 +250,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -264,7 +264,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -278,7 +278,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
-                android:text="10"
+                android:text=""
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
@@ -618,6 +618,236 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:text="10"
+                android:textSize="@dimen/text_size_20" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#878C91" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="指令(开)"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-1-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-2-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-3-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-4-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-5-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-6-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-7-0"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-8-0"
+                android:textSize="@dimen/text_size_20" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#878C91" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="指令(关)"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-1-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-2-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-3-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-4-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-5-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-6-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-7-1"
+                android:textSize="@dimen/text_size_20" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#878C91" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2-8-1"
                 android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
