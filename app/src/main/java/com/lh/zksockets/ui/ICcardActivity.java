@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,6 +43,9 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     @BindView(R.id.ic_recyclerView)
     RecyclerView ic_recyclerView;
 
+    @BindView(R.id.et_work_search)
+    EditText et_work_search;
+
     private AddCardDialog addCardDialog;
     private DeleteDialog deleteDialog;
     private IcCardDao icCardDao;
@@ -74,6 +78,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
             progressDialog.dismiss();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,6 +163,14 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
         ELog.i("===========icCardDao.loadAll()============" + icCardDao.loadAll().toString());
     }
 
+    @OnClick(R.id.btn_search)
+    public void btn_search() {
+        List<IcCard> icCards = icCardDao.queryBuilder()
+                .where(IcCardDao.Properties.WorkNum.eq(et_work_search.getText().toString().trim()))
+                .orderAsc(IcCardDao.Properties.CardNumId)
+                .list();
+        icCardAdapter.setData(icCards);
+    }
 
     @OnClick(R.id.get_card)
     public void get_card() {

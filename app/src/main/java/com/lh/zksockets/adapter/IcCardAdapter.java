@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,9 @@ public class IcCardAdapter extends RecyclerView.Adapter<IcCardAdapter.IcCardView
         holder.tv_workNumber.setText(icCard.workNum);
         holder.tv_cardType.setText(icCard.role + "");
         holder.tv_updataTime.setText(icCard.updataTime);
-        holder.tv_teacherName.setText(icCard.name);
+        holder.tv_teacherName.setText(icCard.name.substring(0, 1) + "* *");
 //        holder.tv_department.setText(icCard.department);
-        holder.tv_cardNum.setText(icCard.card_no + "");
+        holder.tv_cardNum.setText(icCard.card_no.substring(0, 5) + "* *");
 
         holder.setItem(icCard);
     }

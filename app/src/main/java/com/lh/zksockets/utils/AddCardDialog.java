@@ -61,14 +61,21 @@ public class AddCardDialog extends Dialog {
 
     @OnClick(R.id.dialog_btn_ok)
     public void dialog_btn_ok() {
-        if (!et_cardNum.getText().toString().equals("") && et_cardNum.getText().toString().length() == 10) {
+        if (et_workNumber.getText().toString().trim().equals("")) {
+            Toast.makeText(mContext, "请输入工号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (et_teacherName.getText().toString().trim().equals("")) {
+            Toast.makeText(mContext, "请输入老师名称", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!et_cardNum.getText().toString().trim().equals("") && et_cardNum.getText().toString().trim().length() == 10) {
             mDialogCallBack.addCradInfo(et_workNumber.getText().toString(), 1,
                     et_teacherName.getText().toString(), et_department.getText().toString(),
                     et_cardNum.getText().toString());
         } else {
             Toast.makeText(mContext, "请输入正确的十位卡号", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }
