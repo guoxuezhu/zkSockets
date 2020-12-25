@@ -10,6 +10,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.model.DoorInfo;
+import com.lh.zksockets.utils.DisplayTools;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +56,10 @@ public class DoorSetingActivity extends BaseActivity {
 
     @OnClick(R.id.btn_door_ok)
     public void btn_door_ok() {
+        if (!DisplayTools.ipCheck(et_door_ip.getText().toString())) {
+            Toast.makeText(this, "ip地址不合法性", Toast.LENGTH_SHORT).show();
+            return;
+        }
         doorInfoDao.deleteAll();
         if (rbtn_door_ok.isChecked()) {
             doorInfoDao.insert(new DoorInfo(et_door_ip.getText().toString(), et_door_name.getText().toString(), 1));

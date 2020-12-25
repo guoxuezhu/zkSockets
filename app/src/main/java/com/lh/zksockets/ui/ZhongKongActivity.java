@@ -10,6 +10,7 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.model.EventKejianRest;
+import com.lh.zksockets.utils.DisplayTools;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +50,10 @@ public class ZhongKongActivity extends BaseActivity {
 
     @OnClick(R.id.btn_wg_baocun)
     public void btn_wg_baocun() {
+        if (!DisplayTools.ipCheck(wg_ip.getText().toString())) {
+            Toast.makeText(this, "ip地址不合法性", Toast.LENGTH_SHORT).show();
+            return;
+        }
         wangguandata.deleteAll();
         if (rbtn_wg_ok.isChecked()) {
             wangguandata.insert(new EventKejianRest(1, (long) 1, wg_ip.getText().toString(),
