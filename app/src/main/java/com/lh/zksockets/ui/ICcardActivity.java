@@ -165,11 +165,15 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
 
     @OnClick(R.id.btn_search)
     public void btn_search() {
-        List<IcCard> icCards = icCardDao.queryBuilder()
-                .where(IcCardDao.Properties.WorkNum.eq(et_work_search.getText().toString().trim()))
-                .orderAsc(IcCardDao.Properties.CardNumId)
-                .list();
-        icCardAdapter.setData(icCards);
+        if (et_work_search.getText().toString().trim().equals("")) {
+            icCardAdapter.setData(icCardDao.loadAll());
+        } else {
+            List<IcCard> icCards = icCardDao.queryBuilder()
+                    .where(IcCardDao.Properties.WorkNum.like("%" + et_work_search.getText().toString().trim() + "%"))
+                    .orderAsc(IcCardDao.Properties.CardNumId)
+                    .list();
+            icCardAdapter.setData(icCards);
+        }
     }
 
     @OnClick(R.id.get_card)
