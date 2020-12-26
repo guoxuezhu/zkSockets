@@ -34,16 +34,21 @@
 
         <EditText
             android:id="@+id/et_userName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
+            android:maxLength="16"
             android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
+        <View
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
@@ -65,17 +70,29 @@
 
         <EditText
             android:id="@+id/et_userPaw"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
             android:background="@drawable/layout_table_bg"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:gravity="center_vertical"
+            android:hint="数字,大小写字母组合,最大长度16个字符"
             android:inputType="textPassword"
+            android:maxLength="16"
             android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
+        <TextView
+            android:id="@+id/passeord_ts_1"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16" />
     </LinearLayout>
 
 
@@ -97,17 +114,29 @@
 
         <EditText
             android:id="@+id/et_userPaw2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
             android:background="@drawable/layout_table_bg"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:gravity="center_vertical"
+            android:hint="数字,大小写字母组合,最大长度16个字符"
             android:inputType="textPassword"
+            android:maxLength="16"
             android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
+        <TextView
+            android:id="@+id/passeord_ts_2"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16" />
     </LinearLayout>
 
 

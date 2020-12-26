@@ -3,7 +3,12 @@ package com.lh.zksockets.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lh.zksockets.R;
@@ -20,9 +25,32 @@ public class AddUserDialog extends Dialog {
     EditText et_userPaw;
     @BindView(R.id.et_userPaw2)
     EditText et_userPaw2;
+    @BindView(R.id.passeord_ts_2)
+    TextView passeord_ts_2;
+    @BindView(R.id.passeord_ts_1)
+    TextView passeord_ts_1;
+
 
     private Context mContext;
     private UserDialogCallBack mUserDialogCallBack;
+    private Handler addUserDialogHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 45:
+                    ELog.e("======Handler=====45====" + msg.obj.toString());
+                    passeord_ts_1.setText(msg.obj.toString());
+                    break;
+                case 46:
+                    ELog.e("======Handler=====46====" + msg.obj.toString());
+                    passeord_ts_2.setText(msg.obj.toString());
+                    break;
+            }
+
+        }
+    };
+
 
     public AddUserDialog(Context context, UserDialogCallBack dialogCallBack) {
         super(context, R.style.FullHeightDialog);
@@ -57,8 +85,124 @@ public class AddUserDialog extends Dialog {
 
     private void initView() {
         et_userName.setText("");
-        et_userName.setText("");
-        et_userName.setText("");
+        et_userPaw.setText("");
+        et_userPaw2.setText("");
+        passeord_ts_1.setText("");
+        passeord_ts_2.setText("");
+        et_userPaw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Message message = new Message();
+                message.obj = "";
+                if (charSequence.toString().matches("^[0-9]+$")) {
+                    //输入的纯数字为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[a-z]+$")) {
+                    //输入的纯小写字母为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z]+$")) {
+                    //输入的纯大写字母为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z0-9]{1,5}")) {
+                    //输入的大写字母和数字，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z0-9]{6,16}")) {
+                    //输入的大写字母和数字，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[a-z0-9]{1,5}")) {
+                    //输入的小写字母和数字，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[a-z0-9]{6,16}")) {
+                    //输入的小写字母和数字，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z]{1,5}")) {
+                    //输入的大写字母和小写字母，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Za-z]{6,16}")) {
+                    //输入的大写字母和小写字母，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{1,5}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符小于5个个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{6,8}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符大于6个个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{9,16}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符大于8个密码为强
+                    message.obj = "复杂";
+                } else {
+                    ELog.i("==========其它====45=====");
+                }
+                message.what = 45;
+                addUserDialogHandler.sendMessage(message);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        et_userPaw2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Message message = new Message();
+                message.obj = "";
+                if (charSequence.toString().matches("^[0-9]+$")) {
+                    //输入的纯数字为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[a-z]+$")) {
+                    //输入的纯小写字母为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z]+$")) {
+                    //输入的纯大写字母为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z0-9]{1,5}")) {
+                    //输入的大写字母和数字，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Z0-9]{6,16}")) {
+                    //输入的大写字母和数字，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[a-z0-9]{1,5}")) {
+                    //输入的小写字母和数字，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[a-z0-9]{6,16}")) {
+                    //输入的小写字母和数字，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z]{1,5}")) {
+                    //输入的大写字母和小写字母，输入的字符小于7个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Za-z]{6,16}")) {
+                    //输入的大写字母和小写字母，输入的字符大于7个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{1,5}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符小于5个个密码为弱
+                    message.obj = "简单";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{6,8}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符大于6个个密码为中
+                    message.obj = "中级";
+                } else if (charSequence.toString().matches("^[A-Za-z0-9]{9,16}")) {
+                    //输入的大写字母和小写字母和数字，输入的字符大于8个密码为强
+                    message.obj = "复杂";
+                } else {
+                    ELog.i("==========其它====46=====");
+                }
+                message.what = 46;
+                addUserDialogHandler.sendMessage(message);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
     public interface UserDialogCallBack {
