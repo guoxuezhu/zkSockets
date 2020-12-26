@@ -230,7 +230,7 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     public void onClickItem(IcCard item) {
         ELog.i("===========item============" + item.toString());
         if (deleteDialog == null) {
-            deleteDialog = new DeleteDialog(this, this, item);
+            deleteDialog = new DeleteDialog(this, this, item.cardNumId);
         }
         if (deleteDialog != null) {
             deleteDialog.show();
@@ -240,8 +240,8 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
     }
 
     @Override
-    public void deleteInfo(IcCard item) {
-        icCardDao.deleteByKey(item.cardNumId);
+    public void deleteInfo(Long mitemId) {
+        icCardDao.deleteByKey(mitemId);
         closeDialog();
     }
 

@@ -52,6 +52,12 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.btn_user_info)
+    public void btn_user_info() {
+        startActivity(new Intent(this, UsersActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.shengji)
     public void shengji() {
         File apkFile1 = new File("/mnt/usbhost/Storage01/lh/主机.apk");

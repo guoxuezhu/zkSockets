@@ -48,7 +48,8 @@
             android:gravity="center"
             android:text="类型"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_16"
+            android:visibility="gone" />
 
 
         <LinearLayout

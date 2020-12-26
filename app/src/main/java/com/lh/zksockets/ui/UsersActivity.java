@@ -12,8 +12,10 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.UsersAdapter;
 import com.lh.zksockets.data.DbDao.UsersDao;
+import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.utils.AddUserDialog;
+import com.lh.zksockets.utils.DeleteDialog;
 import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
@@ -22,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UsersActivity extends BaseActivity implements AddUserDialog.UserDialogCallBack, UsersAdapter.CallBack {
+public class UsersActivity extends BaseActivity implements AddUserDialog.UserDialogCallBack, DeleteDialog.DialogCallBack, UsersAdapter.CallBack {
 
 
     @BindView(R.id.user_recyclerView)
@@ -31,6 +33,7 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     private AddUserDialog addUserDialog;
     private UsersDao usersDao;
     private UsersAdapter usersAdapter;
+    private DeleteDialog deleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +55,20 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     @Override
     public void onClickItem(Users item) {
         ELog.i("===========item====Users========" + item.toString());
-        usersDao.deleteByKey(item.id);
-        closeDialog();
+        if (deleteDialog == null) {
+            deleteDialog = new DeleteDialog(this, this, item.id);
+        }
+        if (deleteDialog != null) {
+            deleteDialog.show();
+            deleteDialog.setCanceledOnTouchOutside(false);
+        }
     }
 
+    @Override
+    public void deleteInfo(Long mitemId) {
+        usersDao.deleteByKey(mitemId);
+        closeDialog();
+    }
 
     @OnClick(R.id.add_user)
     public void add_user() {
@@ -93,6 +106,10 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
             addUserDialog.dismiss();
             addUserDialog = null;
         }
+        if (deleteDialog != null) {
+            deleteDialog.dismiss();
+            deleteDialog = null;
+        }
     }
 
 
@@ -117,6 +134,5 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     protected void onDestroy() {
         super.onDestroy();
     }
-
 
 }

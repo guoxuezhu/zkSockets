@@ -22,10 +22,12 @@ import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.ApkInfo;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.HttpData;
+import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.service.MyMqttService;
 import com.lh.zksockets.service.NIOHttpServer;
 import com.lh.zksockets.utils.DisplayTools;
@@ -36,6 +38,7 @@ import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -84,6 +87,7 @@ public class SplashActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -378,72 +382,88 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-        }
-        progressDialog.show();
-        progressDialog.setMessage("正在登录");
-        progressDialog.setCanceledOnTouchOutside(false);
-
         if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("hzlhadmin")) {
-            splashHandler.sendEmptyMessage(111);
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }
-        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
-        if (zkInfoDao.loadAll().size() == 0) {
-            Toast.makeText(this, "请先使用管理员帐号设置基本信息", Toast.LENGTH_SHORT).show();
-            return;
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        if (usersDao.loadAll().size() == 0) {
+            Toast.makeText(this, "请使用初始帐号密码登录", Toast.LENGTH_SHORT).show();
+        } else {
+            List<Users> users = usersDao.queryBuilder()
+                    .where(UsersDao.Properties.Username.eq(login_name.getText().toString().trim()), UsersDao.Properties.UserPaw.eq(login_password.getText().toString().trim()))
+                    .list();
+            if (users.size() != 0) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            } else {
+                Toast.makeText(this, "帐号或密码错误", Toast.LENGTH_SHORT).show();
+            }
         }
-        OkHttpClient okHttpClient = new OkHttpClient();
-
-        RequestBody requestBody = new FormBody.Builder()
-                .add("user_name", login_name.getText().toString().trim())
-                .add("user_pass", login_password.getText().toString().trim())
-                .build();
-
-        Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/user_login")
-                .post(requestBody)
-                .build();
-
-        //3.创建一个call对象,参数就是Request请求对象
-        Call call = okHttpClient.newCall(request);
-        //4.请求加入调度，重写回调方法
-        call.enqueue(new Callback() {
-            //请求失败执行的方法
-            @Override
-            public void onFailure(Call call, IOException e) {
-                ELog.e("==========onFailure=======" + e.toString());
-                if (splashHandler != null) {
-                    Message message = new Message();
-                    message.obj = "服务器连接失败,请检测网络";
-                    message.what = 10;
-                    splashHandler.sendMessage(message);
-                }
-            }
-
-            //请求成功执行的方法
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseText = response.body().string();
-                ELog.e("==========数据=======" + responseText);
-                Gson gson = new Gson();
-                HttpData httpData = gson.fromJson(responseText, HttpData.class);
-                ELog.e("==========数据==11=====" + httpData.toString());
-
-                if (httpData.flag == 1) {
-                    splashHandler.sendEmptyMessage(111);
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                } else {
-                    Message message = new Message();
-                    message.obj = httpData.msg;
-                    message.what = 10;
-                    splashHandler.sendMessage(message);
-                }
-            }
-        });
-
+//        if (progressDialog == null) {
+//            progressDialog = new ProgressDialog(this);
+//        }
+//        progressDialog.show();
+//        progressDialog.setMessage("正在登录");
+//        progressDialog.setCanceledOnTouchOutside(false);
+//
+//        if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("hzlhadmin")) {
+//            splashHandler.sendEmptyMessage(111);
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//            return;
+//        }
+//        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+//        if (zkInfoDao.loadAll().size() == 0) {
+//            Toast.makeText(this, "请先使用管理员帐号设置基本信息", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add("user_name", login_name.getText().toString().trim())
+//                .add("user_pass", login_password.getText().toString().trim())
+//                .build();
+//
+//        Request request = new Request.Builder()
+//                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/user_login")
+//                .post(requestBody)
+//                .build();
+//
+//        //3.创建一个call对象,参数就是Request请求对象
+//        Call call = okHttpClient.newCall(request);
+//        //4.请求加入调度，重写回调方法
+//        call.enqueue(new Callback() {
+//            //请求失败执行的方法
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                ELog.e("==========onFailure=======" + e.toString());
+//                if (splashHandler != null) {
+//                    Message message = new Message();
+//                    message.obj = "服务器连接失败,请检测网络";
+//                    message.what = 10;
+//                    splashHandler.sendMessage(message);
+//                }
+//            }
+//
+//            //请求成功执行的方法
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String responseText = response.body().string();
+//                ELog.e("==========数据=======" + responseText);
+//                Gson gson = new Gson();
+//                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+//                ELog.e("==========数据==11=====" + httpData.toString());
+//
+//                if (httpData.flag == 1) {
+//                    splashHandler.sendEmptyMessage(111);
+//                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                } else {
+//                    Message message = new Message();
+//                    message.obj = httpData.msg;
+//                    message.what = 10;
+//                    splashHandler.sendMessage(message);
+//                }
+//            }
+//        });
 
     }
 

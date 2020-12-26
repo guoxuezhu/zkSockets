@@ -61,6 +61,14 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
+                <Button
+                    android:id="@+id/btn_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="用户管理"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
 
             <LinearLayout

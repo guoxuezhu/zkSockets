@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.ui.ICcardActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +44,7 @@ public class AddCardDialog extends Dialog {
 
         }
     };
+
     public AddCardDialog(Context context, DialogCallBack dialogCallBack) {
         super(context, R.style.FullHeightDialog);
         mContext = context;
@@ -61,21 +61,19 @@ public class AddCardDialog extends Dialog {
     @Override
     protected void onStart() {
         super.onStart();
-        ELog.i("========onStart=========");
+        initView();
         SerialPortUtil.setReadCradNum(addCardDialogHandler);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        ELog.i("========onStop=========");
         SerialPortUtil.disReadCradNum();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        initView();
         dismiss();
     }
 
@@ -92,7 +90,6 @@ public class AddCardDialog extends Dialog {
 
     @OnClick(R.id.dialog_btn_no)
     public void dialog_btn_no() {
-        initView();
         dismiss();
     }
 

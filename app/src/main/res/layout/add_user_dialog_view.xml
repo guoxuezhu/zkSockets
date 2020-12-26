@@ -70,6 +70,7 @@
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
+            android:inputType="textPassword"
             android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"
@@ -90,17 +91,18 @@
             android:layout_width="@dimen/dp_150"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="类型:"
+            android:text="再次输入密码:"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
         <EditText
-            android:id="@+id/et_userType"
+            android:id="@+id/et_userPaw2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/layout_table_bg"
             android:gravity="center_vertical"
+            android:inputType="textPassword"
             android:paddingLeft="@dimen/dp_10"
             android:text=""
             android:textColor="@color/black"

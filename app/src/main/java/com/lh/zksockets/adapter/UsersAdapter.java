@@ -1,8 +1,10 @@
 package com.lh.zksockets.adapter;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         Users user = datas.get(position);
         holder.tv_user_serialNumber.setText(position + 1 + "");
         holder.tv_user_name.setText(user.username);
-        holder.tv_user_paw.setText(user.userPaw);
+        holder.tv_user_paw.setText("******");
         holder.tv_user_type.setText(user.usertype + "");
 
         holder.setItem(user);

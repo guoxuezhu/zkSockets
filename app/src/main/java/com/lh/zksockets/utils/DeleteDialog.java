@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.model.IcCard;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,13 +14,13 @@ public class DeleteDialog extends Dialog {
 
     private Context mContext;
     private DialogCallBack mDialogCallBack;
-    private IcCard mitem;
+    private Long mitemId;
 
-    public DeleteDialog(Context context, DialogCallBack dialogCallBack, IcCard item) {
+    public DeleteDialog(Context context, DialogCallBack dialogCallBack, Long id) {
         super(context, R.style.FullHeightDialog);
         mContext = context;
         mDialogCallBack = dialogCallBack;
-        mitem = item;
+        mitemId = id;
     }
 
     @Override
@@ -32,7 +31,7 @@ public class DeleteDialog extends Dialog {
     }
 
     public interface DialogCallBack {
-        void deleteInfo(IcCard item);
+        void deleteInfo(Long mitemId);
     }
 
     @OnClick(R.id.delete_dialog_btn_no)
@@ -42,7 +41,7 @@ public class DeleteDialog extends Dialog {
 
     @OnClick(R.id.delete_dialog_btn_ok)
     public void delete_dialog_btn_ok() {
-        mDialogCallBack.deleteInfo(mitem);
+        mDialogCallBack.deleteInfo(mitemId);
     }
 
 }
