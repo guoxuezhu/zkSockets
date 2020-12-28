@@ -33,7 +33,7 @@ public class DiannaoActivity extends BaseActivity {
 
         computerDao = MyApplication.getDaoSession().getComputerDao();
         if (computerDao.loadAll().size() == 0) {
-            computerDao.insert(new Computer("192.168.1.19", "80801", "FFFF00DD", ""));
+            computerDao.insert(new Computer("192.168.1.19", "8080", "FFFF00DD", ""));
         }
         et_dn_ip.setText(computerDao.loadAll().get(0).IP);
         et_dn_port.setText(computerDao.loadAll().get(0).PORT);

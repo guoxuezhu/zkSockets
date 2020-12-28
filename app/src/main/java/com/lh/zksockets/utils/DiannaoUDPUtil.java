@@ -16,10 +16,11 @@ public class DiannaoUDPUtil {
         if (computerDao.loadAll().size() == 0) {
             return;
         }
+        byte[] msgbyte = SerialPortUtil.StringToBytes(computerDao.loadAll().get(0).userName);
         DatagramSocket cUdpSocket = null;
         try {
             cUdpSocket = new DatagramSocket(Integer.parseInt(computerDao.loadAll().get(0).PORT));
-            DatagramPacket dp = new DatagramPacket(computerDao.loadAll().get(0).userName.getBytes(), computerDao.loadAll().get(0).userName.getBytes().length);
+            DatagramPacket dp = new DatagramPacket(msgbyte, msgbyte.length);
             dp.setSocketAddress(new InetSocketAddress(computerDao.loadAll().get(0).IP, Integer.parseInt(computerDao.loadAll().get(0).PORT)));
             cUdpSocket.send(dp);
         } catch (SocketException e) {
