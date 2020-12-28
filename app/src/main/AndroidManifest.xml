@@ -129,6 +129,9 @@
             android:name=".ui.IOsetActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".ui.DiannaoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.EventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity

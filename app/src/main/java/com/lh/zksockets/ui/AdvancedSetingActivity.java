@@ -48,6 +48,12 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.diannao_seting)
+    public void diannao_seting() {
+        startActivity(new Intent(this, DiannaoActivity.class));
+        finish();
+    }
+
 //    @OnClick(R.id.ic_seting)
 //    public void ic_seting() {
 //        startActivity(new Intent(this, ICcardActivity.class));
