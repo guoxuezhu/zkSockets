@@ -24,3 +24,4 @@ LOCAL_SRC_FILES := SerialPort.c
 LOCAL_LDLIBS    := -llog
 
 include $(BUILD_SHARED_LIBRARY)
+LOCAL_CFLAGS := -Wall -O2 -U_FORTIFY_SOURCE -fstack-protector-all

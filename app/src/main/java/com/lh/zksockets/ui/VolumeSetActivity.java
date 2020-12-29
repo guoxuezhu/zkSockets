@@ -18,7 +18,6 @@ import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
-import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 
 import java.io.IOException;
