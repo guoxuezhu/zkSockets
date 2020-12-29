@@ -28,6 +28,10 @@ public class UsersDao extends AbstractDao<Users, Long> {
         public final static Property Username = new Property(1, String.class, "username", false, "USERNAME");
         public final static Property UserPaw = new Property(2, String.class, "userPaw", false, "USER_PAW");
         public final static Property Usertype = new Property(3, int.class, "usertype", false, "USERTYPE");
+        public final static Property User_permission = new Property(4, int.class, "user_permission", false, "USER_PERMISSION");
+        public final static Property Login_time = new Property(5, Long.class, "login_time", false, "LOGIN_TIME");
+        public final static Property Login_count = new Property(6, int.class, "login_count", false, "LOGIN_COUNT");
+        public final static Property User_status = new Property(7, int.class, "user_status", false, "USER_STATUS");
     }
 
 
@@ -46,7 +50,11 @@ public class UsersDao extends AbstractDao<Users, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"USERNAME\" TEXT," + // 1: username
                 "\"USER_PAW\" TEXT," + // 2: userPaw
-                "\"USERTYPE\" INTEGER NOT NULL );"); // 3: usertype
+                "\"USERTYPE\" INTEGER NOT NULL ," + // 3: usertype
+                "\"USER_PERMISSION\" INTEGER NOT NULL ," + // 4: user_permission
+                "\"LOGIN_TIME\" INTEGER," + // 5: login_time
+                "\"LOGIN_COUNT\" INTEGER NOT NULL ," + // 6: login_count
+                "\"USER_STATUS\" INTEGER NOT NULL );"); // 7: user_status
     }
 
     /** Drops the underlying database table. */
@@ -74,6 +82,14 @@ public class UsersDao extends AbstractDao<Users, Long> {
             stmt.bindString(3, userPaw);
         }
         stmt.bindLong(4, entity.getUsertype());
+        stmt.bindLong(5, entity.getUser_permission());
+ 
+        Long login_time = entity.getLogin_time();
+        if (login_time != null) {
+            stmt.bindLong(6, login_time);
+        }
+        stmt.bindLong(7, entity.getLogin_count());
+        stmt.bindLong(8, entity.getUser_status());
     }
 
     @Override
@@ -95,6 +111,14 @@ public class UsersDao extends AbstractDao<Users, Long> {
             stmt.bindString(3, userPaw);
         }
         stmt.bindLong(4, entity.getUsertype());
+        stmt.bindLong(5, entity.getUser_permission());
+ 
+        Long login_time = entity.getLogin_time();
+        if (login_time != null) {
+            stmt.bindLong(6, login_time);
+        }
+        stmt.bindLong(7, entity.getLogin_count());
+        stmt.bindLong(8, entity.getUser_status());
     }
 
     @Override
@@ -108,7 +132,11 @@ public class UsersDao extends AbstractDao<Users, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // username
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userPaw
-            cursor.getInt(offset + 3) // usertype
+            cursor.getInt(offset + 3), // usertype
+            cursor.getInt(offset + 4), // user_permission
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // login_time
+            cursor.getInt(offset + 6), // login_count
+            cursor.getInt(offset + 7) // user_status
         );
         return entity;
     }
@@ -119,6 +147,10 @@ public class UsersDao extends AbstractDao<Users, Long> {
         entity.setUsername(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setUserPaw(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUsertype(cursor.getInt(offset + 3));
+        entity.setUser_permission(cursor.getInt(offset + 4));
+        entity.setLogin_time(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setLogin_count(cursor.getInt(offset + 6));
+        entity.setUser_status(cursor.getInt(offset + 7));
      }
     
     @Override

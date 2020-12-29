@@ -45,8 +45,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         holder.tv_user_serialNumber.setText(position + 1 + "");
         holder.tv_user_name.setText(user.username);
         holder.tv_user_paw.setText("******");
-        holder.tv_user_type.setText(user.usertype + "");
-
+        if (user.user_status == 1) {
+            holder.tv_user_status.setText("正常");
+            holder.tv_user_status.setTextColor(mContext.getResources().getColor(R.color.black));
+        } else {
+            holder.tv_user_status.setText("锁定");
+            holder.tv_user_status.setTextColor(mContext.getResources().getColor(R.color.red));
+        }
         holder.setItem(user);
     }
 
@@ -72,8 +77,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         TextView tv_user_name;
         @BindView(R.id.tv_user_paw)
         TextView tv_user_paw;
-        @BindView(R.id.tv_user_type)
-        TextView tv_user_type;
+        @BindView(R.id.tv_user_status)
+        TextView tv_user_status;
 
         private Users item;
 

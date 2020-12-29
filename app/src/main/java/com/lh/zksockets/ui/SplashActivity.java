@@ -391,12 +391,34 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请使用初始帐号密码登录", Toast.LENGTH_SHORT).show();
         } else {
             List<Users> users = usersDao.queryBuilder()
-                    .where(UsersDao.Properties.Username.eq(login_name.getText().toString().trim()), UsersDao.Properties.UserPaw.eq(login_password.getText().toString().trim()))
+                    .where(UsersDao.Properties.Username.eq(login_name.getText().toString().trim()))
                     .list();
             if (users.size() != 0) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                Users user = users.get(0);
+                if (user.user_status == 1) {
+                    if (user.userPaw.equals(login_password.getText().toString().trim())) {
+                        user.setLogin_count(3);
+                        usersDao.update(user);
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    } else {
+                        int count = user.login_count - 1;
+                        if (count == 0) {
+                            user.setUser_status(0);
+                            Toast.makeText(this, "密码错误,此帐号锁定", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "密码错误," + count + "次后此帐号锁定", Toast.LENGTH_SHORT).show();
+                        }
+                        user.setLogin_count(count);
+                        ELog.e("==========user===login_count====" + user.toString());
+                        usersDao.update(user);
+                        ELog.e("==========usersDao===111====" + usersDao.loadAll().toString());
+
+                    }
+                } else {
+                    Toast.makeText(this, "此帐号已锁定,请使用其它帐号登录", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "帐号或密码错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "帐号错误", Toast.LENGTH_SHORT).show();
             }
         }
 //        if (progressDialog == null) {

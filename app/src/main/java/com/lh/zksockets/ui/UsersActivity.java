@@ -43,6 +43,7 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
 
         usersDao = MyApplication.getDaoSession().getUsersDao();
         initRcyclerView();
+        ELog.i("============usersDao========" + usersDao.loadAll().toString());
     }
 
     private void initRcyclerView() {
@@ -91,11 +92,11 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
             if (users.size() != 0) {
                 Toast.makeText(this, "此用户已经存在", Toast.LENGTH_SHORT).show();
             } else {
-                usersDao.insert(new Users(null, userName, userPaw, userType));
+                usersDao.insert(new Users(null, userName, userPaw, userType, 1, (long) 1, 3, 1));
                 closeDialog();
             }
         } else {
-            usersDao.insert(new Users(null, userName, userPaw, userType));
+            usersDao.insert(new Users(null, userName, userPaw, userType, 1, (long) 1, 3, 1));
             closeDialog();
         }
     }
@@ -122,7 +123,6 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     public void onBackPressed() {
         super.onBackPressed();
         back();
-
     }
 
     private void back() {

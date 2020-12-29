@@ -41,15 +41,14 @@
             android:textSize="@dimen/text_size_16" />
 
         <TextView
-            android:id="@+id/tv_user_type"
+            android:id="@+id/tv_user_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="类型"
+            android:text="状态"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16"
-            android:visibility="gone" />
+            android:textSize="@dimen/text_size_16" />
 
 
         <LinearLayout
