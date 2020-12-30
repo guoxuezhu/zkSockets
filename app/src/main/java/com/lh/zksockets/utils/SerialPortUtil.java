@@ -1,7 +1,9 @@
 package com.lh.zksockets.utils;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
@@ -13,13 +15,17 @@ import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
+import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.ui.MainActivity;
+import com.lh.zksockets.ui.SplashActivity;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -434,6 +440,8 @@ public class SerialPortUtil {
                                         HttpUtil.setlubo(msg);
                                     } else if (msg.substring(0, 3).equals("JZF")) {
                                         sendShipinFenping(msg);
+                                    } else if (msg.substring(0, 3).equals("USE")) {
+                                        loginMsg(msg);
                                     } else if (msg.substring(0, 3).equals("ICK")) {
                                         shuaka(msg);
                                     } else if (msg.substring(0, 3).equals("MBS")) {
@@ -453,11 +461,46 @@ public class SerialPortUtil {
                 } catch (IOException e) {
                     ELog.i("=========run: 数据读取异常========" + e.toString());
                 }
-
-
             }
         }.start();
 
+    }
+
+    private static void loginMsg(String msg) {
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        if (usersDao.loadAll().size() == 0) {
+            sendMsg1("LOGIN;100;请使用初始帐号密码登录".getBytes());
+        } else {
+            String[] msglist = msg.split(",");
+            List<Users> users = usersDao.queryBuilder()
+                    .where(UsersDao.Properties.Username.eq(msglist[1]))
+                    .list();
+            if (users.size() != 0) {
+                Users user = users.get(0);
+                if (user.user_status == 1) {
+                    if (user.userPaw.equals(msglist[2])) {
+                        user.setLogin_count(3);
+                        usersDao.update(user);
+                        sendMsg1("LOGIN;200;登录成功".getBytes());
+                    } else {
+                        int count = user.login_count - 1;
+                        if (count == 0) {
+                            user.setUser_status(0);
+                            sendMsg1("LOGIN;100;密码错误,此帐号锁定".getBytes());
+                        } else {
+                            String msg1 = "LOGIN;100;密码错误," + count + "次后此帐号锁定";
+                            sendMsg1(msg1.getBytes());
+                        }
+                        user.setLogin_count(count);
+                        usersDao.update(user);
+                    }
+                } else {
+                    sendMsg1("LOGIN;100;此帐号已锁定,请使用其它帐号登录".getBytes());
+                }
+            } else {
+                sendMsg1("LOGIN;100;帐号错误".getBytes());
+            }
+        }
     }
 
     public static void setReadCradNum(Handler addCardDialogHandler) {
