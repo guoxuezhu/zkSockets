@@ -1,7 +1,5 @@
 package com.lh.zksockets.utils;
 
-import android.os.Message;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
@@ -20,6 +18,7 @@ import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerOut;
@@ -38,6 +37,7 @@ import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
+import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
 
@@ -560,5 +560,37 @@ public class HttpRequestUtil {
         wangguandata.deleteAll();
         wangguandata.insert(wgkzqData);
         return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getLoginToken(AsyncHttpServerRequest request) {
+        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+        ELog.i("==========getLoginToken=======" + parms.toString());
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        List<Users> users = usersDao.queryBuilder()
+                .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
+                .list();
+        if (users.size() != 0) {
+            String queryString = users.get(0).username + "SWQxcGJxM2RrRkoyOTAxNGU" + users.get(0).userPaw;
+            String md5Password = "";
+            try {
+                md5Password = Coder.hashMD5(queryString.getBytes("utf8"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "-1001";
+            }
+            if (parms.getString("user_password").equals(md5Password)) {
+                String tokenString = users.get(0).username + "&" + System.currentTimeMillis() + "&" + users.get(0).userPaw;
+                try {
+                    return Coder.hashMD5(tokenString.getBytes("utf8"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "-1001";
+                }
+            } else {
+                return "-1003";
+            }
+        } else {
+            return "-1002";
+        }
     }
 }
