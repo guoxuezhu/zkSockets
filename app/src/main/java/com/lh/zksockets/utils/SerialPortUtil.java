@@ -469,7 +469,7 @@ public class SerialPortUtil {
     private static void loginMsg(String msg) {
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         if (usersDao.loadAll().size() == 0) {
-            sendMsg1("LOGIN;100;请使用初始帐号密码登录".getBytes());
+            sendMsg1("LOGIN;100;5".getBytes());
         } else {
             String[] msglist = msg.split(",");
             List<Users> users = usersDao.queryBuilder()
@@ -481,24 +481,24 @@ public class SerialPortUtil {
                     if (user.userPaw.equals(msglist[2])) {
                         user.setLogin_count(3);
                         usersDao.update(user);
-                        sendMsg1("LOGIN;200;登录成功".getBytes());
+                        sendMsg1("LOGIN;200;6".getBytes());
                     } else {
                         int count = user.login_count - 1;
                         if (count == 0) {
                             user.setUser_status(0);
-                            sendMsg1("LOGIN;100;密码错误,此帐号锁定".getBytes());
+                            sendMsg1("LOGIN;100;4".getBytes());
                         } else {
-                            String msg1 = "LOGIN;100;密码错误," + count + "次后此帐号锁定";
+                            String msg1 = "LOGIN;100;" + count;
                             sendMsg1(msg1.getBytes());
                         }
                         user.setLogin_count(count);
                         usersDao.update(user);
                     }
                 } else {
-                    sendMsg1("LOGIN;100;此帐号已锁定,请使用其它帐号登录".getBytes());
+                    sendMsg1("LOGIN;100;8".getBytes());
                 }
             } else {
-                sendMsg1("LOGIN;100;帐号错误".getBytes());
+                sendMsg1("LOGIN;100;7".getBytes());
             }
         }
     }
