@@ -29,7 +29,7 @@
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.content.ContentProvider
 
-#-keep public class android_serialport_api.** {*;}
+-keep public class android_serialport_api.** {*;}
 -keep public class com.lh.zksockets** {*;}
 
 -keep public class com.lh.zksockets.R$*{
