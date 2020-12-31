@@ -12,7 +12,6 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.UsersAdapter;
 import com.lh.zksockets.data.DbDao.UsersDao;
-import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.utils.AddUserDialog;
 import com.lh.zksockets.utils.DeleteDialog;

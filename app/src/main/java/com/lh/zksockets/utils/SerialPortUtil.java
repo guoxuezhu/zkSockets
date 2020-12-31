@@ -1,9 +1,7 @@
 package com.lh.zksockets.utils;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
@@ -24,8 +22,6 @@ import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
-import com.lh.zksockets.ui.MainActivity;
-import com.lh.zksockets.ui.SplashActivity;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
