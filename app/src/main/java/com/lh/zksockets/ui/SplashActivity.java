@@ -382,7 +382,7 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("hzlhadmin")) {
+        if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("admin456HZLHCCTV")) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }
