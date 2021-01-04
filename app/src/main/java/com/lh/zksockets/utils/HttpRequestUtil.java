@@ -570,27 +570,49 @@ public class HttpRequestUtil {
                 .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
                 .list();
         if (users.size() != 0) {
-            String queryString = users.get(0).username + "SWQxcGJxM2RrRkoyOTAxNGU" + users.get(0).userPaw;
-            String md5Password = "";
-            try {
-                md5Password = Coder.hashMD5(queryString.getBytes("utf8"));
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "-1001";
-            }
-            if (parms.getString("user_password").equals(md5Password)) {
-                String tokenString = users.get(0).username + "&" + System.currentTimeMillis() + "&" + users.get(0).userPaw;
+            Users user = users.get(0);
+            if (user.user_status == 1) {
+                String queryString = user.username + "SWQxcGJxM2RrRkoyOTAxNGU" + user.userPaw;
+                String md5Password = "";
                 try {
-                    return Coder.hashMD5(tokenString.getBytes("utf8"));
+                    md5Password = Coder.hashMD5(queryString.getBytes("utf8"));
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "-1001";
                 }
+                if (parms.getString("user_password").equals(md5Password)) {
+                    user.setLogin_count(3);
+                    usersDao.update(user);
+                    String tokenString = user.username + "&" + System.currentTimeMillis() + "&" + user.userPaw;
+                    try {
+                        return Coder.hashMD5(tokenString.getBytes("utf8"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return "-1001";
+                    }
+                } else {
+                    int count = user.login_count - 1;
+                    if (count == 0) {
+                        user.setUser_status(0);
+                        user.setLogin_count(count);
+                        usersDao.update(user);
+                        return "-1004";
+                    } else if (count == 1) {
+                        user.setLogin_count(count);
+                        usersDao.update(user);
+                        return "-1005";
+                    } else if (count == 2) {
+                        user.setLogin_count(count);
+                        usersDao.update(user);
+                        return "-1006";
+                    }
+                }
             } else {
-                return "-1003";
+                return "-1004";
             }
         } else {
             return "-1002";
         }
+        return "-1001";
     }
 }
