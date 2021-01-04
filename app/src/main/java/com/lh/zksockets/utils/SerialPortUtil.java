@@ -700,6 +700,7 @@ public class SerialPortUtil {
                 }
             }
             if (id == 2) {
+                DiannaoUDPUtil.diannaogj();
                 setXiakeTimer();
             }
             DeviceStatusUtil.setDeviceStatus(id);
@@ -722,7 +723,6 @@ public class SerialPortUtil {
                 }
             }
         }
-
     }
 
     private static void setXiakeTimer() {

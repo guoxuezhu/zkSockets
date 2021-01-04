@@ -43,6 +43,9 @@
             android:name=".ui.DengguangActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".ui.DiannaoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.ChuanglianActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
