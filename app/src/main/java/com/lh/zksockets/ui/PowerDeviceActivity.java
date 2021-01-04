@@ -32,7 +32,7 @@ public class PowerDeviceActivity extends BaseActivity {
     public void btn_dy_time_ok() {
         MyApplication.prefs.setCloseTimer(et_dy_close_time.getText().toString());
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        TimerUtils.setDuandianTimer();
+//        TimerUtils.setDuandianTimer();
     }
 
 

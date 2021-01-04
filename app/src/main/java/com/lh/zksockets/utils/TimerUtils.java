@@ -18,6 +18,7 @@ public class TimerUtils {
     private static Timer ioOutTimer1, ioOutTimer2, ioOutTimer3, ioOutTimer4;
     private static Timer wenshiTimer, KaijiTimer, duandianTimer;
     private static int wsdCount = 0;
+    private static Timer xintiaoTimer;
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
@@ -445,6 +446,20 @@ public class TimerUtils {
         }, time * 1000);
     }
 
+    public static void setXintiaoTimer() {
+
+        if (xintiaoTimer != null) {
+            xintiaoTimer.cancel();
+        }
+        xintiaoTimer = new Timer();
+        xintiaoTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                DeviceStatusUtil.xintiao();
+            }
+        }, 1000, 10 * 1000);
+    }
+
 
     public static void setWenshiduTimer() {
 
@@ -470,6 +485,7 @@ public class TimerUtils {
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
+                DeviceStatusUtil.postDevicestatusList();
                 SerialPortUtil.doSerialPort("1-801");
             }
         }, 12000, 1 * 60 * 1000);
@@ -486,6 +502,7 @@ public class TimerUtils {
             @Override
             public void run() {
                 SerialPortUtil.makeML((long) 45);
+                setXintiaoTimer();
                 if (KaijiTimer != null) {
                     KaijiTimer.cancel();
                     KaijiTimer = null;

@@ -615,4 +615,17 @@ public class HttpRequestUtil {
         }
         return "-1001";
     }
+
+    public static String getTyjInfo(AsyncHttpServerRequest request) {
+        EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
+        if (eventShangkeDao.loadAll().size() == 0) {
+            eventShangkeDao.insert(new EventShangke(0, (long) 1, "投影机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 2, "窗帘", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 3, "灯光", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 4, "大屏一体机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 5, "空调", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 6, "录播", 0, false, 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.load((long) 1)));
+    }
 }
