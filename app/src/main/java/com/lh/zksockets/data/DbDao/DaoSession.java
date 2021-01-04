@@ -8,6 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.DoorInfo;
@@ -25,6 +26,7 @@ import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
 
+import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
@@ -51,6 +53,7 @@ import com.lh.zksockets.data.DbDao.ZkInfoDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig computerDaoConfig;
     private final DaoConfig dangerOutDaoConfig;
     private final DaoConfig dangerStatusDaoConfig;
     private final DaoConfig doorInfoDaoConfig;
@@ -68,6 +71,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig wenShiDuDaoConfig;
     private final DaoConfig zkInfoDaoConfig;
 
+    private final ComputerDao computerDao;
     private final DangerOutDao dangerOutDao;
     private final DangerStatusDao dangerStatusDao;
     private final DoorInfoDao doorInfoDao;
@@ -88,6 +92,9 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        computerDaoConfig = daoConfigMap.get(ComputerDao.class).clone();
+        computerDaoConfig.initIdentityScope(type);
 
         dangerOutDaoConfig = daoConfigMap.get(DangerOutDao.class).clone();
         dangerOutDaoConfig.initIdentityScope(type);
@@ -137,6 +144,7 @@ public class DaoSession extends AbstractDaoSession {
         zkInfoDaoConfig = daoConfigMap.get(ZkInfoDao.class).clone();
         zkInfoDaoConfig.initIdentityScope(type);
 
+        computerDao = new ComputerDao(computerDaoConfig, this);
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
         dangerStatusDao = new DangerStatusDao(dangerStatusDaoConfig, this);
         doorInfoDao = new DoorInfoDao(doorInfoDaoConfig, this);
@@ -154,6 +162,7 @@ public class DaoSession extends AbstractDaoSession {
         wenShiDuDao = new WenShiDuDao(wenShiDuDaoConfig, this);
         zkInfoDao = new ZkInfoDao(zkInfoDaoConfig, this);
 
+        registerDao(Computer.class, computerDao);
         registerDao(DangerOut.class, dangerOutDao);
         registerDao(DangerStatus.class, dangerStatusDao);
         registerDao(DoorInfo.class, doorInfoDao);
@@ -173,6 +182,7 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
+        computerDaoConfig.clearIdentityScope();
         dangerOutDaoConfig.clearIdentityScope();
         dangerStatusDaoConfig.clearIdentityScope();
         doorInfoDaoConfig.clearIdentityScope();
@@ -189,6 +199,10 @@ public class DaoSession extends AbstractDaoSession {
         usersDaoConfig.clearIdentityScope();
         wenShiDuDaoConfig.clearIdentityScope();
         zkInfoDaoConfig.clearIdentityScope();
+    }
+
+    public ComputerDao getComputerDao() {
+        return computerDao;
     }
 
     public DangerOutDao getDangerOutDao() {

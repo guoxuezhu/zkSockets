@@ -36,6 +36,12 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.diannao_seting)
+    public void diannao_seting() {
+        startActivity(new Intent(this, DiannaoActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.vidStatus_seting)
     public void vidStatus_seting() {
         startActivity(new Intent(this, EventSelectActivity.class));

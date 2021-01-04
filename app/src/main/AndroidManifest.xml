@@ -40,6 +40,9 @@
             android:name=".ui.LuboEventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".ui.DiannaoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.DengguangActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
