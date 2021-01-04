@@ -176,7 +176,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ckdataTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 1; i < 5; i++) {
+                for (int i = 1; i < 9; i++) {
                     serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
                             "9600", 0, "NONE", 0, "8", 0, "1", 10));
                     for (int j = 1; j < 31; j++) {
@@ -187,11 +187,11 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                         }
                     }
                 }
-//                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-//                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "电能表", "0104010000027037", 16));
+//                serialPortDataDao.update(new SerialPortData((long) 8, "串口8", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+//                serialCommandDao.update(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "电能表", "0104010000027037", 16));
 
-                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "温湿度", "01040000000271CB", 16));
+                serialPortDataDao.update(new SerialPortData((long) 8, "串口8", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+                serialCommandDao.update(new SerialCommand(Long.valueOf("801"), 8, 1, "1-801", "温湿度", "01040000000271CB", 16));
 
 
                 serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
@@ -649,7 +649,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         progressDialog.setMessage("正在备份数据");
         progressDialog.setCanceledOnTouchOutside(false);
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
-        for (int n = 1; n < 5; n++) {
+        for (int n = 1; n < 9; n++) {
             List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                     .where(SerialCommandDao.Properties.SId.eq(n))
                     .orderAsc(SerialCommandDao.Properties.MlId)

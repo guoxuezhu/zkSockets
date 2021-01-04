@@ -32,8 +32,6 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android_serialport_api.SerialPort;
 import okhttp3.Call;
@@ -52,7 +50,6 @@ public class SerialPortUtil {
     private static SerialPort serialPort1, serialPort2;
     private static InputStream inputStream1, inputStream2;
     private static OutputStream outputStream1, outputStream2;
-    private static Timer xiakeTimer;
     private static Handler readCradHandler;
 
 
@@ -142,10 +139,10 @@ public class SerialPortUtil {
                         buffer2 = new byte[1024];
                     }
 
-                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM3]")) {
-                    ELog.i("===========COM3==============");
+                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+                    ELog.i("===========COM7==============");
                     if (msgdata.indexOf("[", 2) == -1) {
-                        ELog.i("===========COM3===========111111=======" + msgdata.length());
+                        ELog.i("===========COM7===========111111=======" + msgdata.length());
                         if (msgdata.length() == 17) {
                             buffer2 = new byte[1024];
                             System.arraycopy(buffer1, 7, buffer2, 0, 9);
@@ -156,20 +153,20 @@ public class SerialPortUtil {
                         }
                     } else {
                         if (msgdata.indexOf("]", 6) != -1) {
-                            ELog.i("===========COM3=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
-                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM3]")) {
+                            ELog.i("===========COM7=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
+                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
                                 if (bslength - 16 == 9) {
-                                    ELog.i("==========COM3=======两条数据============");
+                                    ELog.i("==========COM7=======两条数据============");
                                     buffer2 = new byte[1024];
                                     int length1 = msgdata.indexOf(">[", 3) + 1;
-                                    ELog.i("==========COM3=======length1============" + length1);
+                                    ELog.i("==========COM7=======length1============" + length1);
                                     System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
                                     System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
                                     setWenshidu();
                                     bslength = bslength - 25;
                                     if (bslength != 0) {
                                         System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-                                        ELog.i("==========COM3======33333=============" + new String(buffer2, 0, bslength));
+                                        ELog.i("==========COM7======33333=============" + new String(buffer2, 0, bslength));
                                         buffer1 = new byte[1024];
                                         System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                         buffer2 = new byte[1024];
@@ -182,7 +179,7 @@ public class SerialPortUtil {
                                     buffer2 = new byte[1024];
                                     bslength = bslength - msgdata.indexOf(">") - 1;
                                     System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                    ELog.i("===========COM3======两条数据错误======" + new String(buffer2, 0, bslength));
+                                    ELog.i("===========COM7======两条数据错误======" + new String(buffer2, 0, bslength));
                                     buffer1 = new byte[1024];
                                     System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                     buffer2 = new byte[1024];
@@ -192,7 +189,7 @@ public class SerialPortUtil {
                                 buffer2 = new byte[1024];
                                 bslength = bslength - msgdata.indexOf(">") - 1;
                                 System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                ELog.i("===========COM3=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
+                                ELog.i("===========COM7=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
                                 buffer1 = new byte[1024];
                                 System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                                 buffer2 = new byte[1024];
@@ -281,7 +278,7 @@ public class SerialPortUtil {
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
                 WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        "", 0, "1-401");
+                        "", 0, "1-801");
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
 
@@ -669,21 +666,6 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             UDPUtil.makeWangguan(id);
-            if (id == 1) {
-                closeXiakeTimer();
-                sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
             MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
             if (mLsListsDao.loadAll().size() != 0) {
                 if (mLsListsDao.load(id) == null) {
@@ -700,7 +682,7 @@ public class SerialPortUtil {
                 }
             }
             if (id == 2) {
-                setXiakeTimer();
+                sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
             }
             DeviceStatusUtil.setDeviceStatus(id);
         }
@@ -723,31 +705,6 @@ public class SerialPortUtil {
             }
         }
 
-    }
-
-    private static void setXiakeTimer() {
-        closeXiakeTimer();
-        xiakeTimer = new Timer();
-        xiakeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
-                closeXiakeTimer();
-            }
-        }, 60 * 1500);
-    }
-
-    private static void closeXiakeTimer() {
-        if (xiakeTimer != null) {
-            xiakeTimer.cancel();
-            xiakeTimer = null;
-        }
     }
 
     private static void doDanger(String ml) {
@@ -936,11 +893,11 @@ public class SerialPortUtil {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
-                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
+                msg = "{[VIDA:DT:A003]<" + str.substring(4) + ">}";
             } else if (str.substring(0, 4).equals("VIDC")) {
-                msg = "BB050" + str.substring(4) + "80";
+                msg = "{[VIDC:DT:A001]<" + str.substring(4) + ">}";
             }
-            byte[] data = StringToBytes(msg);
+            byte[] data = msg.getBytes();
             sendMsg(data);
         }
     }
