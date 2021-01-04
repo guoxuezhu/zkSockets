@@ -613,6 +613,6 @@ public class HttpRequestUtil {
         } else {
             return "-1002";
         }
-        return null;
+        return "-1001";
     }
 }
