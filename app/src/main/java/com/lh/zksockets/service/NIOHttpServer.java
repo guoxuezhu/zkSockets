@@ -63,6 +63,12 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 response.send(new Gson().toJson(new HttpResult("-1002", "帐号错误", false, null)));
             } else if (loginret.equals("-1003")) {
                 response.send(new Gson().toJson(new HttpResult("-1003", "密码错误", false, null)));
+            } else if (loginret.equals("-1005")) {
+                response.send(new Gson().toJson(new HttpResult("-1005", "密码错误,1次后此帐号锁定", false, null)));
+            } else if (loginret.equals("-1006")) {
+                response.send(new Gson().toJson(new HttpResult("-1006", "密码错误,2次后此帐号锁定", false, null)));
+            } else if (loginret.equals("-1004")) {
+                response.send(new Gson().toJson(new HttpResult("-1004", "此帐号已锁定", false, null)));
             } else {
                 LHKEY_TOKEN = HttpRequestUtil.getLoginToken(request);
                 LH_TOKEN_TIME = System.currentTimeMillis() + 1 * 1000 * 60 * 30;
