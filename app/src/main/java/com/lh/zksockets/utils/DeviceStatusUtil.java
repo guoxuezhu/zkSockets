@@ -173,7 +173,7 @@ public class DeviceStatusUtil {
                 .build();
 
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/send_devicestatus")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/send_list_devicestatus")
                 .post(requestBody)
                 .build();
 
@@ -203,6 +203,7 @@ public class DeviceStatusUtil {
         }
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
+                .add("zks_ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("msg", "这是心跳数据")
                 .build();
 

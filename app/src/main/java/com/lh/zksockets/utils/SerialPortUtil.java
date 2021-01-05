@@ -792,10 +792,8 @@ public class SerialPortUtil {
 //                }
 //            }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
-            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
-                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
-                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
-                }
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
             }
         } else if (ml.substring(4).equals("0")) {
             if (ml.substring(2, 3).equals("7")) {
@@ -818,10 +816,8 @@ public class SerialPortUtil {
                 }
             }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
-            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
-                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
-                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
-                }
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
             }
         }
         ELog.i("========doJDQ====msg====" + msg);
