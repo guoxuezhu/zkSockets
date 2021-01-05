@@ -22,25 +22,28 @@ public class TimerUtils {
 
 
     public static void setHuifuJDQstatus(String jdqPort, int time, int status) {
-        if (jdqPort.equals("1")) {
-            startJDQtimer1(time, status);
-        } else if (jdqPort.equals("2")) {
-            startJDQtimer2(time, status);
-        } else if (jdqPort.equals("3")) {
-            startJDQtimer3(time, status);
-        } else if (jdqPort.equals("4")) {
-            startJDQtimer4(time, status);
-        } else if (jdqPort.equals("5")) {
-            startJDQtimer5(time, status);
-        } else if (jdqPort.equals("6")) {
-            startJDQtimer6(time, status);
-        } else if (jdqPort.equals("7")) {
-            startJDQtimer7(time, status);
-        } else if (jdqPort.equals("8")) {
-            startJDQtimer8(time, status);
+        try {
+            if (jdqPort.equals("1")) {
+                startJDQtimer1(time, status);
+            } else if (jdqPort.equals("2")) {
+                startJDQtimer2(time, status);
+            } else if (jdqPort.equals("3")) {
+                startJDQtimer3(time, status);
+            } else if (jdqPort.equals("4")) {
+                startJDQtimer4(time, status);
+            } else if (jdqPort.equals("5")) {
+                startJDQtimer5(time, status);
+            } else if (jdqPort.equals("6")) {
+                startJDQtimer6(time, status);
+            } else if (jdqPort.equals("7")) {
+                startJDQtimer7(time, status);
+            } else if (jdqPort.equals("8")) {
+                startJDQtimer8(time, status);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ELog.e("======JDQtimer====时间异常======");
         }
-
-
     }
 
     private static void startJDQtimer1(int time, final int status) {
