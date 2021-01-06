@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import com.lh.zksockets.R;
 
@@ -79,7 +78,8 @@ public class MainActivity extends BaseActivity {
             intent.setDataAndType(Uri.fromFile(apkFile3), "application/vnd.android.package-archive");
             startActivity(intent);
         } else {
-            Toast.makeText(this, "请插入有升级包的U盘", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "请插入有升级包的U盘", Toast.LENGTH_SHORT).show();
+            startActivity(getPackageManager().getLaunchIntentForPackage("com.softwinner.TvdFileManager"));
         }
     }
 
