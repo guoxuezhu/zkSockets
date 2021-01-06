@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import com.lh.zksockets.R;
 
@@ -60,29 +59,28 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.shengji)
     public void shengji() {
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.softwinner.TvdFileManager");
-        startActivity(intent);
-//        File apkFile1 = new File("/mnt/usbhost/Storage01/lh/主机.apk");
-//        File apkFile2 = new File("/mnt/usbhost/Storage02/lh/主机.apk");
-//        File apkFile3 = new File("/mnt/usbhost/Storage03/lh/主机.apk");
-//        if (apkFile1.exists()) {
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.setDataAndType(Uri.fromFile(apkFile1), "application/vnd.android.package-archive");
-//            startActivity(intent);
-//        } else if (apkFile2.exists()) {
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.setDataAndType(Uri.fromFile(apkFile2), "application/vnd.android.package-archive");
-//            startActivity(intent);
-//        } else if (apkFile3.exists()) {
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.setDataAndType(Uri.fromFile(apkFile3), "application/vnd.android.package-archive");
-//            startActivity(intent);
-//        } else {
+        File apkFile1 = new File("/mnt/usbhost/Storage01/lh/主机.apk");
+        File apkFile2 = new File("/mnt/usbhost/Storage02/lh/主机.apk");
+        File apkFile3 = new File("/mnt/usbhost/Storage03/lh/主机.apk");
+        if (apkFile1.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(apkFile1), "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else if (apkFile2.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(apkFile2), "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else if (apkFile3.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(apkFile3), "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else {
 //            Toast.makeText(this, "请插入有升级包的U盘", Toast.LENGTH_SHORT).show();
-//        }
+            startActivity(getPackageManager().getLaunchIntentForPackage("com.softwinner.TvdFileManager"));
+        }
     }
 
 
