@@ -24,6 +24,7 @@ public class LauncherActivity extends BaseActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                ELog.getMyLogcat();
                 startActivity(new Intent(LauncherActivity.this, SplashActivity.class));
                 timer.cancel();
             }
