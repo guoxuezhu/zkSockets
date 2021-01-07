@@ -304,7 +304,7 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="指令(开)"
+                android:text="指令(高)"
                 android:textSize="@dimen/text_size_20" />
 
             <View
@@ -371,7 +371,7 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="指令(关)"
+                android:text="指令(低)"
                 android:textSize="@dimen/text_size_20" />
 
             <View
