@@ -56,9 +56,7 @@ public class HttpRequestUtil {
 
     private static Gson gson = new Gson();
 
-    public static String updataSportInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("==============1==333====" + parms);
+    public static String updataSportInfo(Multimap parms) {
         String sportNumer = parms.getString("sportNum");
         List<SerialCommand> serialCommandlist = gson.fromJson(parms.getString("sportMls"), new TypeToken<List<SerialCommand>>() {
         }.getType());
@@ -82,7 +80,7 @@ public class HttpRequestUtil {
 
     }
 
-    public static String getSportInfo(AsyncHttpServerRequest request) {
+    public static String getSportInfo(Multimap parms) {
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
         if (serialPortDataDao.loadAll().size() < 4) {
@@ -98,7 +96,7 @@ public class HttpRequestUtil {
                 }
             }
         }
-        String sportNum = request.getQuery().getString("sportNum");
+        String sportNum = parms.getString("sportNum");
         List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                 .where(SerialCommandDao.Properties.SId.eq(sportNum))
                 .orderAsc(SerialCommandDao.Properties.MlId)
@@ -109,7 +107,7 @@ public class HttpRequestUtil {
 
     }
 
-    public static String getDangerInfo(AsyncHttpServerRequest request) {
+    public static String getDangerInfo(Multimap parms) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         if (ioYuanDao.loadAll().size() == 0) {
             ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
@@ -120,9 +118,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
-    public static String updataDangerInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataDangerInfo(Multimap parms) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
         List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
         }.getType());
@@ -132,7 +128,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getEventList(AsyncHttpServerRequest request) {
+    public static String getEventList(Multimap parms) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "上课", "", ""));
@@ -232,9 +228,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
 
-    public static String updataEventInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataEventInfo(Multimap parms) {
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         List<MLsLists> mLsLists = gson.fromJson(parms.getString("eventDatas"), new TypeToken<List<MLsLists>>() {
         }.getType());
@@ -265,7 +259,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getJDQList(AsyncHttpServerRequest request) {
+    public static String getJDQList(Multimap parms) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
             jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 0, 1));
@@ -280,9 +274,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, jdqStatusDao.loadAll()));
     }
 
-    public static String updataJdqInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataJdqInfo(Multimap parms) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         List<JDQstatus> jdQstatuses = gson.fromJson(parms.getString("jdqDatas"), new TypeToken<List<JDQstatus>>() {
         }.getType());
@@ -293,7 +285,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getLuboList(AsyncHttpServerRequest request) {
+    public static String getLuboList(Multimap parms) {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
         if (luboInfoDao.loadAll().size() == 0) {
             luboInfoDao.insert(new LuboInfo("", "", "", "", 0));
@@ -301,10 +293,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, luboInfoDao.loadAll()));
     }
 
-    public static String updataLuboInfo(AsyncHttpServerRequest request) {
-
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataLuboInfo(Multimap parms) {
         LuboInfoDao luboInfoDao = MyApplication.getDaoSession().getLuboInfoDao();
         LuboInfo luboInfos = gson.fromJson(parms.getString("luboDatas"), LuboInfo.class);
         luboInfoDao.deleteAll();
@@ -312,7 +301,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 //
-//    public static String getMqttinfo(AsyncHttpServerRequest request) {
+//    public static String getMqttinfo(Multimap parms) {
 //        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
 //        if (baseInfoDao.loadAll().size() == 0) {
 //            baseInfoDao.insert(new BaseInfo("", "",
@@ -321,7 +310,7 @@ public class HttpRequestUtil {
 //        return gson.toJson(new HttpResult("200", "", true, baseInfoDao.loadAll().get(0)));
 //    }
 //
-//    public static String updataMqttInfo(AsyncHttpServerRequest request) {
+//    public static String updataMqttInfo(Multimap parms) {
 //        BaseInfoDao baseInfoDao = MyApplication.getDaoSession().getBaseInfoDao();
 //        BaseInfo baseInfo = gson.fromJson(request.getQuery().getString("mqttData"), BaseInfo.class);
 //        baseInfoDao.deleteAll();
@@ -330,7 +319,7 @@ public class HttpRequestUtil {
 //    }
 
 
-    public static String getZkBaseInfo(AsyncHttpServerRequest request) {
+    public static String getZkBaseInfo(Multimap parms) {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             zkInfoDao.insert(new ZkInfo("", "0.0.0.0", "1.0.1", "1", 0,
@@ -339,9 +328,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, zkInfoDao.loadAll().get(0)));
     }
 
-    public static String updataZkBaseInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataZkBaseInfo(Multimap parms) {
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         ZkInfo zkInfo = gson.fromJson(parms.getString("zkbaseInfoData"), ZkInfo.class);
         zkInfo.setUuid(zkInfoDao.loadAll().get(0).uuid);
@@ -350,7 +337,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getIoOutinfo(AsyncHttpServerRequest request) {
+    public static String getIoOutinfo(Multimap parms) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         if (ioPortDataDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
@@ -360,9 +347,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
     }
 
-    public static String updataIoOutInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataIoOutInfo(Multimap parms) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
         List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
         }.getType());
@@ -373,7 +358,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getDangerOutInfo(AsyncHttpServerRequest request) {
+    public static String getDangerOutInfo(Multimap parms) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
         if (dangerOutDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
@@ -383,9 +368,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));
     }
 
-    public static String updataDangerOutInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataDangerOutInfo(Multimap parms) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
         List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
         }.getType());
@@ -396,7 +379,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getWSD(AsyncHttpServerRequest request) {
+    public static String getWSD(Multimap parms) {
         try {
             WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
             if (wenShiDuDao.loadAll().size() != 0) {
@@ -409,9 +392,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "无数据", true, null));
     }
 
-    public static String updataMsg(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataMsg(Multimap parms) {
         String msg = parms.getString("msg");
         if (msg.equals("icdata")) {
             //更新卡号
@@ -462,9 +443,7 @@ public class HttpRequestUtil {
         });
     }
 
-    public static String zksendmsg(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String zksendmsg(Multimap parms) {
         String msg = parms.getString("zkbtn");
 //        String msg = request.getQuery().getString("zkbtn");
         ELog.i("========http======zkbtn======msg========" + msg);
@@ -500,18 +479,16 @@ public class HttpRequestUtil {
 
     }
 
-    public static String getRebootTime(AsyncHttpServerRequest request) {
+    public static String getRebootTime(Multimap parms) {
         return gson.toJson(new HttpResult("200", "", true, MyApplication.prefs.getCloseTimer()));
     }
 
-    public static String updataRebootTime(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataRebootTime(Multimap parms) {
         MyApplication.prefs.setCloseTimer(parms.getString("rebootTime"));
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getDoorInfo(AsyncHttpServerRequest request) {
+    public static String getDoorInfo(Multimap parms) {
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
         if (doorInfoDao.loadAll().size() == 0) {
             doorInfoDao.insert(new DoorInfo("", "", 0));
@@ -520,9 +497,7 @@ public class HttpRequestUtil {
     }
 
 
-    public static String updataDoorInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataDoorInfo(Multimap parms) {
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
         DoorInfo doorInfo = gson.fromJson(parms.getString("doorDatas"), DoorInfo.class);
         doorInfoDao.deleteAll();
@@ -530,7 +505,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getDeviceStatus(AsyncHttpServerRequest request) {
+    public static String getDeviceStatus(Multimap parms) {
         EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
         if (eventShangkeDao.loadAll().size() == 0) {
             eventShangkeDao.insert(new EventShangke(0, (long) 1, "投影机", 0, false, 0));
@@ -543,7 +518,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.loadAll()));
     }
 
-    public static String getWgkzqInfo(AsyncHttpServerRequest request) {
+    public static String getWgkzqInfo(Multimap parms) {
         EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
         if (wangguandata.loadAll().size() == 0) {
             wangguandata.insert(new EventKejianRest(1, (long) 1, "192.168.0.220",
@@ -552,9 +527,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll().get(0)));
     }
 
-    public static String updataWgkzqInfo(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("=================" + parms.toString());
+    public static String updataWgkzqInfo(Multimap parms) {
         EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
         EventKejianRest wgkzqData = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
         wangguandata.deleteAll();
@@ -562,9 +535,7 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getLoginToken(AsyncHttpServerRequest request) {
-        Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
-        ELog.i("==========getLoginToken=======" + parms.toString());
+    public static String getLoginToken(Multimap parms) {
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         List<Users> users = usersDao.queryBuilder()
                 .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
@@ -614,5 +585,63 @@ public class HttpRequestUtil {
             return "-1002";
         }
         return "-1001";
+    }
+
+    public static String getUserLists(Multimap parms) {
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        return gson.toJson(new HttpResult("200", "", true, usersDao.loadAll()));
+    }
+
+    public static String deleteUseradmin(Multimap parms) {
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        usersDao.deleteByKey(Long.parseLong(parms.getString("user_id")));
+        return gson.toJson(new HttpResult("200", "", true, usersDao.loadAll()));
+    }
+
+    public static String addUseradmin(Multimap parms) {
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        if (parms.getString("user_id").equals("") || parms.getString("user_id") == null) {
+            List<Users> users = usersDao.queryBuilder()
+                    .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
+                    .list();
+            if (users.size() != 0) {
+                return gson.toJson(new HttpResult("200", "此用户已经存在", false, usersDao.loadAll()));
+            } else {
+                usersDao.insert(new Users(null, parms.getString("user_name"), parms.getString("user_password"), 1, 1, (long) 1, 3, 1));
+            }
+        } else {
+            usersDao.update(new Users(Long.parseLong(parms.getString("user_id")), parms.getString("user_name"), parms.getString("user_password"), 1, 1, (long) 1, 3, 1));
+        }
+        return gson.toJson(new HttpResult("200", "", true, usersDao.loadAll()));
+    }
+
+    public static String getIcdataLists(Multimap parms) {
+        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+        return gson.toJson(new HttpResult("200", "", true, icCardDao.loadAll()));
+    }
+
+    public static String addIcData(Multimap parms) {
+        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+        if (parms.getString("ic_id").equals("") || parms.getString("ic_id") == null) {
+            List<IcCard> icCards = icCardDao.queryBuilder()
+                    .where(IcCardDao.Properties.Card_no.eq(parms.getString("ic_num")))
+                    .orderAsc(IcCardDao.Properties.CardNumId)
+                    .list();
+            if (icCards.size() != 0) {
+                return gson.toJson(new HttpResult("200", "卡号已经存在", false, icCardDao.loadAll()));
+            } else {
+                icCardDao.insert(new IcCard(parms.getString("work_number"), parms.getString("admin_name"), parms.getString("ic_num"), Long.parseLong(parms.getString("ic_num")), 1, DateUtil.getNow(), "on"));
+            }
+        } else {
+            icCardDao.deleteByKey(Long.parseLong(parms.getString("ic_id")));
+            icCardDao.insert(new IcCard(parms.getString("work_number"), parms.getString("admin_name"), parms.getString("ic_num"), Long.parseLong(parms.getString("ic_num")), 1, DateUtil.getNow(), "on"));
+        }
+        return gson.toJson(new HttpResult("200", "", true, icCardDao.loadAll()));
+    }
+
+    public static String deleteIcData(Multimap parms) {
+        IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
+        icCardDao.deleteByKey(Long.parseLong(parms.getString("ic_id")));
+        return gson.toJson(new HttpResult("200", "", true, icCardDao.loadAll()));
     }
 }

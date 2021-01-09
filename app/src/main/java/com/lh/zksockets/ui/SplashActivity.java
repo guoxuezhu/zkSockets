@@ -92,13 +92,18 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
-        if (!isReset) {
-            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
-            dangerStatusDao.deleteAll();
-            dangerStatusDao.insert(new DangerStatus((long) 1, 0, 0, 0, 0));
-            initdata();
+        try {
+            boolean isReset = this.getIntent().getBooleanExtra("isReset", false);
+            if (!isReset) {
+                DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
+                dangerStatusDao.deleteAll();
+                dangerStatusDao.insert(new DangerStatus((long) 1, 0, 0, 0, 0));
+                initdata();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "配置的数据出现异常了", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void initdata() {

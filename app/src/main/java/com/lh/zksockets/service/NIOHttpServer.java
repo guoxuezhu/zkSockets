@@ -56,7 +56,7 @@ public class NIOHttpServer implements HttpServerRequestCallback {
         ELog.i("===========3333=========" + request.getMethod());
 
         if (request.getPath().equals("/api/lh_zk_login")) {
-            String loginret = HttpRequestUtil.getLoginToken(request);
+            String loginret = HttpRequestUtil.getLoginToken((Multimap) request.getBody().get());
             if (loginret.equals("-1001")) {
                 response.send(new Gson().toJson(new HttpResult("-1001", "data exception", false, null)));
             } else if (loginret.equals("-1002")) {
@@ -70,16 +70,18 @@ public class NIOHttpServer implements HttpServerRequestCallback {
             } else if (loginret.equals("-1004")) {
                 response.send(new Gson().toJson(new HttpResult("-1004", "此帐号已锁定", false, null)));
             } else {
-                LHKEY_TOKEN = HttpRequestUtil.getLoginToken(request);
+                LHKEY_TOKEN = loginret;
                 LH_TOKEN_TIME = System.currentTimeMillis() + 1 * 1000 * 60 * 30;
                 response.send(new Gson().toJson(new HttpResult("200", "登录成功", true, LHKEY_TOKEN)));
             }
         } else {
             String usertoken = "";
+            Multimap parms = null;
             if (request.getMethod().equals("GET")) {
-                usertoken = request.getQuery().getString("lh_zks_token");
+                parms = request.getQuery();
+                usertoken = parms.getString("lh_zks_token");
             } else if (request.getMethod().equals("POST")) {
-                Multimap parms = ((AsyncHttpRequestBody<Multimap>) request.getBody()).get();
+                parms = (Multimap) request.getBody().get();
                 usertoken = parms.getString("lh_zks_token");
             }
             if (usertoken != null && usertoken.equals(LHKEY_TOKEN)) {
@@ -88,63 +90,75 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     LH_TOKEN_TIME = System.currentTimeMillis() + 1 * 1000 * 60 * 30;
                     try {
                         if (request.getPath().equals("/api/updataSportInfo")) {
-                            response.send(HttpRequestUtil.updataSportInfo(request));
+                            response.send(HttpRequestUtil.updataSportInfo(parms));
                         } else if (request.getPath().equals("/api/updataDangerInfo")) {
-                            response.send(HttpRequestUtil.updataDangerInfo(request));
+                            response.send(HttpRequestUtil.updataDangerInfo(parms));
                         } else if (request.getPath().equals("/api/updataEventInfo")) {
-                            response.send(HttpRequestUtil.updataEventInfo(request));
+                            response.send(HttpRequestUtil.updataEventInfo(parms));
                         } else if (request.getPath().equals("/api/updataJdqInfo")) {
-                            response.send(HttpRequestUtil.updataJdqInfo(request));
+                            response.send(HttpRequestUtil.updataJdqInfo(parms));
                         } else if (request.getPath().equals("/api/updataLuboInfo")) {
-                            response.send(HttpRequestUtil.updataLuboInfo(request));
+                            response.send(HttpRequestUtil.updataLuboInfo(parms));
 //                        } else if (request.getPath().equals("/api/updataMqttInfo")) {
-//                            response.send(HttpRequestUtil.updataMqttInfo(request));
+//                            response.send(HttpRequestUtil.updataMqttInfo(parms));
                         } else if (request.getPath().equals("/api/updataZKbaseInfo")) {
-                            response.send(HttpRequestUtil.updataZkBaseInfo(request));
+                            response.send(HttpRequestUtil.updataZkBaseInfo(parms));
                         } else if (request.getPath().equals("/api/updataIoOutInfo")) {
-                            response.send(HttpRequestUtil.updataIoOutInfo(request));
+                            response.send(HttpRequestUtil.updataIoOutInfo(parms));
                         } else if (request.getPath().equals("/api/updataDangerOutInfo")) {
-                            response.send(HttpRequestUtil.updataDangerOutInfo(request));
+                            response.send(HttpRequestUtil.updataDangerOutInfo(parms));
                         } else if (request.getPath().equals("/api/updataDoorInfo")) {
-                            response.send(HttpRequestUtil.updataDoorInfo(request));
+                            response.send(HttpRequestUtil.updataDoorInfo(parms));
                         } else if (request.getPath().equals("/api/updataRebootTime")) {
-                            response.send(HttpRequestUtil.updataRebootTime(request));
+                            response.send(HttpRequestUtil.updataRebootTime(parms));
                         } else if (request.getPath().equals("/api/zkczbtn")) {
-                            response.send(HttpRequestUtil.zksendmsg(request));
+                            response.send(HttpRequestUtil.zksendmsg(parms));
                         } else if (request.getPath().equals("/api/updataMsg")) {
-                            response.send(HttpRequestUtil.updataMsg(request));
+                            response.send(HttpRequestUtil.updataMsg(parms));
                         } else if (request.getPath().equals("/api/updataWgkzqInfo")) {
-                            response.send(HttpRequestUtil.updataWgkzqInfo(request));
+                            response.send(HttpRequestUtil.updataWgkzqInfo(parms));
                         } else if (request.getPath().equals("/api/sportInfo")) {
-                            response.send(HttpRequestUtil.getSportInfo(request));
+                            response.send(HttpRequestUtil.getSportInfo(parms));
                         } else if (request.getPath().equals("/api/dangerInfo")) {
-                            response.send(HttpRequestUtil.getDangerInfo(request));
+                            response.send(HttpRequestUtil.getDangerInfo(parms));
                         } else if (request.getPath().equals("/api/eventList")) {
-                            response.send(HttpRequestUtil.getEventList(request));
+                            response.send(HttpRequestUtil.getEventList(parms));
                         } else if (request.getPath().equals("/api/jdqInfo")) {
-                            response.send(HttpRequestUtil.getJDQList(request));
+                            response.send(HttpRequestUtil.getJDQList(parms));
                         } else if (request.getPath().equals("/api/luboInfo")) {
-                            response.send(HttpRequestUtil.getLuboList(request));
+                            response.send(HttpRequestUtil.getLuboList(parms));
 //                        } else if (request.getPath().equals("/api/mqttInfo")) {
-//                            response.send(HttpRequestUtil.getMqttinfo(request));
+//                            response.send(HttpRequestUtil.getMqttinfo(parms));
                         } else if (request.getPath().equals("/api/zkBaseInfo")) {
-                            response.send(HttpRequestUtil.getZkBaseInfo(request));
+                            response.send(HttpRequestUtil.getZkBaseInfo(parms));
                         } else if (request.getPath().equals("/api/iooutInfo")) {
-                            response.send(HttpRequestUtil.getIoOutinfo(request));
+                            response.send(HttpRequestUtil.getIoOutinfo(parms));
                         } else if (request.getPath().equals("/api/dangerOutInfo")) {
-                            response.send(HttpRequestUtil.getDangerOutInfo(request));
+                            response.send(HttpRequestUtil.getDangerOutInfo(parms));
                         } else if (request.getPath().equals("/api/doorSeting")) {
-                            response.send(HttpRequestUtil.getDoorInfo(request));
+                            response.send(HttpRequestUtil.getDoorInfo(parms));
                         } else if (request.getPath().equals("/api/rebootTime")) {
-                            response.send(HttpRequestUtil.getRebootTime(request));
+                            response.send(HttpRequestUtil.getRebootTime(parms));
                         } else if (request.getPath().equals("/api/wsddata")) {
-                            response.send(HttpRequestUtil.getWSD(request));
-                        } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
-                            response.send(HttpRequestUtil.setWsdpm(request));
+                            response.send(HttpRequestUtil.getWSD(parms));
+//                        } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
+//                            response.send(HttpRequestUtil.setWsdpm(parms));
                         } else if (request.getPath().equals("/api/deviceStatus")) {
-                            response.send(HttpRequestUtil.getDeviceStatus(request));
+                            response.send(HttpRequestUtil.getDeviceStatus(parms));
                         } else if (request.getPath().equals("/api/wgkzqInfo")) {
-                            response.send(HttpRequestUtil.getWgkzqInfo(request));
+                            response.send(HttpRequestUtil.getWgkzqInfo(parms));
+                        } else if (request.getPath().equals("/api/ic_list_data")) {
+                            response.send(HttpRequestUtil.getIcdataLists(parms));
+                        } else if (request.getPath().equals("/api/delete_ic_data")) {
+                            response.send(HttpRequestUtil.deleteIcData(parms));
+                        } else if (request.getPath().equals("/api/add_ic_data")) {
+                            response.send(HttpRequestUtil.addIcData(parms));
+                        } else if (request.getPath().equals("/api/delete_user_admin")) {
+                            response.send(HttpRequestUtil.deleteUseradmin(parms));
+                        } else if (request.getPath().equals("/api/add_user_admin")) {
+                            response.send(HttpRequestUtil.addUseradmin(parms));
+                        } else if (request.getPath().equals("/api/user_list_admin")) {
+                            response.send(HttpRequestUtil.getUserLists(parms));
                         } else {
                             response.send("sys Exception");
                         }
@@ -154,6 +168,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 } else {
                     response.send(new Gson().toJson(new HttpResult("-1201", "连接超时,请重新登录", false, null)));
                 }
+            } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
+                response.send(HttpRequestUtil.setWsdpm(request));
             } else {
                 response.send(new Gson().toJson(new HttpResult("-1200", "请重新登录", false, null)));
             }
