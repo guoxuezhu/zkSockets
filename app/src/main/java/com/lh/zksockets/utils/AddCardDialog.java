@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.model.IcCard;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +30,7 @@ public class AddCardDialog extends Dialog {
 
 
     private Context mContext;
+    private IcCard icCard;
     private DialogCallBack mDialogCallBack;
 
     private Handler addCardDialogHandler = new Handler() {
@@ -45,9 +47,10 @@ public class AddCardDialog extends Dialog {
         }
     };
 
-    public AddCardDialog(Context context, DialogCallBack dialogCallBack) {
+    public AddCardDialog(Context context, IcCard item, DialogCallBack dialogCallBack) {
         super(context, R.style.FullHeightDialog);
         mContext = context;
+        icCard = item;
         mDialogCallBack = dialogCallBack;
     }
 
@@ -74,23 +77,36 @@ public class AddCardDialog extends Dialog {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        dismiss();
+        icDialogDismiss();
+    }
+
+    private void icDialogDismiss() {
+        mDialogCallBack.dismissDialog();
     }
 
     private void initView() {
-        et_workNumber.setText("");
-        et_teacherName.setText("");
-        et_department.setText("");
-        et_cardNum.setText("");
+        if (icCard == null) {
+            et_workNumber.setText("");
+            et_teacherName.setText("");
+            et_department.setText("");
+            et_cardNum.setText("");
+        } else {
+            et_workNumber.setText(icCard.workNum + "");
+            et_teacherName.setText(icCard.name + "");
+            et_department.setText(icCard.name + "");
+            et_cardNum.setText(icCard.card_no + "");
+        }
     }
 
     public interface DialogCallBack {
-        void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum);
+        void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum, IcCard icCard);
+
+        void dismissDialog();
     }
 
     @OnClick(R.id.dialog_btn_no)
     public void dialog_btn_no() {
-        dismiss();
+        icDialogDismiss();
     }
 
     @OnClick(R.id.dialog_btn_ok)
@@ -106,7 +122,7 @@ public class AddCardDialog extends Dialog {
         if (!et_cardNum.getText().toString().trim().equals("") && et_cardNum.getText().toString().trim().length() == 10) {
             mDialogCallBack.addCradInfo(et_workNumber.getText().toString(), 1,
                     et_teacherName.getText().toString(), et_department.getText().toString(),
-                    et_cardNum.getText().toString());
+                    et_cardNum.getText().toString(), icCard);
         } else {
             Toast.makeText(mContext, "请输入正确的十位卡号", Toast.LENGTH_SHORT).show();
         }

@@ -215,7 +215,7 @@ public class AddUserDialog extends Dialog {
     }
 
     public interface UserDialogCallBack {
-        void addUserInfo(String userName, String userPaw, long userId);
+        void addUserInfo(String userName, String userPaw, Users user);
 
         void userDialogCancel();
     }
@@ -247,11 +247,7 @@ public class AddUserDialog extends Dialog {
             Toast.makeText(mContext, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (mUser != null) {
-            mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), mUser.id);
-        } else {
-            mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), -1);
-        }
+        mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), mUser);
     }
 
 }

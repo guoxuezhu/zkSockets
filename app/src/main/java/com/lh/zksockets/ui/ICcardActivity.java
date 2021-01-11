@@ -183,35 +183,54 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
 
     @OnClick(R.id.add_card)
     public void add_card() {
-
         if (addCardDialog == null) {
-            addCardDialog = new AddCardDialog(this, this);
+            addCardDialog = new AddCardDialog(this, null, this);
         }
-
         if (addCardDialog != null) {
             addCardDialog.show();
             addCardDialog.setCanceledOnTouchOutside(false);
         }
-
     }
 
     @Override
-    public void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum) {
-        if (icCardDao.loadAll().size() != 0) {
-            List<IcCard> icCards = icCardDao.queryBuilder()
-                    .where(IcCardDao.Properties.Card_no.eq(cardNum))
-                    .orderAsc(IcCardDao.Properties.CardNumId)
-                    .list();
-            if (icCards.size() != 0) {
-                Toast.makeText(this, "卡号已经存在", Toast.LENGTH_SHORT).show();
+    public void onFixItem(IcCard item) {
+        if (addCardDialog == null) {
+            addCardDialog = new AddCardDialog(this, item, this);
+        }
+        if (addCardDialog != null) {
+            addCardDialog.show();
+            addCardDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    @Override
+    public void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum, IcCard icCard) {
+        if (icCard == null) {
+            if (icCardDao.loadAll().size() != 0) {
+                List<IcCard> icCards = icCardDao.queryBuilder()
+                        .where(IcCardDao.Properties.Card_no.eq(cardNum))
+                        .orderAsc(IcCardDao.Properties.CardNumId)
+                        .list();
+                if (icCards.size() != 0) {
+                    Toast.makeText(this, "卡号已经存在", Toast.LENGTH_SHORT).show();
+                } else {
+                    icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
+                    closeDialog();
+                }
             } else {
                 icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
                 closeDialog();
             }
         } else {
+            icCardDao.deleteByKey(icCard.cardNumId);
             icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
             closeDialog();
         }
+    }
+
+    @Override
+    public void dismissDialog() {
+        closeDialog();
     }
 
     private void closeDialog() {

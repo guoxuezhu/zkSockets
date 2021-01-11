@@ -92,6 +92,12 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/ic_btn_fix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改" />
+
+            <Button
                 android:id="@+id/btn_delect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

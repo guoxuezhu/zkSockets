@@ -100,8 +100,8 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     }
 
     @Override
-    public void addUserInfo(String userName, String userPaw, long userid) {
-        if (userid == -1) {
+    public void addUserInfo(String userName, String userPaw, Users user) {
+        if (user == null) {
             if (usersDao.loadAll().size() != 0) {
                 List<Users> users = usersDao.queryBuilder()
                         .where(UsersDao.Properties.Username.eq(userName))
@@ -117,7 +117,7 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
                 closeDialog();
             }
         } else {
-            usersDao.update(new Users(userid, userName, userPaw, 1, 1, (long) 1, 3, 1));
+            usersDao.update(new Users(user.id, userName, userPaw, 1, 1, (long) 1, 3, 1));
             closeDialog();
         }
     }

@@ -66,6 +66,8 @@ public class IcCardAdapter extends RecyclerView.Adapter<IcCardAdapter.IcCardView
 
     public interface CallBack {
         void onClickItem(IcCard item);
+
+        void onFixItem(IcCard item);
     }
 
     public class IcCardViewHolder extends RecyclerView.ViewHolder {
@@ -99,10 +101,14 @@ public class IcCardAdapter extends RecyclerView.Adapter<IcCardAdapter.IcCardView
             item = icCard;
         }
 
+        @OnClick(R.id.ic_btn_fix)
+        public void ic_btn_fix() {
+            mCallBack.onFixItem(item);
+        }
+
         @OnClick(R.id.btn_delect)
         public void btn_delect() {
             mCallBack.onClickItem(item);
         }
-
     }
 }
