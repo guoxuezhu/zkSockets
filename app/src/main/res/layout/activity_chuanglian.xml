@@ -170,7 +170,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-2-1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -236,7 +238,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-2-0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -302,7 +306,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-3-1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -368,7 +374,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-3-0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -434,7 +442,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-4-1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -500,7 +510,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="2-4-0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />

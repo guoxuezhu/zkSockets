@@ -170,7 +170,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-101"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -237,7 +239,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-201"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -304,7 +308,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-301"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -370,7 +376,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-401"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -437,7 +445,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-501"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -503,7 +513,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-601"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -569,7 +581,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-701"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
@@ -635,7 +649,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="@null"
+                        android:digits="0123456789-,"
                         android:gravity="center"
+                        android:inputType="number"
                         android:text="1-801"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />

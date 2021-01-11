@@ -178,7 +178,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
             <View
                 android:layout_width="1dp"
@@ -191,7 +193,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -258,7 +262,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
             <View
                 android:layout_width="1dp"
@@ -271,7 +277,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -338,7 +346,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
             <View
                 android:layout_width="1dp"
@@ -351,7 +361,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -418,7 +430,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
             <View
                 android:layout_width="1dp"
@@ -431,7 +445,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@null"
-                android:gravity="center" />
+                android:digits="0123456789,"
+                android:gravity="center"
+                android:inputType="number" />
 
         </LinearLayout>
 
