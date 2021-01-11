@@ -668,44 +668,47 @@ public class SerialPortUtil {
 
     public static void makeML(Long id) {
         synchronized (id) {
-            UDPUtil.makeWangguan(id);
-            if (id == 1) {
-                closeXiakeTimer();
-                sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            try {
+                UDPUtil.makeWangguan(id);
+                if (id == 1) {
+                    closeXiakeTimer();
+                    sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+                if (mLsListsDao.loadAll().size() != 0) {
+                    if (mLsListsDao.load(id) == null) {
+                        return;
+                    }
+                    mLsListsDao.load(id).setTime(DateUtil.getNow());
+                    mLsListsDao.update(mLsListsDao.load(id));
+                    String strMls = mLsListsDao.load(id).strMLs;
+                    ELog.i("========串口1===========makeML=================" + id);
+                    if (id == 1 || id == 2 || id == 45) {
+                        getEventId(strMls);
+                    } else {
+                        makeBaojing(strMls);
+                    }
                 }
+                if (id == 2) {
+                    DiannaoUDPUtil.diannaogj();
+                    setXiakeTimer();
+                }
+                DeviceStatusUtil.setDeviceStatus(id);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-            if (mLsListsDao.loadAll().size() != 0) {
-                if (mLsListsDao.load(id) == null) {
-                    return;
-                }
-                mLsListsDao.load(id).setTime(DateUtil.getNow());
-                mLsListsDao.update(mLsListsDao.load(id));
-                String strMls = mLsListsDao.load(id).strMLs;
-                ELog.i("========串口1===========makeML=================" + id);
-                if (id == 1 || id == 2 || id == 45) {
-                    getEventId(strMls);
-                } else {
-                    makeBaojing(strMls);
-                }
-            }
-            if (id == 2) {
-                DiannaoUDPUtil.diannaogj();
-                setXiakeTimer();
-            }
-            DeviceStatusUtil.setDeviceStatus(id);
         }
-
     }
 
     private static void getEventId(String strMls) {
