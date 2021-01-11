@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lh.zksockets.R;
+import com.lh.zksockets.data.model.Users;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +33,7 @@ public class AddUserDialog extends Dialog {
 
 
     private Context mContext;
+    private Users mUser;
     private UserDialogCallBack mUserDialogCallBack;
     private Handler addUserDialogHandler = new Handler() {
         @Override
@@ -52,9 +54,10 @@ public class AddUserDialog extends Dialog {
     };
 
 
-    public AddUserDialog(Context context, UserDialogCallBack dialogCallBack) {
+    public AddUserDialog(Context context, Users item, UserDialogCallBack dialogCallBack) {
         super(context, R.style.FullHeightDialog);
         mContext = context;
+        mUser = item;
         mUserDialogCallBack = dialogCallBack;
     }
 
@@ -80,15 +83,21 @@ public class AddUserDialog extends Dialog {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        dismiss();
+        dismissDialog();
     }
 
     private void initView() {
-        et_userName.setText("");
-        et_userPaw.setText("");
-        et_userPaw2.setText("");
         passeord_ts_1.setText("");
         passeord_ts_2.setText("");
+        if (mUser != null) {
+            et_userName.setText(mUser.username + "");
+            et_userPaw.setText(mUser.userPaw + "");
+            et_userPaw2.setText(mUser.userPaw + "");
+        } else {
+            et_userName.setText("");
+            et_userPaw.setText("");
+            et_userPaw2.setText("");
+        }
         et_userPaw.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -206,12 +215,18 @@ public class AddUserDialog extends Dialog {
     }
 
     public interface UserDialogCallBack {
-        void addUserInfo(String userName, String userPaw, int userType);
+        void addUserInfo(String userName, String userPaw, long userId);
+
+        void userDialogCancel();
     }
 
     @OnClick(R.id.dialog_user_btn_no)
     public void dialog_user_btn_no() {
-        dismiss();
+        dismissDialog();
+    }
+
+    private void dismissDialog() {
+        mUserDialogCallBack.userDialogCancel();
     }
 
     @OnClick(R.id.dialog_user_btn_ok)
@@ -232,7 +247,11 @@ public class AddUserDialog extends Dialog {
             Toast.makeText(mContext, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
             return;
         }
-        mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), 1);
+        if (mUser != null) {
+            mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), mUser.id);
+        } else {
+            mUserDialogCallBack.addUserInfo(et_userName.getText().toString(), et_userPaw.getText().toString(), -1);
+        }
     }
 
 }

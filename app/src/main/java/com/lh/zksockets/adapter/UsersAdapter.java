@@ -67,6 +67,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     public interface CallBack {
         void onClickItem(Users item);
+
+        void onFixClickItem(Users item);
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -93,10 +95,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             item = users;
         }
 
+        @OnClick(R.id.user_btn_fix)
+        public void user_btn_fix() {
+            mCallBack.onFixClickItem(item);
+        }
+
         @OnClick(R.id.user_btn_delect)
         public void user_btn_delect() {
             mCallBack.onClickItem(item);
         }
-
     }
 }

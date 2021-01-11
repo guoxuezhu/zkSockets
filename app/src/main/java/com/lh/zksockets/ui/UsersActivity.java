@@ -53,9 +53,21 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     }
 
     @Override
+    public void onFixClickItem(Users item) {
+        if (addUserDialog == null) {
+            ELog.i("===========onFixClickItem====Users========" + item.toString());
+            addUserDialog = new AddUserDialog(this, item, this);
+        }
+        if (addUserDialog != null) {
+            addUserDialog.show();
+            addUserDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    @Override
     public void onClickItem(Users item) {
-        ELog.i("===========item====Users========" + item.toString());
         if (deleteDialog == null) {
+            ELog.i("===========onClickItem====Users========" + item.toString());
             deleteDialog = new DeleteDialog(this, this, item.id);
         }
         if (deleteDialog != null) {
@@ -70,10 +82,15 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
         closeDialog();
     }
 
+    @Override
+    public void userDialogCancel() {
+        closeDialog();
+    }
+
     @OnClick(R.id.add_user)
     public void add_user() {
         if (addUserDialog == null) {
-            addUserDialog = new AddUserDialog(this, this);
+            addUserDialog = new AddUserDialog(this, null, this);
         }
 
         if (addUserDialog != null) {
@@ -83,19 +100,24 @@ public class UsersActivity extends BaseActivity implements AddUserDialog.UserDia
     }
 
     @Override
-    public void addUserInfo(String userName, String userPaw, int userType) {
-        if (usersDao.loadAll().size() != 0) {
-            List<Users> users = usersDao.queryBuilder()
-                    .where(UsersDao.Properties.Username.eq(userName))
-                    .list();
-            if (users.size() != 0) {
-                Toast.makeText(this, "此用户已经存在", Toast.LENGTH_SHORT).show();
+    public void addUserInfo(String userName, String userPaw, long userid) {
+        if (userid == -1) {
+            if (usersDao.loadAll().size() != 0) {
+                List<Users> users = usersDao.queryBuilder()
+                        .where(UsersDao.Properties.Username.eq(userName))
+                        .list();
+                if (users.size() != 0) {
+                    Toast.makeText(this, "此用户已经存在", Toast.LENGTH_SHORT).show();
+                } else {
+                    usersDao.insert(new Users(null, userName, userPaw, 1, 1, (long) 1, 3, 1));
+                    closeDialog();
+                }
             } else {
-                usersDao.insert(new Users(null, userName, userPaw, userType, 1, (long) 1, 3, 1));
+                usersDao.insert(new Users(null, userName, userPaw, 1, 1, (long) 1, 3, 1));
                 closeDialog();
             }
         } else {
-            usersDao.insert(new Users(null, userName, userPaw, userType, 1, (long) 1, 3, 1));
+            usersDao.update(new Users(userid, userName, userPaw, 1, 1, (long) 1, 3, 1));
             closeDialog();
         }
     }
