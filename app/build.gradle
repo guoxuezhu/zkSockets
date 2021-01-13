@@ -10,8 +10,8 @@ android {
         applicationId "com.lh.zksockets"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.4.5"
+        versionCode 6
+        versionName "1.9.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
@@ -61,7 +61,7 @@ android {
     }
 
     greendao {
-        schemaVersion 1
+        schemaVersion 3
         daoPackage 'com.lh.zksockets.data.DbDao'
         targetGenDir 'src/main/java'
     }
