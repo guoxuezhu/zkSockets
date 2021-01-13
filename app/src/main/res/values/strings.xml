@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">主机</string>
+    <string name="ip_msg">ip地址不合法</string>
 </resources>

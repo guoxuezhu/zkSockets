@@ -100,6 +100,10 @@ public class SplashActivity extends BaseActivity {
                 dangerStatusDao.insert(new DangerStatus((long) 1, 0, 0, 0, 0));
                 initdata();
             }
+            UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+            if (usersDao.loadAll().size() == 0) {
+                usersDao.insert(new Users(null, "admin", "admin", 1, 1, (long) 1, 3, 1));
+            }
         } catch (Exception e) {
             Toast.makeText(this, "配置的数据出现异常了", Toast.LENGTH_SHORT).show();
         }
@@ -385,13 +389,13 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (login_name.getText().toString().trim().equals("hzlhadmin") && login_password.getText().toString().trim().equals("admin456HZLHCCTV")) {
+        if (login_name.getText().toString().trim().equals("admin") && login_password.getText().toString().trim().equals("hik12345")) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         if (usersDao.loadAll().size() == 0) {
-            Toast.makeText(this, "请使用初始帐号密码登录", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请断电重启", Toast.LENGTH_SHORT).show();
         } else {
             List<Users> users = usersDao.queryBuilder()
                     .where(UsersDao.Properties.Username.eq(login_name.getText().toString().trim()))

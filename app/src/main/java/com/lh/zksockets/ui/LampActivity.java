@@ -112,7 +112,7 @@ public class LampActivity extends BaseActivity {
     @OnClick(R.id.btn_lubo_ok)
     public void btn_lubo_ok() {
         if (!DisplayTools.ipCheck(et_lb_ip.getText().toString())) {
-            Toast.makeText(this, "ip地址不合法性", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ip_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         luboInfoDao.deleteAll();

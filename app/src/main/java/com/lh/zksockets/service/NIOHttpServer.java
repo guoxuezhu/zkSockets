@@ -58,7 +58,7 @@ public class NIOHttpServer implements HttpServerRequestCallback {
         if (request.getPath().equals("/api/lh_zk_login")) {
             String loginret = HttpRequestUtil.getLoginToken((Multimap) request.getBody().get());
             if (loginret.equals("-1001")) {
-                response.send(new Gson().toJson(new HttpResult("-1001", "data exception", false, null)));
+                response.send(new Gson().toJson(new HttpResult("-1001", "帐号或者密码存在问题", false, null)));
             } else if (loginret.equals("-1002")) {
                 response.send(new Gson().toJson(new HttpResult("-1002", "帐号错误", false, null)));
             } else if (loginret.equals("-1003")) {
@@ -160,7 +160,7 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                         } else if (request.getPath().equals("/api/user_list_admin")) {
                             response.send(HttpRequestUtil.getUserLists(parms));
                         } else {
-                            response.send("sys Exception");
+                            response.send("接口错误");
                         }
                     } catch (Exception e) {
                         response.send(new Gson().toJson(new HttpResult("-200", "数据异常或不能为空", false, null)));

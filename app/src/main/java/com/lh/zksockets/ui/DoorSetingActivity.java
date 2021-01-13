@@ -57,7 +57,7 @@ public class DoorSetingActivity extends BaseActivity {
     @OnClick(R.id.btn_door_ok)
     public void btn_door_ok() {
         if (!DisplayTools.ipCheck(et_door_ip.getText().toString())) {
-            Toast.makeText(this, "ip地址不合法性", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ip_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         doorInfoDao.deleteAll();

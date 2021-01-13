@@ -51,7 +51,7 @@ public class ZhongKongActivity extends BaseActivity {
     @OnClick(R.id.btn_wg_baocun)
     public void btn_wg_baocun() {
         if (!DisplayTools.ipCheck(wg_ip.getText().toString())) {
-            Toast.makeText(this, "ip地址不合法性", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ip_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         wangguandata.deleteAll();
