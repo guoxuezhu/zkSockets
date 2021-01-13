@@ -717,10 +717,10 @@ public class SerialPortUtil {
             for (int i = 0; i < mls.length; i++) {
                 ELog.i("=======getEventId========" + mls[i]);
                 try {
-                    makeML(Long.valueOf(mls[i]));
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    if (!mls[i].equals("1") && !mls[i].equals("2") && !mls[i].equals("45")) {
+                        makeML(Long.valueOf(mls[i]));
+                        sleep(1000);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
