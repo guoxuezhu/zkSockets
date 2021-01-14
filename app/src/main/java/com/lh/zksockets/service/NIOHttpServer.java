@@ -88,6 +88,9 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                 usertoken = parms.getString("lh_zks_token");
                 userName = parms.getString("user_name");
             }
+            if (userName == null) {
+                userName = "";
+            }
             UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
             List<Users> users = usersDao.queryBuilder()
                     .where(UsersDao.Properties.Username.eq(userName))
