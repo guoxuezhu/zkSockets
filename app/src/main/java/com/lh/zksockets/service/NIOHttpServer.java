@@ -143,6 +143,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                             response.send(HttpRequestUtil.getWSD(parms));
 //                        } else if (request.getPath().substring(0, 5).equals("/wsd/")) {
 //                            response.send(HttpRequestUtil.setWsdpm(parms));
+                        } else if (request.getPath().equals("/api/tyjinfo")) {
+                            response.send(HttpRequestUtil.getTyjInfo(parms));
                         } else if (request.getPath().equals("/api/deviceStatus")) {
                             response.send(HttpRequestUtil.getDeviceStatus(parms));
                         } else if (request.getPath().equals("/api/wgkzqInfo")) {
