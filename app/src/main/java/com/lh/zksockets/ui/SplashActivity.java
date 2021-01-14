@@ -99,15 +99,14 @@ public class SplashActivity extends BaseActivity {
                 dangerStatusDao.deleteAll();
                 dangerStatusDao.insert(new DangerStatus((long) 1, 0, 0, 0, 0));
                 initdata();
-            }
-            UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
-            if (usersDao.loadAll().size() == 0) {
-                usersDao.insert(new Users(null, "admin", "admin", 1, 1, (long) 1, 3, 1));
+                UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+                if (usersDao.loadAll().size() == 0) {
+                    usersDao.insert(new Users(null, "admin", "admin", 1, 1, (long) 1, 3, 1));
+                }
             }
         } catch (Exception e) {
             Toast.makeText(this, "配置的数据出现异常了", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void initdata() {
