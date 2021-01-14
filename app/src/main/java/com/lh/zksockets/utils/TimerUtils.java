@@ -489,6 +489,7 @@ public class TimerUtils {
             @Override
             public void run() {
                 SerialPortUtil.makeML((long) 45);
+                setWenshiduTimer();
                 if (KaijiTimer != null) {
                     KaijiTimer.cancel();
                     KaijiTimer = null;

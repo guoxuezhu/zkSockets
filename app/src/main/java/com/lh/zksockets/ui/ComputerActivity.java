@@ -57,7 +57,7 @@ public class ComputerActivity extends BaseActivity {
                 et_ws_shi.getText().toString(), "", Integer.valueOf(et_ws_time.getText().toString()), et_ws_ml.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-        TimerUtils.setWenshiduTimer();
+//        TimerUtils.setWenshiduTimer();
     }
 
     @OnClick(R.id.computer_btn_back)
