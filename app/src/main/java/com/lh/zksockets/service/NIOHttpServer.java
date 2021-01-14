@@ -82,11 +82,11 @@ public class NIOHttpServer implements HttpServerRequestCallback {
             if (request.getMethod().equals("GET")) {
                 parms = request.getQuery();
                 usertoken = parms.getString("lh_zks_token");
-                userName = parms.getString("user_name");
+                userName = parms.getString("login_user_name");
             } else if (request.getMethod().equals("POST")) {
                 parms = (Multimap) request.getBody().get();
                 usertoken = parms.getString("lh_zks_token");
-                userName = parms.getString("user_name");
+                userName = parms.getString("login_user_name");
             }
             if (userName == null) {
                 userName = "";
