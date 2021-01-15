@@ -261,6 +261,11 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         }
         ELog.i("=========serialCommands===tyjViewInit===0000==" + serialCommands.toString());
 
+        for (int j = 0; j < 30; j++) {
+            serialCommands.get(j).setCommandName("");
+            serialCommands.get(j).setCommandStr("");
+        }
+
         if (i == 11) {
             serialCommands.get(0).setCommandName(serialCommandDao.load((long) 901).commandName);
             serialCommands.get(0).setCommandStr(serialCommandDao.load((long) 901).commandStr);
@@ -524,18 +529,23 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         } else {
             jinzhi = 16;
         }
-
         serialPortDataDao.update(new SerialPortData((long) spt_btn_port, "串口" + spt_btn_port,
                 et_device_name.getText().toString(), selectBaudRateId, selectBaudRate,
                 selectCheckoutBitId, selectCheckoutBit, selectDataBitId, selectDataBit,
                 selectStopBitId, selectStopBit, jinzhi));
-
-        ELog.i("========sport_btn_ok==1111===" + serialCommands.toString());
-
         for (int j = 0; j < serialCommands.size(); j++) {
-            serialCommands.get(j).setJinZhi(jinzhi);
-            serialCommandDao.update(serialCommands.get(j));
-            ELog.i("========222222222===" + serialCommands.get(j));
+            if (jinzhi == 16) {
+                if (SerialPortUtil.StringToBytes(serialCommands.get(j).commandStr) != null) {
+                    serialCommands.get(j).setJinZhi(jinzhi);
+                    serialCommandDao.update(serialCommands.get(j));
+                } else {
+                    Toast.makeText(this, serialCommands.get(j).commandId + " 的命令数据格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            } else {
+                serialCommands.get(j).setJinZhi(jinzhi);
+                serialCommandDao.update(serialCommands.get(j));
+            }
         }
 
         //String spStr = selectBaudRate + "," + selectCheckoutBit + "," + selectDataBit + "," + selectStopBit;
