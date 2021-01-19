@@ -16,6 +16,9 @@ public class DiannaoUDPUtil {
         if (computerDao.loadAll().size() == 0) {
             return;
         }
+        if (!computerDao.loadAll().get(0).dn_status.equals("1")) {
+            return;
+        }
         byte[] msgbyte = SerialPortUtil.StringToBytes(computerDao.loadAll().get(0).dn_ml);
         DatagramSocket cUdpSocket = null;
         try {
