@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -22,8 +21,14 @@
         android:theme="@style/Theme.Zksockets"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.WangguanEventActivity"
+            android:name=".ui.XinfengEventActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ui.PowerEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.WangguanEventActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.YinpinEventActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -131,7 +136,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyMqttService" /> <!-- MyMqttService -->
+        <service android:name=".service.MyMqttService" />
     </application>
 
 </manifest>

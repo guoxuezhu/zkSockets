@@ -135,23 +135,22 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 58, "开始直播", "", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "停止直播", "", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 5001, "大屏一体机开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5002, "大屏一体机关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5003, "大屏一体机内置显示", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5004, "大屏一体机外置HDMI", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5001, "一体机开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5002, "一体机关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5003, "一体机内置显示", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5004, "一体机外置HDMI", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5005, "大屏1", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5006, "大屏2", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5007, "大屏3", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5008, "大屏4", "", ""));
 
-            mLsListsDao.insert(new MLsLists((long) 5005, "电视机1", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5006, "电视机2", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5007, "电视机3", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5008, "电视机4", "", ""));
 
-
-            mLsListsDao.insert(new MLsLists((long) 60, "新风开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 61, "新风关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 33, "新风-自动", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 34, "新风-低速", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 35, "新风-中速", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 36, "新风-高速", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6001, "新风开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6002, "新风关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6003, "新风-自动", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6004, "新风-低速", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6005, "新风-中速", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 6006, "新风-高速", "", ""));
 
 
             mLsListsDao.insert(new MLsLists((long) 37, "电源-全开", "", ""));
@@ -343,6 +342,18 @@ public class EventActivity extends BaseActivity {
     @OnClick(R.id.button_event_yp)
     public void button_event_yp() {
         startActivity(new Intent(this, YinpinEventActivity.class));
+        finish();
+    }
+
+    @OnClick(R.id.button_event_power)
+    public void button_event_power() {
+        startActivity(new Intent(this, PowerEventActivity.class));
+        finish();
+    }
+
+    @OnClick(R.id.button_event_xinfeng)
+    public void button_event_xinfeng() {
+        startActivity(new Intent(this, XinfengEventActivity.class));
         finish();
     }
 

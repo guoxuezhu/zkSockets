@@ -100,10 +100,15 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <View
+                <Button
+                    android:id="@+id/button_event_power"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="电源时序器绑定"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
@@ -144,11 +149,15 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <View
+                <Button
+                    android:id="@+id/button_event_xinfeng"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:visibility="visible" />
+                    android:background="@mipmap/btn_img_1"
+                    android:text="新风设备绑定"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
 
 
             </LinearLayout>
