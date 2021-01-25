@@ -194,6 +194,7 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 58, "开始直播", "", ""));
             mLsListsDao.insert(new MLsLists((long) 59, "停止直播", "", ""));
 
+
             mLsListsDao.insert(new MLsLists((long) 5001, "一体机开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5002, "一体机关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5003, "一体机内置显示", "", ""));
@@ -202,6 +203,10 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 5006, "大屏2", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5007, "大屏3", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5008, "大屏4", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5091, "大屏内置显示", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5092, "大屏外置HDMI", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5101, "一体机(老师)信号输出", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5102, "其它信号输出", "", ""));
 
 
             mLsListsDao.insert(new MLsLists((long) 6001, "新风开", "", ""));
@@ -222,8 +227,6 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
         }
-
-
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
 
