@@ -945,6 +945,11 @@ public class SerialPortUtil {
             }
             byte[] data = StringToBytes(msg);
             sendMsg(data);
+            if (str.substring(4, 5).equals("1")) {
+                makeML(Long.valueOf("5101"));
+            } else {
+                makeML(Long.valueOf("5102"));
+            }
         }
     }
 
