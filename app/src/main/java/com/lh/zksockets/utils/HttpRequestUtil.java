@@ -1,9 +1,10 @@
 package com.lh.zksockets.utils;
 
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
-import com.koushikdutta.async.http.body.AsyncHttpRequestBody;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
@@ -447,7 +448,6 @@ public class HttpRequestUtil {
 
     public static String zksendmsg(Multimap parms) {
         String msg = parms.getString("zkbtn");
-//        String msg = request.getQuery().getString("zkbtn");
         ELog.i("========http======zkbtn======msg========" + msg);
         if (msg.length() > 3) {
             try {
@@ -551,17 +551,15 @@ public class HttpRequestUtil {
                     md5Password = Coder.hashMD5(queryString.getBytes("utf8"));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "-1001";
                 }
                 if (parms.getString("user_password").equals(md5Password)) {
                     user.setLogin_count(3);
                     usersDao.update(user);
                     String tokenString = user.username + "&" + System.currentTimeMillis() + "&" + user.userPaw;
                     try {
-                        return Coder.hashMD5(tokenString.getBytes("utf8"));
+                        return gson.toJson(new HttpResult("200", "登录成功", true, Coder.hashMD5(tokenString.getBytes("utf8"))));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        return "-1001";
                     }
                 } else {
                     int count = user.login_count - 1;
@@ -569,24 +567,24 @@ public class HttpRequestUtil {
                         user.setUser_status(0);
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return "-1004";
+                        return gson.toJson(new HttpResult("-1004", "此帐号已锁定", false, null));
                     } else if (count == 1) {
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return "-1005";
+                        return gson.toJson(new HttpResult("-1005", "密码错误,1次后此帐号锁定", false, null));
                     } else if (count == 2) {
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return "-1006";
+                        return gson.toJson(new HttpResult("-1006", "密码错误,2次后此帐号锁定", false, null));
                     }
                 }
             } else {
-                return "-1004";
+                return gson.toJson(new HttpResult("-1004", "此帐号已锁定", false, null));
             }
         } else {
-            return "-1002";
+            return gson.toJson(new HttpResult("-1002", "帐号错误", false, null));
         }
-        return "-1001";
+        return gson.toJson(new HttpResult("-1001", "数据异常", false, null));
     }
 
     public static String getUserLists(Multimap parms) {
