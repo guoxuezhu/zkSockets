@@ -167,6 +167,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 65, "教室灯关", "", ""));
             mLsListsDao.insert(new MLsLists((long) 66, "场景开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 67, "场景关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 68, "插座开(全开)", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 69, "插座关(全关)", "", ""));
         }
 
     }

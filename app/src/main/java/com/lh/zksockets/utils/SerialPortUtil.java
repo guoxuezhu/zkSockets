@@ -669,7 +669,7 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             try {
-                UDPUtil.makeWangguan(id);
+                TcpWgSendMsgUtil.makeTcpWangguan(id);
                 if (id == 1) {
                     closeXiakeTimer();
                     sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());

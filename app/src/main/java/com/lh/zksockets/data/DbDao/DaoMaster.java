@@ -37,6 +37,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SerialPortDataDao.createTable(db, ifNotExists);
         UsersDao.createTable(db, ifNotExists);
         WenShiDuDao.createTable(db, ifNotExists);
+        WgDeviceInfoDao.createTable(db, ifNotExists);
         ZkInfoDao.createTable(db, ifNotExists);
     }
 
@@ -58,6 +59,7 @@ public class DaoMaster extends AbstractDaoMaster {
         SerialPortDataDao.dropTable(db, ifExists);
         UsersDao.dropTable(db, ifExists);
         WenShiDuDao.dropTable(db, ifExists);
+        WgDeviceInfoDao.dropTable(db, ifExists);
         ZkInfoDao.dropTable(db, ifExists);
     }
 
@@ -93,6 +95,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(SerialPortDataDao.class);
         registerDaoClass(UsersDao.class);
         registerDaoClass(WenShiDuDao.class);
+        registerDaoClass(WgDeviceInfoDao.class);
         registerDaoClass(ZkInfoDao.class);
     }
 
