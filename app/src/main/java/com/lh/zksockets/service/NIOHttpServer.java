@@ -136,6 +136,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getUserLists(parms));
                 } else if (request.getPath().equals("/api/wgkzqInfo")) {
                     response.send(HttpRequestUtil.getWgkzqInfo(parms));
+                } else if (request.getPath().equals("/api/ipconnect")) {
+                    response.send(new Gson().toJson(new HttpResult("200", "连接成功", true, null)));
                 } else {
                     response.send(new Gson().toJson(new HttpResult("-201", "api不存在", false, null)));
                 }
