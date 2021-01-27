@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
 
 import com.lh.zksockets.MyApplication;
@@ -190,29 +191,13 @@ public class MyMqttService extends Service {
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {
             ELog.i("===========mqtt====收到消息========" + message.toString());
-            String msg = message.toString();
-            if (msg.length() > 3) {
-                if (msg.substring(0, 3).equals("VID")) {
-                    SerialPortUtil.sendShipinType(msg);
-                } else if (msg.substring(0, 3).equals("FWS")) {
-                    SerialPortUtil.sendFWstatus(msg);
-                } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
-                    SerialPortUtil.sendKJban(msg);
-                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
-                    SerialPortUtil.makemenjin(msg);
-                } else if (msg.substring(0, 3).equals("LUB")) {
-                    HttpUtil.setlubo(msg);
-                } else if (msg.substring(0, 3).equals("JZF")) {
-                    SerialPortUtil.sendShipinFenping(msg);
-                } else if (msg.substring(0, 3).equals("MBS")) {
-                    try {
-                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
-                    } catch (Exception e) {
-                        ELog.i("=========mqtt===接收到了数据====Long.valueOf==异常========" + e.toString());
-                    }
+            try {
+                if (message.toString().length() > 3) {
+                    SerialPortUtil.skMakeReadMsg(message.toString());
                 }
+            } catch (Exception e) {
+                ELog.i("======串口1===接收数据===run======" + e.toString());
             }
-
         }
 
         @Override

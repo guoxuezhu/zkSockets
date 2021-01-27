@@ -49,9 +49,9 @@ import static java.lang.Thread.sleep;
 public class SerialPortUtil {
 
 
-    private static SerialPort serialPort1, serialPort2;
-    private static InputStream inputStream1, inputStream2;
-    private static OutputStream outputStream1, outputStream2;
+    private static SerialPort serialPort1, serialPort2, serialPort3;
+    private static InputStream inputStream1, inputStream2, inputStream3;
+    private static OutputStream outputStream1, outputStream2, outputStream3;
     private static Timer xiakeTimer;
     private static Handler readCradHandler;
 
@@ -60,12 +60,16 @@ public class SerialPortUtil {
         try {
             serialPort1 = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
             serialPort2 = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
+            serialPort3 = new SerialPort(new File("/dev/ttyS3"), 9600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
             inputStream1 = serialPort1.getInputStream();
             outputStream1 = serialPort1.getOutputStream();
 
             inputStream2 = serialPort2.getInputStream();
             outputStream2 = serialPort2.getOutputStream();
+
+            inputStream3 = serialPort3.getInputStream();
+            outputStream3 = serialPort3.getOutputStream();
             return true;
         } catch (Exception e) {
             ELog.e("======open_ck=====打开串口异常");
@@ -107,14 +111,14 @@ public class SerialPortUtil {
                                     bslength = bslength + size;
                                     makeData(new String(buffer1, 0, bslength));
                                 } catch (Exception e) {
-                                    ELog.i("========run====System.arraycopy====" + e.toString());
+                                    ELog.e("=====串口2===run====System.arraycopy====" + e.toString());
                                 }
                             }
                         }
                     }
 
                 } catch (IOException e) {
-                    ELog.i("=========run: 数据读取异常========" + e.toString());
+                    ELog.e("=======串口2==run: 数据读取异常========" + e.toString());
                 }
 
 
@@ -292,17 +296,17 @@ public class SerialPortUtil {
 
     }
 
-    public static void sendMsg1(byte[] data) {
+    private static void sendMsg1(byte[] data) {
         try {
             synchronized (data) {
                 if (data.length > 0) {
                     outputStream1.write(data);
                     outputStream1.flush();
-                    ELog.e("=====sendMsg1=========串口数据发送成功");
+                    ELog.i("=====sendMsg1=========串口数据发送成功");
                 }
             }
         } catch (IOException e) {
-            ELog.e("====sendSerialPort: 串口数据发送失败：" + e.toString());
+            ELog.e("====sendMsg1===串口数据发送失败：" + e.toString());
         }
     }
 
@@ -398,11 +402,11 @@ public class SerialPortUtil {
                     if (data.length > 0) {
                         outputStream2.write(data);
                         outputStream2.flush();
-                        ELog.e("============串口===给单片机=======串口数据发送成功==================");
+                        ELog.i("============串口2===给单片机=======串口数据发送成功==================");
                     }
                 }
             } catch (IOException e) {
-                ELog.e("============串口====给单片机=======串口数据发送失败==================" + e.toString());
+                ELog.e("============串口2====给单片机=======串口数据发送失败==================" + e.toString());
             }
         }
     }
@@ -420,47 +424,135 @@ public class SerialPortUtil {
                 try {
                     while (true && (size = inputStream1.read(buffer, 0, 1024)) > 0) {
                         if (size > 0) {
-                            String msg = new String(buffer, 0, size);
-                            ELog.i("=========串口1===接收到了数据=======" + msg);
                             try {
+                                String msg = new String(buffer, 0, size);
+                                ELog.i("=========串口1===接收到了数据=======" + msg);
                                 if (msg.length() > 3) {
-                                    if (msg.substring(0, 3).equals("VID")) {
-                                        sendShipinType(msg);
-                                    } else if (msg.substring(0, 3).equals("FWS")) {//复位
-                                        sendFWstatus(msg);
-                                    } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
-                                        sendCardLog(msg);
-                                    } else if (msg.substring(0, 3).equals("MJD")) {//门禁
-                                        makemenjin(msg);
-                                    } else if (msg.substring(0, 3).equals("LUB")) {
-                                        HttpUtil.setlubo(msg);
-                                    } else if (msg.substring(0, 3).equals("JZF")) {
-                                        sendShipinFenping(msg);
-                                    } else if (msg.substring(0, 3).equals("USE")) {
-                                        loginMsg(msg);
-                                    } else if (msg.substring(0, 3).equals("ICK")) {
-                                        shuaka(msg);
-                                    } else if (msg.substring(0, 3).equals("MBS")) {
-                                        try {
-                                            makeML(Long.valueOf(msg.substring(3)));
-                                        } catch (Exception e) {
-                                            ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
-                                        }
-                                    }
+                                    skMakeReadMsg(msg);
                                 }
                             } catch (Exception e) {
-                                ELog.i("======串口1===接收数据===run======" + e.toString());
+                                ELog.e("======串口1===接收数据===Exception======" + e.toString());
                             }
                         }
                     }
 
                 } catch (IOException e) {
-                    ELog.i("=========run: 数据读取异常========" + e.toString());
+                    ELog.e("=======串口1==run: 数据读取异常========" + e.toString());
                 }
             }
         }.start();
 
     }
+
+    public static void skMakeReadMsg(String msg) {
+        if (msg.substring(0, 3).equals("VID")) {
+            sendShipinType(msg);
+        } else if (msg.substring(0, 3).equals("FWS")) {//复位
+            sendFWstatus(msg);
+        } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
+            sendCardLog(msg);
+        } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+            makemenjin(msg);
+        } else if (msg.substring(0, 3).equals("LUB")) {
+            HttpUtil.setlubo(msg);
+        } else if (msg.substring(0, 3).equals("JZF")) {
+            sendShipinFenping(msg);
+        } else if (msg.substring(0, 3).equals("USE")) {
+            loginMsg(msg);
+        } else if (msg.substring(0, 3).equals("ICK")) {
+            shuaka(msg);
+        } else if (msg.substring(0, 3).equals("MIC")) {
+            yinpin(msg);
+        } else if (msg.substring(0, 3).equals("MBS")) {
+            try {
+                makeML(Long.valueOf(msg.substring(3)));
+            } catch (Exception e) {
+                ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
+            }
+        }
+    }
+
+    private static void yinpin(String str) {
+        synchronized (str) {
+            String msg = "";
+            String hexstr = Integer.toHexString(Integer.valueOf(str.substring(4)));
+            if (hexstr.length() == 1) {
+                hexstr = "0" + hexstr;
+            }
+            ELog.i("=========yinpin====hexstr========" + hexstr);
+            if (str.substring(0, 4).equals("MICA")) {
+                if (str.substring(4).equals("JY")) {
+                    msg = "BB0153DD";
+                } else {
+                    msg = "BB01" + hexstr + "DD";
+                }
+            } else if (str.substring(0, 4).equals("MICB")) {
+                if (str.substring(4).equals("JY")) {
+                    msg = "BB0253DD";
+                } else {
+                    msg = "BB02" + hexstr + "DD";
+                }
+            } else if (str.substring(0, 4).equals("MICC")) {
+                if (str.substring(4).equals("JY")) {
+                    msg = "BB0353DD";
+                } else {
+                    msg = "BB03" + hexstr + "DD";
+                }
+            }
+            byte[] data = StringToBytes(msg);
+            sendMsg3(data);
+        }
+    }
+
+    private static void sendMsg3(byte[] data) {
+        try {
+            synchronized (data) {
+                if (data.length > 0) {
+                    outputStream3.write(data);
+                    outputStream3.flush();
+                    ELog.i("=====串口3=========数据发送成功");
+                }
+            }
+        } catch (IOException e) {
+            ELog.e("====串口3===数据发送失败：" + e.toString());
+        }
+    }
+
+    public static void readMsg3() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                byte[] buffer = new byte[1024];
+                int size; //读取数据的大小
+                try {
+                    while (true && (size = inputStream3.read(buffer, 0, 1024)) > 0) {
+                        if (size > 0) {
+                            try {
+                                String msg = new String(buffer, 0, size);
+                                ELog.i("=========串口3===接收到了数据=======" + msg);
+                                String ret = "";
+                                for (int j = 0; j < size; j++) {
+                                    String hex = Integer.toHexString(buffer[j] & 0xFF);
+                                    if (hex.length() == 1) {
+                                        hex = '0' + hex;
+                                    }
+                                    ret += hex.toUpperCase();
+                                }
+                                ELog.i("======串口3===接收到了数据====hex=======" + ret);
+                            } catch (Exception e) {
+                                ELog.e("======串口3===接收数据===Exception======" + e.toString());
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    ELog.e("========串口3=run: 数据读取异常========" + e.toString());
+                }
+            }
+        }.start();
+
+    }
+
 
     private static void loginMsg(String msg) {
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
@@ -636,7 +728,7 @@ public class SerialPortUtil {
         });
     }
 
-    public static void makemenjin(String msg) {
+    private static void makemenjin(String msg) {
         DoorInfoDao doorInfoDao = MyApplication.getDaoSession().getDoorInfoDao();
         if (doorInfoDao.loadAll().size() != 0 && doorInfoDao.loadAll().get(0).isStart == 1) {
             DoorUtil.opendoor(doorInfoDao.loadAll().get(0).IP);
@@ -935,7 +1027,7 @@ public class SerialPortUtil {
 
     }
 
-    public static void sendShipinType(String str) {
+    private static void sendShipinType(String str) {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
@@ -953,7 +1045,7 @@ public class SerialPortUtil {
         }
     }
 
-    public static void sendShipinFenping(String str) {
+    private static void sendShipinFenping(String str) {
         synchronized (str) {
             String msg = "";
             if (str.substring(0, 5).equals("JZFGB")) {
@@ -1006,7 +1098,7 @@ public class SerialPortUtil {
     }
 
 
-    public static void sendFWstatus(String str) {
+    private static void sendFWstatus(String str) {
         synchronized (str) {
             if (str.equals("FWS0")) {
                 sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
