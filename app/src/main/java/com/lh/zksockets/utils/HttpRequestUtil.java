@@ -449,36 +449,48 @@ public class HttpRequestUtil {
     public static String zksendmsg(Multimap parms) {
         String msg = parms.getString("zkbtn");
         ELog.i("========http======zkbtn======msg========" + msg);
-        if (msg.length() > 3) {
-            try {
-                if (msg.substring(0, 3).equals("VID")) {
-                    SerialPortUtil.sendShipinType(msg);
-                } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
-                    SerialPortUtil.sendKJban(msg);
-                } else if (msg.substring(0, 3).equals("MJD")) {//门禁
-                    SerialPortUtil.makemenjin(msg);
-                } else if (msg.substring(0, 3).equals("FWS")) {
-                    SerialPortUtil.sendFWstatus(msg);
-                } else if (msg.substring(0, 3).equals("LUB")) {
-                    HttpUtil.setlubo(msg);
-                } else if (msg.substring(0, 3).equals("JZF")) {
-                    SerialPortUtil.sendShipinFenping(msg);
-                } else if (msg.substring(0, 3).equals("MBS")) {
+        UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
+        List<Users> users = usersDao.queryBuilder()
+                .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
+                .list();
+        if (users.size() != 0) {
+            Users user = users.get(0);
+            if (user.user_status == 1) {
+                if (msg.length() > 3) {
                     try {
-                        SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+                        if (msg.substring(0, 3).equals("VID")) {
+                            SerialPortUtil.sendShipinType(msg);
+                        } else if (msg.substring(0, 3).equals("SKJ")) {//远程无卡开机
+                            SerialPortUtil.sendKJban(msg);
+                        } else if (msg.substring(0, 3).equals("MJD")) {//门禁
+                            SerialPortUtil.makemenjin(msg);
+                        } else if (msg.substring(0, 3).equals("FWS")) {
+                            SerialPortUtil.sendFWstatus(msg);
+                        } else if (msg.substring(0, 3).equals("LUB")) {
+                            HttpUtil.setlubo(msg);
+                        } else if (msg.substring(0, 3).equals("JZF")) {
+                            SerialPortUtil.sendShipinFenping(msg);
+                        } else if (msg.substring(0, 3).equals("MBS")) {
+                            try {
+                                SerialPortUtil.makeML(Long.valueOf(msg.substring(3)));
+                            } catch (Exception e) {
+                                ELog.i("============Long.valueOf==异常========" + e.toString());
+                                return gson.toJson(new HttpResult("-101", "命令格式错误", false, null));
+                            }
+                        }
                     } catch (Exception e) {
-                        ELog.i("============Long.valueOf==异常========" + e.toString());
-                        return gson.toJson(new HttpResult("-101", "命令格式错误", false, null));
+                        return gson.toJson(new HttpResult("-101", "Exception", false, null));
                     }
+                    return gson.toJson(new HttpResult("200", "", true, null));
+                } else {
+                    return gson.toJson(new HttpResult("-200", "命令格式错误", false, null));
                 }
-            } catch (Exception e) {
-                return gson.toJson(new HttpResult("-101", "Exception", false, null));
+            } else {
+                return gson.toJson(new HttpResult("-200", "请重新连接", false, null));
             }
-            return gson.toJson(new HttpResult("200", "", true, null));
         } else {
-            return gson.toJson(new HttpResult("-200", "命令格式错误", false, null));
+            return gson.toJson(new HttpResult("-200", "请重新连接", false, null));
         }
-
     }
 
     public static String getRebootTime(Multimap parms) {
