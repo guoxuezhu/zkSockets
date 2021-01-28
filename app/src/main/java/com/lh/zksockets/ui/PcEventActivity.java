@@ -117,10 +117,10 @@ public class PcEventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 5006, "大屏2", event_et_5006.getText().toString(), event_tv_time_5006.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5007, "大屏3", event_et_5007.getText().toString(), event_tv_time_5007.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 5008, "大屏4", event_et_5008.getText().toString(), event_tv_time_5008.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5091, "大屏内置显示", event_et_5091.getText().toString(), event_tv_time_5091.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5092, "大屏外置HDMI", event_et_5092.getText().toString(), event_tv_time_5092.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5101, "一体机(老师)信号输出", event_et_5101.getText().toString(), event_tv_time_5101.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5102, "其它信号输出", event_et_5102.getText().toString(), event_tv_time_5102.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5091, "老师大屏一体机信号输出", event_et_5091.getText().toString(), event_tv_time_5091.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5092, "其它设备信号输出", event_et_5092.getText().toString(), event_tv_time_5092.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5101, "HDMI信号输出", event_et_5101.getText().toString(), event_tv_time_5101.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5102, "OPS信号输出", event_et_5102.getText().toString(), event_tv_time_5102.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

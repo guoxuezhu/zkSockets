@@ -682,7 +682,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="大屏内置显示"
+                        android:text="老师大屏一体机信号输出"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -750,7 +750,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="大屏外置HDMI"
+                        android:text="其它设备信号输出"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -818,7 +818,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="一体机(老师)信号输出"
+                        android:text="HDMI信号输出"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -886,7 +886,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="其它信号输出"
+                        android:text="OPS信号输出"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 

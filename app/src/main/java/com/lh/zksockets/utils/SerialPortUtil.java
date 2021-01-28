@@ -937,18 +937,15 @@ public class SerialPortUtil {
 
     public static void sendShipinType(String str) {
         synchronized (str) {
-            String msg = "";
             if (str.substring(0, 4).equals("VIDA")) {
-                msg = "BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80";
+                sendMsg(StringToBytes("BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80"));
             } else if (str.substring(0, 4).equals("VIDC")) {
-                msg = "BB050" + str.substring(4) + "80";
+                sendMsg(StringToBytes("BB050" + str.substring(4) + "80"));
             }
-            byte[] data = StringToBytes(msg);
-            sendMsg(data);
             if (str.substring(4, 5).equals("1")) {
-                makeML(Long.valueOf("5101"));
+                makeML(Long.valueOf("5091"));
             } else {
-                makeML(Long.valueOf("5102"));
+                makeML(Long.valueOf("5092"));
             }
         }
     }
