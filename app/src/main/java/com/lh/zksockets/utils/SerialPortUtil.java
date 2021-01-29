@@ -475,27 +475,24 @@ public class SerialPortUtil {
     private static void yinpin(String str) {
         synchronized (str) {
             String msg = "";
-            String hexstr = Integer.toHexString(Integer.valueOf(str.substring(4)));
-            if (hexstr.length() == 1) {
-                hexstr = "0" + hexstr;
-            }
-            ELog.i("=========yinpin====hexstr========" + hexstr);
-            if (str.substring(0, 4).equals("MICA")) {
-                if (str.substring(4).equals("JY")) {
-                    msg = "BB0153DD";
-                } else {
+            if (str.substring(4).equals("JY")) {
+                if (str.substring(0, 4).equals("MICA")) {
+                    msg = "BB0154DD";
+                } else if (str.substring(0, 4).equals("MICB")) {
+                    msg = "BB0254DD";
+                } else if (str.substring(0, 4).equals("MICC")) {
+                    msg = "BB0354DD";
+                }
+            } else {
+                String hexstr = Integer.toHexString(Integer.valueOf(str.substring(4)));
+                if (hexstr.length() == 1) {
+                    hexstr = "0" + hexstr;
+                }
+                if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB01" + hexstr + "DD";
-                }
-            } else if (str.substring(0, 4).equals("MICB")) {
-                if (str.substring(4).equals("JY")) {
-                    msg = "BB0253DD";
-                } else {
+                } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB02" + hexstr + "DD";
-                }
-            } else if (str.substring(0, 4).equals("MICC")) {
-                if (str.substring(4).equals("JY")) {
-                    msg = "BB0353DD";
-                } else {
+                } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB03" + hexstr + "DD";
                 }
             }

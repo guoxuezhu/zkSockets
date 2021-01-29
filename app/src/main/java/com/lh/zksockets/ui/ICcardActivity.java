@@ -205,24 +205,21 @@ public class ICcardActivity extends BaseActivity implements AddCardDialog.Dialog
 
     @Override
     public void addCradInfo(String workNumber, int icType, String teacherName, String department, String cardNum, IcCard icCard) {
-        if (icCard == null) {
-            if (icCardDao.loadAll().size() != 0) {
-                List<IcCard> icCards = icCardDao.queryBuilder()
-                        .where(IcCardDao.Properties.Card_no.eq(cardNum))
-                        .orderAsc(IcCardDao.Properties.CardNumId)
-                        .list();
-                if (icCards.size() != 0) {
-                    Toast.makeText(this, "卡号已经存在", Toast.LENGTH_SHORT).show();
-                } else {
-                    icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
-                    closeDialog();
-                }
+        if (icCardDao.loadAll().size() != 0) {
+            List<IcCard> icCards = icCardDao.queryBuilder()
+                    .where(IcCardDao.Properties.Card_no.eq(cardNum))
+                    .orderAsc(IcCardDao.Properties.CardNumId)
+                    .list();
+            if (icCards.size() != 0) {
+                Toast.makeText(this, "卡号已经存在", Toast.LENGTH_SHORT).show();
             } else {
+                if (icCard != null) {
+                    icCardDao.deleteByKey(icCard.cardNumId);
+                }
                 icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
                 closeDialog();
             }
         } else {
-            icCardDao.deleteByKey(icCard.cardNumId);
             icCardDao.insert(new IcCard(workNumber, teacherName, cardNum, Long.parseLong(cardNum), 1, DateUtil.getNow(), "on"));
             closeDialog();
         }
