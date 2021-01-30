@@ -204,11 +204,10 @@ public class HttpRequestUtil {
             mLsListsDao.insert(new MLsLists((long) 5006, "大屏2", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5007, "大屏3", "", ""));
             mLsListsDao.insert(new MLsLists((long) 5008, "大屏4", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5091, "大屏内置显示", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5092, "大屏外置HDMI", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5101, "一体机(老师)信号输出", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 5102, "其它信号输出", "", ""));
-
+            mLsListsDao.insert(new MLsLists((long) 5091, "老师大屏一体机信号输出", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5092, "其它设备信号输出", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5101, "HDMI信号输出", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 5102, "OPS信号输出", "", ""));
 
             mLsListsDao.insert(new MLsLists((long) 6001, "新风开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 6002, "新风关", "", ""));
