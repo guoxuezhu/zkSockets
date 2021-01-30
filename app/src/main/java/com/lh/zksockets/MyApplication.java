@@ -1,7 +1,6 @@
 package com.lh.zksockets;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
 
@@ -15,18 +14,20 @@ public class MyApplication extends Application {
 
     public static SharePreferenceUtil prefs;
     public static DaoSession daoSession;
-    public static Context context;
     public static int geendaoVersion;
-    // http://lihong.h09.66571.com/    http://192.168.0.100/
-//    public static final String BASEURL = "http://192.168.0.100/";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = this;
+        try {
+            initDatas();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void initDatas() {
         prefs = new SharePreferenceUtil(this, "zkcSaveDates");
-
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lhzks.db", null);
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
         daoSession = daoMaster.newSession();
