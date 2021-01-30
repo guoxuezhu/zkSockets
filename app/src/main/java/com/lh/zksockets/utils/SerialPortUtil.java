@@ -12,6 +12,7 @@ import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.DbDao.MicDatasDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
@@ -19,6 +20,7 @@ import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
+import com.lh.zksockets.data.model.MicDatas;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
@@ -461,6 +463,8 @@ public class SerialPortUtil {
             loginMsg(msg);
         } else if (msg.substring(0, 3).equals("ICK")) {
             shuaka(msg);
+        } else if (msg.substring(0, 3).equals("VOL")) {
+            getYinliang();
         } else if (msg.substring(0, 3).equals("MIC")) {
             yinpin(msg);
         } else if (msg.substring(0, 3).equals("MBS")) {
@@ -472,16 +476,36 @@ public class SerialPortUtil {
         }
     }
 
+    private static void getYinliang() {
+        MicDatasDao micDatasDao = MyApplication.getDaoSession().getMicDatasDao();
+        if (micDatasDao.loadAll().size() == 0) {
+            micDatasDao.insert(new MicDatas("22", 1, "22", 1, "22", 1));
+        }
+        MicDatas micdata = micDatasDao.loadAll().get(0);
+        String micMsg = "MICA" + micdata.mic_a + micdata.mic_a_status + ";MICB" + micdata.mic_b + micdata.mic_b_status + ";MICC" + micdata.mic_c + micdata.mic_c_status;
+        ELog.i("=======getYinliang===micMsg====" + micMsg);
+        sendMsg1(micMsg.getBytes());
+    }
+
     private static void yinpin(String str) {
         synchronized (str) {
+            MicDatasDao micDatasDao = MyApplication.getDaoSession().getMicDatasDao();
+            if (micDatasDao.loadAll().size() == 0) {
+                micDatasDao.insert(new MicDatas("22", 1, "22", 1, "22", 1));
+            }
+            ELog.i("=======yinpin===str====" + str);
             String msg = "";
+            MicDatas micdata = micDatasDao.loadAll().get(0);
             if (str.substring(4).equals("JY")) {
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB0154DD";
+                    micdata.setMic_a_status(0);
                 } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB0254DD";
+                    micdata.setMic_b_status(0);
                 } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB0354DD";
+                    micdata.setMic_c_status(0);
                 }
             } else {
                 String hexstr = Integer.toHexString(Integer.valueOf(str.substring(4)));
@@ -490,14 +514,20 @@ public class SerialPortUtil {
                 }
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB01" + hexstr + "DD";
+                    micdata.setMic_a(str.substring(4));
                 } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB02" + hexstr + "DD";
+                    micdata.setMic_b(str.substring(4));
                 } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB03" + hexstr + "DD";
+                    micdata.setMic_c(str.substring(4));
                 }
             }
             byte[] data = StringToBytes(msg);
             sendMsg3(data);
+            micDatasDao.deleteAll();
+            micDatasDao.insert(micdata);
+            ELog.i("=======yinpin=======" + micDatasDao.loadAll().toString());
         }
     }
 
