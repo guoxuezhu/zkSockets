@@ -515,19 +515,22 @@ public class SerialPortUtil {
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB01" + hexstr + "DD";
                     micdata.setMic_a(str.substring(4));
+                    micdata.setMic_a_status(1);
                 } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB02" + hexstr + "DD";
                     micdata.setMic_b(str.substring(4));
+                    micdata.setMic_b_status(1);
                 } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB03" + hexstr + "DD";
                     micdata.setMic_c(str.substring(4));
+                    micdata.setMic_c_status(1);
                 }
             }
             byte[] data = StringToBytes(msg);
             sendMsg3(data);
             micDatasDao.deleteAll();
             micDatasDao.insert(micdata);
-            ELog.i("=======yinpin=======" + micDatasDao.loadAll().toString());
+            ELog.i("=======yinpin===micDatasDao====" + micDatasDao.loadAll().toString());
         }
     }
 
