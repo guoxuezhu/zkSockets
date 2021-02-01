@@ -56,7 +56,7 @@ public class TcpSocketUtil {
                                                 .where(WgDeviceInfoDao.Properties.Name.eq(deviceJson.getString("name")))
                                                 .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
                                                 .list();
-                                        if (deviceJson.getString("name").contains("调光灯")) {
+                                        if (deviceJson.getString("name").contains("L")) {//调光灯
                                             //{"id":"588e81fffed9a398","port":11,"agreement":49246,"attribute":{"on":true,"bri":59,"ctp":500,"sat":0,"hue":0},"online":true,"deviceid":66,"name":"调光灯a398"}
                                             if (wgDeviceInfos.size() == 0) {
                                                 wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"), deviceJson.getString("id"),
@@ -71,7 +71,7 @@ public class TcpSocketUtil {
                                                         new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
                                                         0, 0, 0, 0, 0, 0, 0));
                                             }
-                                        } else if (deviceJson.getString("name").contains("窗帘")) {
+                                        } else if (deviceJson.getString("name").contains("M")) {//窗帘
                                             if (wgDeviceInfos.size() == 0) {
                                                 wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
                                                         deviceJson.getString("id"), deviceJson.getString("name"),
@@ -85,77 +85,113 @@ public class TcpSocketUtil {
                                                         new JSONObject(deviceJson.getString("attribute")).getInt("pt"),
                                                         0, 0, 0, 0, 0, 0, 0));
                                             }
-                                        } else if (deviceJson.getString("name").contains("智能插座")) {
+                                        } else if (deviceJson.getString("name").contains("K")) {//智能插座
                                             if (wgDeviceInfos.size() == 0) {
-                                                wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getBoolean("on"),
-                                                        "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                try {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("current"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("voltage"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("energy"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("power"),
+                                                            0, 0, 0));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getBoolean("on"),
+                                                            "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                }
                                             } else {
-                                                wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getBoolean("on"),
-                                                        "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                try {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("current"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("voltage"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("energy"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("power"),
+                                                            0, 0, 0));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getBoolean("on"),
+                                                            "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                }
                                             }
-                                        } else if (deviceJson.getString("name").contains("智能计量插座")) {
+                                        } else if (deviceJson.getString("name").contains("T")) {//多合一传感器
                                             if (wgDeviceInfos.size() == 0) {
-                                                wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("current"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("voltage"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("energy"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("power"),
-                                                        0, 0, 0));
+                                                try {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("pm2.5")));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            0));
+                                                }
                                             } else {
-                                                wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
-                                                        0, 0, new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("current"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("voltage"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("energy"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("power"),
-                                                        0, 0, 0));
+                                                try {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getInt("pm2.5")));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            0));
+                                                }
                                             }
-                                        } else if (deviceJson.getString("name").contains("多合一传感器")) {
+                                        } else if (deviceJson.getString("name").contains("S")) {
                                             if (wgDeviceInfos.size() == 0) {
-                                                wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
-                                                        0, 0, false, "", 0, 0, 0, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("pm2.5")));
+                                                try {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            0));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                }
                                             } else {
-                                                wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
-                                                        0, 0, false, "", 0, 0, 0, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getInt("pm2.5")));
-                                            }
-                                        } else if (deviceJson.getString("name").contains("温湿度传感器") || deviceJson.getString("name").contains("控制面板温湿度")) {
-                                            if (wgDeviceInfos.size() == 0) {
-                                                wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
-                                                        0, 0, false, "", 0, 0, 0, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
-                                                        0));
-                                            } else {
-                                                wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
-                                                        deviceJson.getString("id"), deviceJson.getString("name"),
-                                                        deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
-                                                        0, 0, false, "", 0, 0, 0, 0, 0,
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
-                                                        new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
-                                                        0));
+                                                try {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0,
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mtemp"),
+                                                            new JSONObject(deviceJson.getString("attribute")).getDouble("mhumi"),
+                                                            0));
+                                                } catch (Exception e) {
+                                                    wgDeviceInfoDao.update(new WgDeviceInfo(wgDeviceInfos.get(0).longId, deviceJson.getInt("deviceid"),
+                                                            deviceJson.getString("id"), deviceJson.getString("name"),
+                                                            deviceJson.getInt("port"), deviceJson.getInt("agreement"), 12004,
+                                                            0, 0, false, "", 0, 0, 0, 0, 0, 0, 0, 0));
+                                                }
                                             }
                                         } else if (deviceJson.getString("name").contains("遥控器")) {
 
