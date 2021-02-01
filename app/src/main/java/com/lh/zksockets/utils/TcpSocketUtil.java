@@ -29,6 +29,7 @@ public class TcpSocketUtil {
                 super.run();
                 try {
                     WgDeviceInfoDao wgDeviceInfoDao = MyApplication.getDaoSession().getWgDeviceInfoDao();
+                    wgDeviceInfoDao.deleteAll();
                     if (serverSocket == null) {
                         serverSocket = new ServerSocket(12136);
                     }
