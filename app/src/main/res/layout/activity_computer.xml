@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/computer_btn_back"
+            android:id="@+id/ktset_btn_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="温湿度传感器"
+            android:text="空调设置"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
@@ -51,16 +51,17 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="温度:"
+                    android:text="制冷温度:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_ws_wen"
+                    android:id="@+id/et_leng_wen"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="22"
                     android:textColor="@color/black"
@@ -80,18 +81,20 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="湿度:"
+                    android:text="制冷指令ID:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_ws_shi"
+                    android:id="@+id/et_leng_ml"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789,"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="77%"
+                    android:text="39,42,44"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
@@ -109,18 +112,20 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="串口协议:"
+                    android:text="制冷开始时间:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_ws_ml"
+                    android:id="@+id/et_leng_time_start"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789:"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text=""
+                    android:text="07:00:00"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
@@ -138,30 +143,201 @@
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="读取间隔(分):"
+                    android:text="制冷结束时间:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
                 <EditText
-                    android:id="@+id/et_ws_time"
+                    android:id="@+id/et_leng_time_end"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789:"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="18:00:00"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="制热温度:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_re_wen"
                     android:layout_width="@dimen/dp_400"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text=""
+                    android:text="5"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="制热指令ID:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_re_ml"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789,"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="39,43,44"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="制热开始时间:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_re_time_start"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789:"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="08:00:00"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="制热结束时间:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+                <EditText
+                    android:id="@+id/et_re_time_end"
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:digits="0123456789:"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="18:00:00"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="是否启用:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_20" />
+
+
+                <RadioGroup
+                    android:layout_width="@dimen/dp_400"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_table_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbtn_ktset_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="启用"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <RadioButton
+                        android:id="@+id/rbtn_ktset_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_50"
+                        android:text="禁用"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
             <Button
-                android:id="@+id/btn_computer_ok"
+                android:id="@+id/btn_ktset_ok"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_100"
                 android:background="@drawable/btn_bg"
                 android:text="保存"
                 android:textColor="@color/white"

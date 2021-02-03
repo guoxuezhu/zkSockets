@@ -291,14 +291,14 @@ public class SerialPortUtil {
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
 
-                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%" + ";" + "0" + "ug/m3";
-                sendMsg1(wsd.getBytes());
+//                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%" + ";" + "0" + "ug/m3";
+//                sendMsg1(wsd.getBytes());
             }
         }
 
     }
 
-    private static void sendMsg1(byte[] data) {
+    public static void sendMsg1(byte[] data) {
         try {
             synchronized (data) {
                 if (data.length > 0) {
@@ -833,7 +833,7 @@ public class SerialPortUtil {
         }
     }
 
-    private static void getEventId(String strMls) {
+    public static void getEventId(String strMls) {
         if (strMls.length() != 0) {
             String[] mls = strMls.split(",");
             for (int i = 0; i < mls.length; i++) {

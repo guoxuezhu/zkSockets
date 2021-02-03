@@ -1,13 +1,12 @@
 package com.lh.zksockets.utils;
 
 import android.os.Environment;
+import android.os.StatFs;
 import android.util.Log;
 
 import com.lh.zksockets.BuildConfig;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 打印log日志
@@ -51,6 +50,19 @@ public class ELog {
             Log.d("mylog", "=========收集日志循环已完全启动!!!");
         } catch (Exception e) {
             Log.e("mylog", "=======logcat Exception====== >" + e.getMessage(), e);
+        }
+    }
+
+    private static void readSDCard() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            File sdcardDir = Environment.getExternalStorageDirectory();
+            StatFs sf = new StatFs(sdcardDir.getPath());
+            long blockSize = sf.getBlockSize();
+            long blockCount = sf.getBlockCount();
+            long availCount = sf.getAvailableBlocks();
+            Log.d("", "block大小:" + blockSize + ",block数目:" + blockCount + ",总大小:" + blockSize * blockCount / 1024 + "KB");
+            Log.d("", "可用的block数目：:" + availCount + ",剩余空间:" + availCount * blockSize / 1024 + "KB");
         }
     }
 }

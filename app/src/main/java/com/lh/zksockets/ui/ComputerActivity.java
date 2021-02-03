@@ -3,13 +3,13 @@ package com.lh.zksockets.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.DbDao.WenShiDuDao;
-import com.lh.zksockets.data.model.WenShiDu;
-import com.lh.zksockets.utils.TimerUtils;
+import com.lh.zksockets.data.DbDao.KongTiaoDataDao;
+import com.lh.zksockets.data.model.KongTiaoData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,15 +17,30 @@ import butterknife.OnClick;
 
 public class ComputerActivity extends BaseActivity {
 
-    @BindView(R.id.et_ws_wen)
-    EditText et_ws_wen;
-    @BindView(R.id.et_ws_shi)
-    EditText et_ws_shi;
-    @BindView(R.id.et_ws_ml)
-    EditText et_ws_ml;
-    @BindView(R.id.et_ws_time)
-    EditText et_ws_time;
-    private WenShiDuDao wenShiDuDao;
+
+    @BindView(R.id.et_leng_wen)
+    EditText et_leng_wen;
+    @BindView(R.id.et_leng_time_start)
+    EditText et_leng_time_start;
+    @BindView(R.id.et_leng_time_end)
+    EditText et_leng_time_end;
+    @BindView(R.id.et_leng_ml)
+    EditText et_leng_ml;
+    @BindView(R.id.et_re_wen)
+    EditText et_re_wen;
+    @BindView(R.id.et_re_time_start)
+    EditText et_re_time_start;
+    @BindView(R.id.et_re_time_end)
+    EditText et_re_time_end;
+    @BindView(R.id.et_re_ml)
+    EditText et_re_ml;
+
+    @BindView(R.id.rbtn_ktset_ok)
+    RadioButton rbtn_ktset_ok;
+    @BindView(R.id.rbtn_ktset_no)
+    RadioButton rbtn_ktset_no;
+
+    private KongTiaoDataDao kongTiaoDataDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +48,10 @@ public class ComputerActivity extends BaseActivity {
         setContentView(R.layout.activity_computer);
         ButterKnife.bind(this);
 
-        wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+        kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
 
-        if (wenShiDuDao.loadAll().size() == 0) {
-            wenShiDuDao.insert(new WenShiDu("", "", "", "", "", "", "", 1, ""));
+        if (kongTiaoDataDao.loadAll().size() == 0) {
+            kongTiaoDataDao.insert(new KongTiaoData("", "", "", "", "", "", "", "1", 0));
         }
 
         initView();
@@ -44,24 +59,36 @@ public class ComputerActivity extends BaseActivity {
     }
 
     private void initView() {
-        et_ws_wen.setText(wenShiDuDao.loadAll().get(0).wenStr);
-        et_ws_shi.setText(wenShiDuDao.loadAll().get(0).shiStr);
-        et_ws_time.setText(wenShiDuDao.loadAll().get(0).timeStr + "");
-        et_ws_ml.setText(wenShiDuDao.loadAll().get(0).serialportML);
+        et_leng_wen.setText(kongTiaoDataDao.loadAll().get(0).wenstr_leng);
+        et_leng_time_start.setText(kongTiaoDataDao.loadAll().get(0).leng_timeStart);
+        et_leng_time_end.setText(kongTiaoDataDao.loadAll().get(0).leng_timeEnd);
+        et_leng_ml.setText(kongTiaoDataDao.loadAll().get(0).leng_ml);
+
+        et_re_wen.setText(kongTiaoDataDao.loadAll().get(0).wenstr_re);
+        et_re_time_start.setText(kongTiaoDataDao.loadAll().get(0).re_timeStart);
+        et_re_time_end.setText(kongTiaoDataDao.loadAll().get(0).re_timeEnd);
+        et_re_ml.setText(kongTiaoDataDao.loadAll().get(0).re_ml);
+
+        if (kongTiaoDataDao.loadAll().get(0).kt_status == 1) {
+            rbtn_ktset_ok.setChecked(true);
+        } else {
+            rbtn_ktset_no.setChecked(true);
+        }
+
     }
 
-    @OnClick(R.id.btn_computer_ok)
-    public void btn_computer_ok() {
-        wenShiDuDao.deleteAll();
-        wenShiDuDao.insert(new WenShiDu("", "", "", "", et_ws_wen.getText().toString(),
-                et_ws_shi.getText().toString(), "", Integer.valueOf(et_ws_time.getText().toString()), et_ws_ml.getText().toString()));
-
+    @OnClick(R.id.btn_ktset_ok)
+    public void btn_ktset_ok() {
+        kongTiaoDataDao.deleteAll();
+        kongTiaoDataDao.insert(new KongTiaoData(et_re_wen.getText().toString().trim(), et_re_time_start.getText().toString().trim(),
+                et_re_time_end.getText().toString().trim(), et_re_ml.getText().toString().trim(), et_leng_wen.getText().toString().trim(),
+                et_leng_time_start.getText().toString().trim(), et_leng_time_end.getText().toString().trim(), et_leng_ml.getText().toString().trim(), 0));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
 //        TimerUtils.setWenshiduTimer();
     }
 
-    @OnClick(R.id.computer_btn_back)
-    public void computer_btn_back() {
+    @OnClick(R.id.ktset_btn_back)
+    public void ktset_btn_back() {
         back();
     }
 

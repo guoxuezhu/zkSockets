@@ -2,6 +2,7 @@ package com.lh.zksockets.utils;
 
 
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.KongTiaoDataDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -463,8 +464,9 @@ public class TimerUtils {
                     WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
                     if (wenShiDuDao.loadAll().size() != 0) {
                         WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
-//                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-//                        SerialPortUtil.sendMsg1(wsd.getBytes());
+                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+                        SerialPortUtil.sendMsg1(wsd.getBytes());
+                        kongtiaoWendu(wenShiDu);
                         if (wsdCount >= 60) {
                             SerialPortUtil.wsdSendLog(wenShiDu);
                             wsdCount = 0;
@@ -476,6 +478,32 @@ public class TimerUtils {
                 SerialPortUtil.doSerialPort("1-401");
             }
         }, 12000, 1 * 60 * 1000);
+    }
+
+    private static void kongtiaoWendu(WenShiDu wenShiDu) {
+        KongTiaoDataDao kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
+        if (kongTiaoDataDao.loadAll().size() == 0) {
+            return;
+        }
+        if (kongTiaoDataDao.loadAll().get(0).kt_status == 0) {
+            return;
+        }
+        if (wenShiDu.wenStr.equals("") || wenShiDu.wenStr.isEmpty()) {
+            return;
+        }
+        int wenInt = Integer.valueOf(wenShiDu.wenStr.split(".")[0]);
+        if (wenInt >= Integer.valueOf(kongTiaoDataDao.loadAll().get(0).wenstr_leng)) {
+            if (DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).leng_timeStart)
+                    && !DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).leng_timeEnd)) {
+                SerialPortUtil.getEventId(kongTiaoDataDao.loadAll().get(0).leng_ml);
+            }
+        }
+        if (wenInt <= Integer.valueOf(kongTiaoDataDao.loadAll().get(0).wenstr_re)) {
+            if (DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).re_timeStart)
+                    && !DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).re_timeEnd)) {
+                SerialPortUtil.getEventId(kongTiaoDataDao.loadAll().get(0).re_ml);
+            }
+        }
     }
 
 

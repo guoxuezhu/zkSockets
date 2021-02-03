@@ -81,4 +81,19 @@ public class DateUtil {
         return timecha;
     }
 
+    public static boolean compareDate(long currentTimeMillis, String DATE2) {
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos2 = new ParsePosition(0);
+        Date dt2 = df.parse(DATE2, pos2);
+        long time2 = dt2.getTime();
+
+        long timecha = currentTimeMillis - time2;
+
+        if (timecha > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
