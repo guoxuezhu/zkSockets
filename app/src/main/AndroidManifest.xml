@@ -21,8 +21,11 @@
         android:theme="@style/Theme.Zksockets"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.XinfengEventActivity"
+            android:name=".ui.MbanActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ui.XinfengEventActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.PowerEventActivity"
             android:windowSoftInputMode="stateHidden" />

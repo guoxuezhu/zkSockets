@@ -95,6 +95,15 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
+                <Button
+                    android:id="@+id/btn_ui_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="操作面板设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
             </LinearLayout>
 
             <LinearLayout

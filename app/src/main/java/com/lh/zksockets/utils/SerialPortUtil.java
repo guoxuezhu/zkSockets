@@ -14,6 +14,7 @@ import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.MicDatasDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
@@ -465,6 +466,8 @@ public class SerialPortUtil {
             shuaka(msg);
         } else if (msg.substring(0, 3).equals("VOL")) {
             getYinliang();
+        } else if (msg.substring(0, 3).equals("UIS")) {
+            mbuiset(msg);
         } else if (msg.substring(0, 3).equals("MIC")) {
             yinpin(msg);
         } else if (msg.substring(0, 3).equals("MBS")) {
@@ -473,6 +476,23 @@ public class SerialPortUtil {
             } catch (Exception e) {
                 ELog.i("=========串口1===接收到了数据====Long.valueOf==异常========" + e.toString());
             }
+        }
+    }
+
+    private static void mbuiset(String msg) {
+        UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
+        if (uIsetDataDao.loadAll().size() != 0) {
+            String uiMsg = "UIS;" + uIsetDataDao.loadAll().get(0).btn_1_status
+                    + uIsetDataDao.loadAll().get(0).btn_2_status
+                    + uIsetDataDao.loadAll().get(0).btn_3_status
+                    + uIsetDataDao.loadAll().get(0).btn_4_status
+                    + uIsetDataDao.loadAll().get(0).btn_5_status
+                    + uIsetDataDao.loadAll().get(0).btn_6_status
+                    + uIsetDataDao.loadAll().get(0).btn_7_status
+                    + uIsetDataDao.loadAll().get(0).btn_8_status
+                    + uIsetDataDao.loadAll().get(0).btn_9_status;
+            ELog.i("=======mbuiset======uiMsg====" + uiMsg);
+            sendMsg1(uiMsg.getBytes());
         }
     }
 

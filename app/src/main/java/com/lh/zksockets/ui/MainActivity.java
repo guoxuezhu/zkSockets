@@ -33,6 +33,12 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.btn_ui_set)
+    public void btn_ui_set() {
+        startActivity(new Intent(this, MbanActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.base_info_btn)
     public void base_info_btn() {
         startActivity(new Intent(this, BaseSetingActivity.class));
