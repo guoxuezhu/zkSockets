@@ -51,9 +51,9 @@ public class ComputerActivity extends BaseActivity {
         kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
 
         if (kongTiaoDataDao.loadAll().size() == 0) {
-            kongTiaoDataDao.insert(new KongTiaoData("", "", "", "", "", "", "", "1", 0));
+            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,43",
+                    "26", "07:00:00", "19:00:00", "39,42", 0));
         }
-
         initView();
 
     }
@@ -80,9 +80,15 @@ public class ComputerActivity extends BaseActivity {
     @OnClick(R.id.btn_ktset_ok)
     public void btn_ktset_ok() {
         kongTiaoDataDao.deleteAll();
-        kongTiaoDataDao.insert(new KongTiaoData(et_re_wen.getText().toString().trim(), et_re_time_start.getText().toString().trim(),
-                et_re_time_end.getText().toString().trim(), et_re_ml.getText().toString().trim(), et_leng_wen.getText().toString().trim(),
-                et_leng_time_start.getText().toString().trim(), et_leng_time_end.getText().toString().trim(), et_leng_ml.getText().toString().trim(), 0));
+        if (rbtn_ktset_ok.isChecked()) {
+            kongTiaoDataDao.insert(new KongTiaoData(et_re_wen.getText().toString().trim(), et_re_time_start.getText().toString().trim(),
+                    et_re_time_end.getText().toString().trim(), et_re_ml.getText().toString().trim(), et_leng_wen.getText().toString().trim(),
+                    et_leng_time_start.getText().toString().trim(), et_leng_time_end.getText().toString().trim(), et_leng_ml.getText().toString().trim(), 1));
+        } else {
+            kongTiaoDataDao.insert(new KongTiaoData(et_re_wen.getText().toString().trim(), et_re_time_start.getText().toString().trim(),
+                    et_re_time_end.getText().toString().trim(), et_re_ml.getText().toString().trim(), et_leng_wen.getText().toString().trim(),
+                    et_leng_time_start.getText().toString().trim(), et_leng_time_end.getText().toString().trim(), et_leng_ml.getText().toString().trim(), 0));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
 //        TimerUtils.setWenshiduTimer();
     }

@@ -517,7 +517,7 @@ public class TimerUtils {
             @Override
             public void run() {
                 SerialPortUtil.makeML((long) 45);
-//                setWenshiduTimer();
+                setWenshiduTimer();
                 ELog.getMyLogcat();
                 if (KaijiTimer != null) {
                     KaijiTimer.cancel();

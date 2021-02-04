@@ -30,6 +30,12 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.kongtiao_seting)
+    public void kongtiao_seting() {
+        startActivity(new Intent(this, ComputerActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.door_seting)
     public void door_seting() {
         startActivity(new Intent(this, DoorSetingActivity.class));
