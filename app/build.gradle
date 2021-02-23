@@ -37,14 +37,12 @@ android {
             minifyEnabled true
             shrinkResources true
             buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'false'
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
 
         debug {
             buildConfigField 'boolean', 'JAVA_LOG_ENABLED', 'true'
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

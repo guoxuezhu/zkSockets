@@ -466,9 +466,11 @@ public class TimerUtils {
                         WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
                         String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
                         SerialPortUtil.sendMsg1(wsd.getBytes());
-                        kongtiaoWendu(wenShiDu);
-                        if (wsdCount >= 60) {
+                        if (wsdCount == 1) {
+                            kongtiaoWendu(wenShiDu);
                             SerialPortUtil.wsdSendLog(wenShiDu);
+                        }
+                        if (wsdCount >= 30) {
                             wsdCount = 0;
                         }
                     }
@@ -491,7 +493,7 @@ public class TimerUtils {
         if (wenShiDu.wenStr.equals("") || wenShiDu.wenStr.isEmpty()) {
             return;
         }
-        int wenInt = Integer.valueOf(wenShiDu.wenStr.split(".")[0]);
+        int wenInt = Integer.valueOf(wenShiDu.wenStr.split("\\.")[0]);
         if (wenInt >= Integer.valueOf(kongTiaoDataDao.loadAll().get(0).wenstr_leng)) {
             if (DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).leng_timeStart)
                     && !DateUtil.compareDate(System.currentTimeMillis(), DateUtil.getTimeyyyyMMdd() + " " + kongTiaoDataDao.loadAll().get(0).leng_timeEnd)) {
