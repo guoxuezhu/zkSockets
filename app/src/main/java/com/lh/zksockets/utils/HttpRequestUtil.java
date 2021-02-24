@@ -110,23 +110,23 @@ public class HttpRequestUtil {
 
     public static String getDangerInfo(Multimap parms) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
-        }
+//        if (ioYuanDao.loadAll().size() == 0) {
+//            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
+//            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
+//            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "", 0, "", ""));
+//            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
+//        }
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
     public static String updataDangerInfo(Multimap parms) {
-        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
-        }.getType());
-        for (int i = 0; i < dangerIoYuans.size(); i++) {
-            ioYuanDao.update(dangerIoYuans.get(i));
-        }
-        return gson.toJson(new HttpResult("200", "", true, null));
+//        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
+//        List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
+//        }.getType());
+//        for (int i = 0; i < dangerIoYuans.size(); i++) {
+//            ioYuanDao.update(dangerIoYuans.get(i));
+//        }
+        return gson.toJson(new HttpResult("-200", "", false, null));
     }
 
     public static String getEventList(Multimap parms) {
@@ -264,10 +264,10 @@ public class HttpRequestUtil {
     public static String getJDQList(Multimap parms) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "", 1, 180));
@@ -341,44 +341,44 @@ public class HttpRequestUtil {
 
     public static String getIoOutinfo(Multimap parms) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        if (ioPortDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
-            }
-        }
+//        if (ioPortDataDao.loadAll().size() == 0) {
+//            for (int i = 1; i < 5; i++) {
+//                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
+//            }
+//        }
         return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
     }
 
     public static String updataIoOutInfo(Multimap parms) {
-        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
-        }.getType());
-        ELog.i("==============1==333====" + ioPortDatas.toString());
-        for (int i = 0; i < ioPortDatas.size(); i++) {
-            ioPortDataDao.update(ioPortDatas.get(i));
-        }
-        return gson.toJson(new HttpResult("200", "", true, null));
+//        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
+//        List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
+//        }.getType());
+//        ELog.i("==============1==333====" + ioPortDatas.toString());
+//        for (int i = 0; i < ioPortDatas.size(); i++) {
+//            ioPortDataDao.update(ioPortDatas.get(i));
+//        }
+        return gson.toJson(new HttpResult("-200", "", false, null));
     }
 
     public static String getDangerOutInfo(Multimap parms) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        if (dangerOutDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
-            }
-        }
+//        if (dangerOutDao.loadAll().size() == 0) {
+//            for (int i = 1; i < 5; i++) {
+//                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
+//            }
+//        }
         return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));
     }
 
     public static String updataDangerOutInfo(Multimap parms) {
-        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
-        }.getType());
-        ELog.i("=============1==333====" + dangerOuts.toString());
-        for (int i = 0; i < dangerOuts.size(); i++) {
-            dangerOutDao.update(dangerOuts.get(i));
-        }
-        return gson.toJson(new HttpResult("200", "", true, null));
+//        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+//        List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
+//        }.getType());
+//        ELog.i("=============1==333====" + dangerOuts.toString());
+//        for (int i = 0; i < dangerOuts.size(); i++) {
+//            dangerOutDao.update(dangerOuts.get(i));
+//        }
+        return gson.toJson(new HttpResult("-200", "", false, null));
     }
 
     public static String getWSD(Multimap parms) {

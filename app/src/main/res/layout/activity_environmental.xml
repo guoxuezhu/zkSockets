@@ -47,7 +47,7 @@
 
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="名称"
@@ -56,50 +56,58 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器1"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器2"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器3"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器4"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
@@ -107,7 +115,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器5"
@@ -119,7 +127,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器6"
@@ -131,7 +139,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器7"
@@ -143,7 +151,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="继电器8"
@@ -162,7 +170,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="绑定的设备"
@@ -172,7 +180,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_devicename_1"
@@ -181,12 +190,14 @@
                 android:background="@null"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_devicename_2"
@@ -195,12 +206,14 @@
                 android:background="@null"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_devicename_3"
@@ -209,12 +222,14 @@
                 android:background="@null"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_devicename_4"
@@ -223,7 +238,8 @@
                 android:background="@null"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
@@ -232,7 +248,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_devicename_5"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -246,7 +262,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_devicename_6"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -260,7 +276,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_devicename_7"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -274,7 +290,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_devicename_8"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center"
@@ -295,7 +311,7 @@
 
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="初始状态"
@@ -305,13 +321,15 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Switch
                     android:id="@+id/jdq_1_gl"
@@ -327,14 +345,16 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
 
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Switch
                     android:id="@+id/jdq_2_gl"
@@ -350,14 +370,16 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
 
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Switch
                     android:id="@+id/jdq_3_gl"
@@ -373,14 +395,16 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
 
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Switch
                     android:id="@+id/jdq_4_gl"
@@ -398,7 +422,7 @@
                 android:background="#878C91" />
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -421,7 +445,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -443,7 +467,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -465,7 +489,7 @@
 
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -493,7 +517,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="时间(秒)"
@@ -503,7 +527,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_time_1"
@@ -514,12 +539,14 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:text="10"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_time_2"
@@ -530,12 +557,14 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:text="10"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_time_3"
@@ -546,12 +575,14 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:text="10"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/jdq_et_time_4"
@@ -562,7 +593,8 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:text="10"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
@@ -571,7 +603,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_time_5"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:digits="0123456789-"
@@ -587,7 +619,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_time_6"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:digits="0123456789-"
@@ -603,7 +635,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_time_7"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:digits="0123456789-"
@@ -619,7 +651,7 @@
 
             <EditText
                 android:id="@+id/jdq_et_time_8"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:digits="0123456789-"
@@ -641,7 +673,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="指令(开)"
@@ -650,50 +682,58 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-1-0"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-2-0"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-3-0"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-4-0"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
@@ -701,7 +741,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-5-0"
@@ -713,7 +753,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-6-0"
@@ -725,7 +765,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-7-0"
@@ -737,7 +777,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-8-0"
@@ -756,7 +796,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="110dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="指令(关)"
@@ -765,50 +805,58 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-1-1"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-2-1"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-3-1"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#878C91" />
+                android:background="#878C91"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-4-1"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_20"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="1dp"
@@ -816,7 +864,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-5-1"
@@ -828,7 +876,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-6-1"
@@ -840,7 +888,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-7-1"
@@ -852,7 +900,7 @@
                 android:background="#878C91" />
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="2-8-1"
