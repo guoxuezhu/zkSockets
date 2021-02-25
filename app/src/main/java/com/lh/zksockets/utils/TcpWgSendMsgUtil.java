@@ -6,6 +6,8 @@ import com.lh.zksockets.data.model.WgDeviceInfo;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class TcpWgSendMsgUtil {
 
     public static void makeTcpWangguan(Long id) {
@@ -108,37 +110,42 @@ public class TcpWgSendMsgUtil {
                 }
             }
         } else if (id == 13) {
-            List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
-                    .where(WgDeviceInfoDao.Properties.Name.like("%L%"))
-                    .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
-                    .list();
-            //{"code":1002,"id":"588e81fffed9a398","port":11,"agreement":49246,"deviceid":66,"serial":12004,"control":{"control":1,"poweronctm":100}}
-            if (wgDeviceInfos.size() != 0) {
-                for (int i = 0; i < wgDeviceInfos.size(); i++) {
-                    msg = "{\"code\":1002,\"id\":\"" + wgDeviceInfos.get(i).stringId
-                            + "\",\"port\":" + wgDeviceInfos.get(i).port
-                            + ",\"agreement\":" + wgDeviceInfos.get(i).agreement
-                            + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
-                            + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
-                    TcpSocketUtil.sendData(msg);
-                }
-            }
+//            List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
+//                    .where(WgDeviceInfoDao.Properties.Name.like("%L%"))
+//                    .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
+//                    .list();
+//            //{"code":1002,"id":"ffffffffffffffff","port":11,"agreement":49246,"deviceid":66,"serial":12004,"control":{"control":0,"poweronctm":0}}
+//            //{"code":1002,"id":"588e81fffed9a398","port":11,"agreement":49246,"deviceid":66,"serial":12004,"control":{"control":1,"poweronctm":100}}
+//            if (wgDeviceInfos.size() != 0) {
+//                for (int i = 0; i < wgDeviceInfos.size(); i++) {
+//                    msg = "{\"code\":1002,\"id\":\"" + wgDeviceInfos.get(i).stringId
+//                            + "\",\"port\":" + wgDeviceInfos.get(i).port
+//                            + ",\"agreement\":" + wgDeviceInfos.get(i).agreement
+//                            + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
+//                            + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
+//                    TcpSocketUtil.sendData(msg);
+//                }
+//            }
+            msg = "{\"code\":1002,\"id\":\"ffffffffffffffff\",\"port\":11,\"agreement\":49246,\"deviceid\":66,\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
+            TcpSocketUtil.sendData(msg);
         } else if (id == 14) {
-            List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
-                    .where(WgDeviceInfoDao.Properties.Name.like("%L%"))
-                    .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
-                    .list();
-            //{"code":1002,"id":"588e81fffed9a398","port":11,"agreement":49246,"deviceid":66,"serial":12004,"control":{"control":0,"poweronctm":0}}
-            if (wgDeviceInfos.size() != 0) {
-                for (int i = 0; i < wgDeviceInfos.size(); i++) {
-                    msg = "{\"code\":1002,\"id\":\"" + wgDeviceInfos.get(i).stringId
-                            + "\",\"port\":" + wgDeviceInfos.get(i).port
-                            + ",\"agreement\":" + wgDeviceInfos.get(i).agreement
-                            + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
-                            + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
-                    TcpSocketUtil.sendData(msg);
-                }
-            }
+//            List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
+//                    .where(WgDeviceInfoDao.Properties.Name.like("%L%"))
+//                    .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
+//                    .list();
+//            //{"code":1002,"id":"588e81fffed9a398","port":11,"agreement":49246,"deviceid":66,"serial":12004,"control":{"control":0,"poweronctm":0}}
+//            if (wgDeviceInfos.size() != 0) {
+//                for (int i = 0; i < wgDeviceInfos.size(); i++) {
+//                    msg = "{\"code\":1002,\"id\":\"" + wgDeviceInfos.get(i).stringId
+//                            + "\",\"port\":" + wgDeviceInfos.get(i).port
+//                            + ",\"agreement\":" + wgDeviceInfos.get(i).agreement
+//                            + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
+//                            + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
+//                    TcpSocketUtil.sendData(msg);
+//                }
+//            }
+            msg = "{\"code\":1002,\"id\":\"ffffffffffffffff\",\"port\":11,\"agreement\":49246,\"deviceid\":66,\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
+            TcpSocketUtil.sendData(msg);
         } else if (id == 62) {
             List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
                     .where(WgDeviceInfoDao.Properties.Name.like("L1"))
@@ -152,6 +159,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 63) {
@@ -167,6 +179,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 64) {
@@ -182,6 +199,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 65) {
@@ -197,6 +219,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 68) {

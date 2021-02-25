@@ -54,7 +54,7 @@ public class TcpSocketUtil {
                                     for (int i = 0; i < devices.length(); i++) {
                                         JSONObject deviceJson = new JSONObject(devices.getString(i));
                                         List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
-                                                .where(WgDeviceInfoDao.Properties.Name.eq(deviceJson.getString("name")))
+                                                .where(WgDeviceInfoDao.Properties.Name.eq(deviceJson.getString("name")), WgDeviceInfoDao.Properties.StringId.eq(deviceJson.getString("id")))
                                                 .orderAsc(WgDeviceInfoDao.Properties.Deviceid)
                                                 .list();
                                         if (deviceJson.getString("name").contains("L")) {//调光灯
