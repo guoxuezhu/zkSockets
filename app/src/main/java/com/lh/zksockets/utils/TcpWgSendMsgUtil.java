@@ -31,6 +31,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":0}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 4) {
@@ -47,6 +52,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":1}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 5) {
@@ -62,6 +72,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":0}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 6) {
@@ -77,6 +92,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":1}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 7) {
@@ -92,6 +112,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":0}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 8) {
@@ -107,6 +132,11 @@ public class TcpWgSendMsgUtil {
                             + ",\"deviceid\":" + wgDeviceInfos.get(i).deviceid
                             + ",\"serial\":12004,\"control\":{\"cts\":1}}";
                     TcpSocketUtil.sendData(msg);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else if (id == 13) {
@@ -160,7 +190,7 @@ public class TcpWgSendMsgUtil {
                             + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
                     TcpSocketUtil.sendData(msg);
                     try {
-                        sleep(1000);
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -180,7 +210,7 @@ public class TcpWgSendMsgUtil {
                             + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
                     TcpSocketUtil.sendData(msg);
                     try {
-                        sleep(1000);
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -200,7 +230,7 @@ public class TcpWgSendMsgUtil {
                             + ",\"serial\":12004,\"control\":{\"control\":1,\"poweronctm\":100}}";
                     TcpSocketUtil.sendData(msg);
                     try {
-                        sleep(1000);
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -220,7 +250,7 @@ public class TcpWgSendMsgUtil {
                             + ",\"serial\":12004,\"control\":{\"control\":0,\"poweronctm\":0}}";
                     TcpSocketUtil.sendData(msg);
                     try {
-                        sleep(1000);
+                        sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
