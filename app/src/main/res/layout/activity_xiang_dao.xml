@@ -145,8 +145,7 @@
                         android:padding="@dimen/dp_6"
                         android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_size_16" />
 
                     <TextView
                         android:id="@+id/tp_ck_6"
@@ -157,8 +156,7 @@
                         android:padding="@dimen/dp_6"
                         android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_size_16" />
 
                     <TextView
                         android:id="@+id/tp_ck_7"
@@ -169,8 +167,7 @@
                         android:padding="@dimen/dp_6"
                         android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_size_16" />
 
                     <TextView
                         android:id="@+id/tp_ck_8"
@@ -181,8 +178,7 @@
                         android:padding="@dimen/dp_6"
                         android:text="无设备"
                         android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_size_16" />
 
 
                 </LinearLayout>
