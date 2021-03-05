@@ -51,10 +51,10 @@ public class TcpSocketUtil {
                                 JSONArray devices = jsonObject.getJSONArray("devices");
                                 if (code == 101 && devices != null) {
                                     ELog.e("======TcpSocketUtil==心跳数据====" + devices);
-                                    String Lstatus1 = "0";
-                                    String Lstatus2 = "0";
-                                    String Mstatus1 = "0";
-                                    String Mstatus2 = "0";
+//                                    String Lstatus1 = "0";
+//                                    String Lstatus2 = "0";
+//                                    String Mstatus1 = "0";
+//                                    String Mstatus2 = "0";
                                     for (int i = 0; i < devices.length(); i++) {
                                         JSONObject deviceJson = new JSONObject(devices.getString(i));
                                         List<WgDeviceInfo> wgDeviceInfos = wgDeviceInfoDao.queryBuilder()
@@ -76,19 +76,19 @@ public class TcpSocketUtil {
                                                         new JSONObject(deviceJson.getString("attribute")).getBoolean("on"), "", 0,
                                                         0, 0, 0, 0, 0, 0, 0));
                                             }
-                                            if (deviceJson.getString("name").equals("L1")) {
-                                                if (new JSONObject(deviceJson.getString("attribute")).getBoolean("on")) {
-                                                    Lstatus1 = "1";
-                                                } else {
-                                                    Lstatus1 = "0";
-                                                }
-                                            } else {
-                                                if (new JSONObject(deviceJson.getString("attribute")).getBoolean("on")) {
-                                                    Lstatus2 = "1";
-                                                } else {
-                                                    Lstatus2 = "0";
-                                                }
-                                            }
+//                                            if (deviceJson.getString("name").equals("L1")) {
+//                                                if (new JSONObject(deviceJson.getString("attribute")).getBoolean("on")) {
+//                                                    Lstatus1 = "1";
+//                                                } else {
+//                                                    Lstatus1 = "0";
+//                                                }
+//                                            } else {
+//                                                if (new JSONObject(deviceJson.getString("attribute")).getBoolean("on")) {
+//                                                    Lstatus2 = "1";
+//                                                } else {
+//                                                    Lstatus2 = "0";
+//                                                }
+//                                            }
                                         } else if (deviceJson.getString("name").contains("M")) {//窗帘
                                             if (wgDeviceInfos.size() == 0) {
                                                 wgDeviceInfoDao.insert(new WgDeviceInfo(null, deviceJson.getInt("deviceid"),
@@ -103,19 +103,19 @@ public class TcpSocketUtil {
                                                         new JSONObject(deviceJson.getString("attribute")).getInt("pt"),
                                                         0, 0, 0, 0, 0, 0, 0));
                                             }
-                                            if (deviceJson.getString("name").equals("M1")) {
-                                                if (new JSONObject(deviceJson.getString("attribute")).getInt("pt") != 0) {
-                                                    Mstatus1 = "1";
-                                                } else {
-                                                    Mstatus1 = "0";
-                                                }
-                                            } else {
-                                                if (new JSONObject(deviceJson.getString("attribute")).getInt("pt") != 0) {
-                                                    Mstatus2 = "1";
-                                                } else {
-                                                    Mstatus2 = "0";
-                                                }
-                                            }
+//                                            if (deviceJson.getString("name").equals("M1")) {
+//                                                if (new JSONObject(deviceJson.getString("attribute")).getInt("pt") != 0) {
+//                                                    Mstatus1 = "1";
+//                                                } else {
+//                                                    Mstatus1 = "0";
+//                                                }
+//                                            } else {
+//                                                if (new JSONObject(deviceJson.getString("attribute")).getInt("pt") != 0) {
+//                                                    Mstatus2 = "1";
+//                                                } else {
+//                                                    Mstatus2 = "0";
+//                                                }
+//                                            }
                                         } else if (deviceJson.getString("name").contains("K")) {//智能插座
                                             if (wgDeviceInfos.size() == 0) {
                                                 try {
@@ -228,8 +228,8 @@ public class TcpSocketUtil {
 
                                         }
                                     }
-                                    String statusStr = "TST;" + Lstatus1 + ";" + Lstatus2 + ";" + Mstatus1 + ";" + Mstatus2 + "";
-                                    SerialPortUtil.sendMsg1(statusStr.getBytes());
+//                                    String statusStr = "TST;" + Lstatus1 + ";" + Lstatus2 + ";" + Mstatus1 + ";" + Mstatus2 + "";
+//                                    SerialPortUtil.sendMsg1(statusStr.getBytes());
                                 }
                             } else {
                                 isRead = false;
