@@ -40,7 +40,8 @@ public class YinpinEventActivity extends BaseActivity {
     EditText event_et_30;
     @BindView(R.id.event_et_31)
     EditText event_et_31;
-
+    @BindView(R.id.event_et_32)
+    EditText event_et_32;
 
     @BindView(R.id.event_tv_time_21)
     TextView event_tv_time_21;
@@ -64,6 +65,9 @@ public class YinpinEventActivity extends BaseActivity {
     TextView event_tv_time_30;
     @BindView(R.id.event_tv_time_31)
     TextView event_tv_time_31;
+    @BindView(R.id.event_tv_time_32)
+    TextView event_tv_time_32;
+
 
     private MLsListsDao mLsListsDao;
 
@@ -86,6 +90,7 @@ public class YinpinEventActivity extends BaseActivity {
         event_et_29.setText(mLsListsDao.load((long) 29).strMLs);
         event_et_30.setText(mLsListsDao.load((long) 30).strMLs);
         event_et_31.setText(mLsListsDao.load((long) 31).strMLs);
+        event_et_32.setText(mLsListsDao.load((long) 32).strMLs);
 
         event_tv_time_21.setText(mLsListsDao.load((long) 21).time);
         event_tv_time_22.setText(mLsListsDao.load((long) 22).time);
@@ -98,6 +103,7 @@ public class YinpinEventActivity extends BaseActivity {
         event_tv_time_29.setText(mLsListsDao.load((long) 29).time);
         event_tv_time_30.setText(mLsListsDao.load((long) 30).time);
         event_tv_time_31.setText(mLsListsDao.load((long) 31).time);
+        event_tv_time_32.setText(mLsListsDao.load((long) 32).time);
 
     }
 
@@ -114,7 +120,8 @@ public class YinpinEventActivity extends BaseActivity {
         mLsListsDao.update(new MLsLists((long) 28, "音量8级", event_et_28.getText().toString(), event_tv_time_28.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 29, "音量9级", event_et_29.getText().toString(), event_tv_time_29.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 30, "音量10", event_et_30.getText().toString(), event_tv_time_30.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 31, "静音", event_et_31.getText().toString(), event_tv_time_31.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 31, "静音开", event_et_31.getText().toString(), event_tv_time_31.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 32, "静音关", event_et_32.getText().toString(), event_tv_time_32.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

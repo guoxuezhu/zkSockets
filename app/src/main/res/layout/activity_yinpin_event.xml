@@ -820,7 +820,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="静音"
+                        android:text="静音开"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -846,6 +846,74 @@
 
                     <EditText
                         android:id="@+id/event_et_31"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@null"
+                        android:digits="0123456789-,"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="3-1-0"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#878C91" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="32"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="静音关"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <TextView
+                        android:id="@+id/event_tv_time_32"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="yyyy-MM-dd HH:mm:ss"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#878C91" />
+
+                    <EditText
+                        android:id="@+id/event_et_32"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"

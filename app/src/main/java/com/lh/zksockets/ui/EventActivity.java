@@ -111,8 +111,8 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 28, "音量8级", "", ""));
             mLsListsDao.insert(new MLsLists((long) 29, "音量9级", "", ""));
             mLsListsDao.insert(new MLsLists((long) 30, "音量10级", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 31, "静音", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 32, "音响静音", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 31, "静音开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 32, "静音关", "", ""));
 
 
             mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "", ""));
