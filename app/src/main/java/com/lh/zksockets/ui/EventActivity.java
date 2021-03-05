@@ -101,18 +101,18 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 20, "灯光3关", "", ""));
 
 
-            mLsListsDao.insert(new MLsLists((long) 21, "总音量+", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 22, "总音量-", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 23, "总音量静音开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 24, "总音量静音关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 25, "音响音量+", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 26, "音响音量-", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 27, "音响静音开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 28, "音响静音关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 29, "麦克风音量+", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 30, "麦克风音量-", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 31, "麦克风静音开", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 32, "麦克风静音关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 21, "音量1级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 22, "音量2级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 23, "音量3级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 24, "音量4级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 25, "音量5级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 26, "音量6级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 27, "音量7级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 28, "音量8级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 29, "音量9级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 30, "音量10级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 31, "静音", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 32, "音响静音", "", ""));
 
 
             mLsListsDao.insert(new MLsLists((long) 39, "空调-开", "", ""));

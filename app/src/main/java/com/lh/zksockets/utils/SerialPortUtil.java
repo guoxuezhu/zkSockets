@@ -440,6 +440,12 @@ public class SerialPortUtil {
                                         loginMsg(msg);
                                     } else if (msg.substring(0, 3).equals("ICK")) {
                                         shuaka(msg);
+                                    } else if (msg.substring(0, 3).equals("HWG")) {
+                                        try {
+                                            TcpWgSendMsgUtil.makeTcpWangguan(Long.valueOf(msg.substring(3)));
+                                        } catch (Exception e) {
+                                            ELog.i("=========串口1===makeTcpWangguan====Long.valueOf==异常========" + e.toString());
+                                        }
                                     } else if (msg.substring(0, 3).equals("MBS")) {
                                         try {
                                             makeML(Long.valueOf(msg.substring(3)));
