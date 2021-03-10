@@ -63,7 +63,7 @@ public class SerialPortUtil {
         try {
             serialPort1 = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
             serialPort2 = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
-            serialPort3 = new SerialPort(new File("/dev/ttyS3"), 9600, 0);
+//            serialPort3 = new SerialPort(new File("/dev/ttyS3"), 9600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
             inputStream1 = serialPort1.getInputStream();
             outputStream1 = serialPort1.getOutputStream();
@@ -71,8 +71,8 @@ public class SerialPortUtil {
             inputStream2 = serialPort2.getInputStream();
             outputStream2 = serialPort2.getOutputStream();
 
-            inputStream3 = serialPort3.getInputStream();
-            outputStream3 = serialPort3.getOutputStream();
+//            inputStream3 = serialPort3.getInputStream();
+//            outputStream3 = serialPort3.getOutputStream();
             return true;
         } catch (Exception e) {
             ELog.e("======open_ck=====打开串口异常");
@@ -465,11 +465,11 @@ public class SerialPortUtil {
         } else if (msg.substring(0, 3).equals("ICK")) {
             shuaka(msg);
         } else if (msg.substring(0, 3).equals("VOL")) {
-            getYinliang();
+//            getYinliang();
         } else if (msg.substring(0, 3).equals("UIS")) {
             mbuiset(msg);
         } else if (msg.substring(0, 3).equals("MIC")) {
-            yinpin(msg);
+//            yinpin(msg);
         } else if (msg.substring(0, 3).equals("MBS")) {
             try {
                 makeML(Long.valueOf(msg.substring(3)));
