@@ -447,10 +447,15 @@ public class HttpRequestUtil {
 
     public static String zksendmsg(Multimap parms) {
         String msg = parms.getString("zkbtn");
-        ELog.i("========http======zkbtn======msg========" + msg);
+        ELog.i("========http============zkbtn========" + msg);
+        String login_user_name = parms.getString("login_user_name");
+        if (login_user_name == null) {
+            return gson.toJson(new HttpResult("-200", "参数错误", false, null));
+        }
+        ELog.i("========http============login_user_name========" + login_user_name);
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         List<Users> users = usersDao.queryBuilder()
-                .where(UsersDao.Properties.Username.eq(parms.getString("login_user_name")))
+                .where(UsersDao.Properties.Username.eq(login_user_name))
                 .list();
         if (users.size() != 0) {
             Users user = users.get(0);
