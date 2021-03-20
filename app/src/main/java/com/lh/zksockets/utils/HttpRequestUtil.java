@@ -450,7 +450,7 @@ public class HttpRequestUtil {
         ELog.i("========http======zkbtn======msg========" + msg);
         UsersDao usersDao = MyApplication.getDaoSession().getUsersDao();
         List<Users> users = usersDao.queryBuilder()
-                .where(UsersDao.Properties.Username.eq(parms.getString("user_name")))
+                .where(UsersDao.Properties.Username.eq(parms.getString("login_user_name")))
                 .list();
         if (users.size() != 0) {
             Users user = users.get(0);
