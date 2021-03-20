@@ -17,31 +17,31 @@ import butterknife.OnClick;
 
 public class WangguanEventActivity extends BaseActivity {
 
-    @BindView(R.id.event_et_62)
-    EditText event_et_62;
-    @BindView(R.id.event_et_63)
-    EditText event_et_63;
-    @BindView(R.id.event_et_64)
-    EditText event_et_64;
-    @BindView(R.id.event_et_65)
-    EditText event_et_65;
-    @BindView(R.id.event_et_66)
-    EditText event_et_66;
-    @BindView(R.id.event_et_67)
-    EditText event_et_67;
+    @BindView(R.id.event_et_7001)
+    EditText event_et_7001;
+    @BindView(R.id.event_et_7002)
+    EditText event_et_7002;
+    @BindView(R.id.event_et_7003)
+    EditText event_et_7003;
+    @BindView(R.id.event_et_7004)
+    EditText event_et_7004;
+    @BindView(R.id.event_et_7005)
+    EditText event_et_7005;
+    @BindView(R.id.event_et_7006)
+    EditText event_et_7006;
 
-    @BindView(R.id.event_tv_time_62)
-    TextView event_tv_time_62;
-    @BindView(R.id.event_tv_time_63)
-    TextView event_tv_time_63;
-    @BindView(R.id.event_tv_time_64)
-    TextView event_tv_time_64;
-    @BindView(R.id.event_tv_time_65)
-    TextView event_tv_time_65;
-    @BindView(R.id.event_tv_time_66)
-    TextView event_tv_time_66;
-    @BindView(R.id.event_tv_time_67)
-    TextView event_tv_time_67;
+    @BindView(R.id.event_tv_time_7001)
+    TextView event_tv_time_7001;
+    @BindView(R.id.event_tv_time_7002)
+    TextView event_tv_time_7002;
+    @BindView(R.id.event_tv_time_7003)
+    TextView event_tv_time_7003;
+    @BindView(R.id.event_tv_time_7004)
+    TextView event_tv_time_7004;
+    @BindView(R.id.event_tv_time_7005)
+    TextView event_tv_time_7005;
+    @BindView(R.id.event_tv_time_7006)
+    TextView event_tv_time_7006;
 
     private MLsListsDao mLsListsDao;
 
@@ -53,30 +53,30 @@ public class WangguanEventActivity extends BaseActivity {
 
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
 
-        event_et_62.setText(mLsListsDao.load((long) 62).strMLs);
-        event_et_63.setText(mLsListsDao.load((long) 63).strMLs);
-        event_et_64.setText(mLsListsDao.load((long) 64).strMLs);
-        event_et_65.setText(mLsListsDao.load((long) 65).strMLs);
-        event_et_66.setText(mLsListsDao.load((long) 66).strMLs);
-        event_et_67.setText(mLsListsDao.load((long) 67).strMLs);
+        event_et_7001.setText(mLsListsDao.load((long) 7001).strMLs);
+        event_et_7002.setText(mLsListsDao.load((long) 7002).strMLs);
+        event_et_7003.setText(mLsListsDao.load((long) 7003).strMLs);
+        event_et_7004.setText(mLsListsDao.load((long) 7004).strMLs);
+        event_et_7005.setText(mLsListsDao.load((long) 7005).strMLs);
+        event_et_7006.setText(mLsListsDao.load((long) 7006).strMLs);
 
-        event_tv_time_62.setText(mLsListsDao.load((long) 62).time);
-        event_tv_time_63.setText(mLsListsDao.load((long) 63).time);
-        event_tv_time_64.setText(mLsListsDao.load((long) 64).time);
-        event_tv_time_65.setText(mLsListsDao.load((long) 65).time);
-        event_tv_time_66.setText(mLsListsDao.load((long) 66).time);
-        event_tv_time_67.setText(mLsListsDao.load((long) 67).time);
+        event_tv_time_7001.setText(mLsListsDao.load((long) 7001).time);
+        event_tv_time_7002.setText(mLsListsDao.load((long) 7002).time);
+        event_tv_time_7003.setText(mLsListsDao.load((long) 7003).time);
+        event_tv_time_7004.setText(mLsListsDao.load((long) 7004).time);
+        event_tv_time_7005.setText(mLsListsDao.load((long) 7005).time);
+        event_tv_time_7006.setText(mLsListsDao.load((long) 7006).time);
 
     }
 
     @OnClick(R.id.btn_event_wgkzq_ok)
     public void btn_event_wgkzq_ok() {
-        mLsListsDao.update(new MLsLists((long) 62, "黑板灯开", event_et_62.getText().toString(), event_tv_time_62.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 63, "黑板灯关", event_et_63.getText().toString(), event_tv_time_63.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 64, "教室灯开", event_et_64.getText().toString(), event_tv_time_64.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 65, "教室灯关", event_et_65.getText().toString(), event_tv_time_65.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 66, "场景开", event_et_66.getText().toString(), event_tv_time_66.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 67, "场景关", event_et_67.getText().toString(), event_tv_time_67.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7001, "自习模式", event_et_7001.getText().toString(), event_tv_time_7001.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7002, "投影模式", event_et_7002.getText().toString(), event_tv_time_7002.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7003, "课件模式", event_et_7003.getText().toString(), event_tv_time_7003.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7004, "自动模式", event_et_7004.getText().toString(), event_tv_time_7004.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7005, "模式1", event_et_7005.getText().toString(), event_tv_time_7005.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 7006, "模式2", event_et_7006.getText().toString(), event_tv_time_7006.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

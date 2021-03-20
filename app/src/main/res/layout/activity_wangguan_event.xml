@@ -125,7 +125,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="62"
+                        android:text="7001"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -149,7 +149,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_62"
+                        android:id="@+id/event_tv_time_7001"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -164,7 +164,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_62"
+                        android:id="@+id/event_et_7001"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -193,7 +193,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="63"
+                        android:text="7002"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -217,7 +217,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_63"
+                        android:id="@+id/event_tv_time_7002"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -232,7 +232,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_63"
+                        android:id="@+id/event_et_7002"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -261,7 +261,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="64"
+                        android:text="7003"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -285,7 +285,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_64"
+                        android:id="@+id/event_tv_time_7003"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -300,7 +300,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_64"
+                        android:id="@+id/event_et_7003"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -329,7 +329,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="65"
+                        android:text="7004"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -353,7 +353,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_65"
+                        android:id="@+id/event_tv_time_7004"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -368,7 +368,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_65"
+                        android:id="@+id/event_et_7004"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -397,7 +397,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="66"
+                        android:text="7005"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -421,7 +421,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_66"
+                        android:id="@+id/event_tv_time_7005"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -436,7 +436,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_66"
+                        android:id="@+id/event_et_7005"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -465,7 +465,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="67"
+                        android:text="7006"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_16" />
 
@@ -489,7 +489,7 @@
                         android:background="#878C91" />
 
                     <TextView
-                        android:id="@+id/event_tv_time_67"
+                        android:id="@+id/event_tv_time_7006"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -504,7 +504,7 @@
                         android:background="#878C91" />
 
                     <EditText
-                        android:id="@+id/event_et_67"
+                        android:id="@+id/event_et_7006"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"

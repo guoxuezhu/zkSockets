@@ -21,37 +21,52 @@ public class DengguangActivity extends BaseActivity {
     EditText event_et_13;
     @BindView(R.id.event_et_14)
     EditText event_et_14;
-    @BindView(R.id.event_et_15)
-    EditText event_et_15;
-    @BindView(R.id.event_et_16)
-    EditText event_et_16;
-    @BindView(R.id.event_et_17)
-    EditText event_et_17;
-    @BindView(R.id.event_et_18)
-    EditText event_et_18;
-    @BindView(R.id.event_et_19)
-    EditText event_et_19;
-    @BindView(R.id.event_et_20)
-    EditText event_et_20;
+    @BindView(R.id.event_et_3001)
+    EditText event_et_3001;
+    @BindView(R.id.event_et_3002)
+    EditText event_et_3002;
+    @BindView(R.id.event_et_3003)
+    EditText event_et_3003;
+    @BindView(R.id.event_et_3004)
+    EditText event_et_3004;
+    @BindView(R.id.event_et_3005)
+    EditText event_et_3005;
+    @BindView(R.id.event_et_3006)
+    EditText event_et_3006;
+    @BindView(R.id.event_et_3007)
+    EditText event_et_3007;
+    @BindView(R.id.event_et_3008)
+    EditText event_et_3008;
+    @BindView(R.id.event_et_3009)
+    EditText event_et_3009;
+    @BindView(R.id.event_et_3010)
+    EditText event_et_3010;
+
 
     @BindView(R.id.event_tv_time_13)
     TextView event_tv_time_13;
     @BindView(R.id.event_tv_time_14)
     TextView event_tv_time_14;
-    @BindView(R.id.event_tv_time_15)
-    TextView event_tv_time_15;
-    @BindView(R.id.event_tv_time_16)
-    TextView event_tv_time_16;
-    @BindView(R.id.event_tv_time_17)
-    TextView event_tv_time_17;
-    @BindView(R.id.event_tv_time_18)
-    TextView event_tv_time_18;
-    @BindView(R.id.event_tv_time_19)
-    TextView event_tv_time_19;
-    @BindView(R.id.event_tv_time_20)
-    TextView event_tv_time_20;
-
-
+    @BindView(R.id.event_tv_time_3001)
+    TextView event_tv_time_3001;
+    @BindView(R.id.event_tv_time_3002)
+    TextView event_tv_time_3002;
+    @BindView(R.id.event_tv_time_3003)
+    TextView event_tv_time_3003;
+    @BindView(R.id.event_tv_time_3004)
+    TextView event_tv_time_3004;
+    @BindView(R.id.event_tv_time_3005)
+    TextView event_tv_time_3005;
+    @BindView(R.id.event_tv_time_3006)
+    TextView event_tv_time_3006;
+    @BindView(R.id.event_tv_time_3007)
+    TextView event_tv_time_3007;
+    @BindView(R.id.event_tv_time_3008)
+    TextView event_tv_time_3008;
+    @BindView(R.id.event_tv_time_3009)
+    TextView event_tv_time_3009;
+    @BindView(R.id.event_tv_time_3010)
+    TextView event_tv_time_3010;
 
     private MLsListsDao mLsListsDao;
 
@@ -65,21 +80,29 @@ public class DengguangActivity extends BaseActivity {
 
         event_et_13.setText(mLsListsDao.load((long) 13).strMLs);
         event_et_14.setText(mLsListsDao.load((long) 14).strMLs);
-        event_et_15.setText(mLsListsDao.load((long) 15).strMLs);
-        event_et_16.setText(mLsListsDao.load((long) 16).strMLs);
-        event_et_17.setText(mLsListsDao.load((long) 17).strMLs);
-        event_et_18.setText(mLsListsDao.load((long) 18).strMLs);
-        event_et_19.setText(mLsListsDao.load((long) 19).strMLs);
-        event_et_20.setText(mLsListsDao.load((long) 20).strMLs);
+        event_et_3001.setText(mLsListsDao.load((long) 3001).strMLs);
+        event_et_3002.setText(mLsListsDao.load((long) 3002).strMLs);
+        event_et_3003.setText(mLsListsDao.load((long) 3003).strMLs);
+        event_et_3004.setText(mLsListsDao.load((long) 3004).strMLs);
+        event_et_3005.setText(mLsListsDao.load((long) 3005).strMLs);
+        event_et_3006.setText(mLsListsDao.load((long) 3006).strMLs);
+        event_et_3007.setText(mLsListsDao.load((long) 3007).strMLs);
+        event_et_3008.setText(mLsListsDao.load((long) 3008).strMLs);
+        event_et_3009.setText(mLsListsDao.load((long) 3009).strMLs);
+        event_et_3010.setText(mLsListsDao.load((long) 3010).strMLs);
 
         event_tv_time_13.setText(mLsListsDao.load((long) 13).time);
         event_tv_time_14.setText(mLsListsDao.load((long) 14).time);
-        event_tv_time_15.setText(mLsListsDao.load((long) 15).time);
-        event_tv_time_16.setText(mLsListsDao.load((long) 16).time);
-        event_tv_time_17.setText(mLsListsDao.load((long) 17).time);
-        event_tv_time_18.setText(mLsListsDao.load((long) 18).time);
-        event_tv_time_19.setText(mLsListsDao.load((long) 19).time);
-        event_tv_time_20.setText(mLsListsDao.load((long) 20).time);
+        event_tv_time_3001.setText(mLsListsDao.load((long) 3001).time);
+        event_tv_time_3002.setText(mLsListsDao.load((long) 3002).time);
+        event_tv_time_3003.setText(mLsListsDao.load((long) 3003).time);
+        event_tv_time_3004.setText(mLsListsDao.load((long) 3004).time);
+        event_tv_time_3005.setText(mLsListsDao.load((long) 3005).time);
+        event_tv_time_3006.setText(mLsListsDao.load((long) 3006).time);
+        event_tv_time_3007.setText(mLsListsDao.load((long) 3007).time);
+        event_tv_time_3008.setText(mLsListsDao.load((long) 3008).time);
+        event_tv_time_3009.setText(mLsListsDao.load((long) 3009).time);
+        event_tv_time_3010.setText(mLsListsDao.load((long) 3010).time);
 
     }
 
@@ -88,12 +111,16 @@ public class DengguangActivity extends BaseActivity {
     public void btn_event_dg_ok() {
         mLsListsDao.update(new MLsLists((long) 13, "灯光开(全开)", event_et_13.getText().toString(), event_tv_time_13.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 14, "灯光关(全关)", event_et_14.getText().toString(), event_tv_time_14.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 15, "灯光1开", event_et_15.getText().toString(), event_tv_time_15.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 16, "灯光1关", event_et_16.getText().toString(), event_tv_time_16.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 17, "灯光2开", event_et_17.getText().toString(), event_tv_time_17.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 18, "灯光2关", event_et_18.getText().toString(), event_tv_time_18.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 19, "灯光3开", event_et_19.getText().toString(), event_tv_time_19.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 20, "灯光3关", event_et_20.getText().toString(), event_tv_time_20.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3001, "黑板灯开", event_et_3001.getText().toString(), event_tv_time_3001.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3002, "黑板灯关", event_et_3002.getText().toString(), event_tv_time_3002.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3003, "教室灯1开", event_et_3003.getText().toString(), event_tv_time_3003.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3004, "教室灯1关", event_et_3004.getText().toString(), event_tv_time_3004.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3005, "教室灯2开", event_et_3005.getText().toString(), event_tv_time_3005.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3006, "教室灯2关", event_et_3006.getText().toString(), event_tv_time_3006.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3007, "教室灯3开", event_et_3007.getText().toString(), event_tv_time_3007.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3008, "教室灯3关", event_et_3008.getText().toString(), event_tv_time_3008.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3009, "教室灯4开", event_et_3009.getText().toString(), event_tv_time_3009.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 3010, "教室灯4关", event_et_3010.getText().toString(), event_tv_time_3010.getText().toString()));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

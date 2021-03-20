@@ -21,35 +21,41 @@ public class KongtiaoEventActivity extends BaseActivity {
     EditText event_et_39;
     @BindView(R.id.event_et_40)
     EditText event_et_40;
-    @BindView(R.id.event_et_41)
-    EditText event_et_41;
-    @BindView(R.id.event_et_42)
-    EditText event_et_42;
-    @BindView(R.id.event_et_43)
-    EditText event_et_43;
-    @BindView(R.id.event_et_44)
-    EditText event_et_44;
-    @BindView(R.id.event_et_48)
-    EditText event_et_48;
-    @BindView(R.id.event_et_49)
-    EditText event_et_49;
+    @BindView(R.id.event_et_2001)
+    EditText event_et_2001;
+    @BindView(R.id.event_et_2002)
+    EditText event_et_2002;
+    @BindView(R.id.event_et_2003)
+    EditText event_et_2003;
+    @BindView(R.id.event_et_2004)
+    EditText event_et_2004;
+    @BindView(R.id.event_et_2005)
+    EditText event_et_2005;
+    @BindView(R.id.event_et_2006)
+    EditText event_et_2006;
+    @BindView(R.id.event_et_2007)
+    EditText event_et_2007;
+
 
     @BindView(R.id.event_tv_time_39)
     TextView event_tv_time_39;
     @BindView(R.id.event_tv_time_40)
     TextView event_tv_time_40;
-    @BindView(R.id.event_tv_time_41)
-    TextView event_tv_time_41;
-    @BindView(R.id.event_tv_time_42)
-    TextView event_tv_time_42;
-    @BindView(R.id.event_tv_time_43)
-    TextView event_tv_time_43;
-    @BindView(R.id.event_tv_time_44)
-    TextView event_tv_time_44;
-    @BindView(R.id.event_tv_time_48)
-    TextView event_tv_time_48;
-    @BindView(R.id.event_tv_time_49)
-    TextView event_tv_time_49;
+    @BindView(R.id.event_tv_time_2001)
+    TextView event_tv_time_2001;
+    @BindView(R.id.event_tv_time_2002)
+    TextView event_tv_time_2002;
+    @BindView(R.id.event_tv_time_2003)
+    TextView event_tv_time_2003;
+    @BindView(R.id.event_tv_time_2004)
+    TextView event_tv_time_2004;
+    @BindView(R.id.event_tv_time_2005)
+    TextView event_tv_time_2005;
+    @BindView(R.id.event_tv_time_2006)
+    TextView event_tv_time_2006;
+    @BindView(R.id.event_tv_time_2007)
+    TextView event_tv_time_2007;
+
 
     private MLsListsDao mLsListsDao;
 
@@ -62,21 +68,23 @@ public class KongtiaoEventActivity extends BaseActivity {
 
         event_et_39.setText(mLsListsDao.load((long) 39).strMLs);
         event_et_40.setText(mLsListsDao.load((long) 40).strMLs);
-        event_et_41.setText(mLsListsDao.load((long) 41).strMLs);
-        event_et_42.setText(mLsListsDao.load((long) 42).strMLs);
-        event_et_43.setText(mLsListsDao.load((long) 43).strMLs);
-        event_et_44.setText(mLsListsDao.load((long) 44).strMLs);
-        event_et_48.setText(mLsListsDao.load((long) 48).strMLs);
-        event_et_49.setText(mLsListsDao.load((long) 49).strMLs);
+        event_et_2001.setText(mLsListsDao.load((long) 2001).strMLs);
+        event_et_2002.setText(mLsListsDao.load((long) 2002).strMLs);
+        event_et_2003.setText(mLsListsDao.load((long) 2003).strMLs);
+        event_et_2004.setText(mLsListsDao.load((long) 2004).strMLs);
+        event_et_2005.setText(mLsListsDao.load((long) 2005).strMLs);
+        event_et_2006.setText(mLsListsDao.load((long) 2006).strMLs);
+        event_et_2007.setText(mLsListsDao.load((long) 2007).strMLs);
 
         event_tv_time_39.setText(mLsListsDao.load((long) 39).time);
         event_tv_time_40.setText(mLsListsDao.load((long) 40).time);
-        event_tv_time_41.setText(mLsListsDao.load((long) 41).time);
-        event_tv_time_42.setText(mLsListsDao.load((long) 42).time);
-        event_tv_time_43.setText(mLsListsDao.load((long) 43).time);
-        event_tv_time_44.setText(mLsListsDao.load((long) 44).time);
-        event_tv_time_48.setText(mLsListsDao.load((long) 48).time);
-        event_tv_time_49.setText(mLsListsDao.load((long) 49).time);
+        event_tv_time_2001.setText(mLsListsDao.load((long) 2001).time);
+        event_tv_time_2002.setText(mLsListsDao.load((long) 2002).time);
+        event_tv_time_2003.setText(mLsListsDao.load((long) 2003).time);
+        event_tv_time_2004.setText(mLsListsDao.load((long) 2004).time);
+        event_tv_time_2005.setText(mLsListsDao.load((long) 2005).time);
+        event_tv_time_2006.setText(mLsListsDao.load((long) 2006).time);
+        event_tv_time_2007.setText(mLsListsDao.load((long) 2007).time);
     }
 
 
@@ -84,12 +92,13 @@ public class KongtiaoEventActivity extends BaseActivity {
     public void btn_event_kt_ok() {
         mLsListsDao.update(new MLsLists((long) 39, "空调-开", event_et_39.getText().toString(), event_tv_time_39.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 40, "空调-关", event_et_40.getText().toString(), event_tv_time_40.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 41, "空调-自动", event_et_41.getText().toString(), event_tv_time_41.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 42, "空调-制冷", event_et_42.getText().toString(), event_tv_time_42.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 43, "空调-制热", event_et_43.getText().toString(), event_tv_time_43.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 44, "空调-风速", event_et_44.getText().toString(), event_tv_time_44.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 48, "空调-模式", event_et_48.getText().toString(), event_tv_time_48.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 49, "空调-摆风", event_et_49.getText().toString(), event_tv_time_49.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2001, "空调-自动", event_et_2001.getText().toString(), event_tv_time_2001.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2002, "空调-制冷", event_et_2002.getText().toString(), event_tv_time_2002.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2003, "空调-制热", event_et_2003.getText().toString(), event_tv_time_2003.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2004, "空调-风速低", event_et_2004.getText().toString(), event_tv_time_2004.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2005, "空调-风速中", event_et_2005.getText().toString(), event_tv_time_2005.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2006, "空调-风速高", event_et_2006.getText().toString(), event_tv_time_2006.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 2007, "空调-摆风", event_et_2007.getText().toString(), event_tv_time_2007.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }

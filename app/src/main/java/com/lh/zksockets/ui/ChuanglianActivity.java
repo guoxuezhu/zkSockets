@@ -23,12 +23,19 @@ public class ChuanglianActivity extends BaseActivity {
     EditText event_et_4;
     @BindView(R.id.event_et_5)
     EditText event_et_5;
-    @BindView(R.id.event_et_6)
-    EditText event_et_6;
-    @BindView(R.id.event_et_7)
-    EditText event_et_7;
-    @BindView(R.id.event_et_8)
-    EditText event_et_8;
+    @BindView(R.id.event_et_1001)
+    EditText event_et_1001;
+    @BindView(R.id.event_et_1002)
+    EditText event_et_1002;
+    @BindView(R.id.event_et_1003)
+    EditText event_et_1003;
+    @BindView(R.id.event_et_1004)
+    EditText event_et_1004;
+    @BindView(R.id.event_et_1005)
+    EditText event_et_1005;
+    @BindView(R.id.event_et_1006)
+    EditText event_et_1006;
+
 
     @BindView(R.id.event_tv_time_3)
     TextView event_tv_time_3;
@@ -36,12 +43,18 @@ public class ChuanglianActivity extends BaseActivity {
     TextView event_tv_time_4;
     @BindView(R.id.event_tv_time_5)
     TextView event_tv_time_5;
-    @BindView(R.id.event_tv_time_6)
-    TextView event_tv_time_6;
-    @BindView(R.id.event_tv_time_7)
-    TextView event_tv_time_7;
-    @BindView(R.id.event_tv_time_8)
-    TextView event_tv_time_8;
+    @BindView(R.id.event_tv_time_1001)
+    TextView event_tv_time_1001;
+    @BindView(R.id.event_tv_time_1002)
+    TextView event_tv_time_1002;
+    @BindView(R.id.event_tv_time_1003)
+    TextView event_tv_time_1003;
+    @BindView(R.id.event_tv_time_1004)
+    TextView event_tv_time_1004;
+    @BindView(R.id.event_tv_time_1005)
+    TextView event_tv_time_1005;
+    @BindView(R.id.event_tv_time_1006)
+    TextView event_tv_time_1006;
 
 
     private MLsListsDao mLsListsDao;
@@ -56,16 +69,22 @@ public class ChuanglianActivity extends BaseActivity {
         event_et_3.setText(mLsListsDao.load((long) 3).strMLs);
         event_et_4.setText(mLsListsDao.load((long) 4).strMLs);
         event_et_5.setText(mLsListsDao.load((long) 5).strMLs);
-        event_et_6.setText(mLsListsDao.load((long) 6).strMLs);
-        event_et_7.setText(mLsListsDao.load((long) 7).strMLs);
-        event_et_8.setText(mLsListsDao.load((long) 8).strMLs);
+        event_et_1001.setText(mLsListsDao.load((long) 1001).strMLs);
+        event_et_1002.setText(mLsListsDao.load((long) 1002).strMLs);
+        event_et_1003.setText(mLsListsDao.load((long) 1003).strMLs);
+        event_et_1004.setText(mLsListsDao.load((long) 1004).strMLs);
+        event_et_1005.setText(mLsListsDao.load((long) 1005).strMLs);
+        event_et_1006.setText(mLsListsDao.load((long) 1006).strMLs);
 
         event_tv_time_3.setText(mLsListsDao.load((long) 3).time);
         event_tv_time_4.setText(mLsListsDao.load((long) 4).time);
         event_tv_time_5.setText(mLsListsDao.load((long) 5).time);
-        event_tv_time_6.setText(mLsListsDao.load((long) 6).time);
-        event_tv_time_7.setText(mLsListsDao.load((long) 7).time);
-        event_tv_time_8.setText(mLsListsDao.load((long) 8).time);
+        event_tv_time_1001.setText(mLsListsDao.load((long) 1001).time);
+        event_tv_time_1002.setText(mLsListsDao.load((long) 1002).time);
+        event_tv_time_1003.setText(mLsListsDao.load((long) 1003).time);
+        event_tv_time_1004.setText(mLsListsDao.load((long) 1004).time);
+        event_tv_time_1005.setText(mLsListsDao.load((long) 1005).time);
+        event_tv_time_1006.setText(mLsListsDao.load((long) 1006).time);
 
     }
 
@@ -75,10 +94,13 @@ public class ChuanglianActivity extends BaseActivity {
 
         mLsListsDao.update(new MLsLists((long) 3, "窗帘开(全开)", event_et_3.getText().toString(), event_tv_time_3.getText().toString()));
         mLsListsDao.update(new MLsLists((long) 4, "窗帘关(全关)", event_et_4.getText().toString(), event_tv_time_4.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5, "窗帘1开", event_et_5.getText().toString(), event_tv_time_5.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 6, "窗帘1关", event_et_6.getText().toString(), event_tv_time_6.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7, "窗帘2开", event_et_7.getText().toString(), event_tv_time_7.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 8, "窗帘2关", event_et_8.getText().toString(), event_tv_time_8.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 5, "窗帘暂停(全暂停)", event_et_5.getText().toString(), event_tv_time_5.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1001, "窗帘1开", event_et_1001.getText().toString(), event_tv_time_1001.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1002, "窗帘1关", event_et_1002.getText().toString(), event_tv_time_1002.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1003, "窗帘1暂停", event_et_1003.getText().toString(), event_tv_time_1003.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1004, "窗帘2开", event_et_1004.getText().toString(), event_tv_time_1004.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1005, "窗帘2关", event_et_1005.getText().toString(), event_tv_time_1005.getText().toString()));
+        mLsListsDao.update(new MLsLists((long) 1006, "窗帘2暂停", event_et_1006.getText().toString(), event_tv_time_1006.getText().toString()));
 
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
