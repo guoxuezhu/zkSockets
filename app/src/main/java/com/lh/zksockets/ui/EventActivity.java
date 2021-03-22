@@ -175,6 +175,13 @@ public class EventActivity extends BaseActivity {
             mLsListsDao.insert(new MLsLists((long) 7004, "自动模式", "", ""));
             mLsListsDao.insert(new MLsLists((long) 7005, "模式1", "", ""));
             mLsListsDao.insert(new MLsLists((long) 7006, "模式2", "", ""));
+
+            mLsListsDao.insert(new MLsLists((long) 8001, "电风扇开", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 8002, "电风扇关", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 8003, "电风扇1级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 8004, "电风扇2级", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 8005, "电风扇3级", "", ""));
+
         }
 
     }

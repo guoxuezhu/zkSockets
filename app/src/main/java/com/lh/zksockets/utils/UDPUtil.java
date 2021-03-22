@@ -27,22 +27,22 @@ public class UDPUtil {
         if (id == 4) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100020A0D"));
         }
-        if (id == 62) {
+        if (id == 3001) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100030A0D"));
         }
-        if (id == 63) {
+        if (id == 3002) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100040A0D"));
         }
-        if (id == 64) {
+        if (id == 3003) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100050A0D"));
         }
-        if (id == 65) {
+        if (id == 3004) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100060A0D"));
         }
-        if (id == 66) {
+        if (id == 7005) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100070A0D"));
         }
-        if (id == 67) {
+        if (id == 7006) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100080A0D"));
         }
         if (id == 13) {
@@ -52,6 +52,27 @@ public class UDPUtil {
         if (id == 14) {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100040A0D"));
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100060A0D"));
+        }
+
+
+        if (id == 8001) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A90100000001000F0A0D"));
+        }
+
+        if (id == 8002) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100100A0D"));
+        }
+
+        if (id == 8003) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100110A0D"));
+        }
+
+        if (id == 8004) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100120A0D"));
+        }
+
+        if (id == 8005) {
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100130A0D"));
         }
 
     }
