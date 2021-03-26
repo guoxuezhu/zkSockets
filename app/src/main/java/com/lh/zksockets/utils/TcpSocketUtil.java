@@ -46,6 +46,7 @@ public class TcpSocketUtil {
                                 String readMsgdata = new String(buffer, 0, len);
                                 ELog.d("=======TcpSocketUtil=====服务端接收到客户端信息==" + readMsgdata);
                                 sendData("{\"code\":1001,\"result\":0,\"timestamp\":" + System.currentTimeMillis() + "}");
+                                DeviceStatusUtil.sendService(readMsgdata);
                                 JSONObject jsonObject = new JSONObject(readMsgdata);
                                 int code = jsonObject.getInt("code");
                                 JSONArray devices = jsonObject.getJSONArray("devices");
