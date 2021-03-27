@@ -3,6 +3,7 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.KongTiaoDataDao;
+import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.model.WenShiDu;
 
@@ -521,6 +522,10 @@ public class TimerUtils {
                 SerialPortUtil.makeML((long) 45);
 //                setWenshiduTimer();
 //                ELog.getMyLogcat();
+                VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
+                vidStatusDao.deleteAll();
+                SerialPortUtil.sendMsg(SerialPortUtil.StringToBytes("BB060080"));
+                ELog.d("=========setKaijiTimer==========");
                 if (KaijiTimer != null) {
                     KaijiTimer.cancel();
                     KaijiTimer = null;

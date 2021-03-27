@@ -16,6 +16,7 @@ import com.lh.zksockets.data.DbDao.MicDatasDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
+import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
@@ -24,6 +25,7 @@ import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.MicDatas;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.Users;
+import com.lh.zksockets.data.model.VidStatus;
 import com.lh.zksockets.data.model.WenShiDu;
 
 import java.io.ByteArrayInputStream;
@@ -57,6 +59,7 @@ public class SerialPortUtil {
     private static OutputStream outputStream1, outputStream2, outputStream3;
     private static Timer xiakeTimer;
     private static Handler readCradHandler;
+    private static boolean isxiake;
 
 
     public static boolean open() {
@@ -207,6 +210,28 @@ public class SerialPortUtil {
                             }
                         }
                     }
+                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[VID]")) {
+                    // size=18  [VID]<BB 06 08 80>
+                    if (msgdata.indexOf(">") != -1) {
+                        if (msgdata.indexOf(">") == 17) {
+                            if (msgdata.substring(6, 11).equals("BB 06") && msgdata.substring(15, 17).equals("80")) {
+                                onVIDinStatus(msgdata.substring(12, 14));
+                            }
+                        }
+//                        buffer2 = new byte[1024];
+//                        System.arraycopy(buffer1, 7, buffer2, 0, 1);
+//
+//                        baojin(Integer.toHexString(buffer2[0] & 0xFF));
+
+                        bslength = bslength - 18;
+                        System.arraycopy(buffer1, 18, buffer2, 0, bslength);
+                        ELog.i("===========VID=====22222=============" + new String(buffer2, 0, bslength));
+                        buffer1 = new byte[1024];
+                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+                        buffer2 = new byte[1024];
+                        makeData(new String(buffer1, 0, bslength));
+
+                    }
                 } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
                     if (msgdata.indexOf(">") != -1) {
                         buffer2 = new byte[1024];
@@ -249,6 +274,50 @@ public class SerialPortUtil {
 
     }
 
+    private static void onVIDinStatus(String str) {
+        ELog.i("=======输入信号====00====" + str);
+        String strstatus = JinzhiUtil.get2String(str.substring(1));
+        ELog.i("=======输入信号====status====" + strstatus);
+        VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
+        if (vidStatusDao.loadAll().size() == 0) {
+            for (int i = 1; i < 5; i++) {
+                vidStatusDao.insert(new VidStatus((long) i, "输入口" + i, strstatus.substring(4 - i, 5 - i)));
+            }
+        } else {
+            if (!strstatus.substring(1, 2).equals(vidStatusDao.load((long) 3).vidinStatus)) {
+                if (strstatus.substring(1, 2).equals("0")) {
+                    ELog.i("======老师笔记本====无信号===");
+                    bjbnovid();
+                } else {
+                    ELog.i("======老师笔记本====有信号====");
+                }
+            }
+            for (int i = 1; i < 5; i++) {
+                vidStatusDao.update(new VidStatus((long) i, "输入口" + i, strstatus.substring(4 - i, 5 - i)));
+            }
+        }
+        ELog.i("======vidStatusDao========" + vidStatusDao.loadAll().toString());
+    }
+
+    private static void bjbnovid() {
+        if (!isxiake) {
+            ontimerXiake();
+        }
+    }
+
+    private static void ontimerXiake() {
+        closeXiakeTimer();
+        xiakeTimer = new Timer();
+        xiakeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                sendMsg1("SKJBB".getBytes());
+                makeML((long) 2);
+                closeXiakeTimer();
+            }
+        }, 60 * 1500);
+    }
+
     private static void getDianLiang() {
         byte[] buffer3 = new byte[4];
         System.arraycopy(buffer2, 3, buffer3, 0, 4);
@@ -269,7 +338,7 @@ public class SerialPortUtil {
         for (int j = 0; j < 9; j++) {
             String hex = Integer.toHexString(buffer2[j] & 0xFF);
             if (hex.length() == 1) {
-                hex = '0' + hex;
+                hex = "0" + hex;
             }
             ret += hex.toUpperCase();
         }
@@ -320,7 +389,7 @@ public class SerialPortUtil {
             return;
         }
         ELog.i("=========报警口==hex====" + hex);
-        String str2jz = JinzhiUtil.get2String(hex);
+        String str2jz = JinzhiUtil.get2String(hex.substring(1));
         ELog.i("=========报警口==000====" + str2jz);
         if (str2jz != null) {
             DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
@@ -585,7 +654,7 @@ public class SerialPortUtil {
                                 for (int j = 0; j < size; j++) {
                                     String hex = Integer.toHexString(buffer[j] & 0xFF);
                                     if (hex.length() == 1) {
-                                        hex = '0' + hex;
+                                        hex = "0" + hex;
                                     }
                                     ret += hex.toUpperCase();
                                 }
@@ -685,6 +754,7 @@ public class SerialPortUtil {
                     .list();
             if (icCards.size() != 0) {
                 sendMsg1("SKJAA".getBytes());
+                sendCardLog(msg);
             } else {
                 sendMsg1("ICKERROR".getBytes());
             }
@@ -813,6 +883,7 @@ public class SerialPortUtil {
             try {
                 UDPUtil.makeWangguan(id);
                 if (id == 1) {
+                    isxiake = false;
                     closeXiakeTimer();
                     sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
                     try {
@@ -843,6 +914,7 @@ public class SerialPortUtil {
                     }
                 }
                 if (id == 2) {
+                    isxiake = true;
                     DiannaoUDPUtil.diannaogj();
                     setXiakeTimer();
                 }

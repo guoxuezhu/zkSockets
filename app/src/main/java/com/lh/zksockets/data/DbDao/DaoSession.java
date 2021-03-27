@@ -26,6 +26,7 @@ import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.UIsetData;
 import com.lh.zksockets.data.model.Users;
+import com.lh.zksockets.data.model.VidStatus;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
 
@@ -47,6 +48,7 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
+import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 
@@ -77,6 +79,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig serialPortDataDaoConfig;
     private final DaoConfig uIsetDataDaoConfig;
     private final DaoConfig usersDaoConfig;
+    private final DaoConfig vidStatusDaoConfig;
     private final DaoConfig wenShiDuDaoConfig;
     private final DaoConfig zkInfoDaoConfig;
 
@@ -98,6 +101,7 @@ public class DaoSession extends AbstractDaoSession {
     private final SerialPortDataDao serialPortDataDao;
     private final UIsetDataDao uIsetDataDao;
     private final UsersDao usersDao;
+    private final VidStatusDao vidStatusDao;
     private final WenShiDuDao wenShiDuDao;
     private final ZkInfoDao zkInfoDao;
 
@@ -159,6 +163,9 @@ public class DaoSession extends AbstractDaoSession {
         usersDaoConfig = daoConfigMap.get(UsersDao.class).clone();
         usersDaoConfig.initIdentityScope(type);
 
+        vidStatusDaoConfig = daoConfigMap.get(VidStatusDao.class).clone();
+        vidStatusDaoConfig.initIdentityScope(type);
+
         wenShiDuDaoConfig = daoConfigMap.get(WenShiDuDao.class).clone();
         wenShiDuDaoConfig.initIdentityScope(type);
 
@@ -183,6 +190,7 @@ public class DaoSession extends AbstractDaoSession {
         serialPortDataDao = new SerialPortDataDao(serialPortDataDaoConfig, this);
         uIsetDataDao = new UIsetDataDao(uIsetDataDaoConfig, this);
         usersDao = new UsersDao(usersDaoConfig, this);
+        vidStatusDao = new VidStatusDao(vidStatusDaoConfig, this);
         wenShiDuDao = new WenShiDuDao(wenShiDuDaoConfig, this);
         zkInfoDao = new ZkInfoDao(zkInfoDaoConfig, this);
 
@@ -204,6 +212,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(SerialPortData.class, serialPortDataDao);
         registerDao(UIsetData.class, uIsetDataDao);
         registerDao(Users.class, usersDao);
+        registerDao(VidStatus.class, vidStatusDao);
         registerDao(WenShiDu.class, wenShiDuDao);
         registerDao(ZkInfo.class, zkInfoDao);
     }
@@ -227,6 +236,7 @@ public class DaoSession extends AbstractDaoSession {
         serialPortDataDaoConfig.clearIdentityScope();
         uIsetDataDaoConfig.clearIdentityScope();
         usersDaoConfig.clearIdentityScope();
+        vidStatusDaoConfig.clearIdentityScope();
         wenShiDuDaoConfig.clearIdentityScope();
         zkInfoDaoConfig.clearIdentityScope();
     }
@@ -301,6 +311,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public UsersDao getUsersDao() {
         return usersDao;
+    }
+
+    public VidStatusDao getVidStatusDao() {
+        return vidStatusDao;
     }
 
     public WenShiDuDao getWenShiDuDao() {
