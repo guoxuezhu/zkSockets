@@ -521,8 +521,8 @@ public class SerialPortUtil {
             sendShipinType(msg);
         } else if (msg.substring(0, 3).equals("FWS")) {//复位
             sendFWstatus(msg);
-        } else if (msg.substring(0, 3).equals("CRD")) {//刷卡
-            sendCardLog(msg);
+        } else if (msg.substring(0, 3).equals("SKJ")) {//打开面板
+            sendKJban(msg);
         } else if (msg.substring(0, 3).equals("MJD")) {//门禁
             makemenjin(msg);
         } else if (msg.substring(0, 3).equals("LUB")) {
@@ -1228,7 +1228,7 @@ public class SerialPortUtil {
     public static void sendKJban(String str) {
         synchronized (str) {
             if (str.equals("SKJAA")) {
-                sendMsg1("SKJ;AA".getBytes());
+                sendMsg1("SKJAA".getBytes());
             }
         }
     }

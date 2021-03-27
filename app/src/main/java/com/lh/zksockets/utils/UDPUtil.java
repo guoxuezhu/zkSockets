@@ -71,10 +71,6 @@ public class UDPUtil {
             sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100120A0D"));
         }
 
-        if (id == 8005) {
-            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100130A0D"));
-        }
-
     }
 
     private static void sendUdpMsg(String ip, byte[] msgbyte) {
