@@ -129,6 +129,16 @@
                     android:text="IC卡管理"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
+
+                <Button
+                    android:id="@+id/vid_Status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="互动信号状态"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
             </LinearLayout>
 
 

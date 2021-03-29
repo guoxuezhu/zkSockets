@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.GridView;
 
+import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
 import com.lh.zksockets.adapter.VidstatusAdapter;
-import com.lh.zksockets.data.model.Vidstatus;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lh.zksockets.data.DbDao.VidStatusDao;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +17,6 @@ public class EventSelectActivity extends BaseActivity {
 
     @BindView(R.id.vid_status_gridView)
     GridView vid_status_gridView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +29,8 @@ public class EventSelectActivity extends BaseActivity {
     }
 
     private void gridViewInit() {
-        List<Vidstatus> vidstatuses = new ArrayList<>();
-        vidstatuses.add(new Vidstatus("录播输入", 0));
-        vidstatuses.add(new Vidstatus("电脑输入", 0));
-
-        vidstatuses.add(new Vidstatus("投影输出", 0));
-        vidstatuses.add(new Vidstatus("电脑输出", 1));
-        vidstatuses.add(new Vidstatus("录播输出", 1));
-        vidstatuses.add(new Vidstatus("小组一输出", 1));
-        vidstatuses.add(new Vidstatus("小组二输出", 1));
-        vidstatuses.add(new Vidstatus("小组三输出", 1));
-        vidstatuses.add(new Vidstatus("小组四输出", 1));
-        vidstatuses.add(new Vidstatus("小组五输出", 1));
-        vidstatuses.add(new Vidstatus("小组六输出", 1));
-
-        VidstatusAdapter vidstatusAdapter = new VidstatusAdapter(this, vidstatuses);
+        VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
+        VidstatusAdapter vidstatusAdapter = new VidstatusAdapter(this, vidStatusDao.loadAll());
         vid_status_gridView.setAdapter(vidstatusAdapter);
     }
 
@@ -62,7 +46,7 @@ public class EventSelectActivity extends BaseActivity {
     }
 
     private void back() {
-        startActivity(new Intent(this, AdvancedSetingActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

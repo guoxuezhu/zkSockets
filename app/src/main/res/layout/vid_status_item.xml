@@ -5,11 +5,10 @@
     android:gravity="center"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/vid_name_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dp_150"
         android:background="@color/profile_badge_3"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dp_10"

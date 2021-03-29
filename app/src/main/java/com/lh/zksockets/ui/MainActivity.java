@@ -33,6 +33,12 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.vid_Status)
+    public void vidStatus_seting() {
+        startActivity(new Intent(this, EventSelectActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.btn_ui_set)
     public void btn_ui_set() {
         startActivity(new Intent(this, MbanActivity.class));

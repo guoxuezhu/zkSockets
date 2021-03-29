@@ -48,12 +48,6 @@ public class AdvancedSetingActivity extends BaseActivity {
         finish();
     }
 
-    @OnClick(R.id.vidStatus_seting)
-    public void vidStatus_seting() {
-        startActivity(new Intent(this, EventSelectActivity.class));
-        finish();
-    }
-
     @OnClick(R.id.power_box)
     public void power_box() {
         startActivity(new Intent(this, PowerDeviceActivity.class));

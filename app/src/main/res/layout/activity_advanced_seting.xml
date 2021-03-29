@@ -137,17 +137,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <Button
-                    android:id="@+id/vidStatus_seting"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@mipmap/btn_img_1"
-                    android:text="互动状态监听"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <LinearLayout
