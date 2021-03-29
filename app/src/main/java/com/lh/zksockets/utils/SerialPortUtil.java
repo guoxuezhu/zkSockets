@@ -218,11 +218,6 @@ public class SerialPortUtil {
                                 onVIDinStatus(msgdata.substring(12, 14));
                             }
                         }
-//                        buffer2 = new byte[1024];
-//                        System.arraycopy(buffer1, 7, buffer2, 0, 1);
-//
-//                        baojin(Integer.toHexString(buffer2[0] & 0xFF));
-
                         bslength = bslength - 18;
                         System.arraycopy(buffer1, 18, buffer2, 0, bslength);
                         ELog.i("===========VID=====22222=============" + new String(buffer2, 0, bslength));
@@ -276,27 +271,42 @@ public class SerialPortUtil {
 
     private static void onVIDinStatus(String str) {
         ELog.i("=======输入信号====00====" + str);
-        String strstatus = JinzhiUtil.get2String(str.substring(1));
-        ELog.i("=======输入信号====status====" + strstatus);
+        String strInStatus = JinzhiUtil.get2String(str.substring(1));
+        ELog.i("=======输入信号====status====" + strInStatus);
+        String strOutStatus = JinzhiUtil.get2String(str.substring(0, 1));
+        ELog.i("=======输出信号====status====" + strOutStatus);
         VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
         if (vidStatusDao.loadAll().size() == 0) {
             for (int i = 1; i < 5; i++) {
-                vidStatusDao.insert(new VidStatus((long) i, "输入口" + i, strstatus.substring(4 - i, 5 - i)));
+                vidStatusDao.insert(new VidStatus((long) i, "输入口" + i, strInStatus.substring(4 - i, 5 - i)));
+            }
+            for (int n = 1; n < 5; n++) {
+                vidStatusDao.insert(new VidStatus((long) n + 10, "输出口" + n, strOutStatus.substring(4 - n, 5 - n)));
             }
         } else {
-            if (!strstatus.substring(1, 2).equals(vidStatusDao.load((long) 3).vidinStatus)) {
-                if (strstatus.substring(1, 2).equals("0")) {
+            if (!strInStatus.substring(1, 2).equals(vidStatusDao.load((long) 3).vidinStatus)) {
+                if (strInStatus.substring(1, 2).equals("0")) {
                     ELog.i("======老师笔记本====无信号===");
                     bjbnovid();
                 } else {
                     ELog.i("======老师笔记本====有信号====");
+                    bjbokvid();
                 }
             }
             for (int i = 1; i < 5; i++) {
-                vidStatusDao.update(new VidStatus((long) i, "输入口" + i, strstatus.substring(4 - i, 5 - i)));
+                vidStatusDao.update(new VidStatus((long) i, "输入口" + i, strInStatus.substring(4 - i, 5 - i)));
+            }
+            for (int n = 1; n < 5; n++) {
+                vidStatusDao.update(new VidStatus((long) n + 10, "输出口" + n, strOutStatus.substring(4 - n, 5 - n)));
             }
         }
         ELog.i("======vidStatusDao========" + vidStatusDao.loadAll().toString());
+    }
+
+    private static void bjbokvid() {
+        if (!isxiake) {
+            closeXiakeTimer();
+        }
     }
 
     private static void bjbnovid() {
@@ -916,6 +926,7 @@ public class SerialPortUtil {
                 if (id == 2) {
                     isxiake = true;
                     DiannaoUDPUtil.diannaogj();
+                    sendMsg(StringToBytes("BB0A0180"));
                     setXiakeTimer();
                 }
                 DeviceStatusUtil.setDeviceStatus(id);
