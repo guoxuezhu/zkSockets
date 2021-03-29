@@ -561,15 +561,10 @@ public class SerialPortUtil {
     private static void mbuiset(String msg) {
         UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
         if (uIsetDataDao.loadAll().size() != 0) {
-            String uiMsg = "UIS;" + uIsetDataDao.loadAll().get(0).btn_1_status
-                    + uIsetDataDao.loadAll().get(0).btn_2_status
-                    + uIsetDataDao.loadAll().get(0).btn_3_status
-                    + uIsetDataDao.loadAll().get(0).btn_4_status
-                    + uIsetDataDao.loadAll().get(0).btn_5_status
-                    + uIsetDataDao.loadAll().get(0).btn_6_status
-                    + uIsetDataDao.loadAll().get(0).btn_7_status
-                    + uIsetDataDao.loadAll().get(0).btn_8_status
-                    + uIsetDataDao.loadAll().get(0).btn_9_status;
+            String uiMsg = "UIS;";
+            for (int i = 1; i < 11; i++) {
+                uiMsg = uiMsg + uIsetDataDao.load((long) i).btn_status;
+            }
             ELog.i("=======mbuiset======uiMsg====" + uiMsg);
             sendMsg1(uiMsg.getBytes());
         }

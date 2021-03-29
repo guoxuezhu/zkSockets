@@ -2,123 +2,68 @@ package com.lh.zksockets.data.model;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class UIsetData {
 
-    public String btn_1_status;
-    public String btn_2_status;
-    public String btn_3_status;
-    public String btn_4_status;
-    public String btn_5_status;
-    public String btn_6_status;
-    public String btn_7_status;
-    public String btn_8_status;
-    public String btn_9_status;
+    @Id
+    public Long btnId;
 
-    @Generated(hash = 2049620878)
-    public UIsetData(String btn_1_status, String btn_2_status, String btn_3_status,
-                     String btn_4_status, String btn_5_status, String btn_6_status,
-                     String btn_7_status, String btn_8_status, String btn_9_status) {
-        this.btn_1_status = btn_1_status;
-        this.btn_2_status = btn_2_status;
-        this.btn_3_status = btn_3_status;
-        this.btn_4_status = btn_4_status;
-        this.btn_5_status = btn_5_status;
-        this.btn_6_status = btn_6_status;
-        this.btn_7_status = btn_7_status;
-        this.btn_8_status = btn_8_status;
-        this.btn_9_status = btn_9_status;
+    public String btn_name;
+
+    public String btn_status;
+
+
+    @Generated(hash = 480825843)
+    public UIsetData(Long btnId, String btn_name, String btn_status) {
+        this.btnId = btnId;
+        this.btn_name = btn_name;
+        this.btn_status = btn_status;
     }
+
 
     @Generated(hash = 1568590389)
     public UIsetData() {
     }
 
+
     @Override
     public String toString() {
         return "UIsetData{" +
-                "btn_1_status='" + btn_1_status + '\'' +
-                ", btn_2_status='" + btn_2_status + '\'' +
-                ", btn_3_status='" + btn_3_status + '\'' +
-                ", btn_4_status='" + btn_4_status + '\'' +
-                ", btn_5_status='" + btn_5_status + '\'' +
-                ", btn_6_status='" + btn_6_status + '\'' +
-                ", btn_7_status='" + btn_7_status + '\'' +
-                ", btn_8_status='" + btn_8_status + '\'' +
-                ", btn_9_status='" + btn_9_status + '\'' +
+                "btnId=" + btnId +
+                ", btn_name='" + btn_name + '\'' +
+                ", btn_status='" + btn_status + '\'' +
                 '}';
     }
 
-    public String getBtn_1_status() {
-        return this.btn_1_status;
+
+    public Long getBtnId() {
+        return this.btnId;
     }
 
-    public void setBtn_1_status(String btn_1_status) {
-        this.btn_1_status = btn_1_status;
+
+    public void setBtnId(Long btnId) {
+        this.btnId = btnId;
     }
 
-    public String getBtn_2_status() {
-        return this.btn_2_status;
+
+    public String getBtn_name() {
+        return this.btn_name;
     }
 
-    public void setBtn_2_status(String btn_2_status) {
-        this.btn_2_status = btn_2_status;
+
+    public void setBtn_name(String btn_name) {
+        this.btn_name = btn_name;
     }
 
-    public String getBtn_3_status() {
-        return this.btn_3_status;
+
+    public String getBtn_status() {
+        return this.btn_status;
     }
 
-    public void setBtn_3_status(String btn_3_status) {
-        this.btn_3_status = btn_3_status;
-    }
 
-    public String getBtn_4_status() {
-        return this.btn_4_status;
-    }
-
-    public void setBtn_4_status(String btn_4_status) {
-        this.btn_4_status = btn_4_status;
-    }
-
-    public String getBtn_5_status() {
-        return this.btn_5_status;
-    }
-
-    public void setBtn_5_status(String btn_5_status) {
-        this.btn_5_status = btn_5_status;
-    }
-
-    public String getBtn_6_status() {
-        return this.btn_6_status;
-    }
-
-    public void setBtn_6_status(String btn_6_status) {
-        this.btn_6_status = btn_6_status;
-    }
-
-    public String getBtn_7_status() {
-        return this.btn_7_status;
-    }
-
-    public void setBtn_7_status(String btn_7_status) {
-        this.btn_7_status = btn_7_status;
-    }
-
-    public String getBtn_8_status() {
-        return this.btn_8_status;
-    }
-
-    public void setBtn_8_status(String btn_8_status) {
-        this.btn_8_status = btn_8_status;
-    }
-
-    public String getBtn_9_status() {
-        return this.btn_9_status;
-    }
-
-    public void setBtn_9_status(String btn_9_status) {
-        this.btn_9_status = btn_9_status;
+    public void setBtn_status(String btn_status) {
+        this.btn_status = btn_status;
     }
 }

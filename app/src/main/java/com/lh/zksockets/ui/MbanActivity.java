@@ -36,6 +36,8 @@ public class MbanActivity extends BaseActivity {
     Switch btn_ui_8;
     @BindView(R.id.btn_ui_9)
     Switch btn_ui_9;
+    @BindView(R.id.btn_ui_10)
+    Switch btn_ui_10;
 
     private UIsetDataDao uIsetDataDao;
 
@@ -45,115 +47,117 @@ public class MbanActivity extends BaseActivity {
         setContentView(R.layout.activity_mban);
         ButterKnife.bind(this);
         uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
-        if (uIsetDataDao.loadAll().size() != 0) {
-            if (uIsetDataDao.loadAll().get(0).btn_1_status.equals("0")) {
-                btn_ui_1.setChecked(true);
-            } else {
-                btn_ui_1.setChecked(false);
+        if (uIsetDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < 11; i++) {
+                uIsetDataDao.insert(new UIsetData((long) i, "", "1"));
             }
-            if (uIsetDataDao.loadAll().get(0).btn_2_status.equals("0")) {
-                btn_ui_2.setChecked(true);
-            } else {
-                btn_ui_2.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_3_status.equals("0")) {
-                btn_ui_3.setChecked(true);
-            } else {
-                btn_ui_3.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_4_status.equals("0")) {
-                btn_ui_4.setChecked(true);
-            } else {
-                btn_ui_4.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_5_status.equals("0")) {
-                btn_ui_5.setChecked(true);
-            } else {
-                btn_ui_5.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_6_status.equals("0")) {
-                btn_ui_6.setChecked(true);
-            } else {
-                btn_ui_6.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_7_status.equals("0")) {
-                btn_ui_7.setChecked(true);
-            } else {
-                btn_ui_7.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_8_status.equals("0")) {
-                btn_ui_8.setChecked(true);
-            } else {
-                btn_ui_8.setChecked(false);
-            }
-            if (uIsetDataDao.loadAll().get(0).btn_9_status.equals("0")) {
-                btn_ui_9.setChecked(true);
-            } else {
-                btn_ui_9.setChecked(false);
-            }
-            ELog.d("=========uIsetDataDao==========" + uIsetDataDao.loadAll().toString());
         }
+        if (uIsetDataDao.load((long) 1).btn_status.equals("0")) {
+            btn_ui_1.setChecked(true);
+        } else {
+            btn_ui_1.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 2).btn_status.equals("0")) {
+            btn_ui_2.setChecked(true);
+        } else {
+            btn_ui_2.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 3).btn_status.equals("0")) {
+            btn_ui_3.setChecked(true);
+        } else {
+            btn_ui_3.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 4).btn_status.equals("0")) {
+            btn_ui_4.setChecked(true);
+        } else {
+            btn_ui_4.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 5).btn_status.equals("0")) {
+            btn_ui_5.setChecked(true);
+        } else {
+            btn_ui_5.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 6).btn_status.equals("0")) {
+            btn_ui_6.setChecked(true);
+        } else {
+            btn_ui_6.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 7).btn_status.equals("0")) {
+            btn_ui_7.setChecked(true);
+        } else {
+            btn_ui_7.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 8).btn_status.equals("0")) {
+            btn_ui_8.setChecked(true);
+        } else {
+            btn_ui_8.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 9).btn_status.equals("0")) {
+            btn_ui_9.setChecked(true);
+        } else {
+            btn_ui_9.setChecked(false);
+        }
+        if (uIsetDataDao.load((long) 10).btn_status.equals("0")) {
+            btn_ui_10.setChecked(true);
+        } else {
+            btn_ui_10.setChecked(false);
+        }
+        ELog.d("=========uIsetDataDao==========" + uIsetDataDao.loadAll().toString());
 
     }
 
     @OnClick(R.id.btn_mban_ok)
     public void btn_mban_ok() {
-        String ui1;
-        String ui2;
-        String ui3;
-        String ui4;
-        String ui5;
-        String ui6;
-        String ui7;
-        String ui8;
-        String ui9;
         if (btn_ui_1.isChecked()) {
-            ui1 = "0";
+            uIsetDataDao.update(new UIsetData((long) 1, "一键互动", "0"));
         } else {
-            ui1 = "1";
+            uIsetDataDao.update(new UIsetData((long) 1, "一键互动", "1"));
         }
         if (btn_ui_2.isChecked()) {
-            ui2 = "0";
+            uIsetDataDao.update(new UIsetData((long) 2, "自由互动", "0"));
         } else {
-            ui2 = "1";
+            uIsetDataDao.update(new UIsetData((long) 2, "自由互动", "1"));
         }
         if (btn_ui_3.isChecked()) {
-            ui3 = "0";
+            uIsetDataDao.update(new UIsetData((long) 3, "录播", "0"));
         } else {
-            ui3 = "1";
+            uIsetDataDao.update(new UIsetData((long) 3, "录播", "1"));
         }
         if (btn_ui_4.isChecked()) {
-            ui4 = "0";
+            uIsetDataDao.update(new UIsetData((long) 4, "多媒体", "0"));
         } else {
-            ui4 = "1";
+            uIsetDataDao.update(new UIsetData((long) 4, "多媒体", "1"));
         }
         if (btn_ui_5.isChecked()) {
-            ui5 = "0";
+            uIsetDataDao.update(new UIsetData((long) 5, "窗帘", "0"));
         } else {
-            ui5 = "1";
+            uIsetDataDao.update(new UIsetData((long) 5, "窗帘", "1"));
         }
         if (btn_ui_6.isChecked()) {
-            ui6 = "0";
+            uIsetDataDao.update(new UIsetData((long) 6, "灯光", "0"));
         } else {
-            ui6 = "1";
+            uIsetDataDao.update(new UIsetData((long) 6, "灯光", "1"));
         }
         if (btn_ui_7.isChecked()) {
-            ui7 = "0";
+            uIsetDataDao.update(new UIsetData((long) 7, "空调", "0"));
         } else {
-            ui7 = "1";
+            uIsetDataDao.update(new UIsetData((long) 7, "空调", "1"));
         }
         if (btn_ui_8.isChecked()) {
-            ui8 = "0";
+            uIsetDataDao.update(new UIsetData((long) 8, "门禁", "0"));
         } else {
-            ui8 = "1";
+            uIsetDataDao.update(new UIsetData((long) 8, "门禁", "1"));
         }
         if (btn_ui_9.isChecked()) {
-            ui9 = "0";
+            uIsetDataDao.update(new UIsetData((long) 9, "音频", "0"));
         } else {
-            ui9 = "1";
+            uIsetDataDao.update(new UIsetData((long) 9, "音频", "1"));
         }
-        uIsetDataDao.deleteAll();
-        uIsetDataDao.insert(new UIsetData(ui1, ui2, ui3, ui4, ui5, ui6, ui7, ui8, ui9));
+        if (btn_ui_10.isChecked()) {
+            uIsetDataDao.update(new UIsetData((long) 10, "电风扇", "0"));
+        } else {
+            uIsetDataDao.update(new UIsetData((long) 10, "电风扇", "1"));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 
