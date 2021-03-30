@@ -151,65 +151,64 @@ public class SerialPortUtil {
                         buffer1 = new byte[1024];
                         buffer2 = new byte[1024];
                     }
-
-                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM3]")) {
-                    ELog.i("===========COM3==============");
-                    if (msgdata.indexOf("[", 2) == -1) {
-                        ELog.i("===========COM3===========111111=======" + msgdata.length());
-                        if (msgdata.length() == 17) {
-                            buffer2 = new byte[1024];
-                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
-                            setWenshidu();
-                            bslength = 0;
-                            buffer1 = new byte[1024];
-                            buffer2 = new byte[1024];
-                        }
-                    } else {
-                        if (msgdata.indexOf("]", 6) != -1) {
-                            ELog.i("===========COM3=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
-                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM3]")) {
-                                if (bslength - 16 == 9) {
-                                    ELog.i("==========COM3=======两条数据============");
-                                    buffer2 = new byte[1024];
-                                    int length1 = msgdata.indexOf(">[", 3) + 1;
-                                    ELog.i("==========COM3=======length1============" + length1);
-                                    System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
-                                    System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-                                    setWenshidu();
-                                    bslength = bslength - 25;
-                                    if (bslength != 0) {
-                                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-                                        ELog.i("==========COM3======33333=============" + new String(buffer2, 0, bslength));
-                                        buffer1 = new byte[1024];
-                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                        buffer2 = new byte[1024];
-                                        makeData(new String(buffer1, 0, bslength));
-                                    } else {
-                                        buffer1 = new byte[1024];
-                                        buffer2 = new byte[1024];
-                                    }
-                                } else {
-                                    buffer2 = new byte[1024];
-                                    bslength = bslength - msgdata.indexOf(">") - 1;
-                                    System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                    ELog.i("===========COM3======两条数据错误======" + new String(buffer2, 0, bslength));
-                                    buffer1 = new byte[1024];
-                                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                    buffer2 = new byte[1024];
-                                    makeData(new String(buffer1, 0, bslength));
-                                }
-                            } else {
-                                buffer2 = new byte[1024];
-                                bslength = bslength - msgdata.indexOf(">") - 1;
-                                System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                                ELog.i("===========COM3=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
-                                buffer1 = new byte[1024];
-                                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                                buffer2 = new byte[1024];
-                                makeData(new String(buffer1, 0, bslength));
-                            }
-                        }
-                    }
+//                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
+//                    ELog.i("===========COM7==============");
+//                    if (msgdata.indexOf("[", 2) == -1) {
+//                        ELog.i("===========COM7===========111111=======" + msgdata.length());
+//                        if (msgdata.length() == 17) {
+//                            buffer2 = new byte[1024];
+//                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
+//                            getDianLiang2();
+//                            bslength = 0;
+//                            buffer1 = new byte[1024];
+//                            buffer2 = new byte[1024];
+//                        }
+//                    } else {
+//                        if (msgdata.indexOf("]", 6) != -1) {
+//                            ELog.i("===========COM7=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
+//                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
+//                                if (bslength - 16 == 9) {
+//                                    ELog.i("==========COM7=======两条数据============");
+//                                    buffer2 = new byte[1024];
+//                                    int length1 = msgdata.indexOf(">[", 3) + 1;
+//                                    ELog.i("==========COM7=======length1============" + length1);
+//                                    System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
+//                                    System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
+//                                    getDianLiang2();
+//                                    bslength = bslength - 25;
+//                                    if (bslength != 0) {
+//                                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
+//                                        ELog.i("==========COM7======33333=============" + new String(buffer2, 0, bslength));
+//                                        buffer1 = new byte[1024];
+//                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+//                                        buffer2 = new byte[1024];
+//                                        makeData(new String(buffer1, 0, bslength));
+//                                    } else {
+//                                        buffer1 = new byte[1024];
+//                                        buffer2 = new byte[1024];
+//                                    }
+//                                } else {
+//                                    buffer2 = new byte[1024];
+//                                    bslength = bslength - msgdata.indexOf(">") - 1;
+//                                    System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+//                                    ELog.i("===========COM7======两条数据错误======" + new String(buffer2, 0, bslength));
+//                                    buffer1 = new byte[1024];
+//                                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+//                                    buffer2 = new byte[1024];
+//                                    makeData(new String(buffer1, 0, bslength));
+//                                }
+//                            } else {
+//                                buffer2 = new byte[1024];
+//                                bslength = bslength - msgdata.indexOf(">") - 1;
+//                                System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
+//                                ELog.i("===========COM7=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
+//                                buffer1 = new byte[1024];
+//                                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
+//                                buffer2 = new byte[1024];
+//                                makeData(new String(buffer1, 0, bslength));
+//                            }
+//                        }
+//                    }
                 } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[VID]")) {
                     // size=18  [VID]<BB 06 08 80>
                     if (msgdata.indexOf(">") != -1) {
@@ -225,7 +224,6 @@ public class SerialPortUtil {
                         System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                         buffer2 = new byte[1024];
                         makeData(new String(buffer1, 0, bslength));
-
                     }
                 } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
                     if (msgdata.indexOf(">") != -1) {
@@ -241,7 +239,6 @@ public class SerialPortUtil {
                         System.arraycopy(buffer2, 0, buffer1, 0, bslength);
                         buffer2 = new byte[1024];
                         makeData(new String(buffer1, 0, bslength));
-
                     }
                 } else {
                     if (msgdata.indexOf(">") != -1) {
@@ -340,6 +337,21 @@ public class SerialPortUtil {
             e.printStackTrace();
             ELog.i("=======电能表====dianliang===IOException======");
         }
+    }
+
+    private static void getDianLiang2() {
+        String ret = "";
+        for (int j = 0; j < 9; j++) {
+            String hex = Integer.toHexString(buffer2[j] & 0xFF);
+            if (hex.length() == 1) {
+                hex = "0" + hex;
+            }
+            ret += hex.toUpperCase();
+        }
+        ELog.i("=======电能表====dianliang=====111========" + ret);
+        ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
+        int dianliang = Integer.parseInt(ret.substring(6, 14), 16);
+        ELog.i("=======电能表====dianliang======111=======" + dianliang * 0.01);
     }
 
     private static void setWenshidu() {
