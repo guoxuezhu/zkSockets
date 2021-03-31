@@ -11,6 +11,25 @@ import java.net.SocketException;
 
 public class UDPUtil {
 
+    public static void doWangguan(String ml) {
+        EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
+        if (wangguandata.loadAll().size() == 0 || wangguandata.loadAll().get(0).status == 0) {
+            return;
+        }
+        // 5-1-1 5-10-1
+        String[] mls = ml.split("-");
+        if (mls.length != 3) {
+            return;
+        }
+        if (mls[2].equals("1")) {
+            String hex = Integer.toHexString(Integer.valueOf(mls[1]));
+            if (hex.length() == 1) {
+                hex = "0" + hex;
+            }
+            sendUdpMsg(wangguandata.loadAll().get(0).name, SerialPortUtil.StringToBytes("4C4801A9010000000100" + hex + "0A0D"));
+        }
+    }
+
     public static void makeWangguan(Long id) {
         EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
         if (wangguandata.loadAll().size() == 0) {
@@ -93,5 +112,6 @@ public class UDPUtil {
         }
 
     }
+
 
 }

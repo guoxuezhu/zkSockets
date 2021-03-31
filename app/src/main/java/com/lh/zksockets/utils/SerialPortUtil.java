@@ -476,6 +476,8 @@ public class SerialPortUtil {
                             doIO(mls[i]);
                         } else if (mls[i].substring(0, 1).equals("4")) {
                             doDanger(mls[i]);
+                        } else if (mls[i].substring(0, 1).equals("5")) {
+                            UDPUtil.doWangguan(mls[i]);
                         }
                         sleep(1000);
                     } catch (InterruptedException e) {
@@ -898,7 +900,6 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             try {
-                UDPUtil.makeWangguan(id);
                 if (id == 1) {
                     isxiake = false;
                     closeXiakeTimer();
