@@ -271,6 +271,12 @@ public class EventActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.button_event_dianfs)
+    public void button_event_dianfs() {
+        startActivity(new Intent(this, DianfsEventActivity.class));
+        finish();
+    }
+
 //
 //    @OnClick(R.id.event_btn_back)
 //    public void event_btn_back() {

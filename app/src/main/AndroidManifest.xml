@@ -27,6 +27,9 @@
             android:name=".ui.XinfengEventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".ui.DianfsEventActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.PowerEventActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
