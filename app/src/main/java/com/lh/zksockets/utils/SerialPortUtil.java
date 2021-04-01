@@ -16,8 +16,6 @@ import com.lh.zksockets.data.DbDao.MicDatasDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
-import com.lh.zksockets.data.DbDao.VidStatusDao;
-import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IcCard;
@@ -25,16 +23,12 @@ import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.MicDatas;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.Users;
-import com.lh.zksockets.data.model.VidStatus;
 import com.lh.zksockets.data.model.WenShiDu;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -84,45 +78,26 @@ public class SerialPortUtil {
         }
     }
 
-
-    private static int bslength = 0;
-    private static byte[] buffer1 = new byte[1024];
-    private static byte[] buffer2 = new byte[1024];
-
     public static void readMsg2() {
 
         new Thread() {
             @Override
             public void run() {
                 super.run();
-
                 byte[] buffer = new byte[1024];
-
-
                 int size; //读取数据的大小
                 try {
                     while (true && (size = inputStream2.read(buffer, 0, 1024)) > 0) {
                         if (size > 0) {
-                            ELog.i("=========串口2===接收到了数据==size=====" + size);
-                            String msg = new String(buffer, 0, size);
-                            ELog.i("=========串口2===接收到了数据=======" + msg);
-                            if (msg.indexOf("[") != -1 && msg.indexOf("]") != -1) {
-                                if (bslength > 200) {
-                                    bslength = 0;
-                                    buffer1 = new byte[1024];
-                                    buffer2 = new byte[1024];
-                                }
-                                try {
-                                    System.arraycopy(buffer, 0, buffer1, bslength, size);
-                                    bslength = bslength + size;
-                                    makeData(new String(buffer1, 0, bslength));
-                                } catch (Exception e) {
-                                    ELog.e("=====串口2===run====System.arraycopy====" + e.toString());
-                                }
+                            try {
+                                ELog.i("=========串口2===接收到了数据==size=====" + size);
+                                ELog.i("=========串口2===接收到了数据=======" + new String(buffer, 0, size));
+                                SportDataUtil.readSptdata(buffer, size);
+                            } catch (Exception e) {
+                                ELog.e("=======串口2==run: 数据读取异常===222222=====" + e.toString());
                             }
                         }
                     }
-
                 } catch (IOException e) {
                     ELog.e("=======串口2==run: 数据读取异常========" + e.toString());
                 }
@@ -133,180 +108,13 @@ public class SerialPortUtil {
 
     }
 
-    private static void makeData(String msgdata) {
-        try {
-            ELog.i("============msgdata====00=============" + msgdata);
-            if (msgdata.indexOf("]") != -1) {
-                ELog.i("============msgdata====11111=============" + msgdata);
-                if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
-                    bslength = bslength - 4;
-                    if (bslength != 0) {
-                        System.arraycopy(buffer1, 4, buffer2, 0, bslength);
-                        ELog.i("==========OK======44444444444444444=============" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-                    } else {
-                        buffer1 = new byte[1024];
-                        buffer2 = new byte[1024];
-                    }
-//                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
-//                    ELog.i("===========COM7==============");
-//                    if (msgdata.indexOf("[", 2) == -1) {
-//                        ELog.i("===========COM7===========111111=======" + msgdata.length());
-//                        if (msgdata.length() == 17) {
-//                            buffer2 = new byte[1024];
-//                            System.arraycopy(buffer1, 7, buffer2, 0, 9);
-//                            getDianLiang2();
-//                            bslength = 0;
-//                            buffer1 = new byte[1024];
-//                            buffer2 = new byte[1024];
-//                        }
-//                    } else {
-//                        if (msgdata.indexOf("]", 6) != -1) {
-//                            ELog.i("===========COM7=========2222=========" + msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1));
-//                            if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
-//                                if (bslength - 16 == 9) {
-//                                    ELog.i("==========COM7=======两条数据============");
-//                                    buffer2 = new byte[1024];
-//                                    int length1 = msgdata.indexOf(">[", 3) + 1;
-//                                    ELog.i("==========COM7=======length1============" + length1);
-//                                    System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
-//                                    System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-//                                    getDianLiang2();
-//                                    bslength = bslength - 25;
-//                                    if (bslength != 0) {
-//                                        System.arraycopy(buffer1, 25, buffer2, 0, bslength);
-//                                        ELog.i("==========COM7======33333=============" + new String(buffer2, 0, bslength));
-//                                        buffer1 = new byte[1024];
-//                                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-//                                        buffer2 = new byte[1024];
-//                                        makeData(new String(buffer1, 0, bslength));
-//                                    } else {
-//                                        buffer1 = new byte[1024];
-//                                        buffer2 = new byte[1024];
-//                                    }
-//                                } else {
-//                                    buffer2 = new byte[1024];
-//                                    bslength = bslength - msgdata.indexOf(">") - 1;
-//                                    System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-//                                    ELog.i("===========COM7======两条数据错误======" + new String(buffer2, 0, bslength));
-//                                    buffer1 = new byte[1024];
-//                                    System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-//                                    buffer2 = new byte[1024];
-//                                    makeData(new String(buffer1, 0, bslength));
-//                                }
-//                            } else {
-//                                buffer2 = new byte[1024];
-//                                bslength = bslength - msgdata.indexOf(">") - 1;
-//                                System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-//                                ELog.i("===========COM7=====去掉有问题数据后=======" + new String(buffer2, 0, bslength));
-//                                buffer1 = new byte[1024];
-//                                System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-//                                buffer2 = new byte[1024];
-//                                makeData(new String(buffer1, 0, bslength));
-//                            }
-//                        }
-//                    }
-                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[VID]")) {
-                    // size=18  [VID]<BB 06 08 80>
-                    if (msgdata.indexOf(">") != -1) {
-                        if (msgdata.indexOf(">") == 17) {
-                            if (msgdata.substring(6, 11).equals("BB 06") && msgdata.substring(15, 17).equals("80")) {
-                                onVIDinStatus(msgdata.substring(12, 14));
-                            }
-                        }
-                        bslength = bslength - 18;
-                        System.arraycopy(buffer1, 18, buffer2, 0, bslength);
-                        ELog.i("===========VID=====22222=============" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-                    }
-                } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
-                    if (msgdata.indexOf(">") != -1) {
-                        buffer2 = new byte[1024];
-                        System.arraycopy(buffer1, 7, buffer2, 0, 1);
-
-                        baojin(Integer.toHexString(buffer2[0] & 0xFF));
-
-                        bslength = bslength - 9;
-                        System.arraycopy(buffer1, 9, buffer2, 0, bslength);
-                        ELog.i("===========ARM0=====3333333333333333=============" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-                    }
-                } else {
-                    if (msgdata.indexOf(">") != -1) {
-                        ELog.i("==========其它接收数据=======1111111111111111111111=====" + msgdata.indexOf(">"));
-                        buffer2 = new byte[1024];
-                        bslength = bslength - msgdata.indexOf(">") - 1;
-                        System.arraycopy(buffer1, msgdata.indexOf(">") + 1, buffer2, 0, bslength);
-                        ELog.i("===========其它接收数据======22222222222222222222222======" + new String(buffer2, 0, bslength));
-                        buffer1 = new byte[1024];
-                        System.arraycopy(buffer2, 0, buffer1, 0, bslength);
-                        buffer2 = new byte[1024];
-                        makeData(new String(buffer1, 0, bslength));
-                    }
-
-                }
-
-
-            }
-        } catch (Exception e) {
-            ELog.i("=========串口2===接收到了数据==处理异常======" + e.toString());
-            bslength = 0;
-            buffer1 = new byte[1024];
-            buffer2 = new byte[1024];
-        }
-
-    }
-
-    private static void onVIDinStatus(String str) {
-        ELog.i("=======输入信号====00====" + str);
-        String strInStatus = JinzhiUtil.get2String(str.substring(1));
-        ELog.i("=======输入信号====status====" + strInStatus);
-        String strOutStatus = JinzhiUtil.get2String(str.substring(0, 1));
-        ELog.i("=======输出信号====status====" + strOutStatus);
-        VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
-        if (vidStatusDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                vidStatusDao.insert(new VidStatus((long) i, "输入口" + i, strInStatus.substring(4 - i, 5 - i)));
-            }
-            for (int n = 1; n < 5; n++) {
-                vidStatusDao.insert(new VidStatus((long) n + 10, "输出口" + n, strOutStatus.substring(4 - n, 5 - n)));
-            }
-        } else {
-            if (!strInStatus.substring(1, 2).equals(vidStatusDao.load((long) 3).vidinStatus)) {
-                if (strInStatus.substring(1, 2).equals("0")) {
-                    ELog.i("======老师笔记本====无信号===");
-                    bjbnovid();
-                } else {
-                    ELog.i("======老师笔记本====有信号====");
-                    bjbokvid();
-                }
-            }
-            for (int i = 1; i < 5; i++) {
-                vidStatusDao.update(new VidStatus((long) i, "输入口" + i, strInStatus.substring(4 - i, 5 - i)));
-            }
-            for (int n = 1; n < 5; n++) {
-                vidStatusDao.update(new VidStatus((long) n + 10, "输出口" + n, strOutStatus.substring(4 - n, 5 - n)));
-            }
-        }
-        ELog.i("======vidStatusDao========" + vidStatusDao.loadAll().toString());
-    }
-
-    private static void bjbokvid() {
+    public static void bjbokvid() {
         if (!isxiake) {
             closeXiakeTimer();
         }
     }
 
-    private static void bjbnovid() {
+    public static void bjbnovid() {
         if (!isxiake) {
             ontimerXiake();
         }
@@ -325,71 +133,6 @@ public class SerialPortUtil {
         }, 60 * 1500);
     }
 
-    private static void getDianLiang() {
-        byte[] buffer3 = new byte[4];
-        System.arraycopy(buffer2, 3, buffer3, 0, 4);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer3);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-        try {
-            float dianliang = dataInputStream.readFloat();
-            ELog.i("=======电能表====dianliang=========" + dianliang);
-        } catch (IOException e) {
-            e.printStackTrace();
-            ELog.i("=======电能表====dianliang===IOException======");
-        }
-    }
-
-    private static void getDianLiang2() {
-        String ret = "";
-        for (int j = 0; j < 9; j++) {
-            String hex = Integer.toHexString(buffer2[j] & 0xFF);
-            if (hex.length() == 1) {
-                hex = "0" + hex;
-            }
-            ret += hex.toUpperCase();
-        }
-        ELog.i("=======电能表====dianliang=====111========" + ret);
-        ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
-        int dianliang = Integer.parseInt(ret.substring(6, 14), 16);
-        ELog.i("=======电能表====dianliang======111=======" + dianliang * 0.01);
-    }
-
-    private static void setWenshidu() {
-
-        String ret = "";
-        for (int j = 0; j < 9; j++) {
-            String hex = Integer.toHexString(buffer2[j] & 0xFF);
-            if (hex.length() == 1) {
-                hex = "0" + hex;
-            }
-            ret += hex.toUpperCase();
-        }
-        ELog.i("=======温度=============" + ret);
-        if (ret.substring(0, 6).equals("010404")) {
-            if (!ret.substring(6, 8).equals("FF")) {
-                ELog.i("=======温度====" + Integer.parseInt(ret.substring(6, 10), 16));
-                ELog.i("=======湿度====" + Integer.parseInt(ret.substring(10, 14), 16));
-
-                BigDecimal wendu = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
-
-                BigDecimal shidu = new BigDecimal(Integer.parseInt(ret.substring(10, 14), 16));
-
-                BigDecimal bigDecimal = new BigDecimal("0.1");
-
-                WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-
-                WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        "", 0, "1-401");
-                wenShiDuDao.deleteAll();
-                wenShiDuDao.insert(wenShiDu);
-
-//                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%" + ";" + "0" + "ug/m3";
-//                sendMsg1(wsd.getBytes());
-            }
-        }
-
-    }
-
     public static void sendMsg1(byte[] data) {
         try {
             synchronized (data) {
@@ -401,63 +144,6 @@ public class SerialPortUtil {
             }
         } catch (IOException e) {
             ELog.e("====sendMsg1===串口数据发送失败：" + e.toString());
-        }
-    }
-
-
-    private static void baojin(String hex) {
-        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        if (ioYuanDao.loadAll().size() == 0) {
-            return;
-        }
-        ELog.i("=========报警口==hex====" + hex);
-        String str2jz = JinzhiUtil.get2String(hex.substring(1));
-        ELog.i("=========报警口==000====" + str2jz);
-        if (str2jz != null) {
-            DangerStatusDao dangerStatusDao = MyApplication.getDaoSession().getDangerStatusDao();
-
-            if (!str2jz.substring(0, 1).equals(dangerStatusDao.load((long) 1).dangerStatus4 + "")) {
-                if (str2jz.substring(0, 1).equals(ioYuanDao.load((long) 4).dangerIoStatus + "")) {
-                    ELog.i("=========报警口======" + 4);
-                    getEventId(ioYuanDao.load((long) 4).dangerMl);
-                } else {
-                    getEventId(ioYuanDao.load((long) 4).noDangerMl);
-                }
-            }
-
-            if (!str2jz.substring(1, 2).equals(dangerStatusDao.load((long) 1).dangerStatus3 + "")) {
-                if (str2jz.substring(1, 2).equals(ioYuanDao.load((long) 3).dangerIoStatus + "")) {
-                    ELog.i("=========报警口======" + 3);
-                    getEventId(ioYuanDao.load((long) 3).dangerMl);
-                } else {
-                    getEventId(ioYuanDao.load((long) 3).noDangerMl);
-                }
-            }
-
-            if (!str2jz.substring(2, 3).equals(dangerStatusDao.load((long) 1).dangerStatus2 + "")) {
-                if (str2jz.substring(2, 3).equals(ioYuanDao.load((long) 2).dangerIoStatus + "")) {
-                    ELog.i("=========报警口======" + 2);
-                    getEventId(ioYuanDao.load((long) 2).dangerMl);
-                } else {
-                    getEventId(ioYuanDao.load((long) 2).noDangerMl);
-                }
-            }
-
-            if (!str2jz.substring(3, 4).equals(dangerStatusDao.load((long) 1).dangerStatus1 + "")) {
-                if (str2jz.substring(3, 4).equals(ioYuanDao.load((long) 1).dangerIoStatus + "")) {
-                    ELog.i("=========报警口======" + 1);
-                    getEventId(ioYuanDao.load((long) 1).dangerMl);
-                } else {
-                    getEventId(ioYuanDao.load((long) 1).noDangerMl);
-                }
-            }
-
-            dangerStatusDao.deleteAll();
-            dangerStatusDao.insert(new DangerStatus((long) 1, Integer.valueOf(str2jz.substring(3, 4)),
-                    Integer.valueOf(str2jz.substring(2, 3)),
-                    Integer.valueOf(str2jz.substring(1, 2)),
-                    Integer.valueOf(str2jz.substring(0, 1))));
-
         }
     }
 
@@ -514,7 +200,6 @@ public class SerialPortUtil {
             @Override
             public void run() {
                 super.run();
-
                 byte[] buffer = new byte[1024];
                 int size; //读取数据的大小
                 try {
