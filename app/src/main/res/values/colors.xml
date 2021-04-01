@@ -7,12 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#ffff0000</color>
+
+
+    <color name="xian">#ff757575</color><!-- Grey -->
+    <color name="xian2">#878C91</color>
+
+
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="red">#ffff0000</color>
 
     <!-- Default user icon colors -->
     <color name="user_icon_1">#ff00bcd4</color><!-- cyan 500 -->
@@ -32,7 +38,7 @@
     <color name="profile_badge_3">#ff22f033</color><!-- Green -->
 
     <!-- Default instant app badge color -->
-    <color name="xian">#ff757575</color><!-- Grey -->
+
 
     <!-- Multi-sim sim colors -->
     <color name="teal_800">#ff00695c</color>

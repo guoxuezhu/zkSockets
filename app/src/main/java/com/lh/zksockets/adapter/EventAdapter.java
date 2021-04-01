@@ -12,18 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.MLsLists;
-import com.lh.zksockets.utils.ELog;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
@@ -52,7 +47,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.event_name.setText(mLsLists.name);
         holder.event_time.setText(mLsLists.time);
         holder.event_et_ml.setText(mLsLists.strMLs);
-
     }
 
     @Override
@@ -97,7 +91,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         public void mlEtChanged(Editable editable) {
             if (!editable.toString().equals(item.strMLs)) {
                 mCallBack.onSetingMl(mPosition, editable.toString());
-                ELog.i("==============OnTextChanged=====1111=======" + editable.toString());
             }
         }
     }
