@@ -36,14 +36,18 @@ public class SportDataUtil {
         ELog.i("============msgdata====00=============" + msgdata);
         if (msgdata.length() > 1 && msgdata.substring(0, 1).equals("[")) {
             if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[OK]")) {
+                delectbuf3();
                 makeOK(msgdata);
             } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[VID]")) {
+                delectbuf3();
                 makeVID(msgdata);
             } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[ARM0]")) {
+                delectbuf3();
                 makeARM(msgdata);
             } else if (msgdata.substring(0, msgdata.indexOf("]") + 1).equals("[COM7]")) {
                 makeCOM(msgdata);
             } else {
+                delectbuf3();
                 makeNOData(msgdata);
             }
         } else {
@@ -210,16 +214,19 @@ public class SportDataUtil {
     }
 
     private static void getDianLiang() {
-        byte[] buffer3 = new byte[4];
-        System.arraycopy(buffer2, 3, buffer3, 0, 4);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer3);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-        try {
-            float dianliang = dataInputStream.readFloat();
-            ELog.i("=======电能表====dianliang=========" + dianliang);
-        } catch (IOException e) {
-            e.printStackTrace();
-            ELog.i("=======电能表====dianliang===IOException======");
+        if (bslength3 == 9) {
+            buffer2 = new byte[4];
+            System.arraycopy(buffer3, 3, buffer2, 0, 4);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer2);
+            DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+            try {
+                float dianliang = dataInputStream.readFloat();
+                ELog.i("=======电能表====dianliang=========" + dianliang);
+            } catch (IOException e) {
+                e.printStackTrace();
+                ELog.i("=======电能表====dianliang===IOException======");
+            }
+            delectbuf3();
         }
     }
 
@@ -234,35 +241,36 @@ public class SportDataUtil {
             ret += hex.toUpperCase();
         }
         ELog.i("=======电能表====dianliang=====111========" + ret);
-        if (bslength3 == 9) {
+        if (bslength3 == 9 && ret.substring(0, 6).equals("010404")) {
             ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
-            int dianliang = Integer.parseInt(ret.substring(6, 14), 16);
-            ELog.i("=======电能表====dianliang======111=======" + dianliang * 0.01);
-            bslength3 = 0;
-            buffer3 = new byte[1024];
+            BigDecimal dianliang = new BigDecimal(Integer.parseInt(ret.substring(6, 14), 16));
+            BigDecimal bigDecimal = new BigDecimal("0.01");
+            ELog.i("=======电能表====dianliang======111=======" + dianliang.multiply(bigDecimal) + "kW·h");
+            delectbuf3();
         }
     }
 
-    private static void setWenshidu() {
+    private static void delectbuf3() {
+        bslength3 = 0;
+        buffer3 = new byte[1024];
+    }
 
+    private static void setWenshidu() {
         String ret = "";
-        for (int j = 0; j < 9; j++) {
-            String hex = Integer.toHexString(buffer2[j] & 0xFF);
+        for (int j = 0; j < bslength3; j++) {
+            String hex = Integer.toHexString(buffer3[j] & 0xFF);
             if (hex.length() == 1) {
                 hex = "0" + hex;
             }
             ret += hex.toUpperCase();
         }
         ELog.i("=======温度=============" + ret);
-        if (ret.substring(0, 6).equals("010404")) {
+        if (bslength3 == 9 && ret.substring(0, 6).equals("010404")) {
             if (!ret.substring(6, 8).equals("FF")) {
                 ELog.i("=======温度====" + Integer.parseInt(ret.substring(6, 10), 16));
                 ELog.i("=======湿度====" + Integer.parseInt(ret.substring(10, 14), 16));
-
                 BigDecimal wendu = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
-
                 BigDecimal shidu = new BigDecimal(Integer.parseInt(ret.substring(10, 14), 16));
-
                 BigDecimal bigDecimal = new BigDecimal("0.1");
 
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
@@ -271,11 +279,10 @@ public class SportDataUtil {
                         "", 0, "1-401");
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
-
+                delectbuf3();
 //                String wsd = "WSD;" + wendu.multiply(bigDecimal) + "℃" + ";" + shidu.multiply(bigDecimal) + "%" + ";" + "0" + "ug/m3";
 //                sendMsg1(wsd.getBytes());
             }
         }
-
     }
 }

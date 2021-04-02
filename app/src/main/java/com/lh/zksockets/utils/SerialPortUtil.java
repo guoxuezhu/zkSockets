@@ -5,9 +5,7 @@ import android.os.Message;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
-import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
-import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
@@ -17,7 +15,6 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
-import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.MicDatas;
