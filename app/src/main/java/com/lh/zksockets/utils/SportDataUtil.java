@@ -16,10 +16,11 @@ import java.math.BigDecimal;
 
 public class SportDataUtil {
 
-
     private static int bslength = 0;
+    private static int bslength3 = 0;
     private static byte[] buffer1 = new byte[1024];
     private static byte[] buffer2 = new byte[1024];
+    private static byte[] buffer3 = new byte[1024];
 
     public static void readSptdata(byte[] buffer, int size) {
         try {
@@ -77,44 +78,20 @@ public class SportDataUtil {
     }
 
     private static void makeCOM(String msgdata) {
-        //size=25 [COM7]<����>����>[COM7]<����lz>
-        if (msgdata.indexOf("[", 2) == -1) {
-            if (msgdata.length() == 17) {
-                buffer2 = new byte[1024];
-                System.arraycopy(buffer1, 7, buffer2, 0, 9);
-                getDianLiang2();
-                bslength = 0;
-                buffer1 = new byte[1024];
-                buffer2 = new byte[1024];
+        //size=17 [COM7]<����>����>   size=25 [COM7]<����>����>[COM7]<����lz>
+        if (msgdata.indexOf(">") != -1) {
+            ELog.i("===========COM=======bslength===========" + bslength);
+            int endsize;
+            if (msgdata.indexOf("[", 2) == -1) {
+                endsize = bslength;
+            } else {
+                endsize = msgdata.indexOf(">[") + 1;
             }
-        } else {
-            if (msgdata.indexOf("]<", 7) != -1 && msgdata.indexOf(">", msgdata.indexOf("]<", 7)) != -1) {
-                int endsize = msgdata.indexOf(">", msgdata.indexOf("]<", 7)) + 1;
-                ELog.i("===========COM=======endsize===========" + endsize);
-                ELog.i("===========COM=======bslength===========" + bslength);
-                if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
-                    if (bslength >= 25) {
-                        String str25 = msgdata.substring(24, 25);
-                        ELog.i("===========COM======str25=========" + str25);
-                        if (str25.equals(">")) {
-                            buffer2 = new byte[1024];
-                            int length1 = msgdata.indexOf(">[", 3) + 1;
-                            ELog.i("==========COM======两条数据====length1============" + length1);
-                            System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
-                            System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
-                            getDianLiang2();
-                            delectNobuf(25);
-                        } else {
-                            delectNobuf(endsize);
-                        }
-                    } else {
-                        delectNobuf(endsize);
-                    }
-                } else {
-                    int endsize2 = msgdata.indexOf(">") + 1;
-                    delectNobuf(endsize2);
-                }
-            }
+            ELog.i("===========COM=======endsize===========" + endsize);
+            System.arraycopy(buffer1, 7, buffer3, bslength3, endsize - 8);
+            bslength3 = bslength3 + endsize - 8;
+            getDianLiang2();
+            delectNobuf(endsize);
         }
     }
 
@@ -247,18 +224,23 @@ public class SportDataUtil {
     }
 
     private static void getDianLiang2() {
+        ELog.i("=======电能表====bslength3=============" + bslength3);
         String ret = "";
-        for (int j = 0; j < 9; j++) {
-            String hex = Integer.toHexString(buffer2[j] & 0xFF);
+        for (int j = 0; j < bslength3; j++) {
+            String hex = Integer.toHexString(buffer3[j] & 0xFF);
             if (hex.length() == 1) {
                 hex = "0" + hex;
             }
             ret += hex.toUpperCase();
         }
         ELog.i("=======电能表====dianliang=====111========" + ret);
-        ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
-        int dianliang = Integer.parseInt(ret.substring(6, 14), 16);
-        ELog.i("=======电能表====dianliang======111=======" + dianliang * 0.01);
+        if (bslength3 == 9) {
+            ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
+            int dianliang = Integer.parseInt(ret.substring(6, 14), 16);
+            ELog.i("=======电能表====dianliang======111=======" + dianliang * 0.01);
+            bslength3 = 0;
+            buffer3 = new byte[1024];
+        }
     }
 
     private static void setWenshidu() {
