@@ -69,13 +69,9 @@ public class SportDataUtil {
     }
 
     private static void makeNOData(String msgdata) {
-        if (msgdata.indexOf(">") != -1) {
-            ELog.i("==========其它接收数据======>>>>======" + msgdata);
-            int endsize = msgdata.indexOf(">") + 1;
-            delectNobuf(endsize);
-        } else if (msgdata.indexOf(">") != -1) {
-            ELog.i("==========其它接收数据======]]]]]======" + msgdata);
-            int endsize = msgdata.indexOf("]") + 1;
+        if (msgdata.indexOf("[", 2) == -1) {
+            ELog.i("==========其它接收数据==========" + msgdata);
+            int endsize = msgdata.indexOf("[", 2) + 1;
             delectNobuf(endsize);
         }
     }
@@ -94,16 +90,16 @@ public class SportDataUtil {
         } else {
             if (msgdata.indexOf("]<", 7) != -1 && msgdata.indexOf(">", msgdata.indexOf("]<", 7)) != -1) {
                 int endsize = msgdata.indexOf(">", msgdata.indexOf("]<", 7)) + 1;
-                ELog.i("===========COM7=======endsize===========" + endsize);
-                ELog.i("===========COM7=======bslength===========" + bslength);
+                ELog.i("===========COM=======endsize===========" + endsize);
+                ELog.i("===========COM=======bslength===========" + bslength);
                 if (msgdata.substring(msgdata.indexOf(">[", 3) + 1, msgdata.indexOf("]<", 6) + 1).equals("[COM7]")) {
                     if (bslength >= 25) {
                         String str25 = msgdata.substring(24, 25);
-                        ELog.i("===========COM7======str25=========" + str25);
+                        ELog.i("===========COM======str25=========" + str25);
                         if (str25.equals(">")) {
                             buffer2 = new byte[1024];
                             int length1 = msgdata.indexOf(">[", 3) + 1;
-                            ELog.i("==========COM7======两条数据====length1============" + length1);
+                            ELog.i("==========COM======两条数据====length1============" + length1);
                             System.arraycopy(buffer1, 7, buffer2, 0, length1 - 8);
                             System.arraycopy(buffer1, length1 + 7, buffer2, length1 - 8, bslength - length1 - 8);
                             getDianLiang2();
