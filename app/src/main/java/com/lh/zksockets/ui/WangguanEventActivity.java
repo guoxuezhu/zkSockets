@@ -2,49 +2,32 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.adapter.EventAdapter;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WangguanEventActivity extends BaseActivity {
+public class WangguanEventActivity extends BaseActivity implements EventAdapter.CallBack {
 
-    @BindView(R.id.event_et_7001)
-    EditText event_et_7001;
-    @BindView(R.id.event_et_7002)
-    EditText event_et_7002;
-    @BindView(R.id.event_et_7003)
-    EditText event_et_7003;
-    @BindView(R.id.event_et_7004)
-    EditText event_et_7004;
-    @BindView(R.id.event_et_7005)
-    EditText event_et_7005;
-    @BindView(R.id.event_et_7006)
-    EditText event_et_7006;
-
-    @BindView(R.id.event_tv_time_7001)
-    TextView event_tv_time_7001;
-    @BindView(R.id.event_tv_time_7002)
-    TextView event_tv_time_7002;
-    @BindView(R.id.event_tv_time_7003)
-    TextView event_tv_time_7003;
-    @BindView(R.id.event_tv_time_7004)
-    TextView event_tv_time_7004;
-    @BindView(R.id.event_tv_time_7005)
-    TextView event_tv_time_7005;
-    @BindView(R.id.event_tv_time_7006)
-    TextView event_tv_time_7006;
+    @BindView(R.id.wangguan_event_recyclerView)
+    RecyclerView wangguan_event_recyclerView;
 
     private MLsListsDao mLsListsDao;
-
+    private List<MLsLists> wangguanEventdatas;
+    private EventAdapter mEventAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,34 +36,31 @@ public class WangguanEventActivity extends BaseActivity {
 
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
 
-        event_et_7001.setText(mLsListsDao.load((long) 7001).strMLs);
-        event_et_7002.setText(mLsListsDao.load((long) 7002).strMLs);
-        event_et_7003.setText(mLsListsDao.load((long) 7003).strMLs);
-        event_et_7004.setText(mLsListsDao.load((long) 7004).strMLs);
-        event_et_7005.setText(mLsListsDao.load((long) 7005).strMLs);
-        event_et_7006.setText(mLsListsDao.load((long) 7006).strMLs);
+        wangguan_event_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        wangguanEventdatas = mLsListsDao.queryBuilder()
+                .where(MLsListsDao.Properties.Name.like("%网关%"))
+                .orderAsc(MLsListsDao.Properties.Id)
+                .list();
+        mEventAdapter = new EventAdapter(this, wangguanEventdatas, this);
+        wangguan_event_recyclerView.setAdapter(mEventAdapter);
+        ELog.i("===========wangguanEventdatas===========" + wangguanEventdatas.toString());
 
-        event_tv_time_7001.setText(mLsListsDao.load((long) 7001).time);
-        event_tv_time_7002.setText(mLsListsDao.load((long) 7002).time);
-        event_tv_time_7003.setText(mLsListsDao.load((long) 7003).time);
-        event_tv_time_7004.setText(mLsListsDao.load((long) 7004).time);
-        event_tv_time_7005.setText(mLsListsDao.load((long) 7005).time);
-        event_tv_time_7006.setText(mLsListsDao.load((long) 7006).time);
+    }
 
+    @Override
+    public void onSetingMl(int mPosition, String etml) {
+        wangguanEventdatas.get(mPosition).setStrMLs(etml);
+        mEventAdapter.setDatas(wangguanEventdatas);
     }
 
     @OnClick(R.id.btn_event_wgkzq_ok)
     public void btn_event_wgkzq_ok() {
-        mLsListsDao.update(new MLsLists((long) 7001, "自习模式", event_et_7001.getText().toString(), event_tv_time_7001.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7002, "投影模式", event_et_7002.getText().toString(), event_tv_time_7002.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7003, "课件模式", event_et_7003.getText().toString(), event_tv_time_7003.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7004, "自动模式", event_et_7004.getText().toString(), event_tv_time_7004.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7005, "模式1", event_et_7005.getText().toString(), event_tv_time_7005.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 7006, "模式2", event_et_7006.getText().toString(), event_tv_time_7006.getText().toString()));
-
+        ELog.i("===========wangguanEventdatas===========" + wangguanEventdatas.toString());
+        for (int i = 0; i < wangguanEventdatas.size(); i++) {
+            mLsListsDao.update(wangguanEventdatas.get(i));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
-
 
     @OnClick(R.id.wgkzq_event_btn_back)
     public void wgkzq_event_btn_back() {

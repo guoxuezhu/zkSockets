@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.DengguangActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -29,9 +28,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
-
     </RelativeLayout>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,20 +39,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="@dimen/dp_900"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_50"
-                android:background="@drawable/layout_stroke_bg"
                 android:orientation="vertical">
 
+                <View style="@style/xian_1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="horizontal">
+
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -66,24 +64,18 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:gravity="center"
                         android:text="名称"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -94,10 +86,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -108,853 +97,32 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-
+                    <View style="@style/xian_2" />
                 </LinearLayout>
 
-                <View
+                <View style="@style/xian_1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dg_event_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="13"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="灯光开(全开)"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_13"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_13"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-101"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="14"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="灯光关(全关)"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_14"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_14"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-201"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3001"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="黑板灯开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3001"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3001"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-301"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3002"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="黑板灯关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3002"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3002"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-301"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3003"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯1开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3003"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3003"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-401"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3004"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯1关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3004"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3004"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-401"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3005"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯2开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3005"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3005"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-501"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3006"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯2关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3006"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3006"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-601"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3007"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯3开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3007"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3007"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-501"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3008"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯3关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3008"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3008"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-601"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3009"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="教室灯4开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3009"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3009"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-701"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="3010"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="灯光4关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_3010"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_3010"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1-801"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_event_dg_ok"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_event_dg_ok"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="保存"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-            </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
 
         </LinearLayout>
 
     </ScrollView>
-
 
 </LinearLayout>

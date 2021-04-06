@@ -2,40 +2,32 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.adapter.EventAdapter;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TyjEventActivity extends BaseActivity {
+public class TyjEventActivity extends BaseActivity implements EventAdapter.CallBack {
 
-    @BindView(R.id.event_et_9)
-    EditText event_et_9;
-    @BindView(R.id.event_et_10)
-    EditText event_et_10;
-    @BindView(R.id.event_et_11)
-    EditText event_et_11;
-    @BindView(R.id.event_et_12)
-    EditText event_et_12;
-
-    @BindView(R.id.event_tv_time_9)
-    TextView event_tv_time_9;
-    @BindView(R.id.event_tv_time_10)
-    TextView event_tv_time_10;
-    @BindView(R.id.event_tv_time_11)
-    TextView event_tv_time_11;
-    @BindView(R.id.event_tv_time_12)
-    TextView event_tv_time_12;
+    @BindView(R.id.tyj_event_recyclerView)
+    RecyclerView tyj_event_recyclerView;
 
     private MLsListsDao mLsListsDao;
+    private List<MLsLists> tyjEventdatas;
+    private EventAdapter mEventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +36,30 @@ public class TyjEventActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
-        event_et_9.setText(mLsListsDao.load((long) 9).strMLs);
-        event_et_10.setText(mLsListsDao.load((long) 10).strMLs);
-        event_et_11.setText(mLsListsDao.load((long) 11).strMLs);
-        event_et_12.setText(mLsListsDao.load((long) 12).strMLs);
 
-        event_tv_time_9.setText(mLsListsDao.load((long) 9).time);
-        event_tv_time_10.setText(mLsListsDao.load((long) 10).time);
-        event_tv_time_11.setText(mLsListsDao.load((long) 11).time);
-        event_tv_time_12.setText(mLsListsDao.load((long) 12).time);
+        tyj_event_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tyjEventdatas = mLsListsDao.queryBuilder()
+                .where(MLsListsDao.Properties.Name.like("%投影机%"))
+                .orderAsc(MLsListsDao.Properties.Id)
+                .list();
+        mEventAdapter = new EventAdapter(this, tyjEventdatas, this);
+        tyj_event_recyclerView.setAdapter(mEventAdapter);
+        ELog.i("===========tyjEventdatas===========" + tyjEventdatas.toString());
 
+    }
+
+    @Override
+    public void onSetingMl(int mPosition, String etml) {
+        tyjEventdatas.get(mPosition).setStrMLs(etml);
+        mEventAdapter.setDatas(tyjEventdatas);
     }
 
     @OnClick(R.id.btn_event_tyj_ok)
     public void btn_event_tyj_ok() {
-        mLsListsDao.update(new MLsLists((long) 9, "投影机开", event_et_9.getText().toString(), event_tv_time_9.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 10, "投影机关", event_et_10.getText().toString(), event_tv_time_10.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 11, "幕布升", event_et_11.getText().toString(), event_tv_time_11.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 12, "幕布降", event_et_12.getText().toString(), event_tv_time_12.getText().toString()));
+        ELog.i("===========tyjEventdatas===========" + tyjEventdatas.toString());
+        for (int i = 0; i < tyjEventdatas.size(); i++) {
+            mLsListsDao.update(tyjEventdatas.get(i));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

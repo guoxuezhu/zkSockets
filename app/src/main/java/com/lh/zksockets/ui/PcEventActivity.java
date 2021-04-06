@@ -2,73 +2,32 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.adapter.EventAdapter;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PcEventActivity extends BaseActivity {
+public class PcEventActivity extends BaseActivity implements EventAdapter.CallBack {
 
-    @BindView(R.id.event_et_5001)
-    EditText event_et_5001;
-    @BindView(R.id.event_et_5002)
-    EditText event_et_5002;
-    @BindView(R.id.event_et_5003)
-    EditText event_et_5003;
-    @BindView(R.id.event_et_5004)
-    EditText event_et_5004;
-    @BindView(R.id.event_et_5005)
-    EditText event_et_5005;
-    @BindView(R.id.event_et_5006)
-    EditText event_et_5006;
-    @BindView(R.id.event_et_5007)
-    EditText event_et_5007;
-    @BindView(R.id.event_et_5008)
-    EditText event_et_5008;
-    @BindView(R.id.event_et_5091)
-    EditText event_et_5091;
-    @BindView(R.id.event_et_5092)
-    EditText event_et_5092;
-    @BindView(R.id.event_et_5101)
-    EditText event_et_5101;
-    @BindView(R.id.event_et_5102)
-    EditText event_et_5102;
-
-    @BindView(R.id.event_tv_time_5001)
-    TextView event_tv_time_5001;
-    @BindView(R.id.event_tv_time_5002)
-    TextView event_tv_time_5002;
-    @BindView(R.id.event_tv_time_5003)
-    TextView event_tv_time_5003;
-    @BindView(R.id.event_tv_time_5004)
-    TextView event_tv_time_5004;
-    @BindView(R.id.event_tv_time_5005)
-    TextView event_tv_time_5005;
-    @BindView(R.id.event_tv_time_5006)
-    TextView event_tv_time_5006;
-    @BindView(R.id.event_tv_time_5007)
-    TextView event_tv_time_5007;
-    @BindView(R.id.event_tv_time_5008)
-    TextView event_tv_time_5008;
-    @BindView(R.id.event_tv_time_5091)
-    TextView event_tv_time_5091;
-    @BindView(R.id.event_tv_time_5092)
-    TextView event_tv_time_5092;
-    @BindView(R.id.event_tv_time_5101)
-    TextView event_tv_time_5101;
-    @BindView(R.id.event_tv_time_5102)
-    TextView event_tv_time_5102;
-
+    @BindView(R.id.pc_event_recyclerView)
+    RecyclerView pc_event_recyclerView;
 
     private MLsListsDao mLsListsDao;
+    private List<MLsLists> pcEventdatas;
+    private EventAdapter mEventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,51 +36,30 @@ public class PcEventActivity extends BaseActivity {
         ButterKnife.bind(this);
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
 
-        event_et_5001.setText(mLsListsDao.load((long) 5001).strMLs);
-        event_et_5002.setText(mLsListsDao.load((long) 5002).strMLs);
-        event_et_5003.setText(mLsListsDao.load((long) 5003).strMLs);
-        event_et_5004.setText(mLsListsDao.load((long) 5004).strMLs);
-        event_et_5005.setText(mLsListsDao.load((long) 5005).strMLs);
-        event_et_5006.setText(mLsListsDao.load((long) 5006).strMLs);
-        event_et_5007.setText(mLsListsDao.load((long) 5007).strMLs);
-        event_et_5008.setText(mLsListsDao.load((long) 5008).strMLs);
-        event_et_5091.setText(mLsListsDao.load((long) 5091).strMLs);
-        event_et_5092.setText(mLsListsDao.load((long) 5092).strMLs);
-        event_et_5101.setText(mLsListsDao.load((long) 5101).strMLs);
-        event_et_5102.setText(mLsListsDao.load((long) 5102).strMLs);
 
-        event_tv_time_5001.setText(mLsListsDao.load((long) 5001).time);
-        event_tv_time_5002.setText(mLsListsDao.load((long) 5002).time);
-        event_tv_time_5003.setText(mLsListsDao.load((long) 5003).time);
-        event_tv_time_5004.setText(mLsListsDao.load((long) 5004).time);
-        event_tv_time_5005.setText(mLsListsDao.load((long) 5005).time);
-        event_tv_time_5006.setText(mLsListsDao.load((long) 5006).time);
-        event_tv_time_5007.setText(mLsListsDao.load((long) 5007).time);
-        event_tv_time_5008.setText(mLsListsDao.load((long) 5008).time);
-        event_tv_time_5091.setText(mLsListsDao.load((long) 5091).time);
-        event_tv_time_5092.setText(mLsListsDao.load((long) 5092).time);
-        event_tv_time_5101.setText(mLsListsDao.load((long) 5101).time);
-        event_tv_time_5102.setText(mLsListsDao.load((long) 5102).time);
+        pc_event_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        pcEventdatas = mLsListsDao.queryBuilder()
+                .where(MLsListsDao.Properties.Name.like("%大屏%"))
+                .orderAsc(MLsListsDao.Properties.Id)
+                .list();
+        mEventAdapter = new EventAdapter(this, pcEventdatas, this);
+        pc_event_recyclerView.setAdapter(mEventAdapter);
+        ELog.i("===========pcEventdatas===========" + pcEventdatas.toString());
 
     }
 
+    @Override
+    public void onSetingMl(int mPosition, String etml) {
+        pcEventdatas.get(mPosition).setStrMLs(etml);
+        mEventAdapter.setDatas(pcEventdatas);
+    }
 
     @OnClick(R.id.btn_event_pc_ok)
     public void btn_event_pc_ok() {
-
-        mLsListsDao.update(new MLsLists((long) 5001, "一体机开", event_et_5001.getText().toString(), event_tv_time_5001.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5002, "一体机关", event_et_5002.getText().toString(), event_tv_time_5002.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5003, "一体机内置显示", event_et_5003.getText().toString(), event_tv_time_5003.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5004, "一体机外置HDMI", event_et_5004.getText().toString(), event_tv_time_5004.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5005, "大屏1", event_et_5005.getText().toString(), event_tv_time_5005.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5006, "大屏2", event_et_5006.getText().toString(), event_tv_time_5006.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5007, "大屏3", event_et_5007.getText().toString(), event_tv_time_5007.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5008, "大屏4", event_et_5008.getText().toString(), event_tv_time_5008.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5091, "老师大屏一体机信号输出", event_et_5091.getText().toString(), event_tv_time_5091.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5092, "其它设备信号输出", event_et_5092.getText().toString(), event_tv_time_5092.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5101, "HDMI信号输出", event_et_5101.getText().toString(), event_tv_time_5101.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 5102, "OPS信号输出", event_et_5102.getText().toString(), event_tv_time_5102.getText().toString()));
-
+        ELog.i("===========pcEventdatas===========" + pcEventdatas.toString());
+        for (int i = 0; i < pcEventdatas.size(); i++) {
+            mLsListsDao.update(pcEventdatas.get(i));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
 

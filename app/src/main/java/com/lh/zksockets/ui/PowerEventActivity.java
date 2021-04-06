@@ -2,32 +2,33 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
+import com.lh.zksockets.adapter.EventAdapter;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PowerEventActivity extends BaseActivity {
+public class PowerEventActivity extends BaseActivity implements EventAdapter.CallBack {
 
-    @BindView(R.id.event_tv_time_37)
-    TextView event_tv_time_37;
-    @BindView(R.id.event_tv_time_38)
-    TextView event_tv_time_38;
-
-    @BindView(R.id.event_et_37)
-    EditText event_et_37;
-    @BindView(R.id.event_et_38)
-    EditText event_et_38;
+    @BindView(R.id.power_event_recyclerView)
+    RecyclerView power_event_recyclerView;
 
     private MLsListsDao mLsListsDao;
+    private List<MLsLists> powerEventdatas;
+    private EventAdapter mEventAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,21 +36,31 @@ public class PowerEventActivity extends BaseActivity {
         ButterKnife.bind(this);
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
 
-        event_et_37.setText(mLsListsDao.load((long) 37).strMLs);
-        event_et_38.setText(mLsListsDao.load((long) 38).strMLs);
-        event_tv_time_37.setText(mLsListsDao.load((long) 37).time);
-        event_tv_time_38.setText(mLsListsDao.load((long) 38).time);
+        power_event_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        powerEventdatas = mLsListsDao.queryBuilder()
+                .where(MLsListsDao.Properties.Name.like("%电源%"))
+                .orderAsc(MLsListsDao.Properties.Id)
+                .list();
+        mEventAdapter = new EventAdapter(this, powerEventdatas, this);
+        power_event_recyclerView.setAdapter(mEventAdapter);
+        ELog.i("===========powerEventdatas===========" + powerEventdatas.toString());
+
     }
 
-
+    @Override
+    public void onSetingMl(int mPosition, String etml) {
+        powerEventdatas.get(mPosition).setStrMLs(etml);
+        mEventAdapter.setDatas(powerEventdatas);
+    }
 
     @OnClick(R.id.btn_event_power_ok)
     public void btn_event_power_ok() {
-        mLsListsDao.update(new MLsLists((long) 37, "电源-全开", event_et_37.getText().toString(), event_tv_time_37.getText().toString()));
-        mLsListsDao.update(new MLsLists((long) 38, "电源-全关", event_et_38.getText().toString(), event_tv_time_38.getText().toString()));
+        ELog.i("===========powerEventdatas===========" + powerEventdatas.toString());
+        for (int i = 0; i < powerEventdatas.size(); i++) {
+            mLsListsDao.update(powerEventdatas.get(i));
+        }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
-
 
     @OnClick(R.id.power_event_btn_back)
     public void power_event_btn_back() {

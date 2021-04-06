@@ -858,9 +858,9 @@ public class SerialPortUtil {
                 sendMsg(StringToBytes("BB050" + str.substring(4) + "80"));
             }
             if (str.substring(4, 5).equals("1")) {
-                makeML(Long.valueOf("5091"));
+                makeML(Long.valueOf("5003"));
             } else {
-                makeML(Long.valueOf("5092"));
+                makeML(Long.valueOf("5004"));
             }
         }
     }

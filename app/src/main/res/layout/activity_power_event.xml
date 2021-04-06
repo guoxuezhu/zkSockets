@@ -28,7 +28,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_30" />
 
-
     </RelativeLayout>
 
 
@@ -47,14 +46,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_50"
-                android:background="@drawable/layout_stroke_bg"
                 android:orientation="vertical">
 
+                <View style="@style/xian_1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="horizontal">
+
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -65,24 +66,18 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:gravity="center"
                         android:text="名称"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -93,10 +88,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
+                    <View style="@style/xian_2" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -107,166 +99,29 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-
+                    <View style="@style/xian_2" />
                 </LinearLayout>
 
-                <View
+                <View style="@style/xian_1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/power_event_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="37"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="电源-全开"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_37"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_37"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#878C91" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="38"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="电源-全关"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <TextView
-                        android:id="@+id/event_tv_time_38"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="yyyy-MM-dd HH:mm:ss"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#878C91" />
-
-                    <EditText
-                        android:id="@+id/event_et_38"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:background="@null"
-                        android:digits="0123456789-,"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_16" />
-
-                </LinearLayout>
-
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_event_power_ok"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_event_power_ok"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_bg"
-                    android:text="保存"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_24" />
-
-            </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/btn_bg"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
 
         </LinearLayout>
 
