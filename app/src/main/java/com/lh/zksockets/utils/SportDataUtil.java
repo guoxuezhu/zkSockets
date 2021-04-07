@@ -21,6 +21,7 @@ public class SportDataUtil {
     private static byte[] buffer1 = new byte[1024];
     private static byte[] buffer2 = new byte[1024];
     private static byte[] buffer3 = new byte[1024];
+    private static int readType;
 
     public static void readSptdata(byte[] buffer, int size) {
         try {
@@ -240,13 +241,34 @@ public class SportDataUtil {
             }
             ret += hex.toUpperCase();
         }
-        ELog.i("=======电能表====dianliang=====111========" + ret);
-        if (bslength3 == 9 && ret.substring(0, 6).equals("010404")) {
-            ELog.i("=======电能表====dianliang=============" + ret.substring(6, 14));
-            BigDecimal dianliang = new BigDecimal(Integer.parseInt(ret.substring(6, 14), 16));
-            BigDecimal bigDecimal = new BigDecimal("0.01");
-            ELog.i("=======电能表====dianliang======111=======" + dianliang.multiply(bigDecimal) + "kW·h");
-            delectbuf3();
+        ELog.i("=======电能表===ret=====" + ret);
+        if (readType == 1) {
+            if (bslength3 == 9 && ret.substring(0, 6).equals("010404")) {
+                BigDecimal dianliang = new BigDecimal(Integer.parseInt(ret.substring(6, 14), 16));
+                BigDecimal bigDecimal = new BigDecimal("0.01");
+                ELog.i("=======电能表====总有功组合电量==========" + dianliang.multiply(bigDecimal) + "Kw·h");
+                delectbuf3();
+            }
+        } else if (readType == 2) {
+            if (bslength3 == 7 && ret.substring(0, 6).equals("010402")) {
+                BigDecimal dianya = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
+                BigDecimal bdv = new BigDecimal("0.1");
+                ELog.i("=======电能表====A电压==========" + dianya.multiply(bdv) + "V");
+                delectbuf3();
+            }
+        } else if (readType == 3) {
+            if (bslength3 == 7 && ret.substring(0, 6).equals("010402")) {
+                BigDecimal dianliu = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
+                BigDecimal bdv = new BigDecimal("0.01");
+                ELog.i("=======电能表====A电流==========" + dianliu.multiply(bdv) + "A");
+                delectbuf3();
+            }
+        } else if (readType == 4) {
+            if (bslength3 == 7 && ret.substring(0, 6).equals("010402")) {
+                int glw = Integer.parseInt(ret.substring(6, 10), 16);
+                ELog.i("=======电能表====总有功功率==========" + glw + "W");
+                delectbuf3();
+            }
         }
     }
 
@@ -284,5 +306,9 @@ public class SportDataUtil {
 //                sendMsg1(wsd.getBytes());
             }
         }
+    }
+
+    public static void readMsgType(int type) {
+        readType = type;
     }
 }

@@ -479,6 +479,7 @@ public class TimerUtils {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
                 SerialPortUtil.doSerialPort("1-801");
+//                SportDataUtil.readMsgType(1);
             }
         }, 12000, 1 * 60 * 1000);
     }
