@@ -20,6 +20,7 @@ import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.DbDao.ZksDataDao;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
@@ -547,5 +548,15 @@ public class HttpRequestUtil {
         IcCardDao icCardDao = MyApplication.getDaoSession().getIcCardDao();
         icCardDao.deleteByKey(Long.parseLong(parms.getString("ic_id")));
         return gson.toJson(new HttpResult("200", "", true, icCardDao.loadAll()));
+    }
+
+    public static String getWSDdatadao(Multimap parms) {
+        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+        return gson.toJson(new HttpResult("200", "", true, wenShiDuDao.loadAll()));
+    }
+
+    public static String getDNBdatadao(Multimap parms) {
+        ZksDataDao zksDataDao = MyApplication.getDaoSession().getZksDataDao();
+        return gson.toJson(new HttpResult("200", "", true, zksDataDao.loadAll()));
     }
 }

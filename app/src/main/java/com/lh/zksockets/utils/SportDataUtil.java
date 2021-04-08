@@ -5,9 +5,11 @@ import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.ZksDataDao;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.VidStatus;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.ZksData;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -242,11 +244,14 @@ public class SportDataUtil {
             ret += hex.toUpperCase();
         }
         ELog.i("=======电能表===ret=====" + ret);
+        ZksDataDao zksDataDao = MyApplication.getDaoSession().getZksDataDao();
         if (readType == 1) {
             if (bslength3 == 9 && ret.substring(0, 6).equals("010404")) {
                 BigDecimal dianliang = new BigDecimal(Integer.parseInt(ret.substring(6, 14), 16));
                 BigDecimal bigDecimal = new BigDecimal("0.01");
                 ELog.i("=======电能表====总有功组合电量==========" + dianliang.multiply(bigDecimal) + "Kw·h");
+                zksDataDao.deleteByKey((long) 1);
+                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", dianliang.multiply(bigDecimal) + "Kw·h", 0));
                 delectbuf3();
             }
         } else if (readType == 2) {
@@ -254,6 +259,8 @@ public class SportDataUtil {
                 BigDecimal dianya = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
                 BigDecimal bdv = new BigDecimal("0.1");
                 ELog.i("=======电能表====A电压==========" + dianya.multiply(bdv) + "V");
+                zksDataDao.deleteByKey((long) 2);
+                zksDataDao.insert(new ZksData((long) 2, "A电压", dianya.multiply(bdv) + "V", 0));
                 delectbuf3();
             }
         } else if (readType == 3) {
@@ -261,12 +268,24 @@ public class SportDataUtil {
                 BigDecimal dianliu = new BigDecimal(Integer.parseInt(ret.substring(6, 10), 16));
                 BigDecimal bdv = new BigDecimal("0.01");
                 ELog.i("=======电能表====A电流==========" + dianliu.multiply(bdv) + "A");
+                zksDataDao.deleteByKey((long) 3);
+                zksDataDao.insert(new ZksData((long) 3, "A电流", dianliu.multiply(bdv) + "A", 0));
                 delectbuf3();
             }
         } else if (readType == 4) {
             if (bslength3 == 7 && ret.substring(0, 6).equals("010402")) {
+                int aglw = Integer.parseInt(ret.substring(6, 10), 16);
+                ELog.i("=======电能表====A有功功率==========" + aglw + "W");
+                zksDataDao.deleteByKey((long) 4);
+                zksDataDao.insert(new ZksData((long) 4, "A有功功率", aglw + "W", 0));
+                delectbuf3();
+            }
+        } else if (readType == 5) {
+            if (bslength3 == 7 && ret.substring(0, 6).equals("010402")) {
                 int glw = Integer.parseInt(ret.substring(6, 10), 16);
                 ELog.i("=======电能表====总有功功率==========" + glw + "W");
+                zksDataDao.deleteByKey((long) 5);
+                zksDataDao.insert(new ZksData((long) 5, "总有功功率", glw + "W", 0));
                 delectbuf3();
             }
         }

@@ -462,24 +462,39 @@ public class TimerUtils {
             public void run() {
                 try {
                     wsdCount++;
-                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-                    if (wenShiDuDao.loadAll().size() != 0) {
-                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
-                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-                        SerialPortUtil.sendMsg1(wsd.getBytes());
-                        if (wsdCount == 1) {
-                            kongtiaoWendu(wenShiDu);
-                            SerialPortUtil.wsdSendLog(wenShiDu);
-                        }
-                        if (wsdCount >= 30) {
-                            wsdCount = 0;
-                        }
+//                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+//                    if (wenShiDuDao.loadAll().size() != 0) {
+//                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
+//                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+//                        SerialPortUtil.sendMsg1(wsd.getBytes());
+//                        if (wsdCount == 1) {
+//                            kongtiaoWendu(wenShiDu);
+//                            SerialPortUtil.wsdSendLog(wenShiDu);
+//                        }
+//                    }
+//                    SerialPortUtil.doSerialPort("1-801");
+
+                    if (wsdCount == 1) {
+                        SportDataUtil.readMsgType(1);
+                        SerialPortUtil.doSerialPort("1-801");
+                    } else if (wsdCount == 2) {
+                        SportDataUtil.readMsgType(2);
+                        SerialPortUtil.doSerialPort("1-802");
+                    } else if (wsdCount == 3) {
+                        SportDataUtil.readMsgType(3);
+                        SerialPortUtil.doSerialPort("1-803");
+                    } else if (wsdCount == 4) {
+                        SportDataUtil.readMsgType(4);
+                        SerialPortUtil.doSerialPort("1-804");
+                    } else if (wsdCount == 5) {
+                        SportDataUtil.readMsgType(5);
+                        SerialPortUtil.doSerialPort("1-805");
+                    } else if (wsdCount >= 30) {
+                        wsdCount = 0;
                     }
                 } catch (Exception e) {
                     ELog.d("=========wenshiTimer===Exception=======" + e.toString());
                 }
-                SerialPortUtil.doSerialPort("1-801");
-//                SportDataUtil.readMsgType(1);
             }
         }, 12000, 1 * 60 * 1000);
     }

@@ -42,6 +42,7 @@ public class DaoMaster extends AbstractDaoMaster {
         VidStatusDao.createTable(db, ifNotExists);
         WenShiDuDao.createTable(db, ifNotExists);
         ZkInfoDao.createTable(db, ifNotExists);
+        ZksDataDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -67,6 +68,7 @@ public class DaoMaster extends AbstractDaoMaster {
         VidStatusDao.dropTable(db, ifExists);
         WenShiDuDao.dropTable(db, ifExists);
         ZkInfoDao.dropTable(db, ifExists);
+        ZksDataDao.dropTable(db, ifExists);
     }
 
     /**
@@ -106,6 +108,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(VidStatusDao.class);
         registerDaoClass(WenShiDuDao.class);
         registerDaoClass(ZkInfoDao.class);
+        registerDaoClass(ZksDataDao.class);
     }
 
     public DaoSession newSession() {
