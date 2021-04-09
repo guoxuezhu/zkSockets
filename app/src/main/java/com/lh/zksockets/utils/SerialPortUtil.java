@@ -455,7 +455,7 @@ public class SerialPortUtil {
                     .list();
             if (icCards.size() != 0) {
                 sendMsg1("SKJAA".getBytes());
-                sendCardLog(msg);
+                sendCardLog(kahao);
             } else {
                 sendMsg1("ICKERROR".getBytes());
             }
@@ -509,7 +509,7 @@ public class SerialPortUtil {
         });
     }
 
-    private static void sendCardLog(String msg) {
+    private static void sendCardLog(String kahao) {
         makeML((long) 37);
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
@@ -517,7 +517,7 @@ public class SerialPortUtil {
         }
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("card_no", msg.substring(3))
+                .add("card_no", kahao)
                 .add("detail", "刷卡打开 " + zkInfoDao.loadAll().get(0).zkname + "(" + zkInfoDao.loadAll().get(0).zkip + ") 的操作面板")
                 .add("addtime", DateUtil.getNow())
                 .build();
