@@ -295,7 +295,7 @@
                     android:background="@drawable/layout_table_bg"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp_10"
-                    android:text="http://192.168.0.115/"
+                    android:text="http://192.168.0.100/"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_24" />
 
