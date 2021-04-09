@@ -77,10 +77,17 @@ public class SportDataUtil {
     }
 
     private static void makeNOData(String msgdata) {
-        if (msgdata.indexOf("[", 2) == -1) {
+        if (msgdata.indexOf("]", 2) != -1) {
             ELog.i("==========其它接收数据==========" + msgdata);
             int endsize = msgdata.indexOf("[", 2) + 1;
-            delectNobuf(endsize);
+            ELog.i("==========其它接收数据===endsize=======" + endsize);
+            if (endsize == 0) {
+                bslength = 0;
+                buffer1 = new byte[1024];
+                buffer2 = new byte[1024];
+            } else {
+                delectNobuf(endsize);
+            }
         }
     }
 
