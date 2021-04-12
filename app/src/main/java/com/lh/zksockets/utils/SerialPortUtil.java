@@ -269,10 +269,16 @@ public class SerialPortUtil {
     private static void getYinliang() {
         MicDatasDao micDatasDao = MyApplication.getDaoSession().getMicDatasDao();
         if (micDatasDao.loadAll().size() == 0) {
-            micDatasDao.insert(new MicDatas("22", 1, "22", 1, "22", 1));
+            micDatasDao.insert(new MicDatas((long) 1, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 2, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 3, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 4, "22", 0));
         }
-        MicDatas micdata = micDatasDao.loadAll().get(0);
-        String micMsg = "MICA" + micdata.mic_a + micdata.mic_a_status + ";MICB" + micdata.mic_b + micdata.mic_b_status + ";MICC" + micdata.mic_c + micdata.mic_c_status;
+        // MIC;221;221;220;220
+        String micMsg = "MIC;" + micDatasDao.load((long) 1).mic_index + micDatasDao.load((long) 1).mic_status + ";"
+                + micDatasDao.load((long) 2).mic_index + micDatasDao.load((long) 2).mic_status + ";"
+                + micDatasDao.load((long) 3).mic_index + micDatasDao.load((long) 3).mic_status + ";"
+                + micDatasDao.load((long) 4).mic_index + micDatasDao.load((long) 4).mic_status;
         ELog.i("=======getYinliang===micMsg====" + micMsg);
         sendMsg1(micMsg.getBytes());
     }
@@ -281,7 +287,10 @@ public class SerialPortUtil {
         synchronized (str) {
             MicDatasDao micDatasDao = MyApplication.getDaoSession().getMicDatasDao();
             if (micDatasDao.loadAll().size() == 0) {
-                micDatasDao.insert(new MicDatas("22", 1, "22", 1, "22", 1));
+                micDatasDao.insert(new MicDatas((long) 1, "22", 0));
+                micDatasDao.insert(new MicDatas((long) 2, "22", 0));
+                micDatasDao.insert(new MicDatas((long) 3, "22", 0));
+                micDatasDao.insert(new MicDatas((long) 4, "22", 0));
             }
             ELog.i("=======yinpin===str====" + str);
             String msg = "";
@@ -289,13 +298,16 @@ public class SerialPortUtil {
             if (str.substring(4).equals("JY")) {
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB0154DD";
-                    micdata.setMic_a_status(0);
+                    micDatasDao.update(new MicDatas((long) 1, micDatasDao.load((long) 1).mic_index, 0));
                 } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB0254DD";
-                    micdata.setMic_b_status(0);
+                    micDatasDao.update(new MicDatas((long) 2, micDatasDao.load((long) 2).mic_index, 0));
                 } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB0354DD";
-                    micdata.setMic_c_status(0);
+                    micDatasDao.update(new MicDatas((long) 3, micDatasDao.load((long) 3).mic_index, 0));
+                } else if (str.substring(0, 4).equals("MICD")) {
+                    msg = "BB0454DD";
+                    micDatasDao.update(new MicDatas((long) 4, micDatasDao.load((long) 4).mic_index, 0));
                 }
             } else {
                 String hexstr = Integer.toHexString(Integer.valueOf(str.substring(4)));
@@ -304,22 +316,20 @@ public class SerialPortUtil {
                 }
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB01" + hexstr + "DD";
-                    micdata.setMic_a(str.substring(4));
-                    micdata.setMic_a_status(1);
+                    micDatasDao.update(new MicDatas((long) 1, str.substring(4), 1));
                 } else if (str.substring(0, 4).equals("MICB")) {
                     msg = "BB02" + hexstr + "DD";
-                    micdata.setMic_b(str.substring(4));
-                    micdata.setMic_b_status(1);
+                    micDatasDao.update(new MicDatas((long) 2, str.substring(4), 1));
                 } else if (str.substring(0, 4).equals("MICC")) {
                     msg = "BB03" + hexstr + "DD";
-                    micdata.setMic_c(str.substring(4));
-                    micdata.setMic_c_status(1);
+                    micDatasDao.update(new MicDatas((long) 3, str.substring(4), 1));
+                } else if (str.substring(0, 4).equals("MICD")) {
+                    msg = "BB04" + hexstr + "DD";
+                    micDatasDao.update(new MicDatas((long) 4, str.substring(4), 1));
                 }
             }
             byte[] data = StringToBytes(msg);
             sendMsg3(data);
-            micDatasDao.deleteAll();
-            micDatasDao.insert(micdata);
             ELog.i("=======yinpin===micDatasDao====" + micDatasDao.loadAll().toString());
         }
     }

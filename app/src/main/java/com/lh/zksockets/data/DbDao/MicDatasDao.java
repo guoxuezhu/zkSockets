@@ -15,7 +15,7 @@ import com.lh.zksockets.data.model.MicDatas;
 /** 
  * DAO for table "MIC_DATAS".
 */
-public class MicDatasDao extends AbstractDao<MicDatas, Void> {
+public class MicDatasDao extends AbstractDao<MicDatas, Long> {
 
     public static final String TABLENAME = "MIC_DATAS";
 
@@ -24,12 +24,9 @@ public class MicDatasDao extends AbstractDao<MicDatas, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Mic_a = new Property(0, String.class, "mic_a", false, "MIC_A");
-        public final static Property Mic_a_status = new Property(1, int.class, "mic_a_status", false, "MIC_A_STATUS");
-        public final static Property Mic_b = new Property(2, String.class, "mic_b", false, "MIC_B");
-        public final static Property Mic_b_status = new Property(3, int.class, "mic_b_status", false, "MIC_B_STATUS");
-        public final static Property Mic_c = new Property(4, String.class, "mic_c", false, "MIC_C");
-        public final static Property Mic_c_status = new Property(5, int.class, "mic_c_status", false, "MIC_C_STATUS");
+        public final static Property Mic_id = new Property(0, Long.class, "mic_id", true, "_id");
+        public final static Property Mic_index = new Property(1, String.class, "mic_index", false, "MIC_INDEX");
+        public final static Property Mic_status = new Property(2, int.class, "mic_status", false, "MIC_STATUS");
     }
 
 
@@ -45,12 +42,9 @@ public class MicDatasDao extends AbstractDao<MicDatas, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"MIC_DATAS\" (" + //
-                "\"MIC_A\" TEXT," + // 0: mic_a
-                "\"MIC_A_STATUS\" INTEGER NOT NULL ," + // 1: mic_a_status
-                "\"MIC_B\" TEXT," + // 2: mic_b
-                "\"MIC_B_STATUS\" INTEGER NOT NULL ," + // 3: mic_b_status
-                "\"MIC_C\" TEXT," + // 4: mic_c
-                "\"MIC_C_STATUS\" INTEGER NOT NULL );"); // 5: mic_c_status
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: mic_id
+                "\"MIC_INDEX\" TEXT," + // 1: mic_index
+                "\"MIC_STATUS\" INTEGER NOT NULL );"); // 2: mic_status
     }
 
     /** Drops the underlying database table. */
@@ -63,91 +57,74 @@ public class MicDatasDao extends AbstractDao<MicDatas, Void> {
     protected final void bindValues(DatabaseStatement stmt, MicDatas entity) {
         stmt.clearBindings();
  
-        String mic_a = entity.getMic_a();
-        if (mic_a != null) {
-            stmt.bindString(1, mic_a);
+        Long mic_id = entity.getMic_id();
+        if (mic_id != null) {
+            stmt.bindLong(1, mic_id);
         }
-        stmt.bindLong(2, entity.getMic_a_status());
  
-        String mic_b = entity.getMic_b();
-        if (mic_b != null) {
-            stmt.bindString(3, mic_b);
+        String mic_index = entity.getMic_index();
+        if (mic_index != null) {
+            stmt.bindString(2, mic_index);
         }
-        stmt.bindLong(4, entity.getMic_b_status());
- 
-        String mic_c = entity.getMic_c();
-        if (mic_c != null) {
-            stmt.bindString(5, mic_c);
-        }
-        stmt.bindLong(6, entity.getMic_c_status());
+        stmt.bindLong(3, entity.getMic_status());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, MicDatas entity) {
         stmt.clearBindings();
  
-        String mic_a = entity.getMic_a();
-        if (mic_a != null) {
-            stmt.bindString(1, mic_a);
+        Long mic_id = entity.getMic_id();
+        if (mic_id != null) {
+            stmt.bindLong(1, mic_id);
         }
-        stmt.bindLong(2, entity.getMic_a_status());
  
-        String mic_b = entity.getMic_b();
-        if (mic_b != null) {
-            stmt.bindString(3, mic_b);
+        String mic_index = entity.getMic_index();
+        if (mic_index != null) {
+            stmt.bindString(2, mic_index);
         }
-        stmt.bindLong(4, entity.getMic_b_status());
- 
-        String mic_c = entity.getMic_c();
-        if (mic_c != null) {
-            stmt.bindString(5, mic_c);
-        }
-        stmt.bindLong(6, entity.getMic_c_status());
+        stmt.bindLong(3, entity.getMic_status());
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public MicDatas readEntity(Cursor cursor, int offset) {
         MicDatas entity = new MicDatas( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // mic_a
-            cursor.getInt(offset + 1), // mic_a_status
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // mic_b
-            cursor.getInt(offset + 3), // mic_b_status
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // mic_c
-            cursor.getInt(offset + 5) // mic_c_status
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // mic_id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mic_index
+            cursor.getInt(offset + 2) // mic_status
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, MicDatas entity, int offset) {
-        entity.setMic_a(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setMic_a_status(cursor.getInt(offset + 1));
-        entity.setMic_b(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setMic_b_status(cursor.getInt(offset + 3));
-        entity.setMic_c(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setMic_c_status(cursor.getInt(offset + 5));
+        entity.setMic_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setMic_index(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setMic_status(cursor.getInt(offset + 2));
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(MicDatas entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(MicDatas entity, long rowId) {
+        entity.setMic_id(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(MicDatas entity) {
-        return null;
+    public Long getKey(MicDatas entity) {
+        if(entity != null) {
+            return entity.getMic_id();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(MicDatas entity) {
-        // TODO
-        return false;
+        return entity.getMic_id() != null;
     }
 
     @Override
