@@ -136,6 +136,18 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.getUserLists(parms));
                 } else if (request.getPath().equals("/api/wgkzqInfo")) {
                     response.send(HttpRequestUtil.getWgkzqInfo(parms));
+                } else if (request.getPath().equals("/api/get_kt_set")) {
+                    response.send(HttpRequestUtil.getKongtiaoSet(parms));
+                } else if (request.getPath().equals("/api/updata_kt_set")) {
+                    response.send(HttpRequestUtil.updataKongtiaoSet(parms));
+                } else if (request.getPath().equals("/api/get_diannao_set")) {
+                    response.send(HttpRequestUtil.getDiannaoSet(parms));
+                } else if (request.getPath().equals("/api/updata_diannao_set")) {
+                    response.send(HttpRequestUtil.updataDiannaoSet(parms));
+                } else if (request.getPath().equals("/api/updata_ui_status")) {
+                    response.send(HttpRequestUtil.updataUIstatus(parms));
+                } else if (request.getPath().equals("/api/get_ui_status")) {
+                    response.send(HttpRequestUtil.getUIstatus(parms));
                 } else if (request.getPath().equals("/api/get_datadao_wsd")) {
                     response.send(HttpRequestUtil.getWSDdatadao(parms));
                 } else if (request.getPath().equals("/api/get_datadao_dnb")) {

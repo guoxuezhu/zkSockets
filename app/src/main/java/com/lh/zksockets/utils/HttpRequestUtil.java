@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.EventKejianRestDao;
@@ -13,14 +14,17 @@ import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
 import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
+import com.lh.zksockets.data.DbDao.KongTiaoDataDao;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
+import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.DbDao.ZksDataDao;
+import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
@@ -32,11 +36,13 @@ import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.IcCard;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
+import com.lh.zksockets.data.model.KongTiaoData;
 import com.lh.zksockets.data.model.LuboInfo;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.data.model.SerialCommand;
 import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.SerialResult;
+import com.lh.zksockets.data.model.UIsetData;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
 import com.lh.zksockets.data.model.ZkInfo;
@@ -558,5 +564,59 @@ public class HttpRequestUtil {
     public static String getDNBdatadao(Multimap parms) {
         ZksDataDao zksDataDao = MyApplication.getDaoSession().getZksDataDao();
         return gson.toJson(new HttpResult("200", "", true, zksDataDao.loadAll()));
+    }
+
+    public static String getUIstatus(Multimap parms) {
+        UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
+        if (uIsetDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < 11; i++) {
+                uIsetDataDao.insert(new UIsetData((long) i, "", "1"));
+            }
+        }
+        return gson.toJson(new HttpResult("200", "", true, uIsetDataDao.loadAll()));
+    }
+
+    public static String updataUIstatus(Multimap parms) {
+        UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
+        List<UIsetData> uIsetDatas = gson.fromJson(parms.getString("ui_status_datas"), new TypeToken<List<UIsetData>>() {
+        }.getType());
+        ELog.i("===========uIsetDatas====" + uIsetDatas.toString());
+        for (int i = 0; i < uIsetDatas.size(); i++) {
+            uIsetDataDao.update(uIsetDatas.get(i));
+        }
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getDiannaoSet(Multimap parms) {
+        ComputerDao computerDao = MyApplication.getDaoSession().getComputerDao();
+        if (computerDao.loadAll().size() == 0) {
+            computerDao.insert(new Computer("192.168.1.19", "8080", "FFFF00DD", "0"));
+        }
+        return gson.toJson(new HttpResult("200", "", true, computerDao.loadAll().get(0)));
+    }
+
+    public static String updataDiannaoSet(Multimap parms) {
+        ComputerDao computerDao = MyApplication.getDaoSession().getComputerDao();
+        Computer computer = gson.fromJson(parms.getString("diannaoData"), Computer.class);
+        computerDao.deleteAll();
+        computerDao.insert(computer);
+        return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getKongtiaoSet(Multimap parms) {
+        KongTiaoDataDao kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
+        if (kongTiaoDataDao.loadAll().size() == 0) {
+            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,43",
+                    "26", "07:00:00", "19:00:00", "39,42", 0));
+        }
+        return gson.toJson(new HttpResult("200", "", true, kongTiaoDataDao.loadAll().get(0)));
+    }
+
+    public static String updataKongtiaoSet(Multimap parms) {
+        KongTiaoDataDao kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
+        KongTiaoData kongTiaoData = gson.fromJson(parms.getString("kongTiaoData"), KongTiaoData.class);
+        kongTiaoDataDao.deleteAll();
+        kongTiaoDataDao.insert(kongTiaoData);
+        return gson.toJson(new HttpResult("200", "", true, null));
     }
 }
