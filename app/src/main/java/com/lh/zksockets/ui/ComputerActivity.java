@@ -51,8 +51,8 @@ public class ComputerActivity extends BaseActivity {
         kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
 
         if (kongTiaoDataDao.loadAll().size() == 0) {
-            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,43",
-                    "26", "07:00:00", "19:00:00", "39,42", 0));
+            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,2003",
+                    "26", "07:00:00", "19:00:00", "39,2002", 0));
         }
         initView();
 

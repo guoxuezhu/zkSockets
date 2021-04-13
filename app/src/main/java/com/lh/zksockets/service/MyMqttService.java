@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.utils.ELog;
-import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;

@@ -606,8 +606,8 @@ public class HttpRequestUtil {
     public static String getKongtiaoSet(Multimap parms) {
         KongTiaoDataDao kongTiaoDataDao = MyApplication.getDaoSession().getKongTiaoDataDao();
         if (kongTiaoDataDao.loadAll().size() == 0) {
-            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,43",
-                    "26", "07:00:00", "19:00:00", "39,42", 0));
+            kongTiaoDataDao.insert(new KongTiaoData("6", "08:00:00", "17:00:00", "39,2003",
+                    "26", "07:00:00", "19:00:00", "39,2002", 0));
         }
         return gson.toJson(new HttpResult("200", "", true, kongTiaoDataDao.loadAll().get(0)));
     }
