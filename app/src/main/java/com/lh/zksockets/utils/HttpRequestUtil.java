@@ -21,6 +21,7 @@ import com.lh.zksockets.data.DbDao.SerialCommandDao;
 import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
+import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.DbDao.ZksDataDao;
@@ -618,5 +619,10 @@ public class HttpRequestUtil {
         kongTiaoDataDao.deleteAll();
         kongTiaoDataDao.insert(kongTiaoData);
         return gson.toJson(new HttpResult("200", "", true, null));
+    }
+
+    public static String getVIDstatus(Multimap parms) {
+        VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
+        return gson.toJson(new HttpResult("200", "", true, vidStatusDao.loadAll().get(0)));
     }
 }
