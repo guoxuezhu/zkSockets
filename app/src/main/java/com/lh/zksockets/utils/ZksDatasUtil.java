@@ -1,13 +1,15 @@
 package com.lh.zksockets.utils;
 
-import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.EventShangkeDao;
+import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.model.EventShangke;
+import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.MLsLists;
 
 public class ZksDatasUtil {
 
-    public static void getEventDatas() {
-        MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+    public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "一键-上课", "", ""));
             mLsListsDao.insert(new MLsLists((long) 2, "一键-下课", "", ""));
@@ -25,8 +27,8 @@ public class ZksDatasUtil {
 
             mLsListsDao.insert(new MLsLists((long) 9, "投影机-开", "", ""));
             mLsListsDao.insert(new MLsLists((long) 10, "投影机-关", "", ""));
-            mLsListsDao.insert(new MLsLists((long) 11, "投影机-幕布升", "2-7-0", ""));
-            mLsListsDao.insert(new MLsLists((long) 12, "投影机-幕布降", "2-8-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 11, "投影机-幕布升", "2-8-0", ""));
+            mLsListsDao.insert(new MLsLists((long) 12, "投影机-幕布降", "2-7-0", ""));
 
             mLsListsDao.insert(new MLsLists((long) 13, "灯光-开(全开)", "", ""));
             mLsListsDao.insert(new MLsLists((long) 14, "灯光-关(全关)", "", ""));
@@ -113,6 +115,35 @@ public class ZksDatasUtil {
             mLsListsDao.insert(new MLsLists((long) 8011, "电风扇2-风速2级", "", ""));
             mLsListsDao.insert(new MLsLists((long) 8012, "电风扇2-风速3级", "", ""));
 
+        }
+    }
+
+    public static void getDeviceStatusDatas(EventShangkeDao eventShangkeDao) {
+        if (eventShangkeDao.loadAll().size() == 0) {
+            eventShangkeDao.insert(new EventShangke(0, (long) 1, "投影机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 201, "窗帘1", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 202, "窗帘2", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 301, "黑板灯", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 302, "教室灯1", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 303, "教室灯2", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 304, "教室灯3", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 305, "教室灯4", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 4, "大屏一体机", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 5, "空调", 0, false, 0));
+            eventShangkeDao.insert(new EventShangke(0, (long) 6, "录播", 0, false, 0));
+        }
+    }
+
+    public static void getjdqDatas(JDQstatusDao jdqStatusDao) {
+        if (jdqStatusDao.loadAll().size() == 0) {
+            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
+            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布降", 1, 180));
+            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布升", 1, 180));
         }
     }
 }

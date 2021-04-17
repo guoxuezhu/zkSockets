@@ -29,7 +29,6 @@ import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventKejianRest;
-import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.HttpRow;
@@ -136,8 +135,8 @@ public class HttpRequestUtil {
     }
 
     public static String getEventList(Multimap parms) {
-        ZksDatasUtil.getEventDatas();
         MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+        ZksDatasUtil.getEventDatas(mLsListsDao);
         return gson.toJson(new HttpResult("200", "", true, mLsListsDao.loadAll()));
     }
 
@@ -174,16 +173,7 @@ public class HttpRequestUtil {
 
     public static String getJDQList(Multimap parms) {
         JDQstatusDao jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-        if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "", 1, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "", 1, 180));
-        }
+        ZksDatasUtil.getjdqDatas(jdqStatusDao);
         return gson.toJson(new HttpResult("200", "", true, jdqStatusDao.loadAll()));
     }
 
@@ -421,14 +411,7 @@ public class HttpRequestUtil {
 
     public static String getDeviceStatus(Multimap parms) {
         EventShangkeDao eventShangkeDao = MyApplication.getDaoSession().getEventShangkeDao();
-        if (eventShangkeDao.loadAll().size() == 0) {
-            eventShangkeDao.insert(new EventShangke(0, (long) 1, "投影机", 0, false, 0));
-            eventShangkeDao.insert(new EventShangke(0, (long) 2, "窗帘", 0, false, 0));
-            eventShangkeDao.insert(new EventShangke(0, (long) 3, "灯光", 0, false, 0));
-            eventShangkeDao.insert(new EventShangke(0, (long) 4, "大屏一体机", 0, false, 0));
-            eventShangkeDao.insert(new EventShangke(0, (long) 5, "空调", 0, false, 0));
-            eventShangkeDao.insert(new EventShangke(0, (long) 6, "录播", 0, false, 0));
-        }
+        ZksDatasUtil.getDeviceStatusDatas(eventShangkeDao);
         return gson.toJson(new HttpResult("200", "", true, eventShangkeDao.loadAll()));
     }
 

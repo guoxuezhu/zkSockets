@@ -70,8 +70,8 @@ public class EventActivity extends BaseActivity {
         setContentView(R.layout.activity_event);
         ButterKnife.bind(this);
 
-        ZksDatasUtil.getEventDatas();
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
+        ZksDatasUtil.getEventDatas(mLsListsDao);
     }
 
     @OnClick(R.id.btn_event_huifu)

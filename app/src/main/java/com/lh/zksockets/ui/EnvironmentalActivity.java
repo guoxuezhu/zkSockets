@@ -20,6 +20,7 @@ import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -125,16 +126,7 @@ public class EnvironmentalActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         jdqStatusDao = MyApplication.getDaoSession().getJDQstatusDao();
-        if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布升", 1, 180));
-            jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布降", 1, 180));
-        }
+        ZksDatasUtil.getjdqDatas(jdqStatusDao);
 
         initView();
         ELog.d("=========jdqStatusDao==========" + jdqStatusDao.loadAll().toString());
