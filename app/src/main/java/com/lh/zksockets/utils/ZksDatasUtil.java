@@ -3,9 +3,11 @@ package com.lh.zksockets.utils;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
 
@@ -144,6 +146,21 @@ public class ZksDatasUtil {
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布降", 1, 180));
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布升", 1, 180));
+        }
+    }
+
+    public static void getUIstatusDatas(UIsetDataDao uIsetDataDao) {
+        if (uIsetDataDao.loadAll().size() == 0) {
+            uIsetDataDao.insert(new UIsetData((long) 1, "一键互动", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 2, "自由互动", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 3, "录播", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 4, "多媒体", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 5, "窗帘", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 6, "灯光", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 7, "空调", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 8, "门禁", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 9, "音频", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 10, "电风扇", "1"));
         }
     }
 }

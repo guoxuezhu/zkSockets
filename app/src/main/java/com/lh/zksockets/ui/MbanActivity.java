@@ -10,6 +10,7 @@ import com.lh.zksockets.R;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.model.UIsetData;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,11 +48,7 @@ public class MbanActivity extends BaseActivity {
         setContentView(R.layout.activity_mban);
         ButterKnife.bind(this);
         uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
-        if (uIsetDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 11; i++) {
-                uIsetDataDao.insert(new UIsetData((long) i, "", "1"));
-            }
-        }
+        ZksDatasUtil.getUIstatusDatas(uIsetDataDao);
         if (uIsetDataDao.load((long) 1).btn_status.equals("0")) {
             btn_ui_1.setChecked(true);
         } else {

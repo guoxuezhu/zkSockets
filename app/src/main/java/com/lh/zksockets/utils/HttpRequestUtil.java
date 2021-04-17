@@ -552,11 +552,7 @@ public class HttpRequestUtil {
 
     public static String getUIstatus(Multimap parms) {
         UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
-        if (uIsetDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 11; i++) {
-                uIsetDataDao.insert(new UIsetData((long) i, "", "1"));
-            }
-        }
+        ZksDatasUtil.getUIstatusDatas(uIsetDataDao);
         return gson.toJson(new HttpResult("200", "", true, uIsetDataDao.loadAll()));
     }
 
