@@ -282,19 +282,6 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
-    public static String getWSD(Multimap parms) {
-        try {
-            WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-            if (wenShiDuDao.loadAll().size() != 0) {
-                return gson.toJson(new HttpResult("200", "", true, wenShiDuDao.loadAll()));
-            }
-        } catch (Exception e) {
-            ELog.d("=========getWSD===Exception=======" + e.toString());
-            return gson.toJson(new HttpResult("-200", "温湿度数据错误", false, null));
-        }
-        return gson.toJson(new HttpResult("200", "无数据", true, null));
-    }
-
     public static String updataMsg(Multimap parms) {
         String msg = parms.getString("msg");
         if (msg.equals("icdata")) {
