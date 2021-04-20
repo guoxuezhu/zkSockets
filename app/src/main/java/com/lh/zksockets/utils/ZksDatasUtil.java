@@ -11,6 +11,8 @@ import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
 
+    public static final int COMCOUNT = 9;
+
     public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "一键-上课", "", ""));

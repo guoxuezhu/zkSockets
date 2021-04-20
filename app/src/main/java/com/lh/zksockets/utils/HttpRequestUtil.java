@@ -90,7 +90,7 @@ public class HttpRequestUtil {
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
         if (serialPortDataDao.loadAll().size() < 4) {
-            for (int i = 1; i < 9; i++) {
+            for (int i = 1; i < ZksDatasUtil.COMCOUNT; i++) {
                 serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
                         "9600", 0, "NONE", 0, "8", 0, "1", 10));
                 for (int j = 1; j < 31; j++) {

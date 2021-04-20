@@ -34,6 +34,7 @@ import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.utils.DisplayTools;
 import com.lh.zksockets.utils.ELog;
 import com.lh.zksockets.utils.SerialPortUtil;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -176,7 +177,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ckdataTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 1; i < 9; i++) {
+                for (int i = 1; i < ZksDatasUtil.COMCOUNT; i++) {
                     serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
                             "9600", 0, "NONE", 0, "8", 0, "1", 10));
                     for (int j = 1; j < 31; j++) {
@@ -659,7 +660,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         progressDialog.setMessage("正在备份数据");
         progressDialog.setCanceledOnTouchOutside(false);
         List<SerialResult> serialResults = new ArrayList<SerialResult>();
-        for (int n = 1; n < 9; n++) {
+        for (int n = 1; n < ZksDatasUtil.COMCOUNT; n++) {
             List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                     .where(SerialCommandDao.Properties.SId.eq(n))
                     .orderAsc(SerialCommandDao.Properties.MlId)
