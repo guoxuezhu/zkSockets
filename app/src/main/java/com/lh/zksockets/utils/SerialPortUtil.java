@@ -617,7 +617,7 @@ public class SerialPortUtil {
                     mLsListsDao.update(mLsListsDao.load(id));
                     String strMls = mLsListsDao.load(id).strMLs;
                     ELog.i("========串口1===========makeML=================" + id);
-                    if (id == 1 || id == 2 || id == 45) {
+                    if (id == 1 || id == 2 || id == 215 || id == 45) {
                         getEventId(strMls);
                     } else {
                         makeBaojing(strMls);
@@ -642,7 +642,7 @@ public class SerialPortUtil {
             for (int i = 0; i < mls.length; i++) {
                 ELog.i("=======getEventId========" + mls[i]);
                 try {
-                    if (!mls[i].equals("1") && !mls[i].equals("2") && !mls[i].equals("45")) {
+                    if (!mls[i].equals("1") && !mls[i].equals("2") && !mls[i].equals("215") && !mls[i].equals("45")) {
                         makeML(Long.valueOf(mls[i]));
                         sleep(1000);
                     }
@@ -666,6 +666,7 @@ public class SerialPortUtil {
                     e.printStackTrace();
                 }
                 sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
+                makeML((long) 215);
                 closeXiakeTimer();
             }
         }, 60 * 1500);

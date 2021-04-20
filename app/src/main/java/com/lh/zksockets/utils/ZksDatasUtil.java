@@ -15,6 +15,7 @@ public class ZksDatasUtil {
         if (mLsListsDao.loadAll().size() == 0) {
             mLsListsDao.insert(new MLsLists((long) 1, "一键-上课", "", ""));
             mLsListsDao.insert(new MLsLists((long) 2, "一键-下课", "", ""));
+            mLsListsDao.insert(new MLsLists((long) 215, "一键-下课1.5分钟", "", ""));
             mLsListsDao.insert(new MLsLists((long) 45, "一键-开机", "", ""));
 
             mLsListsDao.insert(new MLsLists((long) 3, "窗帘-开(全开)", "", ""));

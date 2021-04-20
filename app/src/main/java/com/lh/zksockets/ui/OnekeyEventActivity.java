@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.adapter.EventAdapter;
+import com.lh.zksockets.adapter.OnekeyEventAdapter;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
 import com.lh.zksockets.data.model.MLsLists;
 import com.lh.zksockets.utils.ELog;
@@ -20,14 +20,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OnekeyEventActivity extends BaseActivity implements EventAdapter.CallBack {
+public class OnekeyEventActivity extends BaseActivity implements OnekeyEventAdapter.CallBack {
 
     @BindView(R.id.yijian_event_recyclerView)
     RecyclerView yijian_event_recyclerView;
 
     private MLsListsDao mLsListsDao;
     private List<MLsLists> yijianEventdatas;
-    private EventAdapter mEventAdapter;
+    private OnekeyEventAdapter mOnekeyEventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +42,16 @@ public class OnekeyEventActivity extends BaseActivity implements EventAdapter.Ca
                 .where(MLsListsDao.Properties.Name.like("%一键%"))
                 .orderAsc(MLsListsDao.Properties.Id)
                 .list();
-        mEventAdapter = new EventAdapter(this, yijianEventdatas, this);
-        yijian_event_recyclerView.setAdapter(mEventAdapter);
+        mOnekeyEventAdapter = new OnekeyEventAdapter(this, yijianEventdatas, this);
+        yijian_event_recyclerView.setAdapter(mOnekeyEventAdapter);
         ELog.i("===========yijianEventdatas===========" + yijianEventdatas.toString());
 
     }
 
     @Override
-    public void onSetingMl(int mPosition, String etml) {
+    public void onOnekeySetingMl(int mPosition, String etml) {
         yijianEventdatas.get(mPosition).setStrMLs(etml);
-        mEventAdapter.setDatas(yijianEventdatas);
+        mOnekeyEventAdapter.setDatas(yijianEventdatas);
     }
 
     @OnClick(R.id.btn_event_cj_ok)
