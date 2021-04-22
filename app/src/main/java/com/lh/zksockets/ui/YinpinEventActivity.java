@@ -38,7 +38,7 @@ public class YinpinEventActivity extends BaseActivity implements EventAdapter.Ca
         mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
         yinpin_event_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         yinpinEventdatas = mLsListsDao.queryBuilder()
-                .where(MLsListsDao.Properties.Name.like("%投影机%"))
+                .where(MLsListsDao.Properties.Name.like("%音量%"))
                 .orderAsc(MLsListsDao.Properties.Id)
                 .list();
         mEventAdapter = new EventAdapter(this, yinpinEventdatas, this);
