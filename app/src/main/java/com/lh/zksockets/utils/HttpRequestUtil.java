@@ -89,19 +89,7 @@ public class HttpRequestUtil {
     public static String getSportInfo(Multimap parms) {
         SerialPortDataDao serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         SerialCommandDao serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        if (serialPortDataDao.loadAll().size() < 4) {
-            for (int i = 1; i < ZksDatasUtil.COMCOUNT; i++) {
-                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
-                for (int j = 1; j < 31; j++) {
-                    if (j >= 10) {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
-                    } else {
-                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
-                    }
-                }
-            }
-        }
+        ZksDatasUtil.getComDatas(serialPortDataDao, serialCommandDao);
         String sportNum = parms.getString("sportNum");
         List<SerialCommand> serialCommands = serialCommandDao.queryBuilder()
                 .where(SerialCommandDao.Properties.SId.eq(sportNum))
@@ -115,12 +103,7 @@ public class HttpRequestUtil {
 
     public static String getDangerInfo(Multimap parms) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
-        }
+        ZksDatasUtil.getDangetInDatas(ioYuanDao);
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
@@ -242,11 +225,7 @@ public class HttpRequestUtil {
 
     public static String getIoOutinfo(Multimap parms) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        if (ioPortDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
-            }
-        }
+        ZksDatasUtil.getIoOutDatas(ioPortDataDao);
         return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
     }
 
@@ -263,11 +242,7 @@ public class HttpRequestUtil {
 
     public static String getDangerOutInfo(Multimap parms) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        if (dangerOutDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
-            }
-        }
+        ZksDatasUtil.getDangetOutDatas(dangerOutDao);
         return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));
     }
 

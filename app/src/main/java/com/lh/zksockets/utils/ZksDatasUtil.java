@@ -1,12 +1,22 @@
 package com.lh.zksockets.utils;
 
+import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
+import com.lh.zksockets.data.DbDao.IOYuanDao;
+import com.lh.zksockets.data.DbDao.IoPortDataDao;
 import com.lh.zksockets.data.DbDao.JDQstatusDao;
 import com.lh.zksockets.data.DbDao.MLsListsDao;
+import com.lh.zksockets.data.DbDao.SerialCommandDao;
+import com.lh.zksockets.data.DbDao.SerialPortDataDao;
 import com.lh.zksockets.data.DbDao.UIsetDataDao;
+import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.EventShangke;
+import com.lh.zksockets.data.model.IOYuan;
+import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.data.model.JDQstatus;
 import com.lh.zksockets.data.model.MLsLists;
+import com.lh.zksockets.data.model.SerialCommand;
+import com.lh.zksockets.data.model.SerialPortData;
 import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
@@ -14,8 +24,8 @@ public class ZksDatasUtil {
     public static final int COMCOUNT = 9;
     public static final int JDQ_COUNT = 9;
     public static final int IO_OUT_COUNT = 5;
-    public static final int DANFER_OUT_COUNT = 5;
-    public static final int DANFER_IN_COUNT = 5;
+    public static final int DANGER_OUT_COUNT = 5;
+    public static final int DANGER_IN_COUNT = 5;
 
     public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
@@ -143,6 +153,62 @@ public class ZksDatasUtil {
         }
     }
 
+    public static void getComDatas(SerialPortDataDao serialPortDataDao, SerialCommandDao serialCommandDao) {
+        if (serialPortDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < COMCOUNT; i++) {
+                serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
+                        "9600", 0, "NONE", 0, "8", 0, "1", 10));
+                for (int j = 1; j < 31; j++) {
+                    if (j >= 10) {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
+                    } else {
+                        serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
+                    }
+                }
+            }
+
+//            serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+//            serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "电能表", "0104010000027037", 16));
+//            serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+//            serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "温湿度", "01040000000271CB", 16));
+
+            serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 12, "串口1", "奥图码投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 13, "串口1", "英士投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 14, "串口1", "理光(K360/X600)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 15, "串口1", "理光(WX6170N/X6180N)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 16, "串口1", "理光(K310/K320)投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 17, "串口1", "理光(K7000/K8500/K9000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+            serialPortDataDao.insert(new SerialPortData((long) 18, "串口1", "理光(W1000/W2000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
+
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("901"), 11, 1, "1-101", "开机", "505752204F4E0D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("902"), 11, 2, "1-102", "关机", "505752204F46460D", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("903"), 11, 1, "1-101", "开机", "7E3030303020310D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("904"), 11, 2, "1-102", "关机", "7E3030303020300D", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("905"), 11, 1, "1-101", "开机", "4330300D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("906"), 11, 2, "1-102", "关机", "4330310D", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("907"), 11, 1, "1-101", "开机", "23504F4E0D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("908"), 11, 2, "1-102", "关机", "23504F460D", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("909"), 11, 1, "1-101", "开机", "23504F4E", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("910"), 11, 2, "1-102", "关机", "23504446", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("911"), 11, 1, "1-101", "开机", "4130300D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("912"), 11, 2, "1-102", "关机", "4130310D", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
+
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3A0D", 16));
+            serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463A0D", 16));
+
+        }
+    }
+
     public static void getjdqDatas(JDQstatusDao jdqStatusDao) {
         if (jdqStatusDao.loadAll().size() == 0) {
             jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
@@ -153,6 +219,30 @@ public class ZksDatasUtil {
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布降", 1, 180));
             jdqStatusDao.insert(new JDQstatus((long) 8, "继电器8", "幕布升", 1, 180));
+        }
+    }
+
+    public static void getIoOutDatas(IoPortDataDao ioPortDataDao) {
+        if (ioPortDataDao.loadAll().size() == 0) {
+            for (int i = 1; i < IO_OUT_COUNT; i++) {
+                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
+            }
+        }
+    }
+
+    public static void getDangetOutDatas(DangerOutDao dangerOutDao) {
+        if (dangerOutDao.loadAll().size() == 0) {
+            for (int i = 1; i < DANGER_OUT_COUNT; i++) {
+                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
+            }
+        }
+    }
+
+    public static void getDangetInDatas(IOYuanDao ioYuanDao) {
+        if (ioYuanDao.loadAll().size() == 0) {
+            for (int i = 1; i < DANGER_IN_COUNT; i++) {
+                ioYuanDao.insert(new IOYuan((long) i, "报警" + i, "", 0, "", ""));
+            }
         }
     }
 

@@ -155,7 +155,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         serialPortDataDao = MyApplication.getDaoSession().getSerialPortDataDao();
         serialCommandDao = MyApplication.getDaoSession().getSerialCommandDao();
-        if (serialPortDataDao.loadAll().size() < 4) {
+        if (serialPortDataDao.loadAll().size() == 0) {
             ckData();
         } else {
             setSelectBtn(1);
@@ -163,7 +163,6 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
 
         ELog.i("=========serialPortDataDao===11=====" + serialPortDataDao.loadAll().toString());
         ELog.i("=========serialCommandDao====11====" + serialCommandDao.loadAll().toString());
-
 
     }
 
@@ -177,67 +176,14 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
         ckdataTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (int i = 1; i < ZksDatasUtil.COMCOUNT; i++) {
-                    serialPortDataDao.insert(new SerialPortData((long) i, "串口" + i, "", 3,
-                            "9600", 0, "NONE", 0, "8", 0, "1", 10));
-                    for (int j = 1; j < 31; j++) {
-                        if (j >= 10) {
-                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "" + j), i, j, "1-" + i + "" + j, "", "", 10));
-                        } else {
-                            serialCommandDao.insert(new SerialCommand(Long.valueOf(i + "0" + j), i, j, "1-" + i + "0" + j, "", "", 10));
-                        }
-                    }
-                }
-//                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "电能表", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-//                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "电能表", "0104010000027037", 16));
-
-//                serialPortDataDao.update(new SerialPortData((long) 4, "串口4", "温湿度", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-//                serialCommandDao.update(new SerialCommand(Long.valueOf("401"), 4, 1, "1-401", "温湿度", "01040000000271CB", 16));
-
-
-                serialPortDataDao.insert(new SerialPortData((long) 11, "串口1", "爱普生投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 12, "串口1", "奥图码投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 13, "串口1", "英士投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 14, "串口1", "理光(K360/X600)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 15, "串口1", "理光(WX6170N/X6180N)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 16, "串口1", "理光(K310/K320)投影机", 4, "19200", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 17, "串口1", "理光(K7000/K8500/K9000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-                serialPortDataDao.insert(new SerialPortData((long) 18, "串口1", "理光(W1000/W2000)投影机", 3, "9600", 0, "NONE", 0, "8", 0, "1", 16));
-
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("901"), 11, 1, "1-101", "开机", "505752204F4E0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("902"), 11, 2, "1-102", "关机", "505752204F46460D", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("903"), 11, 1, "1-101", "开机", "7E3030303020310D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("904"), 11, 2, "1-102", "关机", "7E3030303020300D", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("905"), 11, 1, "1-101", "开机", "4330300D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("906"), 11, 2, "1-102", "关机", "4330310D", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("907"), 11, 1, "1-101", "开机", "23504F4E0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("908"), 11, 2, "1-102", "关机", "23504F460D", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("909"), 11, 1, "1-101", "开机", "23504F4E", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("910"), 11, 2, "1-102", "关机", "23504446", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("911"), 11, 1, "1-101", "开机", "4130300D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("912"), 11, 2, "1-102", "关机", "4130310D", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("913"), 11, 1, "1-101", "开机", "3C70777220313E", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("914"), 11, 2, "1-102", "关机", "3C70777220303E", 16));
-
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("915"), 11, 1, "1-101", "开机", "23504F4E3A0D", 16));
-                serialCommandDao.insert(new SerialCommand(Long.valueOf("916"), 11, 2, "1-102", "关机", "23504F463A0D", 16));
-
+                ZksDatasUtil.getComDatas(serialPortDataDao, serialCommandDao);
                 skHandler.sendEmptyMessage(155);
-
                 if (ckdataTimer != null) {
                     ckdataTimer.cancel();
                     ckdataTimer = null;
                 }
             }
         }, 1);
-
     }
 
 

@@ -19,6 +19,7 @@ import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -109,12 +110,7 @@ public class IOsetActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        if (ioYuanDao.loadAll().size() == 0) {
-            ioYuanDao.insert(new IOYuan((long) 1, "报警1", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 2, "报警2", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 3, "报警3", "", 0, "", ""));
-            ioYuanDao.insert(new IOYuan((long) 4, "报警4", "", 0, "", ""));
-        }
+        ZksDatasUtil.getDangetInDatas(ioYuanDao);
 
         initView();
     }

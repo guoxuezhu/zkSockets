@@ -117,7 +117,7 @@ public class XiangDaoActivity extends BaseActivity {
             textView.setLayoutParams(layoutParams);
             LL_danger_in_layout.addView(textView);
         } else {
-            for (int i = 1; i < ZksDatasUtil.DANFER_IN_COUNT; i++) {
+            for (int i = 1; i < ZksDatasUtil.DANGER_IN_COUNT; i++) {
                 TextView textView = new TextView(this);
                 if (ioYuanDao.load((long) i).deviceName.equals("")) {
                     textView.setText(ioYuanDao.load((long) i).name + ":" + "未知设备");
@@ -147,7 +147,7 @@ public class XiangDaoActivity extends BaseActivity {
             textView.setLayoutParams(layoutParams);
             LL_danger_out_layout.addView(textView);
         } else {
-            for (int i = 1; i < ZksDatasUtil.DANFER_OUT_COUNT; i++) {
+            for (int i = 1; i < ZksDatasUtil.DANGER_OUT_COUNT; i++) {
                 TextView textView = new TextView(this);
                 if (dangerOutDao.load((long) i).deviceName.equals("")) {
                     textView.setText(dangerOutDao.load((long) i).name + ":" + "未知设备");

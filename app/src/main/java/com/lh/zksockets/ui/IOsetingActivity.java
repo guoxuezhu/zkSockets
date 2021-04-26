@@ -19,6 +19,7 @@ import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.data.model.IoPortData;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -102,11 +103,7 @@ public class IOsetingActivity extends BaseActivity {
 
 
         ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        if (ioPortDataDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                ioPortDataDao.insert(new IoPortData((long) i, "io输出" + i, "", 0, 10));
-            }
-        }
+        ZksDatasUtil.getIoOutDatas(ioPortDataDao);
         initView();
         ELog.i("========ioPortDataDao========" + ioPortDataDao.loadAll().toString());
     }

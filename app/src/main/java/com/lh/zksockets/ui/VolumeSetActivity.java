@@ -19,6 +19,7 @@ import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpRow;
 import com.lh.zksockets.utils.ELog;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -103,11 +104,7 @@ public class VolumeSetActivity extends BaseActivity {
 
 
         dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        if (dangerOutDao.loadAll().size() == 0) {
-            for (int i = 1; i < 5; i++) {
-                dangerOutDao.insert(new DangerOut((long) i, "报警输出" + i, "", 1, 10));
-            }
-        }
+        ZksDatasUtil.getDangetOutDatas(dangerOutDao);
         initView();
         ELog.i("========dangerOutDao========" + dangerOutDao.loadAll().toString());
 
