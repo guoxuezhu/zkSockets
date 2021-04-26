@@ -59,10 +59,14 @@ public class XiangDaoActivity extends BaseActivity {
         } else {
             for (int i = 1; i < ZksDatasUtil.COMCOUNT; i++) {
                 TextView textView = new TextView(this);
-                String skmsg = "串口" + i + ":";
-                textView.setText(serialPortDataDao.load((long) i).deviceName.equals("") ? skmsg + "未知设备" : skmsg + serialPortDataDao.load((long) i).deviceName);
+                if (serialPortDataDao.load((long) i).deviceName.equals("")) {
+                    textView.setText(serialPortDataDao.load((long) i).serialPortName + ":" + "未知设备");
+                    textView.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
+                } else {
+                    textView.setText(serialPortDataDao.load((long) i).serialPortName + ":" + serialPortDataDao.load((long) i).deviceName);
+                    textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                }
                 textView.setTextSize(16);
-                textView.setTextColor(serialPortDataDao.load((long) i).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
                 textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
                 textView.setPadding(6, 6, 6, 6);
                 layoutParams.setMargins(0, 6, 0, 0);
@@ -85,10 +89,14 @@ public class XiangDaoActivity extends BaseActivity {
         } else {
             for (int i = 1; i < ZksDatasUtil.JDQ_COUNT; i++) {
                 TextView textView = new TextView(this);
-                String jdqmsg = "继电器" + i + ":";
-                textView.setText(jdqStatusDao.load((long) i).deviceName.equals("") ? jdqmsg + "未知设备" : jdqmsg + jdqStatusDao.load((long) i).deviceName);
+                if (jdqStatusDao.load((long) i).deviceName.equals("")) {
+                    textView.setText(jdqStatusDao.load((long) i).name + ":" + "未知设备");
+                    textView.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
+                } else {
+                    textView.setText(jdqStatusDao.load((long) i).name + ":" + jdqStatusDao.load((long) i).deviceName);
+                    textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                }
                 textView.setTextSize(16);
-                textView.setTextColor(jdqStatusDao.load((long) i).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
                 textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
                 textView.setPadding(6, 6, 6, 6);
                 layoutParams.setMargins(0, 6, 0, 0);
@@ -111,9 +119,14 @@ public class XiangDaoActivity extends BaseActivity {
         } else {
             for (int i = 1; i < ZksDatasUtil.DANFER_IN_COUNT; i++) {
                 TextView textView = new TextView(this);
-                textView.setText(ioYuanDao.load((long) i).deviceName.equals("") ? "报警输入" + i + "：未知设备" : "报警输入" + i + ":" + ioYuanDao.load((long) i).deviceName);
+                if (ioYuanDao.load((long) i).deviceName.equals("")) {
+                    textView.setText(ioYuanDao.load((long) i).name + ":" + "未知设备");
+                    textView.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
+                } else {
+                    textView.setText(ioYuanDao.load((long) i).name + ":" + ioYuanDao.load((long) i).deviceName);
+                    textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                }
                 textView.setTextSize(16);
-                textView.setTextColor(ioYuanDao.load((long) i).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
                 textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
                 textView.setPadding(6, 6, 6, 6);
                 layoutParams.setMargins(0, 6, 0, 0);
@@ -136,8 +149,13 @@ public class XiangDaoActivity extends BaseActivity {
         } else {
             for (int i = 1; i < ZksDatasUtil.DANFER_OUT_COUNT; i++) {
                 TextView textView = new TextView(this);
-                textView.setText(dangerOutDao.load((long) i).deviceName.equals("") ? "报警输出" + i + "：未知设备" : "报警输出" + i + ":" + dangerOutDao.load((long) i).deviceName);
-                textView.setTextColor(dangerOutDao.load((long) i).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+                if (dangerOutDao.load((long) i).deviceName.equals("")) {
+                    textView.setText(dangerOutDao.load((long) i).name + ":" + "未知设备");
+                    textView.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
+                } else {
+                    textView.setText(dangerOutDao.load((long) i).name + ":" + dangerOutDao.load((long) i).deviceName);
+                    textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                }
                 textView.setTextSize(16);
                 textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
                 textView.setPadding(6, 6, 6, 6);
@@ -161,8 +179,13 @@ public class XiangDaoActivity extends BaseActivity {
         } else {
             for (int i = 1; i < ZksDatasUtil.IO_OUT_COUNT; i++) {
                 TextView textView = new TextView(this);
-                textView.setText(ioPortDataDao.load((long) i).deviceName.equals("") ? "io输出" + i + "：未知设备" : "io输出" + i + ":" + ioPortDataDao.load((long) i).deviceName);
-                textView.setTextColor(ioPortDataDao.load((long) i).deviceName.equals("") ? getResources().getColor(R.color.user_icon_default_gray) : getResources().getColor(R.color.profile_badge_3));
+                if (ioPortDataDao.load((long) i).deviceName.equals("")) {
+                    textView.setText(ioPortDataDao.load((long) i).name + ":" + "未知设备");
+                    textView.setTextColor(getResources().getColor(R.color.user_icon_default_gray));
+                } else {
+                    textView.setText(ioPortDataDao.load((long) i).name + ":" + ioPortDataDao.load((long) i).deviceName);
+                    textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
+                }
                 textView.setTextSize(16);
                 textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
                 textView.setPadding(6, 6, 6, 6);
@@ -177,6 +200,7 @@ public class XiangDaoActivity extends BaseActivity {
             TextView textView = new TextView(this);
             textView.setText("无设备");
             textView.setTextSize(16);
+            textView.setTextColor(getResources().getColor(R.color.profile_badge_3));
             textView.setBackgroundResource(R.drawable.layout_tuobu_bg); //设置背景
             textView.setPadding(6, 6, 6, 6);
             layoutParams.setMargins(0, 6, 0, 0);
