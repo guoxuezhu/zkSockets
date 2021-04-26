@@ -62,7 +62,6 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,8 +74,8 @@
                     android:layout_height="20dp"
                     android:background="@color/black" />
 
-
                 <LinearLayout
+                    android:id="@+id/LL_sk_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -91,100 +90,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:id="@+id/tp_ck_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tp_ck_8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16"
-                        android:visibility="gone" />
-
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -201,8 +106,8 @@
                     android:layout_height="20dp"
                     android:background="@color/black" />
 
-
                 <LinearLayout
+                    android:id="@+id/LL_jdq_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -217,101 +122,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/jdq_tuopu_name_8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -329,8 +139,8 @@
                     android:layout_height="20dp"
                     android:background="@color/black" />
 
-
                 <LinearLayout
+                    android:id="@+id/LL_danger_out_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -345,52 +155,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:id="@+id/tuopu_dangerOut_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_dangerOut_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_dangerOut_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_dangerOut_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -408,8 +172,8 @@
                     android:layout_height="20dp"
                     android:background="@color/black" />
 
-
                 <LinearLayout
+                    android:id="@+id/LL_danger_in_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -424,51 +188,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:id="@+id/danger_in_tuopu_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/danger_in_tuopu_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/danger_in_tuopu_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/danger_in_tuopu_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -486,8 +205,8 @@
                     android:layout_height="20dp"
                     android:background="@color/black" />
 
-
                 <LinearLayout
+                    android:id="@+id/LL_io_out_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/layout_tuobu_bg"
@@ -502,50 +221,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                    <TextView
-                        android:id="@+id/tuopu_ioOut_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_ioOut_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_ioOut_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:id="@+id/tuopu_ioOut_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="无设备"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -562,7 +237,6 @@
                     android:layout_width="2dp"
                     android:layout_height="20dp"
                     android:background="@color/black" />
-
 
                 <LinearLayout
                     android:id="@+id/LL_vid_layout"
@@ -580,69 +254,12 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_14" />
 
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="20dp"
-                    android:background="@color/black" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/layout_tuobu_bg"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="控制"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_14" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="web"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:background="@drawable/layout_tuobu_bg"
-                        android:padding="@dimen/dp_6"
-                        android:text="手机"
-                        android:textColor="@color/user_icon_default_gray"
-                        android:textSize="@dimen/text_size_16" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-
     </LinearLayout>
+
 </LinearLayout>
