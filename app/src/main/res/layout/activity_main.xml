@@ -137,7 +137,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="互动信号状态"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

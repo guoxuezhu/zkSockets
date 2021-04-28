@@ -103,17 +103,17 @@ public class HttpRequestUtil {
 
     public static String getDangerInfo(Multimap parms) {
         IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        ZksDatasUtil.getDangetInDatas(ioYuanDao);
+//        ZksDatasUtil.getDangetInDatas(ioYuanDao);
         return gson.toJson(new HttpResult("200", "", true, ioYuanDao.loadAll()));
     }
 
     public static String updataDangerInfo(Multimap parms) {
-        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
-        List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
-        }.getType());
-        for (int i = 0; i < dangerIoYuans.size(); i++) {
-            ioYuanDao.update(dangerIoYuans.get(i));
-        }
+//        IOYuanDao ioYuanDao = MyApplication.getDaoSession().getIOYuanDao();
+//        List<IOYuan> dangerIoYuans = gson.fromJson(parms.getString("dangerDatas"), new TypeToken<List<IOYuan>>() {
+//        }.getType());
+//        for (int i = 0; i < dangerIoYuans.size(); i++) {
+//            ioYuanDao.update(dangerIoYuans.get(i));
+//        }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
@@ -225,35 +225,35 @@ public class HttpRequestUtil {
 
     public static String getIoOutinfo(Multimap parms) {
         IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        ZksDatasUtil.getIoOutDatas(ioPortDataDao);
+//        ZksDatasUtil.getIoOutDatas(ioPortDataDao);
         return gson.toJson(new HttpResult("200", "", true, ioPortDataDao.loadAll()));
     }
 
     public static String updataIoOutInfo(Multimap parms) {
-        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
-        List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
-        }.getType());
-        ELog.i("==============1==333====" + ioPortDatas.toString());
-        for (int i = 0; i < ioPortDatas.size(); i++) {
-            ioPortDataDao.update(ioPortDatas.get(i));
-        }
+//        IoPortDataDao ioPortDataDao = MyApplication.getDaoSession().getIoPortDataDao();
+//        List<IoPortData> ioPortDatas = gson.fromJson(parms.getString("ioOutDatas"), new TypeToken<List<IoPortData>>() {
+//        }.getType());
+//        ELog.i("==============1==333====" + ioPortDatas.toString());
+//        for (int i = 0; i < ioPortDatas.size(); i++) {
+//            ioPortDataDao.update(ioPortDatas.get(i));
+//        }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 
     public static String getDangerOutInfo(Multimap parms) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        ZksDatasUtil.getDangetOutDatas(dangerOutDao);
+//        ZksDatasUtil.getDangetOutDatas(dangerOutDao);
         return gson.toJson(new HttpResult("200", "", true, dangerOutDao.loadAll()));
     }
 
     public static String updataDangerOutInfo(Multimap parms) {
-        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
-        List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
-        }.getType());
-        ELog.i("=============1==333====" + dangerOuts.toString());
-        for (int i = 0; i < dangerOuts.size(); i++) {
-            dangerOutDao.update(dangerOuts.get(i));
-        }
+//        DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
+//        List<DangerOut> dangerOuts = gson.fromJson(parms.getString("dangerOutDatas"), new TypeToken<List<DangerOut>>() {
+//        }.getType());
+//        ELog.i("=============1==333====" + dangerOuts.toString());
+//        for (int i = 0; i < dangerOuts.size(); i++) {
+//            dangerOutDao.update(dangerOuts.get(i));
+//        }
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 

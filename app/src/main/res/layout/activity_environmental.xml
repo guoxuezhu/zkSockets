@@ -86,7 +86,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/textView_1"
@@ -140,13 +141,16 @@
 
         </LinearLayout>
 
-        <View style="@style/xian_2" />
+        <View
+            style="@style/xian_2"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/textView_1"
@@ -200,13 +204,16 @@
 
         </LinearLayout>
 
-        <View style="@style/xian_2" />
+        <View
+            style="@style/xian_2"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/textView_1"
@@ -260,13 +267,16 @@
 
         </LinearLayout>
 
-        <View style="@style/xian_2" />
+        <View
+            style="@style/xian_2"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/textView_1"
@@ -320,7 +330,9 @@
 
         </LinearLayout>
 
-        <View style="@style/xian_2" />
+        <View
+            style="@style/xian_2"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"

@@ -21,11 +21,11 @@ import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
 
-    public static final int COMCOUNT = 9;
+    public static final int COMCOUNT = 5;
     public static final int JDQ_COUNT = 9;
-    public static final int IO_OUT_COUNT = 5;
-    public static final int DANGER_OUT_COUNT = 5;
-    public static final int DANGER_IN_COUNT = 5;
+    public static final int IO_OUT_COUNT = 1;
+    public static final int DANGER_OUT_COUNT = 1;
+    public static final int DANGER_IN_COUNT = 1;
 
     public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
@@ -211,10 +211,10 @@ public class ZksDatasUtil {
 
     public static void getjdqDatas(JDQstatusDao jdqStatusDao) {
         if (jdqStatusDao.loadAll().size() == 0) {
-            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
-            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 1, "继电器1", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 2, "继电器2", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 3, "继电器3", "", 1, 1));
+//            jdqStatusDao.insert(new JDQstatus((long) 4, "继电器4", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 5, "继电器5", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 6, "继电器6", "", 1, 1));
             jdqStatusDao.insert(new JDQstatus((long) 7, "继电器7", "幕布降", 1, 180));

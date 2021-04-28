@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 8
-        versionName "v8.d4.i4.o4.c3.m8"
+        versionName "v8.d4.i3.o1.c3.m4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {

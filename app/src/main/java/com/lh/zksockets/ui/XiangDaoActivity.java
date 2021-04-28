@@ -87,7 +87,7 @@ public class XiangDaoActivity extends BaseActivity {
             textView.setLayoutParams(layoutParams);
             LL_jdq_layout.addView(textView);
         } else {
-            for (int i = 1; i < ZksDatasUtil.JDQ_COUNT; i++) {
+            for (int i = 5; i < ZksDatasUtil.JDQ_COUNT; i++) {
                 TextView textView = new TextView(this);
                 if (jdqStatusDao.load((long) i).deviceName.equals("")) {
                     textView.setText(jdqStatusDao.load((long) i).name + ":" + "未知设备");

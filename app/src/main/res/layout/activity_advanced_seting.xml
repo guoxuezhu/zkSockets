@@ -73,15 +73,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20" />
 
-                <Button
-                    android:id="@+id/diannao_seting"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@mipmap/btn_img_1"
-                    android:text="电脑设置"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
 
             </LinearLayout>
 
@@ -109,7 +100,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="报警输入设置"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/lamp_seting"
@@ -153,7 +145,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="报警输出设置"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/io_port_seting"
@@ -163,7 +156,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="IO输出设置"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/power_box"
@@ -175,6 +169,16 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20"
                     android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/diannao_seting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/btn_img_1"
+                    android:text="电脑设置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
 
                 <Button
                     android:id="@+id/zk_seting"
