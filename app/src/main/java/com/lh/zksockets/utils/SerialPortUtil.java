@@ -815,11 +815,11 @@ public class SerialPortUtil {
             } else if (str.substring(0, 4).equals("VIDC")) {
                 sendMsg(("{[VIDC:DT:A001]<" + str.substring(4) + ">}").getBytes());
             }
-            if (str.substring(4, 5).equals("1")) {
-                makeML(Long.valueOf("5003"));
-            } else {
-                makeML(Long.valueOf("5004"));
-            }
+//            if (str.substring(4, 5).equals("1")) {
+//                makeML(Long.valueOf("5003"));
+//            } else {
+//                makeML(Long.valueOf("5004"));
+//            }
         }
     }
 
