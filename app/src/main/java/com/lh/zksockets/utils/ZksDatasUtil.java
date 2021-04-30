@@ -21,7 +21,7 @@ import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
 
-    public static final int COMCOUNT = 9;
+    public static final int COMCOUNT = 5;
     public static final int JDQ_COUNT = 9;
     public static final int IO_OUT_COUNT = 5;
     public static final int DANGER_OUT_COUNT = 5;
