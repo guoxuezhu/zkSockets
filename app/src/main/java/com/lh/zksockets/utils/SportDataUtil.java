@@ -104,7 +104,7 @@ public class SportDataUtil {
             ELog.i("===========COM=======endsize===========" + endsize);
             System.arraycopy(buffer1, 7, buffer3, bslength3, endsize - 8);
             bslength3 = bslength3 + endsize - 8;
-            getDianLiang2();
+            setWenshidu();
             delectNobuf(endsize);
         }
     }
@@ -126,7 +126,7 @@ public class SportDataUtil {
             int endsize = msgdata.indexOf(">") + 1;
             if (endsize == 18) {
                 if (msgdata.substring(6, 11).equals("BB 06") && msgdata.substring(15, 17).equals("80")) {
-                    onVIDinStatus(msgdata.substring(12, 14));
+//                    onVIDinStatus(msgdata.substring(12, 14));
                 }
             }
             delectNobuf(endsize);
@@ -151,10 +151,10 @@ public class SportDataUtil {
             if (!strInStatus.substring(1, 2).equals(vidStatusDao.load((long) 3).vidinStatus)) {
                 if (strInStatus.substring(1, 2).equals("0")) {
                     ELog.i("======老师笔记本====无信号===");
-                    SerialPortUtil.bjbnovid();
+//                    SerialPortUtil.bjbnovid();
                 } else {
                     ELog.i("======老师笔记本====有信号====");
-                    SerialPortUtil.bjbokvid();
+//                    SerialPortUtil.bjbokvid();
                 }
             }
             for (int i = 1; i < 5; i++) {
@@ -324,7 +324,7 @@ public class SportDataUtil {
                 WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
 
                 WenShiDu wenShiDu = new WenShiDu("", "", "", "", wendu.multiply(bigDecimal) + "℃", shidu.multiply(bigDecimal) + "%",
-                        "", 0, "1-401");
+                        "", 0, "1-801");
                 wenShiDuDao.deleteAll();
                 wenShiDuDao.insert(wenShiDu);
                 delectbuf3();

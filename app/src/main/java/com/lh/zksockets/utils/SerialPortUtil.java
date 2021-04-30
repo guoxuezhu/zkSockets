@@ -50,14 +50,12 @@ public class SerialPortUtil {
     private static OutputStream outputStream1, outputStream2, outputStream3;
     private static Timer xiakeTimer;
     private static Handler readCradHandler;
-    private static boolean isxiake;
-
 
     public static boolean open() {
         try {
             serialPort1 = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
             serialPort2 = new SerialPort(new File("/dev/ttyS2"), 9600, 0);
-            serialPort3 = new SerialPort(new File("/dev/ttyS3"), 9600, 0);
+//            serialPort3 = new SerialPort(new File("/dev/ttyS3"), 9600, 0);
             //获取打开的串口中的输入输出流，以便于串口数据的收发
             inputStream1 = serialPort1.getInputStream();
             outputStream1 = serialPort1.getOutputStream();
@@ -65,8 +63,8 @@ public class SerialPortUtil {
             inputStream2 = serialPort2.getInputStream();
             outputStream2 = serialPort2.getOutputStream();
 
-            inputStream3 = serialPort3.getInputStream();
-            outputStream3 = serialPort3.getOutputStream();
+//            inputStream3 = serialPort3.getInputStream();
+//            outputStream3 = serialPort3.getOutputStream();
             return true;
         } catch (Exception e) {
             ELog.e("======open_ck=====打开串口异常");
@@ -103,31 +101,6 @@ public class SerialPortUtil {
             }
         }.start();
 
-    }
-
-    public static void bjbokvid() {
-        if (!isxiake) {
-            closeXiakeTimer();
-        }
-    }
-
-    public static void bjbnovid() {
-        if (!isxiake) {
-            ontimerXiake();
-        }
-    }
-
-    private static void ontimerXiake() {
-        closeXiakeTimer();
-        xiakeTimer = new Timer();
-        xiakeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                sendMsg1("SKJBB".getBytes());
-                makeML((long) 2);
-                closeXiakeTimer();
-            }
-        }, 60 * 1500);
     }
 
     public static void sendMsg1(byte[] data) {
@@ -240,11 +213,11 @@ public class SerialPortUtil {
         } else if (msg.substring(0, 3).equals("ICK")) {
             shuaka(msg);
         } else if (msg.substring(0, 3).equals("VOL")) {
-            getYinliang();
+//            getYinliang();
         } else if (msg.substring(0, 3).equals("UIS")) {
             mbuiset(msg);
         } else if (msg.substring(0, 3).equals("MIC")) {
-            yinpin(msg);
+//            yinpin(msg);
         } else if (msg.substring(0, 3).equals("MBS")) {
             try {
                 makeML(Long.valueOf(msg.substring(3)));
@@ -592,22 +565,6 @@ public class SerialPortUtil {
     public static void makeML(Long id) {
         synchronized (id) {
             try {
-                if (id == 1) {
-                    isxiake = false;
-                    closeXiakeTimer();
-                    sendMsg("{[REY5:DT:A005]<CLOSE>}".getBytes());
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    sendMsg("{[REY6:DT:A005]<CLOSE>}".getBytes());
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
                 MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
                 if (mLsListsDao.loadAll().size() != 0) {
                     if (mLsListsDao.load(id) == null) {
@@ -624,9 +581,8 @@ public class SerialPortUtil {
                     }
                 }
                 if (id == 2) {
-                    isxiake = true;
                     DiannaoUDPUtil.diannaogj();
-                    sendMsg(StringToBytes("BB0A0180"));
+                    sendMsg("{[VIDB:DT:A035]<0,2;1,3;2,4;3,5;4,6;5,7;6,8;7,0;8,1>}".getBytes());
                     setXiakeTimer();
                 }
                 DeviceStatusUtil.setDeviceStatus(id);
@@ -653,19 +609,13 @@ public class SerialPortUtil {
         }
     }
 
+
     private static void setXiakeTimer() {
         closeXiakeTimer();
         xiakeTimer = new Timer();
         xiakeTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                sendMsg("{[REY6:DT:A004]<OPEN>}".getBytes());
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                sendMsg("{[REY5:DT:A004]<OPEN>}".getBytes());
                 makeML((long) 215);
                 closeXiakeTimer();
             }
@@ -678,6 +628,7 @@ public class SerialPortUtil {
             xiakeTimer = null;
         }
     }
+
 
     private static void doDanger(String ml) {
         DangerOutDao dangerOutDao = MyApplication.getDaoSession().getDangerOutDao();
@@ -763,10 +714,8 @@ public class SerialPortUtil {
 //                }
 //            }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A004]<OPEN>}";
-            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
-                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
-                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
-                }
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 0) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 0);
             }
         } else if (ml.substring(4).equals("0")) {
             if (ml.substring(2, 3).equals("7")) {
@@ -789,10 +738,8 @@ public class SerialPortUtil {
                 }
             }
             msg = "{[REY" + ml.substring(2, 3) + ":DT:A005]<CLOSE>}";
-            if (!ml.substring(2, 3).equals("5") && !ml.substring(2, 3).equals("6")) {
-                if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
-                    TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
-                }
+            if (jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).jdqStatus == 1) {
+                TimerUtils.setHuifuJDQstatus(ml.substring(2, 3), jdqStatusDao.load(Long.valueOf(ml.substring(2, 3))).time, 1);
             }
         }
         ELog.i("========doJDQ====msg====" + msg);
@@ -864,9 +811,9 @@ public class SerialPortUtil {
     private static void sendShipinType(String str) {
         synchronized (str) {
             if (str.substring(0, 4).equals("VIDA")) {
-                sendMsg(StringToBytes("BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80"));
+                sendMsg(("{[VIDA:DT:A003]<" + str.substring(4) + ">}").getBytes());
             } else if (str.substring(0, 4).equals("VIDC")) {
-                sendMsg(StringToBytes("BB050" + str.substring(4) + "80"));
+                sendMsg(("{[VIDC:DT:A001]<" + str.substring(4) + ">}").getBytes());
             }
             if (str.substring(4, 5).equals("1")) {
                 makeML(Long.valueOf("5003"));
