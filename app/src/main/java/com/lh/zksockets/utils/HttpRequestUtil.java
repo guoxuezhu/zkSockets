@@ -439,7 +439,7 @@ public class HttpRequestUtil {
                     usersDao.update(user);
                     String tokenString = user.username + "&" + System.currentTimeMillis() + "&" + user.userPaw;
                     try {
-                        return gson.toJson(new HttpResult("200", "登录成功", true, Coder.hashMD5(tokenString.getBytes("utf8"))));
+                        return Coder.hashMD5(tokenString.getBytes("utf8"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -449,24 +449,24 @@ public class HttpRequestUtil {
                         user.setUser_status(0);
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return gson.toJson(new HttpResult("-1004", "此帐号已锁定", false, null));
+                        return "-1004";
                     } else if (count == 1) {
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return gson.toJson(new HttpResult("-1005", "密码错误,1次后此帐号锁定", false, null));
+                        return "-1005";
                     } else if (count == 2) {
                         user.setLogin_count(count);
                         usersDao.update(user);
-                        return gson.toJson(new HttpResult("-1006", "密码错误,2次后此帐号锁定", false, null));
+                        return "-1006";
                     }
                 }
             } else {
-                return gson.toJson(new HttpResult("-1004", "此帐号已锁定", false, null));
+                return "-1004";
             }
         } else {
-            return gson.toJson(new HttpResult("-1002", "帐号错误", false, null));
+            return "-1002";
         }
-        return gson.toJson(new HttpResult("-1001", "数据异常", false, null));
+        return "-1001";
     }
 
     public static String getUserLists(Multimap parms) {
