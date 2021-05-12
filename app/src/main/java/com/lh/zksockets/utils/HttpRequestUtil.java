@@ -8,7 +8,6 @@ import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
-import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
@@ -23,12 +22,12 @@ import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.WuangguanInfoDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.DbDao.ZksDataDao;
 import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DoorInfo;
-import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.HttpData;
 import com.lh.zksockets.data.model.HttpResult;
 import com.lh.zksockets.data.model.HttpRow;
@@ -45,6 +44,7 @@ import com.lh.zksockets.data.model.SerialResult;
 import com.lh.zksockets.data.model.UIsetData;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.WuangguanInfo;
 import com.lh.zksockets.data.model.ZkInfo;
 
 import java.io.IOException;
@@ -378,19 +378,19 @@ public class HttpRequestUtil {
     }
 
     public static String getWgkzqInfo(Multimap parms) {
-        EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
+        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
         if (wangguandata.loadAll().size() == 0) {
-            wangguandata.insert(new EventKejianRest(1, (long) 1, "192.168.0.220",
-                    0, false, 0));
+            wangguandata.insert(new WuangguanInfo((long) 1, "192.168.0.220", 10101, 0));
         }
-        return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll().get(0)));
+        return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll()));
     }
 
     public static String updataWgkzqInfo(Multimap parms) {
-        EventKejianRestDao wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
-        EventKejianRest wgkzqData = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
-        wangguandata.deleteAll();
-        wangguandata.insert(wgkzqData);
+        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
+
+//        EventKejianRest wgkzqData = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
+//        wangguandata.deleteAll();
+//        wangguandata.insert(wgkzqData);
         return gson.toJson(new HttpResult("200", "", true, null));
     }
 

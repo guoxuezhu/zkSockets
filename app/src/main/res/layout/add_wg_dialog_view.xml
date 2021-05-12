@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_shape"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="添加网关信息"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_20" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="网关ID:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/add_wg_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:hint="请输入网关ID（1-100）"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="网关IP:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/add_wg_ip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:digits="0123456789."
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="192.168.0.220"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="网关端口:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <EditText
+            android:id="@+id/add_wg_port"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="10101"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="是否启用:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/layout_table_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbtn_wg_status_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="启用"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+            <RadioButton
+                android:id="@+id/rbtn_wg_status_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_50"
+                android:text="禁用"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <Button
+            android:id="@+id/dialog_wg_btn_no"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/but_bg_no"
+            android:text="取消"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <Button
+            android:id="@+id/dialog_wg_btn_ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/but_bg"
+            android:text="确定"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -25,7 +25,6 @@ public class DaoMaster extends AbstractDaoMaster {
         DangerOutDao.createTable(db, ifNotExists);
         DangerStatusDao.createTable(db, ifNotExists);
         DoorInfoDao.createTable(db, ifNotExists);
-        EventKejianRestDao.createTable(db, ifNotExists);
         EventShangkeDao.createTable(db, ifNotExists);
         IOYuanDao.createTable(db, ifNotExists);
         IcCardDao.createTable(db, ifNotExists);
@@ -41,6 +40,7 @@ public class DaoMaster extends AbstractDaoMaster {
         UsersDao.createTable(db, ifNotExists);
         VidStatusDao.createTable(db, ifNotExists);
         WenShiDuDao.createTable(db, ifNotExists);
+        WuangguanInfoDao.createTable(db, ifNotExists);
         ZkInfoDao.createTable(db, ifNotExists);
         ZksDataDao.createTable(db, ifNotExists);
     }
@@ -51,7 +51,6 @@ public class DaoMaster extends AbstractDaoMaster {
         DangerOutDao.dropTable(db, ifExists);
         DangerStatusDao.dropTable(db, ifExists);
         DoorInfoDao.dropTable(db, ifExists);
-        EventKejianRestDao.dropTable(db, ifExists);
         EventShangkeDao.dropTable(db, ifExists);
         IOYuanDao.dropTable(db, ifExists);
         IcCardDao.dropTable(db, ifExists);
@@ -67,6 +66,7 @@ public class DaoMaster extends AbstractDaoMaster {
         UsersDao.dropTable(db, ifExists);
         VidStatusDao.dropTable(db, ifExists);
         WenShiDuDao.dropTable(db, ifExists);
+        WuangguanInfoDao.dropTable(db, ifExists);
         ZkInfoDao.dropTable(db, ifExists);
         ZksDataDao.dropTable(db, ifExists);
     }
@@ -91,7 +91,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(DangerOutDao.class);
         registerDaoClass(DangerStatusDao.class);
         registerDaoClass(DoorInfoDao.class);
-        registerDaoClass(EventKejianRestDao.class);
         registerDaoClass(EventShangkeDao.class);
         registerDaoClass(IOYuanDao.class);
         registerDaoClass(IcCardDao.class);
@@ -107,6 +106,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(UsersDao.class);
         registerDaoClass(VidStatusDao.class);
         registerDaoClass(WenShiDuDao.class);
+        registerDaoClass(WuangguanInfoDao.class);
         registerDaoClass(ZkInfoDao.class);
         registerDaoClass(ZksDataDao.class);
     }

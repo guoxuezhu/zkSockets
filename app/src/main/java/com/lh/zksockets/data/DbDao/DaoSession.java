@@ -12,7 +12,6 @@ import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DangerStatus;
 import com.lh.zksockets.data.model.DoorInfo;
-import com.lh.zksockets.data.model.EventKejianRest;
 import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.IOYuan;
 import com.lh.zksockets.data.model.IcCard;
@@ -28,6 +27,7 @@ import com.lh.zksockets.data.model.UIsetData;
 import com.lh.zksockets.data.model.Users;
 import com.lh.zksockets.data.model.VidStatus;
 import com.lh.zksockets.data.model.WenShiDu;
+import com.lh.zksockets.data.model.WuangguanInfo;
 import com.lh.zksockets.data.model.ZkInfo;
 import com.lh.zksockets.data.model.ZksData;
 
@@ -35,7 +35,6 @@ import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
-import com.lh.zksockets.data.DbDao.EventKejianRestDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
 import com.lh.zksockets.data.DbDao.IcCardDao;
@@ -51,6 +50,7 @@ import com.lh.zksockets.data.DbDao.UIsetDataDao;
 import com.lh.zksockets.data.DbDao.UsersDao;
 import com.lh.zksockets.data.DbDao.VidStatusDao;
 import com.lh.zksockets.data.DbDao.WenShiDuDao;
+import com.lh.zksockets.data.DbDao.WuangguanInfoDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
 import com.lh.zksockets.data.DbDao.ZksDataDao;
 
@@ -67,7 +67,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig dangerOutDaoConfig;
     private final DaoConfig dangerStatusDaoConfig;
     private final DaoConfig doorInfoDaoConfig;
-    private final DaoConfig eventKejianRestDaoConfig;
     private final DaoConfig eventShangkeDaoConfig;
     private final DaoConfig iOYuanDaoConfig;
     private final DaoConfig icCardDaoConfig;
@@ -83,6 +82,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig usersDaoConfig;
     private final DaoConfig vidStatusDaoConfig;
     private final DaoConfig wenShiDuDaoConfig;
+    private final DaoConfig wuangguanInfoDaoConfig;
     private final DaoConfig zkInfoDaoConfig;
     private final DaoConfig zksDataDaoConfig;
 
@@ -90,7 +90,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DangerOutDao dangerOutDao;
     private final DangerStatusDao dangerStatusDao;
     private final DoorInfoDao doorInfoDao;
-    private final EventKejianRestDao eventKejianRestDao;
     private final EventShangkeDao eventShangkeDao;
     private final IOYuanDao iOYuanDao;
     private final IcCardDao icCardDao;
@@ -106,6 +105,7 @@ public class DaoSession extends AbstractDaoSession {
     private final UsersDao usersDao;
     private final VidStatusDao vidStatusDao;
     private final WenShiDuDao wenShiDuDao;
+    private final WuangguanInfoDao wuangguanInfoDao;
     private final ZkInfoDao zkInfoDao;
     private final ZksDataDao zksDataDao;
 
@@ -124,9 +124,6 @@ public class DaoSession extends AbstractDaoSession {
 
         doorInfoDaoConfig = daoConfigMap.get(DoorInfoDao.class).clone();
         doorInfoDaoConfig.initIdentityScope(type);
-
-        eventKejianRestDaoConfig = daoConfigMap.get(EventKejianRestDao.class).clone();
-        eventKejianRestDaoConfig.initIdentityScope(type);
 
         eventShangkeDaoConfig = daoConfigMap.get(EventShangkeDao.class).clone();
         eventShangkeDaoConfig.initIdentityScope(type);
@@ -173,6 +170,9 @@ public class DaoSession extends AbstractDaoSession {
         wenShiDuDaoConfig = daoConfigMap.get(WenShiDuDao.class).clone();
         wenShiDuDaoConfig.initIdentityScope(type);
 
+        wuangguanInfoDaoConfig = daoConfigMap.get(WuangguanInfoDao.class).clone();
+        wuangguanInfoDaoConfig.initIdentityScope(type);
+
         zkInfoDaoConfig = daoConfigMap.get(ZkInfoDao.class).clone();
         zkInfoDaoConfig.initIdentityScope(type);
 
@@ -183,7 +183,6 @@ public class DaoSession extends AbstractDaoSession {
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
         dangerStatusDao = new DangerStatusDao(dangerStatusDaoConfig, this);
         doorInfoDao = new DoorInfoDao(doorInfoDaoConfig, this);
-        eventKejianRestDao = new EventKejianRestDao(eventKejianRestDaoConfig, this);
         eventShangkeDao = new EventShangkeDao(eventShangkeDaoConfig, this);
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
         icCardDao = new IcCardDao(icCardDaoConfig, this);
@@ -199,6 +198,7 @@ public class DaoSession extends AbstractDaoSession {
         usersDao = new UsersDao(usersDaoConfig, this);
         vidStatusDao = new VidStatusDao(vidStatusDaoConfig, this);
         wenShiDuDao = new WenShiDuDao(wenShiDuDaoConfig, this);
+        wuangguanInfoDao = new WuangguanInfoDao(wuangguanInfoDaoConfig, this);
         zkInfoDao = new ZkInfoDao(zkInfoDaoConfig, this);
         zksDataDao = new ZksDataDao(zksDataDaoConfig, this);
 
@@ -206,7 +206,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(DangerOut.class, dangerOutDao);
         registerDao(DangerStatus.class, dangerStatusDao);
         registerDao(DoorInfo.class, doorInfoDao);
-        registerDao(EventKejianRest.class, eventKejianRestDao);
         registerDao(EventShangke.class, eventShangkeDao);
         registerDao(IOYuan.class, iOYuanDao);
         registerDao(IcCard.class, icCardDao);
@@ -222,6 +221,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Users.class, usersDao);
         registerDao(VidStatus.class, vidStatusDao);
         registerDao(WenShiDu.class, wenShiDuDao);
+        registerDao(WuangguanInfo.class, wuangguanInfoDao);
         registerDao(ZkInfo.class, zkInfoDao);
         registerDao(ZksData.class, zksDataDao);
     }
@@ -231,7 +231,6 @@ public class DaoSession extends AbstractDaoSession {
         dangerOutDaoConfig.clearIdentityScope();
         dangerStatusDaoConfig.clearIdentityScope();
         doorInfoDaoConfig.clearIdentityScope();
-        eventKejianRestDaoConfig.clearIdentityScope();
         eventShangkeDaoConfig.clearIdentityScope();
         iOYuanDaoConfig.clearIdentityScope();
         icCardDaoConfig.clearIdentityScope();
@@ -247,6 +246,7 @@ public class DaoSession extends AbstractDaoSession {
         usersDaoConfig.clearIdentityScope();
         vidStatusDaoConfig.clearIdentityScope();
         wenShiDuDaoConfig.clearIdentityScope();
+        wuangguanInfoDaoConfig.clearIdentityScope();
         zkInfoDaoConfig.clearIdentityScope();
         zksDataDaoConfig.clearIdentityScope();
     }
@@ -265,10 +265,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public DoorInfoDao getDoorInfoDao() {
         return doorInfoDao;
-    }
-
-    public EventKejianRestDao getEventKejianRestDao() {
-        return eventKejianRestDao;
     }
 
     public EventShangkeDao getEventShangkeDao() {
@@ -329,6 +325,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public WenShiDuDao getWenShiDuDao() {
         return wenShiDuDao;
+    }
+
+    public WuangguanInfoDao getWuangguanInfoDao() {
+        return wuangguanInfoDao;
     }
 
     public ZkInfoDao getZkInfoDao() {

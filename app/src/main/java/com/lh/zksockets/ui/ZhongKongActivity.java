@@ -2,32 +2,34 @@ package com.lh.zksockets.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.R;
-import com.lh.zksockets.data.DbDao.EventKejianRestDao;
-import com.lh.zksockets.data.model.EventKejianRest;
-import com.lh.zksockets.utils.DisplayTools;
+import com.lh.zksockets.adapter.WangguanAdapter;
+import com.lh.zksockets.data.DbDao.WuangguanInfoDao;
+import com.lh.zksockets.data.model.WuangguanInfo;
+import com.lh.zksockets.utils.AddWangguanDialog;
+import com.lh.zksockets.utils.DeleteDialog;
+import com.lh.zksockets.utils.ELog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZhongKongActivity extends BaseActivity {
+public class ZhongKongActivity extends BaseActivity implements WangguanAdapter.CallBack, AddWangguanDialog.WuangguanDialogCallBack, DeleteDialog.DialogCallBack {
 
-    @BindView(R.id.wg_ip)
-    EditText wg_ip;
+    @BindView(R.id.wangguan_recyclerView)
+    RecyclerView wangguan_recyclerView;
 
-    @BindView(R.id.rbtn_wg_ok)
-    RadioButton rbtn_wg_ok;
-    @BindView(R.id.rbtn_wg_no)
-    RadioButton rbtn_wg_no;
-
-    private EventKejianRestDao wangguandata;
-
+    private WangguanAdapter wangguanAdapter;
+    private AddWangguanDialog addWangguanDialog;
+    private DeleteDialog deleteDialog;
+    private WuangguanInfoDao wangguandata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,40 +37,90 @@ public class ZhongKongActivity extends BaseActivity {
         setContentView(R.layout.activity_zhong_kong);
         ButterKnife.bind(this);
 
-        wangguandata = MyApplication.getDaoSession().getEventKejianRestDao();
+        wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
         if (wangguandata.loadAll().size() == 0) {
-            wangguandata.insert(new EventKejianRest(1, (long) 1, "192.168.0.220",
-                    0, false, 0));
+            wangguandata.insert(new WuangguanInfo((long) 1, "192.168.0.220", 10101, 0));
         }
-        wg_ip.setText(wangguandata.loadAll().get(0).name);
-        if (wangguandata.loadAll().get(0).status == 1) {
-            rbtn_wg_ok.setChecked(true);
-        } else {
-            rbtn_wg_no.setChecked(true);
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        wangguan_recyclerView.setLayoutManager(manager);
+        wangguanAdapter = new WangguanAdapter(this, wangguandata.loadAll(), this);
+        wangguan_recyclerView.setAdapter(wangguanAdapter);
+        ELog.i("===========wangguandata.loadAll()============" + wangguandata.loadAll().toString());
+    }
+
+    @OnClick(R.id.add_wangguan)
+    public void add_wangguan() {
+        if (addWangguanDialog == null) {
+            addWangguanDialog = new AddWangguanDialog(this, null, this);
+        }
+        if (addWangguanDialog != null) {
+            addWangguanDialog.show();
+            addWangguanDialog.setCanceledOnTouchOutside(false);
         }
     }
 
-    @OnClick(R.id.btn_wg_baocun)
-    public void btn_wg_baocun() {
-        if (!DisplayTools.ipCheck(wg_ip.getText().toString())) {
-            Toast.makeText(this, R.string.ip_msg, Toast.LENGTH_SHORT).show();
-            return;
+    @Override
+    public void addWangguanInfo(String wgId, String wgIp, String wgPort, int status) {
+        if (wangguandata.loadAll().size() != 0) {
+            List<WuangguanInfo> wgData = wangguandata.queryBuilder()
+                    .where(WuangguanInfoDao.Properties.Wg_id.eq(wgId))
+                    .list();
+            if (wgData.size() != 0) {
+                wangguandata.deleteByKey(Long.valueOf(wgId));
+            }
         }
-        wangguandata.deleteAll();
-        if (rbtn_wg_ok.isChecked()) {
-            wangguandata.insert(new EventKejianRest(1, (long) 1, wg_ip.getText().toString(),
-                    1, false, 0));
-        } else {
-            wangguandata.insert(new EventKejianRest(1, (long) 1, wg_ip.getText().toString(),
-                    0, false, 0));
-        }
-        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        wangguandata.insert(new WuangguanInfo(Long.valueOf(wgId), wgIp, Integer.valueOf(wgPort), status));
+        closeDialog();
     }
 
+    @Override
+    public void addWangguanDialogCancel() {
+        closeDialog();
+    }
+
+    private void closeDialog() {
+        wangguanAdapter.setData(wangguandata.loadAll());
+        if (addWangguanDialog != null) {
+            addWangguanDialog.dismiss();
+            addWangguanDialog = null;
+        }
+        if (deleteDialog != null) {
+            deleteDialog.dismiss();
+            deleteDialog = null;
+        }
+    }
 
     @OnClick(R.id.zk_back_btn)
     public void zk_back_btn() {
         back();
+    }
+
+    @Override
+    public void onDelectItem(WuangguanInfo item) {
+        if (deleteDialog == null) {
+            deleteDialog = new DeleteDialog(this, this, item.wg_id);
+        }
+        if (deleteDialog != null) {
+            deleteDialog.show();
+            deleteDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    @Override
+    public void onFixItem(WuangguanInfo item) {
+        if (addWangguanDialog == null) {
+            addWangguanDialog = new AddWangguanDialog(this, item, this);
+        }
+        if (addWangguanDialog != null) {
+            addWangguanDialog.show();
+            addWangguanDialog.setCanceledOnTouchOutside(false);
+        }
+    }
+
+    @Override
+    public void deleteInfo(Long mitemId) {
+        wangguandata.deleteByKey(mitemId);
     }
 
     @Override
@@ -86,4 +138,5 @@ public class ZhongKongActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }
