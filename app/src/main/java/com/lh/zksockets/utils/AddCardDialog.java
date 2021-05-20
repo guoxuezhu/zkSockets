@@ -116,7 +116,7 @@ public class AddCardDialog extends Dialog {
             return;
         }
         if (et_teacherName.getText().toString().trim().equals("")) {
-            Toast.makeText(mContext, "请输入老师名称", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请输入名称", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!et_cardNum.getText().toString().trim().equals("") && et_cardNum.getText().toString().trim().length() == 10) {
