@@ -258,7 +258,7 @@ public class SerialPortUtil {
         UIsetDataDao uIsetDataDao = MyApplication.getDaoSession().getUIsetDataDao();
         if (uIsetDataDao.loadAll().size() != 0) {
             String uiMsg = "UIS;";
-            for (int i = 1; i < 11; i++) {
+            for (int i = 1; i < uIsetDataDao.loadAll().size() + 1; i++) {
                 uiMsg = uiMsg + uIsetDataDao.load((long) i).btn_status;
             }
             ELog.i("=======mbuiset======uiMsg====" + uiMsg);

@@ -154,16 +154,11 @@ public class ZksDatasUtil {
 
     public static void getUIstatusDatas(UIsetDataDao uIsetDataDao) {
         if (uIsetDataDao.loadAll().size() == 0) {
-            uIsetDataDao.insert(new UIsetData((long) 1, "一键互动", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 2, "自由互动", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 3, "录播", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 4, "多媒体", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 5, "窗帘", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 6, "灯光", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 7, "空调", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 8, "门禁", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 9, "音频", "1"));
-            uIsetDataDao.insert(new UIsetData((long) 10, "电风扇", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 1, "互动", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 2, "多媒体", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 3, "环境控制", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 4, "音量", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 5, "录播", "1"));
         }
     }
 }

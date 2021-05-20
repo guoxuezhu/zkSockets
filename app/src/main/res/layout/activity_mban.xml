@@ -61,7 +61,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="一键互动"
+                android:text="互动"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
 
@@ -119,7 +119,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="自由互动"
+                android:text="多媒体"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
 
@@ -177,7 +177,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="录播"
+                android:text="环境控制"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
 
@@ -235,7 +235,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="多媒体"
+                android:text="音量"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
 
@@ -293,7 +293,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="窗帘"
+                android:text="录播"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20" />
 
@@ -313,310 +313,6 @@
 
                 <Switch
                     android:id="@+id/btn_ui_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotationX="6"
-                    android:showText="true"
-                    android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="显"
-                    android:textOn="隐" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="800dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="@dimen/dp_20"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="灯光"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/btn_ui_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotationX="6"
-                    android:showText="true"
-                    android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="显"
-                    android:textOn="隐" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="空调"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/btn_ui_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotationX="6"
-                    android:showText="true"
-                    android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="显"
-                    android:textOn="隐" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="门禁"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/btn_ui_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotationX="6"
-                    android:showText="true"
-                    android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="显"
-                    android:textOn="隐" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="音频"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/btn_ui_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rotationX="6"
-                    android:showText="true"
-                    android:switchMinWidth="@dimen/dp_60"
-                    android:textOff="显"
-                    android:textOn="隐" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="电风扇"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Switch
-                    android:id="@+id/btn_ui_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:rotationX="6"

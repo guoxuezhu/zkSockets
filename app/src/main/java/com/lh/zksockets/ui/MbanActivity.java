@@ -29,16 +29,6 @@ public class MbanActivity extends BaseActivity {
     Switch btn_ui_4;
     @BindView(R.id.btn_ui_5)
     Switch btn_ui_5;
-    @BindView(R.id.btn_ui_6)
-    Switch btn_ui_6;
-    @BindView(R.id.btn_ui_7)
-    Switch btn_ui_7;
-    @BindView(R.id.btn_ui_8)
-    Switch btn_ui_8;
-    @BindView(R.id.btn_ui_9)
-    Switch btn_ui_9;
-    @BindView(R.id.btn_ui_10)
-    Switch btn_ui_10;
 
     private UIsetDataDao uIsetDataDao;
 
@@ -74,86 +64,37 @@ public class MbanActivity extends BaseActivity {
         } else {
             btn_ui_5.setChecked(false);
         }
-        if (uIsetDataDao.load((long) 6).btn_status.equals("0")) {
-            btn_ui_6.setChecked(true);
-        } else {
-            btn_ui_6.setChecked(false);
-        }
-        if (uIsetDataDao.load((long) 7).btn_status.equals("0")) {
-            btn_ui_7.setChecked(true);
-        } else {
-            btn_ui_7.setChecked(false);
-        }
-        if (uIsetDataDao.load((long) 8).btn_status.equals("0")) {
-            btn_ui_8.setChecked(true);
-        } else {
-            btn_ui_8.setChecked(false);
-        }
-        if (uIsetDataDao.load((long) 9).btn_status.equals("0")) {
-            btn_ui_9.setChecked(true);
-        } else {
-            btn_ui_9.setChecked(false);
-        }
-        if (uIsetDataDao.load((long) 10).btn_status.equals("0")) {
-            btn_ui_10.setChecked(true);
-        } else {
-            btn_ui_10.setChecked(false);
-        }
         ELog.d("=========uIsetDataDao==========" + uIsetDataDao.loadAll().toString());
 
     }
 
     @OnClick(R.id.btn_mban_ok)
     public void btn_mban_ok() {
+        uIsetDataDao.deleteAll();
         if (btn_ui_1.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 1, "一键互动", "0"));
+            uIsetDataDao.insert(new UIsetData((long) 1, "互动", "0"));
         } else {
-            uIsetDataDao.update(new UIsetData((long) 1, "一键互动", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 1, "互动", "1"));
         }
         if (btn_ui_2.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 2, "自由互动", "0"));
+            uIsetDataDao.insert(new UIsetData((long) 2, "多媒体", "0"));
         } else {
-            uIsetDataDao.update(new UIsetData((long) 2, "自由互动", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 2, "多媒体", "1"));
         }
         if (btn_ui_3.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 3, "录播", "0"));
+            uIsetDataDao.insert(new UIsetData((long) 3, "环境控制", "0"));
         } else {
-            uIsetDataDao.update(new UIsetData((long) 3, "录播", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 3, "环境控制", "1"));
         }
         if (btn_ui_4.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 4, "多媒体", "0"));
+            uIsetDataDao.insert(new UIsetData((long) 4, "音量", "0"));
         } else {
-            uIsetDataDao.update(new UIsetData((long) 4, "多媒体", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 4, "音量", "1"));
         }
         if (btn_ui_5.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 5, "窗帘", "0"));
+            uIsetDataDao.insert(new UIsetData((long) 5, "录播", "0"));
         } else {
-            uIsetDataDao.update(new UIsetData((long) 5, "窗帘", "1"));
-        }
-        if (btn_ui_6.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 6, "灯光", "0"));
-        } else {
-            uIsetDataDao.update(new UIsetData((long) 6, "灯光", "1"));
-        }
-        if (btn_ui_7.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 7, "空调", "0"));
-        } else {
-            uIsetDataDao.update(new UIsetData((long) 7, "空调", "1"));
-        }
-        if (btn_ui_8.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 8, "门禁", "0"));
-        } else {
-            uIsetDataDao.update(new UIsetData((long) 8, "门禁", "1"));
-        }
-        if (btn_ui_9.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 9, "音频", "0"));
-        } else {
-            uIsetDataDao.update(new UIsetData((long) 9, "音频", "1"));
-        }
-        if (btn_ui_10.isChecked()) {
-            uIsetDataDao.update(new UIsetData((long) 10, "电风扇", "0"));
-        } else {
-            uIsetDataDao.update(new UIsetData((long) 10, "电风扇", "1"));
+            uIsetDataDao.insert(new UIsetData((long) 5, "录播", "1"));
         }
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
