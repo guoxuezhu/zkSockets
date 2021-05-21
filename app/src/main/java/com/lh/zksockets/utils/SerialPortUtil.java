@@ -520,7 +520,6 @@ public class SerialPortUtil {
     }
 
     private static void sendCardLog(String kahao) {
-        makeML((long) 37);
         ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
         if (zkInfoDao.loadAll().size() == 0) {
             return;
