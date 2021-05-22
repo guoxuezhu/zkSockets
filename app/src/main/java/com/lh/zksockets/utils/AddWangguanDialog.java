@@ -58,7 +58,7 @@ public class AddWangguanDialog extends Dialog {
     private void initView() {
         if (mWgdata != null) {
             add_wg_id.setText(mWgdata.wg_id + "");
-            add_wg_id.setEnabled(true);
+            add_wg_id.setEnabled(false);
             add_wg_ip.setText(mWgdata.wg_ip);
             add_wg_port.setText(mWgdata.wg_port + "");
             if (mWgdata.wg_status == 1) {
@@ -68,7 +68,7 @@ public class AddWangguanDialog extends Dialog {
             }
         } else {
             add_wg_id.setText("");
-            add_wg_id.setEnabled(false);
+            add_wg_id.setEnabled(true);
             add_wg_ip.setText("");
             add_wg_port.setText("");
             rbtn_wg_status_no.setChecked(true);
