@@ -121,6 +121,7 @@ public class ZhongKongActivity extends BaseActivity implements WangguanAdapter.C
     @Override
     public void deleteInfo(Long mitemId) {
         wangguandata.deleteByKey(mitemId);
+        closeDialog();
     }
 
     @Override
