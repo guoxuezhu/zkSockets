@@ -7,6 +7,7 @@ import com.lh.zksockets.data.model.WuangguanInfo;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 public class UDPUtil {
 
@@ -14,7 +15,7 @@ public class UDPUtil {
 
     private static void init() {
         try {
-            udpSocket = new DatagramSocket(10101);
+            udpSocket = new DatagramSocket(12001);
         } catch (Exception e) {
             udpSocket = null;
             e.printStackTrace();
@@ -70,16 +71,30 @@ public class UDPUtil {
                     try {
                         DatagramPacket recePacket = new DatagramPacket(receBuf, receBuf.length);
                         udpSocket.receive(recePacket);
-                        String readStr = new String(recePacket.getData(), 0, recePacket.getLength());
-                        ELog.d("=====接收数据包=======" + readStr);
-                        ELog.d("=====接收数据==服务端ip======" + recePacket.getAddress());
-//                        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
-//                        List<WuangguanInfo> wgData = wangguandata.queryBuilder()
-//                                .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress()),
-//                                        WuangguanInfoDao.Properties.Wg_status.eq(1))
-//                                .list();
-//                        if (wgData.size() != 0) {
-//                        }
+                        String ret = "";
+                        for (int j = 0; j < recePacket.getLength(); j++) {
+                            String hex = Integer.toHexString(recePacket.getData()[j] & 0xFF);
+                            if (hex.length() == 1) {
+                                hex = "0" + hex;
+                            }
+                            ret += hex.toUpperCase();
+                        }
+                        ELog.i("=======接收数据包===ret=====" + ret);
+                        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
+                        List<WuangguanInfo> wgData = wangguandata.queryBuilder()
+                                .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
+                                        WuangguanInfoDao.Properties.Wg_status.eq(1))
+                                .list();
+                        if (wgData.size() != 0 && recePacket.getLength() == 22) {
+                            // CC0101 AC 4C48FFAC6802000000 05 0400 02 01 01 0A0DCD
+                            ELog.i("=====接收数据包====ret===1===" + ret.substring(6, 8));
+                            ELog.i("=====接收数据包====ret===2===" + ret.substring(34, 36));
+                            ELog.i("=====接收数据包====ret===3===" + ret.substring(36, 38));
+                            if (ret.substring(6, 8).equals("AC")) {
+                                String wgbtnStatus = "WGBTN;" + ret.substring(34, 36) + ";" + ret.substring(36, 38);
+                                SerialPortUtil.sendMsg1(wgbtnStatus.getBytes());
+                            }
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
