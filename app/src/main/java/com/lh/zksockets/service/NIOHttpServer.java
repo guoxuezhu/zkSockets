@@ -96,6 +96,8 @@ public class NIOHttpServer implements HttpServerRequestCallback {
                     response.send(HttpRequestUtil.updataMsg(parms));
                 } else if (request.getPath().equals("/api/updataWgkzqInfo")) {
                     response.send(HttpRequestUtil.updataWgkzqInfo(parms));
+                } else if (request.getPath().equals("/api/deleteWgkzqInfo")) {
+                    response.send(HttpRequestUtil.deleteWgkzqInfo(parms));
                 } else if (request.getPath().equals("/api/sportInfo")) {
                     response.send(HttpRequestUtil.getSportInfo(parms));
                 } else if (request.getPath().equals("/api/dangerInfo")) {

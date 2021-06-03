@@ -385,13 +385,25 @@ public class HttpRequestUtil {
         return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll()));
     }
 
+    public static String deleteWgkzqInfo(Multimap parms) {
+        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
+        wangguandata.deleteByKey(Long.parseLong(parms.getString("wg_id")));
+        return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll()));
+    }
+
     public static String updataWgkzqInfo(Multimap parms) {
         WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
-
-//        EventKejianRest wgkzqData = gson.fromJson(parms.getString("wgkzqDatas"), EventKejianRest.class);
-//        wangguandata.deleteAll();
-//        wangguandata.insert(wgkzqData);
-        return gson.toJson(new HttpResult("200", "", true, null));
+        if (!parms.getString("wg_id").equals("") || parms.getString("wg_id") != null) {
+            List<WuangguanInfo> wgData = wangguandata.queryBuilder()
+                    .where(WuangguanInfoDao.Properties.Wg_id.eq(parms.getString("wg_id")))
+                    .list();
+            if (wgData.size() != 0) {
+                wangguandata.deleteByKey(Long.valueOf(parms.getString("wg_id")));
+            }
+        }
+        wangguandata.insert(new WuangguanInfo(Long.valueOf(parms.getString("wg_id")), parms.getString("wg_ip"),
+                Integer.valueOf(parms.getString("wg_port")), Integer.valueOf(parms.getString("wg_status"))));
+        return gson.toJson(new HttpResult("200", "", true, wangguandata.loadAll()));
     }
 
     public static String getLoginToken(Multimap parms) {
