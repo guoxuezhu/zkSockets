@@ -95,7 +95,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="指令"
+                        android:text="指令ID"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
