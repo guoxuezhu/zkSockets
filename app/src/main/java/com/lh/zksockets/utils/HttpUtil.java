@@ -2,7 +2,9 @@ package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
 import com.lh.zksockets.data.DbDao.LuboInfoDao;
+import com.lh.zksockets.data.DbDao.MicDatasDao;
 import com.lh.zksockets.data.model.LuboInfo;
+import com.lh.zksockets.data.model.MicDatas;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,48 +25,91 @@ public class HttpUtil {
     private static Timer luboTokenTimer;
 
     public static void setlubo(String msg) {
-        if (getLuboData()) {
-            if (msg.equals("LUB1")) {
-                luboStart();
-                DeviceStatusUtil.setDeviceStatus((long) 54);
-            } else if (msg.equals("LUB2")) {
-                luboPause();
-                DeviceStatusUtil.setDeviceStatus((long) 55);
-            } else if (msg.equals("LUB3")) {
-                luboStop();
-                DeviceStatusUtil.setDeviceStatus((long) 57);
-            } else if (msg.equals("LUB4")) {
-                luboZhiboStartTs();
-                DeviceStatusUtil.setDeviceStatus((long) 58);
-            } else if (msg.equals("LUB5")) {
-                luboZhiboStopTs();
-                DeviceStatusUtil.setDeviceStatus((long) 59);
-            } else if (msg.equals("LUB6")) {
-                luboPause();
-                DeviceStatusUtil.setDeviceStatus((long) 56);
+        MicDatasDao micDatasDao = MyApplication.getDaoSession().getMicDatasDao();
+        if (micDatasDao.loadAll().size() == 0) {
+            micDatasDao.insert(new MicDatas((long) 1, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 2, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 3, "22", 0));
+            micDatasDao.insert(new MicDatas((long) 4, "22", 0));
+        }
+        ELog.i("=======yinpin=====LUB=====micDatasDao====" + micDatasDao.loadAll().toString());
+        String ckmsg = "";
+        if (msg.equals("LUB1")) {
+            MicDatas micdata = micDatasDao.load((long) 3);
+            int current_index = Integer.valueOf(micdata.mic_index);
+            if (current_index > 0) {
+                int mic_index = current_index - 1;
+                micdata.setMic_index(mic_index + "");
+                String hexstr = Integer.toHexString(mic_index);
+                if (hexstr.length() == 1) {
+                    hexstr = "0" + hexstr;
+                }
+                ckmsg = "BB03" + hexstr + "DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
             }
-        } else {
-            if (msg.equals("LUB1")) {
-                SerialPortUtil.makeML((long) 54);
-            } else if (msg.equals("LUB2")) {
-                SerialPortUtil.makeML((long) 55);
-            } else if (msg.equals("LUB3")) {
-                SerialPortUtil.makeML((long) 57);
-            } else if (msg.equals("LUB4")) {
-                SerialPortUtil.makeML((long) 58);
-            } else if (msg.equals("LUB5")) {
-                SerialPortUtil.makeML((long) 59);
-            } else if (msg.equals("LUB6")) {
-                SerialPortUtil.makeML((long) 56);
+        } else if (msg.equals("MBS46")) {
+            MicDatas micdata = micDatasDao.load((long) 3);
+            int current_index = Integer.valueOf(micdata.mic_index);
+            if (current_index < 22) {
+                int mic_index = current_index + 1;
+                micdata.setMic_index(mic_index + "");
+                micdata.setMic_status(1);
+                String hexstr = Integer.toHexString(mic_index);
+                if (hexstr.length() == 1) {
+                    hexstr = "0" + hexstr;
+                }
+                ckmsg = "BB03" + hexstr + "DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
+            } else if (current_index == 22) {
+                micdata.setMic_status(0);
+                ckmsg = "BB0354DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
+            }
+        } else if (msg.equals("LUB3")) {
+            MicDatas micdata = micDatasDao.load((long) 2);
+            int current_index = Integer.valueOf(micdata.mic_index);
+            if (current_index > 0) {
+                int mic_index = current_index - 1;
+                micdata.setMic_index(mic_index + "");
+                String hexstr = Integer.toHexString(mic_index);
+                if (hexstr.length() == 1) {
+                    hexstr = "0" + hexstr;
+                }
+                ckmsg = "BB02" + hexstr + "DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
+            }
+        } else if (msg.equals("LUB2")) {
+            MicDatas micdata = micDatasDao.load((long) 2);
+            int current_index = Integer.valueOf(micdata.mic_index);
+            if (current_index < 22) {
+                int mic_index = current_index + 1;
+                micdata.setMic_index(mic_index + "");
+                micdata.setMic_status(1);
+                String hexstr = Integer.toHexString(mic_index);
+                if (hexstr.length() == 1) {
+                    hexstr = "0" + hexstr;
+                }
+                ckmsg = "BB02" + hexstr + "DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
+            } else if (current_index == 22) {
+                micdata.setMic_status(0);
+                ckmsg = "BB0254DD";
+                SerialPortUtil.sendMsg3(SerialPortUtil.StringToBytes(ckmsg));
+                micDatasDao.update(micdata);
             }
         }
     }
 
 
     public static void setLuboTokenTimer() {
-        if (getLuboData()) {
-            getToken();
-        }
+//        if (getLuboData()) {
+//            getToken();
+//        }
     }
 
     private static boolean getLuboData() {

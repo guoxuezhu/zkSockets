@@ -102,7 +102,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="操作面板设置"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

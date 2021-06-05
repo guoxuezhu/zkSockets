@@ -98,7 +98,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="录播绑定"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/button_event_power"
@@ -137,7 +138,8 @@
                     android:background="@mipmap/btn_img_1"
                     android:text="门禁绑定"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20" />
+                    android:textSize="@dimen/text_size_20"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/button_event_wgkzq"
@@ -209,7 +211,7 @@
                     android:text="音频绑定"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/button_event_dianfs"

@@ -334,7 +334,7 @@ public class SerialPortUtil {
         }
     }
 
-    private static void sendMsg3(byte[] data) {
+    public static void sendMsg3(byte[] data) {
         try {
             synchronized (data) {
                 if (data.length > 0) {
@@ -619,6 +619,8 @@ public class SerialPortUtil {
                     ELog.i("========串口1===========makeML=================" + id);
                     if (id == 1 || id == 2 || id == 215 || id == 45) {
                         getEventId(strMls);
+                    } else if (id == 46) {
+                        HttpUtil.setlubo("MBS46");
                     } else {
                         makeBaojing(strMls);
                     }
@@ -863,15 +865,14 @@ public class SerialPortUtil {
 
     private static void sendShipinType(String str) {
         synchronized (str) {
-            if (str.substring(0, 4).equals("VIDA")) {
-                sendMsg(StringToBytes("BB0" + str.substring(6) + "0" + str.substring(4, 5) + "80"));
-            } else if (str.substring(0, 4).equals("VIDC")) {
-                sendMsg(StringToBytes("BB050" + str.substring(4) + "80"));
-            }
-            if (str.substring(4, 5).equals("1")) {
-                makeML(Long.valueOf("5003"));
-            } else {
-                makeML(Long.valueOf("5004"));
+            if (str.equals("VIDC1")) {
+                makemenjin("MJD46");
+            } else if (str.equals("VIDC2")) {
+                sendMsg(StringToBytes("BB050180"));
+            } else if (str.equals("VIDC3")) {
+                sendMsg(StringToBytes("BB050280"));
+            } else if (str.equals("VIDC4")) {
+                sendMsg(StringToBytes("BB050380"));
             }
         }
     }
