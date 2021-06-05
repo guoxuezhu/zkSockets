@@ -38,7 +38,7 @@ public class HttpUtil {
             MicDatas micdata = micDatasDao.load((long) 3);
             int current_index = Integer.valueOf(micdata.mic_index);
             if (current_index > 0) {
-                int mic_index = current_index - 1;
+                int mic_index = current_index - 2;
                 micdata.setMic_index(mic_index + "");
                 String hexstr = Integer.toHexString(mic_index);
                 if (hexstr.length() == 1) {
@@ -52,7 +52,7 @@ public class HttpUtil {
             MicDatas micdata = micDatasDao.load((long) 3);
             int current_index = Integer.valueOf(micdata.mic_index);
             if (current_index < 22) {
-                int mic_index = current_index + 1;
+                int mic_index = current_index + 2;
                 micdata.setMic_index(mic_index + "");
                 micdata.setMic_status(1);
                 String hexstr = Integer.toHexString(mic_index);
@@ -72,7 +72,7 @@ public class HttpUtil {
             MicDatas micdata = micDatasDao.load((long) 2);
             int current_index = Integer.valueOf(micdata.mic_index);
             if (current_index > 0) {
-                int mic_index = current_index - 1;
+                int mic_index = current_index - 2;
                 micdata.setMic_index(mic_index + "");
                 String hexstr = Integer.toHexString(mic_index);
                 if (hexstr.length() == 1) {
@@ -86,7 +86,7 @@ public class HttpUtil {
             MicDatas micdata = micDatasDao.load((long) 2);
             int current_index = Integer.valueOf(micdata.mic_index);
             if (current_index < 22) {
-                int mic_index = current_index + 1;
+                int mic_index = current_index + 2;
                 micdata.setMic_index(mic_index + "");
                 micdata.setMic_status(1);
                 String hexstr = Integer.toHexString(mic_index);
