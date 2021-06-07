@@ -294,7 +294,6 @@ public class SerialPortUtil {
             }
             ELog.i("=======yinpin===str====" + str);
             String msg = "";
-            MicDatas micdata = micDatasDao.loadAll().get(0);
             if (str.substring(4).equals("JY")) {
                 if (str.substring(0, 4).equals("MICA")) {
                     msg = "BB0154DD";
@@ -606,6 +605,8 @@ public class SerialPortUtil {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    yinpin("MICC14");
+                    yinpin("MICB14");
                 }
                 MLsListsDao mLsListsDao = MyApplication.getDaoSession().getMLsListsDao();
                 if (mLsListsDao.loadAll().size() != 0) {
@@ -627,7 +628,9 @@ public class SerialPortUtil {
                 if (id == 2) {
                     isxiake = true;
                     DiannaoUDPUtil.diannaogj();
-                    sendMsg(StringToBytes("BB0A0180"));
+//                    sendMsg(StringToBytes("BB0A0180"));
+                    yinpin("MICCJY");
+                    yinpin("MICBJY");
                     setXiakeTimer();
                 }
                 DeviceStatusUtil.setDeviceStatus(id);
