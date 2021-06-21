@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 9
-        versionName "hk9.d5.i4.o3.c2.m4"
+        versionName "hk9.d5.i4.o3.c3.m4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {

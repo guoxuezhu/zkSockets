@@ -148,7 +148,7 @@ public class SplashActivity extends BaseActivity {
 
                 SerialPortUtil.readMsg1();
                 SerialPortUtil.readMsg2();
-//                SerialPortUtil.readMsg3();
+                SerialPortUtil.readMsg3();
 
                 if (MyApplication.prefs.getIsReboot()) {
                     MyApplication.prefs.setIsReboot(false);
