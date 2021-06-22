@@ -160,7 +160,8 @@ public class SerialPortUtil {
                         } else if (mls[i].substring(0, 1).equals("4")) {
                             doDanger(mls[i]);
                         } else if (mls[i].substring(0, 1).equals("5")) {
-                            UDPUtil.doWangguan(mls[i]);
+//                            UDPUtil.doWangguan(mls[i]);
+                            TcpSocketUtil.doHKWangguan(mls[i]);
                         }
                         sleep(1000);
                     } catch (InterruptedException e) {

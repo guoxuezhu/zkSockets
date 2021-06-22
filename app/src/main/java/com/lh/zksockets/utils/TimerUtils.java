@@ -538,6 +538,7 @@ public class TimerUtils {
                 SerialPortUtil.makeML((long) 45);
 //                setWenshiduTimer();
 //                ELog.getMyLogcat();
+                TcpSocketUtil.startTcpServer();
                 VidStatusDao vidStatusDao = MyApplication.getDaoSession().getVidStatusDao();
                 vidStatusDao.deleteAll();
                 SerialPortUtil.sendMsg(SerialPortUtil.StringToBytes("BB060080"));
