@@ -36,6 +36,7 @@ import com.lh.zksockets.utils.FileUtil;
 import com.lh.zksockets.utils.HttpUtil;
 import com.lh.zksockets.utils.SerialPortUtil;
 import com.lh.zksockets.utils.TimerUtils;
+import com.lh.zksockets.utils.ZksDatasUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -387,7 +388,7 @@ public class SplashActivity extends BaseActivity {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (login_name.getText().toString().trim().equals("admin") && login_password.getText().toString().trim().equals("hik12345")) {
+        if (login_name.getText().toString().trim().equals(ZksDatasUtil.LOGIN_USER) && login_password.getText().toString().trim().equals(ZksDatasUtil.LOGIN_PASSWORD)) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             return;
         }

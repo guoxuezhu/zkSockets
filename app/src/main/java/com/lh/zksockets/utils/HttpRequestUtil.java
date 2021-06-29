@@ -316,7 +316,7 @@ public class HttpRequestUtil {
             return gson.toJson(new HttpResult("-200", "参数错误", false, null));
         }
         ELog.i("========http============login_user_name========" + login_user_name);
-        if (login_user_name.equals("lhcctvadmin")) {
+        if (login_user_name.equals(ZksDatasUtil.LOGIN_USER)) {
             SerialPortUtil.skMakeReadMsg(msg);
             return gson.toJson(new HttpResult("200", "", true, null));
         }

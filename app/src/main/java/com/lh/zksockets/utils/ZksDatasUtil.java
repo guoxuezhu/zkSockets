@@ -26,6 +26,8 @@ public class ZksDatasUtil {
     public static final int IO_OUT_COUNT = 5;
     public static final int DANGER_OUT_COUNT = 5;
     public static final int DANGER_IN_COUNT = 5;
+    public static final String LOGIN_USER = "lhcctvadmin";
+    public static final String LOGIN_PASSWORD = "lhzkadmin123";
 
     public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
