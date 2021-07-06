@@ -11,7 +11,7 @@ import com.lh.zksockets.data.model.UIsetData;
 
 public class ZksDatasUtil {
 
-    public static final int COMCOUNT = 5;
+    public static final int COMCOUNT = 8;
 
     public static void getEventDatas(MLsListsDao mLsListsDao) {
         if (mLsListsDao.loadAll().size() == 0) {
