@@ -1,11 +1,16 @@
 package com.lh.zksockets.utils;
 
+import com.google.gson.Gson;
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.DianliangDataDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.ZkInfoDao;
+import com.lh.zksockets.data.DbDao.ZksDataDao;
+import com.lh.zksockets.data.model.DianliangData;
 import com.lh.zksockets.data.model.EventShangke;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -160,13 +165,13 @@ public class DeviceStatusUtil {
         }
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
-                .add("device_name", deviceStatus.name)
-                .add("device_status", deviceStatus.status + "")
-                .add("zks_ip", zkInfoDao.loadAll().get(0).zkip)
+                .add("name", deviceStatus.name)
+                .add("status", deviceStatus.status + "")
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("time", DateUtil.getNow())
                 .build();
         Request request = new Request.Builder()
-                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/send_device_status")
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/sets_status")
                 .post(requestBody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -181,8 +186,64 @@ public class DeviceStatusUtil {
                 ELog.e("=======sendServiceDeviceStatus===数据=======" + responseText);
             }
         });
-
     }
 
+    public static void dianliangSendLog() {
+        DianliangDataDao dianliangDataDao = MyApplication.getDaoSession().getDianliangDataDao();
+        ZkInfoDao zkInfoDao = MyApplication.getDaoSession().getZkInfoDao();
+        if (zkInfoDao.loadAll().size() == 0) {
+            return;
+        }
+        List<DianliangData> dianliangDataList = dianliangDataDao.loadAll();
+        ZksDataDao zksDataDao = MyApplication.getDaoSession().getZksDataDao();
+        if (zksDataDao.loadAll().size() != 0) {
+            try {
+                DianliangData dianliangData = new DianliangData((long) 100, "电能表",
+                        zksDataDao.load((long) 1).strMsg,
+                        zksDataDao.load((long) 2).strMsg,
+                        zksDataDao.load((long) 3).strMsg,
+                        zksDataDao.load((long) 4).strMsg,
+                        zksDataDao.load((long) 5).strMsg, 0);
+                dianliangDataList.add(dianliangData);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (dianliangDataList.size() == 0) {
+            return;
+        }
+        Gson gson = new Gson();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("ip", zkInfoDao.loadAll().get(0).zkip)
+                .add("energy", gson.toJson(dianliangDataList))
+                .build();
+        ELog.e("==========dianliangDataDao==gson.toJson=====" + gson.toJson(dianliangDataList));
+        Request request = new Request.Builder()
+                .url(zkInfoDao.loadAll().get(0).ser_ip + "api/energy_log")
+                .post(requestBody)
+                .build();
+
+        //3.创建一个call对象,参数就是Request请求对象
+        Call call = okHttpClient.newCall(request);
+        //4.请求加入调度，重写回调方法
+        call.enqueue(new Callback() {
+            //请求失败执行的方法
+            @Override
+            public void onFailure(Call call, IOException e) {
+                ELog.e("=======dianliangSendLog===onFailure=======" + e.toString());
+            }
+
+            //请求成功执行的方法
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                ELog.e("========dianliangSendLog==数据=======" + responseText);
+//                Gson gson = new Gson();
+//                HttpData httpData = gson.fromJson(responseText, HttpData.class);
+//                ELog.e("==========数据==11=====" + httpData.toString());
+            }
+        });
+    }
 
 }

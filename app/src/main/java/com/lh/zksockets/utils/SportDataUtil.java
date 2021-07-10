@@ -104,7 +104,7 @@ public class SportDataUtil {
             ELog.i("===========COM=======endsize===========" + endsize);
             System.arraycopy(buffer1, 7, buffer3, bslength3, endsize - 8);
             bslength3 = bslength3 + endsize - 8;
-            getDianLiang2();
+            getDianLiang();
             delectNobuf(endsize);
         }
     }
@@ -225,18 +225,36 @@ public class SportDataUtil {
 
     private static void getDianLiang() {
         if (bslength3 == 9) {
+            ZksDataDao zksDataDao = MyApplication.getDaoSession().getZksDataDao();
             buffer2 = new byte[4];
             System.arraycopy(buffer3, 3, buffer2, 0, 4);
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buffer2);
             DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
+            float value = 0;
             try {
-                float dianliang = dataInputStream.readFloat();
-                ELog.i("=======电能表====dianliang=========" + dianliang);
+                value = dataInputStream.readFloat();
+                ELog.i("=======电能表====dianliang=========" + value);
             } catch (IOException e) {
                 e.printStackTrace();
                 ELog.i("=======电能表====dianliang===IOException======");
             }
             delectbuf3();
+            if (readType == 1) {
+                zksDataDao.deleteByKey((long) 1);
+                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", value + "Kw·h", 0));
+            } else if (readType == 2) {
+                zksDataDao.deleteByKey((long) 2);
+                zksDataDao.insert(new ZksData((long) 2, "电压", value + "V", 0));
+            } else if (readType == 3) {
+                zksDataDao.deleteByKey((long) 3);
+                zksDataDao.insert(new ZksData((long) 3, "电流", value + "A", 0));
+            } else if (readType == 4) {
+                zksDataDao.deleteByKey((long) 4);
+                zksDataDao.insert(new ZksData((long) 4, "有功功率", value + "W", 0));
+            } else if (readType == 5) {
+                zksDataDao.deleteByKey((long) 5);
+                zksDataDao.insert(new ZksData((long) 5, "总有功功率", value + "W", 0));
+            }
         }
     }
 

@@ -626,6 +626,7 @@ public class SerialPortUtil {
                     isxiake = true;
                     DiannaoUDPUtil.diannaogj();
 //                    sendMsg(StringToBytes("BB0A0180"));
+                    UDPUtil.wgDianliangInfo();
                     setXiakeTimer();
                 }
                 DeviceStatusUtil.setDeviceStatus(id);

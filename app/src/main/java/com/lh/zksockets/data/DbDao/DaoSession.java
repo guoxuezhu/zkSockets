@@ -11,6 +11,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import com.lh.zksockets.data.model.Computer;
 import com.lh.zksockets.data.model.DangerOut;
 import com.lh.zksockets.data.model.DangerStatus;
+import com.lh.zksockets.data.model.DianliangData;
 import com.lh.zksockets.data.model.DoorInfo;
 import com.lh.zksockets.data.model.EventShangke;
 import com.lh.zksockets.data.model.IOYuan;
@@ -34,6 +35,7 @@ import com.lh.zksockets.data.model.ZksData;
 import com.lh.zksockets.data.DbDao.ComputerDao;
 import com.lh.zksockets.data.DbDao.DangerOutDao;
 import com.lh.zksockets.data.DbDao.DangerStatusDao;
+import com.lh.zksockets.data.DbDao.DianliangDataDao;
 import com.lh.zksockets.data.DbDao.DoorInfoDao;
 import com.lh.zksockets.data.DbDao.EventShangkeDao;
 import com.lh.zksockets.data.DbDao.IOYuanDao;
@@ -66,6 +68,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig computerDaoConfig;
     private final DaoConfig dangerOutDaoConfig;
     private final DaoConfig dangerStatusDaoConfig;
+    private final DaoConfig dianliangDataDaoConfig;
     private final DaoConfig doorInfoDaoConfig;
     private final DaoConfig eventShangkeDaoConfig;
     private final DaoConfig iOYuanDaoConfig;
@@ -89,6 +92,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ComputerDao computerDao;
     private final DangerOutDao dangerOutDao;
     private final DangerStatusDao dangerStatusDao;
+    private final DianliangDataDao dianliangDataDao;
     private final DoorInfoDao doorInfoDao;
     private final EventShangkeDao eventShangkeDao;
     private final IOYuanDao iOYuanDao;
@@ -121,6 +125,9 @@ public class DaoSession extends AbstractDaoSession {
 
         dangerStatusDaoConfig = daoConfigMap.get(DangerStatusDao.class).clone();
         dangerStatusDaoConfig.initIdentityScope(type);
+
+        dianliangDataDaoConfig = daoConfigMap.get(DianliangDataDao.class).clone();
+        dianliangDataDaoConfig.initIdentityScope(type);
 
         doorInfoDaoConfig = daoConfigMap.get(DoorInfoDao.class).clone();
         doorInfoDaoConfig.initIdentityScope(type);
@@ -182,6 +189,7 @@ public class DaoSession extends AbstractDaoSession {
         computerDao = new ComputerDao(computerDaoConfig, this);
         dangerOutDao = new DangerOutDao(dangerOutDaoConfig, this);
         dangerStatusDao = new DangerStatusDao(dangerStatusDaoConfig, this);
+        dianliangDataDao = new DianliangDataDao(dianliangDataDaoConfig, this);
         doorInfoDao = new DoorInfoDao(doorInfoDaoConfig, this);
         eventShangkeDao = new EventShangkeDao(eventShangkeDaoConfig, this);
         iOYuanDao = new IOYuanDao(iOYuanDaoConfig, this);
@@ -205,6 +213,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Computer.class, computerDao);
         registerDao(DangerOut.class, dangerOutDao);
         registerDao(DangerStatus.class, dangerStatusDao);
+        registerDao(DianliangData.class, dianliangDataDao);
         registerDao(DoorInfo.class, doorInfoDao);
         registerDao(EventShangke.class, eventShangkeDao);
         registerDao(IOYuan.class, iOYuanDao);
@@ -230,6 +239,7 @@ public class DaoSession extends AbstractDaoSession {
         computerDaoConfig.clearIdentityScope();
         dangerOutDaoConfig.clearIdentityScope();
         dangerStatusDaoConfig.clearIdentityScope();
+        dianliangDataDaoConfig.clearIdentityScope();
         doorInfoDaoConfig.clearIdentityScope();
         eventShangkeDaoConfig.clearIdentityScope();
         iOYuanDaoConfig.clearIdentityScope();
@@ -261,6 +271,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public DangerStatusDao getDangerStatusDao() {
         return dangerStatusDao;
+    }
+
+    public DianliangDataDao getDianliangDataDao() {
+        return dianliangDataDao;
     }
 
     public DoorInfoDao getDoorInfoDao() {

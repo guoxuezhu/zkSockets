@@ -1,12 +1,16 @@
 package com.lh.zksockets.utils;
 
 import com.lh.zksockets.MyApplication;
+import com.lh.zksockets.data.DbDao.DianliangDataDao;
 import com.lh.zksockets.data.DbDao.WuangguanInfoDao;
+import com.lh.zksockets.data.model.DianliangData;
 import com.lh.zksockets.data.model.WuangguanInfo;
 
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.Arrays;
 import java.util.List;
 
 public class UDPUtil {
@@ -19,6 +23,16 @@ public class UDPUtil {
         } catch (Exception e) {
             udpSocket = null;
             e.printStackTrace();
+        }
+    }
+
+    public static void wgDianliangInfo() {
+        WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
+        for (int i = 0; i < wangguandata.loadAll().size(); i++) {
+            WuangguanInfo wuangguanInfo = wangguandata.loadAll().get(i);
+            if (wuangguanInfo != null && wuangguanInfo.wg_status == 1) {
+                sendUdpMsg(wuangguanInfo.wg_ip, SerialPortUtil.StringToBytes("4C4800A20000000000000A0D"));
+            }
         }
     }
 
@@ -79,20 +93,64 @@ public class UDPUtil {
                             }
                             ret += hex.toUpperCase();
                         }
-                        ELog.i("=======接收数据包===ret=====" + ret);
+                        ELog.i("=======接收数据包===ret==111===" + ret);
                         WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
                         List<WuangguanInfo> wgData = wangguandata.queryBuilder()
                                 .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
                                         WuangguanInfoDao.Properties.Wg_status.eq(1))
                                 .list();
-                        if (wgData.size() != 0 && recePacket.getLength() == 22) {
-                            // CC0101 AC 4C48FFAC6802000000 05 0400 02 01 01 0A0DCD
-                            ELog.i("=====接收数据包====ret===1===" + ret.substring(6, 8));
-                            ELog.i("=====接收数据包====ret===2===" + ret.substring(34, 36));
-                            ELog.i("=====接收数据包====ret===3===" + ret.substring(36, 38));
-                            if (ret.substring(6, 8).equals("AC")) {
-                                String wgbtnStatus = "WGBTN;" + ret.substring(34, 36) + ";" + ret.substring(36, 38);
+                        if (wgData.size() != 0) {
+                            String msgType = Integer.toHexString(recePacket.getData()[3] & 0xFF);
+                            ELog.i("=======接收数据包===msgType=====" + msgType);
+                            if (msgType.equals("ac")) {
+                                String wgbtnStatus = "WGBTN;" + Integer.toHexString(recePacket.getData()[17] & 0xFF)
+                                        + ";" + Integer.toHexString(recePacket.getData()[18] & 0xFF);
                                 SerialPortUtil.sendMsg1(wgbtnStatus.getBytes());
+                            }
+                            if (msgType.equals("a2")) {
+                                DianliangDataDao dianliangDataDao = MyApplication.getDaoSession().getDianliangDataDao();
+                                dianliangDataDao.deleteAll();
+                                String device_numer = Integer.toHexString(recePacket.getData()[14] & 0xFF);
+                                ELog.i("=======接收数据包===device_numer=====" + device_numer);
+                                int count = Integer.valueOf(device_numer);
+                                for (int i = 0; i < count; i++) {
+                                    String device_type = Integer.toHexString(recePacket.getData()[i * 66 + 15] & 0xFF);
+                                    String device_id = Integer.toHexString(recePacket.getData()[i * 66 + 17] & 0xFF);
+                                    ELog.i("=======接收数据包===device_type==111===" + device_type);
+                                    ELog.i("=======接收数据包===device_id===222====" + device_id);
+                                    String device_name = "";
+                                    try {
+                                        device_name = new String(recePacket.getData(), i * 66 + 21, 20, "GBK").trim();
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                    ELog.i("=======接收数据包===device_name===333====" + device_name);
+                                    if (device_type.equals("2")) {
+                                        byte[] buffer = new byte[4];
+                                        String[] strArray = new String[8];
+                                        String value1 = Integer.toHexString(recePacket.getData()[i * 66 + 52] & 0xFF);
+                                        strArray[0] = value1;
+                                        for (int n = 0; n < 7; n++) {
+                                            System.arraycopy(recePacket.getData(), i * 66 + 53 + n * 4, buffer, 0, 4);
+                                            int accum = 0;
+                                            for (int shiftBy = 0; shiftBy < 4; shiftBy++) {
+                                                accum |= (buffer[shiftBy] & 0xff) << shiftBy * 8;
+                                            }
+                                            float value = Float.intBitsToFloat(accum);
+                                            ELog.i("==========value==1111=====" + value);
+                                            if (Float.isNaN(value)) {
+                                                strArray[1 + n] = "0";
+                                            } else {
+                                                strArray[1 + n] = value + "";
+                                            }
+                                        }
+                                        ELog.i("==========value==strArray=====" + Arrays.toString(strArray));
+                                        dianliangDataDao.insert(new DianliangData(Long.parseLong(device_id, 16), device_name,
+                                                strArray[4] + "Kw·h", strArray[1] + "V", strArray[2] + "A",
+                                                strArray[3] + "W", strArray[3] + "W", 0));
+                                        ELog.i("==========dianliangDataDao====" + dianliangDataDao.loadAll().toString());
+                                    }
+                                }
                             }
                         }
                     } catch (Exception e) {
