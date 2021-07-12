@@ -218,7 +218,7 @@ public class DeviceStatusUtil {
                 .add("ip", zkInfoDao.loadAll().get(0).zkip)
                 .add("energy", gson.toJson(dianliangDataList))
                 .build();
-        ELog.e("==========dianliangDataDao==gson.toJson=====" + gson.toJson(dianliangDataList));
+//        ELog.e("==========dianliangDataDao==gson.toJson=====" + gson.toJson(dianliangDataList));
         Request request = new Request.Builder()
                 .url(zkInfoDao.loadAll().get(0).ser_ip + "api/energy_log")
                 .post(requestBody)

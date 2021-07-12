@@ -462,21 +462,16 @@ public class TimerUtils {
             public void run() {
                 try {
                     wsdCount++;
-                    WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
-                    if (wenShiDuDao.loadAll().size() != 0) {
-                        WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
-                        String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
-                        SerialPortUtil.sendMsg1(wsd.getBytes());
-                        if (wsdCount == 1) {
+                    if (wsdCount == 1) {
+                        WenShiDuDao wenShiDuDao = MyApplication.getDaoSession().getWenShiDuDao();
+                        if (wenShiDuDao.loadAll().size() != 0) {
+                            WenShiDu wenShiDu = wenShiDuDao.loadAll().get(0);
+                            String wsd = "WSD;" + wenShiDu.wenStr + ";" + wenShiDu.shiStr + ";" + wenShiDu.PM25;
+                            SerialPortUtil.sendMsg1(wsd.getBytes());
                             kongtiaoWendu(wenShiDu);
                             SerialPortUtil.wsdSendLog(wenShiDu);
-                            DeviceStatusUtil.dianliangSendLog();
-                            ELog.e("==========dianliangSendLog====timer===");
                         }
-                    }
-//                    SerialPortUtil.doSerialPort("1-801");
-
-                    if (wsdCount == 1) {
+                        DeviceStatusUtil.dianliangSendLog();
                         SportDataUtil.readMsgType(1);
                         SerialPortUtil.doSerialPort("1-801");
                     } else if (wsdCount == 2) {
@@ -491,7 +486,7 @@ public class TimerUtils {
                     } else if (wsdCount == 5) {
                         SportDataUtil.readMsgType(5);
                         SerialPortUtil.doSerialPort("1-805");
-                    } else if (wsdCount >= 10) {
+                    } else if (wsdCount >= 20 * 30) {
                         wsdCount = 0;
                     }
                 } catch (Exception e) {

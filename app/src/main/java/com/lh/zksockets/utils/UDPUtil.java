@@ -85,15 +85,15 @@ public class UDPUtil {
                     try {
                         DatagramPacket recePacket = new DatagramPacket(receBuf, receBuf.length);
                         udpSocket.receive(recePacket);
-                        String ret = "";
-                        for (int j = 0; j < recePacket.getLength(); j++) {
-                            String hex = Integer.toHexString(recePacket.getData()[j] & 0xFF);
-                            if (hex.length() == 1) {
-                                hex = "0" + hex;
-                            }
-                            ret += hex.toUpperCase();
-                        }
-                        ELog.i("=======接收数据包===ret==111===" + ret);
+//                        String ret = "";
+//                        for (int j = 0; j < recePacket.getLength(); j++) {
+//                            String hex = Integer.toHexString(recePacket.getData()[j] & 0xFF);
+//                            if (hex.length() == 1) {
+//                                hex = "0" + hex;
+//                            }
+//                            ret += hex.toUpperCase();
+//                        }
+//                        ELog.i("=======接收数据包===ret==111===" + ret);
                         WuangguanInfoDao wangguandata = MyApplication.getDaoSession().getWuangguanInfoDao();
                         List<WuangguanInfo> wgData = wangguandata.queryBuilder()
                                 .where(WuangguanInfoDao.Properties.Wg_ip.eq(recePacket.getAddress().toString().substring(1)),
@@ -146,8 +146,8 @@ public class UDPUtil {
                                         }
                                         ELog.i("==========value==strArray=====" + Arrays.toString(strArray));
                                         dianliangDataDao.insert(new DianliangData(Long.parseLong(device_id, 16), device_name,
-                                                strArray[4] + "Kw·h", strArray[1] + "V", strArray[2] + "A",
-                                                strArray[3] + "W", strArray[3] + "W", 0));
+                                                strArray[4], strArray[1], strArray[2],
+                                                strArray[3], strArray[3], 0));
                                         ELog.i("==========dianliangDataDao====" + dianliangDataDao.loadAll().toString());
                                     }
                                 }

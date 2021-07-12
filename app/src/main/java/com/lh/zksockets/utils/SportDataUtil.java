@@ -92,11 +92,11 @@ public class SportDataUtil {
     }
 
     private static void makeCOM(String msgdata) {
-        //size=17 [COM7]<����>����>   size=25 [COM7]<����>����>[COM7]<����lz>
+        //size=17 [COM7]<C[����>   [COM7]<����>����>   size=25 [COM7]<����>����>[COM7]<����lz>
         if (msgdata.indexOf(">") != -1) {
             ELog.i("===========COM=======bslength===========" + bslength);
             int endsize;
-            if (msgdata.indexOf("[", 2) == -1) {
+            if (msgdata.indexOf(">[", 2) == -1) {
                 endsize = bslength;
             } else {
                 endsize = msgdata.indexOf(">[") + 1;
@@ -241,19 +241,19 @@ public class SportDataUtil {
             delectbuf3();
             if (readType == 1) {
                 zksDataDao.deleteByKey((long) 1);
-                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", value + "Kw·h", 0));
+                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", value + "", 0));
             } else if (readType == 2) {
                 zksDataDao.deleteByKey((long) 2);
-                zksDataDao.insert(new ZksData((long) 2, "电压", value + "V", 0));
+                zksDataDao.insert(new ZksData((long) 2, "电压", value + "", 0));
             } else if (readType == 3) {
                 zksDataDao.deleteByKey((long) 3);
-                zksDataDao.insert(new ZksData((long) 3, "电流", value + "A", 0));
+                zksDataDao.insert(new ZksData((long) 3, "电流", value + "", 0));
             } else if (readType == 4) {
                 zksDataDao.deleteByKey((long) 4);
-                zksDataDao.insert(new ZksData((long) 4, "有功功率", value + "W", 0));
+                zksDataDao.insert(new ZksData((long) 4, "有功功率", value + "", 0));
             } else if (readType == 5) {
                 zksDataDao.deleteByKey((long) 5);
-                zksDataDao.insert(new ZksData((long) 5, "总有功功率", value + "W", 0));
+                zksDataDao.insert(new ZksData((long) 5, "总有功功率", value + "", 0));
             }
         }
     }
@@ -276,7 +276,7 @@ public class SportDataUtil {
                 BigDecimal bigDecimal = new BigDecimal("0.01");
                 ELog.i("=======电能表====总有功组合电量==========" + dianliang.multiply(bigDecimal) + "Kw·h");
                 zksDataDao.deleteByKey((long) 1);
-                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", dianliang.multiply(bigDecimal) + "Kw·h", 0));
+                zksDataDao.insert(new ZksData((long) 1, "总有功组合电量", dianliang.multiply(bigDecimal) + "", 0));
                 delectbuf3();
             }
         } else if (readType == 2) {
@@ -285,7 +285,7 @@ public class SportDataUtil {
                 BigDecimal bdv = new BigDecimal("0.1");
                 ELog.i("=======电能表====A电压==========" + dianya.multiply(bdv) + "V");
                 zksDataDao.deleteByKey((long) 2);
-                zksDataDao.insert(new ZksData((long) 2, "A电压", dianya.multiply(bdv) + "V", 0));
+                zksDataDao.insert(new ZksData((long) 2, "A电压", dianya.multiply(bdv) + "", 0));
                 delectbuf3();
             }
         } else if (readType == 3) {
@@ -294,7 +294,7 @@ public class SportDataUtil {
                 BigDecimal bdv = new BigDecimal("0.01");
                 ELog.i("=======电能表====A电流==========" + dianliu.multiply(bdv) + "A");
                 zksDataDao.deleteByKey((long) 3);
-                zksDataDao.insert(new ZksData((long) 3, "A电流", dianliu.multiply(bdv) + "A", 0));
+                zksDataDao.insert(new ZksData((long) 3, "A电流", dianliu.multiply(bdv) + "", 0));
                 delectbuf3();
             }
         } else if (readType == 4) {
@@ -302,7 +302,7 @@ public class SportDataUtil {
                 int aglw = Integer.parseInt(ret.substring(6, 10), 16);
                 ELog.i("=======电能表====A有功功率==========" + aglw + "W");
                 zksDataDao.deleteByKey((long) 4);
-                zksDataDao.insert(new ZksData((long) 4, "A有功功率", aglw + "W", 0));
+                zksDataDao.insert(new ZksData((long) 4, "A有功功率", aglw + "", 0));
                 delectbuf3();
             }
         } else if (readType == 5) {
@@ -310,7 +310,7 @@ public class SportDataUtil {
                 int glw = Integer.parseInt(ret.substring(6, 10), 16);
                 ELog.i("=======电能表====总有功功率==========" + glw + "W");
                 zksDataDao.deleteByKey((long) 5);
-                zksDataDao.insert(new ZksData((long) 5, "总有功功率", glw + "W", 0));
+                zksDataDao.insert(new ZksData((long) 5, "总有功功率", glw + "", 0));
                 delectbuf3();
             }
         }
