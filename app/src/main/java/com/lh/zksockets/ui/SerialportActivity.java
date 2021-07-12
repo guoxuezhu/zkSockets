@@ -172,6 +172,12 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
             ckdataTimer.cancel();
             ckdataTimer = null;
         }
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.show();
+        progressDialog.setMessage("正在加载数据");
+        progressDialog.setCanceledOnTouchOutside(false);
         ckdataTimer = new Timer();
         ckdataTimer.schedule(new TimerTask() {
             @Override
@@ -182,6 +188,7 @@ public class SerialportActivity extends BaseActivity implements SerialportAdapte
                     ckdataTimer.cancel();
                     ckdataTimer = null;
                 }
+                stopDialog();
             }
         }, 1);
     }

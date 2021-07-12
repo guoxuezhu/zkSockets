@@ -255,33 +255,43 @@ public class BaseSetingActivity extends BaseActivity {
                     HttpData<HttpRow<List<ZkInfo>>> httpRowHttpData = gson.fromJson(responseText, new TypeToken<HttpData<HttpRow<List<ZkInfo>>>>() {
                     }.getType());
                     ELog.e("========中控=httpRow=数据=======" + httpRowHttpData);
-                    if (httpRowHttpData.getData().getRows().get(0).ser_ip != null) {
-                        if (!httpRowHttpData.getData().getRows().get(0).ser_ip.contains("http://") && !httpRowHttpData.getData().getRows().get(0).ser_ip.contains("https://")) {
-                            Message message = new Message();
-                            message.obj = "服务器地址错误";
-                            message.what = 21;
-                            baseHandler.sendMessage(message);
-                        } else {
-                            zkInfoDao.deleteAll();
-                            zkInfoDao.insert(new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
+
+                    if (httpRowHttpData.getData().getRows().get(0) != null) {
+                        ZkInfo zkInfo;
+                        Message message = new Message();
+                        if (httpRowHttpData.getData().getRows().get(0).ser_ip != null &&
+                                httpRowHttpData.getData().getRows().get(0).ser_ip.contains("http://") &&
+                                httpRowHttpData.getData().getRows().get(0).ser_ip.contains("https://")) {
+                            ELog.e("========中控==数据===11111====" + httpRowHttpData.getData().getRows().get(0));
+                            zkInfo = new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
                                     httpRowHttpData.getData().getRows().get(0).zkip,
                                     httpRowHttpData.getData().getRows().get(0).zkVersion,
                                     httpRowHttpData.getData().getRows().get(0).geendaoVersion,
                                     httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
                                     httpRowHttpData.getData().getRows().get(0).ser_ip,
-                                    uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart));
-                            Message message = new Message();
+                                    uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart);
                             message.obj = "数据恢复成功";
-                            message.what = 22;
-                            baseHandler.sendMessage(message);
+                        } else {
+                            ELog.e("========中控==数据===222222====" + httpRowHttpData.getData().getRows().get(0));
+                            zkInfo = new ZkInfo(httpRowHttpData.getData().getRows().get(0).zkname,
+                                    httpRowHttpData.getData().getRows().get(0).zkip,
+                                    httpRowHttpData.getData().getRows().get(0).zkVersion,
+                                    httpRowHttpData.getData().getRows().get(0).geendaoVersion,
+                                    httpRowHttpData.getData().getRows().get(0).hudongVIDnum,
+                                    et_ser_ip.getText().toString(),
+                                    uuid, httpRowHttpData.getData().getRows().get(0).ismqttStart);
+                            message.obj = "服务器地址格式错误，请重新确认";
                         }
+                        zkInfoDao.deleteAll();
+                        zkInfoDao.insert(zkInfo);
+                        message.what = 22;
+                        baseHandler.sendMessage(message);
                     } else {
                         Message message = new Message();
-                        message.obj = "服务器地址错误";
+                        message.obj = "无数据/恢复失败";
                         message.what = 21;
                         baseHandler.sendMessage(message);
                     }
-
                 } else {
                     Message message = new Message();
                     message.obj = "无数据/恢复失败";
